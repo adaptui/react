@@ -1,0 +1,60 @@
+{
+  "name": "renderless-components",
+  "version": "0.0.0",
+  "description": "Renderless Components",
+  "keywords": [
+    "renderless-component"
+  ],
+  "homepage": "https://github.com/timelessco/renderless-components#readme",
+  "bugs": {
+    "url": "https://github.com/timelessco/renderless-components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timelessco/renderless-components.git"
+  },
+  "license": "MIT",
+  "author": "Timeless <hello@timeless.co>",
+  "scripts": {
+    "build-storybook": "build-storybook",
+    "commit": "gacp",
+    "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
+    "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
+    "lint:package": "sort-package-json",
+    "storybook": "start-storybook -p 6006"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "@storybook/addon-a11y": "^6.0.10",
+    "@storybook/addon-actions": "^6.0.10",
+    "@storybook/addon-essentials": "^6.0.10",
+    "@storybook/addon-links": "^6.0.10",
+    "@storybook/addon-storysource": "^6.0.10",
+    "@storybook/react": "^6.0.10",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "gacp": "^2.10.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "sort-package-json": "^1.44.0",
+    "typescript": "^3.9.7"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}": [
+    "prettier --write",
+    "git add"
+  ],
+  "package.json": ["yarn lint:package"],
+  "**/*.{js,jsx,tx,tsx}": ["yarn lint"]
+}
