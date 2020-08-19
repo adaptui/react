@@ -1,0 +1,15 @@
+export const ACCORDION_KEYS = [
+  "baseId",
+  "unstable_idCountRef",
+  "setBaseId",
+  "items",
+  "registerItem",
+  "buttons",
+  "registerButton",
+  "panels",
+  "registerPanel",
+  "activeItems",
+  "addActiveItem",
+  "removeActiveItem",
+  "allowMultiple",
+] as const;
