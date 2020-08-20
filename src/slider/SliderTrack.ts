@@ -1,3 +1,9 @@
+/**
+ * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
+ * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
+ * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
+ * to work with Reakit System
+ */
 import { createComponent, createHook } from "reakit-system";
 import { mergeRefs, dataAttr } from "@chakra-ui/utils";
 import { useId } from "@chakra-ui/hooks";
