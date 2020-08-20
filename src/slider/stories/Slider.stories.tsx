@@ -22,7 +22,7 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  const slider = useSliderState({ isDisabled: true });
+  const slider = useSliderState();
 
   return (
     <Slider {...slider} style={sliderHorizontalStyle}>
@@ -35,7 +35,12 @@ export const Default = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -55,7 +60,12 @@ export const Reversed = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -75,7 +85,12 @@ export const Min20Max80 = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -95,7 +110,12 @@ export const Step10 = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -115,7 +135,12 @@ export const DefaultValue90 = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -135,7 +160,12 @@ export const Disabled = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -155,7 +185,12 @@ export const ReadOnly = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderHorizontalThumbStyle}
+        style={{
+          ...sliderHorizontalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateY(-50%) scale(1.15)"
+            : sliderHorizontalThumbStyle.transform,
+        }}
       />
     </Slider>
   );
@@ -172,7 +207,12 @@ export const Vertical = () => {
       <SliderThumb
         {...slider}
         aria-label="slider-thumb"
-        style={sliderVerticalThumbStyle}
+        style={{
+          ...sliderVerticalThumbStyle,
+          transform: slider.state.isDragging
+            ? "translateX(-50%) scale(1.15)"
+            : sliderVerticalThumbStyle.transform,
+        }}
       />
     </Slider>
   );

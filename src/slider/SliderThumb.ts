@@ -65,8 +65,6 @@ export const useSliderThumb = createHook<useSliderThumbOptions, BoxHTMLProps>({
       "aria-disabled": ariaAttr(options.state.isDisabled),
       "aria-readonly": ariaAttr(options.state.isReadOnly),
       onKeyDown: callAllHandlers(htmlOnKeyDown, options.handlers.onKeyDown),
-      onFocus: callAllHandlers(htmlOnFocus, options.handlers.onFocus),
-      onBlur: callAllHandlers(htmlOnBlur, options.handlers.onBlur),
       style: { ...options.styles.thumbStyle, ...htmlStyle },
       ...htmlProps,
     };

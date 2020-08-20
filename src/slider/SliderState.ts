@@ -111,7 +111,6 @@ export function useSliderState(props: UseSliderProps = {}) {
   } = props;
 
   const [isDragging, setDragging] = useBoolean();
-  const [isFocused, setFocused] = useBoolean();
 
   const [eventSource, setEventSource] = useState<EventSource>();
 
@@ -454,16 +453,12 @@ export function useSliderState(props: UseSliderProps = {}) {
     rootRef.current,
   );
 
-  const onFocus = useCallback(() => setFocused.on(), [setFocused]);
-  const onBlur = useCallback(() => setFocused.off(), [setFocused]);
-
   return {
     actions,
     state: {
       min,
       max,
       value,
-      isFocused,
       isDragging,
       isDisabled,
       isReadOnly,
@@ -476,8 +471,6 @@ export function useSliderState(props: UseSliderProps = {}) {
     },
     handlers: {
       onKeyDown,
-      onFocus,
-      onBlur,
     },
     styles: {
       rootStyle,
