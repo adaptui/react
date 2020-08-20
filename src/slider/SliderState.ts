@@ -4,6 +4,7 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
+
 import {
   useState,
   useRef,
