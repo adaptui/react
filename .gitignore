@@ -25,6 +25,7 @@ jspm_packages/
 .npm
 
 # Yarn
+yarn.lock
 yarn-error.log
 .pnp/
 .pnp.js
