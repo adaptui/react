@@ -1,11 +1,11 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { useAccordionState } from "./AccordionState";
-import { Accordion } from "./Accordion";
-import { AccordionItem } from "./AccordionItem";
-import { AccordionTrigger } from "./AccordionTrigger";
-import { AccordionPanel } from "./AccordionPanel";
+import { useAccordionState } from "../AccordionState";
+import { Accordion } from "../Accordion";
+import { AccordionItem } from "../AccordionItem";
+import { AccordionTrigger } from "../AccordionTrigger";
+import { AccordionPanel } from "../AccordionPanel";
 
 export default {
   title: "Component/Accordion",
