@@ -19,18 +19,7 @@ export type SelectDropdownOptions = CompositeProps &
 const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   name: "selectDropdown",
   compose: useComposite,
-  keys: [
-    "maxHeight",
-    "move",
-    "isDropdownOpen",
-    "items",
-    "selected",
-    "setSelected",
-    "setCurrentId",
-    "typehead",
-    "closeDropdown",
-    ...SELECT_KEYS,
-  ],
+  keys: ["maxHeight", ...SELECT_KEYS],
 
   useProps(
     {

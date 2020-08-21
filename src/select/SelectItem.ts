@@ -17,7 +17,7 @@ export type SelectItemHTMLProp = CompositeItemHTMLProps;
 const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
   name: "selectItem",
   compose: useCompositeItem,
-  keys: ["setSelected", "selected", "value", ...SELECT_KEYS],
+  keys: ["value", ...SELECT_KEYS],
   useProps({ setSelected, selected, value }, { ref: htmlRef, ...htmlProps }) {
     return {
       role: "option",

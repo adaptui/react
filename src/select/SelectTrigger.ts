@@ -4,6 +4,7 @@ import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { createHook, createComponent } from "reakit-system";
+import { SELECT_KEYS } from "./__keys";
 
 export type SelectTriggerOptions = Pick<
   SelectStateReturn,
@@ -12,7 +13,8 @@ export type SelectTriggerOptions = Pick<
 
 const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
   name: "selectTrigger",
-  keys: ["toggleDropdown", "isDropdownOpen"],
+  keys: SELECT_KEYS,
+
   useProps({ toggleDropdown, isDropdownOpen }, { ref: htmlRef, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);
 

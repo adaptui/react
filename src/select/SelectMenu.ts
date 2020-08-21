@@ -4,6 +4,7 @@ import { createOnKeyDown } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { createHook, createComponent } from "reakit-system";
+import { SELECT_KEYS } from "./__keys";
 
 export type SelectMenuOptions = Pick<
   SelectStateReturn,
@@ -18,14 +19,7 @@ export type SelectMenuOptions = Pick<
 
 const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
-  keys: [
-    "setTypehead",
-    "isDropdownOpen",
-    "selected",
-    "onChange",
-    "openDropdown",
-    "closeDropdown",
-  ],
+  keys: SELECT_KEYS,
 
   useProps(
     {
