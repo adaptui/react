@@ -24,6 +24,8 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
+    "@types/lodash.debounce": "^4.0.6",
+    "lodash.debounce": "^4.0.8",
     "reakit": "^1.2.2",
     "reakit-system": "^0.14.2",
     "reakit-utils": "^0.14.2"
