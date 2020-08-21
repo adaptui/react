@@ -35,9 +35,7 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
   },
 });
 
-const SelectTrigger = createComponent({
+export const SelectTrigger = createComponent({
   as: "div",
   useHook: useSelectTrigger,
 });
-
-export { SelectTrigger };

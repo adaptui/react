@@ -2,7 +2,6 @@ import React from "react";
 import {
   useCompositeState,
   CompositeActions,
-  CompositeInitialState,
   CompositeState,
 } from "reakit/Composite";
 
@@ -14,13 +13,11 @@ export type SelectState = CompositeState & {
   isPlaceholder: boolean;
 };
 
-interface selectInitialState {
+export interface ISelectInitialState {
   selected?: string;
   allowMultiselect?: boolean;
+  loop?: boolean;
 }
-
-export type SelectInitialState = CompositeInitialState &
-  Partial<Pick<SelectState, "selected" | "allowMultiselect">>;
 
 export type SelectActions = CompositeActions & {
   setTypehead: React.Dispatch<React.SetStateAction<string>>;
@@ -35,11 +32,12 @@ export type SelectActions = CompositeActions & {
 
 export type SelectStateReturn = SelectState & SelectActions;
 
-const useSelectState = ({
+export const useSelectState = ({
   selected,
   allowMultiselect,
-}: selectInitialState): SelectStateReturn => {
-  const composite = useCompositeState({ loop: true });
+  loop = true,
+}: ISelectInitialState): SelectStateReturn => {
+  const composite = useCompositeState({ loop });
 
   const [typehead, setTypehead] = React.useState<string>("");
   const [isDropdownOpen, setDropdown] = React.useState<boolean>(false);
@@ -58,12 +56,6 @@ const useSelectState = ({
   }, []);
 
   const [_selected, _setSelected] = React.useState<string[]>([]);
-
-  React.useEffect(() => {
-    if (selected) {
-      _setSelected([selected]);
-    }
-  }, [selected]);
 
   const removeSelected = (value: string) => {
     _setSelected(_selected.filter(item => item !== value));
@@ -86,6 +78,12 @@ const useSelectState = ({
     [_selected, allowMultiselect],
   );
 
+  React.useEffect(() => {
+    if (selected) {
+      _setSelected([selected]);
+    }
+  }, [selected]);
+
   React.useLayoutEffect(() => {
     setIsPlaceholder(_selected.length < 1);
   }, [_selected]);
@@ -107,5 +105,3 @@ const useSelectState = ({
     isPlaceholder,
   };
 };
-
-export { useSelectState };

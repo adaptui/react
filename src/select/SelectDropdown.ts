@@ -144,10 +144,8 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   },
 });
 
-const SelectDropdown = createComponent({
+export const SelectDropdown = createComponent({
   as: "div",
   memo: true,
   useHook: useSelectDropdown,
 });
-
-export { SelectDropdown };

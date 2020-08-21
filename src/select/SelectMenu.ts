@@ -84,26 +84,26 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
       }
     }, [typed]);
 
+    const handleOnKeyPress = (e: React.KeyboardEvent) => {
+      e.persist();
+      // skip the enter key
+      if (e.key === "Enter") return;
+      setTyped(prev => prev + e.key);
+    };
+
     return {
       role: "button",
       "aria-expanded": isDropdownOpen,
       "aria-haspopup": "listbox",
       onKeyDown,
-      onKeyPress: (e: React.KeyboardEvent) => {
-        e.persist();
-        // skip the enter key
-        if (e.which === 13) return;
-        setTyped(prev => prev + String.fromCharCode(e.which));
-      },
+      onKeyPress: handleOnKeyPress,
       ...htmlProps,
     };
   },
 });
 
-const SelectMenu = createComponent({
+export const SelectMenu = createComponent({
   as: "div",
   memo: true,
   useHook: useSelectMenu,
 });
-
-export { SelectMenu };
