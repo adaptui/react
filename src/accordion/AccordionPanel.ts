@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
 import {
@@ -37,6 +34,7 @@ export const useAccordionPanel = createHook<
       if (!id) return undefined;
 
       options.registerPanel?.({ id, ref });
+      /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, [id]);
 
     const style = {
@@ -45,10 +43,10 @@ export const useAccordionPanel = createHook<
     };
 
     return {
-      ref: useForkRef(ref, htmlRef),
       role: "region",
       "aria-labelledby": `${buttonId ? buttonId : undefined}`,
       style,
+      ref: useForkRef(ref, htmlRef),
       ...htmlProps,
     };
   },

@@ -34,6 +34,8 @@ import {
 } from "@chakra-ui/utils";
 import { ensureFocus } from "reakit-utils";
 
+import { getDefaultValue, orient } from "./__utils";
+
 export interface UseSliderProps {
   /**
    * The minimum allowed value of the slider. Cannot be greater than max.
@@ -485,27 +487,6 @@ export function useSliderState(props: UseSliderProps = {}) {
       thumbStyle,
     },
   };
-}
-
-function orient(options: {
-  orientation: UseSliderProps["orientation"];
-  vertical: CSSProperties;
-  horizontal: CSSProperties;
-}) {
-  const { orientation, vertical, horizontal } = options;
-
-  return orientation === "vertical" ? vertical : horizontal;
-}
-
-/**
- * The browser <input type="range" /> calculates
- * the default value of a slider by using mid-point
- * between the min and the max.
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
- */
-function getDefaultValue(min: number, max: number) {
-  return max < min ? min : min + (max - min) / 2;
 }
 
 export type UseSliderReturn = ReturnType<typeof useSliderState>;

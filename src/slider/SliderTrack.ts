@@ -5,9 +5,9 @@
  * to work with Reakit System
  */
 import { createComponent, createHook } from "reakit-system";
-import { mergeRefs, dataAttr } from "@chakra-ui/utils";
-import { useId } from "@chakra-ui/hooks";
 import { BoxHTMLProps, useBox } from "reakit";
+import { useId } from "@chakra-ui/hooks";
+import { mergeRefs, dataAttr } from "@chakra-ui/utils";
 
 import { UseSliderReturn } from "./SliderState";
 import { SLIDER_TRACK_KEYS } from "./__keys";

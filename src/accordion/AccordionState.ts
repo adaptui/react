@@ -1,11 +1,54 @@
 import * as React from "react";
 
-import { SealedInitialState, useSealedState } from "reakit-utils";
 import {
   unstable_IdInitialState,
   unstable_IdStateReturn,
   unstable_useIdState,
 } from "reakit";
+import { SealedInitialState, useSealedState } from "reakit-utils";
+
+export type AccordionInitialState = unstable_IdInitialState & {
+  /**
+   * Allow to toggle multiple accordion items
+   */
+  allowMultiple?: boolean;
+};
+
+export type Button = {
+  id: string;
+  ref: React.RefObject<HTMLElement>;
+};
+
+export type Panel = {
+  id: string;
+  ref: React.RefObject<HTMLElement>;
+};
+
+export type Item = {
+  id: string;
+  ref: React.RefObject<HTMLElement>;
+  button?: Button;
+  panel?: Panel;
+};
+
+export type AccordionState = {
+  items: Item[];
+  activeItems: string[];
+  buttons: Button[];
+  allowMultiple: boolean;
+};
+
+export type AccordionActions = {
+  registerItem: (item: Item) => void;
+  registerButton: (button: Button) => void;
+  registerPanel: (panel: Panel) => void;
+  addActiveItem: (id: string) => void;
+  removeActiveItem: (id: string) => void;
+};
+
+export type AccordionStateReturn = unstable_IdStateReturn &
+  AccordionState &
+  AccordionActions;
 
 export function useAccordionState(
   initialState: SealedInitialState<AccordionInitialState> = {},
@@ -41,6 +84,13 @@ export function useAccordionState(
     }, []),
   };
 }
+
+export type AccordionReducerAction =
+  | { type: "registerItem"; item: Item }
+  | { type: "registerButton"; button: Button }
+  | { type: "registerPanel"; panel: Panel }
+  | { type: "addActiveItem"; id: string }
+  | { type: "removeActiveItem"; id: string };
 
 function reducer(
   state: AccordionState,
@@ -112,53 +162,3 @@ function reducer(
       throw new Error();
   }
 }
-
-export type AccordionInitialState = unstable_IdInitialState & {
-  /**
-   * Allow to toggle multiple accordion items
-   */
-  allowMultiple?: boolean;
-};
-
-export type Button = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-};
-
-export type Panel = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-};
-
-export type Item = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-  button?: Button;
-  panel?: Panel;
-};
-
-export type AccordionState = {
-  items: Item[];
-  activeItems: string[];
-  buttons: Button[];
-  allowMultiple: boolean;
-};
-
-export type AccordionActions = {
-  registerItem: (item: Item) => void;
-  registerButton: (button: Button) => void;
-  registerPanel: (panel: Panel) => void;
-  addActiveItem: (id: string) => void;
-  removeActiveItem: (id: string) => void;
-};
-
-export type AccordionStateReturn = unstable_IdStateReturn &
-  AccordionState &
-  AccordionActions;
-
-export type AccordionReducerAction =
-  | { type: "registerItem"; item: Item }
-  | { type: "registerButton"; button: Button }
-  | { type: "registerPanel"; panel: Panel }
-  | { type: "addActiveItem"; id: string }
-  | { type: "removeActiveItem"; id: string };
