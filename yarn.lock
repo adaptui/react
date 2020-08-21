@@ -2306,6 +2306,9 @@
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.debounce/-/lodash.debounce-4.0.6.tgz#c5a2326cd3efc46566c47e4c0aa248dc0ee57d60"
   integrity sha512-4WTmnnhCfDvvuLMaF3KV4Qfki93KebocUF45msxhYyjMttZDQYzHkO639ohhk8+oco2cluAFL3t5+Jn4mleylQ==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.merge@4.6.6":
   version "4.6.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.merge/-/lodash.merge-4.6.6.tgz#b84b403c1d31bc42d51772d1cd5557fa008cd3d6"
@@ -7634,6 +7637,7 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
 lodash.merge@4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
@@ -9560,14 +9564,14 @@ readdirp@~3.4.0:
   dependencies:
     picomatch "^2.2.1"
 
-reakit-system@0.14.2, reakit-system@^0.14.2:
+reakit-system@^0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/reakit-system/-/reakit-system-0.14.2.tgz#44787822962890e12290f13aef8df896942d92d2"
   integrity sha512-JB/wvMIs6Nf7xgZ4CXFX0E31aosUL6FErTyQMUFJzEIyjUCwsw3WO+RXeJXKauIYo9UPrvGAj071L/2LpJyzHQ==
   dependencies:
     reakit-utils "^0.14.2"
 
-reakit-utils@0.14.2, reakit-utils@^0.14.2:
+reakit-utils@^0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/reakit-utils/-/reakit-utils-0.14.2.tgz#c66546221fef3423e672b3c2527ec4c8ddb82ee6"
   integrity sha512-tNEZ0BPKf6WBrUR17yU5Gn4ErTQq6BF067fD5/kjbwWNHABSfAZgMX1dJH6dY2OXp2ENszvstgUbGWorXcdhLA==
@@ -9579,7 +9583,7 @@ reakit-warning@^0.5.2:
   dependencies:
     reakit-utils "^0.14.2"
 
-reakit@1.2.2:
+reakit@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/reakit/-/reakit-1.2.2.tgz#9088a88975e64b6bfdf4ddd6af245edc0254c032"
   integrity sha512-hk4RF6YXBljukoZFnI9OZPQMKFIp7HP5VHrAGOE52AhxtTUyTbr8rmel/A7qGsOtQMTQ2mh1elqIhHIaNy+HiQ==

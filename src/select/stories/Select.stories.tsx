@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectDropdown,
   useSelectState,
-} from "../select";
+} from "../";
 
 export default {
   title: "Component/Select",
