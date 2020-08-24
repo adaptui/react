@@ -32,7 +32,7 @@ const Select: React.FC<{ state: any }> = ({ state }) => {
         </b>
       </SelectTrigger>
 
-      <SelectDropdown maxHeight={200} {...state}>
+      <SelectDropdown style={{ width: "auto" }} maxHeight={200} {...state}>
         {countries.map(item => {
           return (
             <SelectItem {...state} key={item.name} value={item.name}>
@@ -61,4 +61,14 @@ export const DefaultSelected: React.FC = () => {
   const state = useSelectState({ selected: "india" });
 
   return <Select state={state} />;
+};
+
+export const Scrolling: React.FC = () => {
+  const state = useSelectState({ selected: "india" });
+
+  return (
+    <div style={{ margin: "800px 0" }}>
+      <Select state={state} />
+    </div>
+  );
 };

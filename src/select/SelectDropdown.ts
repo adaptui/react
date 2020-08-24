@@ -1,66 +1,51 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { SELECT_KEYS } from "./__keys";
+import { useDialog } from "reakit";
 import debounce from "lodash.debounce";
+import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { useForkRef, contains } from "reakit-utils";
 import { SelectStateReturn } from "./useSelectState";
+import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 import { useComposite, CompositeProps } from "reakit/Composite";
 
 export type SelectDropdownOptions = CompositeProps &
   Pick<
     SelectStateReturn,
-    "isDropdownOpen" | "selected" | "setSelected" | "typehead" | "closeDropdown"
+    | "selected"
+    | "setSelected"
+    | "typehead"
+    | "visible"
+    | "unstable_popoverStyles"
+    | "unstable_popoverRef"
   > & {
     maxHeight?: string | number;
+    modal?: boolean;
   };
 
 const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   name: "selectDropdown",
-  compose: useComposite,
-  keys: ["maxHeight", ...SELECT_KEYS],
+  compose: [useComposite, useDialog],
+  keys: ["maxHeight", ...SELECT_KEYS, ...POPOVER_KEYS],
 
+  useOptions({ modal = false, ...options }) {
+    return { modal, ...options };
+  },
   useProps(
     {
       maxHeight = 500,
       move,
-      isDropdownOpen,
       items,
       selected,
       setSelected,
       setCurrentId,
       typehead,
-      closeDropdown,
+      visible,
+      unstable_popoverStyles,
+      unstable_popoverRef,
     },
-    { ref: htmlRef, ...htmlProps },
+    { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
-    const ref = React.useRef<HTMLElement>(null);
-    const [position, setPosition] = React.useState("top");
-
-    const calculateDropdownPosition = React.useCallback(() => {
-      if (ref.current) {
-        const bounds = ref.current.getBoundingClientRect();
-        if (bounds.y < 0) {
-          setPosition("top");
-        }
-
-        if (bounds.bottom - 50 > window.innerHeight) {
-          setPosition("bottom");
-        }
-      }
-    }, []);
-
-    React.useLayoutEffect(() => {
-      calculateDropdownPosition();
-    }, [calculateDropdownPosition, isDropdownOpen]);
-
-    React.useLayoutEffect(() => {
-      window.addEventListener("scroll", calculateDropdownPosition);
-      return () =>
-        window.removeEventListener("scroll", calculateDropdownPosition);
-    }, [calculateDropdownPosition]);
-
     React.useEffect(() => {
       if (!items[0]) return;
 
@@ -78,7 +63,7 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
         setCurrentId(items[0].id);
         move(items[0].id);
       }
-    }, [isDropdownOpen]);
+    }, [visible]);
 
     React.useEffect(
       debounce(() => {
@@ -104,29 +89,17 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
       [typehead],
     );
 
-    const clickOutside = React.useCallback(e => {
-      e.stopPropagation();
-      if (contains(e.target, ref.current as Element)) {
-        closeDropdown();
-      }
-    }, []);
-
-    React.useEffect(() => {
-      window.addEventListener("click", clickOutside);
-      return () => window.removeEventListener("click", clickOutside);
-    }, [clickOutside]);
-
     return {
       tabIndex: -1,
-      ref: useForkRef(ref, htmlRef),
       role: "listbox",
       "aria-orientation": "vertical",
-      "aria-hidden": !isDropdownOpen,
+      "aria-hidden": !visible,
+      ref: useForkRef(unstable_popoverRef, htmlRef),
       style: {
         maxHeight: maxHeight,
         overflowY: "scroll",
-        display: isDropdownOpen ? "block" : "none",
-        [position]: "100%",
+        ...unstable_popoverStyles,
+        ...htmlStyle,
       },
       ...htmlProps,
     };

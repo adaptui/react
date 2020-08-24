@@ -4,12 +4,12 @@ import {
   CompositeActions,
   CompositeState,
 } from "reakit/Composite";
+import { usePopoverState, PopoverStateReturn } from "reakit";
 
 export type SelectState = CompositeState & {
   allowMultiselect?: boolean;
   selected: string[];
   typehead: string;
-  isDropdownOpen: boolean;
   isPlaceholder: boolean;
 };
 
@@ -21,16 +21,14 @@ export interface ISelectInitialState {
 
 export type SelectActions = CompositeActions & {
   setTypehead: React.Dispatch<React.SetStateAction<string>>;
-  setDropdown: React.Dispatch<React.SetStateAction<boolean>>;
-  openDropdown: React.DispatchWithoutAction;
-  closeDropdown: React.DispatchWithoutAction;
-  toggleDropdown: React.DispatchWithoutAction;
   removeSelected: (value: string) => void;
   setSelected: (value: string, shouldRemainOpen?: boolean) => void;
   _setSelected: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-export type SelectStateReturn = SelectState & SelectActions;
+export type SelectStateReturn = SelectState &
+  SelectActions &
+  PopoverStateReturn;
 
 export const useSelectState = ({
   selected,
@@ -38,22 +36,10 @@ export const useSelectState = ({
   loop = true,
 }: ISelectInitialState): SelectStateReturn => {
   const composite = useCompositeState({ loop });
+  const popover = usePopoverState({ placement: "bottom-start" });
 
   const [typehead, setTypehead] = React.useState<string>("");
-  const [isDropdownOpen, setDropdown] = React.useState<boolean>(false);
   const [isPlaceholder, setIsPlaceholder] = React.useState<boolean>(false);
-
-  const toggleDropdown = React.useCallback(() => {
-    setDropdown(prev => !prev);
-  }, []);
-
-  const openDropdown = React.useCallback(() => {
-    setDropdown(true);
-  }, []);
-
-  const closeDropdown = React.useCallback(() => {
-    setDropdown(false);
-  }, []);
 
   const [_selected, _setSelected] = React.useState<string[]>([]);
 
@@ -71,7 +57,7 @@ export const useSelectState = ({
         setTypehead("");
       } else {
         _setSelected([value]);
-        !shouldRemainOpen && setDropdown(false);
+        !shouldRemainOpen && popover.hide();
         setTypehead("");
       }
     },
@@ -90,14 +76,10 @@ export const useSelectState = ({
 
   return {
     ...composite,
+    ...popover,
     allowMultiselect,
     typehead,
     setTypehead,
-    setDropdown,
-    openDropdown,
-    closeDropdown,
-    isDropdownOpen,
-    toggleDropdown,
     removeSelected,
     selected: _selected,
     setSelected,
