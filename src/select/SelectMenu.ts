@@ -8,11 +8,7 @@ import { SELECT_KEYS } from "./__keys";
 
 export type SelectMenuOptions = Pick<
   SelectStateReturn,
-  | "setTypehead"
-  | "isDropdownOpen"
-  | "selected"
-  | "openDropdown"
-  | "closeDropdown"
+  "setTypehead" | "selected" | "hide" | "show" | "visible"
 > & {
   onChange?: (value: any) => void;
 };
@@ -22,14 +18,7 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   keys: SELECT_KEYS,
 
   useProps(
-    {
-      setTypehead,
-      isDropdownOpen,
-      selected,
-      onChange,
-      openDropdown,
-      closeDropdown,
-    },
+    { setTypehead, selected, onChange, hide, show, visible },
     { ...htmlProps },
   ) {
     const keyClear = React.useRef<any>(null);
@@ -42,19 +31,11 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
     const onKeyDown = React.useMemo(() => {
       return createOnKeyDown({
         stopPropagation: true,
-        keyMap: () => {
-          return {
-            Escape: () => {
-              closeDropdown();
-            },
-            ArrowUp: () => {
-              openDropdown();
-            },
-            ArrowDown: () => {
-              openDropdown();
-            },
-          };
-        },
+        keyMap: () => ({
+          Escape: hide,
+          ArrowUp: show,
+          ArrowDown: show,
+        }),
       });
     }, []);
 
@@ -87,7 +68,7 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
 
     return {
       role: "button",
-      "aria-expanded": isDropdownOpen,
+      "aria-expanded": visible,
       "aria-haspopup": "listbox",
       onKeyDown,
       onKeyPress: handleOnKeyPress,
