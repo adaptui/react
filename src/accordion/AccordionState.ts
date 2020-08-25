@@ -121,11 +121,7 @@ function reducer(
 
     case "registerButton": {
       const { button } = action;
-      const item = items.find(r => r.ref.current?.contains(button.ref.current));
-      const nextItems = items.filter(
-        r => !r.ref.current?.contains(button.ref.current),
-      );
-      const nextItem = { ...item, button } as Item;
+      const { nextItem, nextItems } = getNextItem("button", button, items);
 
       return {
         ...state,
@@ -136,11 +132,7 @@ function reducer(
 
     case "registerPanel": {
       const { panel } = action;
-      const item = items.find(r => r.ref.current?.contains(panel.ref.current));
-      const nextItems = items.filter(
-        r => !r.ref.current?.contains(panel.ref.current),
-      );
-      const nextItem = { ...item, panel } as Item;
+      const { nextItem, nextItems } = getNextItem("panel", panel, items);
 
       return {
         ...state,
@@ -161,4 +153,16 @@ function reducer(
     default:
       throw new Error();
   }
+}
+
+function getNextItem(type: string, currentItem: Button | Panel, items: Item[]) {
+  const item = items.find(r =>
+    r.ref.current?.contains(currentItem.ref.current),
+  );
+  const nextItems = items.filter(
+    r => !r.ref.current?.contains(currentItem.ref.current),
+  );
+  const nextItem = { ...item, [type]: currentItem } as Item;
+
+  return { nextItem, nextItems };
 }
