@@ -80,12 +80,14 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
             dataAttrValue.startsWith(typehead)
           ) {
             setCurrentId(item.id);
-            // remain dropdown open on setSelected
-            setSelected(dataAttrValue, true);
             move(item.id);
+            if (!visible) {
+              // remain dropdown open on setSelected
+              setSelected(dataAttrValue, true);
+            }
           }
         });
-      }, 400),
+      }, 150),
       [typehead],
     );
 
