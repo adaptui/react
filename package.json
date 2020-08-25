@@ -24,8 +24,8 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@chakra-ui/hooks": "1.0.0-next.7",
-    "@chakra-ui/utils": "1.0.0-next.7",
+    "@chakra-ui/hooks": "1.0.0-rc.2",
+    "@chakra-ui/utils": "1.0.0-rc.2",
     "@types/lodash.debounce": "^4.0.6",
     "lodash.debounce": "^4.0.8",
     "reakit": "^1.2.3",

@@ -1100,27 +1100,17 @@
   resolved "https://registry.yarnpkg.com/@base2/pretty-print-object/-/pretty-print-object-1.0.0.tgz#860ce718b0b73f4009e153541faff2cb6b85d047"
   integrity sha512-4Th98KlMHr5+JkxfcoDT//6vY8vM+iSPrLNpHhRyLx2CFYi8e2RfqPLdpbnpo0Q5lQC5hNB79yes07zb02fvCw==
 
-"@chakra-ui/hooks@1.0.0-next.7":
-  version "1.0.0-next.7"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/hooks/-/hooks-1.0.0-next.7.tgz#2d0cc0b5737e7bb7e6e71026c012cb19023fa12d"
-  integrity sha512-a7ZoDFegXw1ma/ulxCOW382Ao4O2fV29sg7vyoKDysS0kA4Ki0Qw6ctA1p1v32i/+NOOYtXi2i15KBZmGI5KRQ==
+"@chakra-ui/hooks@1.0.0-rc.2":
+  version "1.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/hooks/-/hooks-1.0.0-rc.2.tgz#67d81b1170480d82eed1a6382c4e6291d711fa5b"
+  integrity sha512-cI8HpAwRV3j7VnPAasRuc4DFStIS8EiWwZzJAslmcdT0Eof3jR1wF94cmaZW1mCrOuS7vCgrbcRe7Fk2Dfsuqw==
   dependencies:
-    "@chakra-ui/utils" "^1.0.0-next.7"
+    "@chakra-ui/utils" "1.0.0-rc.2"
     "@reach/auto-id" "0.10.5"
     compute-scroll-into-view "1.0.14"
     copy-to-clipboard "3.3.1"
 
-"@chakra-ui/utils@1.0.0-next.7":
-  version "1.0.0-next.7"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.0.0-next.7.tgz#31c20bcb3380f7c410ea482d3adc999af3712e2c"
-  integrity sha512-vtI1TA3AIQ5WYEXgS4TYIhy0VY9NqgyopTl1VIiTZnCmPx+yYhRsSKIO54pgaWb+sX8Nb7tekfy8j4D9GQPqHQ==
-  dependencies:
-    "@types/lodash.merge" "4.6.6"
-    css-box-model "1.2.1"
-    lodash.merge "4.6.2"
-    memoize-one "5.1.1"
-
-"@chakra-ui/utils@^1.0.0-next.7":
+"@chakra-ui/utils@1.0.0-rc.2":
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.0.0-rc.2.tgz#01668cf71eee4f6c8b8ae01513136092f99abce1"
   integrity sha512-5tl1PbEjkgpkILHCTUUvKbecBxl465sLDg62twbP1jyfD+5Tg/F6DsBwOrQEq+DcZlU0qNWIky9d2TP5N1830g==
