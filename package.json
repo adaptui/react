@@ -26,6 +26,10 @@
   "dependencies": {
     "@chakra-ui/hooks": "1.0.0-rc.2",
     "@chakra-ui/utils": "1.0.0-rc.2",
+    "@react-aria/button": "^3.2.1",
+    "@react-aria/interactions": "^3.2.0",
+    "@react-aria/utils": "^3.2.0",
+    "@react-stately/toggle": "^3.2.0",
     "@types/lodash.debounce": "^4.0.6",
     "lodash.debounce": "^4.0.8",
     "reakit": "^1.2.3",

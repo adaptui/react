@@ -2,7 +2,7 @@
 import React from "react";
 import { createOnKeyDown } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
 

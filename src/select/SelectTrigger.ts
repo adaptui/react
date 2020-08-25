@@ -1,6 +1,6 @@
 import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS, POPOVER_DISCLOSURE_KEYS } from "./__keys";
 import { useDialogDisclosure } from "reakit";

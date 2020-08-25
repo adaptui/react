@@ -4,7 +4,7 @@ import { useDialog } from "reakit";
 import debounce from "lodash.debounce";
 import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 import { useComposite, CompositeProps } from "reakit/Composite";

@@ -4,7 +4,7 @@ import {
   CompositeItemOptions,
 } from "reakit/Composite";
 import { SELECT_KEYS } from "./__keys";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 
 export type SelectItemOptions = CompositeItemOptions &
