@@ -26,9 +26,11 @@
   "dependencies": {
     "@chakra-ui/hooks": "1.0.0-next.7",
     "@chakra-ui/utils": "1.0.0-next.7",
-    "reakit": "1.2.3",
-    "reakit-system": "0.14.3",
-    "reakit-utils": "0.14.3"
+    "@types/lodash.debounce": "^4.0.6",
+    "lodash.debounce": "^4.0.8",
+    "reakit": "^1.2.3",
+    "reakit-system": "^0.14.3",
+    "reakit-utils": "^0.14.3"
   },
   "devDependencies": {
     "@babel/core": "7.11.4",
