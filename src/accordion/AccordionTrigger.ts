@@ -4,19 +4,19 @@ import * as React from "react";
 
 import { createComponent, createHook } from "reakit-system";
 import {
-  useForkRef,
-  useLiveRef,
-  createOnKeyDown,
-  isSelfTarget,
-} from "reakit-utils";
-import {
   ButtonHTMLProps,
   ButtonOptions,
   unstable_IdHTMLProps,
   unstable_IdOptions,
   unstable_useId,
+  useButton,
 } from "reakit";
-import { useButton } from "reakit";
+import {
+  useForkRef,
+  useLiveRef,
+  createOnKeyDown,
+  isSelfTarget,
+} from "reakit-utils";
 
 import { AccordionStateReturn } from "./AccordionState";
 import { ACCORDION_KEYS } from "./__keys";
@@ -34,10 +34,6 @@ export const useAccordionTrigger = createHook<
   name: "AccordionTrigger",
   keys: ACCORDION_KEYS,
   compose: [useButton, unstable_useId],
-
-  useOptions(options, htmlProps) {
-    return { ...options };
-  },
 
   useProps(
     options,
@@ -133,5 +129,6 @@ export const useAccordionTrigger = createHook<
 
 export const AccordionTrigger = createComponent({
   as: "button",
+  memo: true,
   useHook: useAccordionTrigger,
 });
