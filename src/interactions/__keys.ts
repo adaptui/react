@@ -16,4 +16,7 @@ export const INTERACTION_KEYS = [
   "onPressEnd",
   "onPressUp",
   "elementType",
+  "within",
+  "onFocusRingChange",
+  "onFocusRingVisibleChange",
 ] as const;

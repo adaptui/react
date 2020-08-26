@@ -23,8 +23,8 @@ export const useFocusVisible = createHook<useFocusVisibleOptions, BoxHTMLProps>(
     compose: [useBox],
 
     useProps(options, htmlProps) {
-      const { onFocusVisibleChange } = options;
-      const { isFocusVisible } = useAriaFocusVisible(options);
+      const { onFocusVisibleChange, ...restOptions } = options;
+      const { isFocusVisible } = useAriaFocusVisible(restOptions);
 
       useEffect(() => {
         onFocusVisibleChange?.(isFocusVisible);

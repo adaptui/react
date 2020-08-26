@@ -1569,7 +1569,7 @@
     "@react-types/shared" "^3.1.0"
     intl-messageformat "^2.2.0"
 
-"@react-aria/interactions@^3.2.0":
+"@react-aria/interactions@^3.1.0", "@react-aria/interactions@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.2.0.tgz#43d28489f8e1ec333127221ed1a2a7c92783dd01"
   integrity sha512-NhXnEOimpp+3K5XUbiM4DxhZ2LykT1Vy7iGaRk1alm7S//y+dxzNm7VzvjAI2+YeMbv6TbdtiPVfXB/+Xi+D9w==
@@ -1578,7 +1578,18 @@
     "@react-aria/utils" "^3.2.0"
     "@react-types/shared" "^3.2.0"
 
-"@react-aria/utils@^3.2.0":
+"@react-aria/link@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/link/-/link-3.1.0.tgz#dd1bad1f1a02b0cee20f574d0d854bca4b0c7386"
+  integrity sha512-qOF0rpJ0FWef77TtDkBDnFYJ1XrP4kxDYYga+NxG6jkff680lgBOhcQuMB7h6adw625ENATeoNKV5JI+Wsid6w==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.1.0"
+    "@react-aria/utils" "^3.1.0"
+    "@react-types/link" "^3.1.0"
+    "@react-types/shared" "^3.1.0"
+
+"@react-aria/utils@^3.1.0", "@react-aria/utils@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.2.0.tgz#67d39dbba9d96612b4f9b3fe5c3243db4196b6f2"
   integrity sha512-o2Far+gAnp78QksjlQTqo4Qq3A2f6ll931C7Q0RU2OIG/ImRHlSczqyMOPBlHRnEGyD+1ctWkmcHkdP4CvuD7g==
@@ -1616,6 +1627,14 @@
   resolved "https://registry.yarnpkg.com/@react-types/checkbox/-/checkbox-3.1.0.tgz#fd8b35d5b672451f2b694d43f30f13011f5a8fd9"
   integrity sha512-XOaoot5ArkxcDuo1aOsGr1BR4MjOBgHy3obs5d3M2FrlF1B7JBmWQMpzinIW+Zs6J0BOOMdqB19zOaCFCORMcw==
   dependencies:
+    "@react-types/shared" "^3.1.0"
+
+"@react-types/link@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-types/link/-/link-3.1.0.tgz#1af394aed73e44ca811aa27b1403fb97a3b6542a"
+  integrity sha512-oxZHWT8Ug22oC/WBFU6z/mRkDakTkBsM44/9R6vZ8HbgnoYMYp+FLRm0nYMkpAFtJvA+cMn1B0h4d1vGrOJyXA==
+  dependencies:
+    "@react-aria/interactions" "^3.1.0"
     "@react-types/shared" "^3.1.0"
 
 "@react-types/shared@^3.1.0", "@react-types/shared@^3.2.0":
