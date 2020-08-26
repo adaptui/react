@@ -79,6 +79,9 @@ export const SELECT_KEYS = [
   "setSelected",
   "_setSelected",
   "isPlaceholder",
+  "inputValue",
+  "setInputValue",
+  "isCombobox",
   ...POPOVER_STATE_KEYS,
 ] as const;
 

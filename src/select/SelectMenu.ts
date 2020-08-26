@@ -8,7 +8,7 @@ import { SELECT_KEYS } from "./__keys";
 
 export type SelectMenuOptions = Pick<
   SelectStateReturn,
-  "setTypehead" | "selected" | "hide" | "show" | "visible"
+  "setTypehead" | "selected" | "hide" | "show" | "visible" | "isCombobox"
 > & {
   onChange?: (value: any) => void;
 };
@@ -18,7 +18,7 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   keys: SELECT_KEYS,
 
   useProps(
-    { setTypehead, selected, onChange, hide, show, visible },
+    { setTypehead, selected, onChange, hide, show, visible, isCombobox },
     { ...htmlProps },
   ) {
     const keyClear = React.useRef<any>(null);
@@ -54,12 +54,13 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
     };
 
     React.useEffect(() => {
-      if (typed !== "") {
+      if (typed !== "" && !isCombobox) {
         clearKeyStrokes();
       }
-    }, [typed]);
+    }, [typed, isCombobox]);
 
     const handleOnKeyPress = (e: React.KeyboardEvent) => {
+      if (isCombobox) return;
       e.persist();
       // skip the enter key
       if (e.key === "Enter") return;

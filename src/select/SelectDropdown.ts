@@ -1,23 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { useDialog } from "reakit";
+import { usePopover } from "reakit";
 import debounce from "lodash.debounce";
-import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
-import { useComposite, CompositeProps } from "reakit/Composite";
+import { CompositeProps } from "reakit/Composite";
 
 export type SelectDropdownOptions = CompositeProps &
   Pick<
     SelectStateReturn,
-    | "selected"
-    | "setSelected"
-    | "typehead"
-    | "visible"
-    | "unstable_popoverStyles"
-    | "unstable_popoverRef"
+    "selected" | "setSelected" | "typehead" | "visible"
   > & {
     maxHeight?: string | number;
     modal?: boolean;
@@ -25,7 +19,7 @@ export type SelectDropdownOptions = CompositeProps &
 
 const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   name: "selectDropdown",
-  compose: [useComposite, useDialog],
+  compose: [usePopover],
   keys: ["maxHeight", ...SELECT_KEYS, ...POPOVER_KEYS],
 
   useOptions({ modal = false, ...options }) {
@@ -41,8 +35,6 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
       setCurrentId,
       typehead,
       visible,
-      unstable_popoverStyles,
-      unstable_popoverRef,
     },
     { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
@@ -81,6 +73,7 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
           ) {
             setCurrentId(item.id);
             move(item.id);
+            // if dropdown is not open directly select the item.
             if (!visible) {
               // remain dropdown open on setSelected
               setSelected(dataAttrValue, true);
@@ -88,7 +81,7 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
           }
         });
       }, 150),
-      [typehead],
+      [typehead, visible],
     );
 
     return {
@@ -96,11 +89,9 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
       role: "listbox",
       "aria-orientation": "vertical",
       "aria-hidden": !visible,
-      ref: useForkRef(unstable_popoverRef, htmlRef),
       style: {
         maxHeight: maxHeight,
         overflowY: "scroll",
-        ...unstable_popoverStyles,
         ...htmlStyle,
       },
       ...htmlProps,

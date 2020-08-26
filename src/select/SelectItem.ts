@@ -22,7 +22,7 @@ const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
     return {
       role: "option",
       "aria-label": value,
-      "aria-selected": selected.includes(value),
+      "data-selected": selected.includes(value),
       "data-value": value,
       onClick: () => {
         setSelected(value);

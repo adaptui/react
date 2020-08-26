@@ -21,6 +21,13 @@ const countries = [
   { name: "california" },
   { name: "ireland" },
   { name: "indonesia" },
+  { name: "chennai" },
+  { name: "mexico" },
+  { name: "sydney" },
+  { name: "africa" },
+  { name: "las vagas" },
+  { name: "vietnam" },
+  { name: "zimbabwe" },
 ];
 
 const Select: React.FC<{ state: any }> = ({ state }) => {
