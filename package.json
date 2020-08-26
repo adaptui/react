@@ -32,6 +32,7 @@
     "@react-aria/utils": "^3.2.0",
     "@react-stately/toggle": "^3.2.0",
     "@types/lodash.debounce": "^4.0.6",
+    "emotion": "^10.0.27",
     "lodash.debounce": "^4.0.8",
     "reakit": "^1.2.3",
     "reakit-system": "^0.14.3",
