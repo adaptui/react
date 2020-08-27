@@ -4,5 +4,5 @@
     "git add"
   ],
   "package.json": ["yarn lint:package"],
-  "**/*.{js,jsx,tx,tsx}": ["yarn lint"]
+  "**/*.{js,jsx,ts,tsx}": ["yarn lint"]
 }
