@@ -5,7 +5,6 @@ import {
   SelectMenu,
   SelectItem,
   SelectInput,
-  SelectTrigger,
   SelectDropdown,
   useSelectState,
 } from "../";
@@ -38,7 +37,6 @@ export const Default: React.FC = () => {
 
   const state = useSelectState({
     allowMultiselect: true,
-    isCombobox: true,
     selected: "india",
   });
 

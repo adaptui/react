@@ -6,7 +6,7 @@ import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
-import { CompositeProps } from "reakit/Composite";
+import { CompositeProps, useComposite } from "reakit/Composite";
 
 export type SelectDropdownOptions = CompositeProps &
   Pick<
@@ -19,7 +19,7 @@ export type SelectDropdownOptions = CompositeProps &
 
 const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   name: "selectDropdown",
-  compose: [usePopover],
+  compose: [useComposite, usePopover],
   keys: ["maxHeight", ...SELECT_KEYS, ...POPOVER_KEYS],
 
   useOptions({ modal = false, ...options }) {

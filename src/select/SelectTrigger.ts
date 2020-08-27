@@ -1,25 +1,28 @@
-import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
-import { useComposite, usePopoverDisclosure } from "reakit";
+import { usePopoverDisclosure } from "reakit";
+import { useTypeahead } from "./common";
 
 export type SelectTriggerOptions = Pick<
   SelectStateReturn,
-  "toggle" | "visible" | "unstable_referenceRef"
+  "visible" | "unstable_referenceRef" | "setTypehead"
 >;
 
 const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
   name: "selectTrigger",
-  compose: [useComposite, usePopoverDisclosure],
+  compose: [usePopoverDisclosure],
   keys: SELECT_KEYS,
 
-  useProps({ visible }, { ref: htmlRef, ...htmlProps }) {
+  useProps({ visible, setTypehead }, { ref: htmlRef, ...htmlProps }) {
+    const { handleOnKeyPress } = useTypeahead({ setTypehead });
+
     return {
       role: "button",
       "aria-haspopup": "listbox",
       "aria-expanded": visible,
+      onKeyPress: handleOnKeyPress,
       tabIndex: 0,
       ...htmlProps,
     };
