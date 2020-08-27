@@ -1,5 +1,6 @@
 import React from "react";
 import { Meta } from "@storybook/react";
+import { css } from "emotion";
 
 import {
   Picker,
@@ -31,15 +32,30 @@ const countries = [
   { name: "zimbabwe" },
 ];
 
-const Select: React.FC<{ state: any }> = ({ state }) => {
-  return (
-    <Picker {...state}>
-      <PickerButton {...state}>Select One Value</PickerButton>
+const focus = css`
+  &:focus {
+    outline: none;
+    box-shadow: rgba(66, 153, 225, 0.6) 0px 0px 0px 3px;
+  }
+`;
 
-      <PickerListBox {...state}>
+const Select: React.FC<{ state: any }> = ({ state }) => {
+  const { selectedValue } = state;
+  return (
+    <Picker className={focus} {...state}>
+      <PickerButton className={focus} {...state}>{`${
+        selectedValue ? selectedValue : "Select One Value"
+      }`}</PickerButton>
+
+      <PickerListBox className={focus} {...state}>
         {countries.map(item => {
           return (
-            <PickerItem {...state} key={item.name} value={item.name}>
+            <PickerItem
+              className={focus}
+              {...state}
+              key={item.name}
+              value={item.name}
+            >
               {item.name}
             </PickerItem>
           );
@@ -54,4 +70,21 @@ export const Default: React.FC = () => {
   console.log("%c state", "color: #917399", state);
 
   return <Select state={state} />;
+};
+
+export const DefaultValueSelected: React.FC = () => {
+  const state = usePickerState({ selectedValue: "india" });
+  console.log("%c state", "color: #917399", state);
+
+  return <Select state={state} />;
+};
+
+export const Scrolling: React.FC = () => {
+  const state = usePickerState({ selectedValue: "australia" });
+
+  return (
+    <div style={{ margin: "800px 0" }}>
+      <Select state={state} />
+    </div>
+  );
 };

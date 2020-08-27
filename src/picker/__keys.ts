@@ -1,5 +1,3 @@
-import { POPOVER_KEYS } from "../select/__keys";
-
 const COMPOSITE_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
@@ -67,4 +65,7 @@ const POPOVER_STATE_KEYS = [
 export const PICKER_STATE_KEYS = [
   ...COMPOSITE_STATE_KEYS,
   ...POPOVER_STATE_KEYS,
+  "values",
+  "selectedValue",
+  "setSelectedValue",
 ] as const;

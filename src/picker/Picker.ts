@@ -1,5 +1,5 @@
-import { createHook, createComponent } from "reakit-system";
 import { PICKER_STATE_KEYS } from "./__keys";
+import { createHook, createComponent } from "reakit-system";
 
 const usePicker = createHook<{}, {}>({
   name: "usePicker",
