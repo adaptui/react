@@ -41,8 +41,14 @@ export const useTypeahead = ({
     e.persist();
     // skip all the keys eg: Enter, Alt, Shift
     if (e.key.length > 1) return;
+    if (e.shiftKey) return;
+    if (e.metaKey) return;
+    if (e.ctrlKey) return;
+    if (e.altKey) return;
 
-    setTyped(prev => prev + e.key);
+    if (/^[a-z0-9_-]$/i.test(e.key)) {
+      setTyped(prev => prev + e.key);
+    }
   };
 
   return { handleOnKeyPress: disabled ? () => {} : handleOnKeyPress };
