@@ -8,6 +8,7 @@ import {
   SelectDropdown,
   useSelectState,
 } from "../";
+import "./style.css";
 
 export default {
   title: "Component/Select",
@@ -62,6 +63,38 @@ export const MultiSelect: React.FC = () => {
   const state = useSelectState({ allowMultiselect: true });
 
   return <Select state={state} />;
+};
+
+export const MultiSelectCheckboxes: React.FC = () => {
+  const state = useSelectState({ allowMultiselect: true });
+
+  return (
+    <SelectMenu {...state} onChange={(value: any) => console.log(value)}>
+      <SelectTrigger {...state}>
+        <b style={{ color: state.isPlaceholder ? "gray" : "black" }}>
+          {state.isPlaceholder
+            ? "Select one.."
+            : `(${state.selected.length}) Items Selected`}
+        </b>
+      </SelectTrigger>
+
+      <SelectDropdown maxHeight={200} {...state}>
+        {countries.map(item => {
+          return (
+            <SelectItem {...state} key={item.name} value={item.name}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={!!state.selected.includes(item.name)}
+                />{" "}
+                <span>{item.name}</span>
+              </label>
+            </SelectItem>
+          );
+        })}
+      </SelectDropdown>
+    </SelectMenu>
+  );
 };
 
 export const DefaultSelected: React.FC = () => {

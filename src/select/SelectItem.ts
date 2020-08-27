@@ -24,7 +24,8 @@ const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
       "aria-label": value,
       "data-selected": selected.includes(value),
       "data-value": value,
-      onClick: () => {
+      onClick: e => {
+        e.preventDefault();
         setSelected(value);
       },
       ...htmlProps,
