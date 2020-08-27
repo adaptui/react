@@ -7,11 +7,17 @@ import { SelectStateReturn } from "./useSelectState";
 import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 import { CompositeProps, useComposite } from "reakit/Composite";
+import { useTypeahead } from "./common";
 
 export type SelectDropdownOptions = CompositeProps &
   Pick<
     SelectStateReturn,
-    "selected" | "setSelected" | "typehead" | "visible"
+    | "selected"
+    | "setSelected"
+    | "typehead"
+    | "visible"
+    | "setTypehead"
+    | "isCombobox"
   > & {
     maxHeight?: string | number;
     modal?: boolean;
@@ -28,16 +34,23 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   useProps(
     {
       maxHeight = 500,
-      move,
       items,
       selected,
-      setSelected,
-      setCurrentId,
       typehead,
       visible,
+      isCombobox,
+      move,
+      setSelected,
+      setCurrentId,
+      setTypehead,
     },
     { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
+    const { handleOnKeyPress } = useTypeahead({
+      setTypehead,
+      disabled: isCombobox,
+    });
+
     React.useEffect(() => {
       if (!items[0]) return;
 
@@ -57,35 +70,36 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
       }
     }, [visible]);
 
-    React.useEffect(
-      debounce(() => {
-        if (typehead === "") return;
+    React.useEffect(() => {
+      debounce(
+        () => {
+          if (typehead === "") return;
 
-        items.forEach(item => {
-          if (!item.ref.current) return;
-          const dataAttrValue = item.ref.current.getAttribute(
-            "data-value",
-          ) as string;
+          items.forEach(item => {
+            if (!item.ref.current) return;
+            const dataAttrValue = item.ref.current.getAttribute(
+              "data-value",
+            ) as string;
 
-          if (
-            !selected.includes(dataAttrValue) &&
-            dataAttrValue.startsWith(typehead)
-          ) {
-            setCurrentId(item.id);
-            move(item.id);
-            // if dropdown is not open directly select the item.
-            if (!visible) {
-              // remain dropdown open on setSelected
-              setSelected(dataAttrValue, true);
+            if (
+              !selected.includes(dataAttrValue) &&
+              dataAttrValue.startsWith(typehead)
+            ) {
+              setCurrentId(item.id);
+              move(item.id);
+              // if dropdown is not open directly select the item.
+              if (!visible) {
+                // remain dropdown open on setSelected
+                setSelected(dataAttrValue, true);
+              }
             }
-          }
-        });
-      }, 150),
-      [typehead, visible],
-    );
+          });
+        },
+        visible ? 150 : 400,
+      )();
+    }, [typehead, visible]);
 
     return {
-      tabIndex: -1,
       role: "listbox",
       "aria-orientation": "vertical",
       "aria-hidden": !visible,
@@ -94,6 +108,7 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
         overflowY: "scroll",
         ...htmlStyle,
       },
+      onKeyDown: handleOnKeyPress,
       ...htmlProps,
     };
   },

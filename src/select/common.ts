@@ -9,8 +9,10 @@ export const enterOrSpace = (e: any, fn: Function) => {
 
 export const useTypeahead = ({
   setTypehead,
+  disabled,
 }: {
   setTypehead: SelectTriggerOptions["setTypehead"];
+  disabled?: boolean;
 }) => {
   const keyClear = React.useRef<any>(null);
   const [typed, setTyped] = React.useState("");
@@ -37,10 +39,11 @@ export const useTypeahead = ({
 
   const handleOnKeyPress = (e: React.KeyboardEvent) => {
     e.persist();
-    // skip the enter key
-    if (e.key === "Enter") return;
+    // skip all the keys eg: Enter, Alt, Shift
+    if (e.key.length > 1) return;
+
     setTyped(prev => prev + e.key);
   };
 
-  return { handleOnKeyPress };
+  return { handleOnKeyPress: disabled ? () => {} : handleOnKeyPress };
 };

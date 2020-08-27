@@ -1,10 +1,9 @@
-import { useForkRef } from "reakit-utils";
+import React from "react";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./useSelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
 import { useComposite, usePopoverDisclosure } from "reakit";
-import React from "react";
 
 export type SelectInputOptions = Pick<
   SelectStateReturn,
@@ -26,10 +25,10 @@ const useSelectInput = createHook<SelectInputOptions, BoxHTMLProps>({
   useProps(
     {
       selected,
-      removeSelected,
       inputValue,
-      setInputValue,
       visible,
+      removeSelected,
+      setInputValue,
       setTypehead,
     },
     { ref: htmlRef, ...htmlProps },
@@ -48,6 +47,9 @@ const useSelectInput = createHook<SelectInputOptions, BoxHTMLProps>({
       },
       "aria-haspopup": "listbox",
       "aria-expanded": visible,
+      autoCorrect: "off",
+      autoComplete: "off",
+      autoCapitalize: "none",
       tabIndex: 0,
       ...htmlProps,
     };

@@ -18,7 +18,7 @@ const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
   name: "selectItem",
   compose: useCompositeItem,
   keys: ["value", ...SELECT_KEYS],
-  useProps({ setSelected, selected, value }, { ref: htmlRef, ...htmlProps }) {
+  useProps({ selected, value, setSelected }, { ref: htmlRef, ...htmlProps }) {
     return {
       role: "option",
       "aria-label": value,

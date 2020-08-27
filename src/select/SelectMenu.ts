@@ -17,7 +17,7 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
   keys: SELECT_KEYS,
 
-  useProps({ selected, onChange, hide, show, visible }, { ...htmlProps }) {
+  useProps({ selected, visible, onChange, hide, show }, { ...htmlProps }) {
     React.useEffect(() => {
       onChange && onChange(selected);
     }, [selected]);

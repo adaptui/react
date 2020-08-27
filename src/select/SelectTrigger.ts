@@ -19,11 +19,11 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
     const { handleOnKeyPress } = useTypeahead({ setTypehead });
 
     return {
+      tabIndex: 0,
       role: "button",
       "aria-haspopup": "listbox",
       "aria-expanded": visible,
       onKeyPress: handleOnKeyPress,
-      tabIndex: 0,
       ...htmlProps,
     };
   },

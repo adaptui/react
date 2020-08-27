@@ -13,12 +13,14 @@ export type SelectState = CompositeState & {
   typehead: string;
   isPlaceholder: boolean;
   inputValue: string;
+  isCombobox: boolean;
 };
 
 export interface ISelectInitialState {
   selected?: string;
   allowMultiselect?: boolean;
   loop?: boolean;
+  isCombobox?: boolean;
 }
 
 export type SelectActions = CompositeActions & {
@@ -36,9 +38,12 @@ export type SelectStateReturn = SelectState &
 export const useSelectState = (
   initialState: SealedInitialState<ISelectInitialState> = {},
 ): SelectStateReturn => {
-  const { selected, allowMultiselect, loop = true } = useSealedState(
-    initialState,
-  );
+  const {
+    selected,
+    allowMultiselect,
+    loop = true,
+    isCombobox = false,
+  } = useSealedState(initialState);
 
   const composite = useCompositeState({ loop, unstable_virtual: true });
   const popover = usePopoverState({
@@ -98,5 +103,6 @@ export const useSelectState = (
     isPlaceholder,
     inputValue,
     setInputValue,
+    isCombobox,
   };
 };
