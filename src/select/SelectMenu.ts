@@ -31,9 +31,6 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   name: "SelectMenu",
   compose: [useComposite, usePopover],
   keys: SELECT_KEYS,
-  useOptions({ modal = false, ...options }) {
-    return { modal, ...options };
-  },
 
   useProps(
     { visible, move, values, currentId, selected, isCombobox },
