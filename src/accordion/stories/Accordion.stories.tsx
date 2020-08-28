@@ -32,7 +32,7 @@ export const Default = () => {
         <h3>
           <AccordionTrigger {...state}>Trigger 3</AccordionTrigger>
         </h3>
-        <AccordionPanel {...state}>Panel 4</AccordionPanel>
+        <AccordionPanel {...state}>Panel 3</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
@@ -59,7 +59,7 @@ export const AllowMultiple = () => {
         <h3>
           <AccordionTrigger {...state}>Trigger 3</AccordionTrigger>
         </h3>
-        <AccordionPanel {...state}>Panel 4</AccordionPanel>
+        <AccordionPanel {...state}>Panel 3</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
