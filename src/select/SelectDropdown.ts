@@ -12,7 +12,7 @@ import { useForkRef } from "reakit-utils";
 export type SelectDropdownOptions = CompositeProps &
   Pick<
     SelectStateReturn,
-    "selected" | "setSelected" | "visible" | "values" | "currentId" | "move"
+    "setSelected" | "visible" | "values" | "currentId" | "move"
   > & {
     maxHeight?: string | number;
     modal?: boolean;
@@ -27,25 +27,12 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
   },
 
   useProps(
-    { maxHeight = 500, selected, visible, move, values, currentId },
+    { maxHeight = 500, visible, move, values, currentId },
     { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
     const ref = React.useRef<HTMLElement>(null);
 
     usePortalShortcut(ref, { values, currentId, move });
-
-    React.useEffect(() => {
-      if (selected && values) {
-        const _selected = values.find(value => {
-          return selected.includes(value.value);
-        });
-
-        if (_selected?.id) {
-          move?.(_selected.id);
-        }
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selected, values, move, visible]);
 
     return {
       ref: useForkRef(ref, htmlRef),
