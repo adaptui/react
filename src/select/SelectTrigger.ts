@@ -1,9 +1,11 @@
 import React from "react";
-import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
-import { usePopoverDisclosure } from "reakit/Popover";
+import {
+  usePopoverDisclosure,
+  PopoverDisclosureHTMLProps,
+} from "reakit/Popover";
 import { useShortcut } from "@chakra-ui/hooks";
 import { createOnKeyDown, useLiveRef, useForkRef } from "reakit-utils";
 import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
@@ -20,7 +22,10 @@ export type SelectTriggerOptions = Pick<
   | "last"
 > & { disabled?: boolean };
 
-const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
+const useSelectTrigger = createHook<
+  SelectTriggerOptions,
+  PopoverDisclosureHTMLProps
+>({
   name: "SelectTrigger",
   compose: [usePopoverDisclosure],
   keys: SELECT_KEYS,

@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { usePopover } from "reakit";
-import { BoxHTMLProps } from "reakit/ts/Box/Box";
+import { usePopover, PopoverHTMLProps } from "reakit";
 import { SelectStateReturn } from "./SelectState";
 import { SELECT_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
-import { CompositeProps, useComposite } from "reakit/Composite";
+import {
+  useComposite,
+  CompositeProps,
+  CompositeHTMLProps,
+} from "reakit/Composite";
 import { usePortalShortcut } from "./__utils";
 import { useForkRef } from "reakit-utils";
 
@@ -17,7 +20,9 @@ export type SelectMenuOptions = CompositeProps &
     modal?: boolean;
   };
 
-const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
+export type SelectMenuHTMLProps = CompositeHTMLProps & PopoverHTMLProps;
+
+const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   name: "SelectMenu",
   compose: [useComposite, usePopover],
   keys: SELECT_KEYS,
@@ -43,8 +48,6 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
     return {
       ref: useForkRef(ref, htmlRef),
       role: "listbox",
-      "aria-orientation": "vertical",
-      "aria-hidden": !visible,
       style: htmlStyle,
       ...htmlProps,
     };
