@@ -32,7 +32,7 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
 
   useProps(
     { visible, move, values, currentId, selected },
-    { ref: htmlRef, style: htmlStyle, ...htmlProps },
+    { ref: htmlRef, ...htmlProps },
   ) {
     const ref = React.useRef<HTMLElement>(null);
 
@@ -53,7 +53,6 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
     return {
       ref: useForkRef(ref, htmlRef),
       role: "listbox",
-      style: htmlStyle,
       ...htmlProps,
     };
   },
