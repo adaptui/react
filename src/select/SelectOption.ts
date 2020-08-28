@@ -22,9 +22,10 @@ const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
   keys: ["value", ...SELECT_KEYS],
   useProps(
     { selected, value, setSelected, disabled },
-    { ref: htmlRef, onMouseMove: htmlOnMouseMove, ...htmlProps },
+    { onClick: htmlOnClick, onMouseMove: htmlOnMouseMove, ...htmlProps },
   ) {
     const onMouseMoveRef = useLiveRef(htmlOnMouseMove);
+    const onClickRef = useLiveRef(htmlOnClick);
 
     const onMouseMove = React.useCallback(
       (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -39,16 +40,20 @@ const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
       [disabled],
     );
 
+    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      onClickRef.current?.(event);
+      if (event.defaultPrevented) return;
+      event.preventDefault();
+      setSelected(value);
+    };
+
     return {
       role: "option",
       "aria-label": value,
       "data-selected": selected.includes(value),
       "data-value": value,
       onMouseMove,
-      onClick: e => {
-        e.preventDefault();
-        setSelected(value);
-      },
+      onClick,
       ...htmlProps,
     };
   },

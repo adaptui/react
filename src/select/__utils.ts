@@ -32,17 +32,17 @@ export function usePortalShortcut(
   });
 
   React.useEffect(() => {
-    const pickerListBox = ref.current;
-    if (!pickerListBox) return undefined;
+    const element = ref.current;
+    if (!element) return undefined;
 
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement;
       const role = target.getAttribute?.("role");
-      const targetIsDialog = target === pickerListBox;
+      const targetIsDialog = target === element;
       const targetIsOption =
         role &&
         role.indexOf("option") !== -1 &&
-        closest(target, "[role=listbox]") === pickerListBox;
+        closest(target, "[role=listbox]") === element;
 
       if (!targetIsDialog && !targetIsOption) return;
 
@@ -51,8 +51,8 @@ export function usePortalShortcut(
     };
 
     // https://github.com/facebook/react/issues/11387#issuecomment-524113945
-    pickerListBox.addEventListener("keydown", onKeyDown);
-    return () => pickerListBox.removeEventListener("keydown", onKeyDown);
+    element.addEventListener("keydown", onKeyDown);
+    return () => element.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onTypeahead]);
 }
