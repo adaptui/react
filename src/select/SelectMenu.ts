@@ -16,7 +16,13 @@ export type SelectMenuOptions = CompositeProps &
   PopoverProps &
   Pick<
     SelectStateReturn,
-    "setSelected" | "visible" | "values" | "currentId" | "move" | "selected"
+    | "setSelected"
+    | "visible"
+    | "values"
+    | "currentId"
+    | "move"
+    | "selected"
+    | "isCombobox"
   >;
 
 export type SelectMenuHTMLProps = CompositeHTMLProps & PopoverHTMLProps;
@@ -30,12 +36,16 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   },
 
   useProps(
-    { visible, move, values, currentId, selected },
+    { visible, move, values, currentId, selected, isCombobox },
     { ref: htmlRef, ...htmlProps },
   ) {
     const ref = React.useRef<HTMLElement>(null);
 
-    usePortalShortcut(ref, { values, currentId, move });
+    usePortalShortcut({
+      ref,
+      options: { values, currentId, move },
+      disable: isCombobox,
+    });
 
     React.useEffect(() => {
       if (values && !selected?.length) {

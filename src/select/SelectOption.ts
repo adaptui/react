@@ -39,12 +39,16 @@ const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
       [disabled, onMouseMoveRef],
     );
 
-    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      onClickRef.current?.(event);
-      if (event.defaultPrevented) return;
-      event.preventDefault();
-      setSelected(value);
-    };
+    const onClick = React.useCallback(
+      (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        onClickRef.current?.(event);
+        if (event.defaultPrevented) return;
+        event.preventDefault();
+        setSelected(value);
+      },
+      /* eslint-disable react-hooks/exhaustive-deps */
+      [onClickRef, value, setSelected],
+    );
 
     return {
       role: "option",

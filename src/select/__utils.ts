@@ -4,13 +4,20 @@ import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
 import { SelectStateReturn } from "./SelectState";
 
+interface usePortalShortcutProps {
+  ref: React.RefObject<HTMLElement>;
+  options: Pick<SelectStateReturn, "values" | "currentId" | "move">;
+  timeout?: number;
+  disable?: boolean;
+}
 // Reference:
 // https://github.com/reakit/reakit/blob/01e73eaff9405ecf8838906684811ef70970b867/packages/reakit/src/Menu/__utils/useShortcuts.ts
-export function usePortalShortcut(
-  ref: React.RefObject<HTMLElement>,
-  options: Pick<SelectStateReturn, "values" | "currentId" | "move">,
-  timeout?: number,
-) {
+export function usePortalShortcut({
+  ref,
+  options,
+  timeout,
+  disable = false,
+}: usePortalShortcutProps) {
   const onCharacterPress = useShortcut({
     preventDefault: event => event.key !== " ",
     timeout,
@@ -34,6 +41,7 @@ export function usePortalShortcut(
   });
 
   React.useEffect(() => {
+    if (disable) return;
     const element = ref.current;
     if (!element) return undefined;
 
