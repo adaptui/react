@@ -36,8 +36,8 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
 
     React.useEffect(() => {
       if (values) {
-        const selectedValue = values[0];
-        selectedValue && move?.(selectedValue.id);
+        const firstItem = values[0];
+        firstItem && move?.(firstItem.id);
       }
     }, [visible]);
 
