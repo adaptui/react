@@ -1,18 +1,11 @@
 import React from "react";
-
 import { closest } from "reakit-utils";
 import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
 import { SelectStateReturn } from "./SelectState";
 
-export const enterOrSpace = (e: any, fn: Function) => {
-  if (e.key === "Enter" || e.key === " ") {
-    fn && fn(e);
-  }
-};
-
 export function usePortalShortcut(
-  pickerListBoxRef: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement>,
   options: Pick<SelectStateReturn, "values" | "currentId" | "move">,
   timeout?: number,
 ) {
@@ -39,7 +32,7 @@ export function usePortalShortcut(
   });
 
   React.useEffect(() => {
-    const pickerListBox = pickerListBoxRef.current;
+    const pickerListBox = ref.current;
     if (!pickerListBox) return undefined;
 
     const onKeyDown = (event: KeyboardEvent) => {

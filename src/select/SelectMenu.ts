@@ -3,7 +3,7 @@ import React from "react";
 import { usePopover } from "reakit";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./SelectState";
-import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
+import { SELECT_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 import { CompositeProps, useComposite } from "reakit/Composite";
 import { usePortalShortcut } from "./__utils";
@@ -21,7 +21,7 @@ export type SelectMenuOptions = CompositeProps &
 const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
   compose: [useComposite, usePopover],
-  keys: ["maxHeight", ...SELECT_KEYS, ...POPOVER_KEYS],
+  keys: ["maxHeight", ...SELECT_KEYS],
   useOptions({ modal = false, ...options }) {
     return { modal, ...options };
   },

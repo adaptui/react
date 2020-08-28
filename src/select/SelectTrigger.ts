@@ -3,7 +3,7 @@ import { BoxHTMLProps } from "reakit/ts/Box/Box";
 import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
-import { usePopoverDisclosure } from "reakit";
+import { usePopoverDisclosure } from "reakit/Popover";
 import { useShortcut } from "@chakra-ui/hooks";
 import { createOnKeyDown, useLiveRef, useForkRef } from "reakit-utils";
 import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
