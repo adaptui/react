@@ -25,16 +25,7 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
   compose: [usePopoverDisclosure],
   keys: SELECT_KEYS,
 
-  useProps(
-    options,
-    {
-      ref: htmlRef,
-      onClick: htmlOnClick,
-      onMouseDown: htmlOnMouseDown,
-      onKeyDown: htmlOnKeyDown,
-      ...htmlProps
-    },
-  ) {
+  useProps(options, { ref: htmlRef, onKeyDown: htmlOnKeyDown, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);
     const disabled = options.disabled || htmlProps["aria-disabled"];
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
@@ -103,10 +94,7 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
     return {
       ref: useForkRef(ref, htmlRef),
       onKeyDown,
-      tabIndex: 0,
-      role: "button",
       "aria-haspopup": "listbox",
-      "aria-expanded": options.visible,
       ...htmlProps,
     };
   },
