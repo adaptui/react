@@ -69,7 +69,7 @@ export const Default: React.FC = () => {
         ></SelectInput>
       </div>
 
-      <SelectMenu className="select__dropdown" maxHeight={200} {...state}>
+      <SelectMenu className="select__dropdown" {...state}>
         {countries.map(item => {
           return (
             item.name.match(state.inputValue) &&
@@ -124,7 +124,7 @@ export const WithoutFilter: React.FC = () => {
         ></SelectInput>
       </div>
 
-      <SelectMenu className="select__dropdown" maxHeight={200} {...state}>
+      <SelectMenu className="select__dropdown" {...state}>
         {countries.map(item => {
           return (
             <SelectOption

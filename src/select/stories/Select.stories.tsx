@@ -40,7 +40,7 @@ const SelectPicker: React.FC<{ state: any }> = ({ state }) => {
         </b>
       </SelectTrigger>
 
-      <SelectMenu style={{ width: "auto" }} maxHeight={200} {...state}>
+      <SelectMenu {...state} style={{ maxHeight: 200, overflowY: "scroll" }}>
         {countries.map(item => {
           return (
             <SelectOption {...state} key={item.name} value={item.name}>
@@ -78,7 +78,7 @@ export const MultiSelectCheckboxes: React.FC = () => {
         </b>
       </SelectTrigger>
 
-      <SelectMenu maxHeight={200} {...state}>
+      <SelectMenu {...state} style={{ maxHeight: 200, overflowY: "scroll" }}>
         {countries.map(item => {
           return (
             <SelectOption {...state} key={item.name} value={item.name}>

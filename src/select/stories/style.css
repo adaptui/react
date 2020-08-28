@@ -61,7 +61,8 @@
 .select__dropdown {
   padding: 5px;
   width: 100%;
-  left: -15px !important;
+  max-height: 200px;
+  overflow-y: scroll;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 

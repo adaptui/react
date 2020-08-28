@@ -4,6 +4,8 @@ import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
 import { SelectStateReturn } from "./SelectState";
 
+// Reference:
+// https://github.com/reakit/reakit/blob/01e73eaff9405ecf8838906684811ef70970b867/packages/reakit/src/Menu/__utils/useShortcuts.ts
 export function usePortalShortcut(
   ref: React.RefObject<HTMLElement>,
   options: Pick<SelectStateReturn, "values" | "currentId" | "move">,

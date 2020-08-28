@@ -21,7 +21,7 @@ export type SelectTriggerOptions = Pick<
 > & { disabled?: boolean };
 
 const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
-  name: "selectTrigger",
+  name: "SelectTrigger",
   compose: [usePopoverDisclosure],
   keys: SELECT_KEYS,
 
@@ -30,6 +30,8 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
     const disabled = options.disabled || htmlProps["aria-disabled"];
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
 
+    // Reference:
+    // https://github.com/chakra-ui/chakra-ui/blob/83eec5b140bd9a69821d8e4df3e69bff0768dcca/packages/menu/src/use-menu.ts#L228-L253
     const onCharacterPress = useShortcut({
       preventDefault: event => event.key !== " ",
     });

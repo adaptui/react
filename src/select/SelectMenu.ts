@@ -14,20 +14,19 @@ export type SelectMenuOptions = CompositeProps &
     SelectStateReturn,
     "setSelected" | "visible" | "values" | "currentId" | "move"
   > & {
-    maxHeight?: string | number;
     modal?: boolean;
   };
 
 const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
   compose: [useComposite, usePopover],
-  keys: ["maxHeight", ...SELECT_KEYS],
+  keys: SELECT_KEYS,
   useOptions({ modal = false, ...options }) {
     return { modal, ...options };
   },
 
   useProps(
-    { maxHeight = 500, visible, move, values, currentId },
+    { visible, move, values, currentId },
     { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
     const ref = React.useRef<HTMLElement>(null);
@@ -46,11 +45,7 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
       role: "listbox",
       "aria-orientation": "vertical",
       "aria-hidden": !visible,
-      style: {
-        maxHeight: maxHeight,
-        overflowY: "scroll",
-        ...htmlStyle,
-      },
+      style: htmlStyle,
       ...htmlProps,
     };
   },
