@@ -1,5 +1,9 @@
-import { SelectTriggerOptions } from "./SelectTrigger";
 import React from "react";
+
+import { closest } from "reakit-utils";
+import { useShortcut } from "@chakra-ui/hooks";
+import { getNextItemFromSearch } from "@chakra-ui/utils";
+import { SelectStateReturn } from "./useSelectState";
 
 export const enterOrSpace = (e: any, fn: Function) => {
   if (e.key === "Enter" || e.key === " ") {
@@ -7,49 +11,55 @@ export const enterOrSpace = (e: any, fn: Function) => {
   }
 };
 
-export const useTypeahead = ({
-  setTypehead,
-  disabled,
-}: {
-  setTypehead: SelectTriggerOptions["setTypehead"];
-  disabled?: boolean;
-}) => {
-  const keyClear = React.useRef<any>(null);
-  const [typed, setTyped] = React.useState("");
+export function usePortalShortcut(
+  pickerListBoxRef: React.RefObject<HTMLElement>,
+  options: Pick<SelectStateReturn, "values" | "currentId" | "move">,
+  timeout?: number,
+) {
+  const onCharacterPress = useShortcut({
+    preventDefault: () => true,
+    timeout,
+  });
 
-  const clearKeyStrokes = () => {
-    setTypehead(typed);
+  const onTypeahead = onCharacterPress(character => {
+    const selectedValue = options.values.find(
+      value => value.id === options.currentId,
+    );
 
-    if (keyClear.current) {
-      clearTimeout(keyClear.current);
-      keyClear.current = null;
+    const nextItem = getNextItemFromSearch(
+      options.values,
+      character,
+      item => item?.value ?? "",
+      selectedValue,
+    );
+
+    if (nextItem?.id) {
+      options.move?.(nextItem.id);
     }
-
-    keyClear.current = setTimeout(() => {
-      setTyped("");
-      keyClear.current = null;
-    }, 800);
-  };
+  });
 
   React.useEffect(() => {
-    if (typed !== "") {
-      clearKeyStrokes();
-    }
-  }, [typed]);
+    const pickerListBox = pickerListBoxRef.current;
+    if (!pickerListBox) return undefined;
 
-  const handleOnKeyPress = (e: React.KeyboardEvent) => {
-    e.persist();
-    // skip all the keys eg: Enter, Alt, Shift
-    if (e.key.length > 1) return;
-    if (e.shiftKey) return;
-    if (e.metaKey) return;
-    if (e.ctrlKey) return;
-    if (e.altKey) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      const role = target.getAttribute?.("role");
+      const targetIsDialog = target === pickerListBox;
+      const targetIsOption =
+        role &&
+        role.indexOf("option") !== -1 &&
+        closest(target, "[role=listbox]") === pickerListBox;
 
-    if (/^[a-z0-9_-]$/i.test(e.key)) {
-      setTyped(prev => prev + e.key);
-    }
-  };
+      if (!targetIsDialog && !targetIsOption) return;
 
-  return { handleOnKeyPress: disabled ? () => {} : handleOnKeyPress };
-};
+      // @ts-ignore
+      onTypeahead(event);
+    };
+
+    // https://github.com/facebook/react/issues/11387#issuecomment-524113945
+    pickerListBox.addEventListener("keydown", onKeyDown);
+    return () => pickerListBox.removeEventListener("keydown", onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onTypeahead]);
+}

@@ -82,6 +82,7 @@ export const SELECT_KEYS = [
   "inputValue",
   "setInputValue",
   "isCombobox",
+  "values",
   ...POPOVER_STATE_KEYS,
 ] as const;
 

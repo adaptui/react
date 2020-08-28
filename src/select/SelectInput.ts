@@ -9,8 +9,6 @@ export type SelectInputOptions = Pick<
   SelectStateReturn,
   | "toggle"
   | "visible"
-  | "typehead"
-  | "setTypehead"
   | "inputValue"
   | "setInputValue"
   | "removeSelected"
@@ -23,14 +21,7 @@ const useSelectInput = createHook<SelectInputOptions, BoxHTMLProps>({
   keys: SELECT_KEYS,
 
   useProps(
-    {
-      selected,
-      inputValue,
-      visible,
-      removeSelected,
-      setInputValue,
-      setTypehead,
-    },
+    { selected, inputValue, visible, removeSelected, setInputValue },
     { ref: htmlRef, ...htmlProps },
   ) {
     return {
@@ -42,7 +33,6 @@ const useSelectInput = createHook<SelectInputOptions, BoxHTMLProps>({
         }
       },
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTypehead(e.target.value);
         setInputValue(e.target.value);
       },
       "aria-haspopup": "listbox",

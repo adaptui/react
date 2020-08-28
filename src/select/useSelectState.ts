@@ -7,13 +7,18 @@ import {
 import { usePopoverState, PopoverStateReturn } from "reakit";
 import { useSealedState, SealedInitialState } from "reakit-utils";
 
+type Value = {
+  value: string;
+  id: string;
+};
+
 export type SelectState = CompositeState & {
   allowMultiselect?: boolean;
   selected: string[];
-  typehead: string;
   isPlaceholder: boolean;
   inputValue: string;
   isCombobox: boolean;
+  values: Value[];
 };
 
 export interface ISelectInitialState {
@@ -24,7 +29,6 @@ export interface ISelectInitialState {
 }
 
 export type SelectActions = CompositeActions & {
-  setTypehead: React.Dispatch<React.SetStateAction<string>>;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   removeSelected: (value: string) => void;
   setSelected: (value: string, shouldRemainOpen?: boolean) => void;
@@ -50,11 +54,10 @@ export const useSelectState = (
     placement: "bottom-start",
     unstable_offset: [0, 10],
   });
+  const [values, setValues] = React.useState<Value[]>([]);
 
-  const [typehead, setTypehead] = React.useState<string>("");
   const [isPlaceholder, setIsPlaceholder] = React.useState<boolean>(false);
   const [inputValue, setInputValue] = React.useState<string>("");
-
   const [_selected, _setSelected] = React.useState<string[]>([]);
 
   const removeSelected = (value: string) => {
@@ -68,17 +71,27 @@ export const useSelectState = (
           ? _setSelected(_selected.filter(item => item !== value))
           : _setSelected([..._selected, value]);
 
-        setTypehead("");
         setInputValue("");
       } else {
         _setSelected([value]);
-        setTypehead("");
         setInputValue("");
         !shouldRemainOpen && popover.hide();
       }
     },
     [_selected, allowMultiselect],
   );
+
+  React.useEffect(() => {
+    if (composite.items) {
+      const _values = composite.items.map(item => ({
+        value:
+          item.ref.current?.attributes.getNamedItem("data-value")?.value ?? "",
+        id: item.id ?? "",
+      }));
+
+      setValues(_values);
+    }
+  }, [composite.items]);
 
   React.useEffect(() => {
     if (selected) {
@@ -93,9 +106,8 @@ export const useSelectState = (
   return {
     ...composite,
     ...popover,
+    values,
     allowMultiselect,
-    typehead,
-    setTypehead,
     removeSelected,
     selected: _selected,
     setSelected,
