@@ -5,7 +5,7 @@ import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { SELECT_KEYS } from "./__keys";
 
-export type SelectOptions = Pick<SelectStateReturn, "selected" | "visible"> & {
+export type SelectOptions = Pick<SelectStateReturn, "selected"> & {
   onChange?: (value: any) => void;
 };
 
@@ -13,15 +13,12 @@ const useSelect = createHook<SelectOptions, BoxHTMLProps>({
   name: "Select",
   keys: SELECT_KEYS,
 
-  useProps({ selected, visible, onChange }, { ...htmlProps }) {
+  useProps({ selected, onChange }, { ...htmlProps }) {
     React.useEffect(() => {
       onChange && onChange(selected);
     }, [selected]);
 
     return {
-      role: "button",
-      "aria-expanded": visible,
-      "aria-haspopup": "listbox",
       ...htmlProps,
     };
   },
