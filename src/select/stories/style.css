@@ -4,12 +4,12 @@
 
 [aria-selected="true"] {
   color: white;
-  background-color: rgb(49, 78, 240) !important;
+  background-color: rgb(103, 126, 255) !important;
 }
 
 [data-selected="true"] {
   color: white;
-  background-color: rgb(103, 126, 255);
+  background-color: rgb(49, 78, 240);
 }
 
 .select {

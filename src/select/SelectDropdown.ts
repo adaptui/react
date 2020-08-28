@@ -34,6 +34,13 @@ const useSelectDropdown = createHook<SelectDropdownOptions, BoxHTMLProps>({
 
     usePortalShortcut(ref, { values, currentId, move });
 
+    React.useEffect(() => {
+      if (values) {
+        const selectedValue = values[0];
+        selectedValue && move?.(selectedValue.id);
+      }
+    }, [visible]);
+
     return {
       ref: useForkRef(ref, htmlRef),
       role: "listbox",
