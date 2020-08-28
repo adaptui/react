@@ -36,8 +36,7 @@ const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
 
         event.currentTarget.focus();
       },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [disabled],
+      [disabled, onMouseMoveRef],
     );
 
     const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -49,7 +48,6 @@ const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
 
     return {
       role: "option",
-      "aria-label": value,
       "data-selected": selected.includes(value),
       "data-value": value,
       onMouseMove,

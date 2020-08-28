@@ -15,7 +15,7 @@ import { useForkRef } from "reakit-utils";
 export type SelectMenuOptions = CompositeProps &
   Pick<
     SelectStateReturn,
-    "setSelected" | "visible" | "values" | "currentId" | "move"
+    "setSelected" | "visible" | "values" | "currentId" | "move" | "selected"
   > & {
     modal?: boolean;
   };
@@ -31,7 +31,7 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   },
 
   useProps(
-    { visible, move, values, currentId },
+    { visible, move, values, currentId, selected },
     { ref: htmlRef, style: htmlStyle, ...htmlProps },
   ) {
     const ref = React.useRef<HTMLElement>(null);
@@ -39,9 +39,14 @@ const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
     usePortalShortcut(ref, { values, currentId, move });
 
     React.useEffect(() => {
-      if (values) {
+      if (values && !selected?.length) {
         const firstItem = values[0];
         firstItem && move?.(firstItem.id);
+      } else {
+        const lastSelected = values.find(i => {
+          return i.value === selected[selected.length - 1];
+        })?.id;
+        move?.(lastSelected as string);
       }
     }, [visible]);
 

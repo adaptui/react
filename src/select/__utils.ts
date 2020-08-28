@@ -12,7 +12,7 @@ export function usePortalShortcut(
   timeout?: number,
 ) {
   const onCharacterPress = useShortcut({
-    preventDefault: () => true,
+    preventDefault: event => event.key !== " ",
     timeout,
   });
 

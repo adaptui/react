@@ -5,22 +5,24 @@ import { SELECT_KEYS } from "./__keys";
 import {
   usePopoverDisclosure,
   PopoverDisclosureHTMLProps,
+  PopoverDisclosureOptions,
 } from "reakit/Popover";
 import { useShortcut } from "@chakra-ui/hooks";
 import { createOnKeyDown, useLiveRef, useForkRef } from "reakit-utils";
 import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
 
-export type SelectTriggerOptions = Pick<
-  SelectStateReturn,
-  | "visible"
-  | "values"
-  | "selected"
-  | "setSelected"
-  | "show"
-  | "hide"
-  | "first"
-  | "last"
-> & { disabled?: boolean };
+export type SelectTriggerOptions = PopoverDisclosureOptions &
+  Pick<
+    SelectStateReturn,
+    | "visible"
+    | "values"
+    | "selected"
+    | "setSelected"
+    | "show"
+    | "hide"
+    | "first"
+    | "last"
+  >;
 
 const useSelectTrigger = createHook<
   SelectTriggerOptions,
