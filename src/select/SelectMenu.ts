@@ -8,7 +8,7 @@ import { SELECT_KEYS } from "./__keys";
 
 export type SelectMenuOptions = Pick<
   SelectStateReturn,
-  "selected" | "hide" | "show" | "visible"
+  "selected" | "visible"
 > & {
   onChange?: (value: any) => void;
 };
@@ -17,24 +17,12 @@ const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
   keys: SELECT_KEYS,
 
-  useProps({ selected, visible, onChange, hide, show }, { ...htmlProps }) {
+  useProps({ selected, visible, onChange }, { ...htmlProps }) {
     React.useEffect(() => {
       onChange && onChange(selected);
     }, [selected]);
 
-    const onKeyDown = React.useMemo(() => {
-      return createOnKeyDown({
-        stopPropagation: true,
-        keyMap: () => ({
-          Escape: hide,
-          ArrowUp: show,
-          ArrowDown: show,
-        }),
-      });
-    }, []);
-
     return {
-      onKeyDown,
       role: "button",
       "aria-expanded": visible,
       "aria-haspopup": "listbox",

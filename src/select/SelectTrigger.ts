@@ -18,7 +18,7 @@ export type SelectTriggerOptions = Pick<
   | "hide"
   | "first"
   | "last"
-> & { disabled: boolean };
+> & { disabled?: boolean };
 
 const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
   name: "selectTrigger",
@@ -76,7 +76,7 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
       keyMap: (() => {
         // setTimeout prevents scroll jump
         const first = () => {
-          if (!options.selected) {
+          if (!options.selected?.length) {
             options.first && setTimeout(options.first);
           } else {
             options.show?.();
@@ -84,7 +84,7 @@ const useSelectTrigger = createHook<SelectTriggerOptions, BoxHTMLProps>({
         };
         const hide = options.hide && (() => options.hide?.());
         const last = () => {
-          if (!options.selected) {
+          if (!options.selected?.length) {
             options.last && setTimeout(options.last);
           } else {
             options.show?.();
