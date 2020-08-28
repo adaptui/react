@@ -1,77 +1,64 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { createOnKeyDown } from "reakit-utils";
-import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./useSelectState";
-import { createHook, createComponent } from "reakit-system";
+import { usePopover, PopoverHTMLProps, PopoverProps } from "reakit";
+import { SelectStateReturn } from "./SelectState";
 import { SELECT_KEYS } from "./__keys";
+import { createComponent, createHook } from "reakit-system";
+import {
+  useComposite,
+  CompositeProps,
+  CompositeHTMLProps,
+} from "reakit/Composite";
+import { usePortalShortcut } from "./__utils";
+import { useForkRef } from "reakit-utils";
 
-export type SelectMenuOptions = Pick<
-  SelectStateReturn,
-  "setTypehead" | "selected" | "hide" | "show" | "visible"
-> & {
-  onChange?: (value: any) => void;
-};
+export type SelectMenuOptions = CompositeProps &
+  PopoverProps &
+  Pick<
+    SelectStateReturn,
+    | "setSelected"
+    | "visible"
+    | "values"
+    | "currentId"
+    | "move"
+    | "selected"
+    | "isCombobox"
+  >;
 
-const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
+export type SelectMenuHTMLProps = CompositeHTMLProps & PopoverHTMLProps;
+
+const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   name: "SelectMenu",
+  compose: [useComposite, usePopover],
   keys: SELECT_KEYS,
 
   useProps(
-    { setTypehead, selected, onChange, hide, show, visible },
-    { ...htmlProps },
+    { visible, move, values, currentId, selected, isCombobox },
+    { ref: htmlRef, ...htmlProps },
   ) {
-    const keyClear = React.useRef<any>(null);
-    const [typed, setTyped] = React.useState("");
+    const ref = React.useRef<HTMLElement>(null);
+
+    usePortalShortcut({
+      ref,
+      options: { values, currentId, move },
+      disable: isCombobox,
+    });
 
     React.useEffect(() => {
-      onChange && onChange(selected);
-    }, [selected]);
-
-    const onKeyDown = React.useMemo(() => {
-      return createOnKeyDown({
-        stopPropagation: true,
-        keyMap: () => ({
-          Escape: hide,
-          ArrowUp: show,
-          ArrowDown: show,
-        }),
-      });
-    }, []);
-
-    const clearKeyStrokes = () => {
-      setTypehead(typed);
-
-      if (keyClear.current) {
-        clearTimeout(keyClear.current);
-        keyClear.current = null;
+      if (values && !selected?.length) {
+        const firstItem = values[0];
+        firstItem && move?.(firstItem.id);
+      } else {
+        const lastSelected = values.find(i => {
+          return i.value === selected[selected.length - 1];
+        })?.id;
+        move?.(lastSelected as string);
       }
-
-      keyClear.current = setTimeout(() => {
-        setTyped("");
-        keyClear.current = null;
-      }, 800);
-    };
-
-    React.useEffect(() => {
-      if (typed !== "") {
-        clearKeyStrokes();
-      }
-    }, [typed]);
-
-    const handleOnKeyPress = (e: React.KeyboardEvent) => {
-      e.persist();
-      // skip the enter key
-      if (e.key === "Enter") return;
-      setTyped(prev => prev + e.key);
-    };
+    }, [visible]);
 
     return {
-      role: "button",
-      "aria-expanded": visible,
-      "aria-haspopup": "listbox",
-      onKeyDown,
-      onKeyPress: handleOnKeyPress,
+      ref: useForkRef(ref, htmlRef),
+      role: "listbox",
       ...htmlProps,
     };
   },
