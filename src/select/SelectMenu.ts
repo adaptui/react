@@ -1,31 +1,56 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { createOnKeyDown } from "reakit-utils";
+import { usePopover } from "reakit";
 import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./useSelectState";
-import { createHook, createComponent } from "reakit-system";
-import { SELECT_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
+import { SELECT_KEYS, POPOVER_KEYS } from "./__keys";
+import { createComponent, createHook } from "reakit-system";
+import { CompositeProps, useComposite } from "reakit/Composite";
+import { usePortalShortcut } from "./__utils";
+import { useForkRef } from "reakit-utils";
 
-export type SelectMenuOptions = Pick<
-  SelectStateReturn,
-  "selected" | "visible"
-> & {
-  onChange?: (value: any) => void;
-};
+export type SelectMenuOptions = CompositeProps &
+  Pick<
+    SelectStateReturn,
+    "setSelected" | "visible" | "values" | "currentId" | "move"
+  > & {
+    maxHeight?: string | number;
+    modal?: boolean;
+  };
 
 const useSelectMenu = createHook<SelectMenuOptions, BoxHTMLProps>({
   name: "SelectMenu",
-  keys: SELECT_KEYS,
+  compose: [useComposite, usePopover],
+  keys: ["maxHeight", ...SELECT_KEYS, ...POPOVER_KEYS],
+  useOptions({ modal = false, ...options }) {
+    return { modal, ...options };
+  },
 
-  useProps({ selected, visible, onChange }, { ...htmlProps }) {
+  useProps(
+    { maxHeight = 500, visible, move, values, currentId },
+    { ref: htmlRef, style: htmlStyle, ...htmlProps },
+  ) {
+    const ref = React.useRef<HTMLElement>(null);
+
+    usePortalShortcut(ref, { values, currentId, move });
+
     React.useEffect(() => {
-      onChange && onChange(selected);
-    }, [selected]);
+      if (values) {
+        const firstItem = values[0];
+        firstItem && move?.(firstItem.id);
+      }
+    }, [visible]);
 
     return {
-      role: "button",
-      "aria-expanded": visible,
-      "aria-haspopup": "listbox",
+      ref: useForkRef(ref, htmlRef),
+      role: "listbox",
+      "aria-orientation": "vertical",
+      "aria-hidden": !visible,
+      style: {
+        maxHeight: maxHeight,
+        overflowY: "scroll",
+        ...htmlStyle,
+      },
       ...htmlProps,
     };
   },

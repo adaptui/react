@@ -5,7 +5,7 @@ import {
   CompositeItemOptions,
 } from "reakit/Composite";
 import { SELECT_KEYS } from "./__keys";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 import { createHook, createComponent } from "reakit-system";
 import { useLiveRef, hasFocusWithin } from "reakit-utils";
 
@@ -16,8 +16,8 @@ export type SelectItemOptions = CompositeItemOptions &
 
 export type SelectItemHTMLProp = CompositeItemHTMLProps;
 
-const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
-  name: "selectItem",
+const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
+  name: "SelectOption",
   compose: useCompositeItem,
   keys: ["value", ...SELECT_KEYS],
   useProps(
@@ -54,8 +54,8 @@ const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProp>({
   },
 });
 
-export const SelectItem = createComponent({
+export const SelectOption = createComponent({
   as: "div",
   memo: true,
-  useHook: useSelectItem,
+  useHook: useSelectOption,
 });

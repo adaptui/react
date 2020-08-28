@@ -3,7 +3,7 @@ import React from "react";
 import { closest } from "reakit-utils";
 import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
-import { SelectStateReturn } from "./useSelectState";
+import { SelectStateReturn } from "./SelectState";
 
 export const enterOrSpace = (e: any, fn: Function) => {
   if (e.key === "Enter" || e.key === " ") {

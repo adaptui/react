@@ -2,10 +2,10 @@ import React from "react";
 import { Meta } from "@storybook/react";
 
 import {
-  SelectMenu,
-  SelectItem,
+  Select,
+  SelectOption,
   SelectInput,
-  SelectDropdown,
+  SelectMenu,
   useSelectState,
 } from "../";
 import "./style.css";
@@ -43,9 +43,9 @@ export const Default: React.FC = () => {
   });
 
   return (
-    <SelectMenu
-      className="select"
+    <Select
       {...state}
+      className="select"
       onChange={(value: any) => console.log(value)}
     >
       <div className="select__header">
@@ -69,24 +69,24 @@ export const Default: React.FC = () => {
         ></SelectInput>
       </div>
 
-      <SelectDropdown className="select__dropdown" maxHeight={200} {...state}>
+      <SelectMenu className="select__dropdown" maxHeight={200} {...state}>
         {countries.map(item => {
           return (
             item.name.match(state.inputValue) &&
             !state.selected.includes(item.name) && (
-              <SelectItem
+              <SelectOption
                 className="select__dropdown--item"
                 {...state}
                 key={item.name}
                 value={item.name}
               >
                 {item.name}
-              </SelectItem>
+              </SelectOption>
             )
           );
         })}
-      </SelectDropdown>
-    </SelectMenu>
+      </SelectMenu>
+    </Select>
   );
 };
 
@@ -98,7 +98,7 @@ export const WithoutFilter: React.FC = () => {
   });
 
   return (
-    <SelectMenu
+    <Select
       className="select"
       {...state}
       onChange={(value: any) => console.log(value)}
@@ -124,20 +124,20 @@ export const WithoutFilter: React.FC = () => {
         ></SelectInput>
       </div>
 
-      <SelectDropdown className="select__dropdown" maxHeight={200} {...state}>
+      <SelectMenu className="select__dropdown" maxHeight={200} {...state}>
         {countries.map(item => {
           return (
-            <SelectItem
+            <SelectOption
               className="select__dropdown--item"
               {...state}
               key={item.name}
               value={item.name}
             >
               {item.name}
-            </SelectItem>
+            </SelectOption>
           );
         })}
-      </SelectDropdown>
-    </SelectMenu>
+      </SelectMenu>
+    </Select>
   );
 };
