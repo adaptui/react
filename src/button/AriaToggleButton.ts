@@ -14,7 +14,7 @@ export const useAriaToggleButton = createHook<
   useAriaToggleButtonOptions,
   BoxHTMLProps
 >({
-  name: "useAriaToggleButton",
+  name: "AriaToggleButton",
   keys: [...INTERACTION_KEYS, "isSelected", "setSelected", "toggle"],
   compose: [useBox],
 

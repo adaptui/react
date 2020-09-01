@@ -6,7 +6,7 @@ import { createComponent, createHook } from "reakit-system";
 import { FocusProps, useFocus as useAriaFocus } from "@react-aria/interactions";
 
 export const useFocus = createHook<FocusProps, BoxHTMLProps>({
-  name: "useFocus",
+  name: "Focus",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

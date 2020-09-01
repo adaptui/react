@@ -9,7 +9,7 @@ import {
 } from "@react-aria/interactions";
 
 export const useKeyboard = createHook<KeyboardProps, BoxHTMLProps>({
-  name: "useKeyboard",
+  name: "Keyboard",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

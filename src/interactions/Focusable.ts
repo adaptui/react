@@ -9,7 +9,7 @@ import {
 } from "@react-aria/focus";
 
 export const useFocusable = createHook<FocusableOptions, BoxHTMLProps>({
-  name: "useFocusable",
+  name: "Focusable",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

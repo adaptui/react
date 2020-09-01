@@ -8,7 +8,7 @@ import {
 } from "@react-aria/interactions";
 
 export const useFocusWithin = createHook<FocusWithinProps, BoxHTMLProps>({
-  name: "useFocusWithin",
+  name: "FocusWithin",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

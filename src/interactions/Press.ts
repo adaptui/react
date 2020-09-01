@@ -8,7 +8,7 @@ import {
 } from "@react-aria/interactions";
 
 export const usePress = createHook<PressHookProps, BoxHTMLProps>({
-  name: "usePress",
+  name: "Press",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 
