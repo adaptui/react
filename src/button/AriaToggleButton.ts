@@ -21,7 +21,7 @@ export const useAriaToggleButton = createHook<
   useProps(options, { ref: htmlRef, ...htmlProps }) {
     const { isSelected, setSelected, toggle, ...restOptions } = options;
     const props = { ...restOptions, ...htmlProps } as AriaToggleButtonProps;
-    const state = { isSelected, setSelected, toggle } as ToggleState;
+    const state = { isSelected, setSelected, toggle };
     const ref = React.useRef<HTMLElement>(null);
 
     const { buttonProps } = useToggleButton(props, state, ref);
