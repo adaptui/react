@@ -1,14 +1,14 @@
 import * as React from "react";
+import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import {
   unstable_IdHTMLProps,
   unstable_IdOptions,
   unstable_useId,
 } from "reakit";
-import { useForkRef } from "reakit-utils";
 
-import { AccordionStateReturn } from "./AccordionState";
 import { ACCORDION_KEYS } from "./__keys";
+import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionItemOptions = unstable_IdOptions & AccordionStateReturn;
 
@@ -19,20 +19,19 @@ export const useAccordionItem = createHook<
   AccordionItemHTMLProps
 >({
   name: "AccordionItem",
-  compose: [unstable_useId],
+  compose: unstable_useId,
   keys: ACCORDION_KEYS,
 
   useProps(options, { ref: htmlRef, ...htmlProps }) {
+    const { id, registerItem } = options;
+
     const ref = React.useRef<HTMLElement>(null);
-    const { id } = options;
 
     React.useLayoutEffect(() => {
       if (!id) return undefined;
 
-      options.registerItem?.({ id, ref });
-
-      /* eslint-disable-next-line react-hooks/exhaustive-deps */
-    }, [id]);
+      registerItem?.({ id, ref });
+    }, [id, registerItem]);
 
     return { ref: useForkRef(ref, htmlRef), ...htmlProps };
   },

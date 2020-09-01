@@ -12,4 +12,10 @@ export const ACCORDION_KEYS = [
   "addActiveItem",
   "removeActiveItem",
   "allowMultiple",
+  "allowToggle",
+  "defaultActiveId",
+  "manual",
+  "loop",
+  "next",
+  "prev",
 ] as const;
