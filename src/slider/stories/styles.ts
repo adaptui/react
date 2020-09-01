@@ -36,7 +36,7 @@ export const sliderThumbStyle: CSSProperties = {
 
 export const sliderHorizontalStyle: CSSProperties = {
   ...sliderStyle,
-  width: "100%",
+  width: "200px",
 };
 
 export const sliderHorizontalTrackStyle: CSSProperties = {
