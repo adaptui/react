@@ -14,7 +14,7 @@ interface useFocusRingOptions extends FocusRingProps {
 }
 
 export const useFocusRing = createHook<useFocusRingOptions, BoxHTMLProps>({
-  name: "useFocusRing",
+  name: "FocusRing",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

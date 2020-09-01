@@ -5,7 +5,7 @@ import { createComponent, createHook } from "reakit-system";
 import { HoverProps, useHover as useAriaHover } from "@react-aria/interactions";
 
 export const useHover = createHook<HoverProps, BoxHTMLProps>({
-  name: "useHover",
+  name: "Hover",
   keys: INTERACTION_KEYS,
   compose: [useBox],
 

@@ -8,8 +8,8 @@ import { INTERACTION_KEYS } from "../interactions/__keys";
 import { createComponent, createHook } from "reakit-system";
 
 export const useAriaButton = createHook<AriaButtonProps, BoxHTMLProps>({
-  name: "useAriaButton",
-  keys: [...INTERACTION_KEYS],
+  name: "AriaButton",
+  keys: INTERACTION_KEYS,
   compose: [useBox],
 
   useProps(options, { ref: htmlRef, ...htmlProps }) {

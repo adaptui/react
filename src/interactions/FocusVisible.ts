@@ -18,7 +18,7 @@ interface useFocusVisibleOptions extends FocusVisibleProps {
 
 export const useFocusVisible = createHook<useFocusVisibleOptions, BoxHTMLProps>(
   {
-    name: "useFocusVisible",
+    name: "FocusVisible",
     keys: INTERACTION_KEYS,
     compose: [useBox],
 
