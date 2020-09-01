@@ -1,13 +1,13 @@
-import { createComponent, createHook } from "reakit-system";
 import { BoxHTMLProps, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
-import { AccordionStateReturn } from "./AccordionState";
 import { ACCORDION_KEYS } from "./__keys";
+import { AccordionStateReturn } from "./AccordionState";
 
 export const useAccordion = createHook<AccordionStateReturn, BoxHTMLProps>({
   name: "AccordionPanel",
+  compose: useBox,
   keys: ACCORDION_KEYS,
-  compose: [useBox],
 });
 
 export const Accordion = createComponent({

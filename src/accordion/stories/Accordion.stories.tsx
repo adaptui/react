@@ -11,8 +11,9 @@ export default {
   title: "Component/Accordion",
 } as Meta;
 
-export const Default = () => {
-  const state = useAccordionState();
+const AccordionComponent = (props: any) => {
+  const state = useAccordionState(props);
+  console.log("%c state", "color: #006dcc", state);
 
   return (
     <Accordion {...state}>
@@ -22,7 +23,7 @@ export const Default = () => {
         </h3>
         <AccordionPanel {...state}>Panel 1</AccordionPanel>
       </AccordionItem>
-      <AccordionItem {...state}>
+      <AccordionItem id="accordion-2" {...state}>
         <h3>
           <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
         </h3>
@@ -38,29 +39,13 @@ export const Default = () => {
   );
 };
 
-export const AllowMultiple = () => {
-  const state = useAccordionState({ allowMultiple: true });
-
-  return (
-    <Accordion {...state}>
-      <AccordionItem {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 3</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      </AccordionItem>
-    </Accordion>
-  );
-};
+export const Default = () => <AccordionComponent />;
+export const AllowMultiple = () => <AccordionComponent allowMultiple />;
+export const LoopFalse = () => <AccordionComponent loop={false} />;
+export const AllowToggleFalse = () => (
+  <AccordionComponent allowToggle={false} />
+);
+export const DefaultActive = () => (
+  <AccordionComponent defaultActiveId="accordion-2" />
+);
+export const ManualFalse = () => <AccordionComponent manual={false} />;
