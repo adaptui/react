@@ -8,9 +8,9 @@ import { InputHTMLProps, useInput } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 
-export const useSliderInput = createHook<UseSliderReturn, InputHTMLProps>({
+export const useSliderInput = createHook<SliderStateReturn, InputHTMLProps>({
   name: "SliderInput",
   compose: useInput,
   keys: SLIDER_INPUT_KEYS,

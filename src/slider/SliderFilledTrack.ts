@@ -7,23 +7,25 @@
 import { BoxHTMLProps, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
 
-export const useSliderFilledTrack = createHook<UseSliderReturn, BoxHTMLProps>({
-  name: "SliderFilledTrack",
-  compose: useBox,
-  keys: SLIDER_FILLED_TRACK_KEYS,
+export const useSliderFilledTrack = createHook<SliderStateReturn, BoxHTMLProps>(
+  {
+    name: "SliderFilledTrack",
+    compose: useBox,
+    keys: SLIDER_FILLED_TRACK_KEYS,
 
-  useProps(options, { style: htmlStyle, ...htmlProps }) {
-    const { styles } = options;
+    useProps(options, { style: htmlStyle, ...htmlProps }) {
+      const { styles } = options;
 
-    return {
-      ...htmlProps,
-      style: { ...htmlStyle, ...styles.innerTrackStyle },
-    };
+      return {
+        ...htmlProps,
+        style: { ...htmlStyle, ...styles.innerTrackStyle },
+      };
+    },
   },
-});
+);
 
 export const SliderFilledTrack = createComponent({
   as: "div",

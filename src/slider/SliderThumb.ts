@@ -5,20 +5,16 @@
  * to work with Reakit System
  */
 import { useId } from "@chakra-ui/hooks";
+import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, useBox } from "reakit";
+import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
-import {
-  ariaAttr,
-  callAllHandlers,
-  dataAttr,
-  mergeRefs,
-} from "@chakra-ui/utils";
 
 import { SLIDER_THUMB_KEYS } from "./__keys";
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 
-export type useSliderThumbOptions = UseSliderReturn & {
+export type SliderThumbOptions = SliderStateReturn & {
   /**
    * The base `id` to use for the sliderThumb
    */
@@ -31,7 +27,7 @@ export type useSliderThumbOptions = UseSliderReturn & {
   getAriaValueText?(value: number): string;
 };
 
-export const useSliderThumb = createHook<useSliderThumbOptions, BoxHTMLProps>({
+export const useSliderThumb = createHook<SliderThumbOptions, BoxHTMLProps>({
   name: "SliderThumb",
   compose: useBox,
   keys: SLIDER_THUMB_KEYS,
@@ -73,7 +69,7 @@ export const useSliderThumb = createHook<useSliderThumbOptions, BoxHTMLProps>({
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabel ? undefined : ariaLabelledBy,
       onKeyDown: callAllHandlers(htmlOnKeyDown, handlers.onKeyDown),
-      ref: mergeRefs(htmlRef, refs.thumbRef),
+      ref: useForkRef(htmlRef, refs.thumbRef),
       style: { ...htmlStyle, ...styles.thumbStyle },
     };
   },

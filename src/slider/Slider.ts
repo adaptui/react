@@ -4,14 +4,15 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
+import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps, useBox } from "reakit";
-import { mergeRefs, ariaAttr } from "@chakra-ui/utils";
+import { ariaAttr } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_KEYS } from "./__keys";
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 
-export const useSlider = createHook<UseSliderReturn, BoxHTMLProps>({
+export const useSlider = createHook<SliderStateReturn, BoxHTMLProps>({
   name: "Slider",
   compose: useBox,
   keys: SLIDER_KEYS,
@@ -23,7 +24,7 @@ export const useSlider = createHook<UseSliderReturn, BoxHTMLProps>({
       ...htmlProps,
       tabIndex: -1,
       "aria-disabled": ariaAttr(state.isDisabled),
-      ref: mergeRefs(htmlRef, refs.rootRef),
+      ref: useForkRef(htmlRef, refs.rootRef),
       style: { ...htmlStyle, ...styles.rootStyle },
     };
   },

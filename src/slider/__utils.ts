@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
 
-import { UseSliderProps } from "./SliderState";
+import { SliderStateProps } from "./SliderState";
 
 export function orient(options: {
-  orientation: UseSliderProps["orientation"];
+  orientation: SliderStateProps["orientation"];
   vertical: CSSProperties;
   horizontal: CSSProperties;
 }) {

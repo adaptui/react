@@ -5,21 +5,22 @@
  * to work with Reakit System
  */
 import { useId } from "@chakra-ui/hooks";
+import { useForkRef } from "reakit-utils";
+import { dataAttr } from "@chakra-ui/utils";
 import { BoxHTMLProps, useBox } from "reakit";
-import { mergeRefs, dataAttr } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_TRACK_KEYS } from "./__keys";
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 
-export type useSliderTrackOptions = UseSliderReturn & {
+export type SliderTrackOptions = SliderStateReturn & {
   /**
    * The base `id` to use for the sliderTrack
    */
   id?: string;
 };
 
-export const useSliderTrack = createHook<useSliderTrackOptions, BoxHTMLProps>({
+export const useSliderTrack = createHook<SliderTrackOptions, BoxHTMLProps>({
   name: "SliderTrack",
   compose: useBox,
   keys: SLIDER_TRACK_KEYS,
@@ -34,7 +35,7 @@ export const useSliderTrack = createHook<useSliderTrackOptions, BoxHTMLProps>({
       id,
       "data-disabled": dataAttr(state.isDisabled),
       style: { ...htmlStyle, ...styles.trackStyle },
-      ref: mergeRefs(htmlRef, refs.trackRef),
+      ref: useForkRef(htmlRef, refs.trackRef),
     };
   },
 });
