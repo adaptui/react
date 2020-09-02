@@ -18,4 +18,6 @@ export const ACCORDION_KEYS = [
   "loop",
   "next",
   "prev",
+  "first",
+  "last",
 ] as const;

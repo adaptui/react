@@ -13,7 +13,6 @@ export default {
 
 const AccordionComponent = (props: any) => {
   const state = useAccordionState(props);
-  console.log("%c state", "color: #006dcc", state);
 
   return (
     <Accordion {...state}>
