@@ -1,3 +1,9 @@
+/**
+ * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
+ * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
+ * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
+ * to work with Reakit System
+ */
 import { isUndefined, valueToPercent } from "@chakra-ui/utils";
 
 export interface UseProgressProps {
