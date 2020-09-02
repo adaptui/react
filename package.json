@@ -31,10 +31,7 @@
     "@react-aria/link": "^3.1.0",
     "@react-aria/utils": "^3.2.0",
     "@react-stately/toggle": "^3.2.0",
-    "@types/lodash.debounce": "^4.0.6",
-    "dayzed": "^3.2.1",
     "emotion": "^10.0.27",
-    "lodash.debounce": "^4.0.8",
     "reakit": "^1.2.3",
     "reakit-system": "^0.14.3",
     "reakit-utils": "^0.14.3"
@@ -55,7 +52,7 @@
     "@typescript-eslint/parser": "4.0.1",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
-    "eslint": "7.8.0",
+    "eslint": "7.8.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-react-app": "5.2.1",
     "eslint-plugin-flowtype": "5.2.0",
@@ -70,7 +67,6 @@
     "prettier": "2.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-is": "16.13.1",
     "sort-package-json": "1.44.0",
     "typescript": "4.0.2"
   }
