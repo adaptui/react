@@ -57,7 +57,7 @@ export function useAccordionState(
   initialState: SealedInitialState<AccordionInitialState> = {},
 ): AccordionStateReturn {
   const {
-    loop = false,
+    loop = true,
     allowToggle = true,
     allowMultiple = false,
     defaultActiveId,
