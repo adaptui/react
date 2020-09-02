@@ -4,29 +4,30 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
-import { BoxHTMLProps, useBox } from "reakit";
+import { InputHTMLProps, useInput } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
+import { SLIDER_INPUT_KEYS } from "./__keys";
 import { UseSliderReturn } from "./SliderState";
-import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
 
-export const useSliderFilledTrack = createHook<UseSliderReturn, BoxHTMLProps>({
-  name: "SliderFilledTrack",
-  compose: useBox,
-  keys: SLIDER_FILLED_TRACK_KEYS,
+export const useSliderInput = createHook<UseSliderReturn, InputHTMLProps>({
+  name: "SliderInput",
+  compose: useInput,
+  keys: SLIDER_INPUT_KEYS,
 
-  useProps(options, { style: htmlStyle, ...htmlProps }) {
-    const { styles } = options;
+  useProps(options, htmlProps) {
+    const { state } = options;
 
     return {
       ...htmlProps,
-      style: { ...htmlStyle, ...styles.innerTrackStyle },
+      type: "hidden",
+      value: state.value,
     };
   },
 });
 
-export const SliderFilledTrack = createComponent({
-  as: "div",
+export const SliderInput = createComponent({
+  as: "input",
   memo: true,
-  useHook: useSliderFilledTrack,
+  useHook: useSliderInput,
 });

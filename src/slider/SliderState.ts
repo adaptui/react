@@ -81,7 +81,6 @@ export interface UseSliderProps {
    * function gets called whenever the slider handle is being dragged or clicked
    */
   onChange?(value: number): void;
-
   /**
    * If `true`, the slider will be disabled
    */

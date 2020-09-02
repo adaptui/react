@@ -4,35 +4,37 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
-import { createComponent, createHook } from "reakit-system";
-import { BoxHTMLProps, useBox } from "reakit";
 import { useId } from "@chakra-ui/hooks";
+import { BoxHTMLProps, useBox } from "reakit";
 import { mergeRefs, dataAttr } from "@chakra-ui/utils";
+import { createComponent, createHook } from "reakit-system";
 
-import { UseSliderReturn } from "./SliderState";
 import { SLIDER_TRACK_KEYS } from "./__keys";
+import { UseSliderReturn } from "./SliderState";
 
 export type useSliderTrackOptions = UseSliderReturn & {
   /**
-   * The base `id` to use for the sliderTrack and it's components
+   * The base `id` to use for the sliderTrack
    */
   id?: string;
 };
 
 export const useSliderTrack = createHook<useSliderTrackOptions, BoxHTMLProps>({
-  name: "useSliderTrack",
-  compose: [useBox],
+  name: "SliderTrack",
+  compose: useBox,
   keys: SLIDER_TRACK_KEYS,
 
   useProps(options, { ref: htmlRef, style: htmlStyle, ...htmlProps }) {
+    const { refs, state, styles } = options;
+
     const id = useId(options.id, "slider-track");
 
     return {
-      id,
-      ref: mergeRefs(htmlRef, options.refs.trackRef),
-      "data-disabled": dataAttr(options.state.isDisabled),
-      style: { ...options.styles.trackStyle, ...htmlStyle },
       ...htmlProps,
+      id,
+      "data-disabled": dataAttr(state.isDisabled),
+      style: { ...htmlStyle, ...styles.trackStyle },
+      ref: mergeRefs(htmlRef, refs.trackRef),
     };
   },
 });
