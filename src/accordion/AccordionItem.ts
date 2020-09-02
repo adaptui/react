@@ -22,9 +22,7 @@ export const useAccordionItem = createHook<
   compose: unstable_useId,
   keys: ACCORDION_KEYS,
 
-  useProps(options, { ref: htmlRef, ...htmlProps }) {
-    const { id, registerItem } = options;
-
+  useProps({ id, registerItem }, { ref: htmlRef, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);
 
     React.useLayoutEffect(() => {
