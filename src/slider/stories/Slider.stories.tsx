@@ -16,6 +16,7 @@ import {
   sliderVerticalThumbStyle,
   sliderVerticalTrackStyle,
 } from "./styles";
+import { SliderInput } from "../SliderInput";
 
 export default {
   title: "Component/Slider",
@@ -42,6 +43,7 @@ export const Default = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -67,6 +69,7 @@ export const Reversed = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -92,6 +95,7 @@ export const Min20Max80 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -117,6 +121,7 @@ export const Step10 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -142,6 +147,7 @@ export const DefaultValue90 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -167,6 +173,7 @@ export const Disabled = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -192,6 +199,7 @@ export const ReadOnly = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -214,6 +222,7 @@ export const Vertical = () => {
             : sliderVerticalThumbStyle.transform,
         }}
       />
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };

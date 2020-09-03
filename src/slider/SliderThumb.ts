@@ -4,23 +4,19 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
-import { createComponent, createHook, useCreateElement } from "reakit-system";
-import { useWarning } from "reakit-warning";
 import { useId } from "@chakra-ui/hooks";
-import {
-  ariaAttr,
-  callAllHandlers,
-  dataAttr,
-  mergeRefs,
-} from "@chakra-ui/utils";
-
-import { UseSliderReturn } from "./SliderState";
-import { SLIDER_THUMB_KEYS } from "./__keys";
+import { useForkRef } from "reakit-utils";
+import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, useBox } from "reakit";
+import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 
-export type useSliderThumbOptions = UseSliderReturn & {
+import { SLIDER_THUMB_KEYS } from "./__keys";
+import { SliderStateReturn } from "./SliderState";
+
+export type SliderThumbOptions = SliderStateReturn & {
   /**
-   * The base `id` to use for the sliderThumb and it's components
+   * The base `id` to use for the sliderThumb
    */
   id?: string;
   /**
@@ -31,48 +27,57 @@ export type useSliderThumbOptions = UseSliderReturn & {
   getAriaValueText?(value: number): string;
 };
 
-export const useSliderThumb = createHook<useSliderThumbOptions, BoxHTMLProps>({
-  name: "useSliderThumb",
+export type SliderThumbHTMLProps = BoxHTMLProps;
+
+export type SliderThumbProps = SliderThumbOptions & SliderThumbHTMLProps;
+
+export const useSliderThumb = createHook<
+  SliderThumbOptions,
+  SliderThumbHTMLProps
+>({
+  name: "SliderThumb",
+  compose: useBox,
   keys: SLIDER_THUMB_KEYS,
-  compose: [useBox],
 
   useProps(
     options,
     {
       ref: htmlRef,
       style: htmlStyle,
-      onFocus: htmlOnFocus,
-      onBlur: htmlOnBlur,
       onKeyDown: htmlOnKeyDown,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
       "aria-valuetext": ariaValueText,
       ...htmlProps
     },
   ) {
+    const { state, handlers, styles, refs } = options;
     const id = useId(options.id, "slider-thumb");
 
     /**
      * ARIA (Optional): To define a human readable representation of the value,
      * we allow users pass aria-valuetext.
      */
-    const valueText =
-      options.getAriaValueText?.(options.state.value) ?? ariaValueText;
+    const valueText = options.getAriaValueText?.(state.value) ?? ariaValueText;
 
     return {
-      id,
-      ref: mergeRefs(htmlRef, options.refs.thumbRef),
-      role: "slider",
-      tabIndex: 0,
-      "aria-valuetext": valueText,
-      "aria-valuemin": options.state.min,
-      "aria-valuemax": options.state.max,
-      "aria-valuenow": options.state.value,
-      "aria-orientation": options.state.orientation,
-      "data-active": dataAttr(options.state.isDragging),
-      "aria-disabled": ariaAttr(options.state.isDisabled),
-      "aria-readonly": ariaAttr(options.state.isReadOnly),
-      onKeyDown: callAllHandlers(htmlOnKeyDown, options.handlers.onKeyDown),
-      style: { ...options.styles.thumbStyle, ...htmlStyle },
       ...htmlProps,
+      id,
+      tabIndex: 0,
+      role: "slider",
+      "aria-valuetext": valueText,
+      "aria-valuemin": state.min,
+      "aria-valuemax": state.max,
+      "aria-valuenow": state.value,
+      "aria-orientation": state.orientation,
+      "data-active": dataAttr(state.isDragging),
+      "aria-disabled": ariaAttr(state.isDisabled),
+      "aria-readonly": ariaAttr(state.isReadOnly),
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabel ? undefined : ariaLabelledBy,
+      onKeyDown: callAllHandlers(htmlOnKeyDown, handlers.onKeyDown),
+      ref: useForkRef(htmlRef, refs.thumbRef),
+      style: { ...htmlStyle, ...styles.thumbStyle },
     };
   },
 });

@@ -4,7 +4,7 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
-
+import { ensureFocus } from "reakit-utils";
 import {
   useState,
   useRef,
@@ -32,11 +32,10 @@ import {
   isRightClick,
   Dict,
 } from "@chakra-ui/utils";
-import { ensureFocus } from "reakit-utils";
 
 import { getDefaultValue, orient } from "./__utils";
 
-export interface UseSliderProps {
+export interface SliderStateProps {
   /**
    * The minimum allowed value of the slider. Cannot be greater than max.
    * @default 0
@@ -81,7 +80,6 @@ export interface UseSliderProps {
    * function gets called whenever the slider handle is being dragged or clicked
    */
   onChange?(value: number): void;
-
   /**
    * If `true`, the slider will be disabled
    */
@@ -102,7 +100,7 @@ type EventSource = "mouse" | "touch" | "keyboard";
  *
  * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices-1.1/#slider
  */
-export function useSliderState(props: UseSliderProps = {}) {
+export function useSliderState(props: SliderStateProps = {}) {
   const {
     min = 0,
     max = 100,
@@ -489,4 +487,4 @@ export function useSliderState(props: UseSliderProps = {}) {
   };
 }
 
-export type UseSliderReturn = ReturnType<typeof useSliderState>;
+export type SliderStateReturn = ReturnType<typeof useSliderState>;

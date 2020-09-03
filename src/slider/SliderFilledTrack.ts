@@ -4,21 +4,34 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { BoxHTMLProps, useBox } from "reakit";
 
-import { UseSliderReturn } from "./SliderState";
+import { SliderStateReturn } from "./SliderState";
 import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
 
-export const useSliderFilledTrack = createHook<UseSliderReturn, BoxHTMLProps>({
-  name: "useSliderFilledTrack",
+export type SliderFilledTrackOptions = BoxOptions &
+  Pick<SliderStateReturn, "styles">;
+
+export type SliderFilledTrackHTMLProps = BoxHTMLProps;
+
+export type SliderFilledTrackProps = SliderFilledTrackOptions &
+  SliderFilledTrackHTMLProps;
+
+export const useSliderFilledTrack = createHook<
+  SliderFilledTrackOptions,
+  SliderFilledTrackHTMLProps
+>({
+  name: "SliderFilledTrack",
+  compose: useBox,
   keys: SLIDER_FILLED_TRACK_KEYS,
-  compose: [useBox],
 
   useProps(options, { style: htmlStyle, ...htmlProps }) {
+    const { styles } = options;
+
     return {
-      style: { ...options.styles.innerTrackStyle, ...htmlStyle },
       ...htmlProps,
+      style: { ...htmlStyle, ...styles.innerTrackStyle },
     };
   },
 });
