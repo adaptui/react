@@ -10,7 +10,7 @@ import {
   useButton,
 } from "reakit";
 
-import { ACCORDION_KEYS } from "./__keys";
+import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionTriggerOptions = unstable_IdOptions &
@@ -19,13 +19,16 @@ export type AccordionTriggerOptions = unstable_IdOptions &
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps & unstable_IdHTMLProps;
 
+export type AccordionTriggerProps = AccordionTriggerOptions &
+  AccordionTriggerHTMLProps;
+
 export const useAccordionTrigger = createHook<
   AccordionTriggerOptions,
   AccordionTriggerHTMLProps
 >({
   name: "AccordionTrigger",
   compose: [useButton, unstable_useId],
-  keys: ACCORDION_KEYS,
+  keys: ACCORDION_TRIGGER_KEYS,
 
   useProps(
     options,

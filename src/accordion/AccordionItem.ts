@@ -7,12 +7,14 @@ import {
   unstable_useId,
 } from "reakit";
 
-import { ACCORDION_KEYS } from "./__keys";
+import { ACCORDION_ITEM_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionItemOptions = unstable_IdOptions & AccordionStateReturn;
 
 export type AccordionItemHTMLProps = unstable_IdHTMLProps;
+
+export type AccordionItemProps = AccordionItemOptions & AccordionItemHTMLProps;
 
 export const useAccordionItem = createHook<
   AccordionItemOptions,
@@ -20,7 +22,7 @@ export const useAccordionItem = createHook<
 >({
   name: "AccordionItem",
   compose: unstable_useId,
-  keys: ACCORDION_KEYS,
+  keys: ACCORDION_ITEM_KEYS,
 
   useProps({ id, registerItem }, { ref: htmlRef, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);

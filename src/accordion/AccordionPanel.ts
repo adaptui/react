@@ -7,12 +7,15 @@ import {
 } from "reakit";
 import { useForkRef } from "reakit-utils";
 
+import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
-import { ACCORDION_KEYS } from "./__keys";
 
 export type AccordionPanelOptions = unstable_IdOptions & AccordionStateReturn;
 
 export type AccordionPanelHTMLProps = unstable_IdHTMLProps;
+
+export type AccordionPanelProps = AccordionPanelOptions &
+  AccordionPanelHTMLProps;
 
 export const useAccordionPanel = createHook<
   AccordionPanelOptions,
@@ -20,7 +23,7 @@ export const useAccordionPanel = createHook<
 >({
   name: "AccordionPanel",
   compose: unstable_useId,
-  keys: ACCORDION_KEYS,
+  keys: ACCORDION_PANEL_KEYS,
 
   useProps(options, { ref: htmlRef, style: htmlStyle, ...htmlProps }) {
     const { id, registerPanel, items, activeItems } = options;
