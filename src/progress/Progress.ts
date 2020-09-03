@@ -4,13 +4,19 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { BoxHTMLProps, useBox } from "reakit";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { PROGRESS_KEYS } from "./__keys";
-import { useProgressReturn } from "./ProgressState";
+import { ProgressStateReturn } from "./ProgressState";
 
-export const useProgress = createHook<useProgressReturn, BoxHTMLProps>({
+export type ProgressOptions = BoxOptions & ProgressStateReturn;
+
+export type ProgressHTMLProps = BoxHTMLProps;
+
+export type ProgressProps = ProgressOptions & ProgressHTMLProps;
+
+export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   name: "Progress",
   compose: useBox,
   keys: PROGRESS_KEYS,

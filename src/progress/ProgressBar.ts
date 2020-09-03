@@ -4,23 +4,28 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { BoxHTMLProps, useBox } from "reakit";
 import { isFunction } from "@chakra-ui/utils";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
 import { PROGRESS_BAR_KEYS } from "./__keys";
-import { useProgressReturn } from "./ProgressState";
+import { ProgressStateReturn } from "./ProgressState";
 
-export type useProgressBarOptions = useProgressReturn & {
-  /**
-   * Function that returns the `aria-valuetext` for screen readers.
-   * It's mostly used to generate a more human-readable
-   * representation of the value for assistive technologies
-   */
-  getAriaValueText?(value: number, percent: number): string;
-};
+export type ProgressBarOptions = BoxOptions &
+  ProgressStateReturn & {
+    /**
+     * Function that returns the `aria-valuetext` for screen readers.
+     * It's mostly used to generate a more human-readable
+     * representation of the value for assistive technologies
+     */
+    getAriaValueText?(value: number, percent: number): string;
+  };
 
-const useProgressBar = createHook<useProgressBarOptions, BoxHTMLProps>({
+export type ProgressBarHTMLProps = BoxHTMLProps;
+
+export type ProgressBarProps = ProgressBarOptions & ProgressBarHTMLProps;
+
+const useProgressBar = createHook<ProgressBarOptions, ProgressBarHTMLProps>({
   name: "ProgressBar",
   compose: useBox,
   keys: PROGRESS_BAR_KEYS,

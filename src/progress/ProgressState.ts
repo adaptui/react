@@ -40,4 +40,4 @@ export const useProgressState = (props: UseProgressProps = {}) => {
   return { value, isIndeterminate, min, max, percent };
 };
 
-export type useProgressReturn = ReturnType<typeof useProgressState>;
+export type ProgressStateReturn = ReturnType<typeof useProgressState>;
