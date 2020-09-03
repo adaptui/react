@@ -6,5 +6,4 @@ const PROGRESS_STATE_KEYS = [
   "percent",
 ] as const;
 
-export const PROGRESS_KEYS = PROGRESS_STATE_KEYS;
-export const PROGRESS_BAR_KEYS = [...PROGRESS_STATE_KEYS, "getAriaValueText"];
+export const PROGRESS_KEYS = [...PROGRESS_STATE_KEYS, "getAriaValueText"];

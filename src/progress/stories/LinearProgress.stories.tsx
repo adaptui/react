@@ -1,19 +1,20 @@
 import { Meta } from "@storybook/react";
 import React, { CSSProperties } from "react";
+import { css, keyframes, cx } from "emotion";
 
 import { Progress } from "../Progress";
-import { css, keyframes } from "emotion";
-import { ProgressBar } from "../ProgressBar";
 import { useProgressState } from "../ProgressState";
 
 export default {
-  title: "Component/Progress",
+  title: "Component/Progress/Linear",
 } as Meta;
 
 const progressStyle: CSSProperties = {
   background: "rgb(237, 242, 247)",
   height: "0.75rem",
   width: "400px",
+  overflow: "hidden",
+  position: "relative",
 };
 
 const labelStyles: CSSProperties = {
@@ -28,9 +29,13 @@ const labelStyles: CSSProperties = {
   lineHeight: 1,
 };
 
-const progressBarStyle: CSSProperties = {
-  transition: "all 0.3s",
-  backgroundColor: "#3182ce",
+const progressBarStyle = (percent: any) => {
+  return css({
+    transition: "all 0.3s",
+    backgroundColor: "#3182ce",
+    width: percent != null ? `${percent}%` : undefined,
+    height: "100%",
+  });
 };
 
 function generateStripe(size = "1rem", color = "rgba(255, 255, 255, 0.15)") {
@@ -48,11 +53,6 @@ function generateStripe(size = "1rem", color = "rgba(255, 255, 255, 0.15)") {
     backgroundSize: `${size} ${size}`,
   };
 }
-
-const stripe = keyframes({
-  from: { backgroundPosition: "1rem 0" },
-  to: { backgroundPosition: "0 0" },
-});
 
 export const Default = () => {
   const [value, setValue] = React.useState(0);
@@ -74,9 +74,9 @@ export const Default = () => {
   const progress = useProgressState({ value });
 
   return (
-    <Progress {...progress} style={progressStyle}>
-      <ProgressBar {...progress} style={progressBarStyle} />
-    </Progress>
+    <div style={progressStyle}>
+      <Progress {...progress} className={progressBarStyle(progress.percent)} />
+    </div>
   );
 };
 
@@ -100,10 +100,10 @@ export const WithLabel = () => {
   const progress = useProgressState({ value });
 
   return (
-    <Progress {...progress} style={progressStyle}>
+    <div style={progressStyle}>
       <div style={labelStyles}>{progress.value}</div>
-      <ProgressBar {...progress} style={progressBarStyle} />
-    </Progress>
+      <Progress {...progress} className={progressBarStyle(progress.percent)} />
+    </div>
   );
 };
 
@@ -131,13 +131,12 @@ export const WithStripe = () => {
   });
 
   return (
-    <Progress {...progress} style={progressStyle}>
-      <ProgressBar
+    <div style={progressStyle}>
+      <Progress
         {...progress}
-        className={stripStyles}
-        style={progressBarStyle}
+        className={cx(progressBarStyle(progress.percent), stripStyles)}
       />
-    </Progress>
+    </div>
   );
 };
 
@@ -160,19 +159,23 @@ export const WithAnimatedStripe = () => {
 
   const progress = useProgressState({ value });
 
+  const stripe = keyframes({
+    from: { backgroundPosition: "1rem 0" },
+    to: { backgroundPosition: "0 0" },
+  });
+
   const stripStyles = css({
     ...generateStripe(),
     animation: `${stripe} 1s linear infinite`,
   });
 
   return (
-    <Progress {...progress} style={progressStyle}>
-      <ProgressBar
+    <div style={progressStyle}>
+      <Progress
         {...progress}
-        className={stripStyles}
-        style={progressBarStyle}
+        className={cx(progressBarStyle(progress.percent), stripStyles)}
       />
-    </Progress>
+    </div>
   );
 };
 
@@ -189,6 +192,8 @@ export const WhenIsIndeterminate = () => {
       position: "absolute",
       willChange: "left",
       minWidth: "50%",
+      width: "100%",
+      height: "100%",
       backgroundImage:
         "linear-gradient( to right, transparent 0%, #D53F8C 50%, transparent 100% )",
       animation: `${progressAnim} 1s ease infinite normal none running`,
@@ -196,13 +201,13 @@ export const WhenIsIndeterminate = () => {
   });
 
   return (
-    <Progress {...progress} style={progressStyle}>
-      <ProgressBar
+    <div style={progressStyle}>
+      <Progress
         {...progress}
         style={{ ...progressBarStyle, backgroundColor: "none" }}
         className={indeterminateStyles}
       />
-    </Progress>
+    </div>
   );
 };
 
@@ -219,18 +224,20 @@ export const WhenIsIndeterminateStripe = () => {
       position: "absolute",
       willChange: "left",
       minWidth: "50%",
+      width: "100%",
+      height: "100%",
       ...generateStripe(),
       animation: `${progressAnim} 1s ease infinite normal none running`,
     }),
   });
 
   return (
-    <Progress {...progress} style={progressStyle}>
-      <ProgressBar
+    <div style={progressStyle}>
+      <Progress
         {...progress}
         style={{ ...progressBarStyle, backgroundColor: "#D53F8C" }}
         className={indeterminateStyles}
       />
-    </Progress>
+    </div>
   );
 };
