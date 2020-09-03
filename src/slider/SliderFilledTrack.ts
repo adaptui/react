@@ -30,8 +30,8 @@ export const useSliderFilledTrack = createHook<
     const { styles } = options;
 
     return {
+      style: { ...styles.innerTrackStyle, ...htmlStyle },
       ...htmlProps,
-      style: { ...htmlStyle, ...styles.innerTrackStyle },
     };
   },
 });

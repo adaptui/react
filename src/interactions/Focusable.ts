@@ -1,5 +1,4 @@
 import React from "react";
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
@@ -8,10 +7,12 @@ import {
   useFocusable as useAriaFocusable,
 } from "@react-aria/focus";
 
+import { INTERACTION_KEYS } from "./__keys";
+
 export const useFocusable = createHook<FocusableOptions, BoxHTMLProps>({
   name: "Focusable",
+  compose: useBox,
   keys: INTERACTION_KEYS,
-  compose: [useBox],
 
   useProps(options, htmlProps) {
     const props = { ...options, ...htmlProps };
@@ -19,7 +20,7 @@ export const useFocusable = createHook<FocusableOptions, BoxHTMLProps>({
 
     const { focusableProps } = useAriaFocusable(props, ref);
 
-    return mergeProps(htmlProps, focusableProps);
+    return mergeProps(focusableProps, htmlProps);
   },
 });
 

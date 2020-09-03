@@ -29,9 +29,9 @@ export const useSliderInput = createHook<
     const { state } = options;
 
     return {
-      ...htmlProps,
       type: "hidden",
       value: state.value,
+      ...htmlProps,
     };
   },
 });

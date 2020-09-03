@@ -1,14 +1,15 @@
 import { useLiveRef } from "reakit-utils";
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
 import { FocusProps, useFocus as useAriaFocus } from "@react-aria/interactions";
 
+import { INTERACTION_KEYS } from "./__keys";
+
 export const useFocus = createHook<FocusProps, BoxHTMLProps>({
   name: "Focus",
+  compose: useBox,
   keys: INTERACTION_KEYS,
-  compose: [useBox],
 
   useProps(
     options,
@@ -24,7 +25,7 @@ export const useFocus = createHook<FocusProps, BoxHTMLProps>({
 
     const { focusProps } = useAriaFocus(props);
 
-    return mergeProps(htmlProps, focusProps);
+    return mergeProps(focusProps, htmlProps);
   },
 });
 

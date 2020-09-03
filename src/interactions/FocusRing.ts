@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
@@ -8,6 +7,8 @@ import {
   useFocusRing as useAriaFocusRing,
 } from "@react-aria/focus";
 
+import { INTERACTION_KEYS } from "./__keys";
+
 interface useFocusRingOptions extends FocusRingProps {
   onFocusRingChange?: (isFocused: boolean) => void;
   onFocusRingVisibleChange?: (isFocusVisible: boolean) => void;
@@ -15,8 +16,8 @@ interface useFocusRingOptions extends FocusRingProps {
 
 export const useFocusRing = createHook<useFocusRingOptions, BoxHTMLProps>({
   name: "FocusRing",
+  compose: useBox,
   keys: INTERACTION_KEYS,
-  compose: [useBox],
 
   useProps(options, htmlProps) {
     const {
@@ -37,7 +38,7 @@ export const useFocusRing = createHook<useFocusRingOptions, BoxHTMLProps>({
       onFocusRingVisibleChange?.(isFocusVisible);
     }, [isFocusVisible, onFocusRingVisibleChange]);
 
-    return mergeProps(htmlProps, focusProps);
+    return mergeProps(focusProps, htmlProps);
   },
 });
 

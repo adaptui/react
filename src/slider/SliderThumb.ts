@@ -61,7 +61,6 @@ export const useSliderThumb = createHook<
     const valueText = options.getAriaValueText?.(state.value) ?? ariaValueText;
 
     return {
-      ...htmlProps,
       id,
       tabIndex: 0,
       role: "slider",
@@ -77,7 +76,8 @@ export const useSliderThumb = createHook<
       "aria-labelledby": ariaLabel ? undefined : ariaLabelledBy,
       onKeyDown: callAllHandlers(htmlOnKeyDown, handlers.onKeyDown),
       ref: useForkRef(htmlRef, refs.thumbRef),
-      style: { ...htmlStyle, ...styles.thumbStyle },
+      style: { ...styles.thumbStyle, ...htmlStyle },
+      ...htmlProps,
     };
   },
 });

@@ -4,13 +4,14 @@
  * to work with Reakit System
  */
 import { useEffect } from "react";
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 import {
   FocusVisibleProps,
   useFocusVisible as useAriaFocusVisible,
 } from "@react-aria/interactions";
-import { createComponent, createHook } from "reakit-system";
+
+import { INTERACTION_KEYS } from "./__keys";
 
 interface useFocusVisibleOptions extends FocusVisibleProps {
   onFocusVisibleChange?: (isFocusVisible: boolean) => void;
@@ -19,8 +20,8 @@ interface useFocusVisibleOptions extends FocusVisibleProps {
 export const useFocusVisible = createHook<useFocusVisibleOptions, BoxHTMLProps>(
   {
     name: "FocusVisible",
+    compose: useBox,
     keys: INTERACTION_KEYS,
-    compose: [useBox],
 
     useProps(options, htmlProps) {
       const { onFocusVisibleChange, ...restOptions } = options;

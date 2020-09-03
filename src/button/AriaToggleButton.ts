@@ -1,35 +1,47 @@
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { BoxHTMLProps, useBox } from "reakit";
+import { ButtonHTMLProps, useButton } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { ToggleState } from "@react-stately/toggle";
 import { useToggleButton } from "@react-aria/button";
 import { INTERACTION_KEYS } from "../interactions/__keys";
 import { createComponent, createHook } from "reakit-system";
-import { AriaToggleButtonProps } from "@react-types/button";
+import { AriaToggleButtonProps as AriaToggleButtonOptionsProps } from "@react-types/button";
 
-type useAriaToggleButtonOptions = AriaToggleButtonProps & ToggleState;
+export type AriaToggleButtonOptions = AriaToggleButtonOptionsProps &
+  ToggleState;
+
+export type AriaToggleButtonHTMLProps = ButtonHTMLProps;
+
+export type AriaToggleButtonProps = AriaToggleButtonOptions &
+  AriaToggleButtonHTMLProps;
 
 export const useAriaToggleButton = createHook<
-  useAriaToggleButtonOptions,
-  BoxHTMLProps
+  AriaToggleButtonOptions,
+  AriaToggleButtonHTMLProps
 >({
   name: "AriaToggleButton",
+  compose: useButton,
   keys: [...INTERACTION_KEYS, "isSelected", "setSelected", "toggle"],
-  compose: [useBox],
 
   useProps(options, { ref: htmlRef, ...htmlProps }) {
     const { isSelected, setSelected, toggle, ...restOptions } = options;
-    const props = { ...restOptions, ...htmlProps } as AriaToggleButtonProps;
+    const props = {
+      ...restOptions,
+      ...htmlProps,
+    } as AriaToggleButtonOptionsProps;
     const state = { isSelected, setSelected, toggle };
     const ref = React.useRef<HTMLElement>(null);
 
     const { buttonProps } = useToggleButton(props, state, ref);
 
-    return mergeProps(htmlProps, {
-      ...buttonProps,
-      ref: useForkRef(ref, htmlRef),
-    });
+    return mergeProps(
+      {
+        ...buttonProps,
+        ref: useForkRef(ref, htmlRef),
+      },
+      htmlProps,
+    );
   },
 });
 

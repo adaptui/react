@@ -28,11 +28,11 @@ export const useSlider = createHook<SliderOptions, SliderHTMLProps>({
     const { refs, state, styles } = options;
 
     return {
-      ...htmlProps,
       tabIndex: -1,
       "aria-disabled": ariaAttr(state.isDisabled),
       ref: useForkRef(htmlRef, refs.rootRef),
-      style: { ...htmlStyle, ...styles.rootStyle },
+      style: { ...styles.rootStyle, ...htmlStyle },
+      ...htmlProps,
     };
   },
 });

@@ -39,11 +39,11 @@ export const useSliderTrack = createHook<
     const id = useId(options.id, "slider-track");
 
     return {
-      ...htmlProps,
       id,
       "data-disabled": dataAttr(state.isDisabled),
-      style: { ...htmlStyle, ...styles.trackStyle },
       ref: useForkRef(htmlRef, refs.trackRef),
+      style: { ...styles.trackStyle, ...htmlStyle },
+      ...htmlProps,
     };
   },
 });

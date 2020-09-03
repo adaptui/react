@@ -1,4 +1,3 @@
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
@@ -7,15 +6,17 @@ import {
   useFocusWithin as useAriaFocusWithin,
 } from "@react-aria/interactions";
 
+import { INTERACTION_KEYS } from "./__keys";
+
 export const useFocusWithin = createHook<FocusWithinProps, BoxHTMLProps>({
   name: "FocusWithin",
+  compose: useBox,
   keys: INTERACTION_KEYS,
-  compose: [useBox],
 
   useProps(options, htmlProps) {
     const { focusWithinProps } = useAriaFocusWithin(options);
 
-    return mergeProps(htmlProps, focusWithinProps);
+    return mergeProps(focusWithinProps, htmlProps);
   },
 });
 

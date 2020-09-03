@@ -1,4 +1,3 @@
-import { INTERACTION_KEYS } from "./__keys";
 import { BoxHTMLProps, useBox } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
@@ -7,15 +6,17 @@ import {
   usePress as useAriaPress,
 } from "@react-aria/interactions";
 
+import { INTERACTION_KEYS } from "./__keys";
+
 export const usePress = createHook<PressHookProps, BoxHTMLProps>({
   name: "Press",
+  compose: useBox,
   keys: INTERACTION_KEYS,
-  compose: [useBox],
 
   useProps(options, htmlProps) {
     const { pressProps } = useAriaPress(options);
 
-    return mergeProps(htmlProps, pressProps);
+    return mergeProps(pressProps, htmlProps);
   },
 });
 

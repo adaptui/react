@@ -1,29 +1,39 @@
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { BoxHTMLProps, useBox } from "reakit";
 import { useButton } from "@react-aria/button";
 import { mergeProps } from "@react-aria/utils";
-import { AriaButtonProps } from "@react-types/button";
-import { INTERACTION_KEYS } from "../interactions/__keys";
 import { createComponent, createHook } from "reakit-system";
+import { ButtonHTMLProps, useButton as useReakitButton } from "reakit";
+import { AriaButtonProps as AriaButtonOptions } from "@react-types/button";
 
-export const useAriaButton = createHook<AriaButtonProps, BoxHTMLProps>({
-  name: "AriaButton",
-  keys: INTERACTION_KEYS,
-  compose: [useBox],
+import { INTERACTION_KEYS } from "../interactions/__keys";
 
-  useProps(options, { ref: htmlRef, ...htmlProps }) {
-    const props = { ...options, ...htmlProps } as AriaButtonProps;
-    const ref = React.useRef<HTMLElement>(null);
+export type AriaButtonHTMLProps = ButtonHTMLProps;
 
-    const { buttonProps } = useButton(props, ref);
+export type AriaButtonProps = AriaButtonOptions & AriaButtonHTMLProps;
 
-    return mergeProps(htmlProps, {
-      ...buttonProps,
-      ref: useForkRef(ref, htmlRef),
-    });
+export const useAriaButton = createHook<AriaButtonOptions, AriaButtonHTMLProps>(
+  {
+    name: "AriaButton",
+    compose: useReakitButton,
+    keys: INTERACTION_KEYS,
+
+    useProps(options, { ref: htmlRef, ...htmlProps }) {
+      const props = { ...options, ...htmlProps } as AriaButtonOptions;
+      const ref = React.useRef<HTMLElement>(null);
+
+      const { buttonProps } = useButton(props, ref);
+
+      return mergeProps(
+        {
+          ...buttonProps,
+          ref: useForkRef(ref, htmlRef),
+        },
+        htmlProps,
+      );
+    },
   },
-});
+);
 
 export const AriaButton = createComponent({
   as: "button",
