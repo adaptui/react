@@ -5,14 +5,20 @@
  * to work with Reakit System
  */
 import { useForkRef } from "reakit-utils";
-import { BoxHTMLProps, useBox } from "reakit";
 import { ariaAttr } from "@chakra-ui/utils";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export const useSlider = createHook<SliderStateReturn, BoxHTMLProps>({
+export type SliderOptions = BoxOptions & SliderStateReturn;
+
+export type SliderHTMLProps = BoxHTMLProps;
+
+export type SliderProps = SliderOptions & SliderHTMLProps;
+
+export const useSlider = createHook<SliderOptions, SliderHTMLProps>({
   name: "Slider",
   compose: useBox,
   keys: SLIDER_KEYS,

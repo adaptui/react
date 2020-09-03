@@ -7,20 +7,28 @@
 import { useId } from "@chakra-ui/hooks";
 import { useForkRef } from "reakit-utils";
 import { dataAttr } from "@chakra-ui/utils";
-import { BoxHTMLProps, useBox } from "reakit";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderTrackOptions = SliderStateReturn & {
-  /**
-   * The base `id` to use for the sliderTrack
-   */
-  id?: string;
-};
+export type SliderTrackOptions = BoxOptions &
+  SliderStateReturn & {
+    /**
+     * The base `id` to use for the sliderTrack
+     */
+    id?: string;
+  };
 
-export const useSliderTrack = createHook<SliderTrackOptions, BoxHTMLProps>({
+export type SliderTrackHTMLProps = BoxHTMLProps;
+
+export type SliderTrackProps = SliderTrackOptions & SliderTrackHTMLProps;
+
+export const useSliderTrack = createHook<
+  SliderTrackOptions,
+  SliderTrackHTMLProps
+>({
   name: "SliderTrack",
   compose: useBox,
   keys: SLIDER_TRACK_KEYS,

@@ -27,7 +27,14 @@ export type SliderThumbOptions = SliderStateReturn & {
   getAriaValueText?(value: number): string;
 };
 
-export const useSliderThumb = createHook<SliderThumbOptions, BoxHTMLProps>({
+export type SliderThumbHTMLProps = BoxHTMLProps;
+
+export type SliderThumbProps = SliderThumbOptions & SliderThumbHTMLProps;
+
+export const useSliderThumb = createHook<
+  SliderThumbOptions,
+  SliderThumbHTMLProps
+>({
   name: "SliderThumb",
   compose: useBox,
   keys: SLIDER_THUMB_KEYS,

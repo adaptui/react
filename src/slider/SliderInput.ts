@@ -4,13 +4,22 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
-import { InputHTMLProps, useInput } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { InputHTMLProps, InputOptions, useInput } from "reakit";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export const useSliderInput = createHook<SliderStateReturn, InputHTMLProps>({
+export type SliderInputOptions = InputOptions & SliderStateReturn;
+
+export type SliderInputHTMLProps = InputHTMLProps;
+
+export type SliderInputProps = SliderInputOptions & SliderInputHTMLProps;
+
+export const useSliderInput = createHook<
+  SliderInputOptions,
+  SliderInputHTMLProps
+>({
   name: "SliderInput",
   compose: useInput,
   keys: SLIDER_INPUT_KEYS,
