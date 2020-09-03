@@ -10,7 +10,8 @@ import { createComponent, createHook } from "reakit-system";
 import { SliderStateReturn } from "./SliderState";
 import { SLIDER_FILLED_TRACK_KEYS } from "./__keys";
 
-export type SliderFilledTrackOptions = BoxOptions & SliderStateReturn;
+export type SliderFilledTrackOptions = BoxOptions &
+  Pick<SliderStateReturn, "styles">;
 
 export type SliderFilledTrackHTMLProps = BoxHTMLProps;
 

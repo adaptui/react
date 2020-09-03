@@ -12,7 +12,8 @@ import { createComponent, createHook } from "reakit-system";
 import { SLIDER_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderOptions = BoxOptions & SliderStateReturn;
+export type SliderOptions = BoxOptions &
+  Pick<SliderStateReturn, "refs" | "state" | "styles">;
 
 export type SliderHTMLProps = BoxHTMLProps;
 

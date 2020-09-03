@@ -10,7 +10,8 @@ import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderInputOptions = InputOptions & SliderStateReturn;
+export type SliderInputOptions = InputOptions &
+  Pick<SliderStateReturn, "state">;
 
 export type SliderInputHTMLProps = InputHTMLProps;
 

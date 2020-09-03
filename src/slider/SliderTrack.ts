@@ -14,7 +14,7 @@ import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderTrackOptions = BoxOptions &
-  SliderStateReturn & {
+  Pick<SliderStateReturn, "refs" | "state" | "styles"> & {
     /**
      * The base `id` to use for the sliderTrack
      */
