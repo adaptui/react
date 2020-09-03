@@ -8,12 +8,28 @@ import {
 
 export type AccordionInitialState = unstable_IdInitialState & {
   /**
-   * Allow to toggle multiple accordion items
+   * Allow to open multiple accordion items
+   * @default false
    */
   allowMultiple?: boolean;
+  /**
+   * Allow to loop accordion items
+   * @default true
+   */
   loop?: boolean;
+  /**
+   * Allow to toggle accordion items
+   * @default true
+   */
   allowToggle?: boolean;
+  /**
+   * Default Active Id to open by default
+   */
   defaultActiveId?: string;
+  /**
+   * Set manual to false, to navigate and open the accordion items on arrow keys movements
+   * @default true
+   */
   manual?: boolean;
 };
 

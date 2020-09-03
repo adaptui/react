@@ -2,7 +2,6 @@ import React from "react";
 import { Meta } from "@storybook/react";
 
 import { useAccordionState } from "../AccordionState";
-import { Accordion } from "../Accordion";
 import { AccordionItem } from "../AccordionItem";
 import { AccordionTrigger } from "../AccordionTrigger";
 import { AccordionPanel } from "../AccordionPanel";
@@ -15,7 +14,7 @@ const AccordionComponent = (props: any) => {
   const state = useAccordionState(props);
 
   return (
-    <Accordion {...state}>
+    <div>
       <AccordionItem {...state}>
         <h3>
           <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
@@ -34,7 +33,7 @@ const AccordionComponent = (props: any) => {
         </h3>
         <AccordionPanel {...state}>Panel 3</AccordionPanel>
       </AccordionItem>
-    </Accordion>
+    </div>
   );
 };
 
