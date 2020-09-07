@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit/Button";
@@ -27,7 +27,12 @@ export const useNumberInputDecrementButton = createHook<
   keys: NUMBERINPUT_DECREMENTBUTTON_KEYS,
 
   useProps(options, htmlProps) {
-    const { keepWithinRange, focusInput, isAtMin, spinner } = options;
+    const {
+      keepWithinRange,
+      focusInput,
+      isAtMin: isAtMinProp,
+      spinner,
+    } = options;
     const {
       onMouseDown,
       onMouseUp,
@@ -37,23 +42,38 @@ export const useNumberInputDecrementButton = createHook<
       ...restHtmlProps
     } = htmlProps;
 
+    const [isAtMin, setIsAtMin] = useState(false);
+
     const spinDown = useCallback(
       (event: any) => {
         event.preventDefault();
         spinner.down();
         focusInput();
+        setIsAtMin(false);
       },
       [focusInput, spinner],
+    );
+
+    const spinStop = useCallback(
+      (event: any) => {
+        event.preventDefault();
+        spinner.stop();
+
+        if (isAtMinProp) {
+          setIsAtMin(true);
+        }
+      },
+      [isAtMinProp, spinner],
     );
 
     return {
       tabIndex: -1,
       onMouseDown: callAllHandlers(onMouseDown, spinDown),
       onTouchStart: callAllHandlers(onTouchStart, spinDown),
-      onMouseLeave: callAllHandlers(onMouseUp, spinner.stop),
-      onMouseUp: callAllHandlers(onMouseUp, spinner.stop),
-      onTouchEnd: callAllHandlers(onTouchEnd, spinner.stop),
-      disabled: keepWithinRange && isAtMin,
+      onMouseLeave: callAllHandlers(onMouseUp, spinStop),
+      onMouseUp: callAllHandlers(onMouseUp, spinStop),
+      onTouchEnd: callAllHandlers(onTouchEnd, spinStop),
+      disabled: keepWithinRange && isAtMinProp && isAtMin,
       "aria-disabled": ariaAttr(keepWithinRange && isAtMin),
       ...restHtmlProps,
     };

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit/Button";
@@ -27,7 +27,12 @@ export const useNumberInputIncrementButton = createHook<
   keys: NUMBERINPUT_INCREMENTBUTTON_KEYS,
 
   useProps(options, htmlProps) {
-    const { keepWithinRange, focusInput, isAtMax, spinner } = options;
+    const {
+      keepWithinRange,
+      focusInput,
+      isAtMax: isAtMaxProp,
+      spinner,
+    } = options;
     const {
       onMouseDown,
       onMouseUp,
@@ -37,23 +42,38 @@ export const useNumberInputIncrementButton = createHook<
       ...restHtmlProps
     } = htmlProps;
 
+    const [isAtMax, setIsAtMax] = useState(false);
+
     const spinUp = useCallback(
       (event: any) => {
         event.preventDefault();
         spinner.up();
         focusInput();
+        setIsAtMax(false);
       },
       [focusInput, spinner],
+    );
+
+    const spinStop = useCallback(
+      (event: any) => {
+        event.preventDefault();
+        spinner.stop();
+
+        if (isAtMaxProp) {
+          setIsAtMax(true);
+        }
+      },
+      [isAtMaxProp, spinner],
     );
 
     return {
       tabIndex: -1,
       onMouseDown: callAllHandlers(onMouseDown, spinUp),
       onTouchStart: callAllHandlers(onTouchStart, spinUp),
-      onMouseUp: callAllHandlers(onMouseUp, spinner.stop),
-      onMouseLeave: callAllHandlers(onMouseLeave, spinner.stop),
-      onTouchEnd: callAllHandlers(onTouchEnd, spinner.stop),
-      disabled: keepWithinRange && isAtMax,
+      onMouseUp: callAllHandlers(onMouseUp, spinStop),
+      onMouseLeave: callAllHandlers(onMouseLeave, spinStop),
+      onTouchEnd: callAllHandlers(onTouchEnd, spinStop),
+      disabled: keepWithinRange && isAtMaxProp && isAtMax,
       "aria-disabled": ariaAttr(keepWithinRange && isAtMax),
       ...restHtmlProps,
     };

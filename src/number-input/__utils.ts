@@ -83,19 +83,6 @@ export function useSpinner(
   // Store the timeout instance id in a ref, so we can clear the timeout later
   const timeoutRef = useRef<any>(null);
 
-  // TODO: Think of an effective solution
-  const isAtMinRef = useRef<boolean>(isAtMin);
-
-  useEffect(() => {
-    isAtMinRef.current = isAtMin;
-  }, [isAtMin]);
-
-  const isAtMaxRef = useRef<boolean>(isAtMax);
-
-  useEffect(() => {
-    isAtMaxRef.current = isAtMax;
-  }, [isAtMax]);
-
   // Clears the timeout from memory
   const removeTimeout = () => clearTimeout(timeoutRef.current);
 
@@ -124,11 +111,9 @@ export function useSpinner(
 
     // after a delay, keep incrementing at interval ("spinning up")
     timeoutRef.current = setTimeout(() => {
-      if (!isAtMinRef.current) {
-        setRunOnce(false);
-        setIsSpinning(true);
-        setAction("increment");
-      }
+      setRunOnce(false);
+      setIsSpinning(true);
+      setAction("increment");
     }, CONTINUOUS_CHANGE_DELAY);
   }, [increment, runOnce]);
 
@@ -141,11 +126,9 @@ export function useSpinner(
 
     // after a delay, keep decrementing at interval ("spinning down")
     timeoutRef.current = setTimeout(() => {
-      if (!isAtMinRef.current) {
-        setRunOnce(false);
-        setIsSpinning(true);
-        setAction("decrement");
-      }
+      setRunOnce(false);
+      setIsSpinning(true);
+      setAction("decrement");
     }, CONTINUOUS_CHANGE_DELAY);
   }, [decrement, runOnce]);
 
