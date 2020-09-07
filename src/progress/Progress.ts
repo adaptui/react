@@ -12,7 +12,10 @@ import { PROGRESS_KEYS } from "./__keys";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressOptions = BoxOptions &
-  ProgressStateReturn & {
+  Pick<
+    ProgressStateReturn,
+    "isIndeterminate" | "value" | "max" | "min" | "percent"
+  > & {
     /**
      * Function that returns the `aria-valuetext` for screen readers.
      * It's mostly used to generate a more human-readable
