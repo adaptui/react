@@ -10,7 +10,8 @@ import { useForkRef } from "reakit-utils";
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
-export type AccordionPanelOptions = unstable_IdOptions & AccordionStateReturn;
+export type AccordionPanelOptions = unstable_IdOptions &
+  Pick<AccordionStateReturn, "registerPanel" | "items" | "activeItems">;
 
 export type AccordionPanelHTMLProps = unstable_IdHTMLProps;
 
