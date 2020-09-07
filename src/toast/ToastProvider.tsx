@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import useToastState, { IToast } from "./ToastState";
 import { ToastController } from "./ToastController";
 import { ToastStateReturn } from "./ToastState";
-import { ToastContextProvider } from "./ToastContext";
 import { canUseDOM } from "reakit-utils";
+import { createContext } from "@chakra-ui/utils";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -19,6 +19,17 @@ const PLACEMENTS = {
 
 // let's infer the union types from the placement values instead of hardcoding them
 export type Placements = keyof typeof PLACEMENTS;
+
+interface IToastContext extends ToastStateReturn {
+  toastTypes: ToastTypes;
+}
+
+export const [ToastContextProvider, useToast] = createContext<IToastContext>({
+  name: "useToast",
+  errorMessage:
+    "The `useToasts` hook must be called from a descendent of the `ToastProvider`.",
+  strict: true,
+});
 
 export type ToastTypes = Record<
   string,
