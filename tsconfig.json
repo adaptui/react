@@ -17,7 +17,8 @@
     "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "types": ["node", "jest"]
   },
   "exclude": ["node_modules"]
 }
