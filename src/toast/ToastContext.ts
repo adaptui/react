@@ -1,20 +1,18 @@
-import React from "react";
 import { ToastStateReturn } from "./ToastState";
 import { ToastTypes } from "./ToastProvider";
+import { createContext } from "@chakra-ui/utils";
 
 interface IToastContext extends ToastStateReturn {
   toastTypes: ToastTypes;
 }
 
-export const ToastContext = React.createContext<IToastContext | null>(null);
-export const useToast = () => {
-  const ctx = React.useContext(ToastContext);
+const context = createContext<IToastContext>({
+  name: "useToast",
+  errorMessage:
+    "The `useToasts` hook must be called from a descendent of the `ToastProvider`.",
+  strict: true,
+});
 
-  if (!ctx) {
-    throw Error(
-      "The `useToasts` hook must be called from a descendent of the `ToastProvider`.",
-    );
-  }
-
-  return ctx;
-};
+export const useToast = context[1];
+export const ToastContext = context[2];
+export const ToastContextProvider = context[0];

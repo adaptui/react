@@ -17,10 +17,10 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
-
   const [x, setX] = React.useState(0);
+
   const bind = useGesture({
-    onDrag: ({ down, movement: [x] }) => {
+    onDrag: ({ down, movement: [x] }: any) => {
       down && setX(x);
 
       if (x > 100 || x < -100) {
@@ -32,17 +32,13 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     onMouseUp: () => setX(0),
   });
 
-  React.useEffect(() => {
-    setDelay(duration);
-  }, [duration]);
-
   const onMouseEnter = React.useCallback(() => {
-    setDelay(null);
-  }, []);
+    autoDismiss && setDelay(null);
+  }, [autoDismiss]);
 
   const onMouseLeave = React.useCallback(() => {
-    setDelay(duration);
-  }, [duration]);
+    autoDismiss && setDelay(duration);
+  }, [autoDismiss, duration]);
 
   useTimeout(() => {
     if (autoDismiss) {
@@ -58,5 +54,6 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     style: { transform: `translateX(${x}px)` },
     ...bind(),
   };
+
   return <div {...props}>{children}</div>;
 };

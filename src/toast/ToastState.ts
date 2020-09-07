@@ -22,13 +22,11 @@ type GetToastToRenderType = (
   callback: (position: Placements, toastList: IToast[]) => void,
 ) => Array<any>;
 
-export type ToastStateReturn = ReturnType<typeof useToastState>;
-
-const useToastState = ({
-  animationTimeout = 200,
-}: {
+interface ToastStateProps {
   animationTimeout?: number;
-}) => {
+}
+
+const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
   const [toasts, setToasts] = React.useState<ToastList>({});
 
   // toggle can be used to just hide/show the toast instead of removing it.
@@ -130,7 +128,7 @@ const useToastState = ({
   };
 
   return {
-    setQueue: setToasts,
+    setToasts,
     getToastToRender,
     toasts,
     toggle,
@@ -139,5 +137,7 @@ const useToastState = ({
     remove,
   };
 };
+
+export type ToastStateReturn = ReturnType<typeof useToastState>;
 
 export default useToastState;
