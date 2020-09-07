@@ -31,6 +31,7 @@ export const Default = () => {
 };
 
 // TODO: Fix onClick on increment button after disabled
+// TODO: Also handle mouse wheel disabling for disabled input
 export const DefaultValue = () => {
   const props = {
     defaultValue: 15,

@@ -54,6 +54,7 @@ export type NumberInputOptions = InputOptions &
 export type NumberInputHTMLProps = InputHTMLProps;
 
 export type NumberInputProps = NumberInputOptions & NumberInputHTMLProps;
+type InputMode = InputHTMLAttributes<any>["inputMode"];
 
 export const useNumberInput = createHook<
   NumberInputOptions,
@@ -85,6 +86,7 @@ export const useNumberInput = createHook<
     const {
       ref,
       onChange: htmlOnChange,
+      onWheel: htmlOnWheel,
       onKeyDown: htmlOnKeyDown,
       onFocus,
       onBlur: htmlOnBlur,
@@ -195,7 +197,20 @@ export const useNumberInput = createHook<
       }
     }, [clampValueOnBlur, setFocused, validateAndClamp]);
 
-    type InputMode = InputHTMLAttributes<any>["inputMode"];
+    const onWheel = useCallback(
+      event => {
+        event.preventDefault();
+        const stepFactor = getStepFactor(event) * stepProp;
+        const wheelDirection = Math.sign(event.deltaY);
+
+        if (wheelDirection === -1) {
+          increment(stepFactor);
+        } else if (wheelDirection === 1) {
+          decrement(stepFactor);
+        }
+      },
+      [increment, decrement, stepProp],
+    );
 
     return {
       value,
@@ -218,6 +233,7 @@ export const useNumberInput = createHook<
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       onFocus: callAllHandlers(onFocus, setFocused.on),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),
+      onWheel: callAllHandlers(htmlOnWheel, onWheel),
       ...restHtmlProps,
     };
   },

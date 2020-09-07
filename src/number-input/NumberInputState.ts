@@ -1,7 +1,7 @@
 import { useCounter, UseCounterProps } from "@chakra-ui/counter";
 import { useBoolean } from "@chakra-ui/hooks";
 import { focus, minSafeInteger, maxSafeInteger } from "@chakra-ui/utils";
-import React, { useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useSpinner } from "./__utils";
 
 export interface UseNumberInputProps extends UseCounterProps {
