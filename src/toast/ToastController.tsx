@@ -21,12 +21,13 @@ export const ToastController: React.FC<ToastControllerProps> = ({
 
   const bind = useGesture({
     onDrag: ({ down, movement: [x] }: any) => {
-      down && setX(x);
+      if (!down) setX(0);
+
+      setX(x);
+      setDelay(null);
 
       if (x > 100 || x < -100) {
         onRequestRemove(id);
-      } else {
-        !down && setX(0);
       }
     },
     onMouseUp: () => setX(0),
