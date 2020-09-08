@@ -9,7 +9,7 @@ import Demo, { getTransform } from "./Demo";
 import "./style.css";
 
 export default {
-  title: "Component/Toast",
+  title: "Component/AnimationToast",
 } as Meta;
 
 const CSSTransitionAnimationWrapper: TToastWrapper = ({
