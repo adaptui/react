@@ -28,15 +28,12 @@ const backdropStyles = css`
   }
 `;
 
-const drawerContentStyles = css`
-  opacity: 0;
-  padding: 10px;
-  background-color: white;
-  transition: 250ms ease-in-out;
-  &[data-enter] {
-    opacity: 1;
-  }
-`;
+const cssTransforms = {
+  top: "translate(0, -200px)",
+  bottom: "translate(0, 200px)",
+  left: "translate(-200px, 0)",
+  right: "translate(200px, 0)",
+};
 
 export const Default = () => {
   const dialog = useDrawerState({ animated: true });
@@ -50,14 +47,26 @@ export const Default = () => {
         <option value="top">Top</option>
         <option value="bottom">Bottom</option>
         <option value="right">Right</option>
-        <option value="left">Left</option>
+        <option selected value="left">
+          Left
+        </option>
       </select>
       <DrawerBackdrop className={backdropStyles} {...dialog}>
         <Drawer
           {...dialog}
           placement={placement}
           aria-label="Hello world"
-          className={drawerContentStyles}
+          className={css`
+            opacity: 0;
+            padding: 10px;
+            background-color: white;
+            transition: 250ms ease-in-out;
+            transform: ${cssTransforms[placement]};
+            &[data-enter] {
+              opacity: 1;
+              transform: translate(0, 0);
+            }
+          `}
           unstable_initialFocusRef={inputRef}
         >
           <DrawerCloseButton {...dialog}>X</DrawerCloseButton>

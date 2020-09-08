@@ -1,4 +1,4 @@
-const DIALOG_STATE_KEYS = [
+const DRAWER_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "visible",
@@ -15,8 +15,8 @@ const DIALOG_STATE_KEYS = [
   "unstable_disclosureRef",
   "setModal",
 ] as const;
-export const DIALOG_KEYS = [
-  ...DIALOG_STATE_KEYS,
+export const DRAWER_KEYS = [
+  ...DRAWER_STATE_KEYS,
   "hideOnEsc",
   "hideOnClickOutside",
   "preventBodyScroll",
@@ -26,5 +26,5 @@ export const DIALOG_KEYS = [
   "unstable_autoFocusOnShow",
   "unstable_autoFocusOnHide",
 ] as const;
-export const DIALOG_BACKDROP_KEYS = DIALOG_STATE_KEYS;
-export const DIALOG_DISCLOSURE_KEYS = DIALOG_BACKDROP_KEYS;
+export const DRAWER_BACKDROP_KEYS = DRAWER_STATE_KEYS;
+export const DRAWER_DISCLOSURE_KEYS = DRAWER_BACKDROP_KEYS;

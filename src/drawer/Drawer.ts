@@ -1,17 +1,7 @@
 import { createHook, createComponent } from "reakit-system";
-import {
-  Dialog,
-  useDialog,
-  DialogBackdrop,
-  useDialogState,
-  DialogDisclosure,
-  DialogOptions,
-  DialogHTMLProps,
-  DialogStateReturn,
-  ButtonProps,
-} from "reakit";
+import { Dialog, useDialog, DialogOptions, DialogHTMLProps } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { DIALOG_KEYS } from "./__keys";
+import { DRAWER_KEYS } from "./__keys";
 
 const PLACEMENTS = {
   left: {
@@ -48,7 +38,7 @@ const useDrawer = createHook<
 >({
   name: "Drawer",
   compose: [useDialog],
-  keys: [...DIALOG_KEYS, "placement"],
+  keys: [...DRAWER_KEYS, "placement"],
   useProps({ placement = "left" }, { style: htmlStyles, ...htmlProps }) {
     return {
       style: {
@@ -65,27 +55,3 @@ export const Drawer = createComponent({
   as: Dialog,
   useHook: useDrawer,
 });
-
-export const useDrawerCloseButton = createHook<
-  Pick<DialogStateReturn, "hide">,
-  ButtonProps
->({
-  name: "DrawerCloseButton",
-  keys: [...DIALOG_KEYS, "hide"],
-
-  useProps({ hide }, { onClick: htmlOnClick, ...htmlProps }) {
-    return {
-      onClick: callAllHandlers(hide, htmlOnClick),
-      ...htmlProps,
-    };
-  },
-});
-
-export const DrawerCloseButton = createComponent({
-  as: "button",
-  useHook: useDrawerCloseButton,
-});
-
-export const useDrawerState = useDialogState;
-export const DrawerBackdrop = DialogBackdrop;
-export const DrawerDisclosure = DialogDisclosure;
