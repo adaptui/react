@@ -1,9 +1,8 @@
 import React from "react";
-import { createComponent, createHook } from "reakit-system";
-import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
-
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
+import { createComponent, createHook } from "reakit-system";
+import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
 
 export type LinkOptions = ClickableOptions & {
   isExternal?: boolean;
