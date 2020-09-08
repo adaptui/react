@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 import { AriaLink } from "../index";
 
 export default {
-  title: "Component/Link",
+  title: "Component/Link/Aria",
 } as Meta;
 
 export const ReactAriaLink = () => {
