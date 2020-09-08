@@ -28,6 +28,6 @@ test("initial state", () => {
       "unstable_idCountRef": Object {
         "current": 0,
       },
-    } 
+    }
   `);
 });

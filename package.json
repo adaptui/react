@@ -22,7 +22,7 @@
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "lint:package": "sort-package-json",
     "storybook": "start-storybook -p 6006",
-    "test": "ts-jest jest"
+    "test": "jest"
   },
   "dependencies": {
     "@chakra-ui/hooks": "1.0.0-rc.3",
