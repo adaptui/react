@@ -10,7 +10,8 @@ import {
 import { ACCORDION_ITEM_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
-export type AccordionItemOptions = unstable_IdOptions & AccordionStateReturn;
+export type AccordionItemOptions = unstable_IdOptions &
+  Pick<AccordionStateReturn, "registerItem">;
 
 export type AccordionItemHTMLProps = unstable_IdHTMLProps;
 

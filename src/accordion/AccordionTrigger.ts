@@ -15,7 +15,20 @@ import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionTriggerOptions = unstable_IdOptions &
   ButtonOptions &
-  AccordionStateReturn;
+  Pick<
+    AccordionStateReturn,
+    | "removeActiveItem"
+    | "addActiveItem"
+    | "registerButton"
+    | "items"
+    | "activeItems"
+    | "next"
+    | "prev"
+    | "first"
+    | "last"
+    | "allowToggle"
+    | "manual"
+  >;
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps & unstable_IdHTMLProps;
 

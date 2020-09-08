@@ -1,14 +1,15 @@
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { ButtonHTMLProps, useButton } from "reakit";
 import { mergeProps } from "@react-aria/utils";
 import { ToggleState } from "@react-stately/toggle";
 import { useToggleButton } from "@react-aria/button";
 import { INTERACTION_KEYS } from "../interactions/__keys";
 import { createComponent, createHook } from "reakit-system";
-import { AriaToggleButtonProps as AriaToggleButtonOptionsProps } from "@react-types/button";
+import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
+import { AriaToggleButtonProps as AriaToggleButtonOptionsTypes } from "@react-types/button";
 
-export type AriaToggleButtonOptions = AriaToggleButtonOptionsProps &
+export type AriaToggleButtonOptions = ButtonOptions &
+  AriaToggleButtonOptionsTypes &
   ToggleState;
 
 export type AriaToggleButtonHTMLProps = ButtonHTMLProps;
@@ -29,7 +30,7 @@ export const useAriaToggleButton = createHook<
     const props = {
       ...restOptions,
       ...htmlProps,
-    } as AriaToggleButtonOptionsProps;
+    } as AriaToggleButtonOptionsTypes;
     const state = { isSelected, setSelected, toggle };
     const ref = React.useRef<HTMLElement>(null);
 

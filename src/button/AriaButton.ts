@@ -3,10 +3,16 @@ import { useForkRef } from "reakit-utils";
 import { useButton } from "@react-aria/button";
 import { mergeProps } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
-import { ButtonHTMLProps, useButton as useReakitButton } from "reakit";
-import { AriaButtonProps as AriaButtonOptions } from "@react-types/button";
+import {
+  ButtonHTMLProps,
+  ButtonOptions,
+  useButton as useReakitButton,
+} from "reakit";
+import { AriaButtonProps as AriaButtonOptionsTypes } from "@react-types/button";
 
 import { INTERACTION_KEYS } from "../interactions/__keys";
+
+export type AriaButtonOptions = ButtonOptions & AriaButtonOptionsTypes;
 
 export type AriaButtonHTMLProps = ButtonHTMLProps;
 
@@ -19,7 +25,7 @@ export const useAriaButton = createHook<AriaButtonOptions, AriaButtonHTMLProps>(
     keys: INTERACTION_KEYS,
 
     useProps(options, { ref: htmlRef, ...htmlProps }) {
-      const props = { ...options, ...htmlProps } as AriaButtonOptions;
+      const props = { ...options, ...htmlProps } as AriaButtonOptionsTypes;
       const ref = React.useRef<HTMLElement>(null);
 
       const { buttonProps } = useButton(props, ref);
