@@ -1,5 +1,5 @@
 import { createHook, createComponent } from "reakit-system";
-import { Dialog, useDialog, DialogOptions, DialogHTMLProps } from "reakit";
+import { useDialog, DialogOptions, DialogHTMLProps } from "reakit";
 import { DRAWER_KEYS } from "./__keys";
 
 const PLACEMENTS = {
