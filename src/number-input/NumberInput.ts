@@ -1,3 +1,9 @@
+/**
+ * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
+ * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
+ * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
+ * to work with Reakit System
+ */
 import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";

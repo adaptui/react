@@ -1,3 +1,9 @@
+/**
+ * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
+ * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
+ * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
+ * to work with Reakit System
+ */
 import { useCallback, useRef } from "react";
 import { useBoolean } from "@chakra-ui/hooks";
 import { useCounter, UseCounterProps } from "@chakra-ui/counter";
