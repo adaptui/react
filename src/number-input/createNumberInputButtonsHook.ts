@@ -2,8 +2,8 @@ import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit/Button";
 
 import { useSpinButton } from "./__utils";
-import { NumberInputStateReturn } from "./NumberInputState";
 import { NUMBERINPUT_BUTTON_KEYS } from "./__keys";
+import { NumberInputStateReturn } from "./NumberInputState";
 
 export type NumberInputButtonOptions = ButtonOptions &
   Pick<Partial<NumberInputStateReturn>, "keepWithinRange"> &
@@ -12,8 +12,15 @@ export type NumberInputButtonOptions = ButtonOptions &
     "focusInput" | "increment" | "decrement" | "isAtMin" | "isAtMax" | "spinner"
   >;
 
-export const createNumberInputHook = (type: "increment" | "decrement") => {
-  return createHook<NumberInputButtonOptions, ButtonHTMLProps>({
+export type NumberInputButtonHTMLProps = ButtonHTMLProps;
+
+export type NumberInputButtonProps = NumberInputButtonOptions &
+  NumberInputButtonHTMLProps;
+
+export const createNumberInputButtonsHook = (
+  type: "increment" | "decrement",
+) => {
+  return createHook<NumberInputButtonOptions, NumberInputButtonHTMLProps>({
     name: `NumberInput`,
     compose: useButton,
     keys: NUMBERINPUT_BUTTON_KEYS,

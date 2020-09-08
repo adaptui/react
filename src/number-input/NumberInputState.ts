@@ -1,7 +1,8 @@
-import { useCounter, UseCounterProps } from "@chakra-ui/counter";
-import { useBoolean } from "@chakra-ui/hooks";
-import { focus, minSafeInteger, maxSafeInteger } from "@chakra-ui/utils";
 import { useCallback, useRef } from "react";
+import { useBoolean } from "@chakra-ui/hooks";
+import { useCounter, UseCounterProps } from "@chakra-ui/counter";
+import { focus, minSafeInteger, maxSafeInteger } from "@chakra-ui/utils";
+
 import { useSpinner } from "./__utils";
 
 export interface UseNumberInputProps extends UseCounterProps {
@@ -84,7 +85,7 @@ export function useNumberInputState(props: UseNumberInputProps = {}) {
    *
    * This leverages `setInterval` internally
    */
-  const spinner = useSpinner(increment, decrement, isAtMin, isAtMax);
+  const spinner = useSpinner(increment, decrement);
 
   const focusInput = useCallback(() => {
     if (focusInputOnChange && inputRef.current) {

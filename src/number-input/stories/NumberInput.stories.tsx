@@ -30,12 +30,84 @@ export const Default = () => {
   return <NumberInputComp {...props} />;
 };
 
-// TODO: Also handle mouse wheel disabling for disabled input
 export const DefaultValue = () => {
   const props = {
     defaultValue: 15,
     min: 10,
     max: 20,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const Step = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 30,
+    step: 5,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const Precision = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 30,
+    step: 0.2,
+    precision: 2,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const ClampValueOnBlurFalse = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 30,
+    step: 0.2,
+    precision: 2,
+    clampValueOnBlur: false,
+    keepWithinRange: false,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const KeepWithinRangeFalse = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 30,
+    step: 0.2,
+    precision: 2,
+    clampValueOnBlur: false,
+    keepWithinRange: false,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const Disabled = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 20,
+    isDisabled: true,
+  };
+
+  return <NumberInputComp {...props} />;
+};
+
+export const ReadOnly = () => {
+  const props = {
+    defaultValue: 15,
+    min: 10,
+    max: 20,
+    isReadOnly: true,
   };
 
   return <NumberInputComp {...props} />;

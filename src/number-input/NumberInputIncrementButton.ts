@@ -1,8 +1,9 @@
 import { createComponent } from "reakit-system";
-import { createNumberInputHook } from "./createNumberInputHook";
+
+import { createNumberInputButtonsHook } from "./createNumberInputButtonsHook";
 
 export const NumberInputIncrementButton = createComponent({
   as: "button",
   memo: true,
-  useHook: createNumberInputHook("increment"),
+  useHook: createNumberInputButtonsHook("increment"),
 });

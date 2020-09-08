@@ -38,12 +38,15 @@ export function isValidNumericKeyboardEvent(event: React.KeyboardEvent) {
 
 export function getStepFactor(event: KeyboardEvent) {
   let ratio = 1;
+
   if (event.metaKey || event.ctrlKey) {
     ratio = 0.1;
   }
+
   if (event.shiftKey) {
     ratio = 10;
   }
+
   return ratio;
 }
 
