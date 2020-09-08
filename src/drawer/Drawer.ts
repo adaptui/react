@@ -1,6 +1,5 @@
 import { createHook, createComponent } from "reakit-system";
 import { Dialog, useDialog, DialogOptions, DialogHTMLProps } from "reakit";
-import { callAllHandlers } from "@chakra-ui/utils";
 import { DRAWER_KEYS } from "./__keys";
 
 const PLACEMENTS = {
@@ -52,6 +51,6 @@ const useDrawer = createHook<
 });
 
 export const Drawer = createComponent({
-  as: Dialog,
+  as: "div",
   useHook: useDrawer,
 });
