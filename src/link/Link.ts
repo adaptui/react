@@ -43,16 +43,10 @@ export const useLink = createHook<LinkOptions, LinkHTMLProps>({
       }
     }, []);
 
-    let externalLinkProps = {};
-
-    if (isExternal) {
-      externalLinkProps = { target: "_blank", rel: "noopener noreferrer" };
-    }
-
     return {
       ref: useForkRef(ref, htmlRef),
       role,
-      ...externalLinkProps,
+      ...(isExternal && { target: "_blank", rel: "noopener noreferrer" }),
       ...htmlProps,
     };
   },
