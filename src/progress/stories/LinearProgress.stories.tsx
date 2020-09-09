@@ -5,19 +5,19 @@ import { css, keyframes, cx } from "emotion";
 import { Progress } from "../Progress";
 import { useProgressState } from "../ProgressState";
 import {
-  generateStripe,
   labelStyles,
-  progressBarStyle,
   progressStyle,
-  useProgressSimulation,
-} from "./utils";
+  generateStripe,
+  progressBarStyle,
+  useFakeProgression,
+} from "../../utils";
 
 export default {
   title: "Component/Progress/Linear",
 } as Meta;
 
 export const Default = () => {
-  const value = useProgressSimulation();
+  const value = useFakeProgression();
   const progress = useProgressState({ value });
 
   return (
@@ -28,7 +28,7 @@ export const Default = () => {
 };
 
 export const WithLabel = () => {
-  const value = useProgressSimulation();
+  const value = useFakeProgression();
   const progress = useProgressState({ value });
 
   return (
@@ -40,7 +40,7 @@ export const WithLabel = () => {
 };
 
 export const WithStripe = () => {
-  const value = useProgressSimulation();
+  const value = useFakeProgression();
   const progress = useProgressState({ value });
 
   const stripStyles = css({
@@ -58,7 +58,7 @@ export const WithStripe = () => {
 };
 
 export const WithAnimatedStripe = () => {
-  const value = useProgressSimulation();
+  const value = useFakeProgression();
   const progress = useProgressState({ value });
 
   const stripe = keyframes({

@@ -5,19 +5,19 @@ import { css, keyframes, cx } from "emotion";
 import { Meter } from "../Meter";
 import { useMeterState } from "../index";
 import {
-  generateStripe,
   labelStyles,
-  useMeterSimulation,
-  progressBarStyle,
   progressStyle,
-} from "./utils";
+  generateStripe,
+  progressBarStyle,
+  useFakeProgression,
+} from "../../utils";
 
 export default {
   title: "Component/Meter/Linear",
 } as Meta;
 
 export const Default = () => {
-  const value = useMeterSimulation();
+  const value = useFakeProgression();
   const progress = useMeterState({ value });
 
   return (
@@ -28,7 +28,7 @@ export const Default = () => {
 };
 
 export const WithLabel = () => {
-  const value = useMeterSimulation();
+  const value = useFakeProgression();
   const progress = useMeterState({ value });
 
   return (
@@ -40,7 +40,7 @@ export const WithLabel = () => {
 };
 
 export const WithStripe = () => {
-  const value = useMeterSimulation();
+  const value = useFakeProgression();
   const progress = useMeterState({ value });
 
   const stripStyles = css({
@@ -58,7 +58,7 @@ export const WithStripe = () => {
 };
 
 export const WithAnimatedStripe = () => {
-  const value = useMeterSimulation();
+  const value = useFakeProgression();
   const progress = useMeterState({ value });
 
   const stripe = keyframes({
