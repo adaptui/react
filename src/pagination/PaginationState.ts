@@ -16,9 +16,9 @@ export interface UsePaginationProps {
 
 export const usePaginationState = (props: UsePaginationProps = {}) => {
   const {
-    count = 10,
+    count = 20,
     defaultPage = 1,
-    boundaryCount = 1,
+    boundaryCount = 3,
     siblingCount = 1,
     page: currentPage,
     onChange,
@@ -30,12 +30,6 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
-
-  const range = (start: number, end: number) => {
-    const length = end - start + 1;
-
-    return Array.from({ length }, (_, i) => start + i);
-  };
 
   const startPages = range(1, Math.min(boundaryCount, count));
   const endPages = range(
@@ -120,3 +114,9 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
 };
 
 export type PaginationStateReturn = ReturnType<typeof usePaginationState>;
+
+function range(start: number, end: number) {
+  const length = end - start + 1;
+
+  return Array.from({ length }, (_, i) => start + i);
+}

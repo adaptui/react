@@ -22,11 +22,11 @@ const PaginationComp: React.FC<UsePaginationProps> = props => {
         </li>
         {state.pages.map(page => {
           if (page === "start-ellipsis" || page === "end-ellipsis") {
-            return <li>...</li>;
+            return <li key={page}>...</li>;
           }
 
           return (
-            <li>
+            <li key={page}>
               <PaginationItem
                 page={page}
                 style={{
