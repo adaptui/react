@@ -1,6 +1,6 @@
 import { css, keyframes } from "emotion";
 import React, { CSSProperties } from "react";
-import { isUndefined } from "@chakra-ui/utils";
+import { isUndefined, cx } from "@chakra-ui/utils";
 
 export const progressStyle: CSSProperties = {
   background: "rgb(237, 242, 247)",
@@ -178,5 +178,85 @@ export const createCircularExample = ({
         {label && <div className={labelStyles}>{`${progress.value}%`}</div>}
       </Component>
     );
+  };
+};
+
+export const createLinearExamples = ({
+  stateHook: useStateHook,
+  component: Component,
+}: any) => {
+  return () => {
+    const Default = () => {
+      const value = useFakeProgression();
+      const progress = useStateHook({ value });
+
+      return (
+        <div style={progressStyle}>
+          <Component
+            {...progress}
+            className={progressBarStyle(progress.percent)}
+          />
+        </div>
+      );
+    };
+
+    const WithLabel = () => {
+      const value = useFakeProgression();
+      const progress = useStateHook({ value });
+
+      return (
+        <div style={progressStyle}>
+          <div style={labelStyles}>{progress.value}</div>
+          <Component
+            {...progress}
+            className={progressBarStyle(progress.percent)}
+          />
+        </div>
+      );
+    };
+
+    const WithStripe = () => {
+      const value = useFakeProgression();
+      const progress = useStateHook({ value });
+
+      const stripStyles = css({
+        ...generateStripe(),
+      });
+
+      return (
+        <div style={progressStyle}>
+          <Component
+            {...progress}
+            className={cx(progressBarStyle(progress.percent), stripStyles)}
+          />
+        </div>
+      );
+    };
+
+    const WithAnimatedStripe = () => {
+      const value = useFakeProgression();
+      const progress = useStateHook({ value });
+
+      const stripe = keyframes({
+        from: { backgroundPosition: "1rem 0" },
+        to: { backgroundPosition: "0 0" },
+      });
+
+      const stripStyles = css({
+        ...generateStripe(),
+        animation: `${stripe} 1s linear infinite`,
+      });
+
+      return (
+        <div style={progressStyle}>
+          <Component
+            {...progress}
+            className={cx(progressBarStyle(progress.percent), stripStyles)}
+          />
+        </div>
+      );
+    };
+
+    return { Default, WithLabel, WithStripe, WithAnimatedStripe };
   };
 };
