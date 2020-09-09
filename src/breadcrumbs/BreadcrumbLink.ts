@@ -1,6 +1,6 @@
 import { createComponent, createHook } from "reakit-system";
 
-import { LinkHTMLProps, LinkOptions, useLink } from "../link";
+import { LinkHTMLProps, LinkOptions, useLink } from "../Link";
 
 export type BreadcrumbLinkOptions = LinkOptions & {
   isCurrent?: boolean;
