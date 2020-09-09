@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
   useAccordionState,
 } from "..";
+import { axe } from "jest-axe";
 
 const AccordionComponent = (props: any) => {
   const state = useAccordionState(props);
@@ -159,4 +160,11 @@ test("Accordion manual: false", () => {
   press.ArrowDown();
   expect(text("Trigger 3")).toHaveFocus();
   expect(text("Panel 3")).toBeVisible();
+});
+
+test("Accordion renders with no a11y violations", async () => {
+  const { baseElement } = render(<AccordionComponent />);
+  const results = await axe(baseElement);
+
+  expect(results).toHaveNoViolations();
 });
