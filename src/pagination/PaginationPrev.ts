@@ -6,7 +6,8 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { PAGINATION_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
 
-export type PaginationPrevOptions = ButtonOptions & PaginationStateReturn;
+export type PaginationPrevOptions = ButtonOptions &
+  Pick<PaginationStateReturn, "isAtMin" | "prev">;
 
 export type PaginationPrevHTMLProps = ButtonHTMLProps;
 

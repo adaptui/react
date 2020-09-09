@@ -7,7 +7,7 @@ import { PAGINATION_ITEM_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
 
 export type PaginationItemOptions = ButtonOptions &
-  PaginationStateReturn & {
+  Pick<PaginationStateReturn, "currentPage" | "goTo"> & {
     page: string | number;
     getAriaLabel?: (page: string | number, isCurrent: boolean) => string;
   };
@@ -26,7 +26,7 @@ export const usePaginationItem = createHook<
   keys: PAGINATION_ITEM_KEYS,
 
   useProps(
-    { currentPage, page, goTo, getAriaLabel },
+    { currentPage, goTo, page, getAriaLabel },
     { onClick: htmlOnClick, ...htmlProps },
   ) {
     const isCurrent = currentPage === page;

@@ -2,9 +2,8 @@ import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { PAGINATION_KEYS } from "./__keys";
-import { PaginationStateReturn } from "./PaginationState";
 
-export type PaginationOptions = BoxOptions & PaginationStateReturn;
+export type PaginationOptions = BoxOptions;
 
 export type PaginationHTMLProps = BoxHTMLProps;
 
