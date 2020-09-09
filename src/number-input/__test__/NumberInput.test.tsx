@@ -162,7 +162,7 @@ describe("NumberInput", () => {
   });
 
   test("NumberInput renders with no a11y violations", async () => {
-    const { container } = render(<NumberInputComp defaultValue={0} />);
+    const { container } = render(<NumberInputComp />);
     const results = await axe(container);
 
     expect(results).toHaveNoViolations();

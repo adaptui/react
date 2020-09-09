@@ -106,7 +106,10 @@ export const useNumberInput = createHook<
      * @see https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-18
      * @see https://www.w3.org/TR/wai-aria-1.1/#aria-valuetext
      */
-    const ariaValueText = getAriaValueText?.(value) ?? String(value);
+    const ariaValueText =
+      value === null || value === ""
+        ? undefined
+        : getAriaValueText?.(value) ?? String(value);
 
     /**
      * The `onChange` handler filters out any character typed
