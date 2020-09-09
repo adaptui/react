@@ -1,13 +1,18 @@
 const PAGINATION_STATE_KEYS = [
-  "currentPage",
-  "isAtMin",
-  "isAtMax",
   "next",
   "prev",
   "goTo",
-  "id",
-  "page",
+  "first",
+  "last",
   "pages",
+  "currentPage",
+  "isAtMin",
+  "isAtMax",
 ] as const;
 
 export const PAGINATION_KEYS = PAGINATION_STATE_KEYS;
+export const PAGINATION_ITEM_KEYS = [
+  ...PAGINATION_STATE_KEYS,
+  "page",
+  "getAriaLabel",
+];

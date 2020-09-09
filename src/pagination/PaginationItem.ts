@@ -1,14 +1,15 @@
-import { callAllHandlers } from "@chakra-ui/utils";
+import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import React from "react";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { PAGINATION_KEYS } from "./__keys";
+import { PAGINATION_ITEM_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
 
 export type PaginationItemOptions = ButtonOptions &
   PaginationStateReturn & {
-    page: number;
+    page: string | number;
+    getAriaLabel?: (page: string | number, isCurrent: boolean) => string;
   };
 
 export type PaginationItemHTMLProps = ButtonHTMLProps;
@@ -22,22 +23,27 @@ export const usePaginationItem = createHook<
 >({
   name: "PaginationItem",
   compose: useButton,
-  keys: PAGINATION_KEYS,
+  keys: PAGINATION_ITEM_KEYS,
 
   useProps(
-    { currentPage, page, goTo },
+    { currentPage, page, goTo, getAriaLabel },
     { onClick: htmlOnClick, ...htmlProps },
   ) {
     const isCurrent = currentPage === page;
 
     const onClick = React.useCallback(() => {
-      if (!isCurrent) {
+      if (isNumber(page)) {
         goTo?.(page);
       }
-    }, [goTo, isCurrent, page]);
+    }, [goTo, page]);
+
+    const ariaLabel =
+      getAriaLabel?.(page, isCurrent) ?? isCurrent
+        ? `Page ${page}`
+        : `Go to Page ${page}`;
 
     return {
-      "aria-label": isCurrent ? `Page ${page}` : `Go to Page ${page}`,
+      "aria-label": ariaLabel,
       "aria-current": isCurrent ? true : undefined,
       onClick: callAllHandlers(onClick, htmlOnClick),
       ...htmlProps,
