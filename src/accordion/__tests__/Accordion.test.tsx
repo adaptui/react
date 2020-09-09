@@ -163,8 +163,8 @@ test("Accordion manual: false", () => {
 });
 
 test("Accordion renders with no a11y violations", async () => {
-  const { baseElement } = render(<AccordionComponent />);
-  const results = await axe(baseElement);
+  const { container } = render(<AccordionComponent />);
+  const results = await axe(container);
 
   expect(results).toHaveNoViolations();
 });
