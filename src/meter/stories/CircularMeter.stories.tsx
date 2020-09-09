@@ -3,12 +3,12 @@ import { Meta } from "@storybook/react";
 import { css, keyframes } from "emotion";
 import { isUndefined } from "@chakra-ui/utils";
 
-import { Progress } from "../Progress";
-import { useProgressSimulation } from "./utils";
-import { useProgressState } from "../ProgressState";
+import { Meter } from "../Meter";
+import { useMeterState } from "../index";
+import { useMeterSimulation } from "./utils";
 
 export default {
-  title: "Component/Progress/Circular",
+  title: "Component/Meter/Circular",
 } as Meta;
 
 const spin = keyframes({
@@ -35,7 +35,7 @@ const rotate = keyframes({
   },
 });
 
-const CircularProgress = (props: any) => {
+const CircularMeter = (props: any) => {
   const {
     size = "48px",
     value,
@@ -46,7 +46,7 @@ const CircularProgress = (props: any) => {
     label = false,
   } = props;
 
-  const progress = useProgressState({ value });
+  const progress = useMeterState({ value });
 
   const determinant = progress.isIndeterminate
     ? undefined
@@ -91,7 +91,7 @@ const CircularProgress = (props: any) => {
   });
 
   return (
-    <Progress {...progress} className={rootStyles}>
+    <Meter {...progress} className={rootStyles}>
       <svg viewBox="0 0 100 100" className={svgStyles}>
         <circle
           cx={50}
@@ -113,22 +113,18 @@ const CircularProgress = (props: any) => {
         />
       </svg>
       {label && <div className={labelStyles}>{`${progress.value}%`}</div>}
-    </Progress>
+    </Meter>
   );
 };
 
 export const Default = () => {
-  const value = useProgressSimulation();
+  const value = useMeterSimulation();
 
-  return <CircularProgress value={value} />;
+  return <CircularMeter value={value} />;
 };
 
 export const WithLabel = () => {
-  const value = useProgressSimulation();
+  const value = useMeterSimulation();
 
-  return <CircularProgress value={value} label />;
-};
-
-export const IsIndeterminate = () => {
-  return <CircularProgress />;
+  return <CircularMeter value={value} label />;
 };
