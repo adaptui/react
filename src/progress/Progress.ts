@@ -28,7 +28,7 @@ export type ProgressHTMLProps = BoxHTMLProps;
 
 export type ProgressProps = ProgressOptions & ProgressHTMLProps;
 
-const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
+export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   name: "Progress",
   compose: useBox,
   keys: PROGRESS_KEYS,
@@ -37,7 +37,6 @@ const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
     const { isIndeterminate, value, max, min, percent } = options;
 
     return {
-      ...htmlProps,
       role: "progressbar",
       "data-indeterminate": isIndeterminate ? "" : undefined,
       "aria-valuemax": max,
@@ -48,7 +47,8 @@ const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
           ? undefined
           : isFunction(options.getAriaValueText)
           ? options.getAriaValueText(value, percent)
-          : ariaValueText,
+          : ariaValueText ?? String(value),
+      ...htmlProps,
     };
   },
 });
