@@ -1,11 +1,14 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Meta } from "@storybook/react";
 
-import { Slider } from "../Slider";
-import { useSliderState } from "../SliderState";
-import { SliderTrack } from "../SliderTrack";
-import { SliderFilledTrack } from "../SliderFilledTrack";
-import { SliderThumb } from "../SliderThumb";
+import {
+  Slider,
+  SliderTrack,
+  SliderInput,
+  SliderThumb,
+  useSliderState,
+  SliderFilledTrack,
+} from "..";
 import {
   sliderHorizontalFilledTractStyle,
   sliderHorizontalStyle,
@@ -16,7 +19,6 @@ import {
   sliderVerticalThumbStyle,
   sliderVerticalTrackStyle,
 } from "./styles";
-import { SliderInput } from "../SliderInput";
 
 export default {
   title: "Component/Slider",
