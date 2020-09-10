@@ -2,7 +2,7 @@ import React from "react";
 
 import { Meta } from "@storybook/react";
 import { Pagination } from "../Pagination";
-import { PaginationButton } from "../PaginationButton";
+import { PaginationButton, TGoto } from "../PaginationButton";
 import { UsePaginationProps, usePaginationState } from "../PaginationState";
 
 export default {
@@ -11,7 +11,6 @@ export default {
 
 const PaginationComp: React.FC<UsePaginationProps> = props => {
   const state = usePaginationState({ count: 10, ...props });
-  console.log("%c state", "color: #cc0088", state);
 
   return (
     <Pagination {...state}>
@@ -34,7 +33,7 @@ const PaginationComp: React.FC<UsePaginationProps> = props => {
           return (
             <li key={page}>
               <PaginationButton
-                goto={page}
+                goto={page as TGoto}
                 style={{
                   fontWeight: state.currentPage === page ? "bold" : undefined,
                 }}

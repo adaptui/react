@@ -1,10 +1,12 @@
-import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import React from "react";
 import { createComponent, createHook } from "reakit-system";
+import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
 import { PAGINATION_ITEM_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
+
+export type TGoto = "next" | "prev" | "last" | "first" | number;
 
 export type PaginationButtonOptions = ButtonOptions &
   Pick<
@@ -18,8 +20,8 @@ export type PaginationButtonOptions = ButtonOptions &
     | "isAtMax"
     | "isAtMin"
   > & {
-    goto: string | number;
-    getAriaLabel?: (goto: string | number, isCurrent: boolean) => string;
+    goto: TGoto;
+    getAriaLabel?: (goto: TGoto, isCurrent: boolean) => string;
   };
 
 export type PaginationButtonHTMLProps = ButtonHTMLProps;
@@ -53,42 +55,22 @@ export const usePaginationButton = createHook<
     };
   },
 
-  useProps(
-    { currentPage, move, last, first, next, prev, goto, getAriaLabel },
-    { onClick: htmlOnClick, ...htmlProps },
-  ) {
+  useProps(options, { onClick: htmlOnClick, ...htmlProps }) {
+    const { currentPage, goto, getAriaLabel } = options;
     const isCurrent = currentPage === goto;
 
     const onClick = React.useCallback(() => {
-      switch (goto) {
-        case "next":
-          next?.();
-          break;
-
-        case "prev":
-          prev?.();
-          break;
-
-        case "first":
-          first?.();
-          break;
-
-        case "last":
-          last?.();
-          break;
-
-        default:
-          if (isNumber(goto)) {
-            move?.(goto);
-          }
-          break;
+      if (isNumber(goto)) {
+        options.move?.(goto);
+      } else {
+        options[goto]?.();
       }
-    }, [goto, next, prev, first, last, move]);
+    }, [goto, options]);
 
     const ariaLabel =
       getAriaLabel?.(goto, isCurrent) ?? isCurrent
         ? `Page ${goto}`
-        : `Go to ${goto} Page`;
+        : `Go to ${goto === "prev" ? "previous" : goto} Page`;
 
     return {
       "aria-label": ariaLabel,
