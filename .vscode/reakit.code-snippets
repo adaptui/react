@@ -1,0 +1,40 @@
+{
+  "Reakit System TS Template": {
+    "prefix": "rk-ts-system",
+    "body": [
+      "import { ${2:ComposeComponent}HTMLProps, ${2:ComposeComponent}Options, use${2:ComposeComponent} } from \"reakit\";",
+      "import { createComponent, createHook } from \"reakit-system\";",
+      "",
+      "import { ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_KEYS } from \"./__keys\";",
+      "import { ${TM_FILENAME_BASE}StateReturn } from \"./${TM_FILENAME_BASE}State\";",
+      "",
+      "export type ${TM_FILENAME_BASE}Options = ${2:ComposeComponent}Options;",
+      "",
+      "export type ${TM_FILENAME_BASE}HTMLProps = ${2:ComposeComponent}HTMLProps;",
+      "",
+      "export type ${TM_FILENAME_BASE}Props = ${TM_FILENAME_BASE}Options & ${TM_FILENAME_BASE}HTMLProps;",
+      "",
+      "export const use${TM_FILENAME_BASE} = createHook<${TM_FILENAME_BASE}Options, ${TM_FILENAME_BASE}HTMLProps>({",
+      "  name: \"${TM_FILENAME_BASE}\",",
+      "  compose: use${2:ComposeComponent},",
+      "  keys: ${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_KEYS,",
+      "",
+      "  useOptions(options, htmlProps) {",
+      "    return options;",
+      "  },",
+      "",
+      "  useProps(options, htmlProps) {",
+      "    return htmlProps;",
+      "  },",
+      "});",
+      "",
+      "export const ${TM_FILENAME_BASE} = createComponent({",
+      "  as: \"div\",",
+      "  memo: true,",
+      "  useHook: use${TM_FILENAME_BASE},",
+      "});",
+      ""
+    ],
+    "description": "Reakit System TS"
+  }
+}
