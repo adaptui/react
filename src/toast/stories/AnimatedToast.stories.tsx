@@ -3,13 +3,12 @@ import { Meta } from "@storybook/react";
 import { useTransition, animated } from "react-spring";
 import { CSSTransition } from "react-transition-group";
 
-import { ToastProvider, TToastWrapper } from "../";
-import Demo, { getTransform } from "./Demo";
-
 import "./style.css";
+import Demo, { getTransform } from "./Demo";
+import { ToastProvider, TToastWrapper } from "../index";
 
 export default {
-  title: "Component/AnimationToast",
+  title: "Component/Toast/Animated",
 } as Meta;
 
 const CSSTransitionAnimationWrapper: TToastWrapper = ({
