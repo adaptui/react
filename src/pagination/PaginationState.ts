@@ -106,7 +106,7 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
     isAtMin: page <= 1,
     next,
     prev,
-    goTo: setPage,
+    move: setPage,
     first,
     last,
     pages,

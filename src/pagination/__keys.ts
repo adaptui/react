@@ -1,7 +1,7 @@
 const PAGINATION_STATE_KEYS = [
   "next",
   "prev",
-  "goTo",
+  "move",
   "first",
   "last",
   "pages",
