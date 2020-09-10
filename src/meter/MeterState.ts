@@ -43,6 +43,8 @@ export const useMeterState = (props: UseMeterProps = {}) => {
   high = handleInequalities(high, min, max);
   optimum = handleInequalities(optimum, min, max);
 
+  // More inequalities handled
+  //  low ≤ high (if both low and high are specified)
   if (low >= high) low = high;
   if (high <= low) high = low;
 
@@ -82,16 +84,25 @@ export const useMeterState = (props: UseMeterProps = {}) => {
 export type MeterStateReturn = ReturnType<typeof useMeterState>;
 
 /**
- * The browser <input type="range" /> calculates
- * the default value of a slider by using mid-point
- * between the min and the max.
+ * The candidate optimum point is the midpoint between the minimum value and
+ * the maximum value.
  *
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
+ * @see https://html.spec.whatwg.org/multipage/form-elements.html#the-meter-element:attr-meter-high-8:~:text=boundary.-,The%20optimum%20point
  */
 export function getDefaultOptimumValue(min: number, max: number) {
   return max < min ? min : min + (max - min) / 2;
 }
 
+/**
+ * Handle Inequalities with received values
+ *
+ * minimum ≤ value ≤ maximum
+ * minimum ≤ low ≤ maximum (if low is specified)
+ * minimum ≤ high ≤ maximum (if high is specified)
+ * minimum ≤ optimum ≤ maximum (if optimum is specified)
+ *
+ * @see https://html.spec.whatwg.org/multipage/form-elements.html#the-meter-element:attr-meter-max-3:~:text=following%20inequalities%20must%20hold
+ */
 export function handleInequalities(value: number, min: number, max: number) {
   if (value <= min) return min;
   if (value >= max) return max;
