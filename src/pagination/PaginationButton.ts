@@ -62,7 +62,7 @@ export const usePaginationButton = createHook<
     const onClick = React.useCallback(() => {
       if (isNumber(goto)) {
         options.move?.(goto);
-      } else {
+      } else if (["next", "prev", "last", "first"].includes(goto)) {
         options[goto]?.();
       }
     }, [goto, options]);
