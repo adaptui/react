@@ -25,7 +25,7 @@ const background = {
   danger: "red",
 };
 
-export const MeterComp: React.FC<UseMeterProps> = props => {
+const MeterComp: React.FC<UseMeterProps> = props => {
   const meter = useMeterState(props);
   const { status } = meter;
   const styles = {
