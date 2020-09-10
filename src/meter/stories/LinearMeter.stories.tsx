@@ -11,6 +11,7 @@ export default {
 const examples = createLinearExamples({
   stateHook: useMeterState,
   component: Meter,
+  type: "meter",
 })();
 
 export const Default = examples.Default;

@@ -74,7 +74,7 @@ export const rotate = keyframes({
   },
 });
 
-export function useFakeProgression() {
+export function useFakeProgression(type: "progress" | "meter" = "progress") {
   const [value, setValue] = React.useState(0);
 
   React.useEffect(() => {
@@ -83,13 +83,18 @@ export function useFakeProgression() {
     }, 500);
 
     if (value === 100) {
-      setValue(5);
+      if (type === "progress") {
+        clearInterval(clearId);
+      }
+      if (type === "meter") {
+        setValue(5);
+      }
     }
 
     return () => {
       clearInterval(clearId);
     };
-  }, [value]);
+  }, [value, type]);
 
   return value;
 }
@@ -184,10 +189,11 @@ export const createCircularExample = ({
 export const createLinearExamples = ({
   stateHook: useStateHook,
   component: Component,
+  type,
 }: any) => {
   return () => {
     const Default = () => {
-      const value = useFakeProgression();
+      const value = useFakeProgression(type);
       const progress = useStateHook({ value });
 
       return (
@@ -201,7 +207,7 @@ export const createLinearExamples = ({
     };
 
     const WithLabel = () => {
-      const value = useFakeProgression();
+      const value = useFakeProgression(type);
       const progress = useStateHook({ value });
 
       return (
@@ -216,7 +222,7 @@ export const createLinearExamples = ({
     };
 
     const WithStripe = () => {
-      const value = useFakeProgression();
+      const value = useFakeProgression(type);
       const progress = useStateHook({ value });
 
       const stripStyles = css({
@@ -234,7 +240,7 @@ export const createLinearExamples = ({
     };
 
     const WithAnimatedStripe = () => {
-      const value = useFakeProgression();
+      const value = useFakeProgression(type);
       const progress = useStateHook({ value });
 
       const stripe = keyframes({

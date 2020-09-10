@@ -15,13 +15,13 @@ const CircularMeter = createCircularExample({
 });
 
 export const Default = () => {
-  const value = useFakeProgression();
+  const value = useFakeProgression("meter");
 
   return <CircularMeter value={value} />;
 };
 
 export const WithLabel = () => {
-  const value = useFakeProgression();
+  const value = useFakeProgression("meter");
 
   return <CircularMeter value={value} label />;
 };
