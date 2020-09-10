@@ -16,9 +16,9 @@ export interface UsePaginationProps {
 
 export const usePaginationState = (props: UsePaginationProps = {}) => {
   const {
-    count = 20,
+    count = 1,
     defaultPage = 1,
-    boundaryCount = 3,
+    boundaryCount = 1,
     siblingCount = 1,
     page: currentPage,
     onChange,

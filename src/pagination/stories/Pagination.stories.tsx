@@ -12,7 +12,7 @@ export default {
 } as Meta;
 
 const PaginationComp: React.FC<UsePaginationProps> = props => {
-  const state = usePaginationState(props);
+  const state = usePaginationState({ count: 10, ...props });
 
   return (
     <Pagination {...state}>
