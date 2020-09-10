@@ -26,7 +26,7 @@ export const progressBarStyle = (percent: any) => {
   return css({
     transition: "all 0.3s",
     backgroundColor: "#3182ce",
-    width: percent != null ? `${percent}%` : undefined,
+    width: percent != null ? `${percent}%` : 0,
     height: "100%",
   });
 };
@@ -79,15 +79,24 @@ export function useFakeProgression(type: "progress" | "meter" = "progress") {
 
   React.useEffect(() => {
     const clearId = setInterval(() => {
-      setValue(prevValue => prevValue + 5);
+      if (type === "progress") {
+        setValue(prevValue => prevValue + 5);
+      }
+
+      if (type === "meter") {
+        setValue(prevValue => prevValue + 0.1);
+      }
     }, 500);
 
     if (value === 100) {
       if (type === "progress") {
         clearInterval(clearId);
       }
+    }
+
+    if (value >= 1) {
       if (type === "meter") {
-        setValue(5);
+        setValue(0.1);
       }
     }
 
