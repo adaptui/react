@@ -1,85 +1,29 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-import { css, keyframes, cx } from "emotion";
+import { css, keyframes } from "emotion";
 
 import { Progress } from "../Progress";
 import { useProgressState } from "../ProgressState";
 import {
-  generateStripe,
-  labelStyles,
-  progressBarStyle,
   progressStyle,
-  useProgressSimulation,
-} from "./utils";
+  generateStripe,
+  progressBarStyle,
+  createLinearExamples,
+} from "../../utils";
 
 export default {
   title: "Component/Progress/Linear",
 } as Meta;
 
-export const Default = () => {
-  const value = useProgressSimulation();
-  const progress = useProgressState({ value });
+const examples = createLinearExamples({
+  stateHook: useProgressState,
+  component: Progress,
+})();
 
-  return (
-    <div style={progressStyle}>
-      <Progress {...progress} className={progressBarStyle(progress.percent)} />
-    </div>
-  );
-};
-
-export const WithLabel = () => {
-  const value = useProgressSimulation();
-  const progress = useProgressState({ value });
-
-  return (
-    <div style={progressStyle}>
-      <div style={labelStyles}>{progress.value}</div>
-      <Progress {...progress} className={progressBarStyle(progress.percent)} />
-    </div>
-  );
-};
-
-export const WithStripe = () => {
-  const value = useProgressSimulation();
-  const progress = useProgressState({ value });
-
-  const stripStyles = css({
-    ...generateStripe(),
-  });
-
-  return (
-    <div style={progressStyle}>
-      <Progress
-        {...progress}
-        className={cx(progressBarStyle(progress.percent), stripStyles)}
-      />
-    </div>
-  );
-};
-
-export const WithAnimatedStripe = () => {
-  const value = useProgressSimulation();
-  const progress = useProgressState({ value });
-
-  const stripe = keyframes({
-    from: { backgroundPosition: "1rem 0" },
-    to: { backgroundPosition: "0 0" },
-  });
-
-  const stripStyles = css({
-    ...generateStripe(),
-    animation: `${stripe} 1s linear infinite`,
-  });
-
-  return (
-    <div style={progressStyle}>
-      <Progress
-        {...progress}
-        className={cx(progressBarStyle(progress.percent), stripStyles)}
-      />
-    </div>
-  );
-};
+export const Default = examples.Default;
+export const WithLabel = examples.WithLabel;
+export const WithStripe = examples.WithStripe;
+export const WithAnimatedStripe = examples.WithAnimatedStripe;
 
 export const WhenIsIndeterminate = () => {
   const progress = useProgressState({ value: undefined });
