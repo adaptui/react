@@ -13,6 +13,6 @@ const PAGINATION_STATE_KEYS = [
 export const PAGINATION_KEYS = PAGINATION_STATE_KEYS;
 export const PAGINATION_ITEM_KEYS = [
   ...PAGINATION_STATE_KEYS,
-  "page",
+  "goto",
   "getAriaLabel",
 ];

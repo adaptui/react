@@ -2,9 +2,7 @@ import React from "react";
 
 import { Meta } from "@storybook/react";
 import { Pagination } from "../Pagination";
-import { PaginationPrev } from "../PaginationPrev";
-import { PaginationNext } from "../PaginationNext";
-import { PaginationItem } from "../PaginationItem";
+import { PaginationButton } from "../PaginationButton";
 import { UsePaginationProps, usePaginationState } from "../PaginationState";
 
 export default {
@@ -13,12 +11,20 @@ export default {
 
 const PaginationComp: React.FC<UsePaginationProps> = props => {
   const state = usePaginationState({ count: 10, ...props });
+  console.log("%c state", "color: #cc0088", state);
 
   return (
     <Pagination {...state}>
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
-          <PaginationPrev {...state}>Previous</PaginationPrev>
+          <PaginationButton goto="first" {...state}>
+            First
+          </PaginationButton>
+        </li>
+        <li>
+          <PaginationButton goto="prev" {...state}>
+            Previous
+          </PaginationButton>
         </li>
         {state.pages.map(page => {
           if (page === "start-ellipsis" || page === "end-ellipsis") {
@@ -27,20 +33,27 @@ const PaginationComp: React.FC<UsePaginationProps> = props => {
 
           return (
             <li key={page}>
-              <PaginationItem
-                page={page}
+              <PaginationButton
+                goto={page}
                 style={{
                   fontWeight: state.currentPage === page ? "bold" : undefined,
                 }}
                 {...state}
               >
                 {page}
-              </PaginationItem>
+              </PaginationButton>
             </li>
           );
         })}
         <li>
-          <PaginationNext {...state}>Next</PaginationNext>
+          <PaginationButton goto="next" {...state}>
+            Next
+          </PaginationButton>
+        </li>
+        <li>
+          <PaginationButton goto="last" {...state}>
+            Last
+          </PaginationButton>
         </li>
       </ul>
     </Pagination>

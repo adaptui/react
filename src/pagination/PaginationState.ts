@@ -85,12 +85,12 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
   ];
 
   const next = React.useCallback(() => {
-    setPage(page + 1);
-  }, [page, setPage]);
+    setPage(prevPage => prevPage + 1);
+  }, [setPage]);
 
   const prev = React.useCallback(() => {
-    setPage(page - 1);
-  }, [page, setPage]);
+    setPage(prevPage => prevPage - 1);
+  }, [setPage]);
 
   const first = React.useCallback(() => {
     setPage(1);
@@ -100,13 +100,20 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
     setPage(count);
   }, [count, setPage]);
 
+  const move = React.useCallback(
+    page => {
+      if (page >= 1 && page <= count) setPage(page);
+    },
+    [count, setPage],
+  );
+
   return {
     currentPage: page,
     isAtMax: page >= count,
     isAtMin: page <= 1,
     next,
     prev,
-    move: setPage,
+    move,
     first,
     last,
     pages,
