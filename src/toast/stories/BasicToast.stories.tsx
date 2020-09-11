@@ -1,11 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react";
-import { ToastProvider } from "../";
+
+import { ToastProvider } from "../index";
 import Demo from "./Demo";
 import "./style.css";
 
 export default {
-  title: "Component/Toast",
+  title: "Component/Toast/Base",
 } as Meta;
 
 export const Default: React.FC = () => {
