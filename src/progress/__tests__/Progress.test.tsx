@@ -2,7 +2,7 @@ import * as React from "react";
 import { axe } from "jest-axe";
 import { render } from "reakit-test-utils";
 
-import { Progress, ProgressProps, useProgressState } from "..";
+import { Progress, ProgressProps, useProgressState } from "../index";
 
 const ProgressComp = (props: Partial<ProgressProps>) => {
   const progress = useProgressState(props);

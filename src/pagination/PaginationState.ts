@@ -60,7 +60,7 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
   );
 
   // Page to render
-  // e.g. pages = [1, 'ellipsis', 4, 5, 6, 'ellipsis', 10]
+  // e.g. pages = [1, 'start-ellipsis', 4, 5, 6, 'end-ellipsis', 10]
   const pages = [
     ...startPages,
 
@@ -108,6 +108,7 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
   );
 
   return {
+    pages,
     currentPage: page,
     isAtMax: page >= count,
     isAtMin: page <= 1,
@@ -116,7 +117,6 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
     move,
     first,
     last,
-    pages,
   };
 };
 

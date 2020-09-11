@@ -1,5 +1,6 @@
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
+
 import { useAccordionState, AccordionInitialState } from "../AccordionState";
 
 expect.addSnapshotSerializer(jestSerializerStripFunctions);

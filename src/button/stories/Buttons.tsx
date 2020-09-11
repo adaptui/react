@@ -1,6 +1,7 @@
 import React, { JSXElementConstructor, useState } from "react";
-import { Button, AriaButton, AriaToggleButton } from "../index";
 import { useToggleState } from "@react-stately/toggle";
+
+import { Button, AriaButton, AriaToggleButton } from "../index";
 
 export interface ButtonProps {
   /**

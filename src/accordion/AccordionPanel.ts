@@ -1,11 +1,11 @@
 import * as React from "react";
+import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import {
   unstable_IdHTMLProps,
   unstable_IdOptions,
   unstable_useId,
 } from "reakit";
-import { useForkRef } from "reakit-utils";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
