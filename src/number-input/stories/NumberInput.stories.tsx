@@ -1,6 +1,6 @@
 import React from "react";
-import { useForm, Controller, ControllerProps, Control } from "react-hook-form";
 import { Meta } from "@storybook/react";
+import { useForm, Controller } from "react-hook-form";
 
 import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
 import { NumberInput } from "../NumberInput";

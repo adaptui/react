@@ -1,6 +1,6 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
 import { Meta } from "@storybook/react";
+import { useForm, Controller } from "react-hook-form";
 
 import {
   Slider,
@@ -9,7 +9,6 @@ import {
   SliderThumb,
   useSliderState,
   SliderFilledTrack,
-  SliderProps,
 } from "..";
 import {
   sliderHorizontalFilledTractStyle,
