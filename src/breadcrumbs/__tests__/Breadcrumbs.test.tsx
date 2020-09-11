@@ -1,6 +1,7 @@
 import * as React from "react";
 import { axe } from "jest-axe";
-import { render, press, click, fireEvent } from "reakit-test-utils";
+import { render } from "reakit-test-utils";
+
 import { Breadcrumbs, BreadcrumbLink } from "..";
 
 const BreadcrumbComp = () => {
