@@ -1,4 +1,5 @@
 import * as React from "react";
+import { axe } from "jest-axe";
 import { render, press } from "reakit-test-utils";
 
 import {
@@ -7,7 +8,6 @@ import {
   AccordionTrigger,
   useAccordionState,
 } from "..";
-import { axe } from "jest-axe";
 
 const AccordionComponent = (props: any) => {
   const state = useAccordionState(props);
