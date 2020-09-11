@@ -1,9 +1,9 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { ToastProvider } from "../index";
-import Demo from "./Demo";
 import "./style.css";
+import Demo from "./Demo";
+import { ToastProvider } from "../index";
 
 export default {
   title: "Component/Toast/Base",

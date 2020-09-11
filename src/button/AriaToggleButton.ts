@@ -3,10 +3,11 @@ import { useForkRef } from "reakit-utils";
 import { mergeProps } from "@react-aria/utils";
 import { ToggleState } from "@react-stately/toggle";
 import { useToggleButton } from "@react-aria/button";
-import { INTERACTION_KEYS } from "../interactions/__keys";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { AriaToggleButtonProps as AriaToggleButtonOptionsTypes } from "@react-types/button";
+
+import { INTERACTION_KEYS } from "../interactions/__keys";
 
 export type AriaToggleButtonOptions = ButtonOptions &
   AriaToggleButtonOptionsTypes &

@@ -1,13 +1,14 @@
 import React from "react";
+import { createHook, createComponent } from "reakit-system";
+import { useLiveRef, hasFocusWithin } from "reakit-utils";
 import {
   useCompositeItem,
   CompositeItemHTMLProps,
   CompositeItemOptions,
 } from "reakit/Composite";
+
 import { SELECT_KEYS } from "./__keys";
 import { SelectStateReturn } from "./SelectState";
-import { createHook, createComponent } from "reakit-system";
-import { useLiveRef, hasFocusWithin } from "reakit-utils";
 
 export type SelectItemOptions = CompositeItemOptions &
   Pick<SelectStateReturn, "setSelected" | "selected"> & {

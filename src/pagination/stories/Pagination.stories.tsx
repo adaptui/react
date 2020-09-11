@@ -1,6 +1,6 @@
 import React from "react";
-
 import { Meta } from "@storybook/react";
+
 import { Pagination } from "../Pagination";
 import { PaginationButton, TGoto } from "../PaginationButton";
 import { UsePaginationProps, usePaginationState } from "../PaginationState";
