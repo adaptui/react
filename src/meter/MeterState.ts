@@ -6,26 +6,35 @@ export interface UseMeterProps {
   /**
    * The `value` of the meter indicator.
    * If `undefined`/`not valid` the meter bar will be equal to `min`
+   * @default 0
    */
   value?: number;
   /**
    * The minimum value of the meter
+   * @default 0
    */
   min?: number;
   /**
    * The maximum value of the meter
+   * @default 1
    */
   max?: number;
   /**
-   * The higher limit of min range
+   * The higher limit of min range.
+   * Defaults to `min`.
+   * @default 0
    */
   low?: number;
   /**
-   * The lower limit of max range
+   * The lower limit of max range.
+   * Defaults to `max`.
+   * @default 1
    */
   high?: number;
   /**
-   * The lower limit of max range
+   * The lower limit of max range.
+   * Defaults to `median of low & high`.
+   * @default 0.5
    */
   optimum?: number;
 }
