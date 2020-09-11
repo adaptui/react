@@ -131,6 +131,7 @@ export function useSliderState(props: SliderStateProps = {}) {
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
+  console.log("%c computedValue", "color: #f279ca", computedValue);
 
   /**
    * Slider uses DOM APIs to add and remove event listeners.
