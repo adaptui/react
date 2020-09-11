@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm, Controller, ControllerProps, Control } from "react-hook-form";
 import { Meta } from "@storybook/react";
 
 import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
@@ -28,6 +29,42 @@ export const Default = () => {
   const props = {};
 
   return <NumberInputComp {...props} />;
+};
+
+const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
+  const state = useNumberInputState({
+    onChange,
+    value,
+  });
+  return (
+    <>
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInput name={name} {...state} />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </>
+  );
+};
+
+export const ReactHookForm = () => {
+  const { control, handleSubmit } = useForm<{
+    num: number;
+  }>({ defaultValues: { num: 20 } });
+
+  return (
+    <form
+      onSubmit={handleSubmit(values => {
+        alert(JSON.stringify(values));
+      })}
+    >
+      <div>
+        <Controller
+          name="num"
+          control={control}
+          render={NumberComponent as any}
+        />
+      </div>
+    </form>
+  );
 };
 
 export const DefaultValue = () => {
