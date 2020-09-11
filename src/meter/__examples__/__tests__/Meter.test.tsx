@@ -26,7 +26,7 @@ describe("Meter", function () {
           role="meter progressbar"
         />
       </div>
-    `);
+  `);
   });
 
   it("checks role", function () {
@@ -103,35 +103,31 @@ describe("Meter", function () {
   it("meter state initial state", function () {
     const result = renderMeterStateHook();
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 1,
-        "low": 0,
-        "max": 1,
-        "min": 0,
-        "optimum": 0.5,
-        "percent": 0,
-        "status": "safe",
-        "value": 0,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 1,
+      low: 0,
+      max: 1,
+      min: 0,
+      optimum: 0.5,
+      percent: 0,
+      status: "safe",
+      value: 0,
+    });
   });
 
   it("meter state with value", function () {
     const result = renderMeterStateHook({ value: 0.5 });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 1,
-        "low": 0,
-        "max": 1,
-        "min": 0,
-        "optimum": 0.5,
-        "percent": 50,
-        "status": "safe",
-        "value": 0.5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 1,
+      low: 0,
+      max: 1,
+      min: 0,
+      optimum: 0.5,
+      percent: 50,
+      status: "safe",
+      value: 0.5,
+    });
   });
 
   it("meter state with custom props", function () {
@@ -143,18 +139,16 @@ describe("Meter", function () {
       max: 10,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 5,
-        "percent": 50,
-        "status": "safe",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 5,
+      percent: 50,
+      status: "safe",
+      value: 5,
+    });
   });
 
   it("meter state with optimum < min", function () {
@@ -167,18 +161,16 @@ describe("Meter", function () {
       optimum: -5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 0,
-        "percent": 50,
-        "status": "caution",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 0,
+      percent: 50,
+      status: "caution",
+      value: 5,
+    });
   });
 
   it("meter state with optimum > max", function () {
@@ -191,18 +183,16 @@ describe("Meter", function () {
       optimum: 15,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 10,
-        "percent": 50,
-        "status": "caution",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 10,
+      percent: 50,
+      status: "caution",
+      value: 5,
+    });
   });
 
   it("meter state with optimum between low & high and value at same range", function () {
@@ -215,18 +205,16 @@ describe("Meter", function () {
       optimum: 5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 5,
-        "percent": 50,
-        "status": "safe",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 5,
+      percent: 50,
+      status: "safe",
+      value: 5,
+    });
   });
 
   it("meter state with optimum between low & high and value below low", function () {
@@ -239,18 +227,16 @@ describe("Meter", function () {
       optimum: 5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 5,
-        "percent": 20,
-        "status": "caution",
-        "value": 2,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 5,
+      percent: 20,
+      status: "caution",
+      value: 2,
+    });
   });
 
   it("meter state with optimum between low & high and value above high", function () {
@@ -263,18 +249,16 @@ describe("Meter", function () {
       optimum: 5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 5,
-        "percent": 80,
-        "status": "caution",
-        "value": 8,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 5,
+      percent: 80,
+      status: "caution",
+      value: 8,
+    });
   });
 
   it("meter state with optimum at high", function () {
@@ -287,18 +271,16 @@ describe("Meter", function () {
       optimum: 7.5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 7.5,
-        "percent": 50,
-        "status": "safe",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 7.5,
+      percent: 50,
+      status: "safe",
+      value: 5,
+    });
   });
 
   it("meter state with optimum at low", function () {
@@ -311,18 +293,16 @@ describe("Meter", function () {
       optimum: 2.5,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 2.5,
-        "percent": 50,
-        "status": "safe",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 2.5,
+      percent: 50,
+      status: "safe",
+      value: 5,
+    });
   });
 
   it("meter state with optimum < low & >= min and value at same range", function () {
@@ -335,18 +315,16 @@ describe("Meter", function () {
       optimum: 2,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 2,
-        "percent": 0,
-        "status": "safe",
-        "value": 0,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 2,
+      percent: 0,
+      status: "safe",
+      value: 0,
+    });
   });
 
   it("meter state with optimum < low & >= min and value > low", function () {
@@ -359,18 +337,16 @@ describe("Meter", function () {
       optimum: 2,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 2,
-        "percent": 50,
-        "status": "caution",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 2,
+      percent: 50,
+      status: "caution",
+      value: 5,
+    });
   });
 
   it("meter state with optimum < low & >= min and value > high", function () {
@@ -383,18 +359,16 @@ describe("Meter", function () {
       optimum: 2,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 2,
-        "percent": 80,
-        "status": "danger",
-        "value": 8,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 2,
+      percent: 80,
+      status: "danger",
+      value: 8,
+    });
   });
 
   it("meter state with optimum <= max & >= high & value at same range", function () {
@@ -407,18 +381,16 @@ describe("Meter", function () {
       optimum: 9,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 9,
-        "percent": 80,
-        "status": "safe",
-        "value": 8,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 9,
+      percent: 80,
+      status: "safe",
+      value: 8,
+    });
   });
 
   it("meter state with optimum <= max & >= high & value < high", function () {
@@ -431,18 +403,16 @@ describe("Meter", function () {
       optimum: 9,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 9,
-        "percent": 50,
-        "status": "caution",
-        "value": 5,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 9,
+      percent: 50,
+      status: "caution",
+      value: 5,
+    });
   });
 
   it("meter state with optimum <= max & >= high & value < low", function () {
@@ -455,17 +425,15 @@ describe("Meter", function () {
       optimum: 9,
     });
 
-    expect(result.current).toMatchInlineSnapshot(`
-      Object {
-        "high": 7.5,
-        "low": 2.5,
-        "max": 10,
-        "min": 0,
-        "optimum": 9,
-        "percent": 20,
-        "status": "danger",
-        "value": 2,
-      }
-    `);
+    expect(result.current).toMatchObject({
+      high: 7.5,
+      low: 2.5,
+      max: 10,
+      min: 0,
+      optimum: 9,
+      percent: 20,
+      status: "danger",
+      value: 2,
+    });
   });
 });

@@ -42,7 +42,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
           ? undefined
           : isFunction(options.getAriaValueText)
           ? options.getAriaValueText(value)
-          : ariaValueText ?? `${String(percent)}%`,
+          : ariaValueText ?? `${percent}%`,
       ...htmlProps,
     };
   },
