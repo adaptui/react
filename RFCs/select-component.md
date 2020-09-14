@@ -1,10 +1,10 @@
 ## The Goal:
 
-Build a select component which would follow the aria best practices. Select
-component should be composable, flexible, accessible & renderless.
+Build a select component which follows the aria best practices. Select component
+should be composable, flexible, accessible & renderless.
 
 The single select will follow WAI-ARIA specs for the list box pattern. These are
-the key resources we need to create this Select
+the key resources we need to create this Select.
 
 - https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-scrollable.html
 - https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
@@ -13,13 +13,15 @@ the key resources we need to create this Select
 
 ## Key Features:
 
-#### Typeahead support: When the select is open and focus is on the select list box
+### Typehead support:
+
+#### When the select is open and focus is on the select list box
 
 - Typing the first letter of an option sends focus to that option.
 - Type multiple characters in rapid succession: focus moves to the next item
   with a name that starts with the string of characters typed.
 
-#### Typeahead support: When the select is not open and focus is on the select dropdown button
+#### When the select is not open and focus is on the select dropdown button
 
 - Typing the first letter of an option directly selects the option without
   opening the dropdown.
@@ -29,7 +31,7 @@ the key resources we need to create this Select
 
 #### Keyboard navigation:
 
-##### Select Dropdown
+##### Select Dropdown Trigger
 
 | Keyboard      | Behaviour                                     |
 | ------------- | --------------------------------------------- |
@@ -37,6 +39,8 @@ the key resources we need to create this Select
 | Escape        | Closes the select dropdown.                   |
 | Down Arrow    | Opens the dropdown & move focus to next item  |
 | Up Arrow      | Open the dropdown move focus to previous item |
+
+##### SelectMenu (list)
 
 - Using the up and down arrow should navigate the options. Any option that's
   disabled should be skipped in the navigation, we can use reakit's composite
@@ -60,9 +64,7 @@ implemented in Reakit's Menu component. https://reakit.io/docs/menu/
 - Virtualize Menu: If there's a large number of options, we might need to
   improve render performance by using `react-virtualized`
 
-## Import
-
-Component Parts:
+### Component Parts:
 
 - **useSelectState:** hook that holds all the a11y and behaviour logic.
 - **Select:** The wrapper that provides the context and functionalities
@@ -118,7 +120,21 @@ const state = useSelectState({ defaultSelected: "mango" });
 - **isDisabled:** If `true` the select control will be disabled
 - **isReadOnly:** If `true`, the select will be in read-only mode
 
-* Returns :-
+```ts
+const state = useSelectState({
+  defaultOpen: "some value",
+  defaultValue: "some value",
+  defaultHighlighted: "some value",
+  isOpen: true,
+  onChange: (value: string) => {},
+  closeOnSelect: true,
+  autoSelect: false,
+  isDisabled: false,
+  isReadOnly: false,
+});
+```
+
+- Returns :-
   - **value:** The selected value.
   - **placeholderVisible:** Helper flag to indicate if no items are selected.
 
@@ -142,4 +158,3 @@ Other libs & implementations for inspiration:
 - https://react-select.com/
 - Timelessco's select component we worked on:
   https://renderless-components.netlify.app/?path=/story/component-select--default
--
