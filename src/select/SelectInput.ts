@@ -1,16 +1,17 @@
 import React from "react";
-import { BoxHTMLProps } from "reakit/ts/Box/Box";
-import { SelectStateReturn } from "./SelectState";
+import { BoxHTMLProps } from "reakit/Box";
+import { useLiveRef } from "reakit-utils";
 import { createHook, createComponent } from "reakit-system";
-import { SELECT_KEYS } from "./__keys";
+import { getNextItemFromSearch } from "@chakra-ui/utils";
 import {
   useComposite,
   CompositeOptions,
   usePopoverDisclosure,
   PopoverDisclosureOptions,
 } from "reakit";
-import { useLiveRef } from "reakit-utils";
-import { getNextItemFromSearch } from "@chakra-ui/utils";
+
+import { SELECT_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
 
 export type SelectInputOptions = CompositeOptions &
   PopoverDisclosureOptions &

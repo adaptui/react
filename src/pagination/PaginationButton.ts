@@ -3,7 +3,7 @@ import { createComponent, createHook } from "reakit-system";
 import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { PAGINATION_ITEM_KEYS } from "./__keys";
+import { PAGINATION_BUTTON_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
 
 export type TGoto = "next" | "prev" | "last" | "first" | number;
@@ -35,7 +35,7 @@ export const usePaginationButton = createHook<
 >({
   name: "PaginationButton",
   compose: useButton,
-  keys: PAGINATION_ITEM_KEYS,
+  keys: PAGINATION_BUTTON_KEYS,
 
   useOptions(options, { disabled: htmlDisabled }) {
     const { goto, isAtMax, isAtMin } = options;

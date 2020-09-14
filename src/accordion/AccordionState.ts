@@ -33,14 +33,14 @@ export type AccordionInitialState = unstable_IdInitialState & {
   manual?: boolean;
 };
 
-export type Button = {
+type Button = {
   id: string;
   ref: React.RefObject<HTMLElement>;
 };
 
-export type Panel = Button;
+type Panel = Button;
 
-export type Item = {
+type Item = {
   id: string;
   ref: React.RefObject<HTMLElement>;
   button?: Button;

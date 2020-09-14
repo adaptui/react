@@ -1,4 +1,5 @@
 import React from "react";
+import { useSealedState, SealedInitialState } from "reakit-utils";
 import {
   useCompositeState,
   CompositeActions,
@@ -13,7 +14,6 @@ import {
   PopoverActions,
   PopoverInitialState,
 } from "reakit/Popover";
-import { useSealedState, SealedInitialState } from "reakit-utils";
 
 type Value = {
   value: string;

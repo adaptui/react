@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+
 import { Placements } from "./ToastProvider";
 
 type JSXFunction = (props: any) => JSX.Element;
