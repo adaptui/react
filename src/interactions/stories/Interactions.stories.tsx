@@ -2,11 +2,11 @@ import { Meta } from "@storybook/react";
 import React, { FocusEvent, KeyboardEvent } from "react";
 
 import { Press } from "../Press";
+import { Hover } from "../Hover";
 import { Focus } from "../Focus";
 import { Keyboard } from "../Keyboard";
 import { FocusWithin } from "../FocusWithin";
 import { FocusVisible } from "../FocusVisible";
-import { Hover } from "../Hover";
 
 export default {
   title: "Component/Interactions",

@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { usePopover, PopoverHTMLProps, PopoverProps } from "reakit";
-import { SelectStateReturn } from "./SelectState";
-import { SELECT_KEYS } from "./__keys";
+import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
+import { usePopover, PopoverHTMLProps, PopoverProps } from "reakit";
 import {
   useComposite,
   CompositeProps,
   CompositeHTMLProps,
 } from "reakit/Composite";
+
+import { SELECT_KEYS } from "./__keys";
 import { usePortalShortcut } from "./__utils";
-import { useForkRef } from "reakit-utils";
+import { SelectStateReturn } from "./SelectState";
 
 export type SelectMenuOptions = CompositeProps &
   PopoverProps &

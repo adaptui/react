@@ -2,6 +2,7 @@ import React from "react";
 import { closest } from "reakit-utils";
 import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
+
 import { SelectStateReturn } from "./SelectState";
 
 interface usePortalShortcutProps {

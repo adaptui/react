@@ -1,6 +1,7 @@
+import { callAllHandlers } from "@chakra-ui/utils";
 import { createHook, createComponent } from "reakit-system";
 import { useButton, DialogStateReturn, ButtonProps } from "reakit";
-import { callAllHandlers } from "@chakra-ui/utils";
+
 import { DRAWER_KEYS } from "./__keys";
 
 export const useDrawerCloseButton = createHook<

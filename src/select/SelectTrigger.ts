@@ -1,15 +1,16 @@
 import React from "react";
-import { SelectStateReturn } from "./SelectState";
+import { useShortcut } from "@chakra-ui/hooks";
 import { createHook, createComponent } from "reakit-system";
-import { SELECT_KEYS } from "./__keys";
+import { createOnKeyDown, useLiveRef, useForkRef } from "reakit-utils";
+import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
 import {
   usePopoverDisclosure,
   PopoverDisclosureHTMLProps,
   PopoverDisclosureOptions,
 } from "reakit/Popover";
-import { useShortcut } from "@chakra-ui/hooks";
-import { createOnKeyDown, useLiveRef, useForkRef } from "reakit-utils";
-import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
+
+import { SelectStateReturn } from "./SelectState";
+import { SELECT_KEYS } from "./__keys";
 
 export type SelectTriggerOptions = PopoverDisclosureOptions &
   Pick<
