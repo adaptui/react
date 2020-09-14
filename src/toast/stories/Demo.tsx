@@ -1,5 +1,5 @@
 import React from "react";
-import { useToast, ToastProvider } from "../";
+import { useToast } from "../";
 
 const randomType = (): string => {
   return ["error", "warning", "success"].splice(Math.random() * 3, 1)[0];

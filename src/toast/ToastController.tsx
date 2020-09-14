@@ -4,9 +4,9 @@ import { useGesture } from "react-use-gesture";
 
 interface ToastControllerProps {
   id: string;
-  onRequestRemove: (id: string) => void;
   duration?: number;
   autoDismiss?: boolean;
+  onRequestRemove: (id: string) => void;
 }
 
 export const ToastController: React.FC<ToastControllerProps> = ({
@@ -51,6 +51,7 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     id,
     onMouseLeave,
     onMouseEnter,
+    role: "alert",
     className: "toast",
     style: { transform: `translateX(${x}px)` },
     ...bind(),
