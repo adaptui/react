@@ -10,6 +10,7 @@ export const PAGINATION_STATE_KEYS = [
   "isAtMax",
 ] as const;
 
+export const PAGINATION_KEYS = PAGINATION_STATE_KEYS;
 export const PAGINATION_BUTTON_KEYS = [
   ...PAGINATION_STATE_KEYS,
   "goto",
