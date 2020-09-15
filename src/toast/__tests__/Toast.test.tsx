@@ -1,7 +1,20 @@
 import * as React from "react";
-import { axe, render } from "reakit-test-utils";
+import { axe, render, click, act } from "reakit-test-utils";
 
 import { useToast, ToastProvider } from "..";
+
+beforeEach(() => {
+  jest.useFakeTimers();
+  jest
+    .spyOn(window, "requestAnimationFrame")
+    .mockImplementation((cb: any) => cb());
+  jest.spyOn(window, "setTimeout").mockImplementation((cb: any) => cb());
+});
+
+afterEach(() => {
+  (window.requestAnimationFrame as any).mockRestore();
+  (window.setTimeout as any).mockRestore();
+});
 
 const Demo = () => {
   const { show } = useToast();
@@ -56,8 +69,15 @@ const ToastComp: React.FC = () => {
       toastTypes={{
         error: ({ remove, content, id }) => {
           return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
+            <div
+              data-testid="error"
+              className="toast"
+              style={{ backgroundColor: "#f02c2d" }}
+            >
+              {content}{" "}
+              <button data-testid="error-close" onClick={() => remove(id)}>
+                x
+              </button>
             </div>
           );
         },
@@ -106,6 +126,42 @@ describe("Toast", () => {
         </div>
       </body>
     `);
+  });
+
+  it("toast should popup to the screen after click", () => {
+    const { getByText: text, getByTestId: id } = render(<ToastComp />);
+
+    expect(text("Error")).toBeInTheDocument();
+
+    act(() => {
+      click(text("Error"));
+    });
+
+    expect(id("error")).toHaveTextContent("This is error");
+  });
+
+  it("should be removed after clicking close button", () => {
+    const {
+      getByText: text,
+      getByTestId: getId,
+      queryByTestId: queryId,
+    } = render(<ToastComp />);
+
+    expect(text("Error")).toBeInTheDocument();
+
+    // add first
+    act(() => {
+      click(text("Error"));
+    });
+
+    expect(getId("error")).toHaveTextContent("This is error");
+
+    // let remove now
+    act(() => {
+      click(getId("error-close"));
+    });
+
+    expect(queryId("error")).not.toBeInTheDocument();
   });
 
   test("Toast renders with no a11y violations", async () => {
