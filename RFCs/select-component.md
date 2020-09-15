@@ -40,6 +40,10 @@ the key resources we need to create this Select.
 | Down Arrow    | Opens the dropdown & move focus to next item  |
 | Up Arrow      | Open the dropdown move focus to previous item |
 
+- After closing the dropdown the focus should go back to the select trigger in
+  order to retain user's context, but not if user closes the dropdown by
+  clicking outside.
+
 ##### SelectMenu (list)
 
 - Using the up and down arrow should navigate the options. Any option that's
@@ -101,6 +105,30 @@ const state = useSelectState({ defaultSelected: "mango" });
     </SelectOption>
   </SelectMenu>
 </Select>;
+```
+
+### API-2 (similar to reakit's combobox)
+
+```jsx
+const state = useSelectState({
+  values: fruits,
+  defaultSelected: "mango",
+});
+
+return (
+  <>
+    <Select {...state} />
+    <SelectPopover {...state}>
+      {state.items.map(item => {
+        return (
+          <SelectOption {...state} disabled={item.disabled} value={item.value}>
+            {item.label}
+          </SelectOption>
+        );
+      })}
+    </SelectPopover>
+  </>
+);
 ```
 
 ## Props
