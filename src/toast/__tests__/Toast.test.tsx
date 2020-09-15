@@ -1,6 +1,6 @@
 import * as React from "react";
 import { axe } from "jest-axe";
-import { render, click, act } from "reakit-test-utils";
+import { render, act, click } from "reakit-test-utils";
 
 import { useToast, ToastProvider } from "..";
 
@@ -110,27 +110,27 @@ describe("Toast", () => {
     expect(baseElement).toMatchInlineSnapshot(`
       <body>
         <div>
-          <button>
-            Error
-          </button>
-          <button>
-            Success
-          </button>
-          <button>
-            Warning
-          </button>
-          <button>
-            Custom
-          </button>
+          <div>
+            <button>
+              Error
+            </button>
+            <button>
+              Success
+            </button>
+            <button>
+              Warning
+            </button>
+            <button>
+              Custom
+            </button>
+          </div>
         </div>
       </body>
     `);
   });
 
   it("toast should popup to the screen after click", () => {
-    const { getByText: text, getByTestId: id } = render(<ToastComp />, {
-      container: document.body,
-    });
+    const { getByText: text, getByTestId: id } = render(<ToastComp />);
 
     expect(text("Error")).toBeInTheDocument();
 
@@ -144,11 +144,9 @@ describe("Toast", () => {
   it("should be removed after clicking close button", () => {
     const {
       getByText: text,
-      queryByTestId: queryId,
       getByTestId: getId,
-    } = render(<ToastComp />, {
-      container: document.body,
-    });
+      queryByTestId: queryId,
+    } = render(<ToastComp />);
 
     expect(text("Error")).toBeInTheDocument();
 
