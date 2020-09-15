@@ -25,7 +25,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   keys: METER_KEYS,
 
   useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
-    const { value, max, min } = options;
+    const { value, max, min, percent } = options;
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
     // does not support meter at all. Safari 13+ seems to support meter properly.
@@ -42,7 +42,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
           ? undefined
           : isFunction(options.getAriaValueText)
           ? options.getAriaValueText(value)
-          : ariaValueText ?? String(value),
+          : ariaValueText ?? `${percent}%`,
       ...htmlProps,
     };
   },

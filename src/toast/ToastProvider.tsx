@@ -5,7 +5,7 @@ import { createContext } from "@chakra-ui/utils";
 
 import { ToastStateReturn } from "./ToastState";
 import { ToastController } from "./ToastController";
-import useToastState, { IToast } from "./ToastState";
+import { useToastState, IToast } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {

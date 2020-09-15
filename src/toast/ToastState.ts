@@ -27,7 +27,7 @@ interface ToastStateProps {
   animationTimeout?: number;
 }
 
-const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
+export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
   const [toasts, setToasts] = React.useState<ToastList>({});
 
   // toggle can be used to just hide/show the toast instead of removing it.
@@ -140,5 +140,3 @@ const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
 };
 
 export type ToastStateReturn = ReturnType<typeof useToastState>;
-
-export default useToastState;
