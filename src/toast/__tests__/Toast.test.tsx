@@ -105,9 +105,7 @@ const ToastComp: React.FC = () => {
 
 describe("Toast", () => {
   it("should render correctly", () => {
-    const { baseElement } = render(<ToastComp />, {
-      container: document.body,
-    });
+    const { baseElement } = render(<ToastComp />);
 
     expect(baseElement).toMatchInlineSnapshot(`
       <body>
