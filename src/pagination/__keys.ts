@@ -1,4 +1,4 @@
-const PAGINATION_STATE_KEYS = [
+export const PAGINATION_STATE_KEYS = [
   "next",
   "prev",
   "move",

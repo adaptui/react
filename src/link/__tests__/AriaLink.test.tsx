@@ -1,6 +1,5 @@
 import * as React from "react";
-import { axe } from "jest-axe";
-import { click, render } from "reakit-test-utils";
+import { axe, click, render } from "reakit-test-utils";
 
 import { AriaLink } from "..";
 

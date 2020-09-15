@@ -1,6 +1,5 @@
 import * as React from "react";
-import { axe } from "jest-axe";
-import { render, act, click } from "reakit-test-utils";
+import { axe, render, click, act } from "reakit-test-utils";
 
 import { useToast, ToastProvider } from "..";
 

@@ -1,5 +1,6 @@
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { PAGINATION_STATE_KEYS } from "./__keys";
 
 export type PaginationOptions = BoxOptions;
 
@@ -11,6 +12,7 @@ export const usePagination = createHook<PaginationOptions, PaginationHTMLProps>(
   {
     name: "Pagination",
     compose: useBox,
+    keys: PAGINATION_STATE_KEYS,
 
     useProps(_, htmlProps) {
       return { "aria-label": "pagination navigation", ...htmlProps };
