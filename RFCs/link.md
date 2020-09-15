@@ -38,3 +38,9 @@ behaviour.
   https://github.com/timelessco/renderless-components/blob/master/src/link/Link.ts
 - Storybook -
   https://renderless-components.netlify.app/?path=/story/component-link-reakit--default
+
+## Related WAI-ARIA resources
+
+- https://www.w3.org/TR/wai-aria-practices-1.2/#link
+- https://www.w3.org/TR/wai-aria-practices-1.2/examples/link/link.html
+- https://www.w3.org/TR/wai-aria-1.2/#link
