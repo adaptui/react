@@ -1,9 +1,9 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { Meter } from "../Meter";
-import { useMeterState } from "../index";
-import { useFakeProgression, createCircularExample } from "../../utils";
+import { Meter } from "../../Meter";
+import { useMeterState } from "../../index";
+import { useFakeProgression, createCircularExample } from "../../../utils";
 
 export default {
   title: "Component/Meter/Circular",
