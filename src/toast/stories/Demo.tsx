@@ -61,7 +61,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is top-left",
             placement: "top-left",
           });
         }}
@@ -72,7 +72,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is top-right",
             placement: "top-right",
           });
         }}
@@ -83,7 +83,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is top-center",
             placement: "top-center",
           });
         }}
@@ -94,7 +94,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is bottom-left",
             placement: "bottom-left",
           });
         }}
@@ -105,7 +105,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is bottom-right",
             placement: "bottom-right",
           });
         }}
@@ -116,7 +116,7 @@ const PlacementDemo = () => {
         onClick={() => {
           show({
             type: randomType(),
-            content: "This is error",
+            content: "This is bottom-center",
             placement: "bottom-center",
           });
         }}
