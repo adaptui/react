@@ -9,7 +9,7 @@ the key resources we need to create this Select.
 - https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-scrollable.html
 - https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
 - https://www.w3.org/TR/wai-aria-practices/#kbd_focus_vs_selection
-- https://www.w3.org/TR/wai-aria-1.1/#select
+- https://www.w3.org/TR/wai-aria-1.2/#select
 
 ## Key Features:
 
