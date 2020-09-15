@@ -1,6 +1,5 @@
 import * as React from "react";
-import { axe } from "jest-axe";
-import { render, press, click, fireEvent } from "reakit-test-utils";
+import { axe, render, press, click, fireEvent } from "reakit-test-utils";
 
 import {
   NumberInput,

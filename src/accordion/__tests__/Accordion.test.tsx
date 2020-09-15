@@ -1,6 +1,5 @@
 import * as React from "react";
-import { axe } from "jest-axe";
-import { render, press } from "reakit-test-utils";
+import { axe, render, press } from "reakit-test-utils";
 
 import {
   AccordionPanel,
