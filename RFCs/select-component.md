@@ -15,13 +15,13 @@ the key resources we need to create this Select.
 
 ### Typehead support:
 
-#### When the select is open and focus is on the select list box
+#### When the dropdown is open and focus is on the select list box
 
 - Typing the first letter of an option sends focus to that option.
 - Type multiple characters in rapid succession: focus moves to the next item
   with a name that starts with the string of characters typed.
 
-#### When the select is not open and focus is on the select dropdown button
+#### When the dropdown is not open and focus is on the select trigger
 
 - Typing the first letter of an option directly selects the option without
   opening the dropdown.
@@ -31,7 +31,7 @@ the key resources we need to create this Select.
 
 #### Keyboard navigation:
 
-##### Select Dropdown Trigger
+##### Select Trigger
 
 | Keyboard      | Behaviour                                     |
 | ------------- | --------------------------------------------- |
@@ -44,7 +44,7 @@ the key resources we need to create this Select.
   order to retain user's context, but not if user closes the dropdown by
   clicking outside.
 
-##### SelectMenu (list)
+##### SelectPopover
 
 - Using the up and down arrow should navigate the options. Any option that's
   disabled should be skipped in the navigation, we can use reakit's composite
@@ -65,8 +65,8 @@ implemented in Reakit's Menu component. https://reakit.io/docs/menu/
   - If `autoSelect` is false, a highlighted option must be manually selected
     using the SPACEBAR or ENTER key.
 
-- Virtualize Menu: If there's a large number of options, we might need to
-  improve render performance by using `react-virtualized`
+- Virtualize Menu: If there are large number of options, we can improve
+  rendering performance by using `react-virtualized`
 
 ### Component Parts:
 
@@ -74,7 +74,7 @@ implemented in Reakit's Menu component. https://reakit.io/docs/menu/
 - **Select:** The wrapper that provides the context and functionalities
 - **SelectTrigger: (compose usePopover)** The element that triggers the list
   box.
-- **SelectMenu:** The wrapper for the popover. It composes the `Popper`
+- **SelectPopover:** The wrapper for the popover. It composes the `Popper`
   component.
 - **SelectOption:** Each option in the select.
 - **SelectOptionGroup:** A wrapper for a set of options that can be labeled.
@@ -90,7 +90,7 @@ const state = useSelectState({ defaultSelected: "mango" });
     {state.placeholderVisible ? "Select one.." : state.value}
   </SelectTrigger>
 
-  <SelectMenu {...state}>
+  <SelectPopover {...state}>
     <SelectOption {...state} value="apples">
       Apples
     </SelectOption>
@@ -103,7 +103,7 @@ const state = useSelectState({ defaultSelected: "mango" });
     <SelectOption {...state} value="mango">
       Mango
     </SelectOption>
-  </SelectMenu>
+  </SelectPopover>
 </Select>;
 ```
 
@@ -183,6 +183,7 @@ https://github.com/reakit/reakit/issues/256
 
 Other libs & implementations for inspiration:
 
+- ChakraUI SingleSelet RFC: https://github.com/chakra-ui/chakra-ui/issues/140
 - https://react-select.com/
 - Timelessco's select component we worked on:
   https://renderless-components.netlify.app/?path=/story/component-select--default
