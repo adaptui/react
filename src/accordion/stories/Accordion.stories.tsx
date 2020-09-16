@@ -84,17 +84,17 @@ export const Styled = () => {
   const props = useAccordionState({ allowMultiple: false });
 
   return (
-    <div id="accordionGroup" className="Accordion">
+    <div id="accordionGroup" className="accordion">
       <AccordionItem {...props}>
         <h3>
-          <AccordionTrigger {...props} className="Accordion-trigger">
-            <span className="Accordion-title">
+          <AccordionTrigger {...props} className="accordion-trigger">
+            <span className="accordion-title">
               Personal Information
-              <span className="Accordion-icon"></span>
+              <span className="accordion-icon"></span>
             </span>
           </AccordionTrigger>
         </h3>
-        <AccordionPanel {...props} className="Accordion-panel">
+        <AccordionPanel {...props} className="accordion-panel">
           <div>
             <fieldset>
               <p>
@@ -144,14 +144,14 @@ export const Styled = () => {
       </AccordionItem>
       <AccordionItem {...props}>
         <h3>
-          <AccordionTrigger {...props} className="Accordion-trigger">
-            <span className="Accordion-title">
+          <AccordionTrigger {...props} className="accordion-trigger">
+            <span className="accordion-title">
               Billing Address
-              <span className="Accordion-icon"></span>
+              <span className="accordion-icon"></span>
             </span>
           </AccordionTrigger>
         </h3>
-        <AccordionPanel {...props} className="Accordion-panel">
+        <AccordionPanel {...props} className="accordion-panel">
           <div>
             <fieldset>
               <p>
@@ -180,14 +180,14 @@ export const Styled = () => {
       </AccordionItem>
       <AccordionItem {...props}>
         <h3>
-          <AccordionTrigger {...props} className="Accordion-trigger">
-            <span className="Accordion-title">
+          <AccordionTrigger {...props} className="accordion-trigger">
+            <span className="accordion-title">
               Shipping Address
-              <span className="Accordion-icon"></span>
+              <span className="accordion-icon"></span>
             </span>
           </AccordionTrigger>
         </h3>
-        <AccordionPanel {...props} className="Accordion-panel">
+        <AccordionPanel {...props} className="accordion-panel">
           <div>
             <fieldset>
               <p>

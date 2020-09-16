@@ -41,7 +41,7 @@ export const useAccordionPanel = createHook<
 
     return {
       role: "region",
-      "aria-labelledby": `${buttonId ? buttonId : undefined}`,
+      "aria-labelledby": buttonId ?? buttonId,
       ref: useForkRef(ref, htmlRef),
       hidden: !isOpen,
       ...htmlProps,
