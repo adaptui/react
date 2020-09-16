@@ -66,6 +66,7 @@
     "@typescript-eslint/parser": "4.1.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
+    "chalk": "^4.1.0",
     "eslint": "7.8.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-react-app": "5.2.1",
@@ -82,6 +83,7 @@
     "jest-in-case": "^1.0.2",
     "jest-matcher-utils": "26.4.2",
     "lint-staged": "10.3.0",
+    "lodash": "^4.17.20",
     "prettier": "2.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -91,6 +93,7 @@
     "react-transition-group": "4.4.1",
     "sort-package-json": "1.44.0",
     "ts-jest": "26.3.0",
+    "ts-morph": "^8.1.0",
     "typescript": "4.0.2"
   }
 }
