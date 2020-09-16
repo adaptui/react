@@ -12,7 +12,7 @@ import {
 
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
-import { useAccordionItemContext } from ".";
+import { useAccordionItemContext } from "./AccordionItem";
 
 export type AccordionTriggerOptions = unstable_IdOptions &
   ButtonOptions &

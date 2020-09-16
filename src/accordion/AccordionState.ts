@@ -5,7 +5,6 @@ import {
   unstable_IdStateReturn,
   unstable_useIdState,
 } from "reakit";
-import { getNextItem } from "@chakra-ui/utils";
 
 export type AccordionInitialState = unstable_IdInitialState & {
   /**
