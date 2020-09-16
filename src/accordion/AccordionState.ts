@@ -83,7 +83,7 @@ export function useAccordionState(
 
   const [state, dispatch] = React.useReducer(reducer, {
     items: [],
-    activeItems: [],
+    activeItems: defaultActiveId ? [defaultActiveId] : [],
     buttons: [],
     allowMultiple,
     loop,
@@ -126,12 +126,6 @@ export function useAccordionState(
   const last = React.useCallback(() => {
     moveFocus(buttons[total - 1]);
   }, [buttons, total]);
-
-  React.useEffect(() => {
-    if (defaultActiveId) {
-      dispatch({ type: "addActiveItem", id: defaultActiveId });
-    }
-  }, [defaultActiveId]);
 
   return {
     ...idState,
