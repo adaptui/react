@@ -19,6 +19,7 @@
     "build-storybook": "build-storybook",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
+    "keys": "node scripts/build/keys",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "lint:package": "sort-package-json",
     "storybook": "start-storybook -p 6006",

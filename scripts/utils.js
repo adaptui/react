@@ -325,7 +325,6 @@ function makeKeys(rootPath) {
   });
   const created = [];
 
-  console.log(filesByModules);
   Object.entries(filesByModules).forEach(([modulePath, paths]) => {
     const sourceFiles = project.addSourceFilesAtPaths(paths);
     const keys = {};
