@@ -9,7 +9,7 @@ import {
   CompositeHTMLProps,
 } from "reakit/Composite";
 
-import { SELECT_KEYS } from "./__keys";
+import { SELECT_MENU_KEYS } from "./__keys";
 import { usePortalShortcut } from "./__utils";
 import { SelectStateReturn } from "./SelectState";
 
@@ -31,7 +31,7 @@ export type SelectMenuHTMLProps = CompositeHTMLProps & PopoverHTMLProps;
 const useSelectMenu = createHook<SelectMenuOptions, SelectMenuHTMLProps>({
   name: "SelectMenu",
   compose: [useComposite, usePopover],
-  keys: SELECT_KEYS,
+  keys: SELECT_MENU_KEYS,
 
   useProps(
     { visible, move, values, currentId, selected, isCombobox },

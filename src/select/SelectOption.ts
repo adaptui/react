@@ -7,7 +7,7 @@ import {
   CompositeItemOptions,
 } from "reakit/Composite";
 
-import { SELECT_KEYS } from "./__keys";
+import { SELECT_ITEM_KEYS } from "./__keys";
 import { SelectStateReturn } from "./SelectState";
 
 export type SelectItemOptions = CompositeItemOptions &
@@ -20,7 +20,7 @@ export type SelectItemHTMLProp = CompositeItemHTMLProps;
 const useSelectOption = createHook<SelectItemOptions, SelectItemHTMLProp>({
   name: "SelectOption",
   compose: useCompositeItem,
-  keys: ["value", ...SELECT_KEYS],
+  keys: SELECT_ITEM_KEYS,
   useProps(
     { selected, value, setSelected, disabled },
     { onClick: htmlOnClick, onMouseMove: htmlOnMouseMove, ...htmlProps },

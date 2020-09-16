@@ -1,4 +1,5 @@
-const COMPOSITE_STATE_KEYS = [
+// Automatically generated
+const SELECT_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "setBaseId",
@@ -33,15 +34,9 @@ const COMPOSITE_STATE_KEYS = [
   "setWrap",
   "reset",
   "unstable_setHasActiveWidget",
-] as const;
-
-const POPOVER_STATE_KEYS = [
-  "baseId",
-  "unstable_idCountRef",
   "visible",
   "animated",
   "animating",
-  "setBaseId",
   "show",
   "hide",
   "toggle",
@@ -60,20 +55,18 @@ const POPOVER_STATE_KEYS = [
   "unstable_update",
   "placement",
   "place",
-] as const;
-
-export const SELECT_STATE_KEYS = [
-  ...COMPOSITE_STATE_KEYS,
-  ...POPOVER_STATE_KEYS,
-  "isPlaceholder",
-  "isCombobox",
   "allowMultiselect",
   "selected",
-  "setSelected",
-  "removeSelected",
+  "isPlaceholder",
   "inputValue",
-  "setInputValue",
+  "isCombobox",
   "values",
+  "setInputValue",
+  "removeSelected",
+  "setSelected",
 ] as const;
-
-export const SELECT_KEYS = SELECT_STATE_KEYS;
+export const SELECT_KEYS = [...SELECT_STATE_KEYS, "onChange"] as const;
+export const SELECT_INPUT_KEYS = SELECT_STATE_KEYS;
+export const SELECT_MENU_KEYS = SELECT_INPUT_KEYS;
+export const SELECT_ITEM_KEYS = [...SELECT_MENU_KEYS, "value"] as const;
+export const SELECT_TRIGGER_KEYS = SELECT_MENU_KEYS;

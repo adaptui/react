@@ -1,7 +1,7 @@
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
-import { METER_KEYS } from "./__key";
+import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 import { isFunction } from "@chakra-ui/utils";
 

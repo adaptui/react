@@ -19,7 +19,7 @@ import {
   useCallback,
 } from "react";
 
-import { NUMBERINPUT_KEYS } from "./__keys";
+import { NUMBER_INPUT_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./NumberInputState";
 import {
   isFloatingPointNumericCharacter,
@@ -68,7 +68,7 @@ export const useNumberInput = createHook<
 >({
   name: "NumberInput",
   compose: useInput,
-  keys: NUMBERINPUT_KEYS,
+  keys: NUMBER_INPUT_KEYS,
 
   useProps(options, htmlProps) {
     const {

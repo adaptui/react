@@ -4,6 +4,8 @@ import { useWarning } from "reakit-warning";
 import { createComponent, createHook } from "reakit-system";
 import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
 
+import { LINK_KEYS } from "./__keys";
+
 export type LinkOptions = ClickableOptions & {
   isExternal?: boolean;
 };
@@ -15,7 +17,7 @@ export type LinkProps = LinkOptions & LinkHTMLProps;
 export const useLink = createHook<LinkOptions, LinkHTMLProps>({
   name: "Link",
   compose: useClickable,
-  keys: ["isExternal"],
+  keys: LINK_KEYS,
 
   useOptions(options) {
     return { unstable_clickOnSpace: false, ...options };
