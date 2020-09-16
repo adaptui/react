@@ -2,7 +2,7 @@ import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit/Button";
 
 import { useSpinButton } from "./__utils";
-import { NUMBERINPUT_BUTTON_KEYS } from "./__keys";
+import { NUMBER_INPUT_BUTTON_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./NumberInputState";
 
 export type NumberInputButtonOptions = ButtonOptions &
@@ -23,7 +23,7 @@ export const createNumberInputButtonsHook = (
   return createHook<NumberInputButtonOptions, NumberInputButtonHTMLProps>({
     name: `NumberInput`,
     compose: useButton,
-    keys: NUMBERINPUT_BUTTON_KEYS,
+    keys: NUMBER_INPUT_BUTTON_KEYS,
 
     useProps(options, htmlProps) {
       return useSpinButton(options, htmlProps, type);

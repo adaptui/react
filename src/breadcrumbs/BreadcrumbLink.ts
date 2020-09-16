@@ -1,6 +1,7 @@
 import { createComponent, createHook } from "reakit-system";
 
 import { LinkHTMLProps, LinkOptions, useLink } from "../link";
+import { BREADCRUMB_LINK_KEYS } from "./__keys";
 
 export type BreadcrumbLinkOptions = LinkOptions & {
   isCurrent?: boolean;
@@ -17,7 +18,7 @@ export const useBreadcrumbLink = createHook<
 >({
   name: "BreadcrumbLink",
   compose: useLink,
-  keys: ["isCurrent"],
+  keys: BREADCRUMB_LINK_KEYS,
 
   useOptions(options) {
     return { disabled: options.disabled || options.isCurrent, ...options };

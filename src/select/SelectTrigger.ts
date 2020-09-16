@@ -10,7 +10,7 @@ import {
 } from "reakit/Popover";
 
 import { SelectStateReturn } from "./SelectState";
-import { SELECT_KEYS } from "./__keys";
+import { SELECT_TRIGGER_KEYS } from "./__keys";
 
 export type SelectTriggerOptions = PopoverDisclosureOptions &
   Pick<
@@ -31,7 +31,7 @@ const useSelectTrigger = createHook<
 >({
   name: "SelectTrigger",
   compose: [usePopoverDisclosure],
-  keys: SELECT_KEYS,
+  keys: SELECT_TRIGGER_KEYS,
 
   useProps(options, { ref: htmlRef, onKeyDown: htmlOnKeyDown, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);

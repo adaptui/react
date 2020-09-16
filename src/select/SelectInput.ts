@@ -10,7 +10,7 @@ import {
   PopoverDisclosureOptions,
 } from "reakit";
 
-import { SELECT_KEYS } from "./__keys";
+import { SELECT_INPUT_KEYS } from "./__keys";
 import { SelectStateReturn } from "./SelectState";
 
 export type SelectInputOptions = CompositeOptions &
@@ -30,7 +30,7 @@ export type SelectInputOptions = CompositeOptions &
 const useSelectInput = createHook<SelectInputOptions, BoxHTMLProps>({
   name: "SelectInput",
   compose: [useComposite, usePopoverDisclosure],
-  keys: SELECT_KEYS,
+  keys: SELECT_INPUT_KEYS,
 
   useProps(
     {
