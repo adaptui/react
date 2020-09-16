@@ -5,6 +5,7 @@ import {
   unstable_IdStateReturn,
   unstable_useIdState,
 } from "reakit";
+import { getNextItem } from "@chakra-ui/utils";
 
 export type AccordionInitialState = unstable_IdInitialState & {
   /**
@@ -40,7 +41,7 @@ type Button = {
 
 type Panel = Button;
 
-type Item = {
+export type Item = {
   id: string;
   ref: React.RefObject<HTMLElement>;
   button?: Button;
@@ -93,7 +94,6 @@ export function useAccordionState(
   });
 
   const idState = unstable_useIdState(sealed);
-
   const { buttons } = state;
   const total = buttons.length;
   const buttonIds = buttons.map(({ id }) => id);
@@ -104,7 +104,7 @@ export function useAccordionState(
       const nextIndex = (currentIndex + 1) % total;
 
       if (!loop && nextIndex === 0) return;
-      moveFocus(nextIndex, buttons);
+      moveFocus(buttons[nextIndex]);
     },
     [buttonIds, buttons, loop, total],
   );
@@ -115,17 +115,17 @@ export function useAccordionState(
       const prevIndex = (currentIndex - 1 + total) % total;
 
       if (!loop && prevIndex === total - 1) return;
-      moveFocus(prevIndex, buttons);
+      moveFocus(buttons[prevIndex]);
     },
     [buttonIds, buttons, loop, total],
   );
 
   const first = React.useCallback(() => {
-    moveFocus(0, buttons);
+    moveFocus(buttons[0]);
   }, [buttons]);
 
   const last = React.useCallback(() => {
-    moveFocus(total - 1, buttons);
+    moveFocus(buttons[total - 1]);
   }, [buttons, total]);
 
   React.useEffect(() => {
@@ -173,11 +173,25 @@ function reducer(
   const { items, activeItems, buttons, allowMultiple } = state;
 
   switch (action.type) {
+    case "registerItem":
+      return { ...state, items: [...items, action.item] };
+
+    case "registerButton":
+      return {
+        ...state,
+        items: getNextItems("button", action.button, items),
+        buttons: [...buttons, action.button],
+      };
+
+    case "registerPanel":
+      return {
+        ...state,
+        items: getNextItems("panel", action.panel, items),
+      };
+
     case "addActiveItem": {
       const { id } = action;
-
       let nextActiveItems;
-
       if (allowMultiple) {
         nextActiveItems = [...activeItems, id];
       } else {
@@ -194,55 +208,27 @@ function reducer(
       return { ...state, activeItems: nextActiveItems };
     }
 
-    case "registerButton": {
-      const { button } = action;
-      const { nextItem, nextItems } = getNextItem("button", button, items);
-
-      return {
-        ...state,
-        items: [...nextItems, nextItem],
-        buttons: [...buttons, button],
-      };
-    }
-
-    case "registerPanel": {
-      const { panel } = action;
-      const { nextItem, nextItems } = getNextItem("panel", panel, items);
-
-      return {
-        ...state,
-        items: [...nextItems, nextItem],
-      };
-    }
-
-    case "registerItem": {
-      const { item } = action;
-
-      if (items.length === 0) {
-        return { ...state, items: [item] };
-      }
-
-      return { ...state, items: [...items, item] };
-    }
-
     default:
       throw new Error();
   }
 }
 
-function getNextItem(type: string, currentItem: Button | Panel, items: Item[]) {
-  const item = items.find(r =>
-    r.ref.current?.contains(currentItem.ref.current),
+function getNextItems(
+  type: "button" | "panel",
+  currentThing: Button | Panel,
+  items: Item[],
+) {
+  const item = items.find(item =>
+    item.ref.current?.contains(currentThing.ref.current),
   );
+  const nextItem = { ...item, [type]: currentThing } as Item;
   const nextItems = items.filter(
-    r => !r.ref.current?.contains(currentItem.ref.current),
+    item => !item.ref.current?.contains(currentThing.ref.current),
   );
-  const nextItem = { ...item, [type]: currentItem } as Item;
 
-  return { nextItem, nextItems };
+  return [...nextItems, nextItem];
 }
 
-function moveFocus(index: number, buttons: Button[]) {
-  const item = buttons[index];
-  item.ref?.current?.focus();
+function moveFocus(button: Button) {
+  button.ref?.current?.focus();
 }
