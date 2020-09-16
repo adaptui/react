@@ -1,3 +1,4 @@
+// Taken from: https://github.com/reakit/reakit/blob/6f6d1ad9177156cafa4adf9c987a43c79a1bbb90/scripts/build/utils.js
 const { join, dirname, basename } = require("path");
 const { toUpper, snakeCase, isEqual } = require("lodash");
 const prettier = require("prettier");
@@ -12,17 +13,6 @@ const chalk = require("chalk");
 
 function log(...args) {
   console.log(...args);
-}
-
-/**
- * Converts ./path/to/file.js to ./path/to
- * @param {string} dir
- */
-function resolveDir(dir) {
-  if (!/\.(t|j)s$/.test(dir)) {
-    return dir;
-  }
-  return dirname(dir);
 }
 
 /**
