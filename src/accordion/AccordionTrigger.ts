@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
-import { useForkRef, useLiveRef, createOnKeyDown } from "reakit-utils";
+import { useForkRef, createOnKeyDown, useLiveRef } from "reakit-utils";
 import {
   ButtonHTMLProps,
   ButtonOptions,
@@ -12,6 +12,7 @@ import {
 
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
+import { useAccordionItemContext } from "./AccordionItem";
 
 export type AccordionTriggerOptions = unstable_IdOptions &
   ButtonOptions &
@@ -58,7 +59,6 @@ export const useAccordionTrigger = createHook<
       removeActiveItem,
       addActiveItem,
       registerButton,
-      items,
       activeItems,
       next,
       prev,
@@ -67,15 +67,7 @@ export const useAccordionTrigger = createHook<
       allowToggle,
       manual,
     } = options;
-
-    const item = items.find(({ button }) => button?.id === id);
-    const panelId = item?.panel?.id;
-    const isOpen = item ? activeItems.includes(item.id) : false;
-
     const ref = React.useRef<HTMLElement>(null);
-    const onClickRef = useLiveRef(htmlOnClick);
-    const onFocusRef = useLiveRef(htmlOnFocus);
-    const onKeyDownRef = useLiveRef(htmlOnKeyDown);
 
     React.useEffect(() => {
       if (!id) return undefined;
@@ -83,11 +75,19 @@ export const useAccordionTrigger = createHook<
       registerButton?.({ id, ref });
     }, [id, registerButton]);
 
+    const { isOpen, item } = useAccordionItemContext();
+    const panelId = item?.panel?.id;
+
+    const onClickRef = useLiveRef(htmlOnClick);
+    const onFocusRef = useLiveRef(htmlOnFocus);
+    const onKeyDownRef = useLiveRef(htmlOnKeyDown);
+
     const onClick = React.useCallback(
       (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         onClickRef.current?.(event);
         if (event.defaultPrevented) return;
         if (!item) return;
+        if (!manual) return;
 
         if (activeItems.includes(item.id) && allowToggle) {
           removeActiveItem?.(item.id);
@@ -100,6 +100,7 @@ export const useAccordionTrigger = createHook<
         addActiveItem,
         allowToggle,
         item,
+        manual,
         onClickRef,
         removeActiveItem,
       ],
@@ -149,7 +150,7 @@ export const useAccordionTrigger = createHook<
     }, [onCharacterKeyDown, id, next, prev, first, last]);
 
     return {
-      "aria-controls": `${panelId ? panelId : undefined}`,
+      "aria-controls": panelId ?? panelId,
       "aria-expanded": isOpen,
       onClick,
       onKeyDown,
