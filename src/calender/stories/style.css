@@ -1,0 +1,79 @@
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+}
+
+.calendar {
+  width: 400px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.header__weeks {
+  margin-top: 10px;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.header__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.month__weeks {
+  margin-top: 10px;
+}
+
+.month__week--days {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+  text-align: center;
+}
+
+.months__week-day,
+.months__week-day--empty {
+  margin: 2px;
+  border-radius: 4px;
+  background-color: rgb(240, 240, 240);
+  height: 30px;
+  line-height: 30px;
+}
+
+.months__week-day {
+  transition: 0.2s;
+}
+
+.months__week-day[aria-selected="true"] {
+  background-color: rgba(50, 54, 241);
+  color: white;
+}
+
+.months__week-day[data-selected="true"] {
+  background-color: rgba(241, 63, 50);
+  color: white;
+}
+
+.months__week-day[aria-selected="true"][data-selected="true"] {
+  transform: scale(1.1);
+  color: white;
+}
+
+[data-weekend="true"] {
+  color: rgb(245, 51, 90);
+}
+
+[aria-disabled="true"] {
+  color: rgb(160, 158, 158) !important;
+}

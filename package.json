@@ -35,6 +35,7 @@
     "@react-aria/utils": "3.2.1",
     "@react-stately/toggle": "3.2.0",
     "@types/jest-in-case": "^1.0.2",
+    "date-fns": "^2.16.1",
     "emotion": "10.0.27",
     "react-use-gesture": "7.0.16",
     "reakit": "1.2.4",
