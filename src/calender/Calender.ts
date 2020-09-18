@@ -1,9 +1,7 @@
 import { createHook, createComponent } from "reakit-system";
-import { createOnKeyDown } from "reakit-utils";
 import {
   unstable_GridHTMLProps as GridHTMLProps,
   unstable_GridRowProps as GridRowProps,
-  unstable_useGrid as useGrid,
 } from "reakit";
 
 import { CALENDER_KEYS } from "./__keys";
@@ -22,10 +20,7 @@ export type CalenderProps = CalenderOptions & CalenderHTMLProps;
 export const useCalender = createHook<CalenderOptions, CalenderHTMLProps>({
   name: "Calender",
   keys: CALENDER_KEYS,
-  useProps(
-    { nextMonth, previousMonth, nextYear, previousYear },
-    { ...htmlProps },
-  ) {
+  useProps(_, htmlProps) {
     return {
       ...htmlProps,
     };
