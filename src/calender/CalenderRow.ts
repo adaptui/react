@@ -27,6 +27,6 @@ export const useCalenderRow = createHook<
 });
 
 export const CalenderRow = createComponent({
-  as: "div",
+  as: "tr",
   useHook: useCalenderRow,
 });

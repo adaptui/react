@@ -10,62 +10,54 @@ button {
   width: 400px;
 }
 
-.header {
+.calender__table {
+  width: inherit;
+}
+
+.calender__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: center;
 }
 
-.header__weeks {
-  margin-top: 10px;
-  display: grid;
-  text-align: center;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.header__buttons {
+.calender__header--buttons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.month__weeks {
+.calender__table--header__weeks {
   margin-top: 10px;
-}
-
-.month__week--days {
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 5px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
-.months__week-day,
-.months__week-day--empty {
+.calender__table--cell,
+.calender__table--cell--empty {
   margin: 2px;
   border-radius: 4px;
   background-color: rgb(240, 240, 240);
   height: 30px;
   line-height: 30px;
+  text-align: center;
 }
 
-.months__week-day {
+.calender__table--cell {
   transition: 0.2s;
 }
 
-.months__week-day[aria-selected="true"] {
+.calender__table--cell[aria-selected="true"] {
   background-color: rgba(50, 54, 241);
   color: white;
 }
 
-.months__week-day[data-selected="true"] {
+.calender__table--cell[data-selected="true"] {
   background-color: rgba(241, 63, 50);
   color: white;
 }
 
-.months__week-day[aria-selected="true"][data-selected="true"] {
+.calender__table--cell[aria-selected="true"][data-selected="true"] {
   transform: scale(1.1);
   color: white;
 }

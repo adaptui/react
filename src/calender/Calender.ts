@@ -21,28 +21,12 @@ export type CalenderProps = CalenderOptions & CalenderHTMLProps;
 
 export const useCalender = createHook<CalenderOptions, CalenderHTMLProps>({
   name: "Calender",
-  compose: useGrid,
   keys: CALENDER_KEYS,
   useProps(
     { nextMonth, previousMonth, nextYear, previousYear },
     { ...htmlProps },
   ) {
-    const keyboardHandle = createOnKeyDown({
-      keyMap: event => {
-        const shift = event.shiftKey;
-        return {
-          PageUp: () => {
-            shift ? nextYear() : nextMonth();
-          },
-          PageDown: () => {
-            shift ? previousYear() : previousMonth();
-          },
-        };
-      },
-    });
-
     return {
-      onKeyUp: keyboardHandle,
       ...htmlProps,
     };
   },

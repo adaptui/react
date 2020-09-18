@@ -61,6 +61,6 @@ export const useCalenderCell = createHook<
 });
 
 export const CalenderCell = createComponent({
-  as: "div",
+  as: "td",
   useHook: useCalenderCell,
 });
