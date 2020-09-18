@@ -1,11 +1,10 @@
 import { createHook, createComponent } from "reakit-system";
 import { format, isSameDay, isWeekend } from "date-fns";
-import { createOnKeyDown } from "reakit-utils";
+import { callAllHandlers } from "@chakra-ui/utils";
 import {
   unstable_useGridCell as useGridCell,
   unstable_GridCellProps as GridCellProps,
   unstable_GridCellHTMLProps as GridCellHTMLProps,
-  useCompositeItem,
 } from "reakit";
 
 import { CALENDER_CELL_KEYS } from "./__keys";
@@ -33,25 +32,18 @@ export const useCalenderCell = createHook<
   CalenderCellHTMLProps
 >({
   name: "CalenderCell",
-  compose: [useGridCell, useCompositeItem],
+  compose: useGridCell,
   keys: CALENDER_CELL_KEYS,
 
   useProps(
-    {
-      selectedDate,
-      setSelectedDate,
-      date,
-      nextYear,
-      nextMonth,
-      previousYear,
-      previousMonth,
-    },
+    { selectedDate, setSelectedDate, date },
     { disabled, ...htmlProps },
   ) {
+    const handleSelected = () => {
+      setSelectedDate && setSelectedDate(date);
+    };
     return {
-      onClick: () => {
-        setSelectedDate && setSelectedDate(date);
-      },
+      onClick: callAllHandlers(handleSelected, htmlProps.onClick),
       "aria-label": date && format(date, "do MMM yyyy"),
       "data-selected": isSameDay(selectedDate, date),
       "data-weekend": isWeekend(date),

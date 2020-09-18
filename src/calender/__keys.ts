@@ -1,5 +1,9 @@
 // Automatically generated
 const CALENDER_STATE_KEYS = [
+  "up",
+  "down",
+  "next",
+  "previous",
   "weeksDays",
   "weeks",
   "previousMonth",
@@ -9,8 +13,6 @@ const CALENDER_STATE_KEYS = [
   "selectedDate",
   "setSelectedDate",
   "startDate",
-  "gotoMonthEnd",
-  "gotoMonthStart",
   "baseId",
   "unstable_idCountRef",
   "setBaseId",
@@ -30,10 +32,6 @@ const CALENDER_STATE_KEYS = [
   "registerGroup",
   "unregisterGroup",
   "move",
-  "next",
-  "previous",
-  "up",
-  "down",
   "first",
   "last",
   "sort",
@@ -47,5 +45,6 @@ const CALENDER_STATE_KEYS = [
   "unstable_setHasActiveWidget",
 ] as const;
 export const CALENDER_KEYS = CALENDER_STATE_KEYS;
-export const CALENDER_CELL_KEYS = [...CALENDER_KEYS, "date"] as const;
-export const CALENDER_ROW_KEYS = CALENDER_KEYS;
+export const CALENDER_BODY_KEYS = CALENDER_KEYS;
+export const CALENDER_CELL_KEYS = [...CALENDER_BODY_KEYS, "date"] as const;
+export const CALENDER_ROW_KEYS = CALENDER_BODY_KEYS;

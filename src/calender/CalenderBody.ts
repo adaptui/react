@@ -1,6 +1,7 @@
 import { createHook, createComponent } from "reakit-system";
 import { createOnKeyDown } from "reakit-utils";
 import {
+  CompositeOptions,
   unstable_GridHTMLProps as GridHTMLProps,
   unstable_GridRowProps as GridRowProps,
   unstable_useGrid as useGrid,
@@ -9,7 +10,8 @@ import {
 import { CALENDER_KEYS } from "./__keys";
 import { CalenderStateReturn } from "./CalenderState";
 
-export type CalenderBodyOptions = GridRowProps &
+export type CalenderBodyOptions = CompositeOptions &
+  GridRowProps &
   Pick<
     CalenderStateReturn,
     "nextMonth" | "previousMonth" | "nextYear" | "previousYear"
@@ -26,27 +28,28 @@ export const useCalenderBody = createHook<
   name: "CalenderBody",
   compose: useGrid,
   keys: CALENDER_KEYS,
-  useProps(
-    { nextMonth, previousMonth, nextYear, previousYear },
-    { ...htmlProps },
-  ) {
+
+  useComposeProps(options, htmlProps) {
+    htmlProps = useGrid(options, htmlProps, true);
+
     const keyboardHandle = createOnKeyDown({
+      onKeyDown: htmlProps.onKeyDown,
       keyMap: event => {
         const shift = event.shiftKey;
         return {
           PageUp: () => {
-            shift ? nextYear() : nextMonth();
+            shift ? options.nextYear() : options.nextMonth();
           },
           PageDown: () => {
-            shift ? previousYear() : previousMonth();
+            shift ? options.previousYear() : options.previousMonth();
           },
         };
       },
     });
 
     return {
-      onKeyUp: keyboardHandle,
       ...htmlProps,
+      onKeyDown: keyboardHandle,
     };
   },
 });
