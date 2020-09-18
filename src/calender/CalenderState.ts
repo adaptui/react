@@ -154,7 +154,7 @@ export const useCalenderState = ({
     } else {
       composite.down();
     }
-  }, [moveToUpOrDown, nextMonth, composite, composite.groups.length]);
+  }, [moveToUpOrDown, nextMonth, composite, composite.groups]);
 
   const next = React.useCallback(() => {
     console.log("next");
