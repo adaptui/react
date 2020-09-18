@@ -1,0 +1,131 @@
+.calendar {
+  margin-top: 1em;
+  max-width: 320px;
+  position: relative;
+}
+
+.calendar .header {
+  cursor: default;
+  background-color: hsl(216, 80%, 51%);
+  padding: 7px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.calendar h2 {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 1em;
+  color: white;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.calendar button {
+  border-style: none;
+  background: transparent;
+}
+
+.calendar button::-moz-focus-inner {
+  border: 0;
+}
+
+.calendar .prev-year,
+.calendar .prev-month,
+.calendar .next-month,
+.calendar .next-year {
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.calendar .prev-year:focus,
+.calendar .prev-month:focus,
+.calendar .next-month:focus,
+.calendar .next-year:focus {
+  padding: 2px;
+  border: 2px solid white;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.calendar .prev-year:hover,
+.calendar .prev-month:hover,
+.calendar .next-month:hover,
+.calendar .next-year:hover {
+  padding: 3px;
+  border: 1px solid white;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.calendar .month-year {
+  display: inline-block;
+  width: 12em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar .dates {
+  width: 320px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+
+.calendar .dates th,
+.calendar .dates td {
+  text-align: center;
+}
+
+.calendar .dates tr {
+  border: 1px solid black;
+}
+
+.calendar .dates td {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  background: #eee;
+}
+
+.calendar .dates td span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.calendar .dates td[aria-selected] span {
+  border: 2px dotted black;
+  background-color: hsl(216, 80%, 96%);
+}
+
+.calendar .dates td span:focus {
+  background-color: hsl(216, 80%, 51%);
+  color: white;
+}
+
+.calendar .dates td span:hover {
+  background-color: hsl(216, 80%, 92%);
+  color: black;
+}
+
+.calendar .dates td span:not(.disabled):hover {
+  border: 1px solid rgb(100, 100, 100);
+}
+
+.calendar .dates td span:focus {
+  border: 2px solid rgb(100, 100, 100);
+  outline: 0;
+}
