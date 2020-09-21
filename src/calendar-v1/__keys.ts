@@ -1,5 +1,5 @@
 // Automatically generated
-export const CALENDAR_STATE_KEYS = [
+const CALENDAR_STATE_KEYS = [
   "dateValue",
   "setDateValue",
   "currentMonth",
@@ -26,17 +26,15 @@ export const CALENDAR_STATE_KEYS = [
   "weekStart",
   "getCellOptions",
 ] as const;
-
-export const CALENDAR_CELL_BUTTON_KEYS = [
-  ...CALENDAR_STATE_KEYS,
-  "weekIndex",
-  "dayIndex",
-] as const;
-
-export const CALENDAR_CELL_KEYS = CALENDAR_CELL_BUTTON_KEYS;
-export const CALENDAR_GRID_KEYS = CALENDAR_STATE_KEYS;
 export const CALENDAR_BUTTON_KEYS = [
   ...CALENDAR_STATE_KEYS,
   "goto",
   "getAriaLabel",
-];
+] as const;
+export const CALENDAR_CELL_KEYS = [
+  ...CALENDAR_STATE_KEYS,
+  "weekIndex",
+  "dayIndex",
+] as const;
+export const CALENDAR_CELL_BUTTON_KEYS = CALENDAR_CELL_KEYS;
+export const CALENDAR_GRID_KEYS = CALENDAR_STATE_KEYS;

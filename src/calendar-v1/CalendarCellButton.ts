@@ -6,11 +6,11 @@ import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { CalendarState } from "./CalendarState";
+import { CalendarStateReturn } from "./CalendarState";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 
 export type CalendarCellButtonOptions = ButtonOptions &
-  CalendarState & {
+  CalendarStateReturn & {
     weekIndex: number;
     dayIndex: number;
   };
