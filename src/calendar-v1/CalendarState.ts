@@ -39,7 +39,7 @@ export interface CalendarProps {
   onChange?: (value: DateValue) => void;
 }
 
-export function useCalendarState(props: CalendarProps = {}): CalendarState {
+export function useCalendarState(props: CalendarProps = {}) {
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
@@ -140,7 +140,7 @@ export function useCalendarState(props: CalendarProps = {}): CalendarState {
     selectFocusedDate() {
       setValue(focusedDate);
     },
-    selectDate(date) {
+    selectDate(date: Date) {
       setValue(date);
     },
     isDisabled,
@@ -149,7 +149,7 @@ export function useCalendarState(props: CalendarProps = {}): CalendarState {
     setFocused,
     weeksInMonth,
     weekStart,
-    getCellOptions(weekIndex, dayIndex) {
+    getCellOptions(weekIndex: number, dayIndex: number) {
       const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
       const cellDate = new Date(year, month, day);
       const isCurrentMonth = cellDate.getMonth() === month;
@@ -175,33 +175,7 @@ function isInvalid(date: Date, minDate: Date | null, maxDate: Date | null) {
   );
 }
 
-export interface CalendarState {
-  dateValue: Date | null;
-  setDateValue(value: Date): void;
-  currentMonth: Date;
-  setCurrentMonth(value: Date): void;
-  focusedDate: Date;
-  setFocusedDate(value: Date): void;
-  focusNextDay(): void;
-  focusPreviousDay(): void;
-  focusNextWeek(): void;
-  focusPreviousWeek(): void;
-  focusNextMonth(): void;
-  focusPreviousMonth(): void;
-  focusStartOfMonth(): void;
-  focusEndOfMonth(): void;
-  focusNextYear(): void;
-  focusPreviousYear(): void;
-  selectFocusedDate(): void;
-  selectDate(date: Date): void;
-  isDisabled: boolean;
-  isFocused: boolean;
-  isReadOnly: boolean;
-  setFocused(value: boolean): void;
-  weeksInMonth: number;
-  weekStart: number;
-  getCellOptions(weekIndex: number, dayIndex: number): CalendarCellOptions;
-}
+export type CalendarStateReturn = ReturnType<typeof useCalendarState>;
 
 export interface CalendarCellOptions {
   cellDate: Date;
