@@ -5,9 +5,9 @@ import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
 import { CALENDAR_GRID_KEYS } from "./__keys";
-import { CalendarState } from "./CalendarState";
+import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarGridOptions = BoxOptions & CalendarState;
+export type CalendarGridOptions = BoxOptions & CalendarStateReturn;
 
 export type CalendarGridHTMLProps = BoxHTMLProps;
 

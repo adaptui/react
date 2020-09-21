@@ -2,11 +2,11 @@ import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { CALENDAR_CELL_KEYS } from "./__keys";
-import { CalendarState } from "./CalendarState";
+import { CalendarStateReturn } from "./CalendarState";
 import { ariaAttr } from "@chakra-ui/utils";
 
 export type CalendarCellOptions = BoxOptions &
-  CalendarState & {
+  CalendarStateReturn & {
     weekIndex: number;
     dayIndex: number;
   };
