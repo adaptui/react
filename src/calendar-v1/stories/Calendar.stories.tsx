@@ -115,21 +115,11 @@ const Calendar: React.FC<CalendarProps> = props => {
           </tr>
         </thead>
         <tbody>
-          {[...new Array(state.weeksInMonth).keys()].map(weekIndex => (
+          {state.daysInMonth.map((week, weekIndex) => (
             <tr key={weekIndex}>
-              {[...new Array(7).keys()].map(dayIndex => (
-                <CalendarCell
-                  {...state}
-                  as="td"
-                  key={dayIndex}
-                  weekIndex={weekIndex}
-                  dayIndex={dayIndex}
-                >
-                  <CalendarCellButton
-                    {...state}
-                    weekIndex={weekIndex}
-                    dayIndex={dayIndex}
-                  />
+              {week.map((day, dayIndex) => (
+                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
+                  <CalendarCellButton {...state} date={day} />
                 </CalendarCell>
               ))}
             </tr>

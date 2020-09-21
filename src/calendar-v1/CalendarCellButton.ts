@@ -1,21 +1,29 @@
 import * as React from "react";
 import { isSameDay } from "date-fns";
-import { ensureFocus, useForkRef } from "reakit-utils";
-import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
+import { ensureFocus, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
+import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { CalendarStateReturn } from "./CalendarState";
+import { isInvalid } from "./__utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
+import { CalendarStateReturn } from "./CalendarState";
 
 export type CalendarCellButtonOptions = ButtonOptions &
   Pick<
     CalendarStateReturn,
-    "getCellOptions" | "focusedDate" | "selectDate" | "setFocusedDate"
+    | "focusedDate"
+    | "selectDate"
+    | "setFocusedDate"
+    | "isDisabled"
+    | "month"
+    | "minDate"
+    | "maxDate"
+    | "dateValue"
+    | "isFocused"
   > & {
-    weekIndex: number;
-    dayIndex: number;
+    date: Date;
   };
 
 export type CalendarCellButtonHTMLProps = ButtonHTMLProps;
@@ -32,8 +40,16 @@ export const useCalendarCellButton = createHook<
   keys: CALENDAR_CELL_BUTTON_KEYS,
 
   useOptions(options, { disabled }) {
-    const { weekIndex, dayIndex, getCellOptions } = options;
-    const { isDisabled } = getCellOptions(weekIndex, dayIndex);
+    const {
+      isDisabled: isDisabledOption,
+      date,
+      month,
+      minDate,
+      maxDate,
+    } = options;
+    const isCurrentMonth = date.getMonth() === month;
+    const isDisabled =
+      isDisabledOption || !isCurrentMonth || isInvalid(date, minDate, maxDate);
     const truelyDisabled = disabled || isDisabled;
 
     return { disabled: truelyDisabled, ...options };
@@ -44,44 +60,44 @@ export const useCalendarCellButton = createHook<
     { onFocus: htmlOnFocus, onClick: htmlOnClick, ref: htmlRef, ...htmlProps },
   ) {
     const {
+      date,
       disabled,
-      weekIndex,
-      dayIndex,
-      getCellOptions,
+      dateValue,
+      selectDate,
       focusedDate,
       setFocusedDate,
-      selectDate,
+      isFocused: isFocusedOption,
     } = options;
 
-    const { cellDate, isFocused, isToday, isSelected } = getCellOptions(
-      weekIndex,
-      dayIndex,
-    );
     const ref = React.useRef<HTMLElement>(null);
+    const isSelected = dateValue ? isSameDay(date, dateValue) : false;
+    const isFocused =
+      isFocusedOption && focusedDate && isSameDay(date, focusedDate);
+    const isToday = isSameDay(date, new Date());
 
     // Focus the button in the DOM when the state updates.
     React.useEffect(() => {
       if (isFocused && ref.current) {
         ensureFocus(ref.current);
       }
-    }, [cellDate, focusedDate, isFocused, ref]);
+    }, [date, focusedDate, isFocused, ref]);
 
     const onClick = React.useCallback(() => {
       if (!disabled) {
-        selectDate(cellDate);
-        setFocusedDate(cellDate);
+        selectDate(date);
+        setFocusedDate(date);
       }
-    }, [cellDate, disabled, selectDate, setFocusedDate]);
+    }, [date, disabled, selectDate, setFocusedDate]);
 
     const onFocus = React.useCallback(() => {
       if (!disabled) {
-        setFocusedDate(cellDate);
+        setFocusedDate(date);
       }
-    }, [cellDate, disabled, setFocusedDate]);
+    }, [date, disabled, setFocusedDate]);
 
     let tabIndex = undefined;
     if (!disabled) {
-      tabIndex = isSameDay(cellDate, focusedDate) ? 0 : -1;
+      tabIndex = isSameDay(date, focusedDate) ? 0 : -1;
     }
 
     const dateFormatter = useDateFormatter({
@@ -92,7 +108,7 @@ export const useCalendarCellButton = createHook<
     });
 
     // aria-label should be localize Day of week, Month, Day and Year without Time.
-    let ariaLabel = dateFormatter.format(cellDate);
+    let ariaLabel = dateFormatter.format(date);
     if (isToday) {
       // If date is today, set appropriate string depending on selected state:
       ariaLabel = isSelected
@@ -104,7 +120,7 @@ export const useCalendarCellButton = createHook<
     }
 
     return {
-      children: useDateFormatter({ day: "numeric" }).format(cellDate),
+      children: useDateFormatter({ day: "numeric" }).format(date),
       tabIndex,
       "aria-label": ariaLabel,
       "aria-disabled": ariaAttr(disabled),

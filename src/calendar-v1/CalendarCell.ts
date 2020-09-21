@@ -1,14 +1,14 @@
+import { isSameDay } from "date-fns";
+import { ariaAttr } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
-import { ariaAttr } from "@chakra-ui/utils";
 
 export type CalendarCellOptions = BoxOptions &
   CalendarStateReturn & {
-    weekIndex: number;
-    dayIndex: number;
+    date: Date;
   };
 
 export type CalendarCellHTMLProps = BoxHTMLProps;
@@ -23,8 +23,8 @@ export const useCalendarCell = createHook<
   compose: useBox,
   keys: CALENDAR_CELL_KEYS,
 
-  useProps({ weekIndex, dayIndex, getCellOptions }, htmlProps) {
-    const { isSelected } = getCellOptions(weekIndex, dayIndex);
+  useProps({ date, dateValue }, htmlProps) {
+    const isSelected = dateValue ? isSameDay(date, dateValue) : false;
 
     return {
       role: "gridcell",
