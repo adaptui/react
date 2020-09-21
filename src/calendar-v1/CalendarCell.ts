@@ -7,7 +7,7 @@ import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
 export type CalendarCellOptions = BoxOptions &
-  CalendarStateReturn & {
+  Pick<CalendarStateReturn, "dateValue"> & {
     date: Date;
   };
 
