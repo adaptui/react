@@ -5,12 +5,12 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { CalendarState } from "./CalendarState";
 import { CALENDAR_BUTTON_KEYS } from "./__keys";
 
-export type Goto = "nextMonth" | "previousMonth" | "nextYear" | "previousYear";
+export type TGoto = "nextMonth" | "previousMonth" | "nextYear" | "previousYear";
 
 export type CalendarButtonOptions = ButtonOptions &
   CalendarState & {
-    goto: Goto;
-    getAriaLabel?: (goto: Goto) => string;
+    goto: TGoto;
+    getAriaLabel?: (goto: TGoto) => string;
   };
 
 export type CalendarButtonHTMLProps = ButtonHTMLProps;
@@ -56,8 +56,8 @@ export const useCalendarButton = createHook<
     };
 
     return {
-      onClick: callAllHandlers(htmlOnClick, TYPES[goto].handler),
-      "aria-label": getAriaLabel?.(goto) ?? TYPES[goto].ariaLabel,
+      onClick: callAllHandlers(htmlOnClick, TYPES[goto]?.handler),
+      "aria-label": getAriaLabel?.(goto) ?? TYPES[goto]?.ariaLabel,
       ...htmlProps,
     };
   },

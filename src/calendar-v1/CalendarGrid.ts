@@ -79,7 +79,7 @@ export const useCalendarGrid = createHook<
       role: "grid",
       "aria-readonly": ariaAttr(isReadOnly),
       "aria-disabled": ariaAttr(isDisabled),
-      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
+      onKeyDown,
       onFocus: callAllHandlers(htmlOnFocus, () => setFocused(true)),
       onBlur: callAllHandlers(htmlOnBlur, () => setFocused(false)),
       ...htmlProps,
