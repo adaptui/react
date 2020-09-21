@@ -1,17 +1,14 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 import { useDateFormatter } from "@react-aria/i18n";
+import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
 import { CalendarCell } from "../CalendarCell";
 import { CalendarGrid } from "../CalendarGrid";
-import { CalendarProps, DateValue, useCalendarState } from "../CalendarState";
+import { CalendarButton } from "../CalendarButton";
 import { CalendarCellButton } from "../CalendarCellButton";
-import { CalendarNextYearButton } from "../CalendarNextYearButton";
-import { CalendarNextMonthButton } from "../CalendarNextMonthButton";
-import { CalendarPreviousYearButton } from "../CalendarPreviousYearButton";
-import { CalendarPreviousMonthButton } from "../CalendarPreviousMonthButton";
-import { addDays, addWeeks, subWeeks } from "date-fns";
+import { CalendarProps, DateValue, useCalendarState } from "../CalendarState";
 
 export default {
   title: "Component/Calendar",
@@ -24,7 +21,7 @@ const Calendar: React.FC<CalendarProps> = props => {
   return (
     <div className="calendar">
       <div className="header">
-        <CalendarPreviousYearButton {...state} className="prev-year">
+        <CalendarButton {...state} goto="previousYear" className="prev-year">
           <svg
             fill="none"
             stroke="currentColor"
@@ -38,8 +35,8 @@ const Calendar: React.FC<CalendarProps> = props => {
               d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
             ></path>
           </svg>
-        </CalendarPreviousYearButton>
-        <CalendarPreviousMonthButton {...state} className="prev-month">
+        </CalendarButton>
+        <CalendarButton {...state} goto="previousMonth" className="prev-month">
           <svg
             fill="none"
             stroke="currentColor"
@@ -53,13 +50,13 @@ const Calendar: React.FC<CalendarProps> = props => {
               d="M15 19l-7-7 7-7"
             ></path>
           </svg>
-        </CalendarPreviousMonthButton>
+        </CalendarButton>
         <h2 id="cb-grid-label" className="month-year" aria-live="polite">
           {useDateFormatter({ month: "long", year: "numeric" }).format(
             state.currentMonth,
           )}
         </h2>
-        <CalendarNextMonthButton {...state} className="next-month">
+        <CalendarButton {...state} goto="nextMonth" className="next-month">
           <svg
             fill="none"
             stroke="currentColor"
@@ -73,8 +70,8 @@ const Calendar: React.FC<CalendarProps> = props => {
               d="M9 5l7 7-7 7"
             ></path>
           </svg>
-        </CalendarNextMonthButton>
-        <CalendarNextYearButton {...state} className="next-year">
+        </CalendarButton>
+        <CalendarButton {...state} goto="nextYear" className="next-year">
           <svg
             fill="none"
             stroke="currentColor"
@@ -88,31 +85,32 @@ const Calendar: React.FC<CalendarProps> = props => {
               d="M13 5l7 7-7 7M5 5l7 7-7 7"
             ></path>
           </svg>
-        </CalendarNextYearButton>
+        </CalendarButton>
       </div>
+
       <CalendarGrid {...state} as="table" className="dates">
         <thead>
           <tr>
-            <th scope="col" abbr="Sunday">
-              Su
+            <th aria-label="Sunday" scope="col">
+              <abbr title="Sunday">Su</abbr>
             </th>
-            <th scope="col" abbr="Monday">
-              Mo
+            <th aria-label="Monday" scope="col">
+              <abbr title="Monday">Mo</abbr>
             </th>
-            <th scope="col" abbr="Tuesday">
-              Tu
+            <th aria-label="Tuesday" scope="col">
+              <abbr title="Tuesday">Tu</abbr>
             </th>
-            <th scope="col" abbr="Wednesday">
-              We
+            <th aria-label="Wednesday" scope="col">
+              <abbr title="Wednesday">We</abbr>
             </th>
-            <th scope="col" abbr="Thursday">
-              Th
+            <th aria-label="Thursday" scope="col">
+              <abbr title="Thursday">Th</abbr>
             </th>
-            <th scope="col" abbr="Friday">
-              Fr
+            <th aria-label="Friday" scope="col">
+              <abbr title="Friday">Fr</abbr>
             </th>
-            <th scope="col" abbr="Saturday">
-              Sa
+            <th aria-label="Saturday" scope="col">
+              <abbr title="Saturday">Sa</abbr>
             </th>
           </tr>
         </thead>

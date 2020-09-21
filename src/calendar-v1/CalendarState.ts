@@ -1,3 +1,8 @@
+/**
+ * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
+ * We improved the Calendar from Stately [useCalendarState](https://github.com/adobe/react-spectrum/tree/main/packages/%40react-stately/calendar)
+ * to work with Reakit System
+ */
 import { useState } from "react";
 import { useWeekStart } from "./useWeekStart";
 import {
