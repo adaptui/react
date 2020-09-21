@@ -4,6 +4,8 @@
  * to work with Reakit System
  */
 import { useState } from "react";
+import { unstable_useId as useId } from "reakit";
+
 import { useWeekStart } from "./useWeekStart";
 import {
   addDays,
@@ -25,7 +27,7 @@ import {
 import { useControllableState } from "@chakra-ui/hooks";
 
 export type DateValue = string | number | Date;
-export interface CalendarProps {
+export interface IUseCalendarProps {
   minValue?: DateValue;
   maxValue?: DateValue;
   isDisabled?: boolean;
@@ -39,7 +41,8 @@ export interface CalendarProps {
   onChange?: (value: DateValue) => void;
 }
 
-export function useCalendarState(props: CalendarProps = {}) {
+export function useCalendarState(props: IUseCalendarProps = {}) {
+  const { id: calendarId } = useId({ baseId: "calendar" });
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
@@ -101,6 +104,7 @@ export function useCalendarState(props: CalendarProps = {}) {
   }
 
   return {
+    calendarId,
     dateValue,
     setDateValue: setValue,
     currentMonth,

@@ -6,7 +6,7 @@ import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { useDateFormatter } from "@react-aria/i18n";
 
 export type CalendarHeaderOptions = BoxOptions &
-  CalendarStateReturn & {
+  Pick<CalendarStateReturn, "calendarId" | "currentMonth"> & {
     format?: Intl.DateTimeFormatOptions;
   };
 
@@ -24,10 +24,11 @@ export const useCalendarHeader = createHook<
   keys: CALENDAR_HEADER_KEYS,
 
   useProps(
-    { format = { month: "long", year: "numeric" }, currentMonth },
+    { format = { month: "long", year: "numeric" }, currentMonth, calendarId },
     { ...htmlProps },
   ) {
     return {
+      id: calendarId,
       children: useDateFormatter(format).format(currentMonth),
       "aria-live": "polite",
       ...htmlProps,
