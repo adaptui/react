@@ -1,23 +1,24 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
+import { useDateFormatter } from "@react-aria/i18n";
 
 import "./index.css";
-import { useCalendarState } from "../CalendarState";
-import { CalendarCellButton } from "..";
 import { CalendarCell } from "../CalendarCell";
 import { CalendarGrid } from "../CalendarGrid";
-import { CalendarPreviousMonthButton } from "../CalendarPreviousMonthButton";
-import { CalendarNextMonthButton } from "../CalendarNextMonthButton";
-import { useDateFormatter } from "@react-aria/i18n";
-import { CalendarPreviousYearButton } from "../CalendarPreviousYearButton";
+import { CalendarProps, DateValue, useCalendarState } from "../CalendarState";
+import { CalendarCellButton } from "../CalendarCellButton";
 import { CalendarNextYearButton } from "../CalendarNextYearButton";
+import { CalendarNextMonthButton } from "../CalendarNextMonthButton";
+import { CalendarPreviousYearButton } from "../CalendarPreviousYearButton";
+import { CalendarPreviousMonthButton } from "../CalendarPreviousMonthButton";
+import { addDays, addWeeks, subWeeks } from "date-fns";
 
 export default {
   title: "Component/Calendar",
 } as Meta;
 
-export const Default = () => {
-  const state = useCalendarState({ value: new Date() });
+const Calendar: React.FC<CalendarProps> = props => {
+  const state = useCalendarState(props);
   console.log("%c state", "color: #e5de73", state);
 
   return (
@@ -89,7 +90,7 @@ export const Default = () => {
           </svg>
         </CalendarNextYearButton>
       </div>
-      <CalendarGrid {...state} as="table" className="dates" role="grid">
+      <CalendarGrid {...state} as="table" className="dates">
         <thead>
           <tr>
             <th scope="col" abbr="Sunday">
@@ -140,3 +141,32 @@ export const Default = () => {
     </div>
   );
 };
+
+export const Default = () => <Calendar />;
+export const DefaultValue = () => (
+  <Calendar defaultValue={addDays(new Date(), 1)} />
+);
+export const ControlledValue = () => {
+  const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
+  return <Calendar value={value} onChange={setValue} />;
+};
+export const MinMaxDate = () => (
+  <Calendar minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />
+);
+export const MinMaxDefaultDate = () => (
+  <Calendar
+    defaultValue={new Date()}
+    minValue={subWeeks(new Date(), 1)}
+    maxValue={addWeeks(new Date(), 1)}
+  />
+);
+export const isDisabled = () => (
+  <Calendar defaultValue={addDays(new Date(), 1)} isDisabled />
+);
+export const isReadOnly = () => (
+  <Calendar defaultValue={addDays(new Date(), 1)} isReadOnly />
+);
+export const autoFocus = () => (
+  // eslint-disable-next-line jsx-a11y/no-autofocus
+  <Calendar defaultValue={addDays(new Date(), 1)} autoFocus />
+);

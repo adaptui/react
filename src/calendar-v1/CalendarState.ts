@@ -36,28 +36,34 @@ export interface CalendarProps {
 
 export function useCalendarState(props: CalendarProps = {}): CalendarState {
   const {
-    value: initialValue,
     minValue: initialMinValue,
     maxValue: initialMaxValue,
+    isDisabled = false,
+    isReadOnly = false,
+    autoFocus = false,
+    value: initialValue,
+    defaultValue,
+    onChange,
   } = props;
+
   const [value, setControllableValue] = useControllableState({
     value: initialValue,
-    defaultValue: props.defaultValue,
-    onChange: props.onChange,
+    defaultValue,
+    onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
+
   const dateValue = value ? new Date(value) : null;
   const minValue = initialMinValue ? new Date(initialMinValue) : null;
   const maxValue = initialMaxValue ? new Date(initialMaxValue) : null;
   const minDate = minValue ? startOfDay(minValue) : null;
   const maxDate = maxValue ? endOfDay(maxValue) : null;
 
-  const [isFocused, setFocused] = useState(props.autoFocus || false);
+  const [isFocused, setFocused] = useState(autoFocus);
 
   const initialMonth = dateValue ?? new Date();
   const [currentMonth, setCurrentMonth] = useState(initialMonth); // TODO: does this need to be in state at all??
   const [focusedDate, setFocusedDate] = useState(initialMonth);
-  console.log("%c focusedDate", "color: #e50000", focusedDate);
 
   const weekStart = useWeekStart();
   let monthStartsAt = (startOfMonth(currentMonth).getDay() - weekStart) % 7;
@@ -84,7 +90,7 @@ export function useCalendarState(props: CalendarProps = {}): CalendarState {
   }
 
   function setValue(value: Date) {
-    if (!props.isDisabled && !props.isReadOnly) {
+    if (!isDisabled && !isReadOnly) {
       setControllableValue(value);
     }
   }
@@ -132,9 +138,9 @@ export function useCalendarState(props: CalendarProps = {}): CalendarState {
     selectDate(date) {
       setValue(date);
     },
-    isDisabled: props.isDisabled ?? false,
+    isDisabled,
     isFocused,
-    isReadOnly: props.isReadOnly ?? false,
+    isReadOnly,
     setFocused,
     weeksInMonth,
     weekStart,
@@ -148,12 +154,11 @@ export function useCalendarState(props: CalendarProps = {}): CalendarState {
         isToday: isSameDay(cellDate, new Date()),
         isCurrentMonth,
         isDisabled:
-          props.isDisabled ||
+          isDisabled ||
           !isCurrentMonth ||
           isInvalid(cellDate, minDate, maxDate),
         isSelected: dateValue ? isSameDay(cellDate, dateValue) : false,
         isFocused: isFocused && focusedDate && isSameDay(cellDate, focusedDate),
-        isReadOnly: props.isReadOnly ?? false,
       };
     },
   };
