@@ -13,7 +13,7 @@ import {
   IUseCalendarProps,
   useCalendarState,
   CalendarCellButton,
-} from "..";
+} from "../index";
 
 export default {
   title: "Component/Calendar",

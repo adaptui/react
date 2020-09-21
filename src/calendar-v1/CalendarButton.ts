@@ -1,3 +1,8 @@
+/**
+ * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
+ * We improved the Calendar from Aria [useCalendarBase](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useCalendarBase.ts)
+ * to work with Reakit System
+ */
 import { callAllHandlers } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
