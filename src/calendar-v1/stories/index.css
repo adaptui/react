@@ -17,6 +17,7 @@ body {
   color: #676d7e;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .calendar h2 {

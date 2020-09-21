@@ -24,7 +24,7 @@ import {
 } from "date-fns";
 
 import { useWeekStart } from "./useWeekStart";
-import { isInvalid } from "./__utils";
+import { isInvalid, useWeekDays } from "./__utils";
 
 export type DateValue = string | number | Date;
 export interface IUseCalendarProps {
@@ -77,12 +77,14 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
 
   const month = currentMonth.getMonth();
   const year = currentMonth.getFullYear();
-  const days = getDaysInMonth(currentMonth);
   const weekStart = useWeekStart();
+  const weekDays = useWeekDays(weekStart);
+
   let monthStartsAt = (startOfMonth(currentMonth).getDay() - weekStart) % 7;
   if (monthStartsAt < 0) {
     monthStartsAt += 7;
   }
+  const days = getDaysInMonth(currentMonth);
   const weeksInMonth = Math.ceil((monthStartsAt + days) / 7);
 
   // Get 2D Date arrays in 7 days a week format
@@ -130,6 +132,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     month,
     year,
     weekStart,
+    weekDays,
     daysInMonth,
     isDisabled,
     isFocused,

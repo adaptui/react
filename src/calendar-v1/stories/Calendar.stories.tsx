@@ -13,6 +13,7 @@ import {
   IUseCalendarProps,
   useCalendarState,
   CalendarCellButton,
+  CalendarWeekTitle,
 } from "../index";
 
 export default {
@@ -92,27 +93,19 @@ const CalendarComp: React.FC<IUseCalendarProps> = props => {
       <CalendarGrid {...state} as="table" className="dates">
         <thead>
           <tr>
-            <th aria-label="Sunday" scope="col">
-              <abbr title="Sunday">Su</abbr>
-            </th>
-            <th aria-label="Monday" scope="col">
-              <abbr title="Monday">Mo</abbr>
-            </th>
-            <th aria-label="Tuesday" scope="col">
-              <abbr title="Tuesday">Tu</abbr>
-            </th>
-            <th aria-label="Wednesday" scope="col">
-              <abbr title="Wednesday">We</abbr>
-            </th>
-            <th aria-label="Thursday" scope="col">
-              <abbr title="Thursday">Th</abbr>
-            </th>
-            <th aria-label="Friday" scope="col">
-              <abbr title="Friday">Fr</abbr>
-            </th>
-            <th aria-label="Saturday" scope="col">
-              <abbr title="Saturday">Sa</abbr>
-            </th>
+            {state.weekDays.map((day, dayIndex) => {
+              return (
+                <CalendarWeekTitle
+                  {...state}
+                  as="th"
+                  scope="col"
+                  key={dayIndex}
+                  dayIndex={dayIndex}
+                >
+                  <abbr title={day.title}>{day.abbr}</abbr>
+                </CalendarWeekTitle>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
