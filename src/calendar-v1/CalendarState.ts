@@ -21,7 +21,6 @@ import {
   subMonths,
   subWeeks,
   subYears,
-  isWeekend,
 } from "date-fns";
 
 import { useWeekStart } from "./useWeekStart";
