@@ -7,7 +7,24 @@ import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { CALENDAR_GRID_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarGridOptions = BoxOptions & CalendarStateReturn;
+export type CalendarGridOptions = BoxOptions &
+  Pick<
+    CalendarStateReturn,
+    | "isReadOnly"
+    | "isDisabled"
+    | "setFocused"
+    | "selectFocusedDate"
+    | "focusPreviousYear"
+    | "focusPreviousMonth"
+    | "focusNextYear"
+    | "focusNextMonth"
+    | "focusEndOfMonth"
+    | "focusStartOfMonth"
+    | "focusNextDay"
+    | "focusPreviousDay"
+    | "focusNextWeek"
+    | "focusPreviousWeek"
+  >;
 
 export type CalendarGridHTMLProps = BoxHTMLProps;
 
