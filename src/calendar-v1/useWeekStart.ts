@@ -1,3 +1,8 @@
+/**
+ * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
+ * We improved the Calendar from Stately [useWeekStart](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/calendar/src/useWeekStart.ts)
+ * to work with Reakit System
+ */
 import { useLocale } from "@react-aria/i18n";
 
 // Data from https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/weekData.json
