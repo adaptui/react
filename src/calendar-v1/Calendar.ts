@@ -1,8 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
-import { CalendarStateReturn } from "./CalendarState";
 import { CALENDAR_KEYS } from "./__keys";
+import { CalendarStateReturn } from "./CalendarState";
 
 export type CalendarOptions = BoxOptions &
   Pick<CalendarStateReturn, "calendarId">;
@@ -16,7 +16,7 @@ export const useCalendar = createHook<CalendarOptions, CalendarHTMLProps>({
   compose: useBox,
   keys: CALENDAR_KEYS,
 
-  useProps({ calendarId }, { ...htmlProps }) {
+  useProps({ calendarId }, htmlProps) {
     return {
       role: "group",
       "aria-labelledby": calendarId,

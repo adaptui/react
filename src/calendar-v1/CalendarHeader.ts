@@ -25,7 +25,7 @@ export const useCalendarHeader = createHook<
 
   useProps(
     { format = { month: "long", year: "numeric" }, currentMonth, calendarId },
-    { ...htmlProps },
+    htmlProps,
   ) {
     return {
       id: calendarId,

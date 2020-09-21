@@ -5,8 +5,7 @@
  */
 import { useState } from "react";
 import { unstable_useId as useId } from "reakit";
-
-import { useWeekStart } from "./useWeekStart";
+import { useControllableState } from "@chakra-ui/hooks";
 import {
   addDays,
   addMonths,
@@ -24,7 +23,8 @@ import {
   subWeeks,
   subYears,
 } from "date-fns";
-import { useControllableState } from "@chakra-ui/hooks";
+
+import { useWeekStart } from "./useWeekStart";
 
 export type DateValue = string | number | Date;
 export interface IUseCalendarProps {
