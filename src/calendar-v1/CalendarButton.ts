@@ -2,13 +2,19 @@ import { callAllHandlers } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { CalendarStateReturn } from "./CalendarState";
 import { CALENDAR_BUTTON_KEYS } from "./__keys";
+import { CalendarStateReturn } from "./CalendarState";
 
 export type TGoto = "nextMonth" | "previousMonth" | "nextYear" | "previousYear";
 
 export type CalendarButtonOptions = ButtonOptions &
-  CalendarStateReturn & {
+  Pick<
+    CalendarStateReturn,
+    | "focusNextMonth"
+    | "focusPreviousMonth"
+    | "focusPreviousYear"
+    | "focusNextYear"
+  > & {
     goto: TGoto;
     getAriaLabel?: (goto: TGoto) => string;
   };

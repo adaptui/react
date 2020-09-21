@@ -4,7 +4,8 @@
  * to work with Reakit System
  */
 import { useState } from "react";
-import { useWeekStart } from "./useWeekStart";
+import { unstable_useId as useId } from "reakit";
+import { useControllableState } from "@chakra-ui/hooks";
 import {
   addDays,
   addMonths,
@@ -22,10 +23,11 @@ import {
   subWeeks,
   subYears,
 } from "date-fns";
-import { useControllableState } from "@chakra-ui/hooks";
+
+import { useWeekStart } from "./useWeekStart";
 
 export type DateValue = string | number | Date;
-export interface CalendarProps {
+export interface IUseCalendarProps {
   minValue?: DateValue;
   maxValue?: DateValue;
   isDisabled?: boolean;
@@ -39,7 +41,8 @@ export interface CalendarProps {
   onChange?: (value: DateValue) => void;
 }
 
-export function useCalendarState(props: CalendarProps = {}) {
+export function useCalendarState(props: IUseCalendarProps = {}) {
+  const { id: calendarId } = useId({ baseId: "calendar" });
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
@@ -101,6 +104,7 @@ export function useCalendarState(props: CalendarProps = {}) {
   }
 
   return {
+    calendarId,
     dateValue,
     setDateValue: setValue,
     currentMonth,
@@ -176,17 +180,3 @@ function isInvalid(date: Date, minDate: Date | null, maxDate: Date | null) {
 }
 
 export type CalendarStateReturn = ReturnType<typeof useCalendarState>;
-
-export interface CalendarCellOptions {
-  cellDate: Date;
-  isToday: boolean;
-  isCurrentMonth: boolean;
-  isDisabled: boolean;
-  isSelected: boolean;
-  isFocused: boolean;
-  isRangeSelection?: boolean;
-  isRangeStart?: boolean;
-  isRangeEnd?: boolean;
-  isSelectionStart?: boolean;
-  isSelectionEnd?: boolean;
-}
