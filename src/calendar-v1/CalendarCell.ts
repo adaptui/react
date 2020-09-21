@@ -6,7 +6,7 @@ import { CalendarStateReturn } from "./CalendarState";
 import { ariaAttr } from "@chakra-ui/utils";
 
 export type CalendarCellOptions = BoxOptions &
-  CalendarStateReturn & {
+  Pick<CalendarStateReturn, "getCellOptions"> & {
     weekIndex: number;
     dayIndex: number;
   };

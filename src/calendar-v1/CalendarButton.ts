@@ -8,7 +8,13 @@ import { CALENDAR_BUTTON_KEYS } from "./__keys";
 export type TGoto = "nextMonth" | "previousMonth" | "nextYear" | "previousYear";
 
 export type CalendarButtonOptions = ButtonOptions &
-  CalendarStateReturn & {
+  Pick<
+    CalendarStateReturn,
+    | "focusNextMonth"
+    | "focusPreviousMonth"
+    | "focusPreviousYear"
+    | "focusNextYear"
+  > & {
     goto: TGoto;
     getAriaLabel?: (goto: TGoto) => string;
   };
