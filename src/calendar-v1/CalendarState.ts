@@ -4,7 +4,8 @@
  * to work with Reakit System
  */
 import { useState } from "react";
-import { useControllableState, useId } from "@chakra-ui/hooks";
+import { unstable_useId as useId } from "reakit";
+import { useControllableState } from "@chakra-ui/hooks";
 import {
   addDays,
   addMonths,
@@ -54,7 +55,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     id,
   } = props;
 
-  const calendarId = useId(id, "calendar");
+  const { id: calendarId } = useId({ id, baseId: "calendar" });
   const [value, setControllableValue] = useControllableState({
     value: initialValue,
     defaultValue,
