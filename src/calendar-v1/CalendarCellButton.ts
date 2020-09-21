@@ -1,5 +1,5 @@
+import * as React from "react";
 import { isSameDay } from "date-fns";
-import { useEffect, useRef } from "react";
 import { ensureFocus, useForkRef } from "reakit-utils";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
@@ -10,7 +10,10 @@ import { CalendarState } from "./CalendarState";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 
 export type CalendarCellButtonOptions = ButtonOptions &
-  CalendarState & {
+  Pick<
+    CalendarState,
+    "getCellOptions" | "focusedDate" | "selectDate" | "setFocusedDate"
+  > & {
     weekIndex: number;
     dayIndex: number;
   };
@@ -54,28 +57,27 @@ export const useCalendarCellButton = createHook<
       weekIndex,
       dayIndex,
     );
-
-    const ref = useRef<HTMLElement>(null);
+    const ref = React.useRef<HTMLElement>(null);
 
     // Focus the button in the DOM when the state updates.
-    useEffect(() => {
+    React.useEffect(() => {
       if (isFocused && ref.current) {
         ensureFocus(ref.current);
       }
     }, [cellDate, focusedDate, isFocused, ref]);
 
-    const onClick = () => {
+    const onClick = React.useCallback(() => {
       if (!disabled) {
         selectDate(cellDate);
         setFocusedDate(cellDate);
       }
-    };
+    }, [cellDate, disabled, selectDate, setFocusedDate]);
 
-    const onFocus = () => {
+    const onFocus = React.useCallback(() => {
       if (!disabled) {
         setFocusedDate(cellDate);
       }
-    };
+    }, [cellDate, disabled, setFocusedDate]);
 
     let tabIndex = undefined;
     if (!disabled) {
@@ -90,23 +92,25 @@ export const useCalendarCellButton = createHook<
     });
 
     // aria-label should be localize Day of week, Month, Day and Year without Time.
-    let label = dateFormatter.format(cellDate);
+    let ariaLabel = dateFormatter.format(cellDate);
     if (isToday) {
       // If date is today, set appropriate string depending on selected state:
-      label = isSelected ? `Today, ${label} selected` : `Today, ${label}`;
+      ariaLabel = isSelected
+        ? `Today, ${ariaLabel} selected`
+        : `Today, ${ariaLabel}`;
     } else if (isSelected) {
       // If date is selected but not today:
-      label = `${label} selected`;
+      ariaLabel = `${ariaLabel} selected`;
     }
 
     return {
       children: useDateFormatter({ day: "numeric" }).format(cellDate),
       tabIndex,
-      "aria-label": label,
+      "aria-label": ariaLabel,
       "aria-disabled": ariaAttr(disabled),
       ref: useForkRef(ref, htmlRef),
-      onClick: callAllHandlers(onClick, htmlOnClick),
-      onFocus: callAllHandlers(onFocus, htmlOnFocus),
+      onClick: callAllHandlers(htmlOnClick, onClick),
+      onFocus: callAllHandlers(htmlOnFocus, onFocus),
       ...htmlProps,
     };
   },
