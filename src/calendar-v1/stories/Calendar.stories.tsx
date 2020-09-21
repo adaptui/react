@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { useDateFormatter } from "@react-aria/i18n";
 import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
 import { CalendarCell } from "../CalendarCell";
 import { CalendarGrid } from "../CalendarGrid";
+import { CalendarHeader } from "../CalendarHeader";
 import { CalendarButton } from "../CalendarButton";
 import { CalendarCellButton } from "../CalendarCellButton";
 import { CalendarProps, DateValue, useCalendarState } from "../CalendarState";
@@ -51,11 +51,7 @@ const Calendar: React.FC<CalendarProps> = props => {
             ></path>
           </svg>
         </CalendarButton>
-        <h2 id="cb-grid-label" className="month-year" aria-live="polite">
-          {useDateFormatter({ month: "long", year: "numeric" }).format(
-            state.currentMonth,
-          )}
-        </h2>
+        <CalendarHeader id="cb-grid-label" {...state} />
         <CalendarButton {...state} goto="nextMonth" className="next-month">
           <svg
             fill="none"
