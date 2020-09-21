@@ -176,17 +176,3 @@ function isInvalid(date: Date, minDate: Date | null, maxDate: Date | null) {
 }
 
 export type CalendarStateReturn = ReturnType<typeof useCalendarState>;
-
-export interface CalendarCellOptions {
-  cellDate: Date;
-  isToday: boolean;
-  isCurrentMonth: boolean;
-  isDisabled: boolean;
-  isSelected: boolean;
-  isFocused: boolean;
-  isRangeSelection?: boolean;
-  isRangeStart?: boolean;
-  isRangeEnd?: boolean;
-  isSelectionStart?: boolean;
-  isSelectionEnd?: boolean;
-}
