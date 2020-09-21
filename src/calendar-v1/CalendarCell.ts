@@ -24,10 +24,11 @@ export const useCalendarCell = createHook<
   keys: CALENDAR_CELL_KEYS,
 
   useProps({ weekIndex, dayIndex, getCellOptions }, htmlProps) {
-    const { isSelected } = getCellOptions(weekIndex, dayIndex);
+    const { isSelected, isWeekend } = getCellOptions(weekIndex, dayIndex);
 
     return {
       role: "gridcell",
+      "data-weekend": isWeekend,
       "aria-selected": ariaAttr(isSelected),
       ...htmlProps,
     };

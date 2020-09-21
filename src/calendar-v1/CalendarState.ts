@@ -22,6 +22,7 @@ import {
   subMonths,
   subWeeks,
   subYears,
+  isWeekend,
 } from "date-fns";
 
 import { useWeekStart } from "./useWeekStart";
@@ -157,9 +158,11 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
       const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
       const cellDate = new Date(year, month, day);
       const isCurrentMonth = cellDate.getMonth() === month;
+      const weekend = isWeekend(cellDate);
 
       return {
         cellDate,
+        isWeekend: weekend,
         isToday: isSameDay(cellDate, new Date()),
         isCurrentMonth,
         isDisabled:

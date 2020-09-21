@@ -1,3 +1,7 @@
+body {
+  font-family: "Century Gothic";
+}
+
 .calendar {
   margin-top: 1em;
   max-width: 320px;
@@ -6,11 +10,11 @@
 
 .calendar .header {
   cursor: default;
-  background-color: hsl(216, 80%, 51%);
+  background-color: #fbfbff;
   padding: 7px;
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
+  color: #676d7e;
   display: flex;
   justify-content: space-around;
 }
@@ -20,7 +24,7 @@
   padding: 0;
   display: inline-block;
   font-size: 1em;
-  color: white;
+  color: #676d7e;
   text-transform: none;
   font-weight: bold;
 }
@@ -41,7 +45,7 @@
   padding: 4px;
   width: 24px;
   height: 24px;
-  color: white;
+  color: #676d7e;
 }
 
 .calendar .prev-year:focus,
@@ -49,7 +53,7 @@
 .calendar .next-month:focus,
 .calendar .next-year:focus {
   padding: 2px;
-  border: 2px solid white;
+  border: 2px solid #676d7e;
   border-radius: 4px;
   outline: 0;
 }
@@ -59,7 +63,7 @@
 .calendar .next-month:hover,
 .calendar .next-year:hover {
   padding: 3px;
-  border: 1px solid white;
+  border: 1px solid #676d7e;
   border-radius: 4px;
   outline: 0;
 }
@@ -78,6 +82,7 @@
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 1em;
+  background-color: #fbfbff;
 }
 
 .calendar .dates th,
@@ -94,7 +99,6 @@
   width: 40px;
   border-radius: 5px;
   font-size: 15px;
-  background: #eee;
 }
 
 .calendar .dates td span {
@@ -107,25 +111,35 @@
 }
 
 .calendar .dates td[aria-selected] span {
+  border-radius: 50%;
   border: 2px dotted black;
-  background-color: hsl(216, 80%, 96%);
+  background-color: #fbfbff;
 }
 
 .calendar .dates td span:focus {
-  background-color: hsl(216, 80%, 51%);
+  background-color: #5f91ff;
   color: white;
 }
 
 .calendar .dates td span:hover {
-  background-color: hsl(216, 80%, 92%);
+  background-color: #dae7fb;
   color: black;
 }
 
 .calendar .dates td span:not(.disabled):hover {
-  border: 1px solid rgb(100, 100, 100);
+  border-radius: 50%;
+  border: 1px solid #4c4a69;
 }
 
 .calendar .dates td span:focus {
-  border: 2px solid rgb(100, 100, 100);
+  border-radius: 50%;
+  border: 2px solid #4c4a69;
   outline: 0;
+}
+
+.calendar [aria-disabled="true"] {
+  color: #959595;
+}
+.calendar [data-weekend="true"] {
+  color: #fa3131;
 }
