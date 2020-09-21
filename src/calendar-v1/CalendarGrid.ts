@@ -1,3 +1,8 @@
+/**
+ * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
+ * We improved the Calendar from Stately [useWeekStart](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/calendar/src/useWeekStart.ts)
+ * to work with Reakit System
+ */
 import { KeyboardEvent, useRef } from "react";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createOnKeyDown, useForkRef } from "reakit-utils";
@@ -10,6 +15,7 @@ import { CalendarStateReturn } from "./CalendarState";
 export type CalendarGridOptions = BoxOptions &
   Pick<
     CalendarStateReturn,
+    | "calendarId"
     | "isReadOnly"
     | "isDisabled"
     | "setFocused"
@@ -63,6 +69,7 @@ export const useCalendarGrid = createHook<
       focusPreviousDay,
       focusNextWeek,
       focusPreviousWeek,
+      calendarId,
     } = options;
     const ref = useRef<HTMLElement>(null);
 
@@ -94,6 +101,7 @@ export const useCalendarGrid = createHook<
     return {
       ref: useForkRef(ref, htmlRef),
       role: "grid",
+      "aria-labelledby": calendarId,
       "aria-readonly": ariaAttr(isReadOnly),
       "aria-disabled": ariaAttr(isDisabled),
       onKeyDown,

@@ -14,7 +14,6 @@ import {
   endOfDay,
   endOfMonth,
   getDaysInMonth,
-  isSameDay,
   isSameMonth,
   startOfDay,
   startOfMonth,
@@ -26,6 +25,7 @@ import {
 } from "date-fns";
 
 import { useWeekStart } from "./useWeekStart";
+import { isInvalid } from "./__utils";
 
 export type DateValue = string | number | Date;
 export interface IUseCalendarProps {
@@ -40,10 +40,10 @@ export interface IUseCalendarProps {
   defaultValue?: DateValue;
   /** Handler that is called when the value changes. */
   onChange?: (value: DateValue) => void;
+  id?: string;
 }
 
 export function useCalendarState(props: IUseCalendarProps = {}) {
-  const { id: calendarId } = useId({ baseId: "calendar" });
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
@@ -53,8 +53,10 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     value: initialValue,
     defaultValue,
     onChange,
+    id,
   } = props;
 
+  const { id: calendarId } = useId({ id, baseId: "calendar" });
   const [value, setControllableValue] = useControllableState({
     value: initialValue,
     defaultValue,
@@ -74,16 +76,33 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
   const [currentMonth, setCurrentMonth] = useState(initialMonth); // TODO: does this need to be in state at all??
   const [focusedDate, setFocusedDate] = useState(initialMonth);
 
+  const month = currentMonth.getMonth();
+  const year = currentMonth.getFullYear();
+  const days = getDaysInMonth(currentMonth);
   const weekStart = useWeekStart();
   let monthStartsAt = (startOfMonth(currentMonth).getDay() - weekStart) % 7;
   if (monthStartsAt < 0) {
     monthStartsAt += 7;
   }
-
-  const days = getDaysInMonth(currentMonth);
   const weeksInMonth = Math.ceil((monthStartsAt + days) / 7);
-  const month = currentMonth.getMonth();
-  const year = currentMonth.getFullYear();
+
+  // Get 2D Date arrays in 7 days a week format
+  const daysInMonth = [...new Array(weeksInMonth).keys()].reduce(
+    (weeks: Date[][], weekIndex) => {
+      const daysInWeek = [...new Array(7).keys()].reduce(
+        (days: Date[], dayIndex) => {
+          const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
+          const cellDate = new Date(year, month, day);
+
+          return [...days, cellDate];
+        },
+        [],
+      );
+
+      return [...weeks, daysInWeek];
+    },
+    [],
+  );
 
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
@@ -107,6 +126,16 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
   return {
     calendarId,
     dateValue,
+    minDate,
+    maxDate,
+    month,
+    year,
+    weekStart,
+    daysInMonth,
+    isDisabled,
+    isFocused,
+    isReadOnly,
+    setFocused,
     setDateValue: setValue,
     currentMonth,
     setCurrentMonth,
@@ -148,38 +177,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     selectDate(date: Date) {
       setValue(date);
     },
-    isDisabled,
-    isFocused,
-    isReadOnly,
-    setFocused,
-    weeksInMonth,
-    weekStart,
-    getCellOptions(weekIndex: number, dayIndex: number) {
-      const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
-      const cellDate = new Date(year, month, day);
-      const isCurrentMonth = cellDate.getMonth() === month;
-      const weekend = isWeekend(cellDate);
-
-      return {
-        cellDate,
-        isWeekend: weekend,
-        isToday: isSameDay(cellDate, new Date()),
-        isCurrentMonth,
-        isDisabled:
-          isDisabled ||
-          !isCurrentMonth ||
-          isInvalid(cellDate, minDate, maxDate),
-        isSelected: dateValue ? isSameDay(cellDate, dateValue) : false,
-        isFocused: isFocused && focusedDate && isSameDay(cellDate, focusedDate),
-      };
-    },
   };
-}
-
-function isInvalid(date: Date, minDate: Date | null, maxDate: Date | null) {
-  return (
-    (minDate != null && date < minDate) || (maxDate != null && date > maxDate)
-  );
 }
 
 export type CalendarStateReturn = ReturnType<typeof useCalendarState>;
