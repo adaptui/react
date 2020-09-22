@@ -24,11 +24,9 @@ import {
   subYears,
 } from "date-fns";
 
+import { CalendarProps } from "./index.d";
 import { useWeekStart } from "./useWeekStart";
 import { isInvalid, useWeekDays } from "./__utils";
-import { CalendarProps } from "./index.d";
-
-export type DateValue = string | number | Date;
 
 export interface IUseCalendarProps extends CalendarProps {
   id?: string;

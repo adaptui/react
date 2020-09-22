@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { DateValue } from "./CalendarState";
 import { RangeValue } from "@react-types/shared";
 import { useCalendarState } from "./CalendarState";
-import { endOfDay, getDaysInMonth, isSameDay, startOfDay } from "date-fns";
-import { RangeCalendarProps } from "./index.d";
-import { useControllableState } from "@chakra-ui/hooks";
+import { DateValue, RangeCalendarProps } from "./index.d";
+import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
+import {
+  format,
+  endOfDay,
+  isSameDay,
+  startOfDay,
+  getDaysInMonth,
+} from "date-fns";
+import { announce } from "../utils/LiveAnnouncer";
 
 export function useRangeCalendarState(props: RangeCalendarProps) {
   const {
@@ -43,6 +49,19 @@ export function useRangeCalendarState(props: RangeCalendarProps) {
     }
   };
 
+  useUpdateEffect(() => {
+    if (anchorDate) return;
+    if (isSameDay(highlightedRange.start, highlightedRange.end)) return;
+    if (highlightedRange) {
+      announce(
+        `Selected range, from ${format(
+          highlightedRange.start,
+          "do MMM yyyy",
+        )} to ${format(highlightedRange.end, "do MMM yyyy")}`,
+      );
+    }
+  }, [highlightedRange]);
+
   return {
     ...calendar,
     value: dateRange,
@@ -65,6 +84,7 @@ export function useRangeCalendarState(props: RangeCalendarProps) {
         highlightedRange &&
         opts.cellDate >= highlightedRange.start &&
         opts.cellDate <= highlightedRange.end;
+
       return {
         ...opts,
         isRangeSelection: isSelected,

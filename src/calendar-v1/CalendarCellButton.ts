@@ -14,6 +14,7 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { isInvalid } from "./__utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
+import { RangeCalendarStateReturn } from "./CalendarRangeState";
 
 export type CalendarCellButtonOptions = ButtonOptions &
   Pick<
@@ -27,7 +28,8 @@ export type CalendarCellButtonOptions = ButtonOptions &
     | "maxDate"
     | "dateValue"
     | "isFocused"
-  > & {
+  > &
+  Partial<Pick<RangeCalendarStateReturn, "anchorDate">> & {
     date: Date;
   };
 
@@ -69,7 +71,9 @@ export const useCalendarCellButton = createHook<
       disabled,
       dateValue,
       selectDate,
+      anchorDate,
       focusedDate,
+      isDisabled,
       setFocusedDate,
       isFocused: isFocusedOption,
     } = options;
@@ -122,6 +126,25 @@ export const useCalendarCellButton = createHook<
     } else if (isSelected) {
       // If date is selected but not today:
       ariaLabel = `${ariaLabel} selected`;
+    }
+
+    // When a cell is focused and this is a range calendar, add a prompt to help
+    // screenreader users know that they are in a range selection mode.
+    if (anchorDate && isFocused && !isDisabled) {
+      let rangeSelectionPrompt = "";
+
+      // If selection has started add "click to finish selecting range"
+      if (anchorDate) {
+        rangeSelectionPrompt = "click to finish selecting range";
+        // Otherwise, add "click to start selecting range" prompt
+      } else {
+        rangeSelectionPrompt = "click to start selecting range";
+      }
+
+      // Append to aria-label
+      if (rangeSelectionPrompt) {
+        ariaLabel = `${ariaLabel} (${rangeSelectionPrompt})`;
+      }
     }
 
     return {

@@ -3,8 +3,8 @@
  * We improved the Calendar from Aria [useCalendarBase](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useCalendarBase.ts)
  * to work with Reakit System
  */
+import { isWeekend } from "date-fns";
 import { ariaAttr } from "@chakra-ui/utils";
-import { isSameDay, isWeekend } from "date-fns";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
@@ -13,9 +13,9 @@ import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./CalendarRangeState";
 
 export type CalendarCellOptions = BoxOptions &
-  Pick<
-    RangeCalendarStateReturn & CalendarStateReturn,
-    "dateValue" | "getCellOptions" | "highlightDate"
+  Pick<CalendarStateReturn, "dateValue" | "isDisabled"> &
+  Partial<
+    Pick<RangeCalendarStateReturn, "highlightDate" | "getCellOptions">
   > & {
     weekIndex: number;
     dayIndex: number;
@@ -35,25 +35,25 @@ export const useCalendarCell = createHook<
   keys: CALENDAR_CELL_KEYS,
 
   useProps(
-    { date, getCellOptions, weekIndex, dayIndex, highlightDate },
+    { date, getCellOptions, weekIndex, dayIndex, highlightDate, isDisabled },
     htmlProps,
   ) {
-    const cellProps = getCellOptions(weekIndex, dayIndex);
+    const cellProps = getCellOptions?.(weekIndex, dayIndex);
 
     const onMouseEnter = () => {
       highlightDate && highlightDate(date);
     };
 
     return {
-      onMouseEnter,
+      onMouseEnter: isDisabled ? () => {} : onMouseEnter,
       role: "gridcell",
-      "data-is-range-start": cellProps.isRangeStart,
-      "data-is-range-end": cellProps.isRangeEnd,
-      "data-is-range-selection": cellProps.isRangeSelection,
-      "data-is-selection-start": cellProps.isSelectionStart,
-      "data-is-selection-end": cellProps.isSelectionEnd,
       "data-weekend": isWeekend(date),
-      "aria-selected": ariaAttr(cellProps.isSelected),
+      "aria-selected": ariaAttr(cellProps?.isSelected),
+      "data-is-range-end": cellProps?.isRangeEnd,
+      "data-is-range-start": cellProps?.isRangeStart,
+      "data-is-selection-end": cellProps?.isSelectionEnd,
+      "data-is-selection-start": cellProps?.isSelectionStart,
+      "data-is-range-selection": cellProps?.isRangeSelection,
       ...htmlProps,
     };
   },

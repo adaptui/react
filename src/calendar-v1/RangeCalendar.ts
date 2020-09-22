@@ -3,42 +3,30 @@
  * We improved the Calendar from Aria [useCalendarBase](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useCalendarBase.ts)
  * to work with Reakit System
  */
-import { BoxHTMLProps, BoxOptions } from "reakit";
+import { BoxOptions } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
-import { CALENDAR_KEYS, RANGE_CALENDAR_KEYS } from "./__keys";
+import { RANGE_CALENDAR_KEYS } from "./__keys";
 import { RangeCalendarStateReturn } from "./CalendarRangeState";
-import {
-  CalendarHTMLProps,
-  CalendarOptions,
-  CalendarProps,
-  useCalendar,
-} from "./Calendar";
+import { CalendarHTMLProps, CalendarOptions, useCalendar } from "./Calendar";
 
 export type RangeCalendarOptions = BoxOptions &
   CalendarOptions &
-  Pick<
-    RangeCalendarStateReturn,
-    "calendarId" | "setAnchorDate" | "highlightedRange" | "anchorDate"
-  >;
+  Pick<RangeCalendarStateReturn, "setAnchorDate">;
 
-export type RangeCalendarHTMLProps = BoxHTMLProps & CalendarHTMLProps;
+export type RangeCalendarHTMLProps = CalendarHTMLProps;
 
-export type RangeCalendarProps = CalendarProps &
-  RangeCalendarOptions &
-  RangeCalendarHTMLProps;
+export type RangeCalendarProps = RangeCalendarOptions & RangeCalendarHTMLProps;
 
 export const useRangeCalendar = createHook<
   RangeCalendarOptions,
   RangeCalendarHTMLProps
 >({
   name: "RangeCalendar",
-  compose: [useCalendar],
+  compose: useCalendar,
   keys: RANGE_CALENDAR_KEYS,
 
-  useProps({ setAnchorDate, highlightedRange }, htmlProps) {
-    const { start, end } = highlightedRange || { start: null, end: null };
-
+  useProps({ setAnchorDate }, htmlProps) {
     const onKeyDown = (e: any) => {
       switch (e.key) {
         case "Escape":
