@@ -1,5 +1,5 @@
-import { createComponent, createHook } from "reakit-system";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
 
 import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { useDateFormatter } from "@react-aria/i18n";
