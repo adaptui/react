@@ -10,9 +10,10 @@ import {
   CalendarWeekTitle,
 } from "../index";
 import { RangeCalendar } from "../RangeCalendar";
-import { RangeCalendarProps } from "../index.d";
+import { DateValue, RangeCalendarProps } from "../index.d";
 import { useRangeCalendarState } from "../CalendarRangeState";
 import "./range-style.css";
+import { addDays, addWeeks, setDate, subWeeks } from "date-fns";
 
 export default {
   title: "Component/RangeCalendar",
@@ -127,3 +128,34 @@ const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
 };
 
 export const Default = () => <RangeCalendarComp />;
+export const DefaultValue = () => (
+  <RangeCalendarComp
+    defaultValue={{ start: setDate(new Date(), 1), end: new Date() }}
+  />
+);
+
+export const ControlledValue = () => {
+  const [start, setStart] = React.useState<DateValue>(addDays(new Date(), 1));
+  const [end, setEnd] = React.useState<DateValue>(addDays(new Date(), 1));
+
+  return (
+    <div>
+      <input type="date" onChange={e => setStart(e.target.value)} />
+      <input type="date" onChange={e => setEnd(e.target.value)} />
+      <RangeCalendarComp value={{ start, end }} />
+    </div>
+  );
+};
+
+export const MinMaxDefaultDate = () => (
+  <RangeCalendarComp
+    minValue={subWeeks(new Date(), 1)}
+    maxValue={addWeeks(new Date(), 1)}
+  />
+);
+export const isDisabled = () => <RangeCalendarComp isDisabled />;
+export const isReadOnly = () => <RangeCalendarComp isReadOnly />;
+export const autoFocus = () => (
+  // eslint-disable-next-line jsx-a11y/no-autofocus
+  <RangeCalendarComp autoFocus />
+);
