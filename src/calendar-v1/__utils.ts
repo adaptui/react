@@ -26,3 +26,27 @@ export function useWeekDays(weekStart: number) {
     return { title: dayLong, abbr: day };
   });
 }
+
+export function generateDaysInMonthArray(
+  month: number,
+  monthStartsAt: number,
+  weeksInMonth: number,
+  year: number,
+) {
+  return [...new Array(weeksInMonth).keys()].reduce(
+    (weeks: Date[][], weekIndex) => {
+      const daysInWeek = [...new Array(7).keys()].reduce(
+        (days: Date[], dayIndex) => {
+          const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
+          const cellDate = new Date(year, month, day);
+
+          return [...days, cellDate];
+        },
+        [],
+      );
+
+      return [...weeks, daysInWeek];
+    },
+    [],
+  );
+}
