@@ -4,6 +4,7 @@
  * to work with Reakit System
  */
 import { BoxOptions } from "reakit";
+import { createOnKeyDown } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 
 import { RANGE_CALENDAR_KEYS } from "./__keys";
@@ -27,14 +28,14 @@ export const useRangeCalendar = createHook<
   keys: RANGE_CALENDAR_KEYS,
 
   useProps({ setAnchorDate }, htmlProps) {
-    const onKeyDown = (e: any) => {
-      switch (e.key) {
-        case "Escape":
+    const onKeyDown = createOnKeyDown({
+      keyMap: {
+        Escape: () => {
           // Cancel the selection.
           setAnchorDate(null);
-          break;
-      }
-    };
+        },
+      },
+    });
 
     return {
       "aria-multiselectable": true,
