@@ -1,8 +1,8 @@
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { CalendarStateReturn } from "./CalendarState";
 
 import { CALENDAR_WEEK_TITLE_KEYS } from "./__keys";
+import { CalendarStateReturn } from "./CalendarState";
 
 export type CalendarWeekTitleOptions = BoxOptions &
   Pick<CalendarStateReturn, "weekDays"> & {
@@ -24,7 +24,7 @@ export const useCalendarWeekTitle = createHook<
 
   useProps({ dayIndex, weekDays }, htmlProps) {
     return {
-      "aria-label": weekDays[dayIndex].title,
+      "aria-label": weekDays[dayIndex]?.title,
       ...htmlProps,
     };
   },
