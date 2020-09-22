@@ -30,18 +30,34 @@ const CALENDAR_STATE_KEYS = [
   "focusPreviousYear",
   "selectFocusedDate",
   "selectDate",
+  "getCellOptions",
 ] as const;
-export const CALENDAR_KEYS = CALENDAR_STATE_KEYS;
+const RANGE_CALENDAR_STATE_KEYS = [
+  ...CALENDAR_STATE_KEYS,
+  "value",
+  "setValue",
+  "anchorDate",
+  "setAnchorDate",
+  "highlightedRange",
+  "highlightDate",
+] as const;
+export const CALENDAR_KEYS = RANGE_CALENDAR_STATE_KEYS;
 export const CALENDAR_BUTTON_KEYS = [
   ...CALENDAR_KEYS,
   "goto",
   "getAriaLabel",
 ] as const;
-export const CALENDAR_CELL_KEYS = [...CALENDAR_KEYS, "date"] as const;
-export const CALENDAR_CELL_BUTTON_KEYS = CALENDAR_CELL_KEYS;
+export const CALENDAR_CELL_KEYS = [
+  ...CALENDAR_KEYS,
+  "weekIndex",
+  "dayIndex",
+  "date",
+] as const;
+export const CALENDAR_CELL_BUTTON_KEYS = [...CALENDAR_KEYS, "date"] as const;
 export const CALENDAR_GRID_KEYS = CALENDAR_KEYS;
 export const CALENDAR_HEADER_KEYS = [...CALENDAR_GRID_KEYS, "format"] as const;
 export const CALENDAR_WEEK_TITLE_KEYS = [
   ...CALENDAR_GRID_KEYS,
   "dayIndex",
 ] as const;
+export const RANGE_CALENDAR_KEYS = CALENDAR_GRID_KEYS;

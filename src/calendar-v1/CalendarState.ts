@@ -14,6 +14,7 @@ import {
   endOfDay,
   endOfMonth,
   getDaysInMonth,
+  isSameDay,
   isSameMonth,
   startOfDay,
   startOfMonth,
@@ -25,20 +26,11 @@ import {
 
 import { useWeekStart } from "./useWeekStart";
 import { isInvalid, useWeekDays } from "./__utils";
+import { CalendarProps } from "./index.d";
 
 export type DateValue = string | number | Date;
-export interface IUseCalendarProps {
-  minValue?: DateValue;
-  maxValue?: DateValue;
-  isDisabled?: boolean;
-  isReadOnly?: boolean;
-  autoFocus?: boolean;
-  /** The current value (controlled). */
-  value?: DateValue;
-  /** The default value (uncontrolled). */
-  defaultValue?: DateValue;
-  /** Handler that is called when the value changes. */
-  onChange?: (value: DateValue) => void;
+
+export interface IUseCalendarProps extends CalendarProps {
   id?: string;
 }
 
@@ -178,6 +170,24 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     },
     selectDate(date: Date) {
       setValue(date);
+    },
+    getCellOptions(weekIndex: number, dayIndex: number) {
+      const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
+      const cellDate = new Date(year, month, day);
+      const isCurrentMonth = cellDate.getMonth() === month;
+
+      return {
+        cellDate,
+        isToday: isSameDay(cellDate, new Date()),
+        isCurrentMonth,
+        isDisabled:
+          props.isDisabled ||
+          !isCurrentMonth ||
+          isInvalid(cellDate, minDate, maxDate),
+        isSelected: isSameDay(cellDate, value as Date),
+        isFocused: isFocused && focusedDate && isSameDay(cellDate, focusedDate),
+        isReadOnly: props.isReadOnly,
+      };
     },
   };
 }
