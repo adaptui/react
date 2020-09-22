@@ -32,6 +32,16 @@ export interface IUseCalendarProps extends CalendarProps {
   id?: string;
 }
 
+export type getCellOptionsReturn = {
+  cellDate: Date;
+  isToday: boolean;
+  isCurrentMonth: boolean;
+  isDisabled: boolean;
+  isSelected: boolean;
+  isFocused: boolean;
+  isReadOnly: boolean | undefined;
+};
+
 export function useCalendarState(props: IUseCalendarProps = {}) {
   const {
     minValue: initialMinValue,
@@ -169,7 +179,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     selectDate(date: Date) {
       setValue(date);
     },
-    getCellOptions(weekIndex: number, dayIndex: number) {
+    getCellOptions(weekIndex: number, dayIndex: number): getCellOptionsReturn {
       const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
       const cellDate = new Date(year, month, day);
       const isCurrentMonth = cellDate.getMonth() === month;

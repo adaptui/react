@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RangeValue } from "@react-types/shared";
-import { useCalendarState } from "./CalendarState";
+import { getCellOptionsReturn, useCalendarState } from "./CalendarState";
 import { DateValue, RangeCalendarProps } from "./index.d";
 import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
 import {
@@ -11,6 +11,15 @@ import {
   getDaysInMonth,
 } from "date-fns";
 import { announce } from "../utils/LiveAnnouncer";
+
+export type getRangeCellOptionsReturn = getCellOptionsReturn & {
+  isRangeSelection: boolean;
+  isSelected: boolean;
+  isRangeStart: boolean;
+  isRangeEnd: boolean;
+  isSelectionStart: boolean;
+  isSelectionEnd: boolean;
+};
 
 export function useRangeCalendarState(props: RangeCalendarProps) {
   const {
@@ -78,7 +87,10 @@ export function useRangeCalendarState(props: RangeCalendarProps) {
         calendar.setFocusedDate(date);
       }
     },
-    getCellOptions(weekIndex: number, dayIndex: number) {
+    getCellOptions(
+      weekIndex: number,
+      dayIndex: number,
+    ): getRangeCellOptionsReturn {
       const opts = calendar.getCellOptions(weekIndex, dayIndex);
       const isSelected =
         highlightedRange &&

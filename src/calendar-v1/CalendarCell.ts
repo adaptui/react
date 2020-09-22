@@ -8,18 +8,23 @@ import { ariaAttr } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
+import {
+  getRangeCellOptionsReturn,
+  RangeCalendarStateReturn,
+} from "./CalendarRangeState";
 import { CALENDAR_CELL_KEYS } from "./__keys";
-import { CalendarStateReturn } from "./CalendarState";
-import { RangeCalendarStateReturn } from "./CalendarRangeState";
+import { CalendarStateReturn, getCellOptionsReturn } from "./CalendarState";
 
 export type CalendarCellOptions = BoxOptions &
   Pick<CalendarStateReturn, "dateValue" | "isDisabled"> &
-  Partial<
-    Pick<RangeCalendarStateReturn, "highlightDate" | "getCellOptions">
-  > & {
+  Partial<Pick<RangeCalendarStateReturn, "highlightDate">> & {
     weekIndex: number;
     dayIndex: number;
     date: Date;
+    getCellOptions: (
+      weekIndex: number,
+      dayIndex: number,
+    ) => Partial<getRangeCellOptionsReturn & getCellOptionsReturn>;
   };
 
 export type CalendarCellHTMLProps = BoxHTMLProps;
