@@ -179,9 +179,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     selectDate(date: Date) {
       setValue(date);
     },
-    getCellOptions(weekIndex: number, dayIndex: number): getCellOptionsReturn {
-      const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
-      const cellDate = new Date(year, month, day);
+    getCellOptions(cellDate: Date): getCellOptionsReturn {
       const isCurrentMonth = cellDate.getMonth() === month;
 
       return {

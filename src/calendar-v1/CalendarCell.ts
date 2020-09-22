@@ -18,12 +18,9 @@ import { CalendarStateReturn, getCellOptionsReturn } from "./CalendarState";
 export type CalendarCellOptions = BoxOptions &
   Pick<CalendarStateReturn, "dateValue" | "isDisabled"> &
   Partial<Pick<RangeCalendarStateReturn, "highlightDate">> & {
-    weekIndex: number;
-    dayIndex: number;
     date: Date;
     getCellOptions: (
-      weekIndex: number,
-      dayIndex: number,
+      date: Date,
     ) => Partial<getRangeCellOptionsReturn & getCellOptionsReturn>;
   };
 
@@ -39,11 +36,8 @@ export const useCalendarCell = createHook<
   compose: useBox,
   keys: CALENDAR_CELL_KEYS,
 
-  useProps(
-    { date, getCellOptions, weekIndex, dayIndex, highlightDate, isDisabled },
-    htmlProps,
-  ) {
-    const cellProps = getCellOptions?.(weekIndex, dayIndex);
+  useProps({ date, getCellOptions, highlightDate, isDisabled }, htmlProps) {
+    const cellProps = getCellOptions?.(date);
 
     const onMouseEnter = () => {
       highlightDate && highlightDate(date);

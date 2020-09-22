@@ -87,11 +87,8 @@ export function useRangeCalendarState(props: RangeCalendarProps) {
         calendar.setFocusedDate(date);
       }
     },
-    getCellOptions(
-      weekIndex: number,
-      dayIndex: number,
-    ): getRangeCellOptionsReturn {
-      const opts = calendar.getCellOptions(weekIndex, dayIndex);
+    getCellOptions(cellDate: Date): getRangeCellOptionsReturn {
+      const opts = calendar.getCellOptions(cellDate);
       const isSelected =
         highlightedRange &&
         opts.cellDate >= highlightedRange.start &&
@@ -101,12 +98,10 @@ export function useRangeCalendarState(props: RangeCalendarProps) {
         ...opts,
         isRangeSelection: isSelected,
         isSelected,
-        isRangeStart:
-          isSelected && (dayIndex === 0 || opts.cellDate.getDate() === 1),
+        isRangeStart: isSelected && opts.cellDate.getDate() === 1,
         isRangeEnd:
           isSelected &&
-          (dayIndex === 6 ||
-            opts.cellDate.getDate() === getDaysInMonth(calendar.currentMonth)),
+          opts.cellDate.getDate() === getDaysInMonth(calendar.currentMonth),
         isSelectionStart:
           highlightedRange && isSameDay(opts.cellDate, highlightedRange.start),
         isSelectionEnd:
