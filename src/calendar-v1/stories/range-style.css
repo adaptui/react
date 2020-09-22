@@ -84,6 +84,7 @@ body {
   padding-right: 1em;
   padding-top: 1em;
   background-color: #fbfbff;
+  border-spacing: 0;
 }
 
 .calendar-range .dates th,
@@ -100,6 +101,7 @@ body {
   width: 40px;
   border-radius: 5px;
   font-size: 15px;
+  padding: 1px 0;
 }
 
 .calendar-range .dates td span {
@@ -124,7 +126,6 @@ body {
 [data-is-selection-start="true"] > span,
 [data-is-selection-end="true"] > span {
   color: white !important;
-  border-radius: 50%;
 }
 
 [data-is-range-start="true"] > span {
@@ -138,7 +139,9 @@ body {
 }
 [data-is-selection-start="true"] > span {
   background-color: #1141aa;
+  border-radius: 50% 0 0 50%;
 }
 [data-is-selection-end="true"] > span {
   background-color: #1141aa;
+  border-radius: 0% 50% 50% 0%;
 }
