@@ -9,8 +9,8 @@ import {
   PopoverDisclosureOptions,
 } from "reakit/Popover";
 
-import { SelectStateReturn } from "./SelectState";
 import { SELECT_TRIGGER_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
 
 export type SelectTriggerOptions = PopoverDisclosureOptions &
   Pick<

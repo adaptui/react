@@ -1,9 +1,9 @@
+import { isFunction } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
-import { isFunction } from "@chakra-ui/utils";
 
 export type MeterOptions = BoxOptions &
   Pick<MeterStateReturn, "value" | "max" | "min" | "percent"> & {
