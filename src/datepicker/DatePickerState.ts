@@ -17,7 +17,7 @@ export const useDatePickerState = () => {
   });
 
   const currentDate = calendar.dateValue?.getDate();
-  const currentMonth = calendar.currentMonth?.getMonth();
+  const currentMonth = calendar.dateValue?.getMonth();
   const currentYear = calendar.dateValue?.getFullYear();
 
   const numberSegmentStates = {
@@ -34,7 +34,7 @@ export const useDatePickerState = () => {
     month: useNumberInputState({
       min: 1,
       max: 12,
-      value: currentMonth,
+      defaultValue: currentMonth,
       onChange: value => {
         const date = setMonth(calendar.dateValue as Date, parseInt(value));
         calendar.focusCell(date);

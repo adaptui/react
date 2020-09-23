@@ -1,0 +1,8 @@
+.datepicker__trigger {
+  margin-left: 5px;
+}
+
+.datepicker__header {
+  display: flex;
+  align-items: center;
+}

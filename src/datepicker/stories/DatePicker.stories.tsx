@@ -10,6 +10,8 @@ import { Calendar } from "./Calendar";
 import { DatePickerSegmentInput } from "../DatePickerSegmentInput";
 import { DatePickerSegment } from "../DatePickerSegment";
 
+import "./index.css";
+
 export default {
   title: "Component/DatePicker",
 } as Meta;
@@ -19,7 +21,7 @@ const DatePickerComp: React.FC = props => {
 
   return (
     <DatePicker {...state}>
-      <div>
+      <div className="datepicker__header">
         <DatePickerSegmentInput style={{ display: "flex" }} {...state}>
           <DatePickerSegment {...state} type="date" />
           /
@@ -27,11 +29,17 @@ const DatePickerComp: React.FC = props => {
           /
           <DatePickerSegment {...state} type="year" />
         </DatePickerSegmentInput>
-        <DatePickerTrigger {...state}>[Open]</DatePickerTrigger>
+        <DatePickerTrigger
+          as="button"
+          className="datepicker__trigger"
+          {...state}
+        >
+          Open
+        </DatePickerTrigger>
       </div>
-      {/* <DatePickerContent {...state}> */}
-      <Calendar {...state} />
-      {/* </DatePickerContent> */}
+      <DatePickerContent {...state}>
+        <Calendar {...state} />
+      </DatePickerContent>
     </DatePicker>
   );
 };

@@ -48,7 +48,7 @@ export const useDatePickerSegment = createHook<
     const onKeyDown = (event: any) => {
       event.preventDefault();
       if (isValidNumericKeyboardEvent(event)) {
-        numberInputState.update(+event.key);
+        // numberInputState.update(+event.key);
       }
     };
 
