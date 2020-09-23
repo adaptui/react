@@ -17,6 +17,7 @@ const CALENDAR_STATE_KEYS = [
   "currentMonth",
   "setCurrentMonth",
   "focusedDate",
+  "focusCell",
   "setFocusedDate",
   "focusNextDay",
   "focusPreviousDay",

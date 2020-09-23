@@ -142,6 +142,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     currentMonth,
     setCurrentMonth,
     focusedDate,
+    focusCell,
     setFocusedDate,
     focusNextDay() {
       focusCell(addDays(focusedDate, 1));
