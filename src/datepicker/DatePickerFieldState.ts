@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { DatePickerProps, DateValue } from "./index.d";
+import { DatePickerProps, DateValue } from ".";
 import {
   getDate,
   getDaysInMonth,
@@ -26,7 +26,6 @@ import {
   setSeconds,
   setYear,
 } from "date-fns";
-import parse from "date-fns/parse";
 import { useControlledState } from "@react-stately/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { useMemo, useState } from "react";
@@ -182,6 +181,10 @@ export function useDatePickerFieldState(
     },
   };
 }
+
+export type DatePickerFieldStateReturn = ReturnType<
+  typeof useDatePickerFieldState
+>;
 
 function convertValue(value: DateValue | undefined): Date | undefined {
   if (!value) {

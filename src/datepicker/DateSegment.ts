@@ -15,7 +15,7 @@ import {
 import {
   DatePickerFieldState,
   DateSegment as IDateSegment,
-} from "./useDatePickerFieldState";
+} from "./DatePickerFieldState";
 import { DatePickerProps } from ".";
 import { USE_DATE_SEGMENT_KEYS } from "./__keys";
 import { useSpinButton } from "../utils/useSpinButton";

@@ -1,15 +1,10 @@
-import {
-  PopoverDisclosureHTMLProps,
-  PopoverDisclosureOptions,
-  usePopoverDisclosure,
-} from "reakit";
+import { usePopoverDisclosure, PopoverDisclosureHTMLProps } from "reakit";
 
 import { DATE_PICKER_TRIGGER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
-import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DatePickerTriggerOptions = PopoverDisclosureOptions &
-  DatePickerStateReturn;
+// TODO: Fix Typescript error
+export type DatePickerTriggerOptions = any; // PopoverDisclosureOptions;
 
 export type DatePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
 

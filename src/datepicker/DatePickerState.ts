@@ -2,7 +2,7 @@ import React from "react";
 import { useCompositeState, useDisclosureState } from "reakit";
 
 import { useCalendarState } from "../calendar-v1";
-import { useDatePickerFieldState } from "./useDatePickerFieldState";
+import { useDatePickerFieldState } from "./DatePickerFieldState";
 
 interface DatePickerInitialProps {
   initialDate?: Date;
@@ -42,10 +42,10 @@ export const useDatePickerState = ({
   }, [disclosure.visible]);
 
   return {
+    calendar,
     ...fieldState,
     ...segmentComposite,
     ...disclosure,
-    calendar,
   };
 };
 

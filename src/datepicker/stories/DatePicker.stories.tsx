@@ -1,15 +1,14 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 
-import { DatePicker } from "../DatePicker";
-import { DatePickerContent } from "../DatePickerContent";
-import { useDatePickerState } from "../DatePickerState";
-import { DatePickerTrigger } from "../DatePickerTrigger";
-import { Calendar } from "./Calendar";
-
 import "./index.css";
+import { Calendar } from "./Calendar";
+import { DatePicker } from "../DatePicker";
 import { DateSegment } from "../DateSegment";
 import { DateSegmentField } from "../DateSegmentField";
+import { DatePickerContent } from "../DatePickerContent";
+import { DatePickerTrigger } from "../DatePickerTrigger";
+import { useDatePickerState } from "../DatePickerState";
 
 export default {
   title: "Component/DatePicker",
@@ -24,9 +23,9 @@ const DatePickerComp: React.FC = props => {
         <DateSegmentField {...state} className="datepicker__field">
           {state.segments.map((segment, i) => (
             <DateSegment
-              className="datepicker__field--item"
               key={i}
               segment={segment}
+              className="datepicker__field--item"
               {...state}
             />
           ))}
