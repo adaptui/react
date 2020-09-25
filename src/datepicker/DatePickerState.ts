@@ -36,11 +36,16 @@ export const useDatePickerState = ({
     },
   });
 
+  React.useEffect(() => {
+    calendar.setFocused(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disclosure.visible]);
+
   return {
     ...fieldState,
     ...segmentComposite,
     ...disclosure,
-    ...calendar,
+    calendar,
   };
 };
 

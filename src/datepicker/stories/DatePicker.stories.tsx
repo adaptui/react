@@ -37,7 +37,7 @@ const DatePickerComp: React.FC = props => {
         </DatePickerTrigger>
       </div>
       <DatePickerContent {...state}>
-        <Calendar {...state} />
+        <Calendar {...state.calendar} />
       </DatePickerContent>
     </DatePicker>
   );
