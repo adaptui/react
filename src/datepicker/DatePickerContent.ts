@@ -1,5 +1,5 @@
-import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 
 import { DATE_PICKER_CONTENT_KEYS } from "./__keys";
 

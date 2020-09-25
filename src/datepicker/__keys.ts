@@ -1,6 +1,5 @@
 // Automatically generated
 const DATE_PICKER_STATE_KEYS = [
-  "numberSegmentStates",
   "calendarId",
   "dateValue",
   "minDate",
@@ -75,12 +74,22 @@ const DATE_PICKER_STATE_KEYS = [
   "setWrap",
   "reset",
   "unstable_setHasActiveWidget",
+  "value",
+  "setValue",
+  "segments",
+  "dateFormatter",
+  "increment",
+  "decrement",
+  "incrementPage",
+  "decrementPage",
+  "setSegment",
+  "confirmPlaceholder",
 ] as const;
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;
 export const DATE_PICKER_CONTENT_KEYS = DATE_PICKER_KEYS;
-export const DATE_PICKER_SEGMENT_KEYS = [
-  ...DATE_PICKER_CONTENT_KEYS,
-  "type",
+export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_CONTENT_KEYS;
+export const USE_DATE_SEGMENT_KEYS = [
+  ...DATE_PICKER_TRIGGER_KEYS,
+  "segment",
 ] as const;
-export const DATE_PICKER_SEGMENT_INPUT_KEYS = DATE_PICKER_CONTENT_KEYS;
-export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_SEGMENT_INPUT_KEYS;
+export const DATE_SEGMENT_FIELD_KEYS = DATE_PICKER_TRIGGER_KEYS;

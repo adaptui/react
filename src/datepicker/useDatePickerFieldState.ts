@@ -109,7 +109,6 @@ export function useDatePickerFieldState(
   // is controlled, so use the placeholder as the value until all segments are entered so it doesn't
   // change from uncontrolled to controlled and emit a warning.
   const [placeholderDate, setPlaceholderDate] = useState(
-    // @ts-ignore
     convertValue(props.placeholderDate) ||
       new Date(new Date().getFullYear(), 0, 1),
   );
@@ -117,9 +116,7 @@ export function useDatePickerFieldState(
     // @ts-ignore
     props.value === null
       ? convertValue(placeholderDate)
-      : // @ts-ignore
-        convertValue(props.value),
-    // @ts-ignore
+      : convertValue(props.value),
     convertValue(props.defaultValue),
     props.onChange,
   );
@@ -186,12 +183,12 @@ export function useDatePickerFieldState(
   };
 }
 
-function convertValue(value: DateValue | null): Date | undefined {
+function convertValue(value: DateValue | undefined): Date | undefined {
   if (!value) {
     return undefined;
   }
 
-  return new Date(value); //parse(value);
+  return new Date(value);
 }
 
 function getSegmentLimits(
