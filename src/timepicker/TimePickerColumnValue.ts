@@ -10,7 +10,7 @@ import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 
 export type TimePickerColumnValueOptions = CompositeItemOptions &
   Pick<TimePickerColumnStateReturn, "setSelected" | "selected"> & {
-    value: number;
+    value: number | string;
   };
 
 export type TimePickerColumnValueHTMLProps = CompositeItemHTMLProps;

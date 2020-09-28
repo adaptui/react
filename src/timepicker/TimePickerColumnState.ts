@@ -2,17 +2,19 @@ import React from "react";
 import { useCompositeState } from "reakit";
 
 interface Props {
-  onChange?: (v: number) => void;
-  value?: number;
+  onChange?: (v: number | string) => void;
+  value?: number | string;
 }
 
 export const useTimePickerColumnState = ({ onChange, value }: Props = {}) => {
   const [selected, setSelected] = React.useState(value);
   const composite = useCompositeState({
+    loop: true,
+    wrap: true,
     orientation: "vertical",
   });
 
-  const handleSelected = (v: number) => {
+  const handleSelected = (v: number | string) => {
     setSelected(v);
     onChange?.(v);
   };

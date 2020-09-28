@@ -1,12 +1,30 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #dde0ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9097ff;
+}
+
 .timepicker {
   display: flex;
 }
 
 .timepicker__column {
-  width: 40px;
+  width: 80px;
   text-align: center;
-  max-height: 100px;
+  max-height: 200px;
   overflow: hidden;
+  overflow-y: scroll;
+  border: 1px solid #838bfa;
+}
+
+.timepicker__column--value {
+  padding: 5px;
 }
 
 [data-selected="true"] {

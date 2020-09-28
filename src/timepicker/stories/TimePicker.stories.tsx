@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 
-import { Composite, CompositeItem, useCompositeState } from "reakit";
+import { TimePicker } from "../TimePicker";
 import { TimePickerColumn } from "../TimePickerColumn";
+import { useTimePickerState } from "../TimePickerState";
 import { TimePickerColumnValue } from "../TimePickerColumnValue";
-import { useTimePickerColumnState } from "../TimePickerColumnState";
 
 import "./index.css";
 
@@ -12,33 +12,55 @@ export default {
   title: "Component/TimePicker",
 } as Meta;
 
-const TimePickerComp: React.FC<any> = props => {
-  const state1 = useTimePickerColumnState();
-  const state2 = useTimePickerColumnState();
-  const composite = useCompositeState({ orientation: "horizontal" });
+const TimePickerComp: React.FC<any> = () => {
+  const state = useTimePickerState();
 
   return (
     <>
-      <Composite className="timepicker" {...composite}>
-        <TimePickerColumn className="timepicker__column" {...state1}>
-          {[...new Array(12).keys()].map(n => {
+      <TimePicker className="timepicker" {...state}>
+        <TimePickerColumn className="timepicker__column" {...state.hourState}>
+          {state.hours.map(n => {
             return (
-              <TimePickerColumnValue value={n} {...state1}>
+              <TimePickerColumnValue
+                className="timepicker__column--value"
+                value={n}
+                {...state.hourState}
+              >
                 {n}
               </TimePickerColumnValue>
             );
           })}
         </TimePickerColumn>
-        <TimePickerColumn className="timepicker__column" {...state2}>
-          {[...new Array(60).keys()].map(n => {
+        <TimePickerColumn className="timepicker__column" {...state.minuteState}>
+          {state.minutes.map(n => {
             return (
-              <TimePickerColumnValue value={n} {...state2}>
+              <TimePickerColumnValue
+                className="timepicker__column--value"
+                value={n}
+                {...state.minuteState}
+              >
                 {n}
               </TimePickerColumnValue>
             );
           })}
         </TimePickerColumn>
-      </Composite>
+        <TimePickerColumn
+          className="timepicker__column"
+          {...state.meridiesState}
+        >
+          {state.meridies.map(n => {
+            return (
+              <TimePickerColumnValue
+                className="timepicker__column--value"
+                value={n}
+                {...state.meridiesState}
+              >
+                {n}
+              </TimePickerColumnValue>
+            );
+          })}
+        </TimePickerColumn>
+      </TimePicker>
     </>
   );
 };
