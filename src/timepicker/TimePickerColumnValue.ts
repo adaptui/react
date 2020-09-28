@@ -1,15 +1,17 @@
+import React from "react";
 import {
   useCompositeItem,
   CompositeItemOptions,
   CompositeItemHTMLProps,
 } from "reakit";
+import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 
 export type TimePickerColumnValueOptions = CompositeItemOptions &
-  Pick<TimePickerColumnStateReturn, "setSelected" | "selected"> & {
+  Pick<TimePickerColumnStateReturn, "setSelected" | "selected" | "move"> & {
     value: number | string;
   };
 
@@ -26,8 +28,23 @@ export const useTimePickerColumnValue = createHook<
   compose: useCompositeItem,
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
-  useProps({ setSelected, selected, value }, htmlProps) {
+  useProps(
+    { setSelected, setCurrentId, move, selected, value, id },
+    { ref, ...htmlProps },
+  ) {
+    const htmlRef = React.useRef();
+
+    React.useEffect(() => {
+      if (selected === value) {
+        setCurrentId?.(id as string);
+        move?.(id as string);
+        (htmlRef?.current as any).scrollIntoView();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return {
+      ref: useForkRef(ref, htmlRef),
       onClick: () => setSelected(value),
       "data-selected": selected === value,
       ...htmlProps,

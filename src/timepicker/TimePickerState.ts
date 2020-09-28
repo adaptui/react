@@ -1,4 +1,3 @@
-import React from "react";
 import { useCompositeState } from "reakit";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 
@@ -8,13 +7,13 @@ interface Props {
 }
 
 export const useTimePickerState = ({ onChange, value }: Props = {}) => {
-  const hourState = useTimePickerColumnState();
-  const minuteState = useTimePickerColumnState();
-  const meridiesState = useTimePickerColumnState();
+  const hourState = useTimePickerColumnState({ value: 10 });
+  const minuteState = useTimePickerColumnState({ value: 6 });
+  const meridiesState = useTimePickerColumnState({ value: "PM" });
   const composite = useCompositeState({ orientation: "horizontal" });
 
-  const hours = [...new Array(24).keys()];
-  const minutes = [...new Array(60).keys()];
+  const hours = [...new Array(25).keys()].slice(1);
+  const minutes = [...new Array(61).keys()].slice(1);
   const meridies = ["AM", "PM"];
   return {
     hours,
