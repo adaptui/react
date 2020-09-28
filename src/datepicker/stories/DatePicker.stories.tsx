@@ -2,20 +2,23 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 
 import "./index.css";
-import { Calendar } from "./Calendar";
+import {
+  useDatePickerState,
+  DatePickerStateInitialProps,
+} from "../DatePickerState";
 import { DatePicker } from "../DatePicker";
 import { DateSegment } from "../DateSegment";
 import { DateSegmentField } from "../DateSegmentField";
 import { DatePickerContent } from "../DatePickerContent";
 import { DatePickerTrigger } from "../DatePickerTrigger";
-import { useDatePickerState } from "../DatePickerState";
+import { CalendarComponent } from "../../calendar-v1/stories/CalendarComponent";
 
 export default {
   title: "Component/DatePicker",
 } as Meta;
 
-const DatePickerComp: React.FC = props => {
-  const state = useDatePickerState({});
+const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
+  const state = useDatePickerState(props);
 
   return (
     <DatePicker {...state}>
@@ -36,7 +39,7 @@ const DatePickerComp: React.FC = props => {
         </DatePickerTrigger>
       </div>
       <DatePickerContent {...state}>
-        <Calendar {...state.calendar} />
+        <CalendarComponent {...state.calendar} />
       </DatePickerContent>
     </DatePicker>
   );
@@ -50,3 +53,6 @@ const CalendarIcon = () => (
 );
 
 export const Default = () => <DatePickerComp />;
+export const InitialDate = () => (
+  <DatePickerComp initialDate={new Date(2001, 0, 1)} />
+);

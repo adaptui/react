@@ -8,10 +8,10 @@ import {
   CalendarHeader,
   CalendarStateReturn,
   CalendarWeekTitle,
-} from "../../calendar-v1";
-import "../../calendar-v1/stories/index.css";
+} from "..";
+import "./index.css";
 
-export const Calendar: React.FC<CalendarStateReturn> = state => {
+export const CalendarComponent: React.FC<CalendarStateReturn> = state => {
   return (
     <CalendarWrapper {...state} className="calendar">
       <div className="header">

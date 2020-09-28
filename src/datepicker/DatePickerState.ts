@@ -1,22 +1,22 @@
 import React from "react";
 import { useCompositeState, useDisclosureState } from "reakit";
 
-import { useCalendarState } from "../calendar-v1";
+import { useCalendarState, CalendarStateInitialProps } from "../calendar-v1";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
 
-interface DatePickerInitialProps {
+export interface DatePickerStateInitialProps extends CalendarStateInitialProps {
+  visible?: boolean;
   initialDate?: Date;
   dateFormat?: Intl.DateTimeFormatOptions;
 }
 
-export const useDatePickerState = ({
-  dateFormat,
-  initialDate = new Date(),
-}: DatePickerInitialProps = {}) => {
+export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
+  const { visible, dateFormat, initialDate = new Date() } = props;
+
   const [date, setDate] = React.useState(initialDate);
 
   const segmentComposite = useCompositeState({ orientation: "horizontal" });
-  const disclosure = useDisclosureState();
+  const disclosure = useDisclosureState({ visible });
 
   const calendar = useCalendarState({
     value: date,

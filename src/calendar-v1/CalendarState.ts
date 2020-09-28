@@ -27,7 +27,7 @@ import { useWeekStart } from "./useWeekStart";
 import { isInvalid, useWeekDays } from "./__utils";
 
 export type DateValue = string | number | Date;
-export interface IUseCalendarProps {
+export interface CalendarStateInitialProps {
   minValue?: DateValue;
   maxValue?: DateValue;
   isDisabled?: boolean;
@@ -42,7 +42,7 @@ export interface IUseCalendarProps {
   id?: string;
 }
 
-export function useCalendarState(props: IUseCalendarProps = {}) {
+export function useCalendarState(props: CalendarStateInitialProps = {}) {
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
