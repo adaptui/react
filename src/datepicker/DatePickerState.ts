@@ -19,7 +19,6 @@ export const useDatePickerState = ({
   const disclosure = useDisclosureState();
 
   const calendar = useCalendarState({
-    autoFocus: true,
     value: date,
     onChange: date => {
       setDate(new Date(date));
@@ -37,7 +36,9 @@ export const useDatePickerState = ({
   });
 
   React.useEffect(() => {
-    calendar.setFocused(true);
+    if (disclosure.visible) {
+      calendar.setFocused(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disclosure.visible]);
 
