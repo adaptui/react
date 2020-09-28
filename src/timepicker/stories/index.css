@@ -1,0 +1,15 @@
+.timepicker {
+  display: flex;
+}
+
+.timepicker__column {
+  width: 40px;
+  text-align: center;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+[data-selected="true"] {
+  background-color: #3c49fd;
+  color: white;
+}
