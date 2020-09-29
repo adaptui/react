@@ -35,12 +35,21 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "reset",
   "unstable_setHasActiveWidget",
   "selected",
-  "setSelected",
+  "onSelect",
 ] as const;
 const TIME_PICKER_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
+  "visible",
+  "animated",
+  "animating",
   "setBaseId",
+  "show",
+  "hide",
+  "toggle",
+  "setVisible",
+  "setAnimated",
+  "stopAnimation",
   "unstable_virtual",
   "rtl",
   "orientation",
@@ -72,6 +81,7 @@ const TIME_PICKER_STATE_KEYS = [
   "setWrap",
   "reset",
   "unstable_setHasActiveWidget",
+  "time",
   "hours",
   "minutes",
   "meridies",
@@ -88,3 +98,5 @@ export const TIME_PICKER_COLUMN_VALUE_KEYS = [
   ...TIME_PICKER_COLUMN_KEYS,
   "value",
 ] as const;
+export const TIME_PICKER_CONTENT_KEYS = TIME_PICKER_COLUMN_KEYS;
+export const TIME_PICKER_TRIGGER_KEYS = TIME_PICKER_CONTENT_KEYS;

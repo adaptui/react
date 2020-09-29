@@ -11,6 +11,10 @@
 }
 
 .timepicker {
+  width: fit-content;
+}
+
+.timepicker__content {
   display: flex;
 }
 

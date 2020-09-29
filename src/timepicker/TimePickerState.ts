@@ -1,17 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react";
-import { useCompositeState } from "reakit";
+import { useCompositeState, useDisclosureState } from "reakit";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 
 export interface TimePickerStateProps {
   onChange?: (v: Date | null) => void;
+  visible?: boolean;
   value?: string;
 }
 
 export const useTimePickerState = ({
   onChange,
+  visible = false,
   value = "0:00",
 }: TimePickerStateProps = {}) => {
+  const disclosure = useDisclosureState({ visible });
+
   const [time, setTime] = React.useState<Date | null>(parseTime(value));
 
   React.useEffect(() => {
@@ -25,6 +29,7 @@ export const useTimePickerState = ({
       d.setHours(v as number);
       setTime(d);
     },
+    onSelection: () => disclosure.hide(),
   });
 
   const minuteState = useTimePickerColumnState({
@@ -34,6 +39,7 @@ export const useTimePickerState = ({
       d.setMinutes(v as number);
       setTime(d);
     },
+    onSelection: () => disclosure.hide(),
   });
 
   const meridiesState = useTimePickerColumnState({
@@ -49,6 +55,7 @@ export const useTimePickerState = ({
       }
       setTime(d);
     },
+    onSelection: () => disclosure.hide(),
   });
 
   const composite = useCompositeState({ orientation: "horizontal" });
@@ -57,6 +64,7 @@ export const useTimePickerState = ({
   const minutes = [...new Array(60).keys()];
   const meridies = ["AM", "PM"];
   return {
+    time,
     hours,
     minutes,
     meridies,
@@ -64,6 +72,7 @@ export const useTimePickerState = ({
     minuteState,
     meridiesState,
     ...composite,
+    ...disclosure,
   };
 };
 
