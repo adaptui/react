@@ -4,7 +4,7 @@
  * to work with Reakit System
  */
 import { chain } from "@react-aria/utils";
-import { useForkRef } from "reakit-utils";
+import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { KeyboardEvent, useRef } from "react";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
@@ -77,55 +77,30 @@ export const useCalendarGrid = createHook<
     } = options;
     const ref = useRef<HTMLElement>(null);
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "Enter":
-        case " ":
-          e.preventDefault();
-          selectFocusedDate();
-          break;
-        case "PageUp":
-          e.preventDefault();
-          if (e.shiftKey) {
-            focusPreviousYear();
-          } else {
-            focusPreviousMonth();
-          }
-          break;
-        case "PageDown":
-          e.preventDefault();
-          if (e.shiftKey) {
-            focusNextYear();
-          } else {
-            focusNextMonth();
-          }
-          break;
-        case "End":
-          e.preventDefault();
-          focusEndOfMonth();
-          break;
-        case "Home":
-          e.preventDefault();
-          focusStartOfMonth();
-          break;
-        case "ArrowLeft":
-          e.preventDefault();
-          focusPreviousDay();
-          break;
-        case "ArrowUp":
-          e.preventDefault();
-          focusPreviousWeek();
-          break;
-        case "ArrowRight":
-          e.preventDefault();
-          focusNextDay();
-          break;
-        case "ArrowDown":
-          e.preventDefault();
-          focusNextWeek();
-          break;
-      }
-    };
+    const onKeyDown = createOnKeyDown({
+      onKeyDown: htmlOnKeyDown,
+      preventDefault: true,
+      keyMap: (event: KeyboardEvent) => {
+        const shift = event.shiftKey;
+
+        return {
+          " ": selectFocusedDate,
+          Enter: selectFocusedDate,
+          End: focusEndOfMonth,
+          Home: focusStartOfMonth,
+          ArrowLeft: focusPreviousDay,
+          ArrowUp: focusPreviousWeek,
+          ArrowRight: focusNextDay,
+          ArrowDown: focusNextWeek,
+          PageUp: () => {
+            shift ? focusPreviousYear() : focusPreviousMonth();
+          },
+          PageDown: () => {
+            shift ? focusNextYear() : focusNextMonth();
+          },
+        };
+      },
+    });
 
     let rangeCalendarProps = {};
 
