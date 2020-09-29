@@ -1,7 +1,3 @@
-body {
-  font-family: "Century Gothic";
-}
-
 .calendar-range {
   margin-top: 1em;
   max-width: 320px;
@@ -116,32 +112,32 @@ body {
 .calendar-range [aria-disabled="true"] {
   color: #959595;
 }
-.calendar-range [data-weekend="true"] {
+.calendar-range [data-weekend] {
   color: #fa3131;
 }
 
-[data-is-range-start="true"] > span,
-[data-is-range-end="true"] > span,
-[data-is-range-selection="true"] > span,
-[data-is-selection-start="true"] > span,
-[data-is-selection-end="true"] > span {
+[data-is-range-start] > span,
+[data-is-range-end] > span,
+[data-is-range-selection] > span,
+[data-is-selection-start] > span,
+[data-is-selection-end] > span {
   color: white !important;
 }
 
-[data-is-range-start="true"] > span {
+[data-is-range-start] > span {
   background-color: #1141aa;
 }
-[data-is-range-end="true"] > span {
+[data-is-range-end] > span {
   background-color: #1141aa;
 }
-[data-is-range-selection="true"] > span {
+[data-is-range-selection] > span {
   background-color: #427af3;
 }
-[data-is-selection-start="true"] > span {
+[data-is-selection-start] > span {
   background-color: #1141aa;
   border-radius: 50% 0 0 50%;
 }
-[data-is-selection-end="true"] > span {
+[data-is-selection-end] > span {
   background-color: #1141aa;
   border-radius: 0% 50% 50% 0%;
 }

@@ -30,12 +30,11 @@ const CALENDAR_STATE_KEYS = [
   "focusPreviousYear",
   "selectFocusedDate",
   "selectDate",
-  "getCellOptions",
 ] as const;
 const RANGE_CALENDAR_STATE_KEYS = [
   ...CALENDAR_STATE_KEYS,
-  "value",
-  "setValue",
+  "dateRangeValue",
+  "setDateRangeValue",
   "anchorDate",
   "setAnchorDate",
   "highlightedRange",
@@ -55,4 +54,3 @@ export const CALENDAR_WEEK_TITLE_KEYS = [
   ...CALENDAR_GRID_KEYS,
   "dayIndex",
 ] as const;
-export const RANGE_CALENDAR_KEYS = CALENDAR_GRID_KEYS;

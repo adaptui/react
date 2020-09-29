@@ -1,7 +1,12 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
+import { addDays, addWeeks, setDate, subDays, subWeeks } from "date-fns";
 
+import "./range-style.css";
+import { DateValue, RangeCalendarProps } from "../index.d";
+import { useRangeCalendarState } from "../RangeCalendarState";
 import {
+  Calendar,
   CalendarCell,
   CalendarGrid,
   CalendarHeader,
@@ -9,11 +14,6 @@ import {
   CalendarCellButton,
   CalendarWeekTitle,
 } from "../index";
-import { RangeCalendar } from "../RangeCalendar";
-import { DateValue, RangeCalendarProps } from "../index.d";
-import { useRangeCalendarState } from "../CalendarRangeState";
-import "./range-style.css";
-import { addDays, addWeeks, setDate, subWeeks } from "date-fns";
 
 export default {
   title: "Component/RangeCalendar",
@@ -21,10 +21,9 @@ export default {
 
 const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
   const state = useRangeCalendarState(props);
-  console.log("%c state", "color: #e5de73", state);
 
   return (
-    <RangeCalendar
+    <Calendar
       {...state}
       onChange={() => console.log("change")}
       className="calendar-range"
@@ -123,7 +122,7 @@ const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
           ))}
         </tbody>
       </CalendarGrid>
-    </RangeCalendar>
+    </Calendar>
   );
 };
 
@@ -135,14 +134,27 @@ export const DefaultValue = () => (
 );
 
 export const ControlledValue = () => {
-  const [start, setStart] = React.useState<DateValue>(addDays(new Date(), 1));
+  const [start, setStart] = React.useState<DateValue>(subDays(new Date(), 1));
   const [end, setEnd] = React.useState<DateValue>(addDays(new Date(), 1));
-
   return (
     <div>
-      <input type="date" onChange={e => setStart(e.target.value)} />
-      <input type="date" onChange={e => setEnd(e.target.value)} />
-      <RangeCalendarComp value={{ start, end }} />
+      <input
+        type="date"
+        onChange={e => setStart(new Date(e.target.value))}
+        value={(start as Date).toISOString().slice(0, 10)}
+      />
+      <input
+        type="date"
+        onChange={e => setEnd(new Date(e.target.value))}
+        value={(end as Date).toISOString().slice(0, 10)}
+      />
+      <RangeCalendarComp
+        value={{ start, end }}
+        onChange={({ end, start }) => {
+          setStart(start);
+          setEnd(end);
+        }}
+      />
     </div>
   );
 };
