@@ -3,8 +3,8 @@ import { Meta } from "@storybook/react";
 
 import { TimePicker } from "../TimePicker";
 import { TimePickerColumn } from "../TimePickerColumn";
-import { useTimePickerState } from "../TimePickerState";
 import { TimePickerColumnValue } from "../TimePickerColumnValue";
+import { useTimePickerState, TimePickerStateProps } from "../TimePickerState";
 
 import "./index.css";
 
@@ -12,8 +12,8 @@ export default {
   title: "Component/TimePicker",
 } as Meta;
 
-const TimePickerComp: React.FC<any> = () => {
-  const state = useTimePickerState();
+const TimePickerComp: React.FC<TimePickerStateProps> = props => {
+  const state = useTimePickerState(props);
 
   return (
     <>
@@ -44,6 +44,7 @@ const TimePickerComp: React.FC<any> = () => {
             );
           })}
         </TimePickerColumn>
+
         <TimePickerColumn
           className="timepicker__column"
           {...state.meridiesState}
@@ -66,3 +67,11 @@ const TimePickerComp: React.FC<any> = () => {
 };
 
 export const Default = () => <TimePickerComp />;
+export const DefaultTimme = () => (
+  <>
+    <TimePickerComp
+      onChange={d => console.log({ d: d?.toLocaleTimeString() })}
+      value="21:45"
+    />
+  </>
+);
