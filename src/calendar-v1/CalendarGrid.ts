@@ -33,7 +33,7 @@ export type CalendarGridOptions = BoxOptions &
     | "focusNextWeek"
     | "focusPreviousWeek"
   > &
-  Partial<Pick<RangeCalendarStateReturn, "highlightedRange" | "setAnchorDate">>;
+  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
 
 export type CalendarGridHTMLProps = BoxHTMLProps;
 
