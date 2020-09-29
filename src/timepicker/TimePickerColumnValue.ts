@@ -11,7 +11,7 @@ import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 
 export type TimePickerColumnValueOptions = CompositeItemOptions &
-  Pick<TimePickerColumnStateReturn, "selected" | "move" | "onSelect"> & {
+  Pick<TimePickerColumnStateReturn, "selected" | "move" | "onSelection"> & {
     value: number | string;
     visible?: boolean; // used to track mounting
   };
@@ -30,7 +30,7 @@ export const useTimePickerColumnValue = createHook<
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
   useProps(
-    { setCurrentId, move, selected, value, id, onSelect },
+    { setCurrentId, move, selected, value, id, onSelection },
     { ref, ...htmlProps },
   ) {
     const htmlRef = React.useRef();
@@ -48,7 +48,7 @@ export const useTimePickerColumnValue = createHook<
       ref: useForkRef(ref, htmlRef),
       onKeyDown: e => {
         if (e.key === "Enter") {
-          onSelect(value);
+          onSelection(value);
         }
       },
       "data-value": value,

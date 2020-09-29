@@ -77,7 +77,7 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
 };
 
 export const Default = () => <TimePickerComp />;
-export const DefaultTimme = () => (
+export const DefaultTime = () => (
   <>
     <TimePickerComp
       onChange={d => console.log({ d: d?.toLocaleTimeString() })}

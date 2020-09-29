@@ -39,7 +39,7 @@ export const useTimePickerColumnState = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [composite.currentId]);
 
-  return { selected, onSelect, ...composite };
+  return { selected, onSelection: onSelect, ...composite };
 };
 
 export type TimePickerColumnStateReturn = ReturnType<
