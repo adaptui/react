@@ -6,7 +6,7 @@ import { DatePickerStateReturn } from "./DatePickerState";
 import { DATE_SEGMENT_FIELD_KEYS } from "./__keys";
 
 export type DateSegmentFieldOptions = CompositeOptions &
-  Pick<DatePickerStateReturn, "next" | "previous">;
+  Pick<DatePickerStateReturn, "next" | "previous" | "show">;
 
 export type DateSegmentFieldHTMLProps = CompositeHTMLProps;
 
@@ -28,9 +28,13 @@ export const useDateSegmentField = createHook<
       preventDefault: false,
       keyMap: event => {
         const isShift = event.shiftKey;
+        const isAlt = event.altKey;
         return {
           Tab: () => {
             isShift ? options.previous() : options.next();
+          },
+          ArrowDown: () => {
+            isAlt && options.show();
           },
         };
       },
