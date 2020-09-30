@@ -40,7 +40,6 @@
     "react-use-gesture": "7.0.16",
     "reakit": "1.2.5",
     "reakit-system": "0.14.5",
-    "reakit-test-utils": "0.14.5",
     "reakit-utils": "0.14.4",
     "uuid": "8.3.0"
   },
@@ -95,6 +94,7 @@
     "react-spring": "8.0.27",
     "react-test-renderer": "16.13.1",
     "react-transition-group": "4.4.1",
+    "reakit-test-utils": "0.14.5",
     "sort-package-json": "1.46.0",
     "ts-jest": "26.4.1",
     "ts-morph": "8.1.1",
