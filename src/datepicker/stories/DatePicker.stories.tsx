@@ -52,7 +52,12 @@ const CalendarIcon = () => (
   </svg>
 );
 
-export const Default = () => <DatePickerComp />;
+export const Default = () => (
+  <>
+    <DatePickerComp />
+    <input />
+  </>
+);
 export const InitialDate = () => (
   <DatePickerComp initialDate={new Date(2001, 0, 1)} />
 );

@@ -20,7 +20,7 @@ export const useDatePickerTrigger = createHook<
   keys: DATE_PICKER_TRIGGER_KEYS,
 
   useProps(options, htmlProps) {
-    return htmlProps;
+    return { tabIndex: -1, ...htmlProps };
   },
 });
 
