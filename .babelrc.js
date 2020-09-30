@@ -23,7 +23,7 @@ module.exports = {
       },
     ],
     "babel-plugin-transform-async-to-promises",
-    cjs && ["@babel/transform-modules-commonjs", { loose }],
+    cjs && ["@babel/plugin-transform-modules-commonjs", { loose }],
     [
       "@babel/transform-runtime",
       {
