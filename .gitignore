@@ -75,3 +75,6 @@ yarn-error.log*
 /es
 /lib
 /types
+size-plugin.json
+stats-react.json
+stats.html
