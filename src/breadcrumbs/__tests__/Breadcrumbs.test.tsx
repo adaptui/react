@@ -66,9 +66,9 @@ describe("Breadcrumb", () => {
                 <a
                   aria-current="page"
                   aria-disabled="true"
-                  disabled=""
                   href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
                   style="pointer-events: none;"
+                  tabindex="-1"
                 >
                   Breadcrumb Pattern
                 </a>
