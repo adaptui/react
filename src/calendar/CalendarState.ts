@@ -26,7 +26,7 @@ import {
   subYears,
 } from "date-fns";
 
-import { CalendarProps } from "./index.d";
+import { CalendarProps } from "./types";
 import { useWeekStart } from "./useWeekStart";
 import { announce } from "../utils/LiveAnnouncer";
 import { generateDaysInMonthArray, isInvalid, useWeekDays } from "./__utils";

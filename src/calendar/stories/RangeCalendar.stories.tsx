@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 import { addDays, addWeeks, setDate, subDays, subWeeks } from "date-fns";
 
 import "./range-style.css";
-import { DateValue, RangeCalendarProps } from "../index.d";
+import { DateValue, RangeCalendarProps } from "../types";
 import { useRangeCalendarState } from "../RangeCalendarState";
 import {
   Calendar,

@@ -5,7 +5,7 @@
  */
 import * as React from "react";
 import { format, isSameDay } from "date-fns";
-import { RangeCalendarProps } from "./index.d";
+import { RangeCalendarProps } from "./types";
 import { useCalendarState } from "./CalendarState";
 import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
 

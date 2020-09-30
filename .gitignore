@@ -11,6 +11,7 @@ jspm_packages/
 
 # production
 /build
+/lib
 
 # testing
 /coverage
