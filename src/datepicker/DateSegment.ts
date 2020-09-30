@@ -1,43 +1,46 @@
+import {
+  useBox,
+  BoxOptions,
+  BoxHTMLProps,
+  useCompositeItem,
+  CompositeItemOptions,
+  CompositeItemHTMLProps,
+} from "reakit";
 import { MouseEvent, useState } from "react";
 import { DOMProps } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 import { mergeProps, useId } from "@react-aria/utils";
 import { createComponent, createHook } from "reakit-system";
-import {
-  BoxHTMLProps,
-  BoxOptions,
-  CompositeItemHTMLProps,
-  CompositeItemOptions,
-  useBox,
-  useCompositeItem,
-} from "reakit";
 
-import {
-  DatePickerFieldState,
-  DateSegment as IDateSegment,
-} from "./DatePickerFieldState";
-import { DatePickerProps } from ".";
-import { USE_DATE_SEGMENT_KEYS } from "./__keys";
+import { DatePickerProps } from "./index.d";
+import { DATE_SEGMENT_KEYS } from "./__keys";
+import { isNumeric, parseNumber } from "./__utils";
 import { useSpinButton } from "../utils/useSpinButton";
+import { DatePickerFieldState, IDateSegment } from "./DatePickerFieldState";
 
-export type useDateSegmentOptions = CompositeItemOptions &
+export type DateSegmentOptions = CompositeItemOptions &
   BoxOptions &
-  DatePickerFieldState & { segment: IDateSegment } & DatePickerProps;
+  DatePickerFieldState &
+  DatePickerProps & {
+    segment: IDateSegment;
+    isDisabled?: boolean;
+    isReadOnly?: boolean;
+    isRequired?: boolean;
+  };
 
-export type useDateSegmentHTMLProps = CompositeItemHTMLProps &
+export type DateSegmentHTMLProps = CompositeItemHTMLProps &
   BoxHTMLProps &
   DOMProps;
 
-export type useDateSegmentProps = useDateSegmentOptions &
-  useDateSegmentHTMLProps;
+export type DateSegmentProps = DateSegmentOptions & DateSegmentHTMLProps;
 
 export const useDateSegment = createHook<
-  useDateSegmentOptions,
-  useDateSegmentHTMLProps
+  DateSegmentOptions,
+  DateSegmentHTMLProps
 >({
   name: "DateSegment",
   compose: [useBox, useCompositeItem],
-  keys: USE_DATE_SEGMENT_KEYS,
+  keys: DATE_SEGMENT_KEYS,
 
   useOptions(options, htmlProps) {
     return {
@@ -231,27 +234,3 @@ export const DateSegment = createComponent({
   memo: true,
   useHook: useDateSegment,
 });
-
-// Converts unicode number strings to real JS numbers.
-// Numbers can be displayed and typed in many number systems, but JS
-// only understands latin numbers.
-// See https://www.fileformat.info/info/unicode/category/Nd/list.htm
-// for a list of unicode numeric characters.
-// Currently only Arabic and Latin numbers are supported, but more
-// could be added here in the future.
-// Keep this in sync with `isNumeric` below.
-function parseNumber(str: string): number {
-  str = str
-    // Arabic Indic
-    .replace(/[\u0660-\u0669]/g, c => String(c.charCodeAt(0) - 0x0660))
-    // Extended Arabic Indic
-    .replace(/[\u06f0-\u06f9]/g, c => String(c.charCodeAt(0) - 0x06f0));
-
-  return Number(str);
-}
-
-// Checks whether a unicode string could be converted to a number.
-// Keep this in sync with `parseNumber` above.
-function isNumeric(str: string) {
-  return /^[0-9\u0660-\u0669\u06f0-\u06f9]+$/.test(str);
-}

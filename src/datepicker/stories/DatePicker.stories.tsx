@@ -3,14 +3,14 @@ import { Meta } from "@storybook/react";
 
 import "./index.css";
 import {
+  DatePicker,
+  DateSegment,
+  DateSegmentField,
+  DatePickerContent,
+  DatePickerTrigger,
   useDatePickerState,
   DatePickerStateInitialProps,
-} from "../DatePickerState";
-import { DatePicker } from "../DatePicker";
-import { DateSegment } from "../DateSegment";
-import { DateSegmentField } from "../DateSegmentField";
-import { DatePickerContent } from "../DatePickerContent";
-import { DatePickerTrigger } from "../DatePickerTrigger";
+} from "..";
 import { CalendarComponent } from "../../calendar-v1/stories/CalendarComponent";
 
 export default {
@@ -52,12 +52,7 @@ const CalendarIcon = () => (
   </svg>
 );
 
-export const Default = () => (
-  <>
-    <DatePickerComp />
-    <input />
-  </>
-);
+export const Default = () => <DatePickerComp />;
 export const InitialDate = () => (
   <DatePickerComp initialDate={new Date(2001, 0, 1)} />
 );

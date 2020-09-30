@@ -61,8 +61,11 @@ const DATE_PICKER_STATE_KEYS = [
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;
 export const DATE_PICKER_CONTENT_KEYS = DATE_PICKER_KEYS;
 export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_CONTENT_KEYS;
-export const USE_DATE_SEGMENT_KEYS = [
+export const DATE_SEGMENT_KEYS = [
   ...DATE_PICKER_TRIGGER_KEYS,
   "segment",
+  "isDisabled",
+  "isReadOnly",
+  "isRequired",
 ] as const;
 export const DATE_SEGMENT_FIELD_KEYS = DATE_PICKER_TRIGGER_KEYS;
