@@ -52,10 +52,10 @@
     "@react-stately/toggle": "3.2.0",
     "date-fns": "^2.16.1",
     "react-use-gesture": "7.0.16",
-    "reakit": "1.2.4",
-    "reakit-system": "0.14.4",
-    "reakit-test-utils": "0.14.4",
-    "reakit-utils": "0.14.3",
+    "reakit": "^1.2.5",
+    "reakit-system": "^0.14.5",
+    "reakit-test-utils": "^0.14.5",
+    "reakit-utils": "^0.14.4",
     "uuid": "8.3.0"
   },
   "devDependencies": {
