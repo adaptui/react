@@ -22,7 +22,6 @@ export default {
 
 const CalendarComp: React.FC<IUseCalendarProps> = props => {
   const state = useCalendarState(props);
-  console.log("%c state", "color: #e5de73", state);
 
   return (
     <Calendar {...state} className="calendar">
@@ -130,7 +129,17 @@ export const DefaultValue = () => (
 );
 export const ControlledValue = () => {
   const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
-  return <CalendarComp value={value} onChange={setValue} />;
+
+  return (
+    <div>
+      <input
+        type="date"
+        onChange={e => setValue(new Date(e.target.value))}
+        value={(value as Date).toISOString().slice(0, 10)}
+      />
+      <CalendarComp value={value} onChange={setValue} />
+    </div>
+  );
 };
 export const MinMaxDate = () => (
   <CalendarComp minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />

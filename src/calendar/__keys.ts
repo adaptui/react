@@ -31,7 +31,16 @@ const CALENDAR_STATE_KEYS = [
   "selectFocusedDate",
   "selectDate",
 ] as const;
-export const CALENDAR_KEYS = CALENDAR_STATE_KEYS;
+const RANGE_CALENDAR_STATE_KEYS = [
+  ...CALENDAR_STATE_KEYS,
+  "dateRangeValue",
+  "setDateRangeValue",
+  "anchorDate",
+  "setAnchorDate",
+  "highlightedRange",
+  "highlightDate",
+] as const;
+export const CALENDAR_KEYS = RANGE_CALENDAR_STATE_KEYS;
 export const CALENDAR_BUTTON_KEYS = [
   ...CALENDAR_KEYS,
   "goto",
