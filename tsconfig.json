@@ -4,7 +4,7 @@
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "declaration": true,
-    "declarationDir": "types",
+    "declarationDir": "dist/types",
     "sourceMap": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -22,5 +22,5 @@
     "resolveJsonModule": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
