@@ -14,7 +14,7 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { isInvalid } from "./__utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
-import { RangeCalendarStateReturn } from "./CalendarRangeState";
+import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
 export type CalendarCellButtonOptions = ButtonOptions &
   Pick<

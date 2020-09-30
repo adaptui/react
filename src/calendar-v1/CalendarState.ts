@@ -3,8 +3,10 @@
  * We improved the Calendar from Stately [useCalendarState](https://github.com/adobe/react-spectrum/tree/main/packages/%40react-stately/calendar)
  * to work with Reakit System
  */
-import React from "react";
+import * as React from "react";
 import { unstable_useId as useId } from "reakit";
+import { useUpdateEffect } from "@chakra-ui/hooks";
+import { useDateFormatter } from "@react-aria/i18n";
 import { useControllableState } from "@chakra-ui/hooks";
 import {
   addDays,
@@ -13,8 +15,8 @@ import {
   addYears,
   endOfDay,
   endOfMonth,
+  format,
   getDaysInMonth,
-  isSameDay,
   isSameMonth,
   startOfDay,
   startOfMonth,
@@ -26,21 +28,12 @@ import {
 
 import { CalendarProps } from "./index.d";
 import { useWeekStart } from "./useWeekStart";
+import { announce } from "../utils/LiveAnnouncer";
 import { generateDaysInMonthArray, isInvalid, useWeekDays } from "./__utils";
 
 export interface IUseCalendarProps extends CalendarProps {
   id?: string;
 }
-
-export type getCellOptionsReturn = {
-  cellDate: Date;
-  isToday: boolean;
-  isCurrentMonth: boolean;
-  isDisabled: boolean;
-  isSelected: boolean;
-  isFocused: boolean;
-  isReadOnly: boolean | undefined;
-};
 
 export function useCalendarState(props: IUseCalendarProps = {}) {
   const {
@@ -113,6 +106,24 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     }
   }
 
+  const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
+
+  // Announce when the current month changes
+  useUpdateEffect(() => {
+    // announce the new month with a change from the Previous or Next button
+    if (!isFocused) {
+      announce(monthFormatter.format(currentMonth));
+    }
+    // handle an update to the current month from the Previous or Next button
+    // rather than move focus, we announce the new month value
+  }, [currentMonth]);
+
+  useUpdateEffect(() => {
+    if (!dateValue) return;
+
+    announce(`Selected Date: ${format(dateValue, "do MMM yyyy")}`);
+  }, [dateValue]);
+
   return {
     calendarId,
     dateValue,
@@ -167,22 +178,6 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     },
     selectDate(date: Date) {
       setValue(date);
-    },
-    getCellOptions(cellDate: Date): getCellOptionsReturn {
-      const isCurrentMonth = cellDate.getMonth() === month;
-
-      return {
-        cellDate,
-        isToday: isSameDay(cellDate, new Date()),
-        isCurrentMonth,
-        isDisabled:
-          props.isDisabled ||
-          !isCurrentMonth ||
-          isInvalid(cellDate, minDate, maxDate),
-        isSelected: isSameDay(cellDate, value as Date),
-        isFocused: isFocused && focusedDate && isSameDay(cellDate, focusedDate),
-        isReadOnly: props.isReadOnly,
-      };
     },
   };
 }

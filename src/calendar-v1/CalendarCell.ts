@@ -3,25 +3,22 @@
  * We improved the Calendar from Aria [useCalendarBase](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useCalendarBase.ts)
  * to work with Reakit System
  */
-import { isWeekend } from "date-fns";
-import { ariaAttr } from "@chakra-ui/utils";
+import { useCallback } from "react";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { getDaysInMonth, isSameDay, isWeekend } from "date-fns";
+import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
 
-import {
-  getRangeCellOptionsReturn,
-  RangeCalendarStateReturn,
-} from "./CalendarRangeState";
 import { CALENDAR_CELL_KEYS } from "./__keys";
-import { CalendarStateReturn, getCellOptionsReturn } from "./CalendarState";
+import { CalendarStateReturn } from "./CalendarState";
+import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
 export type CalendarCellOptions = BoxOptions &
-  Pick<CalendarStateReturn, "dateValue" | "isDisabled"> &
-  Partial<Pick<RangeCalendarStateReturn, "highlightDate">> & {
+  Pick<CalendarStateReturn, "dateValue" | "isDisabled" | "currentMonth"> &
+  Partial<
+    Pick<RangeCalendarStateReturn, "highlightDate" | "highlightedRange">
+  > & {
     date: Date;
-    getCellOptions: (
-      date: Date,
-    ) => Partial<getRangeCellOptionsReturn & getCellOptionsReturn>;
   };
 
 export type CalendarCellHTMLProps = BoxHTMLProps;
@@ -36,23 +33,22 @@ export const useCalendarCell = createHook<
   compose: useBox,
   keys: CALENDAR_CELL_KEYS,
 
-  useProps({ date, getCellOptions, highlightDate, isDisabled }, htmlProps) {
-    const cellProps = getCellOptions?.(date);
+  useProps(options, { onMouseEnter: htmlOnMouseEnter, ...htmlProps }) {
+    const { isDisabled, highlightDate, date } = options;
+    const onMouseEnter = useCallback(() => {
+      if (isDisabled) return;
 
-    const onMouseEnter = () => {
-      highlightDate && highlightDate(date);
-    };
+      highlightDate?.(date);
+    }, [date, highlightDate, isDisabled]);
 
     return {
-      onMouseEnter: isDisabled ? () => {} : onMouseEnter,
       role: "gridcell",
-      "data-weekend": isWeekend(date),
-      "aria-selected": ariaAttr(cellProps?.isSelected),
-      "data-is-range-end": cellProps?.isRangeEnd,
-      "data-is-range-start": cellProps?.isRangeStart,
-      "data-is-selection-end": cellProps?.isSelectionEnd,
-      "data-is-selection-start": cellProps?.isSelectionStart,
-      "data-is-range-selection": cellProps?.isRangeSelection,
+      "data-weekend": dataAttr(isWeekend(date)),
+      onMouseEnter:
+        "highlightDate" in options
+          ? callAllHandlers(htmlOnMouseEnter, onMouseEnter)
+          : htmlOnMouseEnter,
+      ...getCalendarCellProps(options),
       ...htmlProps,
     };
   },
@@ -63,3 +59,38 @@ export const CalendarCell = createComponent({
   memo: true,
   useHook: useCalendarCell,
 });
+
+const getCalendarCellProps = (options: CalendarCellOptions) => {
+  const { date, dateValue, highlightedRange, currentMonth } = options;
+
+  if ("highlightDate" in options) {
+    const isSelected = highlightedRange
+      ? date >= highlightedRange.start && date <= highlightedRange.end
+      : false;
+
+    const isRangeStart = isSelected && date.getDate() === 1;
+    const isRangeEnd =
+      isSelected && date.getDate() === getDaysInMonth(currentMonth);
+    const isSelectionStart = highlightedRange
+      ? isSameDay(date, highlightedRange.start)
+      : false;
+    const isSelectionEnd = highlightedRange
+      ? isSameDay(date, highlightedRange.end)
+      : false;
+
+    return {
+      "aria-selected": ariaAttr(isSelected),
+      "data-is-range-selection": dataAttr(isSelected),
+      "data-is-range-end": dataAttr(isRangeEnd),
+      "data-is-range-start": dataAttr(isRangeStart),
+      "data-is-selection-end": dataAttr(isSelectionEnd),
+      "data-is-selection-start": dataAttr(isSelectionStart),
+    };
+  }
+
+  const isSelected = dateValue ? isSameDay(date, dateValue) : false;
+
+  return {
+    "aria-selected": ariaAttr(isSelected),
+  };
+};

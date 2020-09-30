@@ -3,14 +3,16 @@
  * We improved the Calendar from Stately [useWeekStart](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/calendar/src/useWeekStart.ts)
  * to work with Reakit System
  */
+import { chain } from "@react-aria/utils";
+import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { KeyboardEvent, useRef } from "react";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
-import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
 import { CALENDAR_GRID_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
+import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
 export type CalendarGridOptions = BoxOptions &
   Pick<
@@ -30,7 +32,8 @@ export type CalendarGridOptions = BoxOptions &
     | "focusPreviousDay"
     | "focusNextWeek"
     | "focusPreviousWeek"
-  >;
+  > &
+  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
 
 export type CalendarGridHTMLProps = BoxHTMLProps;
 
@@ -70,6 +73,7 @@ export const useCalendarGrid = createHook<
       focusNextWeek,
       focusPreviousWeek,
       calendarId,
+      setAnchorDate,
     } = options;
     const ref = useRef<HTMLElement>(null);
 
@@ -98,15 +102,37 @@ export const useCalendarGrid = createHook<
       },
     });
 
+    let rangeCalendarProps = {};
+
+    if ("highlightDate" in options) {
+      const onRangeKeyDown = (e: KeyboardEvent) => {
+        switch (e.key) {
+          case "Escape":
+            // Cancel the selection.
+            setAnchorDate?.(null);
+            break;
+        }
+      };
+
+      rangeCalendarProps = {
+        "aria-multiselectable": true,
+        onKeyDown: callAllHandlers(
+          htmlOnKeyDown,
+          chain(onKeyDown, onRangeKeyDown),
+        ),
+      };
+    }
+
     return {
       ref: useForkRef(ref, htmlRef),
       role: "grid",
       "aria-labelledby": calendarId,
       "aria-readonly": ariaAttr(isReadOnly),
       "aria-disabled": ariaAttr(isDisabled),
-      onKeyDown,
+      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       onFocus: callAllHandlers(htmlOnFocus, () => setFocused(true)),
       onBlur: callAllHandlers(htmlOnBlur, () => setFocused(false)),
+      ...rangeCalendarProps,
       ...htmlProps,
     };
   },
