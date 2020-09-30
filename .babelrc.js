@@ -16,7 +16,7 @@ module.exports = {
     "@babel/react",
   ],
   plugins: [
-    cjs && ["@babel/transform-modules-commonjs", { loose }],
+    cjs && ["@babel/plugin-transform-modules-commonjs", { loose }],
     [
       "@babel/transform-runtime",
       {
