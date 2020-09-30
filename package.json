@@ -16,9 +16,11 @@
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
   "scripts": {
+    "build": "yarn build:commonjs && yarn build:es && yarn build:types",
     "build-storybook": "build-storybook",
     "build:commonjs": "rm -rf ./lib && BABEL_ENV=commonjs babel --extensions .ts,.tsx --ignore ./src/**/*.test.tsx ./src --out-dir lib",
     "build:es": "rm -rf ./es && babel --extensions .ts,.tsx --ignore ./src/**/*.test.tsx ./src --out-dir es",
+    "build:types": "rm -rf ./types && tsc --emitDeclarationOnly",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "keys": "node scripts/build/keys",

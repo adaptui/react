@@ -4,6 +4,7 @@
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "declaration": true,
+    "declarationDir": "types",
     "sourceMap": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
