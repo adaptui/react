@@ -39,6 +39,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "@chakra-ui/counter": "1.0.0-rc.4",
     "@chakra-ui/hooks": "1.0.0-rc.4",
     "@chakra-ui/utils": "1.0.0-rc.4",
