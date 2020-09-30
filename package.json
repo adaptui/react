@@ -18,8 +18,8 @@
   "scripts": {
     "build": "yarn build:commonjs && yarn build:es && yarn build:types",
     "build-storybook": "build-storybook",
-    "build:commonjs": "rimraf ./dits/lib && cross-env BABEL_ENV=commonjs babel --extensions .ts,.tsx --ignore ./src/**/*.test.tsx ./src --out-dir dist/lib",
-    "build:es": "rimraf ./dist/es && babel --extensions .ts,.tsx --ignore ./src/**/*.test.tsx ./src --out-dir dist/es",
+    "build:commonjs": "rimraf ./dits/lib && cross-env BABEL_ENV=commonjs babel --extensions .ts,.tsx  ./src --out-dir dist/lib",
+    "build:es": "rimraf ./dist/es && babel --extensions .ts,.tsx ./src --out-dir dist/es",
     "build:types": "rimraf ./dits/types && tsc --emitDeclarationOnly",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",

@@ -34,4 +34,5 @@ module.exports = {
       },
     ],
   ].filter(Boolean),
+  ignore: ["**/*/__tests__", "**/*/stories"],
 };
