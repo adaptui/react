@@ -39,7 +39,7 @@ export const useDateSegmentField = createHook<
   },
 
   useProps(options, htmlProps) {
-    return htmlProps;
+    return { ...htmlProps };
   },
 });
 
