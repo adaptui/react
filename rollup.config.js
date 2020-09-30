@@ -25,7 +25,25 @@ export default [
     input: inputSrc,
     output: {
       name: "Renderless Components",
-      file: "dist/renderless-components.production.min.js",
+      file: "dist/umd/renderless-components.js",
+      format: "umd",
+      sourcemap: true,
+      globals,
+    },
+    external,
+    plugins: [
+      replace({ "process.env.NODE_ENV": `"production"`, delimiters: ["", ""] }),
+      resolve(resolveConfig),
+      babel(babelConfig),
+      commonJS(),
+      externalDeps(),
+    ],
+  },
+  {
+    input: inputSrc,
+    output: {
+      name: "Renderless Components",
+      file: "dist/umd/renderless-components.min.js",
       format: "umd",
       sourcemap: true,
       globals,
