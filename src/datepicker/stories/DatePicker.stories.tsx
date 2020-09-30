@@ -11,7 +11,7 @@ import {
   useDatePickerState,
   DatePickerStateInitialProps,
 } from "..";
-import { CalendarComponent } from "../../calendar-v1/stories/CalendarComponent";
+import { CalendarComponent } from "../../calendar/stories/CalendarComponent";
 
 export default {
   title: "Component/DatePicker",

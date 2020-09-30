@@ -1,8 +1,8 @@
 import React from "react";
 import { useCompositeState, useDisclosureState } from "reakit";
 
-import { useCalendarState, CalendarStateInitialProps } from "../calendar-v1";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
+import { useCalendarState, CalendarStateInitialProps } from "../calendar";
 
 export interface DatePickerStateInitialProps extends CalendarStateInitialProps {
   visible?: boolean;
