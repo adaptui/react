@@ -71,10 +71,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#build
-/es
-/lib
-/types
+#buildsize
 size-plugin.json
 stats-react.json
 stats.html
