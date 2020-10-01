@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.1](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.0...v0.1.1-alpha.1) (2020-10-01)
+
+### Bug Fixes
+
+- fix broken tests
+  ([b60d91f](https://github.com/timelessco/renderless-components/commit/b60d91f409bb3cc8dad0f53a7f692c73c06562a0))
+
+### Others
+
+- use custom babel config
+  ([ebcc52d](https://github.com/timelessco/renderless-components/commit/ebcc52d8a7cd32d1f67befb6d2d7094fac3c91ee))
+- **release:** 0.1.1-alpha.0
+  ([3d2976a](https://github.com/timelessco/renderless-components/commit/3d2976a2005ad69c79101fc13d02f2d0aa81a41c))
+
+### Build System
+
+- fixed broken storybook / build
+  ([cda49c9](https://github.com/timelessco/renderless-components/commit/cda49c9ddff5cb953542c61a6bf3a8143d161491))
+- ignore **examples** folder
+  ([3f820e5](https://github.com/timelessco/renderless-components/commit/3f820e5409e954ae0a42f5d239b0bf47af71d6e8))
+
+### Code Refactoring
+
+- move storybook progress utils
+  ([c84a846](https://github.com/timelessco/renderless-components/commit/c84a8460df24a5133ceb32afd415ce308c2887ff))
+
 ### [0.1.1-alpha.0](https://github.com/timelessco/renderless-components/compare/v0.1.0...v0.1.1-alpha.0) (2020-10-01)
 
 ### Bug Fixes
