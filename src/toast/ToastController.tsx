@@ -5,6 +5,7 @@ interface ToastControllerProps {
   id: string;
   duration?: number;
   autoDismiss?: boolean;
+  dragThreshold?: number;
   onRequestRemove: (id: string) => void;
 }
 
@@ -13,57 +14,53 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   duration = 0,
   autoDismiss,
   onRequestRemove,
+  dragThreshold = 100,
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
 
-  // document.addEventListener("touchstart", handleTouchStart, false);
-  // document.addEventListener("touchmove", handleTouchMove, false);
+  const [active, setActive] = React.useState<boolean>(false);
+  const [currentX, setCurrentX] = React.useState<number>(0);
+  const [initialX, setInitialX] = React.useState<number>(0);
+  const [xOffset, setXOffset] = React.useState<number>(0);
+  const [posX, setPosX] = React.useState<number>(0);
 
-  const [xDown, setXDown] = React.useState<number | null>(null);
-  const [yDown, setYDown] = React.useState<number | null>(null);
+  const dragStart = React.useCallback(
+    (e: React.TouchEvent) => {
+      setInitialX(e.touches[0].clientX - xOffset);
 
-  function getTouches(evt: React.TouchEvent) {
-    return evt.touches;
-  }
+      setActive(true);
+    },
+    [xOffset],
+  );
 
-  function handleTouchStart(evt: React.TouchEvent) {
-    const firstTouch = getTouches(evt)[0];
-    setXDown(firstTouch.clientX);
-    setYDown(firstTouch.clientY);
-  }
+  const dragEnd = React.useCallback(() => {
+    active && setPosX(0);
 
-  function handleTouchMove(evt: React.TouchEvent) {
-    if (!xDown || !yDown) {
-      return;
-    }
+    setInitialX(currentX);
+    setActive(false);
+  }, [active, currentX]);
 
-    const xUp = evt.touches[0].clientX;
-    const yUp = evt.touches[0].clientY;
+  const drag = React.useCallback(
+    (e: React.TouchEvent) => {
+      if (active) {
+        e.preventDefault();
 
-    const xDiff = xDown - xUp;
-    const yDiff = yDown - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-      /*most significant*/
-      if (xDiff > 0) {
-        console.log("left");
-        /* left swipe */
-      } else {
-        console.log("right");
-        /* right swipe */
+        setCurrentX(e.touches[0].clientX - initialX);
+        setXOffset(currentX);
+        setPosX(currentX);
       }
-    } else {
-      if (yDiff > 0) {
-        /* up swipe */
-      } else {
-        /* down swipe */
-      }
+    },
+    [active, currentX, initialX],
+  );
+
+  React.useEffect(() => {
+    if (posX > dragThreshold || posX < -dragThreshold) {
+      setActive(false);
+      onRequestRemove(id);
     }
-    /* reset values */
-    setXDown(null);
-    setYDown(null);
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posX]);
 
   const onMouseEnter = React.useCallback(() => {
     autoDismiss && setDelay(null);
@@ -83,11 +80,15 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     id,
     onMouseLeave,
     onMouseEnter,
-    onTouchStart: handleTouchStart,
-    onTouchMove: handleTouchMove,
+    onTouchStart: dragStart,
+    onTouchEnd: dragEnd,
+    onTouchMove: drag,
     role: "alert",
     className: "toast",
-    style: { transform: `translateX(${0}px)` },
+    style: {
+      transform: `translateX(${posX}px)`,
+      ...(active && { transition: "none" }),
+    },
   };
 
   return <div {...props}>{children}</div>;
