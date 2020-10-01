@@ -32,18 +32,8 @@ import { announce } from "../utils/LiveAnnouncer";
 import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
 
 export type DateValue = string | number | Date;
-export interface CalendarStateInitialProps {
-  minValue?: DateValue;
-  maxValue?: DateValue;
-  isDisabled?: boolean;
-  isReadOnly?: boolean;
-  autoFocus?: boolean;
-  /** The current value (controlled). */
-  value?: DateValue;
-  /** The default value (uncontrolled). */
-  defaultValue?: DateValue;
-  /** Handler that is called when the value changes. */
-  onChange?: (value: DateValue) => void;
+
+export interface CalendarStateInitialProps extends Partial<CalendarProps> {
   id?: string;
 }
 
