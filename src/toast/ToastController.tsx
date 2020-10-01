@@ -1,6 +1,5 @@
 import React from "react";
 import { useTimeout } from "@chakra-ui/hooks";
-import { useGesture } from "react-use-gesture";
 
 interface ToastControllerProps {
   id: string;
@@ -17,21 +16,54 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
-  const [x, setX] = React.useState(0);
 
-  const bind = useGesture({
-    onDrag: ({ down, movement: [x] }: any) => {
-      if (!down) setX(0);
+  // document.addEventListener("touchstart", handleTouchStart, false);
+  // document.addEventListener("touchmove", handleTouchMove, false);
 
-      setX(x);
-      setDelay(null);
+  const [xDown, setXDown] = React.useState<number | null>(null);
+  const [yDown, setYDown] = React.useState<number | null>(null);
 
-      if (x > 100 || x < -100) {
-        onRequestRemove(id);
+  function getTouches(evt: React.TouchEvent) {
+    return evt.touches;
+  }
+
+  function handleTouchStart(evt: React.TouchEvent) {
+    const firstTouch = getTouches(evt)[0];
+    setXDown(firstTouch.clientX);
+    setYDown(firstTouch.clientY);
+  }
+
+  function handleTouchMove(evt: React.TouchEvent) {
+    if (!xDown || !yDown) {
+      return;
+    }
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      /*most significant*/
+      if (xDiff > 0) {
+        console.log("left");
+        /* left swipe */
+      } else {
+        console.log("right");
+        /* right swipe */
       }
-    },
-    onMouseUp: () => setX(0),
-  });
+    } else {
+      if (yDiff > 0) {
+        /* up swipe */
+      } else {
+        /* down swipe */
+      }
+    }
+    /* reset values */
+    setXDown(null);
+    setYDown(null);
+  }
 
   const onMouseEnter = React.useCallback(() => {
     autoDismiss && setDelay(null);
@@ -51,10 +83,11 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     id,
     onMouseLeave,
     onMouseEnter,
+    onTouchStart: handleTouchStart,
+    onTouchMove: handleTouchMove,
     role: "alert",
     className: "toast",
-    style: { transform: `translateX(${x}px)` },
-    ...bind(),
+    style: { transform: `translateX(${0}px)` },
   };
 
   return <div {...props}>{children}</div>;
