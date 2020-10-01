@@ -27,5 +27,5 @@ module.exports = {
       },
     ],
   ].filter(Boolean),
-  ignore: ["**/*/__tests__", "**/*/stories"],
+  ignore: ["**/*/__tests__", "**/*/stories", "**/*/__examples__"],
 };

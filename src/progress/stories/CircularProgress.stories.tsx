@@ -3,7 +3,10 @@ import { Meta } from "@storybook/react";
 
 import { Progress } from "../Progress";
 import { useProgressState } from "../ProgressState";
-import { useFakeProgression, createCircularExample } from "../../utils";
+import {
+  useFakeProgression,
+  createCircularExample,
+} from "./storybook-progress-utils";
 
 export default {
   title: "Component/Progress/Circular",
