@@ -30,6 +30,7 @@ export const ToastController: React.FC<ToastControllerProps> = ({
       setInitialX(e.touches[0].clientX - xOffset);
 
       setActive(true);
+      setDelay(null);
     },
     [xOffset],
   );
@@ -39,7 +40,8 @@ export const ToastController: React.FC<ToastControllerProps> = ({
 
     setInitialX(currentX);
     setActive(false);
-  }, [active, currentX]);
+    setDelay(duration);
+  }, [active, currentX, duration]);
 
   const drag = React.useCallback(
     (e: React.TouchEvent) => {
