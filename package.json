@@ -56,7 +56,6 @@
     "@react-aria/visually-hidden": "^3.2.0",
     "@react-stately/toggle": "3.2.0",
     "date-fns": "2.16.1",
-    "react-use-gesture": "7.0.16",
     "reakit": "1.2.5",
     "reakit-system": "0.14.5",
     "reakit-utils": "0.14.4",
