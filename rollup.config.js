@@ -6,6 +6,7 @@ import resolve from "rollup-plugin-node-resolve";
 import commonJS from "rollup-plugin-commonjs";
 import visualizer from "rollup-plugin-visualizer";
 import replace from "@rollup/plugin-replace";
+const defaultBabelConfig = require("./babel-config");
 
 const external = ["react", "react-dom"];
 
@@ -17,7 +18,7 @@ const globals = {
 const inputSrc = "src/index.ts";
 
 const extensions = [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"];
-const babelConfig = { extensions, runtimeHelpers: true };
+const babelConfig = { extensions, runtimeHelpers: true, ...defaultBabelConfig };
 const resolveConfig = { extensions, preferBuiltins: true };
 
 export default [
