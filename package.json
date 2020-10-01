@@ -34,6 +34,7 @@
     "keys": "node scripts/build/keys",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "lint:package": "sort-package-json",
+    "prepublishOnly": "yarn test && yarn build",
     "release": "git add . && standard-version -a",
     "postrelease": "concurrently yarn:release:*",
     "release:github": "conventional-github-releaser -p angular",
@@ -143,9 +144,7 @@
     "react-dom": "^16.8.0"
   },
   "publishConfig": {
-    "access": "public",
-    "pkgRoot": "dist",
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "main:umd": "dist/umd/renderless-components.js"
 }
