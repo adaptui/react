@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timelessco/renderless-components.git"
+    "url": "https://github.com/timelessco/renderless-components.git"
   },
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
@@ -23,17 +23,22 @@
     "dist"
   ],
   "scripts": {
-    "build": "concurrently \"yarn build:commonjs\" \"yarn build:es\"  \"yarn build:types\" \"yarn build:umd\"",
+    "build": "concurrently yarn:build:*",
     "build-storybook": "build-storybook",
     "build:commonjs": "rimraf ./dist/lib && cross-env BABEL_ENV=commonjs babel --extensions .ts,.tsx  ./src --out-dir dist/lib",
     "build:es": "rimraf ./dist/es && babel --extensions .ts,.tsx ./src --out-dir dist/es",
     "build:types": "rimraf ./dist/types && tsc --emitDeclarationOnly",
-    "build:umd": "rimraf ./dist && cross-env NODE_ENV=production rollup -c && rollup-plugin-visualizer stats-react.json",
+    "build:umd": "rimraf ./dist/umd && cross-env NODE_ENV=production rollup -c && rollup-plugin-visualizer stats-react.json",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "keys": "node scripts/build/keys",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "lint:package": "sort-package-json",
+    "prepublishOnly": "yarn test && yarn build",
+    "release": "standard-version -a",
+    "postrelease": "concurrently yarn:release:*",
+    "release:github": "conventional-github-releaser -p angular",
+    "release:tags": "git push --follow-tags origin master",
     "stats": "open ./stats.html",
     "storybook": "start-storybook -p 6006",
     "test": "jest"
@@ -91,6 +96,7 @@
     "babel-loader": "8.1.0",
     "chalk": "4.1.0",
     "concurrently": "^5.3.0",
+    "conventional-github-releaser": "^3.1.5",
     "cross-env": "^7.0.2",
     "emotion": "10.0.27",
     "eslint": "7.10.0",
@@ -128,6 +134,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^4.1.1",
     "sort-package-json": "1.46.0",
+    "standard-version": "^9.0.0",
     "ts-jest": "26.4.1",
     "ts-morph": "8.1.1",
     "typescript": "4.0.3"
@@ -135,6 +142,11 @@
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "pkgRoot": "dist",
+    "registry": "https://npm.pkg.github.com/"
   },
   "main:umd": "dist/umd/renderless-components.js"
 }
