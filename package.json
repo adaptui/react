@@ -1,6 +1,6 @@
 {
   "name": "renderless-components",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Renderless Components",
   "keywords": [
     "renderless-component"
@@ -34,8 +34,7 @@
     "keys": "node scripts/build/keys",
     "lint": "eslint . --ext .tsx,.ts,.jsx,.js --fix",
     "lint:package": "sort-package-json",
-    "prepublishOnly": "yarn test && yarn build",
-    "release": "standard-version -a",
+    "release": "git add . && standard-version -a",
     "postrelease": "concurrently yarn:release:*",
     "release:github": "conventional-github-releaser -p angular",
     "release:tags": "git push --follow-tags origin master",
