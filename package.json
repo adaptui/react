@@ -1,6 +1,6 @@
 {
   "name": "renderless-components",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.1-alpha.1",
   "description": "Renderless Components",
   "keywords": [
     "renderless-component"
@@ -25,8 +25,8 @@
   "scripts": {
     "build": "concurrently yarn:build:*",
     "build-storybook": "build-storybook",
-    "build:commonjs": "rimraf ./dist/lib && cross-env BABEL_ENV=commonjs babel --extensions .ts,.tsx  ./src --out-dir dist/lib",
-    "build:es": "rimraf ./dist/es && babel --extensions .ts,.tsx ./src --out-dir dist/es",
+    "build:commonjs": "rimraf ./dist/lib && cross-env BABEL_ENV=commonjs babel --extensions .ts,.tsx  ./src --config-file ./babel-config.js  --out-dir dist/lib",
+    "build:es": "rimraf ./dist/es && babel --extensions .ts,.tsx ./src --config-file ./babel-config.js  --out-dir dist/es",
     "build:types": "rimraf ./dist/types && tsc --emitDeclarationOnly",
     "build:umd": "rimraf ./dist/umd && cross-env NODE_ENV=production rollup -c && rollup-plugin-visualizer stats-react.json",
     "commit": "gacp",
