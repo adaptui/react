@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.0](https://github.com/timelessco/renderless-components/compare/v0.1.0...v0.1.1-alpha.0) (2020-10-01)
+
+### Bug Fixes
+
+- **publish:** 🔧 bug with npm publish & add prepublish script
+  ([9b2468f](https://github.com/timelessco/renderless-components/commit/9b2468f41038409f7797f91a7daaf9530f999b15))
+
 ## 0.1.0 (2020-10-01)
 
 ### Features
