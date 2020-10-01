@@ -38,6 +38,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   React.useEffect(() => {
     if (disclosure.visible) {
       calendar.setFocused(true);
+      calendar.setFocusedDate(date);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disclosure.visible]);
