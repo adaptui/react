@@ -32,19 +32,23 @@ const PLACEMENTS = {
 
 export type TPlacement = keyof typeof PLACEMENTS;
 
-const useDrawer = createHook<
-  DialogOptions & { placement?: TPlacement },
-  DialogHTMLProps
->({
+export type DrawerOptions = DialogOptions & { placement?: TPlacement };
+
+export type DrawerHTMLProps = DialogHTMLProps;
+
+export type DrawerProps = DrawerOptions & DrawerHTMLProps;
+
+const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
   name: "Drawer",
-  compose: [useDialog],
+  compose: useDialog,
   keys: [...DRAWER_KEYS, "placement"],
+
   useProps({ placement = "left" }, { style: htmlStyles, ...htmlProps }) {
     return {
       style: {
         ...PLACEMENTS[placement],
         position: "fixed",
-        htmlStyles,
+        ...htmlStyles,
       },
       ...htmlProps,
     };

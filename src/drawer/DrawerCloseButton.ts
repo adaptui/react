@@ -1,22 +1,32 @@
-import { callAllHandlers } from "@chakra-ui/utils";
 import { createHook, createComponent } from "reakit-system";
-import { useButton, DialogStateReturn, ButtonProps } from "reakit";
+import {
+  useButton,
+  ButtonProps,
+  useDialogDisclosure,
+  DialogDisclosureOptions,
+  DialogDisclosureHTMLProps,
+} from "reakit";
 
-import { DRAWER_KEYS } from "./__keys";
+import { DRAWER_CLOSE_BUTTON_KEYS } from "./__keys";
+
+export type DrawerCloseButtonOptions = DialogDisclosureOptions;
+
+export type DrawerCloseButtonHTMLProps = ButtonProps &
+  DialogDisclosureHTMLProps;
+
+export type DrawerCloseButtonProps = DrawerCloseButtonOptions &
+  DrawerCloseButtonHTMLProps;
 
 export const useDrawerCloseButton = createHook<
-  Pick<DialogStateReturn, "hide">,
-  ButtonProps
+  DrawerCloseButtonOptions,
+  DrawerCloseButtonHTMLProps
 >({
   name: "DrawerCloseButton",
-  compose: useButton,
-  keys: [...DRAWER_KEYS, "hide"],
+  compose: [useButton, useDialogDisclosure],
+  keys: DRAWER_CLOSE_BUTTON_KEYS,
 
-  useProps({ hide }, { onClick: htmlOnClick, ...htmlProps }) {
-    return {
-      onClick: callAllHandlers(hide, htmlOnClick),
-      ...htmlProps,
-    };
+  useProps(options, htmlProps) {
+    return htmlProps;
   },
 });
 
