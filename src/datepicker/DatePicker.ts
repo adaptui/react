@@ -5,6 +5,7 @@ import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
 import { DATE_PICKER_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
+import { first } from "lodash";
 
 export type DatePickerOptions = BoxOptions &
   Pick<
@@ -41,7 +42,7 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
       {
         onKeyDown: htmlOnKeyDown,
         onClick: htmlOnClick,
-        onFocus: htmlOnFocus,
+        onMouseDown: htmlOnMouseDown,
         ...htmlProps
       },
     ) {
@@ -58,10 +59,8 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
       } = options;
       console.log("%c options", "color: #00bf00", options);
 
-      const onClick = (e: React.MouseEvent) => {
-        if (isTouch) {
-          show();
-        }
+      const onClick = () => {
+        if (isTouch) show();
       };
 
       // Open the popover on alt + arrow down
@@ -81,12 +80,9 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
         },
       });
 
-      const onFocus = (e: React.FocusEvent) => {
-        e.preventDefault();
+      const onMouseDown = (e: React.MouseEvent) => {
         e.stopPropagation();
-        if (isSelfTarget(e)) {
-          first();
-        }
+        first();
       };
 
       return {
@@ -101,8 +97,7 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
         "aria-required": ariaAttr(isRequired),
         onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
         onClick: callAllHandlers(htmlOnClick, onClick),
-        onFocus: callAllHandlers(htmlOnFocus, onFocus),
-        tabIndex: -1,
+        onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
         ...htmlProps,
       };
     },

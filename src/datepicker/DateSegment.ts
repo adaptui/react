@@ -53,7 +53,12 @@ export const useDateSegment = createHook<
 
   useProps(
     { segment, next, ...options },
-    { onKeyDown: htmlOnKeyDown, onFocus: htmlOnFocus, ...htmlProps },
+    {
+      onKeyDown: htmlOnKeyDown,
+      onFocus: htmlOnFocus,
+      onMouseDown: htmlOnMouseDown,
+      ...htmlProps
+    },
   ) {
     const [enteredKeys, setEnteredKeys] = useState("");
 
@@ -180,6 +185,10 @@ export const useDateSegment = createHook<
       setEnteredKeys("");
     };
 
+    const onMouseDown = (e: React.MouseEvent) => {
+      e.stopPropagation();
+    };
+
     const { id } = useId({ baseId: "spin-button" });
 
     switch (segment.type) {
@@ -211,6 +220,7 @@ export const useDateSegment = createHook<
           "aria-labelledby": `${options.pickerId} ${id}`,
           onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
           onFocus: callAllHandlers(htmlOnFocus, onFocus),
+          onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
           children: segment.text,
           ...htmlProps,
         });
