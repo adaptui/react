@@ -41,7 +41,7 @@ export type DrawerProps = DrawerOptions & DrawerHTMLProps;
 const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
   name: "Drawer",
   compose: useDialog,
-  keys: [...DRAWER_KEYS, "placement"],
+  keys: DRAWER_KEYS,
 
   useProps({ placement = "left" }, { style: htmlStyles, ...htmlProps }) {
     return {
