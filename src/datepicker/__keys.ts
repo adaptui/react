@@ -13,6 +13,7 @@ const DATE_PICKER_FIELD_STATE_KEYS = [
 ] as const;
 const DATE_PICKER_STATE_KEYS = [
   ...DATE_PICKER_FIELD_STATE_KEYS,
+  "calendar",
   "baseId",
   "unstable_idCountRef",
   "visible",

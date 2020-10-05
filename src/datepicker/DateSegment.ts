@@ -1,3 +1,9 @@
+import { useState } from "react";
+import { DOMProps } from "@react-types/shared";
+import { mergeProps } from "@react-aria/utils";
+import { callAllHandlers } from "@chakra-ui/utils";
+import { useDateFormatter } from "@react-aria/i18n";
+import { createComponent, createHook } from "reakit-system";
 import {
   BoxHTMLProps,
   useCompositeItem,
@@ -5,12 +11,6 @@ import {
   CompositeItemHTMLProps,
   unstable_useId as useId,
 } from "reakit";
-import { useState } from "react";
-import { DOMProps } from "@react-types/shared";
-import { mergeProps } from "@react-aria/utils";
-import { callAllHandlers } from "@chakra-ui/utils";
-import { useDateFormatter } from "@react-aria/i18n";
-import { createComponent, createHook } from "reakit-system";
 
 import { DATE_SEGMENT_KEYS } from "./__keys";
 import { isNumeric, parseNumber } from "./__utils";

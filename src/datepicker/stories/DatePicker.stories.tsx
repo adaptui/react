@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react";
 
 import "./index.css";
 import { DatePickerStateInitialProps, DateValue } from "../index.d";
-import { CalendarComponent } from "../../calendar/stories/CalendarComponent";
+import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 import {
   DatePicker,
   DateSegment,
@@ -41,14 +41,7 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
         </DatePickerTrigger>
       </div>
       <DatePickerContent {...state}>
-        {state.visible ? (
-          <CalendarComponent
-            value={state.dateValue}
-            onChange={state.selectDate}
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus
-          />
-        ) : null}
+        <CalendarComp {...state.calendar} />
       </DatePickerContent>
     </DatePicker>
   );

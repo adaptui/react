@@ -4,6 +4,7 @@
  * to work with Reakit System
  */
 
+import * as React from "react";
 import { useControllableState } from "@chakra-ui/hooks";
 import {
   useCompositeState,
@@ -14,11 +15,12 @@ import {
 import { setTime, isInvalid } from "./__utils";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
+import { useCalendarState } from "../calendar";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   const {
     value: initialValue,
-    defaultValue,
+    defaultValue = new Date(),
     onChange,
     minValue,
     maxValue,
@@ -43,8 +45,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   const dateValue = value != null ? new Date(value) : undefined;
 
   // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
-  const popover = usePopoverState(props);
-  const composite = useCompositeState({ orientation: "horizontal" });
   const selectDate = (newValue: Date) => {
     if (dateValue) {
       setTime(newValue, dateValue);
@@ -54,6 +54,8 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     popover.hide();
   };
 
+  const popover = usePopoverState(props);
+  const composite = useCompositeState({ orientation: "horizontal" });
   const fieldState = useDatePickerFieldState({
     value: dateValue,
     defaultValue,
@@ -61,12 +63,26 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     formatOptions,
     placeholderDate,
   });
+  const calendar = useCalendarState({
+    value: dateValue,
+    defaultValue,
+    // @ts-ignore
+    onChange: selectDate,
+  });
 
   const validationState: ValidationState =
     props.validationState ||
     (isInvalid(dateValue, props.minValue, props.maxValue)
       ? "invalid"
       : "valid");
+
+  React.useEffect(() => {
+    if (popover.visible) {
+      calendar.setFocused(true);
+      dateValue && calendar.setFocusedDate(dateValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [popover.visible]);
 
   return {
     pickerId,
@@ -83,6 +99,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     ...composite,
     ...popover,
     ...fieldState,
+    calendar,
   };
 };
 

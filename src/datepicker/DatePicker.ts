@@ -1,3 +1,4 @@
+import { createOnKeyDown, isSelfTarget } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
@@ -16,6 +17,7 @@ export type DatePickerOptions = BoxOptions &
     | "show"
     | "pickerId"
     | "dialogId"
+    | "first"
   >;
 
 export type DatePickerHTMLProps = BoxHTMLProps;
@@ -36,7 +38,12 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
 
     useProps(
       options,
-      { onKeyDown: htmlOnKeyDown, onClick: htmlOnClick, ...htmlProps },
+      {
+        onKeyDown: htmlOnKeyDown,
+        onClick: htmlOnClick,
+        onFocus: htmlOnFocus,
+        ...htmlProps
+      },
     ) {
       const {
         visible,
@@ -47,19 +54,39 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
         show,
         pickerId,
         dialogId,
+        first,
       } = options;
+      console.log("%c options", "color: #00bf00", options);
 
-      // Open the popover on alt + arrow down
-      const onKeyDown = (e: React.KeyboardEvent) => {
-        if (e.altKey && e.key === "ArrowDown") {
-          e.preventDefault();
-          e.stopPropagation();
-          show;
+      const onClick = (e: React.MouseEvent) => {
+        if (isTouch) {
+          show();
         }
       };
 
-      const onClick = (e: React.MouseEvent) => {
-        if (isTouch) show();
+      // Open the popover on alt + arrow down
+      const onKeyDown = createOnKeyDown({
+        onKey: htmlOnKeyDown,
+        preventDefault: false,
+        keyMap: event => {
+          const isAlt = event.altKey;
+
+          return {
+            ArrowDown: () => {
+              event.preventDefault();
+              event.stopPropagation();
+              isAlt && show();
+            },
+          };
+        },
+      });
+
+      const onFocus = (e: React.FocusEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isSelfTarget(e)) {
+          first();
+        }
       };
 
       return {
@@ -74,6 +101,8 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
         "aria-required": ariaAttr(isRequired),
         onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
         onClick: callAllHandlers(htmlOnClick, onClick),
+        onFocus: callAllHandlers(htmlOnFocus, onFocus),
+        tabIndex: -1,
         ...htmlProps,
       };
     },
