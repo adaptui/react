@@ -22,7 +22,7 @@ export const useDrawerCloseButton = createHook<
   DrawerCloseButtonHTMLProps
 >({
   name: "DrawerCloseButton",
-  compose: useDialogDisclosure
+  compose: useDialogDisclosure,
   keys: DRAWER_CLOSE_BUTTON_KEYS,
 
   useProps(options, htmlProps) {
