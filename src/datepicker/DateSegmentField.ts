@@ -1,10 +1,9 @@
 import { createOnKeyDown } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
-
-import { DatePickerStateReturn } from "./DatePickerState";
 import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
 
 import { DATE_SEGMENT_FIELD_KEYS } from "./__keys";
+import { DatePickerStateReturn } from "./DatePickerState";
 
 export type DateSegmentFieldOptions = CompositeOptions &
   Pick<DatePickerStateReturn, "next" | "previous" | "show">;
@@ -40,12 +39,7 @@ export const useDateSegmentField = createHook<
         };
       },
     });
-
-    return { ...composite, onKeyDown };
-  },
-
-  useProps(options, htmlProps) {
-    return htmlProps;
+    return { ...composite, onKeyDown, ...htmlProps };
   },
 });
 
