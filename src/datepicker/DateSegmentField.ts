@@ -1,3 +1,4 @@
+import { callAllHandlers } from "@chakra-ui/utils";
 import { createOnKeyDown } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
@@ -5,8 +6,7 @@ import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
 import { DATE_SEGMENT_FIELD_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DateSegmentFieldOptions = CompositeOptions &
-  Pick<DatePickerStateReturn, "next" | "previous" | "show">;
+export type DateSegmentFieldOptions = CompositeOptions & DatePickerStateReturn;
 
 export type DateSegmentFieldHTMLProps = CompositeHTMLProps;
 
@@ -21,25 +21,32 @@ export const useDateSegmentField = createHook<
   compose: useComposite,
   keys: DATE_SEGMENT_FIELD_KEYS,
 
-  useComposeProps(options, htmlProps) {
-    const composite = useComposite(options, htmlProps);
+  useProps(options, { onKeyDown: htmlOnKeyDown, ...htmlProps }) {
+    const { pickerId, previous, next, show } = options;
+
     const onKeyDown = createOnKeyDown({
-      onKey: composite.onKeyDown,
+      onKey: htmlOnKeyDown,
       preventDefault: false,
       keyMap: event => {
         const isShift = event.shiftKey;
         const isAlt = event.altKey;
+
         return {
           Tab: () => {
-            isShift ? options.previous() : options.next();
+            isShift ? previous() : next();
           },
           ArrowDown: () => {
-            isAlt && options.show();
+            isAlt && show();
           },
         };
       },
     });
-    return { ...composite, onKeyDown, ...htmlProps };
+
+    return {
+      "aria-labelledby": pickerId,
+      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
+      ...htmlProps,
+    };
   },
 });
 

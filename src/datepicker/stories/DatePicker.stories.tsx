@@ -1,7 +1,10 @@
 import * as React from "react";
+import { addDays } from "date-fns";
 import { Meta } from "@storybook/react";
 
 import "./index.css";
+import { DatePickerStateInitialProps, DateValue } from "../index.d";
+import { CalendarComponent } from "../../calendar/stories/CalendarComponent";
 import {
   DatePicker,
   DateSegment,
@@ -9,9 +12,7 @@ import {
   DatePickerContent,
   DatePickerTrigger,
   useDatePickerState,
-  DatePickerStateInitialProps,
-} from "..";
-import { CalendarComponent } from "../../calendar/stories/CalendarComponent";
+} from "../index";
 
 export default {
   title: "Component/DatePicker",
@@ -19,6 +20,7 @@ export default {
 
 const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
   const state = useDatePickerState(props);
+  console.log("%c state", "color: #f27999", state);
 
   return (
     <DatePicker {...state}>
@@ -39,7 +41,14 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
         </DatePickerTrigger>
       </div>
       <DatePickerContent {...state}>
-        <CalendarComponent {...state.calendar} />
+        {state.visible ? (
+          <CalendarComponent
+            value={state.dateValue}
+            onChange={state.selectDate}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+          />
+        ) : null}
       </DatePickerContent>
     </DatePicker>
   );
@@ -55,11 +64,20 @@ const CalendarIcon = () => (
 export const Default = () => <DatePickerComp />;
 
 export const InitialDate = () => (
-  <DatePickerComp initialDate={new Date(2001, 0, 1)} />
+  <DatePickerComp defaultValue={new Date(2001, 0, 1)} />
 );
 
-export const Controllable = () => {
-  const [date, setDate] = React.useState(new Date(2020, 0, 1));
+export const ControllableState = () => {
+  const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
 
-  return <DatePickerComp value={date} onChange={val => console.log(val)} />;
+  return (
+    <div>
+      <input
+        type="date"
+        onChange={e => setValue(new Date(e.target.value))}
+        value={(value as Date).toISOString().slice(0, 10)}
+      />
+      <DatePickerComp value={value} onChange={setValue} />
+    </div>
+  );
 };

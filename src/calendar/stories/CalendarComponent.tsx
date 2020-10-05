@@ -1,4 +1,6 @@
 import React from "react";
+
+import "./index.css";
 import {
   Calendar as CalendarWrapper,
   CalendarButton,
@@ -6,12 +8,14 @@ import {
   CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarStateReturn,
   CalendarWeekTitle,
-} from "..";
-import "./index.css";
+  CalendarStateInitialProps,
+  useCalendarState,
+} from "../index";
 
-export const CalendarComponent: React.FC<CalendarStateReturn> = state => {
+export const CalendarComponent: React.FC<CalendarStateInitialProps> = props => {
+  const state = useCalendarState(props);
+
   return (
     <CalendarWrapper {...state} className="calendar">
       <div className="header">

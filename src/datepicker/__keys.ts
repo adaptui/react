@@ -1,7 +1,7 @@
 // Automatically generated
 const DATE_PICKER_FIELD_STATE_KEYS = [
-  "value",
-  "setValue",
+  "fieldValue",
+  "setFieldValue",
   "segments",
   "dateFormatter",
   "increment",
@@ -25,6 +25,18 @@ const DATE_PICKER_STATE_KEYS = [
   "setVisible",
   "setAnimated",
   "stopAnimation",
+  "modal",
+  "unstable_disclosureRef",
+  "setModal",
+  "unstable_referenceRef",
+  "unstable_popoverRef",
+  "unstable_arrowRef",
+  "unstable_popoverStyles",
+  "unstable_arrowStyles",
+  "unstable_originalPlacement",
+  "unstable_update",
+  "placement",
+  "place",
   "unstable_virtual",
   "rtl",
   "orientation",
@@ -56,7 +68,17 @@ const DATE_PICKER_STATE_KEYS = [
   "setWrap",
   "reset",
   "unstable_setHasActiveWidget",
-  "calendar",
+  "pickerId",
+  "dialogId",
+  "dateValue",
+  "setDateValue",
+  "selectDate",
+  "validationState",
+  "minValue",
+  "maxValue",
+  "isDisabled",
+  "isReadOnly",
+  "isRequired",
 ] as const;
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;
 export const DATE_PICKER_CONTENT_KEYS = DATE_PICKER_KEYS;
@@ -64,8 +86,5 @@ export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_CONTENT_KEYS;
 export const DATE_SEGMENT_KEYS = [
   ...DATE_PICKER_TRIGGER_KEYS,
   "segment",
-  "isDisabled",
-  "isReadOnly",
-  "isRequired",
 ] as const;
 export const DATE_SEGMENT_FIELD_KEYS = DATE_PICKER_TRIGGER_KEYS;

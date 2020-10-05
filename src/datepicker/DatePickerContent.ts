@@ -2,8 +2,10 @@ import { createComponent, createHook } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 
 import { DATE_PICKER_CONTENT_KEYS } from "./__keys";
+import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DatePickerContentOptions = PopoverOptions;
+export type DatePickerContentOptions = PopoverOptions &
+  Pick<DatePickerStateReturn, "dialogId">;
 
 export type DatePickerContentHTMLProps = PopoverHTMLProps;
 
@@ -18,8 +20,8 @@ export const useDatePickerContent = createHook<
   compose: usePopover,
   keys: DATE_PICKER_CONTENT_KEYS,
 
-  useProps(options, htmlProps) {
-    return htmlProps;
+  useProps({ dialogId }, htmlProps) {
+    return { id: dialogId, ...htmlProps };
   },
 });
 
