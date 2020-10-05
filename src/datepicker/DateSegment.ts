@@ -22,12 +22,26 @@ import {
 } from "./DatePickerFieldState";
 
 export type DateSegmentOptions = CompositeItemOptions &
-  DatePickerFieldStateReturn &
-  DatePickerStateReturn & {
+  Pick<
+    DatePickerFieldStateReturn,
+    | "fieldValue"
+    | "increment"
+    | "incrementPage"
+    | "setSegment"
+    | "decrement"
+    | "decrementPage"
+    | "confirmPlaceholder"
+  > &
+  Pick<
+    DatePickerStateReturn,
+    | "pickerId"
+    | "next"
+    | "dateFormatter"
+    | "isDisabled"
+    | "isRequired"
+    | "isReadOnly"
+  > & {
     segment: IDateSegment;
-    isDisabled?: boolean;
-    isReadOnly?: boolean;
-    isRequired?: boolean;
   };
 
 export type DateSegmentHTMLProps = CompositeItemHTMLProps &
