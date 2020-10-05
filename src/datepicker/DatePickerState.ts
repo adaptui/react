@@ -12,10 +12,10 @@ import {
   unstable_useId as useId,
 } from "reakit";
 
+import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
-import { useCalendarState } from "../calendar";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   const {

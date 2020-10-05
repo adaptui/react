@@ -1,11 +1,10 @@
-import { createOnKeyDown, isSelfTarget } from "reakit-utils";
+import { createOnKeyDown } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
 import { DATE_PICKER_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
-import { first } from "lodash";
 
 export type DatePickerOptions = BoxOptions &
   Pick<
