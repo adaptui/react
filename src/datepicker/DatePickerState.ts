@@ -5,6 +5,7 @@
  */
 
 import * as React from "react";
+import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 import {
   useCompositeState,
@@ -12,42 +13,56 @@ import {
   unstable_useId as useId,
 } from "reakit";
 
-import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
+import { DateValue, useCalendarState } from "../calendar";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   const {
-    value: initialValue,
-    defaultValue = new Date(),
+    value: initialDate,
+    defaultValue: defaultValueProp,
     onChange,
-    minValue,
-    maxValue,
+    minValue: minValueProp,
+    maxValue: maxValueProp,
     isDisabled,
     isReadOnly,
     isRequired,
     pickerId: pickerIdProp,
     dialogId: dialogIdProp,
     formatOptions,
-    placeholderDate,
+    placeholderDate: placeholderDateProp,
   } = props;
 
   const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
   const { id: dialogId } = useId({ id: dialogIdProp, baseId: "dialog" });
 
+  const defaultValue =
+    defaultValueProp && isValid(defaultValueProp)
+      ? new Date(defaultValueProp)
+      : new Date();
+
   const [value, setValue] = useControllableState({
-    value: initialValue,
+    value: initialDate,
     defaultValue,
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
-  const dateValue = value != null ? new Date(value) : undefined;
+
+  const dateValue = value && isValid(value) ? new Date(value) : undefined;
+  const minValue =
+    minValueProp && isValid(minValueProp) ? new Date(minValueProp) : undefined;
+  const maxValue =
+    maxValueProp && isValid(maxValueProp) ? new Date(maxValueProp) : undefined;
+  const placeholderDate =
+    placeholderDateProp && isValid(placeholderDateProp)
+      ? new Date(placeholderDateProp)
+      : undefined;
 
   // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
-  const selectDate = (newValue: Date) => {
+  const selectDate = (newValue: DateValue) => {
     if (dateValue) {
-      setTime(newValue, dateValue);
+      setTime(new Date(newValue), dateValue);
     }
 
     setValue(newValue);
@@ -66,7 +81,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   const calendar = useCalendarState({
     value: dateValue,
     defaultValue,
-    // @ts-ignore
     onChange: selectDate,
   });
 

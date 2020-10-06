@@ -68,7 +68,7 @@ export const ControllableState = () => {
       <input
         type="date"
         onChange={e => setValue(new Date(e.target.value))}
-        value={(value as Date).toISOString().slice(0, 10)}
+        value={new Date(value).toISOString().slice(0, 10)}
       />
       <DatePickerComp value={value} onChange={setValue} />
     </div>

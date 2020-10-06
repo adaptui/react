@@ -1,4 +1,4 @@
-import { createOnKeyDown, isSelfTarget } from "reakit-utils";
+import { createOnKeyDown } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
@@ -56,7 +56,6 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
         dialogId,
         first,
       } = options;
-      console.log("%c options", "color: #00bf00", options);
 
       const onClick = () => {
         if (isTouch) show();
@@ -65,14 +64,12 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
       // Open the popover on alt + arrow down
       const onKeyDown = createOnKeyDown({
         onKey: htmlOnKeyDown,
-        preventDefault: false,
+        preventDefault: true,
         keyMap: event => {
           const isAlt = event.altKey;
 
           return {
             ArrowDown: () => {
-              event.preventDefault();
-              event.stopPropagation();
               isAlt && show();
             },
           };

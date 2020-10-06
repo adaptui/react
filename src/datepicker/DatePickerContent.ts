@@ -1,9 +1,9 @@
 import { createComponent, createHook } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 
+import { callAllHandlers } from "@chakra-ui/utils";
 import { DATE_PICKER_CONTENT_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
-import { callAllHandlers } from "@chakra-ui/utils";
 
 export type DatePickerContentOptions = PopoverOptions &
   Pick<DatePickerStateReturn, "dialogId">;
