@@ -47,9 +47,10 @@ const TYPE_MAPPING = {
 export interface SegmentStateProps {
   value?: Date;
   defaultValue?: Date;
-  formatOptions?:
-    | (Intl.DateTimeFormatOptions & { timeStyle?: string; dateStyle?: string })
-    | undefined;
+  formatOptions?: Intl.DateTimeFormatOptions & {
+    timeStyle?: string;
+    dateStyle?: string;
+  };
   placeholderDate?: Date;
   onChange?: (value: Date, ...args: any[]) => void;
 }

@@ -30,7 +30,7 @@ const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
 };
 
 export const Default = () => (
-  <div>
+  <div className="segment_demo">
     <pre>
       year: "numeric", month: "2-digit", day: "2-digit", weekday: "long",
     </pre>

@@ -1,5 +1,3 @@
-export type DateValue = string | number | Date;
-
 import {
   getDate,
   getDaysInMonth,
@@ -231,3 +229,5 @@ export function parseNumber(str: string): number {
 export function isNumeric(str: string) {
   return /^[0-9\u0660-\u0669\u06f0-\u06f9]+$/.test(str);
 }
+
+export type DateValue = string | number | Date;

@@ -1,15 +1,13 @@
 import {
-  useBox,
-  BoxOptions,
-  BoxHTMLProps,
   useCompositeItem,
   CompositeItemOptions,
   CompositeItemHTMLProps,
 } from "reakit";
 import { MouseEvent, useState } from "react";
-import { DOMProps } from "@react-types/shared";
-import { useDateFormatter } from "@react-aria/i18n";
 import { mergeProps, useId } from "@react-aria/utils";
+import { DOMProps } from "@react-types/shared";
+import { callAllHandlers } from "@chakra-ui/utils";
+import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
 
 import { isNumeric, parseNumber } from "./__utils";
@@ -17,22 +15,32 @@ import { useSpinButton } from "../utils/useSpinButton";
 import { DATE_SEGMENT_KEYS } from "../datepicker/__keys";
 import { IDateSegment, SegmentStateReturn } from "./SegmentState";
 
-export type SegmentOptions = SegmentStateReturn &
-  CompositeItemOptions &
-  BoxOptions & {
+export type SegmentOptions = CompositeItemOptions &
+  Pick<
+    SegmentStateReturn,
+    | "next"
+    | "dateFormatter"
+    | "confirmPlaceholder"
+    | "increment"
+    | "decrement"
+    | "incrementPage"
+    | "decrementPage"
+    | "setSegment"
+    | "value"
+  > & {
     segment: IDateSegment;
     isDisabled?: boolean;
     isReadOnly?: boolean;
     isRequired?: boolean;
   };
 
-export type SegmentHTMLProps = CompositeItemHTMLProps & BoxHTMLProps & DOMProps;
+export type SegmentHTMLProps = CompositeItemHTMLProps & DOMProps;
 
 export type SegmentProps = SegmentOptions & SegmentHTMLProps;
 
 export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
   name: "Segment",
-  compose: [useBox, useCompositeItem],
+  compose: useCompositeItem,
   keys: DATE_SEGMENT_KEYS,
 
   useOptions(options, htmlProps) {
@@ -46,33 +54,40 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
     const composite = useCompositeItem(options, htmlProps);
 
     /*
-      Haz: 
-      Ensure tabIndex={0} 
+      Haz:
+      Ensure tabIndex={0}
       Tab is not the only thing that can move focus in web pages
-      For example, on iOS you can move between form elements using 
+      For example, on iOS you can move between form elements using
       the arrows above the keyboard
     */
     return {
-      ...htmlProps,
       ...composite,
-      tabIndex: options.segment.type === "literal" ? -1 : 0,
+      tabIndex: options.disabled ? -1 : 0,
     };
   },
 
-  useProps({ segment, next, previous, ...state }, htmlProps) {
+  useProps(
+    { segment, next, ...options },
+    {
+      onMouseDown: htmlOnMouseDown,
+      onKeyDown: htmlOnKeyDown,
+      onFocus: htmlOnFocus,
+      ...htmlProps
+    },
+  ) {
     const [enteredKeys, setEnteredKeys] = useState("");
 
     let textValue = segment.text;
     const monthDateFormatter = useDateFormatter({ month: "long" });
     const hourDateFormatter = useDateFormatter({
       hour: "numeric",
-      hour12: state.dateFormatter.resolvedOptions().hour12,
+      hour12: options.dateFormatter.resolvedOptions().hour12,
     });
 
     if (segment.type === "month") {
-      textValue = monthDateFormatter.format(state.value);
+      textValue = monthDateFormatter.format(options.value);
     } else if (segment.type === "hour" || segment.type === "dayPeriod") {
-      textValue = hourDateFormatter.format(state.value);
+      textValue = hourDateFormatter.format(options.value);
     }
 
     const { spinButtonProps } = useSpinButton({
@@ -80,17 +95,17 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       textValue,
       minValue: segment.minValue,
       maxValue: segment.maxValue,
-      isDisabled: state.isDisabled,
-      isReadOnly: state.isReadOnly,
-      isRequired: state.isRequired,
-      onIncrement: () => state.increment(segment.type),
-      onDecrement: () => state.decrement(segment.type),
-      onIncrementPage: () => state.incrementPage(segment.type),
-      onDecrementPage: () => state.decrementPage(segment.type),
+      isDisabled: options.isDisabled,
+      isReadOnly: options.isReadOnly,
+      isRequired: options.isRequired,
+      onIncrement: () => options.increment(segment.type),
+      onDecrement: () => options.decrement(segment.type),
+      onIncrementPage: () => options.incrementPage(segment.type),
+      onDecrementPage: () => options.decrementPage(segment.type),
       onIncrementToMax: () =>
-        state.setSegment(segment.type, segment.maxValue as number),
+        options.setSegment(segment.type, segment.maxValue as number),
       onDecrementToMin: () =>
-        state.setSegment(segment.type, segment.minValue as number),
+        options.setSegment(segment.type, segment.minValue as number),
     });
 
     const onKeyDown = (e: any) => {
@@ -101,8 +116,8 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       switch (e.key) {
         case "Enter":
           e.preventDefault();
-          if (segment.isPlaceholder && !state.isReadOnly) {
-            state.confirmPlaceholder(segment.type);
+          if (segment.isPlaceholder && !options.isReadOnly) {
+            options.confirmPlaceholder(segment.type);
           }
           next();
           break;
@@ -110,9 +125,9 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
           break;
         case "Backspace": {
           e.preventDefault();
-          if (isNumeric(segment.text) && !state.isReadOnly) {
+          if (isNumeric(segment.text) && !options.isReadOnly) {
             const newValue = segment.text.slice(0, -1);
-            state.setSegment(
+            options.setSegment(
               segment.type,
               newValue.length === 0
                 ? (segment.minValue as number)
@@ -125,7 +140,10 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
         default:
           e.preventDefault();
           e.stopPropagation();
-          if ((isNumeric(e.key) || /^[ap]$/.test(e.key)) && !state.isReadOnly) {
+          if (
+            (isNumeric(e.key) || /^[ap]$/.test(e.key)) &&
+            !options.isReadOnly
+          ) {
             onInput(e.key);
           }
       }
@@ -137,9 +155,9 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       switch (segment.type) {
         case "dayPeriod":
           if (key === "a") {
-            state.setSegment("dayPeriod", 0);
+            options.setSegment("dayPeriod", 0);
           } else if (key === "p") {
-            state.setSegment("dayPeriod", 12);
+            options.setSegment("dayPeriod", 12);
           }
           next();
           break;
@@ -157,7 +175,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
           let segmentValue = numberValue;
           if (
             segment.type === "hour" &&
-            state.dateFormatter.resolvedOptions().hour12 &&
+            options.dateFormatter.resolvedOptions().hour12 &&
             numberValue === 12
           ) {
             segmentValue = 0;
@@ -165,7 +183,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
             segmentValue = parseNumber(key);
           }
 
-          state.setSegment(segment.type, segmentValue);
+          options.setSegment(segment.type, segmentValue);
 
           if (Number(numberValue + "0") > (segment.maxValue as number)) {
             setEnteredKeys("");
@@ -181,6 +199,8 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
     const onFocus = () => {
       setEnteredKeys("");
     };
+
+    const preventPropagation = (e: MouseEvent) => e.stopPropagation();
 
     const id = useId(htmlProps.id);
 
@@ -210,11 +230,11 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
         return mergeProps(spinButtonProps, {
           id,
           "aria-label": segment.type,
-          "aria-labelledby": `${state["aria-labelledby"]} ${id}`,
-          tabIndex: state.isDisabled ? undefined : 0,
-          onKeyDown,
-          onFocus,
-          onMouseDown: (e: MouseEvent) => e.stopPropagation(),
+          "aria-labelledby": `${options["aria-labelledby"]} ${id}`,
+          tabIndex: options.isDisabled ? undefined : 0,
+          onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
+          onFocus: callAllHandlers(htmlOnFocus, onFocus),
+          onMouseDown: callAllHandlers(preventPropagation, htmlOnMouseDown),
           children: segment.text,
           ...htmlProps,
         });

@@ -12,10 +12,10 @@
   outline: none;
 }
 
-pre {
+.segment_demo pre {
   font-size: 12px;
   color: rgb(101, 100, 124);
 }
-pre ~ pre {
+.segment_demo pre ~ pre {
   margin-top: 35px;
 }
