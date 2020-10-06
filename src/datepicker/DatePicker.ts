@@ -1,4 +1,4 @@
-import { createOnKeyDown } from "reakit-utils";
+import { createOnKeyDown, isSelfTarget } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";

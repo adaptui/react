@@ -1,3 +1,4 @@
+import { callAllHandlers } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 import {
   usePopoverDisclosure,
@@ -22,8 +23,16 @@ export const useDatePickerTrigger = createHook<
   compose: usePopoverDisclosure,
   keys: DATE_PICKER_TRIGGER_KEYS,
 
-  useProps(_, htmlProps) {
-    return { tabIndex: -1, ...htmlProps };
+  useProps(_, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
+    const onMouseDown = (e: React.MouseEvent) => {
+      e.stopPropagation();
+    };
+
+    return {
+      tabIndex: -1,
+      onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
+      ...htmlProps,
+    };
   },
 });
 

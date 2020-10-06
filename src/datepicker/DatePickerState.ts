@@ -81,10 +81,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
       calendar.setFocused(true);
       dateValue && calendar.focusCell(dateValue);
     }
-
-    if (!popover.visible) {
-      composite.first();
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
 
