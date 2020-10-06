@@ -19,7 +19,11 @@ export default {
 } as Meta;
 
 const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
-  const state = useDatePickerState(props);
+  const state = useDatePickerState({
+    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
+    ...props,
+  });
+
   console.log("%c state", "color: #f27999", state);
 
   return (

@@ -18,9 +18,15 @@
   align-items: center;
   padding-left: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.datepicker__header:focus-within {
+  border: 1px solid #1e65fd;
 }
 
 .datepicker__field {
+  font-family: monospace;
   display: flex;
 }
 

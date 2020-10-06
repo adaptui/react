@@ -40,7 +40,7 @@ export function generateDaysInMonthArray(
       const daysInWeek = [...new Array(7).keys()].reduce(
         (days: Date[], dayIndex) => {
           const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
-          const cellDate = new Date(year, month, day);
+          const cellDate = new Date(year, month, day, new Date().getHours());
 
           return [...days, cellDate];
         },
