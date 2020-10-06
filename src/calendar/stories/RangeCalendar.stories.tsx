@@ -136,6 +136,7 @@ export const DefaultValue = () => (
 export const ControlledValue = () => {
   const [start, setStart] = React.useState<DateValue>(subDays(new Date(), 1));
   const [end, setEnd] = React.useState<DateValue>(addDays(new Date(), 1));
+
   return (
     <div>
       <input

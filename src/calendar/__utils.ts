@@ -58,7 +58,7 @@ export function makeRange(start: Date, end: Date): RangeValue<Date> {
     [start, end] = [end, start];
   }
 
-  return { start: startOfDay(start), end: endOfDay(end) };
+  return { start: start, end: endOfDay(end) };
 }
 
 export function convertRange(range: RangeValue<DateValue>): RangeValue<Date> {
