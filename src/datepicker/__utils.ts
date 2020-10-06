@@ -126,6 +126,9 @@ export function add(
       const year = cycleValue(getYear(value), amount, 1, 9999, true);
       return setYear(value, year);
     }
+    default: {
+      return value;
+    }
   }
 }
 
@@ -229,4 +232,27 @@ export function parseNumber(str: string): number {
 // Keep this in sync with `parseNumber` above.
 export function isNumeric(str: string) {
   return /^[0-9\u0660-\u0669\u06f0-\u06f9]+$/.test(str);
+}
+
+export function setTime(date: Date, time: Date) {
+  if (!date || !time) {
+    return;
+  }
+
+  date.setHours(time.getHours());
+  date.setMinutes(time.getMinutes());
+  date.setSeconds(time.getSeconds());
+  date.setMilliseconds(time.getMilliseconds());
+}
+
+export function isInvalid(
+  value: Date | undefined,
+  minValue?: DateValue,
+  maxValue?: DateValue,
+) {
+  return (
+    value != null &&
+    ((minValue != null && value < new Date(minValue)) ||
+      (maxValue != null && value > new Date(maxValue)))
+  );
 }

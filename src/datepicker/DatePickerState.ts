@@ -1,53 +1,119 @@
-import React from "react";
-import { useCompositeState, useDisclosureState } from "reakit";
+/**
+ * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
+ * We improved the Calendar from Stately [useDatePickerState](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/datepicker/src/useDatePickerState.ts)
+ * to work with Reakit System
+ */
 
+import * as React from "react";
+import { isValid } from "date-fns";
+import { useControllableState } from "@chakra-ui/hooks";
+import {
+  useCompositeState,
+  usePopoverState,
+  unstable_useId as useId,
+} from "reakit";
+
+import { setTime, isInvalid } from "./__utils";
+import { DateValue, useCalendarState } from "../calendar";
 import { useDatePickerFieldState } from "./DatePickerFieldState";
-import { useCalendarState, CalendarStateInitialProps } from "../calendar";
-
-export interface DatePickerStateInitialProps extends CalendarStateInitialProps {
-  visible?: boolean;
-  initialDate?: Date;
-  dateFormat?: Intl.DateTimeFormatOptions;
-}
+import { DatePickerStateInitialProps, ValidationState } from "./index.d";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
-  const { visible, dateFormat, initialDate = new Date() } = props;
+  const {
+    value: initialDate,
+    defaultValue: defaultValueProp,
+    onChange,
+    minValue: minValueProp,
+    maxValue: maxValueProp,
+    isDisabled,
+    isReadOnly,
+    isRequired,
+    pickerId: pickerIdProp,
+    dialogId: dialogIdProp,
+    formatOptions,
+    placeholderDate: placeholderDateProp,
+  } = props;
 
-  const [date, setDate] = React.useState(initialDate);
+  const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
+  const { id: dialogId } = useId({ id: dialogIdProp, baseId: "dialog" });
 
-  const segmentComposite = useCompositeState({ orientation: "horizontal" });
-  const disclosure = useDisclosureState({ visible });
+  const defaultValue =
+    defaultValueProp && isValid(defaultValueProp)
+      ? new Date(defaultValueProp)
+      : new Date();
 
-  const calendar = useCalendarState({
-    value: date,
-    onChange: date => {
-      setDate(new Date(date));
-      disclosure.hide();
-    },
+  const [value, setValue] = useControllableState({
+    value: initialDate,
+    defaultValue,
+    onChange,
+    shouldUpdate: (prev, next) => prev !== next,
   });
 
+  const dateValue = value && isValid(value) ? new Date(value) : undefined;
+  const minValue =
+    minValueProp && isValid(minValueProp) ? new Date(minValueProp) : undefined;
+  const maxValue =
+    maxValueProp && isValid(maxValueProp) ? new Date(maxValueProp) : undefined;
+  const placeholderDate =
+    placeholderDateProp && isValid(placeholderDateProp)
+      ? new Date(placeholderDateProp)
+      : undefined;
+
+  // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
+  const selectDate = (newValue: DateValue) => {
+    if (dateValue) {
+      setTime(new Date(newValue), dateValue);
+    }
+
+    setValue(newValue);
+    popover.hide();
+  };
+
+  const popover = usePopoverState(props);
+  const composite = useCompositeState({ orientation: "horizontal" });
   const fieldState = useDatePickerFieldState({
-    formatOptions: dateFormat,
-    value: date,
-    onChange(v) {
-      setDate(new Date(v));
-      calendar.focusCell(new Date(v));
-    },
+    value: dateValue,
+    defaultValue,
+    onChange: setValue,
+    formatOptions,
+    placeholderDate,
   });
+  const calendar = useCalendarState({
+    value: dateValue,
+    defaultValue,
+    onChange: selectDate,
+  });
+
+  const validationState: ValidationState =
+    props.validationState ||
+    (isInvalid(dateValue, props.minValue, props.maxValue)
+      ? "invalid"
+      : "valid");
 
   React.useEffect(() => {
-    if (disclosure.visible) {
+    if (popover.visible) {
       calendar.setFocused(true);
-      calendar.setFocusedDate(date);
+      dateValue && calendar.focusCell(dateValue);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disclosure.visible]);
+  }, [popover.visible]);
 
   return {
-    calendar,
+    pickerId,
+    dialogId,
+    dateValue,
+    setDateValue: setValue,
+    selectDate,
+    validationState,
+    minValue,
+    maxValue,
+    isDisabled,
+    isReadOnly,
+    isRequired,
+    ...composite,
+    ...popover,
     ...fieldState,
-    ...segmentComposite,
-    ...disclosure,
+    calendar,
   };
 };
 

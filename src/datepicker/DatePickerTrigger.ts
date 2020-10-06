@@ -1,10 +1,14 @@
-import { usePopoverDisclosure, PopoverDisclosureHTMLProps } from "reakit";
+import { callAllHandlers } from "@chakra-ui/utils";
+import { createComponent, createHook } from "reakit-system";
+import {
+  usePopoverDisclosure,
+  PopoverDisclosureHTMLProps,
+  PopoverDisclosureOptions,
+} from "reakit";
 
 import { DATE_PICKER_TRIGGER_KEYS } from "./__keys";
-import { createComponent, createHook } from "reakit-system";
 
-// TODO: Fix Typescript error
-export type DatePickerTriggerOptions = any; // PopoverDisclosureOptions;
+export type DatePickerTriggerOptions = PopoverDisclosureOptions;
 
 export type DatePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
 
@@ -19,8 +23,16 @@ export const useDatePickerTrigger = createHook<
   compose: usePopoverDisclosure,
   keys: DATE_PICKER_TRIGGER_KEYS,
 
-  useProps(options, htmlProps) {
-    return { tabIndex: -1, ...htmlProps };
+  useProps(_, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
+    const onMouseDown = (e: React.MouseEvent) => {
+      e.stopPropagation();
+    };
+
+    return {
+      tabIndex: -1,
+      onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
+      ...htmlProps,
+    };
   },
 });
 

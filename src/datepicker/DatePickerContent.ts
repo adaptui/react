@@ -1,9 +1,12 @@
 import { createComponent, createHook } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 
+import { callAllHandlers } from "@chakra-ui/utils";
 import { DATE_PICKER_CONTENT_KEYS } from "./__keys";
+import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DatePickerContentOptions = PopoverOptions;
+export type DatePickerContentOptions = PopoverOptions &
+  Pick<DatePickerStateReturn, "dialogId">;
 
 export type DatePickerContentHTMLProps = PopoverHTMLProps;
 
@@ -18,8 +21,16 @@ export const useDatePickerContent = createHook<
   compose: usePopover,
   keys: DATE_PICKER_CONTENT_KEYS,
 
-  useProps(options, htmlProps) {
-    return htmlProps;
+  useProps({ dialogId }, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
+    const onMouseDown = (e: React.MouseEvent) => {
+      e.stopPropagation();
+    };
+
+    return {
+      id: dialogId,
+      onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
+      ...htmlProps,
+    };
   },
 });
 

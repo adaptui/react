@@ -1,14 +1,14 @@
 /**
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
- * We improved the Calendar from Stately [useCalendarState](https://github.com/adobe/react-spectrum/tree/main/packages/%40react-stately/calendar)
+ * We improved the Calendar from Stately [useDatePickerFieldState](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/datepicker/src/useDatePickerFieldState.ts)
  * to work with Reakit System
  */
 
 import { useMemo, useState } from "react";
 import { useDateFormatter } from "@react-aria/i18n";
-import { useControlledState } from "@react-stately/utils";
+import { useControllableState } from "@chakra-ui/hooks";
 
-import { DatePickerProps } from "./index.d";
+import { DatePickerStateInitialProps } from "./index.d";
 import { add, setSegment, convertValue, getSegmentLimits } from "./__utils";
 
 export interface IDateSegment {
@@ -18,19 +18,6 @@ export interface IDateSegment {
   minValue?: number;
   maxValue?: number;
   isPlaceholder: boolean;
-}
-
-export interface DatePickerFieldState {
-  value: Date;
-  setValue: (value: Date) => void;
-  segments: IDateSegment[];
-  dateFormatter: Intl.DateTimeFormat;
-  increment: (type: Intl.DateTimeFormatPartTypes) => void;
-  decrement: (type: Intl.DateTimeFormatPartTypes) => void;
-  incrementPage: (type: Intl.DateTimeFormatPartTypes) => void;
-  decrementPage: (type: Intl.DateTimeFormatPartTypes) => void;
-  setSegment: (type: Intl.DateTimeFormatPartTypes, value: number) => void;
-  confirmPlaceholder: (type: Intl.DateTimeFormatPartTypes) => void;
 }
 
 const EDITABLE_SEGMENTS = {
@@ -57,9 +44,7 @@ const TYPE_MAPPING = {
   dayperiod: "dayPeriod",
 };
 
-export function useDatePickerFieldState(
-  props: DatePickerProps,
-): DatePickerFieldState {
+export function useDatePickerFieldState(props: DatePickerStateInitialProps) {
   const [validSegments, setValidSegments] = useState(
     props.value || props.defaultValue ? { ...EDITABLE_SEGMENTS } : {},
   );
@@ -92,14 +77,15 @@ export function useDatePickerFieldState(
     convertValue(props.placeholderDate) ||
       new Date(new Date().getFullYear(), 0, 1),
   );
-  const [date, setDate] = useControlledState<Date>(
-    // @ts-ignore
-    props.value === null
-      ? convertValue(placeholderDate)
-      : convertValue(props.value),
-    convertValue(props.defaultValue),
-    props.onChange,
-  );
+  const [date, setDate] = useControllableState<Date>({
+    value:
+      props.value == null
+        ? convertValue(placeholderDate)
+        : convertValue(props.value),
+    defaultValue: convertValue(props.defaultValue),
+    onChange: props.onChange,
+    shouldUpdate: (prev, next) => prev !== next,
+  });
 
   // If all segments are valid, use the date from state, otherwise use the placeholder date.
   const value =
@@ -128,34 +114,33 @@ export function useDatePickerFieldState(
   ) => {
     validSegments[type] = true;
     setValidSegments({ ...validSegments });
-    // @ts-ignore
     setValue(add(value, type, amount, resolvedOptions));
   };
 
   return {
-    value,
-    setValue,
+    fieldValue: value,
+    setFieldValue: setValue,
     segments,
     dateFormatter,
-    increment(part) {
+    increment(part: Intl.DateTimeFormatPartTypes) {
       adjustSegment(part, 1);
     },
-    decrement(part) {
+    decrement(part: Intl.DateTimeFormatPartTypes) {
       adjustSegment(part, -1);
     },
-    incrementPage(part) {
+    incrementPage(part: Intl.DateTimeFormatPartTypes) {
       adjustSegment(part, PAGE_STEP[part] || 1);
     },
-    decrementPage(part) {
+    decrementPage(part: Intl.DateTimeFormatPartTypes) {
       adjustSegment(part, -(PAGE_STEP[part] || 1));
     },
-    setSegment(part, v) {
+    setSegment(part: Intl.DateTimeFormatPartTypes, v: number) {
       validSegments[part] = true;
       setValidSegments({ ...validSegments });
       // @ts-ignore
       setValue(setSegment(value, part, v, resolvedOptions));
     },
-    confirmPlaceholder(part) {
+    confirmPlaceholder(part: Intl.DateTimeFormatPartTypes) {
       validSegments[part] = true;
       setValidSegments({ ...validSegments });
       setValue(new Date(value));
