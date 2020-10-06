@@ -200,7 +200,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       setEnteredKeys("");
     };
 
-    const preventPropagation = (e: MouseEvent) => e.stopPropagation();
+    const onMouseDown = (e: MouseEvent) => e.stopPropagation();
 
     const id = useId(htmlProps.id);
 
@@ -234,7 +234,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
           tabIndex: options.isDisabled ? undefined : 0,
           onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
           onFocus: callAllHandlers(htmlOnFocus, onFocus),
-          onMouseDown: callAllHandlers(preventPropagation, htmlOnMouseDown),
+          onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
           children: segment.text,
           ...htmlProps,
         });
