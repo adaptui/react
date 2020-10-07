@@ -60,7 +60,10 @@ export const useDateSegment = createHook<
 
   useOptions(options, htmlProps) {
     return {
-      disabled: options.segment.type === "literal",
+      disabled:
+        options.isDisabled ||
+        options.isReadOnly ||
+        options.segment.type === "literal",
       ...options,
     };
   },

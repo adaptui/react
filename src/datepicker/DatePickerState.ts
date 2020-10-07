@@ -28,6 +28,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     isDisabled,
     isReadOnly,
     isRequired,
+    autoFocus,
     pickerId: pickerIdProp,
     dialogId: dialogIdProp,
     formatOptions,
@@ -97,6 +98,13 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
+
+  React.useEffect(() => {
+    if (autoFocus) {
+      composite.first();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoFocus, composite.first]);
 
   return {
     pickerId,
