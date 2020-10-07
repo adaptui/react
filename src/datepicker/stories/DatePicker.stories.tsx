@@ -25,7 +25,7 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
   });
 
   return (
-    <DatePicker {...state}>
+    <DatePicker className="datepicker" {...state}>
       <div className="datepicker__header">
         <DateSegmentField {...state} className="datepicker__field">
           {state.segments.map((segment, i) => (

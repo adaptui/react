@@ -25,7 +25,7 @@
   border: 1px solid #1e65fd;
 }
 
-[aria-invalid] > .datepicker__header {
+[aria-invalid="true"] > .datepicker__header {
   border: 1px solid #c00000;
 }
 
@@ -43,4 +43,8 @@
   background-color: #1e65fd;
   color: white;
   outline: none;
+}
+
+.datepicker [aria-disabled="true"] {
+  opacity: 0.5;
 }
