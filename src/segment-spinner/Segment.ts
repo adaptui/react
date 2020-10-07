@@ -2,11 +2,11 @@ import {
   useCompositeItem,
   CompositeItemOptions,
   CompositeItemHTMLProps,
+  unstable_useId as useId,
 } from "reakit";
 import { MouseEvent, useState } from "react";
 import { mergeProps } from "@react-aria/utils";
 import { DOMProps } from "@react-types/shared";
-import { unstable_useId as useId } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
@@ -19,8 +19,8 @@ import { IDateSegment, SegmentStateReturn } from "./SegmentState";
 export type SegmentOptions = CompositeItemOptions &
   Pick<
     SegmentStateReturn,
-    | "value"
     | "next"
+    | "fieldValue"
     | "setSegment"
     | "increment"
     | "decrement"
@@ -89,9 +89,9 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
     });
 
     if (segment.type === "month") {
-      textValue = monthDateFormatter.format(options.value);
+      textValue = monthDateFormatter.format(options.fieldValue);
     } else if (segment.type === "hour" || segment.type === "dayPeriod") {
-      textValue = hourDateFormatter.format(options.value);
+      textValue = hourDateFormatter.format(options.fieldValue);
     }
 
     const { spinButtonProps } = useSpinButton({
