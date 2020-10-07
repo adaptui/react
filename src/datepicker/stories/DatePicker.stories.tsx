@@ -25,27 +25,29 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
   });
 
   return (
-    <DatePicker className="datepicker" {...state}>
-      <div className="datepicker__header">
-        <DateSegmentField {...state} className="datepicker__field">
-          {state.segments.map((segment, i) => (
-            <DateSegment
-              key={i}
-              segment={segment}
-              className="datepicker__field--item"
-              {...state}
-            />
-          ))}
-        </DateSegmentField>
+    <>
+      <DatePicker className="datepicker" {...state}>
+        <div className="datepicker__header">
+          <DateSegmentField {...state} className="datepicker__field">
+            {state.segments.map((segment, i) => (
+              <DateSegment
+                key={i}
+                segment={segment}
+                className="datepicker__field--item"
+                {...state}
+              />
+            ))}
+          </DateSegmentField>
 
-        <DatePickerTrigger className="datepicker__trigger" {...state}>
-          <CalendarIcon />
-        </DatePickerTrigger>
-      </div>
+          <DatePickerTrigger className="datepicker__trigger" {...state}>
+            <CalendarIcon />
+          </DatePickerTrigger>
+        </div>
+      </DatePicker>
       <DatePickerContent {...state}>
         <CalendarComp {...state.calendar} />
       </DatePickerContent>
-    </DatePicker>
+    </>
   );
 };
 

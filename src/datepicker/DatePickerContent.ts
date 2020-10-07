@@ -22,13 +22,8 @@ export const useDatePickerContent = createHook<
   keys: DATE_PICKER_CONTENT_KEYS,
 
   useProps({ dialogId }, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
-    const onMouseDown = (e: React.MouseEvent) => {
-      e.stopPropagation();
-    };
-
     return {
       id: dialogId,
-      onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
       ...htmlProps,
     };
   },
