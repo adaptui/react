@@ -1,7 +1,8 @@
 // Automatically generated
-const DATE_PICKER_FIELD_STATE_KEYS = [
-  "fieldValue",
-  "setFieldValue",
+const DATE_PICKER_STATE_KEYS = [
+  "calendar",
+  "value",
+  "setValue",
   "segments",
   "dateFormatter",
   "increment",
@@ -10,34 +11,9 @@ const DATE_PICKER_FIELD_STATE_KEYS = [
   "decrementPage",
   "setSegment",
   "confirmPlaceholder",
-] as const;
-const DATE_PICKER_STATE_KEYS = [
-  ...DATE_PICKER_FIELD_STATE_KEYS,
-  "calendar",
   "baseId",
   "unstable_idCountRef",
-  "visible",
-  "animated",
-  "animating",
   "setBaseId",
-  "show",
-  "hide",
-  "toggle",
-  "setVisible",
-  "setAnimated",
-  "stopAnimation",
-  "modal",
-  "unstable_disclosureRef",
-  "setModal",
-  "unstable_referenceRef",
-  "unstable_popoverRef",
-  "unstable_arrowRef",
-  "unstable_popoverStyles",
-  "unstable_arrowStyles",
-  "unstable_originalPlacement",
-  "unstable_update",
-  "placement",
-  "place",
   "unstable_virtual",
   "rtl",
   "orientation",
@@ -69,6 +45,27 @@ const DATE_PICKER_STATE_KEYS = [
   "setWrap",
   "reset",
   "unstable_setHasActiveWidget",
+  "visible",
+  "animated",
+  "animating",
+  "show",
+  "hide",
+  "toggle",
+  "setVisible",
+  "setAnimated",
+  "stopAnimation",
+  "modal",
+  "unstable_disclosureRef",
+  "setModal",
+  "unstable_referenceRef",
+  "unstable_popoverRef",
+  "unstable_arrowRef",
+  "unstable_popoverStyles",
+  "unstable_arrowStyles",
+  "unstable_originalPlacement",
+  "unstable_update",
+  "placement",
+  "place",
   "pickerId",
   "dialogId",
   "dateValue",
@@ -84,8 +81,5 @@ const DATE_PICKER_STATE_KEYS = [
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;
 export const DATE_PICKER_CONTENT_KEYS = DATE_PICKER_KEYS;
 export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_CONTENT_KEYS;
-export const DATE_SEGMENT_KEYS = [
-  ...DATE_PICKER_TRIGGER_KEYS,
-  "segment",
-] as const;
-export const DATE_SEGMENT_FIELD_KEYS = DATE_PICKER_TRIGGER_KEYS;
+export const DATE_SEGMENT_KEYS = DATE_PICKER_TRIGGER_KEYS;
+export const DATE_SEGMENT_FIELD_KEYS = DATE_SEGMENT_KEYS;

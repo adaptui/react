@@ -4,29 +4,30 @@ import {
   CompositeItemHTMLProps,
 } from "reakit";
 import { MouseEvent, useState } from "react";
-import { mergeProps, useId } from "@react-aria/utils";
+import { mergeProps } from "@react-aria/utils";
 import { DOMProps } from "@react-types/shared";
+import { unstable_useId as useId } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
 
+import { SEGMENT_KEYS } from "./__keys";
 import { isNumeric, parseNumber } from "./__utils";
 import { useSpinButton } from "../utils/useSpinButton";
-import { DATE_SEGMENT_KEYS } from "../datepicker/__keys";
 import { IDateSegment, SegmentStateReturn } from "./SegmentState";
 
 export type SegmentOptions = CompositeItemOptions &
   Pick<
     SegmentStateReturn,
+    | "value"
     | "next"
-    | "dateFormatter"
-    | "confirmPlaceholder"
+    | "setSegment"
     | "increment"
     | "decrement"
     | "incrementPage"
     | "decrementPage"
-    | "setSegment"
-    | "value"
+    | "dateFormatter"
+    | "confirmPlaceholder"
   > & {
     segment: IDateSegment;
     isDisabled?: boolean;
@@ -41,11 +42,14 @@ export type SegmentProps = SegmentOptions & SegmentHTMLProps;
 export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
   name: "Segment",
   compose: useCompositeItem,
-  keys: DATE_SEGMENT_KEYS,
+  keys: SEGMENT_KEYS,
 
   useOptions(options, htmlProps) {
     return {
-      disabled: options.segment.type === "literal",
+      disabled:
+        options.isDisabled ||
+        options.isReadOnly ||
+        options.segment.type === "literal",
       ...options,
     };
   },
@@ -202,7 +206,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
 
     const onMouseDown = (e: MouseEvent) => e.stopPropagation();
 
-    const id = useId(htmlProps.id);
+    const { id } = useId({ baseId: "segment-spin-button" });
 
     switch (segment.type) {
       // A separator, e.g. punctuation

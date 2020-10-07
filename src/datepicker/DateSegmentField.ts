@@ -1,13 +1,15 @@
+import { DatePickerStateReturn } from ".";
 import { createComponent, createHook } from "reakit-system";
-import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
 
+import {
+  SegmentFieldHTMLProps,
+  useSegmentField,
+} from "../segment-spinner/SegmentField";
 import { DATE_SEGMENT_FIELD_KEYS } from "./__keys";
-import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DateSegmentFieldOptions = CompositeOptions &
-  Pick<DatePickerStateReturn, "pickerId">;
+export type DateSegmentFieldOptions = DatePickerStateReturn;
 
-export type DateSegmentFieldHTMLProps = CompositeHTMLProps;
+export type DateSegmentFieldHTMLProps = SegmentFieldHTMLProps;
 
 export type DateSegmentFieldProps = DateSegmentFieldOptions &
   DateSegmentFieldHTMLProps;
@@ -17,15 +19,8 @@ export const useDateSegmentField = createHook<
   DateSegmentFieldHTMLProps
 >({
   name: "DateSegmentField",
-  compose: useComposite,
+  compose: useSegmentField,
   keys: DATE_SEGMENT_FIELD_KEYS,
-
-  useProps(options, { onKeyDown: htmlOnKeyDown, ...htmlProps }) {
-    return {
-      "aria-labelledby": options.pickerId,
-      ...htmlProps,
-    };
-  },
 });
 
 export const DateSegmentField = createComponent({

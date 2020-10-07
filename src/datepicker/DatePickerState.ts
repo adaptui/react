@@ -8,14 +8,14 @@ import * as React from "react";
 import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 import {
-  useCompositeState,
   usePopoverState,
+  useCompositeState,
   unstable_useId as useId,
 } from "reakit";
 
 import { setTime, isInvalid } from "./__utils";
 import { DateValue, useCalendarState } from "../calendar";
-import { useDatePickerFieldState } from "./DatePickerFieldState";
+import { useSegmentState } from "../segment-spinner/SegmentState";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
@@ -72,7 +72,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
 
   const popover = usePopoverState(props);
   const composite = useCompositeState({ orientation: "horizontal" });
-  const fieldState = useDatePickerFieldState({
+  const segmentState = useSegmentState({
     value: dateValue,
     defaultValue,
     onChange: setValue,
@@ -120,7 +120,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     isRequired,
     ...composite,
     ...popover,
-    ...fieldState,
+    ...segmentState,
     calendar,
   };
 };

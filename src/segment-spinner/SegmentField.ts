@@ -2,9 +2,8 @@ import { createComponent, createHook } from "reakit-system";
 import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
 
 import { SEGMENT_FIELD_KEYS } from "./__keys";
-import { SegmentStateReturn } from "./SegmentState";
 
-export type SegmentFieldOptions = CompositeOptions & SegmentStateReturn;
+export type SegmentFieldOptions = CompositeOptions;
 
 export type SegmentFieldHTMLProps = CompositeHTMLProps;
 
