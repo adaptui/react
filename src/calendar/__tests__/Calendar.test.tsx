@@ -1,4 +1,5 @@
 import * as React from "react";
+import { subWeeks, addWeeks } from "date-fns";
 import { axe, render, press } from "reakit-test-utils";
 
 import {
@@ -25,8 +26,8 @@ export const CalendarComp: React.FC<CalendarStateInitialProps> = props => {
         <CalendarButton {...state} goto="previousMonth">
           previous month
         </CalendarButton>
-        <CalendarHeader data-testid="current-year" {...state} />
-        <CalendarButton {...state} goto="nextMonth">
+        <CalendarHeader {...state} data-testid="current-year" />
+        <CalendarButton {...state} goto="nextMonth" data-testid="next-month">
           next month
         </CalendarButton>
         <CalendarButton {...state} goto="nextYear">
@@ -130,6 +131,35 @@ describe("Calendar", () => {
     expect(label("Friday, November 6, 2020")).toHaveFocus();
     expect(testId("current-year")).toHaveTextContent("November 2020");
   });
+});
+
+test("should have min/max values", async () => {
+  const { getByLabelText: label } = render(
+    <CalendarComp
+      defaultValue={new Date(2020, 10, 7)}
+      minValue={subWeeks(new Date(2020, 10, 7), 1)}
+      maxValue={addWeeks(new Date(2020, 10, 7), 1)}
+    />,
+  );
+
+  press.Tab();
+  press.Tab();
+  press.Tab();
+  press.Tab();
+  press.Tab();
+  expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
+
+  // try to go outside the min max value
+  press.ArrowUp();
+  press.ArrowUp();
+  press.ArrowUp();
+  press.ArrowUp();
+  expect(label("Saturday, October 31, 2020")).toHaveFocus();
+
+  press.ArrowDown();
+  press.ArrowDown();
+  press.ArrowDown();
+  expect(label("Saturday, November 14, 2020")).toHaveFocus();
 });
 
 test("Calendar renders with no a11y violations", async () => {
