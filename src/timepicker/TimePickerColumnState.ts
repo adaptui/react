@@ -13,11 +13,6 @@ export const useTimePickerColumnState = ({
   onSelection,
 }: Props = {}) => {
   const [selected, setSelected] = React.useState(value);
-  const composite = useCompositeState({
-    loop: true,
-    wrap: true,
-    orientation: "vertical",
-  });
 
   const handleSelected = (v: number | string) => {
     setSelected(v);
@@ -27,6 +22,12 @@ export const useTimePickerColumnState = ({
   const onSelect = (v: number | string) => {
     onSelection?.(v);
   };
+
+  const composite = useCompositeState({
+    loop: true,
+    wrap: true,
+    orientation: "vertical",
+  });
 
   React.useEffect(() => {
     const value = composite.items

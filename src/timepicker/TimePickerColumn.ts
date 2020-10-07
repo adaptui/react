@@ -24,6 +24,9 @@ export const useTimePickerColumn = createHook<
 
   useProps(options, htmlProps) {
     return {
+      onKeyDown: (e: React.KeyboardEvent) => {
+        // console.log("%c e", "color: #0088cc", e);
+      },
       ...htmlProps,
     };
   },

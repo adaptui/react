@@ -1,8 +1,8 @@
 // Automatically generated
 const DATE_PICKER_STATE_KEYS = [
   "calendar",
-  "value",
-  "setValue",
+  "fieldValue",
+  "setFieldValue",
   "segments",
   "dateFormatter",
   "increment",

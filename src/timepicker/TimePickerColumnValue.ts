@@ -33,13 +33,15 @@ export const useTimePickerColumnValue = createHook<
     { setCurrentId, move, selected, value, id, onSelection },
     { ref, ...htmlProps },
   ) {
-    const htmlRef = React.useRef();
+    const htmlRef = React.useRef<HTMLElement>();
 
     React.useEffect(() => {
       if (selected === value) {
-        setCurrentId?.(id as string);
-        move?.(id as string);
-        (htmlRef?.current as any).scrollIntoView();
+        if (!id) return;
+
+        setCurrentId?.(id);
+        move?.(id);
+        htmlRef?.current?.scrollIntoView();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
