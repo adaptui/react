@@ -1,11 +1,11 @@
 import React from "react";
 import { useTimeout } from "@chakra-ui/hooks";
-import { useGesture } from "react-use-gesture";
 
 interface ToastControllerProps {
   id: string;
   duration?: number;
   autoDismiss?: boolean;
+  dragThreshold?: number;
   onRequestRemove: (id: string) => void;
 }
 
@@ -14,24 +14,55 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   duration = 0,
   autoDismiss,
   onRequestRemove,
+  dragThreshold = 100,
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
-  const [x, setX] = React.useState(0);
 
-  const bind = useGesture({
-    onDrag: ({ down, movement: [x] }: any) => {
-      if (!down) setX(0);
+  const [active, setActive] = React.useState<boolean>(false);
+  const [currentX, setCurrentX] = React.useState<number>(0);
+  const [initialX, setInitialX] = React.useState<number>(0);
+  const [xOffset, setXOffset] = React.useState<number>(0);
+  const [posX, setPosX] = React.useState<number>(0);
 
-      setX(x);
+  const dragStart = React.useCallback(
+    (e: React.TouchEvent) => {
+      setInitialX(e.touches[0].clientX - xOffset);
+
+      setActive(true);
       setDelay(null);
+    },
+    [xOffset],
+  );
 
-      if (x > 100 || x < -100) {
-        onRequestRemove(id);
+  const dragEnd = React.useCallback(() => {
+    active && setPosX(0);
+
+    setInitialX(currentX);
+    setActive(false);
+    setDelay(duration);
+  }, [active, currentX, duration]);
+
+  const drag = React.useCallback(
+    (e: React.TouchEvent) => {
+      if (active) {
+        e.preventDefault();
+
+        setCurrentX(e.touches[0].clientX - initialX);
+        setXOffset(currentX);
+        setPosX(currentX);
       }
     },
-    onMouseUp: () => setX(0),
-  });
+    [active, currentX, initialX],
+  );
+
+  React.useEffect(() => {
+    if (posX > dragThreshold || posX < -dragThreshold) {
+      setActive(false);
+      onRequestRemove(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posX]);
 
   const onMouseEnter = React.useCallback(() => {
     autoDismiss && setDelay(null);
@@ -51,10 +82,15 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     id,
     onMouseLeave,
     onMouseEnter,
+    onTouchStart: dragStart,
+    onTouchEnd: dragEnd,
+    onTouchMove: drag,
     role: "alert",
     className: "toast",
-    style: { transform: `translateX(${x}px)` },
-    ...bind(),
+    style: {
+      transform: `translateX(${posX}px)`,
+      ...(active && { transition: "none" }),
+    },
   };
 
   return <div {...props}>{children}</div>;

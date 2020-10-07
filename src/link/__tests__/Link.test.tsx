@@ -16,10 +16,10 @@ describe("ReakitLink", () => {
         <div>
           <a
             aria-disabled="true"
-            disabled=""
             href="#"
             rel="noopener noreferrer"
             style="pointer-events: none;"
+            tabindex="-1"
             target="_blank"
           >
             link

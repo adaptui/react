@@ -20,10 +20,6 @@ export const useBreadcrumbLink = createHook<
   compose: useLink,
   keys: BREADCRUMB_LINK_KEYS,
 
-  useOptions(options) {
-    return { disabled: options.disabled || options.isCurrent, ...options };
-  },
-
   useProps({ isCurrent }, htmlProps) {
     return { "aria-current": isCurrent && "page", ...htmlProps };
   },

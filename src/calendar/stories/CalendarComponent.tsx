@@ -1,31 +1,22 @@
-import * as React from "react";
-import { Meta } from "@storybook/react";
-import { addDays, addWeeks, subWeeks } from "date-fns";
+import React from "react";
 
 import "./index.css";
 import {
-  Calendar,
-  DateValue,
+  Calendar as CalendarWrapper,
+  CalendarButton,
   CalendarCell,
+  CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarButton,
-  IUseCalendarProps,
-  useCalendarState,
-  CalendarCellButton,
   CalendarWeekTitle,
+  CalendarStateInitialProps,
+  useCalendarState,
 } from "../index";
+import { CalendarStateReturn } from "../CalendarState";
 
-export default {
-  title: "Component/Calendar",
-} as Meta;
-
-const CalendarComp: React.FC<IUseCalendarProps> = props => {
-  const state = useCalendarState(props);
-  console.log("%c state", "color: #e5de73", state);
-
+export const CalendarComp: React.FC<CalendarStateReturn> = state => {
   return (
-    <Calendar {...state} className="calendar">
+    <CalendarWrapper {...state} className="calendar">
       <div className="header">
         <CalendarButton {...state} goto="previousYear" className="prev-year">
           <svg
@@ -120,35 +111,12 @@ const CalendarComp: React.FC<IUseCalendarProps> = props => {
           ))}
         </tbody>
       </CalendarGrid>
-    </Calendar>
+    </CalendarWrapper>
   );
 };
 
-export const Default = () => <CalendarComp />;
-export const DefaultValue = () => (
-  <CalendarComp defaultValue={addDays(new Date(), 1)} />
-);
-export const ControlledValue = () => {
-  const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
-  return <CalendarComp value={value} onChange={setValue} />;
+export const CalendarComponent: React.FC<CalendarStateInitialProps> = props => {
+  const state = useCalendarState(props);
+
+  return <CalendarComp {...state} />;
 };
-export const MinMaxDate = () => (
-  <CalendarComp minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />
-);
-export const MinMaxDefaultDate = () => (
-  <CalendarComp
-    defaultValue={new Date()}
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
-  />
-);
-export const isDisabled = () => (
-  <CalendarComp defaultValue={addDays(new Date(), 1)} isDisabled />
-);
-export const isReadOnly = () => (
-  <CalendarComp defaultValue={addDays(new Date(), 1)} isReadOnly />
-);
-export const autoFocus = () => (
-  // eslint-disable-next-line jsx-a11y/no-autofocus
-  <CalendarComp defaultValue={addDays(new Date(), 1)} autoFocus />
-);

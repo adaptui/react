@@ -9,7 +9,7 @@ import {
   generateStripe,
   progressBarStyle,
   createLinearExamples,
-} from "../../utils";
+} from "./storybook-progress-utils";
 
 export default {
   title: "Component/Progress/Linear",

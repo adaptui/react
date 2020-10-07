@@ -3,7 +3,10 @@ import { Meta } from "@storybook/react";
 
 import { Meter } from "../../Meter";
 import { useMeterState } from "../../index";
-import { useFakeProgression, createCircularExample } from "../../../utils";
+import {
+  useFakeProgression,
+  createCircularExample,
+} from "../../../progress/stories/storybook-progress-utils";
 
 export default {
   title: "Component/Meter/Circular",

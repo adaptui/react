@@ -1,9 +1,9 @@
 import * as React from "react";
 import { css, cx, keyframes } from "emotion";
 
-import { generateStripe } from "../../utils";
 import { MeterStateReturn } from "../MeterState";
 import { Meter, useMeterState, UseMeterProps } from "../index";
+import { generateStripe } from "../../progress/stories/storybook-progress-utils";
 
 export const MeterComp: React.FC<UseMeterProps> = props => {
   const { value, low, high, optimum, min, max, ...rest } = props;

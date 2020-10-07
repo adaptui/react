@@ -44,19 +44,21 @@ export const Default = () => {
   return (
     <div>
       <DrawerDisclosure {...dialog}>Open Drawer</DrawerDisclosure>
-      <select onBlur={e => setPlacement(e.target.value as TPlacement)}>
+      <select
+        defaultValue={placement}
+        onBlur={e => setPlacement(e.target.value as TPlacement)}
+      >
         <option value="top">Top</option>
         <option value="bottom">Bottom</option>
         <option value="right">Right</option>
-        <option selected value="left">
-          Left
-        </option>
+        <option value="left">Left</option>
       </select>
       <DrawerBackdrop className={backdropStyles} {...dialog}>
         <Drawer
           {...dialog}
           placement={placement}
           aria-label="Hello world"
+          style={{ color: "red" }}
           className={css`
             opacity: 0;
             padding: 10px;
