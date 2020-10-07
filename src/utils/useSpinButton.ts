@@ -71,6 +71,7 @@ export function useSpinButton(props: SpinButtonProps): SpinbuttonAria {
     }
 
     switch (e.key) {
+      // @ts-expect-error
       case "PageUp":
         if (onIncrementPage) {
           e.preventDefault();
@@ -85,6 +86,7 @@ export function useSpinButton(props: SpinButtonProps): SpinbuttonAria {
           onIncrement();
         }
         break;
+      // @ts-expect-error
       case "PageDown":
         if (onDecrementPage) {
           e.preventDefault();
