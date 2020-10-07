@@ -1,0 +1,21 @@
+.segment__field {
+  display: flex;
+}
+
+.segment__field--item {
+  padding: 2px;
+  border-radius: 4px;
+}
+.segment__field--item:focus {
+  background-color: #1e65fd;
+  color: white;
+  outline: none;
+}
+
+.segment_demo pre {
+  font-size: 12px;
+  color: rgb(101, 100, 124);
+}
+.segment_demo pre ~ pre {
+  margin-top: 35px;
+}

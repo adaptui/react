@@ -29,13 +29,13 @@ import {
 import { CalendarProps } from "./index.d";
 import { useWeekStart } from "./useWeekStart";
 import { announce } from "../utils/LiveAnnouncer";
-import { generateDaysInMonthArray, isInvalid, useWeekDays } from "./__utils";
+import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
 
-export interface IUseCalendarProps extends CalendarProps {
+export interface CalendarStateInitialProps extends Partial<CalendarProps> {
   id?: string;
 }
 
-export function useCalendarState(props: IUseCalendarProps = {}) {
+export function useCalendarState(props: CalendarStateInitialProps = {}) {
   const {
     minValue: initialMinValue,
     maxValue: initialMaxValue,
@@ -142,6 +142,7 @@ export function useCalendarState(props: IUseCalendarProps = {}) {
     currentMonth,
     setCurrentMonth,
     focusedDate,
+    focusCell,
     setFocusedDate,
     focusNextDay() {
       focusCell(addDays(focusedDate, 1));

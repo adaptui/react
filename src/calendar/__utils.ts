@@ -2,10 +2,11 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
-import { DateValue } from "./index.d";
+import { endOfDay, setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
-import { endOfDay, setDay, startOfDay } from "date-fns";
+
+import { DateValue } from "../calendar/index.d";
 
 export function isInvalid(
   date: Date,
@@ -40,7 +41,7 @@ export function generateDaysInMonthArray(
       const daysInWeek = [...new Array(7).keys()].reduce(
         (days: Date[], dayIndex) => {
           const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
-          const cellDate = new Date(year, month, day);
+          const cellDate = new Date(year, month, day, new Date().getHours());
 
           return [...days, cellDate];
         },
@@ -58,7 +59,7 @@ export function makeRange(start: Date, end: Date): RangeValue<Date> {
     [start, end] = [end, start];
   }
 
-  return { start: startOfDay(start), end: endOfDay(end) };
+  return { start: start, end: endOfDay(end) };
 }
 
 export function convertRange(range: RangeValue<DateValue>): RangeValue<Date> {

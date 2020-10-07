@@ -1,33 +1,22 @@
-import * as React from "react";
-import { Meta } from "@storybook/react";
-import { addDays, addWeeks, setDate, subDays, subWeeks } from "date-fns";
+import React from "react";
 
-import "./range-style.css";
-import { DateValue, RangeCalendarProps } from "../index.d";
-import { useRangeCalendarState } from "../RangeCalendarState";
+import "./index.css";
 import {
-  Calendar,
+  Calendar as CalendarWrapper,
+  CalendarButton,
   CalendarCell,
+  CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarButton,
-  CalendarCellButton,
   CalendarWeekTitle,
+  CalendarStateInitialProps,
+  useCalendarState,
 } from "../index";
+import { CalendarStateReturn } from "../CalendarState";
 
-export default {
-  title: "Component/RangeCalendar",
-} as Meta;
-
-const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
-  const state = useRangeCalendarState(props);
-
+export const CalendarComp: React.FC<CalendarStateReturn> = state => {
   return (
-    <Calendar
-      {...state}
-      onChange={() => console.log("change")}
-      className="calendar-range"
-    >
+    <CalendarWrapper {...state} className="calendar">
       <div className="header">
         <CalendarButton {...state} goto="previousYear" className="prev-year">
           <svg
@@ -122,53 +111,12 @@ const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
           ))}
         </tbody>
       </CalendarGrid>
-    </Calendar>
+    </CalendarWrapper>
   );
 };
 
-export const Default = () => <RangeCalendarComp />;
-export const DefaultValue = () => (
-  <RangeCalendarComp
-    defaultValue={{ start: setDate(new Date(), 1), end: new Date() }}
-  />
-);
+export const CalendarComponent: React.FC<CalendarStateInitialProps> = props => {
+  const state = useCalendarState(props);
 
-export const ControlledValue = () => {
-  const [start, setStart] = React.useState<DateValue>(subDays(new Date(), 1));
-  const [end, setEnd] = React.useState<DateValue>(addDays(new Date(), 1));
-
-  return (
-    <div>
-      <input
-        type="date"
-        onChange={e => setStart(new Date(e.target.value))}
-        value={(start as Date).toISOString().slice(0, 10)}
-      />
-      <input
-        type="date"
-        onChange={e => setEnd(new Date(e.target.value))}
-        value={(end as Date).toISOString().slice(0, 10)}
-      />
-      <RangeCalendarComp
-        value={{ start, end }}
-        onChange={({ end, start }) => {
-          setStart(start);
-          setEnd(end);
-        }}
-      />
-    </div>
-  );
+  return <CalendarComp {...state} />;
 };
-
-export const MinMaxDefaultDate = () => (
-  <RangeCalendarComp
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
-  />
-);
-export const isDisabled = () => <RangeCalendarComp isDisabled />;
-export const isReadOnly = () => <RangeCalendarComp isReadOnly />;
-export const autoFocus = () => (
-  // eslint-disable-next-line jsx-a11y/no-autofocus
-  <RangeCalendarComp autoFocus />
-);
