@@ -7,8 +7,10 @@ import {
 } from "reakit";
 
 import { DATE_PICKER_TRIGGER_KEYS } from "./__keys";
+import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DatePickerTriggerOptions = PopoverDisclosureOptions;
+export type DatePickerTriggerOptions = PopoverDisclosureOptions &
+  Pick<DatePickerStateReturn, "isDisabled" | "isReadOnly">;
 
 export type DatePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
 
@@ -22,6 +24,13 @@ export const useDatePickerTrigger = createHook<
   name: "DatePickerTrigger",
   compose: usePopoverDisclosure,
   keys: DATE_PICKER_TRIGGER_KEYS,
+
+  useOptions(options, htmlProps) {
+    return {
+      disabled: options.isDisabled || options.isReadOnly,
+      ...options,
+    };
+  },
 
   useProps(_, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
     const onMouseDown = (e: React.MouseEvent) => {

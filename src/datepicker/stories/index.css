@@ -25,6 +25,10 @@
   border: 1px solid #1e65fd;
 }
 
+[aria-invalid="true"] > .datepicker__header {
+  border: 1px solid #c00000;
+}
+
 .datepicker__field {
   font-family: monospace;
   display: flex;
@@ -34,8 +38,13 @@
   padding: 2px;
   border-radius: 4px;
 }
+
 .datepicker__field--item:focus {
   background-color: #1e65fd;
   color: white;
   outline: none;
+}
+
+.datepicker [aria-disabled="true"] {
+  opacity: 0.5;
 }

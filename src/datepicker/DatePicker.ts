@@ -1,7 +1,7 @@
 import { createOnKeyDown } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
+import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
 
 import { DATE_PICKER_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";

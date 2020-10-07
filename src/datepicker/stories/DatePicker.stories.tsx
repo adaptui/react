@@ -1,6 +1,6 @@
 import * as React from "react";
-import { addDays } from "date-fns";
 import { Meta } from "@storybook/react";
+import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
 import { DatePickerStateInitialProps, DateValue } from "../index.d";
@@ -24,10 +24,8 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
     ...props,
   });
 
-  console.log("%c state", "color: #f27999", state);
-
   return (
-    <DatePicker {...state}>
+    <DatePicker className="datepicker" {...state}>
       <div className="datepicker__header">
         <DateSegmentField {...state} className="datepicker__field">
           {state.segments.map((segment, i) => (
@@ -78,3 +76,28 @@ export const ControllableState = () => {
     </div>
   );
 };
+
+export const MinMaxDate = () => (
+  <DatePickerComp minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />
+);
+
+export const InValidDate = () => (
+  <DatePickerComp
+    defaultValue={addWeeks(new Date(), 2)}
+    minValue={subWeeks(new Date(), 1)}
+    maxValue={addWeeks(new Date(), 1)}
+  />
+);
+
+export const isDisabled = () => (
+  <DatePickerComp defaultValue={addDays(new Date(), 1)} isDisabled />
+);
+
+export const isReadOnly = () => (
+  <DatePickerComp defaultValue={addDays(new Date(), 1)} isReadOnly />
+);
+
+export const autoFocus = () => (
+  // eslint-disable-next-line jsx-a11y/no-autofocus
+  <DatePickerComp defaultValue={addDays(new Date(), 1)} autoFocus />
+);
