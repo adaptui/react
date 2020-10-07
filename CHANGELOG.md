@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.2](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.1...v0.1.1-alpha.2) (2020-10-07)
+
+### Features
+
+- added DatePicker
+  ([#58](https://github.com/timelessco/renderless-components/issues/58))
+  ([2698ddf](https://github.com/timelessco/renderless-components/commit/2698ddf68dac261b742c16c78e3e42507652619e)),
+  closes [#70](https://github.com/timelessco/renderless-components/issues/70)
+  [#72](https://github.com/timelessco/renderless-components/issues/72)
+  [#71](https://github.com/timelessco/renderless-components/issues/71)
+
+### Bug Fixes
+
+- breadcrumb isCurrent disabled should be false
+  ([#69](https://github.com/timelessco/renderless-components/issues/69))
+  ([66fb5a1](https://github.com/timelessco/renderless-components/commit/66fb5a1b1dce28b651796f98ccc14b6126951901))
+
+### Others
+
+- **release:** 0.1.1-alpha.1
+  ([381934e](https://github.com/timelessco/renderless-components/commit/381934e21437c945df85e9d7c3561352e1985634))
+
+### Code Refactoring
+
+- added custom dragging logic in toast gesture & removed react-use-gesture
+  ([#67](https://github.com/timelessco/renderless-components/issues/67))
+  ([6c1c0ec](https://github.com/timelessco/renderless-components/commit/6c1c0ec7290dd0ae2c5c8fe4255385a1d5594f79))
+- improved drawer types & fixed drawer bugs
+  ([#68](https://github.com/timelessco/renderless-components/issues/68))
+  ([4dc06ef](https://github.com/timelessco/renderless-components/commit/4dc06ef0c75bbaf572dad807e6e23639b303f073))
+
 ### [0.1.1-alpha.1](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.0...v0.1.1-alpha.1) (2020-10-01)
 
 ### Bug Fixes
