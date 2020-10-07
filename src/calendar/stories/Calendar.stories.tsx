@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
-import { DateValue } from "../index";
+import { DateValue } from "../index.d";
 import { CalendarComponent } from "./CalendarComponent";
 
 export default {

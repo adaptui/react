@@ -3,7 +3,8 @@ import { Meta } from "@storybook/react";
 import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
-import { DatePickerStateInitialProps, DateValue } from "../index.d";
+import { DateValue } from "../../calendar/index.d";
+import { DatePickerStateInitialProps } from "../index.d";
 import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 import {
   DatePicker,

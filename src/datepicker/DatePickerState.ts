@@ -7,11 +7,7 @@
 import * as React from "react";
 import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
-import {
-  usePopoverState,
-  useCompositeState,
-  unstable_useId as useId,
-} from "reakit";
+import { usePopoverState, unstable_useId as useId } from "reakit";
 
 import { setTime, isInvalid } from "./__utils";
 import { DateValue, useCalendarState } from "../calendar";
@@ -71,7 +67,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   };
 
   const popover = usePopoverState(props);
-  const composite = useCompositeState({ orientation: "horizontal" });
   const segmentState = useSegmentState({
     value: dateValue,
     defaultValue,
@@ -101,10 +96,10 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
 
   React.useEffect(() => {
     if (autoFocus) {
-      composite.first();
+      segmentState.first();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoFocus, composite.first]);
+  }, [autoFocus, segmentState.first]);
 
   return {
     pickerId,
@@ -118,7 +113,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     isDisabled,
     isReadOnly,
     isRequired,
-    ...composite,
     ...popover,
     ...segmentState,
     calendar,

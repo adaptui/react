@@ -132,8 +132,8 @@ export function useSegmentState(props: SegmentStateProps) {
 
   return {
     ...segmentComposite,
-    value,
-    setValue,
+    fieldValue: value,
+    setFieldValue: setValue,
     segments,
     dateFormatter,
     increment(part: Intl.DateTimeFormatPartTypes) {

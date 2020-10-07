@@ -31,8 +31,6 @@ import { useWeekStart } from "./useWeekStart";
 import { announce } from "../utils/LiveAnnouncer";
 import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
 
-export type DateValue = string | number | Date;
-
 export interface CalendarStateInitialProps extends Partial<CalendarProps> {
   id?: string;
 }

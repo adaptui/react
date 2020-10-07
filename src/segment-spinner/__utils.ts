@@ -13,6 +13,7 @@ import {
   setSeconds,
   setYear,
 } from "date-fns";
+import { DateValue } from "../calendar/index.d";
 
 export function convertValue(value: DateValue | undefined): Date | undefined {
   if (!value) {
@@ -229,5 +230,3 @@ export function parseNumber(str: string): number {
 export function isNumeric(str: string) {
   return /^[0-9\u0660-\u0669\u06f0-\u06f9]+$/.test(str);
 }
-
-export type DateValue = string | number | Date;

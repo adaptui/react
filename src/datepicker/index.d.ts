@@ -6,7 +6,6 @@ import {
   ValueBase,
 } from "@react-types/shared";
 
-export type DateValue = string | number | Date;
 interface DatePickerBase extends InputBase, Validation, FocusableProps {
   minValue?: DateValue;
   maxValue?: DateValue;

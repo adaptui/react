@@ -2,10 +2,11 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
-import { DateValue } from "./index.d";
+import { endOfDay, setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
-import { endOfDay, setDay, startOfDay } from "date-fns";
+
+import { DateValue } from "../calendar/index.d";
 
 export function isInvalid(
   date: Date,
