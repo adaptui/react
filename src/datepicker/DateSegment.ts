@@ -1,10 +1,14 @@
 import { DatePickerStateReturn } from ".";
 import { createComponent, createHook } from "reakit-system";
 
+import {
+  useSegment,
+  SegmentOptions,
+  SegmentHTMLProps,
+} from "../segment-spinner/Segment";
 import { DATE_SEGMENT_KEYS } from "./__keys";
-import { SegmentHTMLProps, useSegment } from "../segment-spinner/Segment";
 
-export type DateSegmentOptions = DatePickerStateReturn;
+export type DateSegmentOptions = SegmentOptions & DatePickerStateReturn;
 
 export type DateSegmentHTMLProps = SegmentHTMLProps;
 

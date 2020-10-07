@@ -6,7 +6,6 @@ import {
 } from "reakit";
 import { MouseEvent, useState } from "react";
 import { mergeProps } from "@react-aria/utils";
-import { DOMProps } from "@react-types/shared";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
@@ -35,7 +34,7 @@ export type SegmentOptions = CompositeItemOptions &
     isRequired?: boolean;
   };
 
-export type SegmentHTMLProps = CompositeItemHTMLProps & DOMProps;
+export type SegmentHTMLProps = CompositeItemHTMLProps;
 
 export type SegmentProps = SegmentOptions & SegmentHTMLProps;
 
