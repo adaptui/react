@@ -21,7 +21,6 @@ export type TimePickerColumnValueOptions = ButtonOptions &
     "selected" | "move" | "setSelected" | "visible"
   > & {
     value: number | string;
-    visible?: boolean; // used to track mounting
   };
 
 export type TimePickerColumnValueHTMLProps = ButtonHTMLProps &

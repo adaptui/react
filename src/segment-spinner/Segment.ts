@@ -53,22 +53,6 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
     };
   },
 
-  useComposeProps(options, htmlProps) {
-    const composite = useCompositeItem(options, htmlProps);
-
-    /*
-      Haz:
-      Ensure tabIndex={0}
-      Tab is not the only thing that can move focus in web pages
-      For example, on iOS you can move between form elements using
-      the arrows above the keyboard
-    */
-    return {
-      ...composite,
-      tabIndex: options.disabled ? -1 : 0,
-    };
-  },
-
   useProps(
     { segment, next, ...options },
     {
@@ -242,6 +226,22 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
           ...htmlProps,
         });
     }
+  },
+
+  useComposeProps(options, htmlProps) {
+    const composite = useCompositeItem(options, htmlProps);
+
+    /*
+      Haz:
+      Ensure tabIndex={0}
+      Tab is not the only thing that can move focus in web pages
+      For example, on iOS you can move between form elements using
+      the arrows above the keyboard
+    */
+    return {
+      ...composite,
+      tabIndex: options.disabled ? -1 : 0,
+    };
   },
 });
 

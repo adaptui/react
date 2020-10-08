@@ -13,7 +13,8 @@ import {
   setSeconds,
   setYear,
 } from "date-fns";
-import { DateValue } from "../calendar/index.d";
+
+import { DateValue } from "../utils";
 
 export function convertValue(value: DateValue | undefined): Date | undefined {
   if (!value) {

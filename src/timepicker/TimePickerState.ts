@@ -9,12 +9,13 @@ import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment-spinner";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
+import { DateTimeFormatOptions } from "../utils/types";
 
 export interface TimePickerStateProps extends PopoverInitialState, InputBase {
   value?: string;
   defaultValue?: string;
   onChange?: (v: string) => void;
-  formatOptions?: Intl.DateTimeFormatOptions;
+  formatOptions?: DateTimeFormatOptions;
   placeholderDate?: Date;
   pickerId?: string;
   dialogId?: string;

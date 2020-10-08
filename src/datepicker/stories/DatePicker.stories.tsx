@@ -3,9 +3,6 @@ import { Meta } from "@storybook/react";
 import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
-import { DateValue } from "../../calendar/index.d";
-import { DatePickerStateInitialProps } from "../index.d";
-import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 import {
   DatePicker,
   DateSegment,
@@ -14,6 +11,9 @@ import {
   DatePickerTrigger,
   useDatePickerState,
 } from "../index";
+import { DateValue } from "../../utils";
+import { DatePickerStateInitialProps } from "../index.d";
+import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 
 export default {
   title: "Component/DatePicker",

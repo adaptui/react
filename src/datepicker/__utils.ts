@@ -1,4 +1,4 @@
-import { DateValue } from "../calendar/index.d";
+import { DateValue } from "../utils";
 
 export function setTime(date: Date, time: Date) {
   if (!date || !time) {

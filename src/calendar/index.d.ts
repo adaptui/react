@@ -1,6 +1,6 @@
 import { RangeValue, ValueBase } from "@react-types/shared";
+import { DateValue } from "../utils";
 
-export type DateValue = string | number | Date;
 export interface CalendarPropsBase {
   minValue?: DateValue;
   maxValue?: DateValue;

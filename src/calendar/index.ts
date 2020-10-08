@@ -7,4 +7,3 @@ export * from "./CalendarButton";
 export * from "./CalendarGrid";
 export * from "./CalendarHeader";
 export * from "./CalendarWeekTitle";
-export { DateValue } from "./index.d";
