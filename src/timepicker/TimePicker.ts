@@ -1,18 +1,18 @@
-import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { TIME_PICKER_KEYS } from "./__keys";
 
-export type TimePickerOptions = CompositeOptions;
+export type TimePickerOptions = BoxOptions;
 
-export type TimePickerHTMLProps = CompositeHTMLProps;
+export type TimePickerHTMLProps = BoxHTMLProps;
 
 export type TimePickerProps = TimePickerOptions & TimePickerHTMLProps;
 
 export const useTimePicker = createHook<TimePickerOptions, TimePickerHTMLProps>(
   {
     name: "TimePicker",
-    compose: useComposite,
+    compose: useBox,
     keys: TIME_PICKER_KEYS,
 
     useProps(options, htmlProps) {

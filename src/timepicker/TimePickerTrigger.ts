@@ -7,7 +7,6 @@ import {
 import { TIME_PICKER_TRIGGER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 
-// TODO: Fix Typescript error
 export type TimePickerTriggerOptions = PopoverDisclosureOptions;
 
 export type TimePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
