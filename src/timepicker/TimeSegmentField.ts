@@ -1,10 +1,10 @@
-import { SegmentFieldOptions } from "./../segment-spinner/SegmentField";
 import { createComponent, createHook } from "reakit-system";
 
 import {
   SegmentFieldHTMLProps,
   useSegmentField,
-} from "../segment-spinner/SegmentField";
+  SegmentFieldOptions,
+} from "../segment-spinner";
 import { TIME_SEGMENT_FIELD_KEYS } from "./__keys";
 import { TimePickerStateReturn } from "./TimePickerState";
 

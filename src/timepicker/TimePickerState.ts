@@ -1,15 +1,23 @@
+import {
+  PopoverInitialState,
+  usePopoverState,
+  unstable_useId as useId,
+} from "reakit";
 import * as React from "react";
+import { InputBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
-import { PopoverInitialState, usePopoverState } from "reakit";
-import { useTimePickerColumnState } from "./TimePickerColumnState";
-import { useSegmentState } from "../segment-spinner/SegmentState";
 
-export interface TimePickerStateProps extends PopoverInitialState {
+import { useSegmentState } from "../segment-spinner";
+import { useTimePickerColumnState } from "./TimePickerColumnState";
+
+export interface TimePickerStateProps extends PopoverInitialState, InputBase {
   value?: string;
   defaultValue?: string;
   onChange?: (v: string) => void;
   formatOptions?: Intl.DateTimeFormatOptions;
   placeholderDate?: Date;
+  pickerId?: string;
+  dialogId?: string;
 }
 
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
@@ -19,7 +27,14 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     onChange,
     formatOptions = { timeStyle: "short" },
     placeholderDate,
+    pickerId: pickerIdProp,
+    dialogId: dialogIdProp,
+    isDisabled,
+    isReadOnly,
   } = props;
+
+  const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
+  const { id: dialogId } = useId({ id: dialogIdProp, baseId: "dialog" });
 
   const [timeProp, setTimeProp] = useControllableState({
     value: initialValue,
@@ -34,61 +49,17 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
       : parseTime(`${new Date().getHours()}:${new Date().getMinutes()}`);
   const time = timeProp == null ? defaultValue : parseTime(timeProp);
 
-  const setTime = (hour: number, minute: number, meridian: string) => {
-    if (meridian === "PM") {
-      hour = +hour + 12;
-    } else {
-      hour = hour % 12;
-    }
-
-    setTimeProp(`${pad(hour)}:${pad(minute)}`);
-  };
-
-  const [hour, setHourProp] = React.useState(time?.getHours() % 12);
+  const [hour, setHourProp] = React.useState(time?.getHours() % 12 || 12);
   const [minute, setMinuteProp] = React.useState(time?.getMinutes());
   const [meridian, setMeridianProp] = React.useState(
-    time?.getHours() >= 12 ? "PM" : "AM",
+    time?.getHours() >= 12 ? 1 : 0,
   );
 
-  const setHour = (hour: number | string) => {
-    setHourProp(hour as number);
-    setTime(hour as number, minute, meridian);
-  };
-
-  const setMinute = (minute: number | string) => {
-    setMinuteProp(minute as number);
-    setTime(hour, minute as number, meridian);
-  };
-
-  const setMeridian = (meridianValue: number | string) => {
-    setMeridianProp(meridianValue as string);
-    setTime(hour, minute, meridianValue as string);
-  };
-
-  const hourState = useTimePickerColumnState({
-    value: hour,
-    onChange: setHour,
-    onSelection: () => popover.hide(),
-  });
-
-  const minuteState = useTimePickerColumnState({
-    value: minute,
-    onChange: setMinute,
-    onSelection: () => popover.hide(),
-  });
-
-  const meridiesState = useTimePickerColumnState({
-    value: meridian,
-    onChange: setMeridian,
-    onSelection: () => popover.hide(),
-  });
-
-  const hours = [...new Array(13).keys()].slice(1);
-  const minutes = [...new Array(60).keys()];
-  const meridies = ["AM", "PM"];
-
   const setSegmentTime = (date: Date) => {
-    setTimeProp(`${date.getHours()}:${date.getMinutes()}`);
+    setHourProp(date.getHours() % 12 || 12);
+    setMinuteProp(date.getMinutes());
+    setMeridianProp(date.getHours() >= 12 ? 1 : 0);
+    setTimeProp(`${pad(date.getHours())}:${pad(date.getMinutes())}`);
   };
 
   const segmentState = useSegmentState({
@@ -99,6 +70,56 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     placeholderDate,
   });
 
+  const setTime = (hour: number, minute: number, meridian: number) => {
+    if (meridian === 1) {
+      hour = +hour + 12;
+    } else {
+      hour = hour % 12;
+    }
+
+    setTimeProp(`${pad(hour)}:${pad(minute)}`);
+  };
+
+  const setHour = (hour: number) => {
+    setHourProp(hour);
+    setTime(hour, minute, meridian);
+    popover.hide();
+  };
+
+  const setMinute = (minute: number) => {
+    setMinuteProp(minute);
+    setTime(hour, minute, meridian);
+    popover.hide();
+  };
+
+  const setMeridian = (meridianValue: number) => {
+    setMeridianProp(meridianValue);
+    setTime(hour, minute, meridianValue);
+    popover.hide();
+  };
+
+  const hourState = useTimePickerColumnState({
+    value: hour,
+    onChange: setHour,
+    visible: popover.visible,
+  });
+
+  const minuteState = useTimePickerColumnState({
+    value: minute,
+    onChange: setMinute,
+    visible: popover.visible,
+  });
+
+  const meridiesState = useTimePickerColumnState({
+    value: meridian,
+    onChange: setMeridian,
+    visible: popover.visible,
+  });
+
+  const hours = [...new Array(13).keys()].slice(1);
+  const minutes = [...new Array(60).keys()];
+  const meridies = ["AM", "PM"];
+
   return {
     time,
     hours,
@@ -107,6 +128,10 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     hourState,
     minuteState,
     meridiesState,
+    pickerId,
+    dialogId,
+    isDisabled,
+    isReadOnly,
     ...popover,
     ...segmentState,
   };

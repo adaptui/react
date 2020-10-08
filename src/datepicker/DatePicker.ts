@@ -3,6 +3,7 @@ import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
+import { isTouch } from "../utils";
 import { DATE_PICKER_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
 
@@ -23,12 +24,6 @@ export type DatePickerOptions = BoxOptions &
 export type DatePickerHTMLProps = BoxHTMLProps;
 
 export type DatePickerProps = DatePickerOptions & DatePickerHTMLProps;
-
-const isTouch = Boolean(
-  "ontouchstart" in window ||
-    window.navigator.maxTouchPoints > 0 ||
-    window.navigator.msMaxTouchPoints > 0,
-);
 
 export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
   {
@@ -58,7 +53,7 @@ export const useDatePicker = createHook<DatePickerOptions, DatePickerHTMLProps>(
       } = options;
 
       const onClick = () => {
-        if (isTouch) show();
+        if (isTouch()) show();
       };
 
       // Open the popover on alt + arrow down

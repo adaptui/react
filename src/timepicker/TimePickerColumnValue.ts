@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   useCompositeItem,
   CompositeItemOptions,
   CompositeItemHTMLProps,
+  useButton,
+  ButtonHTMLProps,
+  ButtonOptions,
 } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
+import { callAllHandlers } from "@chakra-ui/utils";
 
-export type TimePickerColumnValueOptions = CompositeItemOptions &
-  Pick<TimePickerColumnStateReturn, "selected" | "move" | "onSelection"> & {
+export type TimePickerColumnValueOptions = ButtonOptions &
+  CompositeItemOptions &
+  Pick<
+    TimePickerColumnStateReturn,
+    "selected" | "move" | "setSelected" | "visible"
+  > & {
     value: number | string;
     visible?: boolean; // used to track mounting
   };
 
-export type TimePickerColumnValueHTMLProps = CompositeItemHTMLProps;
+export type TimePickerColumnValueHTMLProps = ButtonHTMLProps &
+  CompositeItemHTMLProps;
 
 export type TimePickerColumnValueProps = TimePickerColumnValueOptions &
   TimePickerColumnValueHTMLProps;
@@ -26,35 +35,39 @@ export const useTimePickerColumnValue = createHook<
   TimePickerColumnValueHTMLProps
 >({
   name: "TimePickerColumnValue",
-  compose: useCompositeItem,
+  compose: [useButton, useCompositeItem],
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
-  useProps(
-    { setCurrentId, move, selected, value, id, onSelection },
-    { ref, ...htmlProps },
-  ) {
-    const htmlRef = React.useRef<HTMLElement>();
+  useProps(options, { ref: htmlRef, onClick: htmlOnClick, ...htmlProps }) {
+    const {
+      setCurrentId,
+      move,
+      selected,
+      value,
+      id,
+      setSelected,
+      visible,
+    } = options;
+    const ref = React.useRef<HTMLElement>();
+    const valueProp = value === "AM" ? 0 : value === "PM" ? 1 : +value;
 
     React.useEffect(() => {
-      if (selected === value) {
+      if (selected === valueProp) {
         if (!id) return;
 
         setCurrentId?.(id);
-        move?.(id);
-        htmlRef?.current?.scrollIntoView();
+        ref?.current?.scrollIntoView();
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id, move, selected, setCurrentId, valueProp, visible]);
+
+    const onClick = useCallback(() => {
+      setSelected(valueProp);
+    }, [setSelected, valueProp]);
 
     return {
       ref: useForkRef(ref, htmlRef),
-      onKeyDown: e => {
-        if (e.key === "Enter") {
-          onSelection(value);
-        }
-      },
-      "data-value": value,
-      "data-selected": selected == value,
+      onClick: callAllHandlers(htmlOnClick, onClick),
+      "aria-selected": selected == valueProp,
       ...htmlProps,
     };
   },

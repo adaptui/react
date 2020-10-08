@@ -5,7 +5,7 @@ import {
   useSegment,
   SegmentOptions,
   SegmentHTMLProps,
-} from "../segment-spinner/Segment";
+} from "../segment-spinner";
 import { DATE_SEGMENT_KEYS } from "./__keys";
 
 export type DateSegmentOptions = SegmentOptions & DatePickerStateReturn;

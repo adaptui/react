@@ -1,46 +1,25 @@
-import React from "react";
 import { useCompositeState } from "reakit";
+import { useControllableState } from "@chakra-ui/hooks";
 
-interface Props {
-  onChange?: (v: number | string) => void;
-  onSelection?: (v: number | string) => void;
-  value?: number | string;
+interface TimePickerColumnInitialProps {
+  value?: number;
+  onChange?: (v: number) => void;
+  visible?: boolean;
 }
 
-export const useTimePickerColumnState = ({
-  onChange,
-  value,
-  onSelection,
-}: Props = {}) => {
-  const [selected, setSelected] = React.useState(value);
+export const useTimePickerColumnState = (
+  props: TimePickerColumnInitialProps = {},
+) => {
+  const { value, onChange, visible } = props;
 
-  const handleSelected = (v: number | string) => {
-    setSelected(v);
-    onChange?.(v);
-  };
-
-  const onSelect = (v: number | string) => {
-    onSelection?.(v);
-  };
-
+  const [selected, setSelected] = useControllableState({ value, onChange });
   const composite = useCompositeState({
     loop: true,
     wrap: true,
     orientation: "vertical",
   });
 
-  React.useEffect(() => {
-    const value = composite.items
-      .find(item => item.id === composite.currentId)
-      ?.ref.current?.getAttribute("data-value");
-
-    if (value) {
-      handleSelected(value);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [composite.currentId]);
-
-  return { selected, onSelection: onSelect, ...composite };
+  return { selected, setSelected, visible, ...composite };
 };
 
 export type TimePickerColumnStateReturn = ReturnType<

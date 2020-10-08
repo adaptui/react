@@ -4,7 +4,7 @@ import {
   useSegment,
   SegmentOptions,
   SegmentHTMLProps,
-} from "../segment-spinner/Segment";
+} from "../segment-spinner";
 import { TimePickerStateReturn } from "./TimePickerState";
 import { TIME_SEGMENT_KEYS } from "./__keys";
 

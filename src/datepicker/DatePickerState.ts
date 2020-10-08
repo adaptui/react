@@ -10,8 +10,8 @@ import { useControllableState } from "@chakra-ui/hooks";
 import { usePopoverState, unstable_useId as useId } from "reakit";
 
 import { setTime, isInvalid } from "./__utils";
+import { useSegmentState } from "../segment-spinner";
 import { DateValue, useCalendarState } from "../calendar";
-import { useSegmentState } from "../segment-spinner/SegmentState";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {

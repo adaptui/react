@@ -2,8 +2,10 @@ import { createComponent, createHook } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 
 import { TIME_PICKER_CONTENT_KEYS } from "./__keys";
+import { TimePickerStateReturn } from "./TimePickerState";
 
-export type TimePickerContentOptions = PopoverOptions;
+export type TimePickerContentOptions = PopoverOptions &
+  Pick<TimePickerStateReturn, "dialogId">;
 
 export type TimePickerContentHTMLProps = PopoverHTMLProps;
 
@@ -18,8 +20,11 @@ export const useTimePickerContent = createHook<
   compose: usePopover,
   keys: TIME_PICKER_CONTENT_KEYS,
 
-  useProps(options, htmlProps) {
-    return htmlProps;
+  useProps({ dialogId }, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
+    return {
+      id: dialogId,
+      ...htmlProps,
+    };
   },
 });
 

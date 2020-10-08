@@ -1,13 +1,15 @@
-import { DatePickerStateReturn } from ".";
 import { createComponent, createHook } from "reakit-system";
 
 import {
   SegmentFieldHTMLProps,
+  SegmentFieldOptions,
   useSegmentField,
-} from "../segment-spinner/SegmentField";
+} from "../segment-spinner";
 import { DATE_SEGMENT_FIELD_KEYS } from "./__keys";
+import { DatePickerStateReturn } from "./DatePickerState";
 
-export type DateSegmentFieldOptions = DatePickerStateReturn;
+export type DateSegmentFieldOptions = SegmentFieldOptions &
+  DatePickerStateReturn;
 
 export type DateSegmentFieldHTMLProps = SegmentFieldHTMLProps;
 

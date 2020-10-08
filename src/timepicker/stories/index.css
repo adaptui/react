@@ -58,11 +58,6 @@
   padding: 5px;
 }
 
-..timepicker__content [data-selected="true"] {
-  background-color: #3c49fd;
-  color: white;
-}
-
 .timepicker__content ::-webkit-scrollbar {
   width: 5px;
 }
@@ -73,4 +68,9 @@
 
 .timepicker__content ::-webkit-scrollbar-thumb {
   background-color: #9097ff;
+}
+
+.timepicker__column--value[aria-selected="true"] {
+  background-color: #1e65fd;
+  color: white;
 }

@@ -53,6 +53,7 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
               <TimePickerColumnValue
                 className="timepicker__column--value"
                 value={n}
+                key={n}
                 {...state.hourState}
               >
                 {n}
@@ -66,6 +67,7 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
               <TimePickerColumnValue
                 className="timepicker__column--value"
                 value={n}
+                key={n}
                 {...state.minuteState}
               >
                 {n}
@@ -80,6 +82,7 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
           {state.meridies.map(n => {
             return (
               <TimePickerColumnValue
+                key={n}
                 className="timepicker__column--value"
                 value={n}
                 {...state.meridiesState}
