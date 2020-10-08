@@ -26,7 +26,7 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     defaultValue: defaultValueProp,
     onChange,
   });
-  console.log("%c timeProp", "color: #99adcc", timeProp);
+  const popover = usePopoverState({ modal: true, ...props });
 
   const defaultValue =
     defaultValueProp && isValidTime(defaultValueProp)
@@ -50,19 +50,19 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     time?.getHours() >= 12 ? "PM" : "AM",
   );
 
-  const setHour = (hour: number) => {
-    setHourProp(hour);
-    setTime(hour, minute, meridian);
+  const setHour = (hour: number | string) => {
+    setHourProp(hour as number);
+    setTime(hour as number, minute, meridian);
   };
 
-  const setMinute = (minute: number) => {
-    setMinuteProp(minute);
-    setTime(hour, minute, meridian);
+  const setMinute = (minute: number | string) => {
+    setMinuteProp(minute as number);
+    setTime(hour, minute as number, meridian);
   };
 
-  const setMeridian = (meridianValue: string) => {
-    setMeridianProp(meridianValue);
-    setTime(hour, minute, meridianValue);
+  const setMeridian = (meridianValue: number | string) => {
+    setMeridianProp(meridianValue as string);
+    setTime(hour, minute, meridianValue as string);
   };
 
   const hourState = useTimePickerColumnState({
@@ -98,8 +98,6 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     formatOptions,
     placeholderDate,
   });
-
-  const popover = usePopoverState({ modal: true, ...props });
 
   return {
     time,
