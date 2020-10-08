@@ -115,7 +115,7 @@ describe("Calendar", () => {
     press.Tab();
     press.Tab();
 
-    expect(label("Today, Wednesday, October 7, 2020 selected")).toHaveFocus();
+    expect(label("Wednesday, October 7, 2020 selected")).toHaveFocus();
 
     // Let's navigate to 30
     press.ArrowDown();

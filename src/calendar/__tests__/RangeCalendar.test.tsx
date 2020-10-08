@@ -120,7 +120,7 @@ describe("RangeCalendar", () => {
     press.Tab();
     press.Tab();
 
-    expect(label("Today, Wednesday, October 7, 2020 selected")).toHaveFocus();
+    expect(label("Wednesday, October 7, 2020 selected")).toHaveFocus();
     press.ArrowDown(); // go to down just for some variety
 
     press.Enter(); // start the selection, currently the start and end should be the same date
