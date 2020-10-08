@@ -82,6 +82,7 @@
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.0.4",
     "@testing-library/react-hooks": "3.4.2",
+    "@testing-library/user-event": "^12.1.7",
     "@types/jest": "26.0.14",
     "@types/jest-axe": "3.5.0",
     "@types/jest-in-case": "1.0.2",
