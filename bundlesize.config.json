@@ -1,0 +1,8 @@
+{
+  "files": [
+    {
+      "path": "./dist/umd/renderless-components.min.js",
+      "maxSize": "50kb"
+    }
+  ]
+}
