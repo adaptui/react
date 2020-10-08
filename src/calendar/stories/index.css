@@ -1,9 +1,4 @@
-body {
-  font-family: "Century Gothic";
-}
-
 .calendar {
-  margin-top: 1em;
   max-width: 320px;
   position: relative;
 }
@@ -141,6 +136,6 @@ body {
 .calendar [aria-disabled="true"] {
   color: #959595;
 }
-.calendar [data-weekend="true"] {
+.calendar [data-weekend] {
   color: #fa3131;
 }
