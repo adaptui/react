@@ -46,7 +46,7 @@ describe("PickerBase", () => {
             aria-label="picker base"
             aria-owns="dialog-1"
             id="picker-1"
-            role="combobox"
+            role="button"
           >
             <div
               aria-controls="picker-test"
@@ -98,5 +98,12 @@ describe("PickerBase", () => {
 
     press.Escape();
     expect(testId("picker-content")).not.toBeVisible();
+  });
+
+  test("PickerBase renders with no a11y violations", async () => {
+    const { container } = render(<PickerBaseComp />);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
   });
 });
