@@ -10,16 +10,16 @@ import {
   DatePickerContent,
   DatePickerTrigger,
   useDatePickerState,
+  DatePickerInitialState,
 } from "../index";
-import { DateValue } from "../../utils";
-import { DatePickerStateInitialProps } from "../index.d";
+import { DateValue } from "../../utils/types";
 import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 
 export default {
   title: "Component/DatePicker",
 } as Meta;
 
-const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
+const DatePickerComp: React.FC<DatePickerInitialState> = props => {
   const state = useDatePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,

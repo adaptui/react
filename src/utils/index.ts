@@ -27,5 +27,3 @@ export function isTouch() {
       window.navigator.msMaxTouchPoints > 0,
   );
 }
-
-export * from "./types";

@@ -1,4 +1,4 @@
-import { DateValue } from "../utils";
+import { DateValue } from "../utils/types";
 
 export function setTime(date: Date, time: Date) {
   if (!date || !time) {
