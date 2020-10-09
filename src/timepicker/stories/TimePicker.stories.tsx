@@ -1,16 +1,18 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 
-import { TimePicker } from "../TimePicker";
-import { TimePickerColumn } from "../TimePickerColumn";
-import { TimePickerContent } from "../TimePickerContent";
-import { TimePickerTrigger } from "../TimePickerTrigger";
-import { TimePickerColumnValue } from "../TimePickerColumnValue";
-import { TimeSegmentField } from "../TimeSegmentField";
-import { TimeSegment } from "../TimeSegment";
-import { useTimePickerState, TimePickerStateProps } from "../TimePickerState";
-
 import "./index.css";
+import {
+  useTimePickerState,
+  TimePicker,
+  TimePickerColumn,
+  TimePickerColumnValue,
+  TimePickerContent,
+  TimePickerStateProps,
+  TimePickerTrigger,
+  TimePickerSegment,
+  TimePickerSegmentField,
+} from "../index";
 
 export default {
   title: "Component/TimePicker",
@@ -31,16 +33,16 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
     <>
       <TimePicker className="timepicker" {...state}>
         <div className="timepicker__header">
-          <TimeSegmentField {...state} className="timepicker__field">
+          <TimePickerSegmentField {...state} className="timepicker__field">
             {state.segments.map((segment, i) => (
-              <TimeSegment
+              <TimePickerSegment
                 key={i}
                 segment={segment}
                 className="timepicker__field--item"
                 {...state}
               />
             ))}
-          </TimeSegmentField>
+          </TimePickerSegmentField>
           <TimePickerTrigger className="timepicker__trigger" {...state}>
             <CalendarIcon />
           </TimePickerTrigger>

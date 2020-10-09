@@ -12,7 +12,7 @@ import { usePopoverState, unstable_useId as useId } from "reakit";
 import { DateValue } from "../utils";
 import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
-import { useSegmentState } from "../segment-spinner";
+import { useSegmentState } from "../segment";
 import { DatePickerStateInitialProps, ValidationState } from "./index.d";
 
 export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {

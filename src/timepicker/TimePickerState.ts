@@ -7,7 +7,7 @@ import * as React from "react";
 import { InputBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
 
-import { useSegmentState } from "../segment-spinner";
+import { useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { DateTimeFormatOptions } from "../utils/types";
 

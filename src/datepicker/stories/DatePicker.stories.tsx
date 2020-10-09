@@ -5,8 +5,8 @@ import { addDays, addWeeks, subWeeks } from "date-fns";
 import "./index.css";
 import {
   DatePicker,
-  DateSegment,
-  DateSegmentField,
+  DatePickerSegment,
+  DatePickerSegmentField,
   DatePickerContent,
   DatePickerTrigger,
   useDatePickerState,
@@ -29,16 +29,16 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
     <>
       <DatePicker className="datepicker" {...state}>
         <div className="datepicker__header">
-          <DateSegmentField {...state} className="datepicker__field">
+          <DatePickerSegmentField {...state} className="datepicker__field">
             {state.segments.map((segment, i) => (
-              <DateSegment
+              <DatePickerSegment
                 key={i}
                 segment={segment}
                 className="datepicker__field--item"
                 {...state}
               />
             ))}
-          </DateSegmentField>
+          </DatePickerSegmentField>
 
           <DatePickerTrigger className="datepicker__trigger" {...state}>
             <CalendarIcon />
