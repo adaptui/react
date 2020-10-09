@@ -20,7 +20,7 @@ export type TimePickerColumnValueOptions = ButtonOptions &
     TimePickerColumnStateReturn,
     "selected" | "move" | "setSelected" | "visible"
   > & {
-    value: number | string;
+    value: number;
   };
 
 export type TimePickerColumnValueHTMLProps = ButtonHTMLProps &
@@ -48,25 +48,24 @@ export const useTimePickerColumnValue = createHook<
       visible,
     } = options;
     const ref = React.useRef<HTMLElement>();
-    const valueProp = value === "AM" ? 0 : value === "PM" ? 1 : +value;
 
     React.useEffect(() => {
-      if (selected === valueProp) {
+      if (selected === value) {
         if (!id) return;
 
         setCurrentId?.(id);
         ref?.current?.scrollIntoView();
       }
-    }, [id, move, selected, setCurrentId, valueProp, visible]);
+    }, [id, move, selected, setCurrentId, value, visible]);
 
     const onClick = useCallback(() => {
-      setSelected(valueProp);
-    }, [setSelected, valueProp]);
+      setSelected(value);
+    }, [setSelected, value]);
 
     return {
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
-      "aria-selected": selected == valueProp,
+      "aria-selected": selected == value,
       ...htmlProps,
     };
   },

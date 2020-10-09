@@ -1,15 +1,16 @@
-import * as React from "react";
+import { isString } from "@chakra-ui/utils";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
-import { DateTimeFormatOptions } from "../utils/types";
+import { DateTimeFormatOptions, DateValue } from "../utils/types";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
+// TODO: Voice Overing all button on dialog open
 export interface TimePickerStateProps extends PickerBaseInitialState {
-  value?: string;
-  defaultValue?: string;
-  onChange?: (v: string) => void;
+  value?: DateValue;
+  defaultValue?: DateValue;
+  onChange?: (v: DateValue) => void;
   formatOptions?: DateTimeFormatOptions;
   placeholderDate?: Date;
 }
@@ -17,90 +18,50 @@ export interface TimePickerStateProps extends PickerBaseInitialState {
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
   const {
     value: initialValue,
-    defaultValue: defaultValueProp,
+    defaultValue: defaultValueProp = new Date(),
     onChange,
     formatOptions = { timeStyle: "short" },
     placeholderDate,
   } = props;
 
-  const [timeProp, setTimeProp] = useControllableState({
-    value: initialValue,
-    defaultValue: defaultValueProp,
+  const [time, setTime] = useControllableState({
+    value: parseTime(initialValue),
+    defaultValue: parseTime(defaultValueProp),
     onChange,
   });
 
-  const defaultValue =
-    defaultValueProp && isValidTime(defaultValueProp)
-      ? parseTime(defaultValueProp)
-      : parseTime(`${new Date().getHours()}:${new Date().getMinutes()}`);
-  const time = timeProp == null ? defaultValue : parseTime(timeProp);
-
-  const [hour, setHourProp] = React.useState(time?.getHours() % 12 || 12);
-  const [minute, setMinuteProp] = React.useState(time?.getMinutes());
-  const [meridian, setMeridianProp] = React.useState(
-    time?.getHours() >= 12 ? 1 : 0,
-  );
-
-  const setSegmentTime = (date: Date) => {
-    setHourProp(date.getHours() % 12 || 12);
-    setMinuteProp(date.getMinutes());
-    setMeridianProp(date.getHours() >= 12 ? 1 : 0);
-    setTimeProp(`${pad(date.getHours())}:${pad(date.getMinutes())}`);
-  };
-
   const segmentState = useSegmentState({
     value: time,
-    defaultValue,
-    onChange: setSegmentTime,
+    onChange: setTime,
     formatOptions,
     placeholderDate,
   });
 
   const popover = usePickerBaseState({ focus: segmentState.first });
 
-  const setTime = (hour: number, minute: number, meridian: number) => {
-    if (meridian === 1) {
-      hour = +hour + 12;
-    } else {
-      hour = hour % 12;
-    }
-
-    setTimeProp(`${pad(hour)}:${pad(minute)}`);
-  };
-
-  const setHour = (hour: number) => {
-    setHourProp(hour);
-    setTime(hour, minute, meridian);
-    popover.hide();
-  };
-
-  const setMinute = (minute: number) => {
-    setMinuteProp(minute);
-    setTime(hour, minute, meridian);
-    popover.hide();
-  };
-
-  const setMeridian = (meridianValue: number) => {
-    setMeridianProp(meridianValue);
-    setTime(hour, minute, meridianValue);
+  const setTimeProp = (date: Date) => {
+    setTime(date);
     popover.hide();
   };
 
   const hourState = useTimePickerColumnState({
-    value: hour,
-    onChange: setHour,
+    type: "hour",
+    value: time,
+    onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const minuteState = useTimePickerColumnState({
-    value: minute,
-    onChange: setMinute,
+    type: "minute",
+    value: time,
+    onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const meridiesState = useTimePickerColumnState({
-    value: meridian,
-    onChange: setMeridian,
+    type: "meridian",
+    value: time,
+    onChange: setTimeProp,
     visible: popover.visible,
   });
 
@@ -123,23 +84,24 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
 
 export type TimePickerStateReturn = ReturnType<typeof useTimePickerState>;
 
-function isValidTime(timeString: string | undefined) {
-  if (!timeString) return false;
+function parseTime(timeValue: DateValue | undefined) {
+  if (timeValue == null) return;
 
-  const time = timeString.match(/(\d+)(:(\d\d))?\s*(p?)/i);
-  if (time == null) return false;
+  if (isString(timeValue)) {
+    const timeRegex = timeValue.match(/(\d+)(:(\d\d))?\s*(p?)/i);
+    if (timeRegex == null) return;
 
-  return true;
-}
+    const time = timeValue.split(":");
+    const date = new Date();
 
-function parseTime(timeString: string) {
-  const time = timeString.split(":");
+    date.setHours(parseInt(time[0], 10));
+    date.setMinutes(parseInt(time[1], 10));
+    date.setSeconds(0, 0);
 
-  const date = new Date();
-  date.setHours(parseInt(time[0], 10));
-  date.setMinutes(parseInt(time[1], 10));
-  date.setSeconds(0, 0);
-  return date;
+    return date;
+  }
+
+  return new Date(timeValue);
 }
 
 function pad(number: number) {

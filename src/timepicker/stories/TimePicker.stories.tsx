@@ -53,9 +53,9 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
           {state.hours.map(n => {
             return (
               <TimePickerColumnValue
+                key={n}
                 className="timepicker__column--value"
                 value={n}
-                key={n}
                 {...state.hourState}
               >
                 {n}
@@ -64,12 +64,12 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
           })}
         </TimePickerColumn>
         <TimePickerColumn className="timepicker__column" {...state.minuteState}>
-          {state.minutes.map(n => {
+          {state.minutes.map((n, i) => {
             return (
               <TimePickerColumnValue
-                className="timepicker__column--value"
-                value={n}
                 key={n}
+                className="timepicker__column--value"
+                value={i}
                 {...state.minuteState}
               >
                 {n}
@@ -81,12 +81,12 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
           className="timepicker__column"
           {...state.meridiesState}
         >
-          {state.meridies.map(n => {
+          {state.meridies.map((n, i) => {
             return (
               <TimePickerColumnValue
                 key={n}
                 className="timepicker__column--value"
-                value={n}
+                value={i}
                 {...state.meridiesState}
               >
                 {n}
