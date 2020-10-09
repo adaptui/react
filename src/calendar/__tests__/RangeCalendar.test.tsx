@@ -1,7 +1,6 @@
 import * as React from "react";
 import { axe, render, press } from "reakit-test-utils";
 
-import { RangeCalendarProps } from "../index.d";
 import {
   Calendar,
   CalendarCell,
@@ -11,9 +10,10 @@ import {
   CalendarWeekTitle,
   CalendarCellButton,
   useRangeCalendarState,
+  RangeCalendarInitialState,
 } from "../index";
 
-const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
+const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
 
   return (

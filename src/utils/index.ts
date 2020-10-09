@@ -19,3 +19,11 @@ export function clampValue(value: number, min: number, max: number) {
 
   return Math.min(Math.max(value, min), max);
 }
+
+export function isTouch() {
+  return Boolean(
+    "ontouchstart" in window ||
+      window.navigator.maxTouchPoints > 0 ||
+      window.navigator.msMaxTouchPoints > 0,
+  );
+}

@@ -10,11 +10,11 @@ import {
   useCalendarState,
   CalendarWeekTitle,
   CalendarCellButton,
-  CalendarStateInitialProps,
+  CalendarInitialState,
   Calendar as CalendarWrapper,
 } from "../index";
 
-export const CalendarComp: React.FC<CalendarStateInitialProps> = props => {
+export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
 
   return (
