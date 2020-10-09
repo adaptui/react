@@ -7,8 +7,8 @@ export type DateTimeFormatOptions = Intl.DateTimeFormatOptions & {
 export type DateValue = string | number | Date;
 
 export interface RangeValueBase<T> {
-  /** The smallest value allowed for the input. */
+  /** The smallest value allowed. */
   minValue?: T;
-  /** The largest value allowed for the input. */
+  /** The largest value allowed. */
   maxValue?: T;
 }
