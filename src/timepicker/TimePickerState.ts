@@ -1,11 +1,10 @@
-import * as React from "react";
+import { isString } from "@chakra-ui/utils";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
 import { DateTimeFormatOptions, DateValue } from "../utils/types";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { isString } from "@chakra-ui/utils";
 
 // TODO: Voice Overing all button on dialog open
 export interface TimePickerStateProps extends PickerBaseInitialState {
@@ -31,11 +30,8 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     onChange,
   });
 
-  const defaultValue = parseTime(defaultValueProp) || new Date();
-
   const segmentState = useSegmentState({
     value: time,
-    defaultValue,
     onChange: setTime,
     formatOptions,
     placeholderDate,
