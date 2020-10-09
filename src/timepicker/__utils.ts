@@ -1,4 +1,37 @@
+import { isString } from "@chakra-ui/utils";
+
 import { ColumnType } from "./TimePickerColumnState";
+
+export function parseTime(timeValue: string | undefined) {
+  if (timeValue == null) return;
+
+  if (isString(timeValue)) {
+    const timeRegex = timeValue.match(/(\d+)(:(\d\d))?\s*(p?)/i);
+    if (timeRegex == null) return;
+
+    const time = timeValue.split(":");
+    const date = new Date();
+
+    date.setHours(parseInt(time[0], 10));
+    date.setMinutes(parseInt(time[1], 10));
+    date.setSeconds(0, 0);
+
+    return date;
+  }
+
+  return new Date(timeValue);
+}
+
+function pad(number: number) {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number;
+}
+
+export function stringifyTime(date: Date) {
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
 
 export function getSelectedValueFromDate(date: Date, type: ColumnType) {
   if (type === "minute") return date.getMinutes();

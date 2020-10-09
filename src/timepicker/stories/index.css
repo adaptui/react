@@ -74,3 +74,7 @@
   background-color: #1e65fd;
   color: white;
 }
+
+.timepicker [aria-disabled="true"] {
+  opacity: 0.5;
+}
