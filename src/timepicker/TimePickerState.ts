@@ -1,24 +1,17 @@
-import {
-  PopoverInitialState,
-  usePopoverState,
-  unstable_useId as useId,
-} from "reakit";
 import * as React from "react";
-import { InputBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
-import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { DateTimeFormatOptions } from "../utils/types";
+import { useTimePickerColumnState } from "./TimePickerColumnState";
+import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export interface TimePickerStateProps extends PopoverInitialState, InputBase {
+export interface TimePickerStateProps extends PickerBaseInitialState {
   value?: string;
   defaultValue?: string;
   onChange?: (v: string) => void;
   formatOptions?: DateTimeFormatOptions;
   placeholderDate?: Date;
-  pickerId?: string;
-  dialogId?: string;
 }
 
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
@@ -28,21 +21,13 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     onChange,
     formatOptions = { timeStyle: "short" },
     placeholderDate,
-    pickerId: pickerIdProp,
-    dialogId: dialogIdProp,
-    isDisabled,
-    isReadOnly,
   } = props;
-
-  const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
-  const { id: dialogId } = useId({ id: dialogIdProp, baseId: "dialog" });
 
   const [timeProp, setTimeProp] = useControllableState({
     value: initialValue,
     defaultValue: defaultValueProp,
     onChange,
   });
-  const popover = usePopoverState({ modal: true, ...props });
 
   const defaultValue =
     defaultValueProp && isValidTime(defaultValueProp)
@@ -70,6 +55,8 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     formatOptions,
     placeholderDate,
   });
+
+  const popover = usePickerBaseState({ focus: segmentState.first });
 
   const setTime = (hour: number, minute: number, meridian: number) => {
     if (meridian === 1) {
@@ -129,10 +116,6 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     hourState,
     minuteState,
     meridiesState,
-    pickerId,
-    dialogId,
-    isDisabled,
-    isReadOnly,
     ...popover,
     ...segmentState,
   };

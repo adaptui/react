@@ -104,6 +104,11 @@ const TIME_PICKER_STATE_KEYS = [
   "unstable_update",
   "placement",
   "place",
+  "pickerId",
+  "dialogId",
+  "isDisabled",
+  "isReadOnly",
+  "focus",
   "time",
   "hours",
   "minutes",
@@ -111,10 +116,6 @@ const TIME_PICKER_STATE_KEYS = [
   "hourState",
   "minuteState",
   "meridiesState",
-  "pickerId",
-  "dialogId",
-  "isDisabled",
-  "isReadOnly",
 ] as const;
 export const TIME_PICKER_KEYS = [
   ...TIME_PICKER_COLUMN_STATE_KEYS,

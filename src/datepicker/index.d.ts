@@ -6,9 +6,13 @@ import {
 } from "@react-types/shared";
 import { PopoverInitialState } from "reakit";
 
+import { PickerBaseInitialState } from "../picker-base";
 import { DateTimeFormatOptions, DateValue } from "../utils";
 
-interface DatePickerBase extends InputBase, Validation, FocusableProps {
+interface DatePickerBase
+  extends PickerBaseInitialState,
+    Validation,
+    FocusableProps {
   minValue?: DateValue;
   maxValue?: DateValue;
   formatOptions?: DateTimeFormatOptions;

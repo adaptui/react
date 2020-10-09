@@ -68,14 +68,15 @@ const DATE_PICKER_STATE_KEYS = [
   "place",
   "pickerId",
   "dialogId",
+  "isDisabled",
+  "isReadOnly",
+  "focus",
   "dateValue",
   "setDateValue",
   "selectDate",
   "validationState",
   "minValue",
   "maxValue",
-  "isDisabled",
-  "isReadOnly",
   "isRequired",
 ] as const;
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;

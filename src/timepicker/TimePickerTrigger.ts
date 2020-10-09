@@ -1,18 +1,17 @@
-import {
-  usePopoverDisclosure,
-  PopoverDisclosureHTMLProps,
-  PopoverDisclosureOptions,
-} from "reakit";
-import { callAllHandlers } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 
+import {
+  usePickerBaseTrigger,
+  PickerBaseHTMLProps,
+  PickerBaseOptions,
+} from "../picker-base";
 import { TIME_PICKER_TRIGGER_KEYS } from "./__keys";
 import { TimePickerStateReturn } from "./TimePickerState";
 
-export type TimePickerTriggerOptions = PopoverDisclosureOptions &
+export type TimePickerTriggerOptions = PickerBaseOptions &
   TimePickerStateReturn;
 
-export type TimePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
+export type TimePickerTriggerHTMLProps = PickerBaseHTMLProps;
 
 export type TimePickerTriggerProps = TimePickerTriggerOptions &
   TimePickerTriggerHTMLProps;
@@ -22,19 +21,11 @@ export const useTimePickerTrigger = createHook<
   TimePickerTriggerHTMLProps
 >({
   name: "TimePickerTrigger",
-  compose: usePopoverDisclosure,
+  compose: usePickerBaseTrigger,
   keys: TIME_PICKER_TRIGGER_KEYS,
 
-  useProps(_, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
-    const onMouseDown = (e: React.MouseEvent) => {
-      e.stopPropagation();
-    };
-
-    return {
-      tabIndex: -1,
-      onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
-      ...htmlProps,
-    };
+  useProps(_, htmlProps) {
+    return htmlProps;
   },
 });
 
