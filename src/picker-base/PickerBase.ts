@@ -74,7 +74,7 @@ export const usePickerBase = createHook<PickerBaseOptions, PickerBaseHTMLProps>(
 
       return {
         id: pickerId,
-        role: "combobox",
+        role: "button",
         "aria-haspopup": "dialog",
         "aria-expanded": visible,
         "aria-owns": visible ? dialogId : undefined,

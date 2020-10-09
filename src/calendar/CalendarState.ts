@@ -3,11 +3,7 @@
  * We improved the Calendar from Stately [useCalendarState](https://github.com/adobe/react-spectrum/tree/main/packages/%40react-stately/calendar)
  * to work with Reakit System
  */
-import * as React from "react";
-import { unstable_useId as useId } from "reakit";
-import { useUpdateEffect } from "@chakra-ui/hooks";
-import { useDateFormatter } from "@react-aria/i18n";
-import { useControllableState } from "@chakra-ui/hooks";
+
 import {
   addDays,
   addMonths,
@@ -25,26 +21,36 @@ import {
   subWeeks,
   subYears,
 } from "date-fns";
+import * as React from "react";
+import { unstable_useId as useId } from "reakit";
+import { useUpdateEffect } from "@chakra-ui/hooks";
+import { useDateFormatter } from "@react-aria/i18n";
+import { useControllableState } from "@chakra-ui/hooks";
+import { FocusableProps, InputBase, ValueBase } from "@react-types/shared";
 
-import { CalendarProps } from "./index.d";
 import { useWeekStart } from "./useWeekStart";
 import { announce } from "../utils/LiveAnnouncer";
+import { DateValue, RangeValueBase } from "../utils/types";
 import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
 
-export interface CalendarStateInitialProps extends Partial<CalendarProps> {
+export interface CalendarInitialState
+  extends FocusableProps,
+    InputBase,
+    ValueBase<DateValue>,
+    RangeValueBase<DateValue> {
   id?: string;
 }
 
-export function useCalendarState(props: CalendarStateInitialProps = {}) {
+export function useCalendarState(props: CalendarInitialState = {}) {
   const {
+    value: initialValue,
+    defaultValue,
+    onChange,
     minValue: initialMinValue,
     maxValue: initialMaxValue,
     isDisabled = false,
     isReadOnly = false,
     autoFocus = false,
-    value: initialValue,
-    defaultValue,
-    onChange,
     id,
   } = props;
 

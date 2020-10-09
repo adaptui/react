@@ -100,4 +100,31 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
 };
 
 export const Default = () => <TimePickerComp />;
-export const DefaultTime = () => <TimePickerComp value="21:45" />;
+
+export const InitialDate = () => <TimePickerComp defaultValue="01:30" />;
+
+export const ControllableState = () => {
+  const [value, setValue] = React.useState("12:30");
+
+  return (
+    <div>
+      <input
+        type="time"
+        onChange={e => {
+          setValue(e.target.value);
+        }}
+        value={value}
+      />
+      <TimePickerComp value={value} onChange={setValue} />
+    </div>
+  );
+};
+
+export const isDisabled = () => <TimePickerComp isDisabled />;
+
+export const isReadOnly = () => <TimePickerComp isReadOnly />;
+
+export const autoFocus = () => (
+  // eslint-disable-next-line jsx-a11y/no-autofocus
+  <TimePickerComp autoFocus />
+);

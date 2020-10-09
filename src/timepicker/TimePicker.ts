@@ -18,10 +18,6 @@ export const useTimePicker = createHook<TimePickerOptions, TimePickerHTMLProps>(
     name: "TimePicker",
     compose: usePickerBase,
     keys: TIME_PICKER_KEYS,
-
-    useProps(_, htmlProps) {
-      return htmlProps;
-    },
   },
 );
 

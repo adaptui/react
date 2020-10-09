@@ -21,10 +21,6 @@ export const useTimePickerContent = createHook<
   name: "TimePickerContent",
   compose: usePickerBaseContent,
   keys: TIME_PICKER_CONTENT_KEYS,
-
-  useProps(_, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const TimePickerContent = createComponent({

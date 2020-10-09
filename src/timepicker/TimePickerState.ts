@@ -1,16 +1,18 @@
-import { isString } from "@chakra-ui/utils";
+import * as React from "react";
 import { useControllableState } from "@chakra-ui/hooks";
+import { ValueBase, FocusableProps } from "@react-types/shared";
 
 import { useSegmentState } from "../segment";
-import { DateTimeFormatOptions, DateValue } from "../utils/types";
+import { DateTimeFormatOptions } from "../utils/types";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { stringifyTime, parseTime } from "./__utils";
 
 // TODO: Voice Overing all button on dialog open
-export interface TimePickerStateProps extends PickerBaseInitialState {
-  value?: DateValue;
-  defaultValue?: DateValue;
-  onChange?: (v: DateValue) => void;
+export interface TimePickerStateProps
+  extends PickerBaseInitialState,
+    FocusableProps,
+    ValueBase<string> {
   formatOptions?: DateTimeFormatOptions;
   placeholderDate?: Date;
 }
@@ -18,15 +20,23 @@ export interface TimePickerStateProps extends PickerBaseInitialState {
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
   const {
     value: initialValue,
-    defaultValue: defaultValueProp = new Date(),
-    onChange,
+    defaultValue: defaultValueProp = stringifyTime(new Date()),
+    onChange: onChangeProp,
     formatOptions = { timeStyle: "short" },
     placeholderDate,
+    autoFocus,
   } = props;
+
+  const onChange = React.useCallback(
+    (date: Date) => {
+      return onChangeProp?.(stringifyTime(date));
+    },
+    [onChangeProp],
+  );
 
   const [time, setTime] = useControllableState({
     value: parseTime(initialValue),
-    defaultValue: parseTime(defaultValueProp),
+    defaultValue: parseTime(defaultValueProp) || new Date(),
     onChange,
   });
 
@@ -37,7 +47,7 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     placeholderDate,
   });
 
-  const popover = usePickerBaseState({ focus: segmentState.first });
+  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
 
   const setTimeProp = (date: Date) => {
     setTime(date);
@@ -69,6 +79,13 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
   const minutes = [...new Array(60).keys()];
   const meridies = ["AM", "PM"];
 
+  React.useEffect(() => {
+    if (autoFocus) {
+      segmentState.first();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoFocus, segmentState.first]);
+
   return {
     time,
     hours,
@@ -83,30 +100,3 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
 };
 
 export type TimePickerStateReturn = ReturnType<typeof useTimePickerState>;
-
-function parseTime(timeValue: DateValue | undefined) {
-  if (timeValue == null) return;
-
-  if (isString(timeValue)) {
-    const timeRegex = timeValue.match(/(\d+)(:(\d\d))?\s*(p?)/i);
-    if (timeRegex == null) return;
-
-    const time = timeValue.split(":");
-    const date = new Date();
-
-    date.setHours(parseInt(time[0], 10));
-    date.setMinutes(parseInt(time[1], 10));
-    date.setSeconds(0, 0);
-
-    return date;
-  }
-
-  return new Date(timeValue);
-}
-
-function pad(number: number) {
-  if (number < 10) {
-    return "0" + number;
-  }
-  return number;
-}
