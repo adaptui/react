@@ -9,7 +9,7 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarWeekTitle,
-  CalendarStateInitialProps,
+  CalendarInitialState,
   useCalendarState,
 } from "../index";
 import { CalendarStateReturn } from "../CalendarState";
@@ -115,7 +115,7 @@ export const CalendarComp: React.FC<CalendarStateReturn> = state => {
   );
 };
 
-export const CalendarComponent: React.FC<CalendarStateInitialProps> = props => {
+export const CalendarComponent: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
 
   return <CalendarComp {...state} />;

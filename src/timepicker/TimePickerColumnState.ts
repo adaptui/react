@@ -1,45 +1,46 @@
-import React from "react";
 import { useCompositeState } from "reakit";
+import { ValueBase } from "@react-types/shared";
+import { useControllableState } from "@chakra-ui/hooks";
 
-interface Props {
-  onChange?: (v: number | string) => void;
-  onSelection?: (v: number | string) => void;
-  value?: number | string;
+import { getSelectedValueFromDate, getSelectedDateFromValue } from "./__utils";
+
+export type ColumnType = "hour" | "minute" | "meridian";
+
+export interface TimePickerColumnInitialState extends ValueBase<Date> {
+  visible?: boolean;
+  type?: ColumnType;
 }
 
-export const useTimePickerColumnState = ({
-  onChange,
-  value,
-  onSelection,
-}: Props = {}) => {
-  const [selected, setSelected] = React.useState(value);
+export const useTimePickerColumnState = (
+  props: TimePickerColumnInitialState = {},
+) => {
+  const {
+    value: time,
+    defaultValue = new Date(),
+    onChange,
+    visible,
+    type = "hour",
+  } = props;
+
+  const [date, setDate] = useControllableState({
+    value: time,
+    defaultValue,
+    onChange,
+  });
+
+  const selected = getSelectedValueFromDate(date, type);
+
   const composite = useCompositeState({
     loop: true,
     wrap: true,
     orientation: "vertical",
   });
 
-  const handleSelected = (v: number | string) => {
-    setSelected(v);
-    onChange?.(v);
+  const setSelected = (value: number) => {
+    setDate(getSelectedDateFromValue(value, date, type));
   };
 
-  const onSelect = (v: number | string) => {
-    onSelection?.(v);
-  };
-
-  React.useEffect(() => {
-    const value = composite.items
-      .find(item => item.id === composite.currentId)
-      ?.ref.current?.getAttribute("data-value");
-
-    if (value) {
-      handleSelected(value);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [composite.currentId]);
-
-  return { selected, onSelection: onSelect, ...composite };
+  return { selected, setSelected, visible, ...composite };
 };
 
 export type TimePickerColumnStateReturn = ReturnType<

@@ -17,7 +17,7 @@ export const useSegmentField = createHook<
   compose: useComposite,
   keys: SEGMENT_FIELD_KEYS,
 
-  useProps(options, htmlProps) {
+  useProps(_, htmlProps) {
     return htmlProps;
   },
 });

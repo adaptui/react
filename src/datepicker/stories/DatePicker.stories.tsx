@@ -3,23 +3,23 @@ import { Meta } from "@storybook/react";
 import { addDays, addWeeks, subWeeks } from "date-fns";
 
 import "./index.css";
-import { DateValue } from "../../calendar/index.d";
-import { DatePickerStateInitialProps } from "../index.d";
-import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 import {
   DatePicker,
-  DateSegment,
-  DateSegmentField,
+  DatePickerSegment,
+  DatePickerSegmentField,
   DatePickerContent,
   DatePickerTrigger,
   useDatePickerState,
+  DatePickerInitialState,
 } from "../index";
+import { DateValue } from "../../utils/types";
+import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 
 export default {
   title: "Component/DatePicker",
 } as Meta;
 
-const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
+const DatePickerComp: React.FC<DatePickerInitialState> = props => {
   const state = useDatePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,
@@ -29,16 +29,16 @@ const DatePickerComp: React.FC<DatePickerStateInitialProps> = props => {
     <>
       <DatePicker className="datepicker" {...state}>
         <div className="datepicker__header">
-          <DateSegmentField {...state} className="datepicker__field">
+          <DatePickerSegmentField {...state} className="datepicker__field">
             {state.segments.map((segment, i) => (
-              <DateSegment
+              <DatePickerSegment
                 key={i}
                 segment={segment}
                 className="datepicker__field--item"
                 {...state}
               />
             ))}
-          </DateSegmentField>
+          </DatePickerSegmentField>
 
           <DatePickerTrigger className="datepicker__trigger" {...state}>
             <CalendarIcon />

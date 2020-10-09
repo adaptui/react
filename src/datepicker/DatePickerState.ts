@@ -4,35 +4,48 @@
  * to work with Reakit System
  */
 
+import {
+  Validation,
+  FocusableProps,
+  ValueBase,
+  ValidationState,
+} from "@react-types/shared";
 import * as React from "react";
 import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
-import { usePopoverState, unstable_useId as useId } from "reakit";
 
+import {
+  DateTimeFormatOptions,
+  DateValue,
+  RangeValueBase,
+} from "../utils/types";
+import { useSegmentState } from "../segment";
+import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
-import { DateValue, useCalendarState } from "../calendar";
-import { useSegmentState } from "../segment-spinner/SegmentState";
-import { DatePickerStateInitialProps, ValidationState } from "./index.d";
+import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
+export interface DatePickerInitialState
+  extends PickerBaseInitialState,
+    Validation,
+    FocusableProps,
+    ValueBase<DateValue>,
+    RangeValueBase<DateValue> {
+  placeholderDate?: DateValue;
+  formatOptions?: DateTimeFormatOptions;
+}
+
+export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
     onChange,
     minValue: minValueProp,
     maxValue: maxValueProp,
-    isDisabled,
-    isReadOnly,
     isRequired,
     autoFocus,
-    pickerId: pickerIdProp,
-    dialogId: dialogIdProp,
     formatOptions,
     placeholderDate: placeholderDateProp,
   } = props;
-
-  const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
-  const { id: dialogId } = useId({ id: dialogIdProp, baseId: "dialog" });
 
   const defaultValue =
     defaultValueProp && isValid(defaultValueProp)
@@ -66,7 +79,6 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     popover.hide();
   };
 
-  const popover = usePopoverState(props);
   const segmentState = useSegmentState({
     value: dateValue,
     defaultValue,
@@ -74,6 +86,7 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
     formatOptions,
     placeholderDate,
   });
+  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
   const calendar = useCalendarState({
     value: dateValue,
     defaultValue,
@@ -102,16 +115,12 @@ export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
   }, [autoFocus, segmentState.first]);
 
   return {
-    pickerId,
-    dialogId,
     dateValue,
     setDateValue: setValue,
     selectDate,
     validationState,
     minValue,
     maxValue,
-    isDisabled,
-    isReadOnly,
     isRequired,
     ...popover,
     ...segmentState,

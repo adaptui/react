@@ -1,0 +1,35 @@
+// Automatically generated
+const PICKER_BASE_STATE_KEYS = [
+  "baseId",
+  "unstable_idCountRef",
+  "visible",
+  "animated",
+  "animating",
+  "setBaseId",
+  "show",
+  "hide",
+  "toggle",
+  "setVisible",
+  "setAnimated",
+  "stopAnimation",
+  "modal",
+  "unstable_disclosureRef",
+  "setModal",
+  "unstable_referenceRef",
+  "unstable_popoverRef",
+  "unstable_arrowRef",
+  "unstable_popoverStyles",
+  "unstable_arrowStyles",
+  "unstable_originalPlacement",
+  "unstable_update",
+  "placement",
+  "place",
+  "pickerId",
+  "dialogId",
+  "isDisabled",
+  "isReadOnly",
+  "focus",
+] as const;
+export const PICKER_BASE_KEYS = PICKER_BASE_STATE_KEYS;
+export const PICKER_BASE_CONTENT_KEYS = PICKER_BASE_KEYS;
+export const PICKER_BASE_TRIGGER_KEYS = PICKER_BASE_CONTENT_KEYS;

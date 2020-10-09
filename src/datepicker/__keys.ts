@@ -1,8 +1,8 @@
 // Automatically generated
 const DATE_PICKER_STATE_KEYS = [
   "calendar",
-  "value",
-  "setValue",
+  "fieldValue",
+  "setFieldValue",
   "segments",
   "dateFormatter",
   "increment",
@@ -68,18 +68,19 @@ const DATE_PICKER_STATE_KEYS = [
   "place",
   "pickerId",
   "dialogId",
+  "isDisabled",
+  "isReadOnly",
+  "focus",
   "dateValue",
   "setDateValue",
   "selectDate",
   "validationState",
   "minValue",
   "maxValue",
-  "isDisabled",
-  "isReadOnly",
   "isRequired",
 ] as const;
 export const DATE_PICKER_KEYS = DATE_PICKER_STATE_KEYS;
 export const DATE_PICKER_CONTENT_KEYS = DATE_PICKER_KEYS;
-export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_CONTENT_KEYS;
-export const DATE_SEGMENT_KEYS = DATE_PICKER_TRIGGER_KEYS;
-export const DATE_SEGMENT_FIELD_KEYS = DATE_SEGMENT_KEYS;
+export const DATE_PICKER_SEGMENT_KEYS = DATE_PICKER_CONTENT_KEYS;
+export const DATE_PICKER_SEGMENT_FIELD_KEYS = DATE_PICKER_SEGMENT_KEYS;
+export const DATE_PICKER_TRIGGER_KEYS = DATE_PICKER_SEGMENT_FIELD_KEYS;

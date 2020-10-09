@@ -1,16 +1,17 @@
-import {
-  usePopoverDisclosure,
-  PopoverDisclosureHTMLProps,
-  PopoverDisclosureOptions,
-} from "reakit";
-
-import { TIME_PICKER_TRIGGER_KEYS } from "./__keys";
 import { createComponent, createHook } from "reakit-system";
 
-// TODO: Fix Typescript error
-export type TimePickerTriggerOptions = PopoverDisclosureOptions;
+import {
+  usePickerBaseTrigger,
+  PickerBaseHTMLProps,
+  PickerBaseOptions,
+} from "../picker-base";
+import { TIME_PICKER_TRIGGER_KEYS } from "./__keys";
+import { TimePickerStateReturn } from "./TimePickerState";
 
-export type TimePickerTriggerHTMLProps = PopoverDisclosureHTMLProps;
+export type TimePickerTriggerOptions = PickerBaseOptions &
+  TimePickerStateReturn;
+
+export type TimePickerTriggerHTMLProps = PickerBaseHTMLProps;
 
 export type TimePickerTriggerProps = TimePickerTriggerOptions &
   TimePickerTriggerHTMLProps;
@@ -20,12 +21,8 @@ export const useTimePickerTrigger = createHook<
   TimePickerTriggerHTMLProps
 >({
   name: "TimePickerTrigger",
-  compose: usePopoverDisclosure,
+  compose: usePickerBaseTrigger,
   keys: TIME_PICKER_TRIGGER_KEYS,
-
-  useProps(options, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const TimePickerTrigger = createComponent({

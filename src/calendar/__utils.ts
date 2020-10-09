@@ -6,7 +6,7 @@ import { endOfDay, setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 
-import { DateValue } from "../calendar/index.d";
+import { DateValue } from "../utils/types";
 
 export function isInvalid(
   date: Date,

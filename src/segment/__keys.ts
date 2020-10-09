@@ -1,7 +1,7 @@
 // Automatically generated
 const SEGMENT_STATE_KEYS = [
-  "value",
-  "setValue",
+  "fieldValue",
+  "setFieldValue",
   "segments",
   "dateFormatter",
   "increment",

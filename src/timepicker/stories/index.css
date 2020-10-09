@@ -1,24 +1,51 @@
-::-webkit-scrollbar {
-  width: 5px;
+.timepicker__trigger {
+  display: flex;
+  padding: 5px;
+  margin-left: 10px;
+  background-color: #f8f8f8;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #dde0ff;
+.timepicker__trigger svg {
+  fill: #43424d;
+  width: 20px;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #9097ff;
-}
-
-.timepicker {
+.timepicker__header {
+  padding: 0;
+  border-radius: 4px;
   width: fit-content;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.timepicker__header:focus-within {
+  border: 1px solid #1e65fd;
+}
+
+.timepicker__field {
+  font-family: monospace;
+  display: flex;
+}
+
+.timepicker__field--item {
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.timepicker__field--item:focus {
+  background-color: #1e65fd;
+  color: white;
+  outline: none;
 }
 
 .timepicker__content {
   display: flex;
 }
 
-.timepicker__column {
+.timepicker__content .timepicker__column {
   width: 80px;
   text-align: center;
   max-height: 200px;
@@ -27,11 +54,27 @@
   border: 1px solid #838bfa;
 }
 
-.timepicker__column--value {
+.timepicker__content .timepicker__column--value {
   padding: 5px;
 }
 
-[data-selected="true"] {
-  background-color: #3c49fd;
+.timepicker__content ::-webkit-scrollbar {
+  width: 5px;
+}
+
+.timepicker__content ::-webkit-scrollbar-track {
+  background-color: #dde0ff;
+}
+
+.timepicker__content ::-webkit-scrollbar-thumb {
+  background-color: #9097ff;
+}
+
+.timepicker__column--value[aria-selected="true"] {
+  background-color: #1e65fd;
   color: white;
+}
+
+.timepicker [aria-disabled="true"] {
+  opacity: 0.5;
 }
