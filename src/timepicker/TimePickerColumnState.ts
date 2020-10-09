@@ -1,19 +1,18 @@
 import { useCompositeState } from "reakit";
+import { ValueBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { getSelectedValueFromDate, getSelectedDateFromValue } from "./__utils";
 
 export type ColumnType = "hour" | "minute" | "meridian";
-interface TimePickerColumnInitialProps {
-  value?: Date;
-  defaultValue?: Date;
-  onChange?: (v: Date) => void;
+
+export interface TimePickerColumnInitialState extends ValueBase<Date> {
   visible?: boolean;
   type?: ColumnType;
 }
 
 export const useTimePickerColumnState = (
-  props: TimePickerColumnInitialProps = {},
+  props: TimePickerColumnInitialState = {},
 ) => {
   const {
     value: time,

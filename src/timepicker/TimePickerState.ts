@@ -1,4 +1,5 @@
 import { isString } from "@chakra-ui/utils";
+import { ValueBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
@@ -7,12 +8,11 @@ import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 // TODO: Voice Overing all button on dialog open
-export interface TimePickerStateProps extends PickerBaseInitialState {
-  value?: DateValue;
-  defaultValue?: DateValue;
-  onChange?: (v: DateValue) => void;
+export interface TimePickerStateProps
+  extends PickerBaseInitialState,
+    ValueBase<DateValue> {
   formatOptions?: DateTimeFormatOptions;
-  placeholderDate?: Date;
+  placeholderDate?: DateValue;
 }
 
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
@@ -34,7 +34,7 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     value: time,
     onChange: setTime,
     formatOptions,
-    placeholderDate,
+    placeholderDate: parseTime(placeholderDate),
   });
 
   const popover = usePickerBaseState({ focus: segmentState.first });

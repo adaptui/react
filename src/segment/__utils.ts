@@ -14,7 +14,7 @@ import {
   setYear,
 } from "date-fns";
 
-import { DateValue } from "../utils";
+import { DateTimeFormatOptions, DateValue } from "../utils/types";
 
 export function convertValue(value: DateValue | undefined): Date | undefined {
   if (!value) {
@@ -27,7 +27,7 @@ export function convertValue(value: DateValue | undefined): Date | undefined {
 export function getSegmentLimits(
   date: Date,
   type: string,
-  options: Intl.ResolvedDateTimeFormatOptions,
+  options: DateTimeFormatOptions,
 ) {
   let value, minValue, maxValue;
   switch (type) {

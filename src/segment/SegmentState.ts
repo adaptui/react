@@ -4,11 +4,12 @@
  * to work with Reakit System
  */
 
-import { useCompositeState } from "reakit";
 import { useMemo, useState } from "react";
+import { useCompositeState } from "reakit";
 import { useDateFormatter } from "@react-aria/i18n";
 import { useControlledState } from "@react-stately/utils";
 
+import { DateTimeFormatOptions } from "../utils/types";
 import { add, setSegment, convertValue, getSegmentLimits } from "./__utils";
 
 export interface IDateSegment {
@@ -47,10 +48,7 @@ const TYPE_MAPPING = {
 export interface SegmentStateProps {
   value?: Date;
   defaultValue?: Date;
-  formatOptions?: Intl.DateTimeFormatOptions & {
-    timeStyle?: string;
-    dateStyle?: string;
-  };
+  formatOptions?: DateTimeFormatOptions;
   placeholderDate?: Date;
   onChange?: (value: Date, ...args: any[]) => void;
 }

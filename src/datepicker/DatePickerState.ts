@@ -4,18 +4,37 @@
  * to work with Reakit System
  */
 
+import {
+  Validation,
+  FocusableProps,
+  ValueBase,
+  ValidationState,
+} from "@react-types/shared";
 import * as React from "react";
 import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 
-import { DateValue } from "../utils";
+import {
+  DateTimeFormatOptions,
+  DateValue,
+  RangeValueBase,
+} from "../utils/types";
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
-import { usePickerBaseState } from "../picker-base";
-import { DatePickerStateInitialProps, ValidationState } from "./index.d";
+import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export const useDatePickerState = (props: DatePickerStateInitialProps = {}) => {
+export interface DatePickerInitialState
+  extends PickerBaseInitialState,
+    Validation,
+    FocusableProps,
+    ValueBase<DateValue>,
+    RangeValueBase<DateValue> {
+  placeholderDate?: DateValue;
+  formatOptions?: DateTimeFormatOptions;
+}
+
+export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
