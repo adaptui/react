@@ -23,10 +23,6 @@ export const useTimePickerTrigger = createHook<
   name: "TimePickerTrigger",
   compose: usePickerBaseTrigger,
   keys: TIME_PICKER_TRIGGER_KEYS,
-
-  useProps(_, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const TimePickerTrigger = createComponent({

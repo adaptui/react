@@ -12,11 +12,7 @@ import {
   TimePickerTrigger,
   TimePickerSegment,
   TimePickerSegmentField,
-  stringifyTime,
 } from "../index";
-import { addDays, addWeeks, subWeeks } from "date-fns";
-import { DateValue } from "../../utils/types";
-import { stringify } from "querystring";
 
 export default {
   title: "Component/TimePicker",
