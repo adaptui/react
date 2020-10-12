@@ -14,10 +14,10 @@
 import { AriaButtonProps } from "@react-types/button";
 import { HTMLAttributes, useCallback, useEffect, useRef } from "react";
 import {
-  InputBase,
-  RangeInputBase,
-  Validation,
   ValueBase,
+  InputBase,
+  Validation,
+  RangeInputBase,
 } from "@react-types/shared";
 
 export interface SpinButtonProps
@@ -60,7 +60,6 @@ export function useSpinButton(props: SpinButtonProps): SpinbuttonAria {
 
   const clearAsync = () => clearTimeout(_async.current);
 
-  // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     return () => clearAsync();
   }, []);

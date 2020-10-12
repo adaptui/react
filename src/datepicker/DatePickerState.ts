@@ -14,15 +14,11 @@ import * as React from "react";
 import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 
-import {
-  DateTimeFormatOptions,
-  DateValue,
-  RangeValueBase,
-} from "../utils/types";
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { DateTimeFormatOpts, DateValue, RangeValueBase } from "../utils/types";
 
 export interface DatePickerInitialState
   extends PickerBaseInitialState,
@@ -31,7 +27,7 @@ export interface DatePickerInitialState
     ValueBase<DateValue>,
     RangeValueBase<DateValue> {
   placeholderDate?: DateValue;
-  formatOptions?: DateTimeFormatOptions;
+  formatOptions?: DateTimeFormatOpts;
 }
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
