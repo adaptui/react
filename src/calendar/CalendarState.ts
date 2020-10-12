@@ -9,7 +9,6 @@ import {
   addMonths,
   addWeeks,
   addYears,
-  endOfDay,
   endOfMonth,
   format,
   getDaysInMonth,
@@ -29,25 +28,26 @@ import { useControllableState } from "@chakra-ui/hooks";
 import { FocusableProps, InputBase, ValueBase } from "@react-types/shared";
 
 import { useWeekStart } from "./useWeekStart";
+import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
-import { DateValue, RangeValueBase } from "../utils/types";
+import { parseDate, stringifyDate } from "../datepicker/__utils";
 import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
 
 export interface CalendarInitialState
   extends FocusableProps,
     InputBase,
-    ValueBase<DateValue>,
-    RangeValueBase<DateValue> {
+    ValueBase<string>,
+    RangeValueBase<string> {
   id?: string;
 }
 
 export function useCalendarState(props: CalendarInitialState = {}) {
   const {
-    value: initialValue,
-    defaultValue,
-    onChange,
-    minValue: initialMinValue,
-    maxValue: initialMaxValue,
+    value: initialDate,
+    defaultValue: defaultValueProp,
+    onChange: onChangeProp,
+    minValue: minValueProp,
+    maxValue: maxValueProp,
     isDisabled = false,
     isReadOnly = false,
     autoFocus = false,
@@ -55,23 +55,28 @@ export function useCalendarState(props: CalendarInitialState = {}) {
   } = props;
 
   const { id: calendarId } = useId({ id, baseId: "calendar" });
+
+  const onChange = React.useCallback(
+    (date: Date) => {
+      return onChangeProp?.(stringifyDate(date));
+    },
+    [onChangeProp],
+  );
+
   const [value, setControllableValue] = useControllableState({
-    value: initialValue,
-    defaultValue,
+    value: parseDate(initialDate),
+    defaultValue: parseDate(defaultValueProp),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
-  const dateValue = value ? new Date(value) : null;
-  const minValue = initialMinValue ? new Date(initialMinValue) : null;
-  const maxValue = initialMaxValue ? new Date(initialMaxValue) : null;
-  const minDate = minValue ? startOfDay(minValue) : null;
-  const maxDate = maxValue ? endOfDay(maxValue) : null;
+  const minValue = parseDate(minValueProp);
+  const maxValue = parseDate(maxValueProp);
 
   const [isFocused, setFocused] = React.useState(autoFocus);
 
-  const initialMonth = dateValue ?? new Date();
-  const [currentMonth, setCurrentMonth] = React.useState(initialMonth); // TODO: does this need to be in state at all??
+  const initialMonth = value ?? new Date();
+  const [currentMonth, setCurrentMonth] = React.useState(initialMonth);
   const [focusedDate, setFocusedDate] = React.useState(initialMonth);
 
   const month = currentMonth.getMonth();
@@ -95,7 +100,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
 
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
-    if (isInvalid(date, minDate, maxDate)) {
+    if (isInvalid(date, minValue, maxValue)) {
       return;
     }
 
@@ -125,16 +130,15 @@ export function useCalendarState(props: CalendarInitialState = {}) {
   }, [currentMonth]);
 
   useUpdateEffect(() => {
-    if (!dateValue) return;
-
-    announce(`Selected Date: ${format(dateValue, "do MMM yyyy")}`);
-  }, [dateValue]);
+    if (!value) return;
+    announce(`Selected Date: ${format(value, "do MMM yyyy")}`);
+  }, [value]);
 
   return {
     calendarId,
-    dateValue,
-    minDate,
-    maxDate,
+    dateValue: value,
+    minDate: minValue,
+    maxDate: maxValue,
     month,
     year,
     weekStart,

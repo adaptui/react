@@ -2,24 +2,28 @@ import { isString } from "@chakra-ui/utils";
 
 import { ColumnType } from "./TimePickerColumnState";
 
+// As per https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#times
 export function parseTime(timeValue: string | undefined) {
-  if (timeValue == null) return;
+  if (timeValue == null || !isString(timeValue)) return;
 
-  if (isString(timeValue)) {
-    const timeRegex = timeValue.match(/(\d+)(:(\d\d))?\s*(p?)/i);
-    if (timeRegex == null) return;
+  const timeRegex = timeValue.match(/(\d\d)(:(\d\d)){1,2}/i);
+  if (timeRegex == null) return;
 
-    const time = timeValue.split(":");
-    const date = new Date();
+  const time = timeValue.split(":");
+  const date = new Date();
 
-    date.setHours(parseInt(time[0], 10));
-    date.setMinutes(parseInt(time[1], 10));
-    date.setSeconds(0, 0);
+  if (+time[0] < 0 || +time[0] > 23 || +time[1] < 0 || +time[1] > 59) return;
 
-    return date;
+  date.setHours(+time[0]);
+  date.setMinutes(+time[1]);
+  date.setSeconds(0);
+
+  if (time[2]) {
+    if (+time[2] < 0 || +time[2] > 60) return;
+    date.setSeconds(+time[2]);
   }
 
-  return new Date(timeValue);
+  return date;
 }
 
 function pad(number: number) {
@@ -30,7 +34,9 @@ function pad(number: number) {
 }
 
 export function stringifyTime(date: Date) {
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(
+    date.getSeconds(),
+  )}`;
 }
 
 export function getSelectedValueFromDate(date: Date, type: ColumnType) {

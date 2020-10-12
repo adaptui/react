@@ -6,13 +6,9 @@ import { endOfDay, setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 
-import { DateValue } from "../utils/types";
+import { parseDate } from "../datepicker/__utils";
 
-export function isInvalid(
-  date: Date,
-  minDate: Date | null,
-  maxDate: Date | null,
-) {
+export function isInvalid(date: Date, minDate?: Date, maxDate?: Date) {
   return (
     (minDate != null && date < minDate) || (maxDate != null && date > maxDate)
   );
@@ -62,9 +58,13 @@ export function makeRange(start: Date, end: Date): RangeValue<Date> {
   return { start: start, end: endOfDay(end) };
 }
 
-export function convertRange(range: RangeValue<DateValue>): RangeValue<Date> {
-  return {
-    start: new Date(range.start),
-    end: new Date(range.end),
-  };
-}
+export const parseRangeDate = (
+  date?: RangeValue<string>,
+): RangeValue<Date> | undefined => {
+  if (!date) return;
+
+  const start = parseDate(date.start);
+  const end = parseDate(date.end);
+  if (!start || !end) return;
+  return { start, end };
+};

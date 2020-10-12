@@ -13,40 +13,50 @@ import * as React from "react";
 import { format, isSameDay } from "date-fns";
 import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
 
-import { DateValue } from "../utils/types";
+import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
-import { convertRange, makeRange } from "./__utils";
+import { stringifyDate } from "../datepicker/__utils";
+import { convertRange, makeRange, parseRangeDate } from "./__utils";
 
 export interface RangeCalendarInitialState
   extends FocusableProps,
     InputBase,
-    ValueBase<RangeValue<DateValue>> {
-  minValue?: DateValue;
-  maxValue?: DateValue;
+    ValueBase<RangeValue<string>>,
+    RangeValueBase<string> {
   id?: string;
 }
 
 export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
   const {
-    value: initialValue,
-    defaultValue,
-    onChange,
+    value: initialDate,
+    defaultValue: defaultValueProp,
+    onChange: onChangeProp,
     ...calendarProps
   } = props;
 
-  const [value, setValue] = useControllableState({
-    value: initialValue,
-    defaultValue,
+  const onChange = React.useCallback(
+    (date: RangeValue<Date>) => {
+      return onChangeProp?.({
+        start: stringifyDate(date.start),
+        end: stringifyDate(date.end),
+      });
+    },
+    [onChangeProp],
+  );
+
+  const [value, setValue] = useControllableState<RangeValue<Date>>({
+    value: parseRangeDate(initialDate),
+    defaultValue: parseRangeDate(defaultValueProp),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
-  const dateRange = value != null ? convertRange(value) : null;
+  const dateRange = value != null ? value : null;
   const [anchorDate, setAnchorDate] = React.useState<Date | null>(null);
   const calendar = useCalendarState({
     ...calendarProps,
-    value: value && value.start,
+    value: value && stringifyDate(value.start),
   });
 
   const highlightedRange = anchorDate

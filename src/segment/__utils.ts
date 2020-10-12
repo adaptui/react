@@ -14,9 +14,9 @@ import {
   setYear,
 } from "date-fns";
 
-import { DateTimeFormatOptions, DateValue } from "../utils/types";
+import { DateTimeFormatOptions } from "../utils/types";
 
-export function convertValue(value: DateValue | undefined): Date | undefined {
+export function convertValue(value: Date | undefined): Date | undefined {
   if (!value) {
     return undefined;
   }
