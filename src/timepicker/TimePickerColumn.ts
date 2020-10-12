@@ -28,9 +28,6 @@ export const useTimePickerColumn = createHook<
     return {
       role: "listbox",
       "aria-label": options.type,
-      onKeyDown: (e: React.KeyboardEvent) => {
-        // console.log("%c e", "color: #0088cc", e);
-      },
       ...htmlProps,
     };
   },

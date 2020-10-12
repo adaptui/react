@@ -1,4 +1,7 @@
+import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
+import { createOnKeyDown, useForkRef } from "reakit-utils";
+import { focus, getNextTabbable, getPreviousTabbable } from "@chakra-ui/utils";
 
 import {
   PickerBaseContentHTMLProps,
@@ -21,6 +24,38 @@ export const useTimePickerContent = createHook<
   name: "TimePickerContent",
   compose: usePickerBaseContent,
   keys: TIME_PICKER_CONTENT_KEYS,
+
+  useProps(_, { ref: htmlRef, onKeyDown: htmlOnKeyDown, ...htmlProps }) {
+    const ref = React.useRef<HTMLElement>(null);
+
+    const onKeyDown = React.useMemo(() => {
+      return createOnKeyDown({
+        onKeyDown: htmlOnKeyDown,
+        keyMap: () => {
+          return {
+            ArrowRight: () => {
+              if (!ref.current) return;
+
+              const nextTabbableElement = getNextTabbable(ref.current);
+              if (nextTabbableElement) {
+                focus(nextTabbableElement);
+              }
+            },
+            ArrowLeft: () => {
+              if (!ref.current) return;
+
+              const previousTabbableElement = getPreviousTabbable(ref.current);
+              if (previousTabbableElement) {
+                focus(previousTabbableElement);
+              }
+            },
+          };
+        },
+      });
+    }, [htmlOnKeyDown]);
+
+    return { ref: useForkRef(ref, htmlRef), onKeyDown, ...htmlProps };
+  },
 });
 
 export const TimePickerContent = createComponent({
