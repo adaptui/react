@@ -40,7 +40,7 @@ export const useTimePickerColumnState = (
     setDate(getSelectedDateFromValue(value, date, type));
   };
 
-  return { selected, setSelected, visible, ...composite };
+  return { selected, setSelected, visible, type, ...composite };
 };
 
 export type TimePickerColumnStateReturn = ReturnType<

@@ -6,8 +6,10 @@ import {
 import { createComponent, createHook } from "reakit-system";
 
 import { TIME_PICKER_COLUMN_KEYS } from "./__keys";
+import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
-export type TimePickerColumnOptions = CompositeOptions;
+export type TimePickerColumnOptions = CompositeOptions &
+  Pick<TimePickerColumnStateReturn, "type">;
 
 export type TimePickerColumnHTMLProps = CompositeHTMLProps;
 
@@ -24,6 +26,8 @@ export const useTimePickerColumn = createHook<
 
   useProps(options, htmlProps) {
     return {
+      role: "listbox",
+      "aria-label": options.type,
       onKeyDown: (e: React.KeyboardEvent) => {
         // console.log("%c e", "color: #0088cc", e);
       },

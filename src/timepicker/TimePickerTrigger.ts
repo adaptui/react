@@ -23,6 +23,13 @@ export const useTimePickerTrigger = createHook<
   name: "TimePickerTrigger",
   compose: usePickerBaseTrigger,
   keys: TIME_PICKER_TRIGGER_KEYS,
+
+  useProps(options, htmlProps) {
+    return {
+      "aria-haspopup": "listbox",
+      ...htmlProps,
+    };
+  },
 });
 
 export const TimePickerTrigger = createComponent({
