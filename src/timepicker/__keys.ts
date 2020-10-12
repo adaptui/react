@@ -37,7 +37,7 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "selected",
   "setSelected",
   "visible",
-  "type",
+  "columnType",
 ] as const;
 const TIME_PICKER_STATE_KEYS = [
   "fieldValue",
