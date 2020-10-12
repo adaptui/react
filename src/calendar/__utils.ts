@@ -6,14 +6,6 @@ import { endOfDay, setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 
-import { parseDate } from "../datepicker/__utils";
-
-export function isInvalid(date: Date, minDate?: Date, maxDate?: Date) {
-  return (
-    (minDate != null && date < minDate) || (maxDate != null && date > maxDate)
-  );
-}
-
 export function useWeekDays(weekStart: number) {
   const dayFormatter = useDateFormatter({ weekday: "short" });
   const dayFormatterLong = useDateFormatter({ weekday: "long" });
@@ -57,14 +49,3 @@ export function makeRange(start: Date, end: Date): RangeValue<Date> {
 
   return { start: start, end: endOfDay(end) };
 }
-
-export const parseRangeDate = (
-  date?: RangeValue<string>,
-): RangeValue<Date> | undefined => {
-  if (!date) return;
-
-  const start = parseDate(date.start);
-  const end = parseDate(date.end);
-  if (!start || !end) return;
-  return { start, end };
-};

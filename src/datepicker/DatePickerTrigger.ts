@@ -1,11 +1,11 @@
 import { createComponent, createHook } from "reakit-system";
 
-import { DATE_PICKER_TRIGGER_KEYS } from "./__keys";
 import {
   PickerBaseTriggerHTMLProps,
   PickerBaseTriggerOptions,
   usePickerBaseTrigger,
 } from "../picker-base";
+import { DATE_PICKER_TRIGGER_KEYS } from "./__keys";
 
 export type DatePickerTriggerOptions = PickerBaseTriggerOptions;
 
@@ -21,10 +21,6 @@ export const useDatePickerTrigger = createHook<
   name: "DatePickerTrigger",
   compose: usePickerBaseTrigger,
   keys: DATE_PICKER_TRIGGER_KEYS,
-
-  useProps(_, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const DatePickerTrigger = createComponent({

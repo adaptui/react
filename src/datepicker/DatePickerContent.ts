@@ -21,10 +21,6 @@ export const useDatePickerContent = createHook<
   name: "DatePickerContent",
   compose: usePickerBaseContent,
   keys: DATE_PICKER_CONTENT_KEYS,
-
-  useProps(_, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const DatePickerContent = createComponent({

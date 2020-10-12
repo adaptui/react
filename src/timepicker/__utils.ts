@@ -1,5 +1,6 @@
 import { isString } from "@chakra-ui/utils";
 
+import { pad } from "../utils";
 import { ColumnType } from "./TimePickerColumnState";
 
 // As per https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#times
@@ -24,13 +25,6 @@ export function parseTime(timeValue: string | undefined) {
   }
 
   return date;
-}
-
-function pad(number: number) {
-  if (number < 10) {
-    return "0" + number;
-  }
-  return number;
 }
 
 export function stringifyTime(date: Date) {

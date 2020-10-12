@@ -15,7 +15,7 @@ import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
-import { isInvalid, parseDate, stringifyDate } from "./__utils";
+import { isInvalidDate, parseDate, stringifyDate } from "../utils";
 import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
@@ -79,7 +79,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
   const validationState: ValidationState =
     props.validationState ||
-    (isInvalid(value, minValue, maxValue) ? "invalid" : "valid");
+    (isInvalidDate(value, minValue, maxValue) ? "invalid" : "valid");
 
   React.useEffect(() => {
     if (popover.visible) {

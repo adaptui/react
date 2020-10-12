@@ -30,8 +30,8 @@ import { FocusableProps, InputBase, ValueBase } from "@react-types/shared";
 import { useWeekStart } from "./useWeekStart";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
-import { parseDate, stringifyDate } from "../datepicker/__utils";
-import { isInvalid, useWeekDays, generateDaysInMonthArray } from "./__utils";
+import { isInvalidDate, parseDate, stringifyDate } from "../utils";
+import { useWeekDays, generateDaysInMonthArray } from "./__utils";
 
 export interface CalendarInitialState
   extends FocusableProps,
@@ -100,7 +100,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
 
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
-    if (isInvalid(date, minValue, maxValue)) {
+    if (isInvalidDate(date, minValue, maxValue)) {
       return;
     }
 

@@ -11,7 +11,7 @@ import { createComponent, createHook } from "reakit-system";
 import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { isInvalid } from "./__utils";
+import { isInvalidDate } from "../utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
@@ -56,7 +56,9 @@ export const useCalendarCellButton = createHook<
     } = options;
     const isCurrentMonth = date.getMonth() === month;
     const isDisabled =
-      isDisabledOption || !isCurrentMonth || isInvalid(date, minDate, maxDate);
+      isDisabledOption ||
+      !isCurrentMonth ||
+      isInvalidDate(date, minDate, maxDate);
     const truelyDisabled = disabled || isDisabled;
 
     return { disabled: truelyDisabled, ...options };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { addDays, addWeeks, format, subWeeks } from "date-fns";
+import { addWeeks, format, subWeeks } from "date-fns";
 
 import "./index.css";
 import { CalendarComponent } from "./CalendarComponent";

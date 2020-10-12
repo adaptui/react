@@ -11,14 +11,14 @@
  */
 
 // import { announce } from "./storybook/";
-import { AriaButtonProps } from "@react-types/button";
-import { HTMLAttributes, useCallback, useEffect, useRef } from "react";
 import {
   ValueBase,
   InputBase,
   Validation,
   RangeInputBase,
 } from "@react-types/shared";
+import { AriaButtonProps } from "@react-types/button";
+import { HTMLAttributes, useCallback, useEffect, useRef } from "react";
 
 export interface SpinButtonProps
   extends InputBase,

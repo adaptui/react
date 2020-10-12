@@ -13,11 +13,11 @@ import * as React from "react";
 import { format, isSameDay } from "date-fns";
 import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
 
+import { makeRange } from "./__utils";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
-import { makeRange, parseRangeDate } from "./__utils";
-import { stringifyDate } from "../datepicker/__utils";
+import { parseRangeDate, stringifyDate } from "../utils";
 
 export interface RangeCalendarInitialState
   extends FocusableProps,

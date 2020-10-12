@@ -1,5 +1,6 @@
 import * as React from "react";
 import { axe, render, press } from "reakit-test-utils";
+
 import {
   TimePicker,
   TimePickerColumn,
@@ -10,7 +11,7 @@ import {
   TimePickerStateProps,
   TimePickerColumnValue,
   TimePickerSegmentField,
-} from "..";
+} from "../index";
 
 beforeAll(() => {
   // https://github.com/jsdom/jsdom/issues/1695

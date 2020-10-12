@@ -16,10 +16,6 @@ export const useSegmentField = createHook<
   name: "SegmentField",
   compose: useComposite,
   keys: SEGMENT_FIELD_KEYS,
-
-  useProps(_, htmlProps) {
-    return htmlProps;
-  },
 });
 
 export const SegmentField = createComponent({
