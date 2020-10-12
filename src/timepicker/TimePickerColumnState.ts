@@ -8,7 +8,7 @@ export type ColumnType = "hour" | "minute" | "meridian";
 
 export interface TimePickerColumnInitialState extends ValueBase<Date> {
   visible?: boolean;
-  type?: ColumnType;
+  columnType?: ColumnType;
 }
 
 export const useTimePickerColumnState = (
@@ -19,7 +19,7 @@ export const useTimePickerColumnState = (
     defaultValue = new Date(),
     onChange,
     visible,
-    type = "hour",
+    columnType = "hour",
   } = props;
 
   const [date, setDate] = useControllableState({
@@ -28,7 +28,7 @@ export const useTimePickerColumnState = (
     onChange,
   });
 
-  const selected = getSelectedValueFromDate(date, type);
+  const selected = getSelectedValueFromDate(date, columnType);
 
   const composite = useCompositeState({
     loop: true,
@@ -37,10 +37,10 @@ export const useTimePickerColumnState = (
   });
 
   const setSelected = (value: number) => {
-    setDate(getSelectedDateFromValue(value, date, type));
+    setDate(getSelectedDateFromValue(value, date, columnType));
   };
 
-  return { selected, setSelected, visible, type, ...composite };
+  return { selected, setSelected, visible, columnType, ...composite };
 };
 
 export type TimePickerColumnStateReturn = ReturnType<

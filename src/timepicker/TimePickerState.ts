@@ -55,21 +55,21 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
   };
 
   const hourState = useTimePickerColumnState({
-    type: "hour",
+    columnType: "hour",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const minuteState = useTimePickerColumnState({
-    type: "minute",
+    columnType: "minute",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const meridiesState = useTimePickerColumnState({
-    type: "meridian",
+    columnType: "meridian",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
