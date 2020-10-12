@@ -63,6 +63,7 @@ export const useTimePickerColumnValue = createHook<
     }, [setSelected, value]);
 
     return {
+      role: "option",
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
       "aria-selected": selected == value,
