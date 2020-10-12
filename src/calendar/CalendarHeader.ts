@@ -4,11 +4,11 @@ import { createComponent, createHook } from "reakit-system";
 import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { useDateFormatter } from "@react-aria/i18n";
 import { CalendarStateReturn } from "./CalendarState";
-import { DateTimeFormatOptions } from "../utils/types";
+import { DateTimeFormatOpts } from "../utils/types";
 
 export type CalendarHeaderOptions = BoxOptions &
   Pick<CalendarStateReturn, "calendarId" | "currentMonth"> & {
-    format?: DateTimeFormatOptions;
+    format?: DateTimeFormatOpts;
   };
 
 export type CalendarHeaderHTMLProps = BoxHTMLProps;

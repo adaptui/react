@@ -3,8 +3,8 @@ import { useControllableState } from "@chakra-ui/hooks";
 import { ValueBase, FocusableProps } from "@react-types/shared";
 
 import { useSegmentState } from "../segment";
+import { DateTimeFormatOpts } from "../utils/types";
 import { stringifyTime, parseTime } from "./__utils";
-import { DateTimeFormatOptions } from "../utils/types";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
@@ -12,7 +12,7 @@ export interface TimePickerStateProps
   extends PickerBaseInitialState,
     FocusableProps,
     ValueBase<string> {
-  formatOptions?: DateTimeFormatOptions;
+  formatOptions?: DateTimeFormatOpts;
   placeholderDate?: Date;
 }
 
@@ -54,21 +54,21 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
   };
 
   const hourState = useTimePickerColumnState({
-    type: "hour",
+    columnType: "hour",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const minuteState = useTimePickerColumnState({
-    type: "minute",
+    columnType: "minute",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
   });
 
   const meridiesState = useTimePickerColumnState({
-    type: "meridian",
+    columnType: "meridian",
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,

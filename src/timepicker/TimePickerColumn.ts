@@ -9,7 +9,7 @@ import { TIME_PICKER_COLUMN_KEYS } from "./__keys";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
 export type TimePickerColumnOptions = CompositeOptions &
-  Pick<TimePickerColumnStateReturn, "type">;
+  Pick<TimePickerColumnStateReturn, "columnType">;
 
 export type TimePickerColumnHTMLProps = CompositeHTMLProps;
 
@@ -27,7 +27,7 @@ export const useTimePickerColumn = createHook<
   useProps(options, htmlProps) {
     return {
       role: "listbox",
-      "aria-label": options.type,
+      "aria-label": options.columnType,
       ...htmlProps,
     };
   },

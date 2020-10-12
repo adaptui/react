@@ -16,7 +16,7 @@ import { useControllableState } from "@chakra-ui/hooks";
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
 import { isInvalid, parseDate, stringifyDate } from "./__utils";
-import { DateTimeFormatOptions, RangeValueBase } from "../utils/types";
+import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface DatePickerInitialState
@@ -25,7 +25,7 @@ export interface DatePickerInitialState
     FocusableProps,
     ValueBase<string>,
     RangeValueBase<string> {
-  formatOptions?: DateTimeFormatOptions;
+  formatOptions?: DateTimeFormatOpts;
   placeholderDate?: Date;
 }
 

@@ -16,8 +16,8 @@ import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
+import { makeRange, parseRangeDate } from "./__utils";
 import { stringifyDate } from "../datepicker/__utils";
-import { convertRange, makeRange, parseRangeDate } from "./__utils";
 
 export interface RangeCalendarInitialState
   extends FocusableProps,
