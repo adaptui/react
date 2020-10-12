@@ -37,9 +37,9 @@ export const MinMaxDate = () => (
 
 export const MinMaxDefaultDate = () => (
   <CalendarComponent
-    defaultValue={format(addDays(new Date(), 4), "yyyy-MM-dd")}
-    minValue={format(subWeeks(new Date(), 1), "yyyy-MM-dd")}
-    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
+    defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+    minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
   />
 );
 

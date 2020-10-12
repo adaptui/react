@@ -34,7 +34,15 @@ export function parseDate(dateValue: string | undefined) {
     : getMaxDay(+date[1]);
   if (+date[2] < 1 && +date[2] > maxDay) return;
 
-  return new Date(+date[0], +date[1] - 1, +date[2], 0, 0, 0, 0);
+  return new Date(
+    +date[0],
+    +date[1] - 1,
+    +date[2],
+    new Date().getHours(),
+    0,
+    0,
+    0,
+  );
 }
 
 function getMaxDay(month: number, isLeapYear = false) {
