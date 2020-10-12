@@ -6,8 +6,10 @@ import {
 import { createComponent, createHook } from "reakit-system";
 
 import { TIME_PICKER_COLUMN_KEYS } from "./__keys";
+import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
-export type TimePickerColumnOptions = CompositeOptions;
+export type TimePickerColumnOptions = CompositeOptions &
+  Pick<TimePickerColumnStateReturn, "type">;
 
 export type TimePickerColumnHTMLProps = CompositeHTMLProps;
 
@@ -21,6 +23,14 @@ export const useTimePickerColumn = createHook<
   name: "TimePickerColumn",
   compose: useComposite,
   keys: TIME_PICKER_COLUMN_KEYS,
+
+  useProps(options, htmlProps) {
+    return {
+      role: "listbox",
+      "aria-label": options.type,
+      ...htmlProps,
+    };
+  },
 });
 
 export const TimePickerColumn = createComponent({
