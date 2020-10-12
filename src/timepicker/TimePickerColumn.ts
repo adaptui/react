@@ -21,15 +21,6 @@ export const useTimePickerColumn = createHook<
   name: "TimePickerColumn",
   compose: useComposite,
   keys: TIME_PICKER_COLUMN_KEYS,
-
-  useProps(options, htmlProps) {
-    return {
-      onKeyDown: (e: React.KeyboardEvent) => {
-        // console.log("%c e", "color: #0088cc", e);
-      },
-      ...htmlProps,
-    };
-  },
 });
 
 export const TimePickerColumn = createComponent({
