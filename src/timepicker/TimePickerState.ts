@@ -3,17 +3,17 @@ import { useControllableState } from "@chakra-ui/hooks";
 import { ValueBase, FocusableProps } from "@react-types/shared";
 
 import { useSegmentState } from "../segment";
-import { DateTimeFormatOptions } from "../utils/types";
+import { DateTimeFormatOpts } from "../utils/types";
+import { stringifyTime, parseTime } from "./__utils";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { stringifyTime, parseTime } from "./__utils";
 
 // TODO: Voice Overing all button on dialog open
 export interface TimePickerStateProps
   extends PickerBaseInitialState,
     FocusableProps,
     ValueBase<string> {
-  formatOptions?: DateTimeFormatOptions;
+  formatOptions?: DateTimeFormatOpts;
   placeholderDate?: Date;
 }
 

@@ -1,5 +1,4 @@
-import { RangeValue } from "@react-types/shared";
-export type DateTimeFormatOptions = Intl.DateTimeFormatOptions & {
+export type DateTimeFormatOpts = Intl.DateTimeFormatOptions & {
   timeStyle?: string;
   dateStyle?: string;
 };
