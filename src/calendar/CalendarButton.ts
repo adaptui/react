@@ -10,7 +10,11 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { CALENDAR_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type TGoto = "nextMonth" | "previousMonth" | "nextYear" | "previousYear";
+export type CalendarGoto =
+  | "nextMonth"
+  | "previousMonth"
+  | "nextYear"
+  | "previousYear";
 
 export type CalendarButtonOptions = ButtonOptions &
   Pick<
@@ -20,8 +24,8 @@ export type CalendarButtonOptions = ButtonOptions &
     | "focusPreviousYear"
     | "focusNextYear"
   > & {
-    goto: TGoto;
-    getAriaLabel?: (goto: TGoto) => string;
+    goto: CalendarGoto;
+    getAriaLabel?: (goto: CalendarGoto) => string;
   };
 
 export type CalendarButtonHTMLProps = ButtonHTMLProps;
