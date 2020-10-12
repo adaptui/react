@@ -34,21 +34,19 @@ export const useTimePickerContent = createHook<
         keyMap: () => {
           return {
             ArrowRight: () => {
-              if (ref.current) {
-                const nextTabbableElement = getNextTabbable(ref.current);
-                if (nextTabbableElement) {
-                  focus(nextTabbableElement);
-                }
+              if (!ref.current) return;
+
+              const nextTabbableElement = getNextTabbable(ref.current);
+              if (nextTabbableElement) {
+                focus(nextTabbableElement);
               }
             },
             ArrowLeft: () => {
-              if (ref.current) {
-                const previousTabbableElement = getPreviousTabbable(
-                  ref.current,
-                );
-                if (previousTabbableElement) {
-                  focus(previousTabbableElement);
-                }
+              if (!ref.current) return;
+
+              const previousTabbableElement = getPreviousTabbable(ref.current);
+              if (previousTabbableElement) {
+                focus(previousTabbableElement);
               }
             },
           };
