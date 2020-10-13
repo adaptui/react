@@ -19,27 +19,27 @@ const AccordionComponent: React.FC<AccordionInitialState> = props => {
 
   return (
     <Accordion {...state}>
-      <h3>
+      <h2>
         <AccordionItem {...state}>Trigger 1</AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h3>
+      <h2>
         <AccordionItem {...state}>Trigger 2</AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      <h3>
+      <h2>
         <AccordionItem {...state} id="accordion3">
           Trigger 3
         </AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      <h3>
+      <h2>
         <AccordionItem {...state}>Trigger 4</AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...state}>Panel 4</AccordionPanel>
-      <h3>
+      <h2>
         <AccordionItem {...state}>Trigger 5</AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...state}>Panel 5</AccordionPanel>
     </Accordion>
   );
@@ -67,14 +67,14 @@ export const Styled = () => {
 
   return (
     <Accordion {...props} id="accordionGroup" className="accordion">
-      <h3>
+      <h2>
         <AccordionItem {...props} className="accordion-trigger">
           <span className="accordion-title">
             Personal Information
             <span className="accordion-icon"></span>
           </span>
         </AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>
           <fieldset>
@@ -118,14 +118,14 @@ export const Styled = () => {
         </div>
       </AccordionPanel>
 
-      <h3>
+      <h2>
         <AccordionItem {...props} className="accordion-trigger">
           <span className="accordion-title">
             Billing Address
             <span className="accordion-icon"></span>
           </span>
         </AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>
           <fieldset>
@@ -153,14 +153,14 @@ export const Styled = () => {
         </div>
       </AccordionPanel>
 
-      <h3>
+      <h2>
         <AccordionItem {...props} className="accordion-trigger">
           <span className="accordion-title">
             Shipping Address
             <span className="accordion-icon"></span>
           </span>
         </AccordionItem>
-      </h3>
+      </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>
           <fieldset>
