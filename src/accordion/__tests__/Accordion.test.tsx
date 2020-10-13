@@ -3,35 +3,31 @@ import { axe, render, press } from "reakit-test-utils";
 
 import {
   AccordionPanel,
+  Accordion,
   AccordionItem,
-  AccordionTrigger,
   useAccordionState,
-} from "..";
+} from "../index";
 
 const AccordionComponent = (props: any) => {
   const state = useAccordionState(props);
 
   return (
-    <div>
-      <AccordionItem {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem id="accordion-2" {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      </AccordionItem>
-      <AccordionItem {...state}>
-        <h3>
-          <AccordionTrigger {...state}>Trigger 3</AccordionTrigger>
-        </h3>
-        <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      </AccordionItem>
-    </div>
+    <Accordion {...state}>
+      <h3>
+        <AccordionItem {...state}>Trigger 1</AccordionItem>
+      </h3>
+      <AccordionPanel {...state}>Panel 1</AccordionPanel>
+      <h3>
+        <AccordionItem id="accordion-2" {...state}>
+          Trigger 2
+        </AccordionItem>
+      </h3>
+      <AccordionPanel {...state}>Panel 2</AccordionPanel>
+      <h3>
+        <AccordionItem {...state}>Trigger 3</AccordionItem>
+      </h3>
+      <AccordionPanel {...state}>Panel 3</AccordionPanel>
+    </Accordion>
   );
 };
 
@@ -45,15 +41,15 @@ test("Accordion should have proper keyboard navigation", () => {
   press.ArrowDown();
   expect(text("Trigger 3")).toHaveFocus();
   press.ArrowDown();
-  expect(text("Trigger 1")).toHaveFocus();
-  press.ArrowUp();
   expect(text("Trigger 3")).toHaveFocus();
   press.ArrowUp();
   expect(text("Trigger 2")).toHaveFocus();
+  press.ArrowUp();
+  expect(text("Trigger 1")).toHaveFocus();
 });
 
-test("Accordion should have proper keyboard navigation (loop: false)", () => {
-  const { getByText: text } = render(<AccordionComponent loop={false} />);
+test("Accordion should have proper keyboard navigation when on loop", () => {
+  const { getByText: text } = render(<AccordionComponent loop />);
 
   press.Tab();
   expect(text("Trigger 1")).toHaveFocus();
@@ -62,11 +58,11 @@ test("Accordion should have proper keyboard navigation (loop: false)", () => {
   press.ArrowDown();
   expect(text("Trigger 3")).toHaveFocus();
   press.ArrowDown();
+  expect(text("Trigger 1")).toHaveFocus();
+  press.ArrowUp();
   expect(text("Trigger 3")).toHaveFocus();
   press.ArrowUp();
   expect(text("Trigger 2")).toHaveFocus();
-  press.ArrowUp();
-  expect(text("Trigger 1")).toHaveFocus();
 });
 
 [true, false].forEach(toggle => {
@@ -76,7 +72,6 @@ test("Accordion should have proper keyboard navigation (loop: false)", () => {
     );
 
     press.Tab();
-    press.Enter();
     expect(text("Trigger 1")).toHaveFocus();
     expect(text("Panel 1")).toBeVisible();
 
@@ -97,8 +92,7 @@ test("Accordion should open/close properly with AllowMultiple: false", () => {
 
   press.Tab();
   expect(text("Trigger 1")).toHaveFocus();
-
-  expect(text("Panel 1")).not.toBeVisible();
+  expect(text("Panel 1")).toBeVisible();
   press.Enter();
   expect(text("Panel 1")).toBeVisible();
 
@@ -113,16 +107,15 @@ test("Accordion should open/close properly with AllowMultiple: false", () => {
 });
 
 test("Accordion should open/close properly with AllowMultiple: true", () => {
-  const { getByText: text } = render(
-    <AccordionComponent allowMultiple={true} />,
-  );
+  const { getByText: text } = render(<AccordionComponent allowMultiple />);
 
   press.Tab();
   expect(text("Trigger 1")).toHaveFocus();
+  expect(text("Panel 1")).toBeVisible();
 
+  press.Enter();
   expect(text("Panel 1")).not.toBeVisible();
   press.Enter();
-  expect(text("Panel 1")).toBeVisible();
 
   // go to next panel
   press.ArrowDown();
@@ -133,14 +126,23 @@ test("Accordion should open/close properly with AllowMultiple: true", () => {
   expect(text("Panel 1")).toBeVisible();
 });
 
-test("Accordion should have proper default active", () => {
+test("Accordion with selectedId given to be selected properly", () => {
   const { getByText: text } = render(
-    <AccordionComponent defaultActiveId="accordion-2" />,
+    <AccordionComponent selectedId="accordion-2" />,
   );
 
   press.Tab();
   expect(text("Panel 1")).not.toBeVisible();
   expect(text("Panel 2")).toBeVisible();
+});
+
+test("Accordion should have none selected when selectedId is null", () => {
+  const { getByText: text } = render(<AccordionComponent selectedId={null} />);
+
+  press.Tab();
+  expect(text("Panel 1")).not.toBeVisible();
+  expect(text("Panel 2")).not.toBeVisible();
+  expect(text("Panel 3")).not.toBeVisible();
 });
 
 test("Accordion manual: false", () => {

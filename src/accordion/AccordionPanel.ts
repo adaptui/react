@@ -1,50 +1,126 @@
+import {
+  DisclosureContentOptions,
+  DisclosureContentHTMLProps,
+  useDisclosureContent,
+  unstable_useId,
+  unstable_IdOptions,
+  unstable_IdHTMLProps,
+} from "reakit";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
-import {
-  unstable_IdHTMLProps,
-  unstable_IdOptions,
-  unstable_useId,
-} from "reakit";
+import { createHook, createComponent } from "reakit-system";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
-import { useAccordionItemContext } from "./AccordionItem";
 
-export type AccordionPanelOptions = unstable_IdOptions &
-  Pick<AccordionStateReturn, "registerPanel" | "items" | "activeItems">;
+export type AccordionPanelOptions = DisclosureContentOptions &
+  unstable_IdOptions &
+  Pick<
+    AccordionStateReturn,
+    | "selectedId"
+    | "selectedIds"
+    | "registerPanel"
+    | "unregisterPanel"
+    | "panels"
+    | "items"
+    | "allowMultiple"
+  > & {
+    /**
+     * Accordion's id
+     */
+    accordionId?: string;
+  };
 
-export type AccordionPanelHTMLProps = unstable_IdHTMLProps;
+export type AccordionPanelHTMLProps = DisclosureContentHTMLProps &
+  unstable_IdHTMLProps;
 
 export type AccordionPanelProps = AccordionPanelOptions &
   AccordionPanelHTMLProps;
+
+function getAccordionsWithoutPanel(
+  accordions: AccordionPanelOptions["items"],
+  panels: AccordionPanelOptions["panels"],
+) {
+  const panelsAccordionIds = panels.map(panel => panel.groupId).filter(Boolean);
+
+  return accordions.filter(
+    item => panelsAccordionIds.indexOf(item.id || undefined) === -1,
+  );
+}
+
+function getPanelIndex(
+  panels: AccordionPanelOptions["panels"],
+  panel: typeof panels[number],
+) {
+  const panelsWithoutAccordionId = panels.filter(p => !p.groupId);
+  return panelsWithoutAccordionId.indexOf(panel);
+}
+
+/**
+ * When <AccordionPanel> is used without accordionId:
+ *
+ *  - First render: getAccordionId will return undefined because options.panels
+ * doesn't contain the current panel yet (registerPanel wasn't called yet).
+ * Thus registerPanel will be called without groupId (accordionId).
+ *
+ *  - Second render: options.panels already contains the current panel (because
+ * registerPanel was called in the previous render). This means that we'll be
+ * able to get the related accordionId with the accordion panel index. Basically,
+ * we filter out all the accordions and panels that have already matched. In this
+ * phase, registerPanel will be called again with the proper groupId (accordionId).
+ *
+ *  - In the third render, panel.groupId will be already defined, so we just
+ * return it. registerPanel is not called.
+ */
+function getAccordionId(options: AccordionPanelOptions) {
+  const panel = options.panels?.find(p => p.id === options.id);
+  const accordionId = options.accordionId || panel?.groupId;
+  if (accordionId || !panel || !options.panels || !options.items) {
+    return accordionId;
+  }
+
+  const panelIndex = getPanelIndex(options.panels, panel);
+  const accordionsWithoutPanel = getAccordionsWithoutPanel(
+    options.items,
+    options.panels,
+  );
+  return accordionsWithoutPanel[panelIndex]?.id || undefined;
+}
 
 export const useAccordionPanel = createHook<
   AccordionPanelOptions,
   AccordionPanelHTMLProps
 >({
   name: "AccordionPanel",
-  compose: unstable_useId,
+  compose: [unstable_useId, useDisclosureContent],
   keys: ACCORDION_PANEL_KEYS,
 
-  useProps({ id, registerPanel }, { ref: htmlRef, ...htmlProps }) {
+  useProps(options, { ref: htmlRef, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);
+    const accordionId = getAccordionId(options);
+    const { id, registerPanel, unregisterPanel } = options;
 
     React.useEffect(() => {
       if (!id) return undefined;
+      registerPanel?.({ id, ref, groupId: accordionId });
 
-      registerPanel?.({ id, ref });
-    }, [id, registerPanel]);
-
-    const { item, isOpen } = useAccordionItemContext();
-    const buttonId = item?.button?.id;
+      return () => {
+        unregisterPanel?.(id);
+      };
+    }, [accordionId, id, registerPanel, unregisterPanel]);
 
     return {
-      role: "region",
-      "aria-labelledby": buttonId ?? buttonId,
       ref: useForkRef(ref, htmlRef),
-      hidden: !isOpen,
+      role: "region",
+      "aria-labelledby": accordionId,
       ...htmlProps,
+    };
+  },
+
+  useComposeOptions(options) {
+    return {
+      visible: isPanelVisible(options),
+      ...options,
     };
   },
 });
@@ -53,3 +129,12 @@ export const AccordionPanel = createComponent({
   as: "div",
   useHook: useAccordionPanel,
 });
+
+function isPanelVisible(options: AccordionPanelOptions) {
+  const accordionId = getAccordionId(options);
+
+  if (!options.allowMultiple)
+    return accordionId ? options.selectedId === accordionId : false;
+
+  return accordionId ? options.selectedIds?.includes(accordionId) : false;
+}

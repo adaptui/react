@@ -1,227 +1,197 @@
-import * as React from "react";
-import { SealedInitialState, useSealedState } from "reakit-utils";
 import {
-  unstable_IdInitialState,
-  unstable_IdStateReturn,
-  unstable_useIdState,
+  useCompositeState,
+  CompositeState,
+  CompositeActions,
+  CompositeInitialState,
 } from "reakit";
+import * as React from "react";
+import {
+  SealedInitialState,
+  useSealedState,
+} from "reakit-utils/useSealedState";
 
-export type AccordionInitialState = unstable_IdInitialState & {
+export type AccordionState = CompositeState & {
+  /**
+   * The current selected accordion's `id`.
+   */
+  selectedId?: AccordionState["currentId"];
+  /**
+   * Initial selected accordion's `id`.
+   * @default []
+   */
+  selectedIds?: AccordionState["currentId"][] | null;
+  /**
+   * Lists all the panels.
+   */
+  panels: AccordionState["items"];
+  /**
+   * Whether the accodion selection should be manual.
+   * @default true
+   */
+  manual: boolean;
   /**
    * Allow to open multiple accordion items
    * @default false
    */
   allowMultiple?: boolean;
   /**
-   * Allow to loop accordion items
-   * @default true
-   */
-  loop?: boolean;
-  /**
    * Allow to toggle accordion items
-   * @default true
+   * @default false
    */
   allowToggle?: boolean;
+};
+
+export type AccordionActions = CompositeActions & {
   /**
-   * Default Active Id to open by default
+   * Moves into and selects an accordion by its `id`.
    */
-  defaultActiveId?: string;
+  select: AccordionActions["move"];
   /**
-   * Set manual to false, to navigate and open the accordion items on arrow keys movements
-   * @default true
+   * Moves into and unSelects an accordion by its `id` if it's already selected.
    */
-  manual?: boolean;
+  unSelect: AccordionActions["move"];
+  /**
+   * Sets `selectedId`.
+   */
+  setSelectedId: AccordionActions["setCurrentId"];
+  /**
+   * Sets `selectedIds`.
+   */
+  setSelectedIds: React.Dispatch<
+    React.SetStateAction<CompositeState["currentId"][] | null | undefined>
+  >;
+  /**
+   * Registers a accordion panel.
+   */
+  registerPanel: AccordionActions["registerItem"];
+  /**
+   * Unregisters a accordion panel.
+   */
+  unregisterPanel: AccordionActions["unregisterItem"];
 };
 
-type Button = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-};
+export type AccordionInitialState = CompositeInitialState &
+  Partial<
+    Pick<
+      AccordionState,
+      "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
+    >
+  >;
 
-type Panel = Button;
-
-export type Item = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-  button?: Button;
-  panel?: Panel;
-};
-
-export type AccordionState = AccordionInitialState & {
-  items: Item[];
-  activeItems: string[];
-  buttons: Button[];
-};
-
-export type AccordionActions = {
-  registerItem: (item: Item) => void;
-  registerButton: (button: Button) => void;
-  registerPanel: (panel: Panel) => void;
-  addActiveItem: (id: string) => void;
-  removeActiveItem: (id: string) => void;
-  next: (id: string) => void;
-  prev: (id: string) => void;
-  first: () => void;
-  last: () => void;
-};
-
-export type AccordionStateReturn = unstable_IdStateReturn &
-  AccordionState &
-  AccordionActions;
+export type AccordionStateReturn = AccordionState & AccordionActions;
 
 export function useAccordionState(
   initialState: SealedInitialState<AccordionInitialState> = {},
 ): AccordionStateReturn {
   const {
-    loop = true,
-    allowToggle = true,
+    selectedId: initialSelectedId,
+    selectedIds: initialSelectedIds,
     allowMultiple = false,
-    defaultActiveId,
+    allowToggle: allowToggleProp = false,
     manual = true,
     ...sealed
   } = useSealedState(initialState);
-
-  const [state, dispatch] = React.useReducer(reducer, {
-    items: [],
-    activeItems: defaultActiveId ? [defaultActiveId] : [],
-    buttons: [],
-    allowMultiple,
-    loop,
-    allowToggle,
-    defaultActiveId,
-    manual,
+  const allowToggle = useSealedState(
+    allowMultiple ? allowMultiple : allowToggleProp,
+  );
+  const composite = useCompositeState({
+    currentId: initialSelectedId,
+    orientation: "vertical",
+    ...sealed,
   });
 
-  const idState = unstable_useIdState(sealed);
-  const { buttons } = state;
-  const total = buttons.length;
-  const buttonIds = buttons.map(({ id }) => id);
+  const [selectedId, setSelectedId] = React.useState(initialSelectedId);
 
-  const next = React.useCallback(
-    (id: string) => {
-      const currentIndex = buttonIds.indexOf(id);
-      const nextIndex = (currentIndex + 1) % total;
+  // If selectedId is not set, use the currentId. It's still possible to have
+  // no selected accordion with useAccordionState({ selectedId: null });
+  React.useEffect(() => {
+    if (selectedId === null) return;
 
-      if (!loop && nextIndex === 0) return;
-      moveFocus(buttons[nextIndex]);
-    },
-    [buttonIds, buttons, loop, total],
-  );
+    const selectedItem = composite.items.find(item => item.id === selectedId);
+    if (selectedItem) return;
 
-  const prev = React.useCallback(
-    (id: string) => {
-      const currentIndex = buttonIds.indexOf(id);
-      const prevIndex = (currentIndex - 1 + total) % total;
+    if (composite.currentId) {
+      setSelectedId(composite.currentId);
+    }
+  }, [selectedId, composite.items, composite.currentId]);
 
-      if (!loop && prevIndex === total - 1) return;
-      moveFocus(buttons[prevIndex]);
-    },
-    [buttonIds, buttons, loop, total],
-  );
+  // Logic for Allow Multiple
+  const [selectedIds, setSelectedIds] = React.useState(initialSelectedIds);
 
-  const first = React.useCallback(() => {
-    moveFocus(buttons[0]);
-  }, [buttons]);
+  React.useEffect(() => {
+    if (!allowMultiple) return;
+    if (selectedIds === null) return;
+    if (selectedIds?.length === 0) return;
 
-  const last = React.useCallback(() => {
-    moveFocus(buttons[total - 1]);
-  }, [buttons, total]);
+    const selectedItem = composite.items.find(item =>
+      selectedIds?.includes(item.id),
+    );
+    if (selectedItem) return;
 
-  return {
-    ...idState,
-    ...state,
-    addActiveItem: React.useCallback(id => {
-      dispatch({ type: "addActiveItem", id });
-    }, []),
-    removeActiveItem: React.useCallback(id => {
-      dispatch({ type: "removeActiveItem", id });
-    }, []),
-    registerButton: React.useCallback(button => {
-      dispatch({ type: "registerButton", button });
-    }, []),
-    registerPanel: React.useCallback(panel => {
-      dispatch({ type: "registerPanel", panel });
-    }, []),
-    registerItem: React.useCallback(item => {
-      dispatch({ type: "registerItem", item });
-    }, []),
-    next,
-    prev,
-    first,
-    last,
-  };
-}
+    if (composite.currentId) {
+      setSelectedIds([composite.currentId]);
+    }
+  }, [selectedIds, composite.items, composite.currentId, allowMultiple]);
 
-export type AccordionReducerAction =
-  | { type: "registerItem"; item: Item }
-  | { type: "registerButton"; button: Button }
-  | { type: "registerPanel"; panel: Panel }
-  | { type: "addActiveItem"; id: string }
-  | { type: "removeActiveItem"; id: string };
+  const select = React.useCallback(
+    (id: string | null) => {
+      composite.move(id);
 
-function reducer(
-  state: AccordionState,
-  action: AccordionReducerAction,
-): AccordionState {
-  const { items, activeItems, buttons, allowMultiple } = state;
+      if (!allowMultiple) {
+        if (allowToggle && id === selectedId) {
+          setSelectedId(null);
+          return;
+        }
 
-  switch (action.type) {
-    case "registerItem":
-      return { ...state, items: [...items, action.item] };
-
-    case "registerButton":
-      return {
-        ...state,
-        items: getNextItems("button", action.button, items),
-        buttons: [...buttons, action.button],
-      };
-
-    case "registerPanel":
-      return {
-        ...state,
-        items: getNextItems("panel", action.panel, items),
-      };
-
-    case "addActiveItem": {
-      const { id } = action;
-      let nextActiveItems;
-      if (allowMultiple) {
-        nextActiveItems = [...activeItems, id];
-      } else {
-        nextActiveItems = [id];
+        setSelectedId(id);
+        return;
       }
 
-      return { ...state, activeItems: nextActiveItems };
-    }
+      if (id === null) return;
+      setSelectedIds(prevIds => [...prevIds, id]);
+    },
 
-    case "removeActiveItem": {
-      const { id } = action;
-      const nextActiveItems = activeItems.filter(panelId => panelId !== id);
-
-      return { ...state, activeItems: nextActiveItems };
-    }
-
-    default:
-      throw new Error();
-  }
-}
-
-function getNextItems(
-  type: "button" | "panel",
-  currentThing: Button | Panel,
-  items: Item[],
-) {
-  const item = items.find(item =>
-    item.ref.current?.contains(currentThing.ref.current),
-  );
-  const nextItem = { ...item, [type]: currentThing } as Item;
-  const nextItems = items.filter(
-    item => !item.ref.current?.contains(currentThing.ref.current),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allowMultiple, allowToggle, composite.move, selectedId],
   );
 
-  return [...nextItems, nextItem];
-}
+  const unSelect = React.useCallback(
+    (id: string | null) => {
+      if (!allowMultiple && id === null) return;
 
-function moveFocus(button: Button) {
-  button.ref?.current?.focus();
+      composite.move(id);
+      setSelectedIds(prevIds => prevIds?.filter(pId => pId !== id));
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [composite.move],
+  );
+
+  const panels = useCompositeState();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const registerPanel = React.useCallback(panel => panels.registerItem(panel), [
+    panels.registerItem,
+  ]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const unregisterPanel = React.useCallback(id => panels.unregisterItem(id), [
+    panels.unregisterItem,
+  ]);
+
+  return {
+    manual,
+    allowMultiple,
+    allowToggle,
+    selectedId,
+    setSelectedId,
+    selectedIds,
+    setSelectedIds,
+    select,
+    unSelect,
+    panels: panels.items,
+    registerPanel,
+    unregisterPanel,
+    ...composite,
+  };
 }
