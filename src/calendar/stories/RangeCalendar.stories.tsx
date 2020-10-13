@@ -1,6 +1,14 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 import { addDays, addWeeks, setDate, subDays, subWeeks } from "date-fns";
+import "./range-style.css";
+
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "./svg-icons";
 
 import {
   Calendar,
@@ -11,16 +19,17 @@ import {
   CalendarCellButton,
   CalendarWeekTitle,
 } from "../index";
-import "./range-style.css";
-import { DateValue } from "../../utils";
-import { RangeCalendarProps } from "../index.d";
-import { useRangeCalendarState } from "../RangeCalendarState";
+import {
+  useRangeCalendarState,
+  RangeCalendarInitialState,
+} from "../RangeCalendarState";
+import { DateValue } from "../../utils/types";
 
 export default {
   title: "Component/RangeCalendar",
 } as Meta;
 
-const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
+const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
 
   return (
@@ -31,65 +40,17 @@ const RangeCalendarComp: React.FC<RangeCalendarProps> = props => {
     >
       <div className="header">
         <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-            ></path>
-          </svg>
+          <DoubleChevronLeft />
         </CalendarButton>
         <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
+          <ChevronLeft />
         </CalendarButton>
         <CalendarHeader {...state} />
         <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
+          <ChevronRight />
         </CalendarButton>
         <CalendarButton {...state} goto="nextYear" className="next-year">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 5l7 7-7 7M5 5l7 7-7 7"
-            ></path>
-          </svg>
+          <DoubleChevronRight />
         </CalendarButton>
       </div>
 

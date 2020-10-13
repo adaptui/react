@@ -8,30 +8,34 @@ import {
   Validation,
   FocusableProps,
   ValueBase,
+  RangeValue,
   ValidationState,
 } from "@react-types/shared";
 import * as React from "react";
-import { isValid } from "date-fns";
+import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
-import { useCalendarState } from "../calendar";
 import { setTime, isInvalid } from "./__utils";
 import { convertValue } from "../segment/__utils";
+import { convertRange } from "../calendar/__utils";
+import { useRangeCalendarState } from "../calendar";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 import { DateTimeFormatOpts, DateValue, RangeValueBase } from "../utils/types";
 
-export interface DatePickerInitialState
+export interface DateRangePickerInitialState
   extends PickerBaseInitialState,
     Validation,
     FocusableProps,
-    ValueBase<DateValue>,
+    ValueBase<RangeValue<DateValue>>,
     RangeValueBase<DateValue> {
   placeholderDate?: DateValue;
   formatOptions?: DateTimeFormatOpts;
 }
 
-export const useDatePickerState = (props: DatePickerInitialState = {}) => {
+export const useDateRangePickerState = (
+  props: DateRangePickerInitialState = {},
+) => {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
@@ -44,70 +48,81 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     placeholderDate: placeholderDateProp,
   } = props;
 
-  const defaultValue =
-    defaultValueProp && isValid(defaultValueProp)
-      ? new Date(defaultValueProp)
-      : new Date();
-
   const [value, setValue] = useControllableState({
     value: initialDate,
-    defaultValue,
+    defaultValue: defaultValueProp && convertRange(defaultValueProp),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
-  const dateValue = convertValue(value);
   const minValue = convertValue(minValueProp);
   const maxValue = convertValue(maxValueProp);
   const placeholderDate = convertValue(placeholderDateProp);
 
   // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
-  const selectDate = (newValue: DateValue) => {
-    if (dateValue) {
-      setTime(new Date(newValue), dateValue);
+  const selectDate = (range: RangeValue<DateValue>) => {
+    if (range) {
+      setTime(new Date(range.start), new Date(value.start));
+      setTime(new Date(range.end), new Date(value.end));
     }
+    setValue(range);
 
-    setValue(newValue);
     popover.hide();
   };
 
-  const segmentState = useSegmentState({
-    value: dateValue,
-    defaultValue,
-    onChange: setValue,
+  const segmentComposite = useCompositeState({ orientation: "horizontal" });
+  const startSegmentState = useSegmentState({
+    value: convertValue(value.start),
+    defaultValue: convertValue(defaultValueProp?.start),
+    onChange: date => setValue({ start: date, end: value.end }),
     formatOptions,
     placeholderDate,
   });
-  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
-  const calendar = useCalendarState({
-    value: dateValue,
-    defaultValue,
-    onChange: selectDate,
+
+  const endSegmentState = useSegmentState({
+    value: convertValue(value.end),
+    defaultValue: convertValue(defaultValueProp?.end),
+    onChange: date => setValue({ start: value.start, end: date }),
+    formatOptions,
+    placeholderDate,
   });
 
-  const validationState: ValidationState =
+  const popover = usePickerBaseState({
+    focus: segmentComposite.first,
+    ...props,
+  });
+  const calendar = useRangeCalendarState({
+    value: value,
+    onChange: selectDate,
+    defaultValue: defaultValueProp,
+  });
+
+  const validationState: ValidationState | null =
     props.validationState ||
-    (isInvalid(dateValue, props.minValue, props.maxValue)
+    (value != null &&
+    (isInvalid(value.start as Date, props.minValue, props.maxValue) ||
+      isInvalid(value.end as Date, props.minValue, props.maxValue) ||
+      (value.end != null && value.start != null && value.end < value.start))
       ? "invalid"
-      : "valid");
+      : null);
 
   React.useEffect(() => {
     if (popover.visible) {
       calendar.setFocused(true);
-      dateValue && calendar.focusCell(dateValue);
+      value.start && calendar.focusCell(new Date(value.start));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
 
   React.useEffect(() => {
     if (autoFocus) {
-      segmentState.first();
+      segmentComposite.first();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoFocus, segmentState.first]);
+  }, [autoFocus, segmentComposite.first]);
 
   return {
-    dateValue,
+    dateValue: value,
     setDateValue: setValue,
     selectDate,
     validationState,
@@ -115,9 +130,12 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     maxValue,
     isRequired,
     ...popover,
-    ...segmentState,
+    startSegmentState: { ...startSegmentState, ...segmentComposite },
+    endSegmentState: { ...endSegmentState, ...segmentComposite },
     calendar,
   };
 };
 
-export type DatePickerStateReturn = ReturnType<typeof useDatePickerState>;
+export type DateRangePickerStateReturn = ReturnType<
+  typeof useDateRangePickerState
+>;

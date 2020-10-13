@@ -6,6 +6,7 @@ import {
   getMonth,
   getSeconds,
   getYear,
+  isValid,
   setDate,
   setHours,
   setMinutes,
@@ -17,7 +18,7 @@ import {
 import { DateTimeFormatOpts, DateValue } from "../utils/types";
 
 export function convertValue(value: DateValue | undefined): Date | undefined {
-  if (!value) {
+  if (!value || !isValid(value)) {
     return undefined;
   }
 
