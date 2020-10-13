@@ -30,8 +30,8 @@ import { FocusableProps, InputBase, ValueBase } from "@react-types/shared";
 import { useWeekStart } from "./useWeekStart";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
-import { isInvalidDate, parseDate, stringifyDate } from "../utils";
 import { useWeekDays, generateDaysInMonthArray } from "./__utils";
+import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 
 export interface CalendarInitialState
   extends FocusableProps,
@@ -69,6 +69,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
+  console.log("%c value", "color: #d90000", value);
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
@@ -100,7 +101,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
 
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
-    if (isInvalidDate(date, minValue, maxValue)) {
+    if (isInvalidDateRange(date, minValue, maxValue)) {
       return;
     }
 

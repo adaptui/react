@@ -60,7 +60,7 @@ const CalendarIcon = () => (
 
 export const Default = () => <DatePickerComp />;
 
-export const InitialDate = () => <DatePickerComp defaultValue="2001-01-01" />;
+export const InitialDate = () => <DatePickerComp defaultValue="2020-02-29" />;
 
 export const ControllableState = () => {
   const [value, setValue] = React.useState("2020-10-13");

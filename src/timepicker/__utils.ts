@@ -1,6 +1,6 @@
+import { format } from "date-fns";
 import { isString } from "@chakra-ui/utils";
 
-import { pad } from "../utils";
 import { ColumnType } from "./TimePickerColumnState";
 
 // As per https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#times
@@ -28,9 +28,7 @@ export function parseTime(timeValue: string | undefined) {
 }
 
 export function stringifyTime(date: Date) {
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(
-    date.getSeconds(),
-  )}`;
+  return format(date, "HH:mm:ss");
 }
 
 export function getSelectedValueFromDate(date: Date, type: ColumnType) {
