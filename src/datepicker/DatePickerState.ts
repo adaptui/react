@@ -11,95 +11,82 @@ import {
   ValidationState,
 } from "@react-types/shared";
 import * as React from "react";
-import { isValid } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
-import { setTime, isInvalid } from "./__utils";
+import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
+import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { DateTimeFormatOpts, DateValue, RangeValueBase } from "../utils/types";
 
 export interface DatePickerInitialState
   extends PickerBaseInitialState,
     Validation,
     FocusableProps,
-    ValueBase<DateValue>,
-    RangeValueBase<DateValue> {
-  placeholderDate?: DateValue;
+    ValueBase<string>,
+    RangeValueBase<string> {
   formatOptions?: DateTimeFormatOpts;
+  placeholderDate?: Date;
 }
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const {
     value: initialDate,
-    defaultValue: defaultValueProp,
-    onChange,
+    defaultValue: defaultValueProp = stringifyDate(new Date()),
+    onChange: onChangeProp,
     minValue: minValueProp,
     maxValue: maxValueProp,
     isRequired,
     autoFocus,
     formatOptions,
-    placeholderDate: placeholderDateProp,
+    placeholderDate,
   } = props;
 
-  const defaultValue =
-    defaultValueProp && isValid(defaultValueProp)
-      ? new Date(defaultValueProp)
-      : new Date();
+  const onChange = React.useCallback(
+    (date: Date) => {
+      return onChangeProp?.(stringifyDate(date));
+    },
+    [onChangeProp],
+  );
 
   const [value, setValue] = useControllableState({
-    value: initialDate,
-    defaultValue,
+    value: parseDate(initialDate),
+    defaultValue: parseDate(defaultValueProp) || new Date(),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
-  const dateValue = value && isValid(value) ? new Date(value) : undefined;
-  const minValue =
-    minValueProp && isValid(minValueProp) ? new Date(minValueProp) : undefined;
-  const maxValue =
-    maxValueProp && isValid(maxValueProp) ? new Date(maxValueProp) : undefined;
-  const placeholderDate =
-    placeholderDateProp && isValid(placeholderDateProp)
-      ? new Date(placeholderDateProp)
-      : undefined;
+  const minValue = parseDate(minValueProp);
+  const maxValue = parseDate(maxValueProp);
 
-  // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
-  const selectDate = (newValue: DateValue) => {
-    if (dateValue) {
-      setTime(new Date(newValue), dateValue);
-    }
-
-    setValue(newValue);
+  const selectDate = (newValue: string) => {
+    const newDate = parseDate(newValue);
+    if (newDate) setValue(newDate);
     popover.hide();
   };
 
   const segmentState = useSegmentState({
-    value: dateValue,
-    defaultValue,
+    value,
     onChange: setValue,
     formatOptions,
     placeholderDate,
   });
   const popover = usePickerBaseState({ focus: segmentState.first, ...props });
   const calendar = useCalendarState({
-    value: dateValue,
-    defaultValue,
+    value: stringifyDate(value),
     onChange: selectDate,
   });
 
   const validationState: ValidationState =
     props.validationState ||
-    (isInvalid(dateValue, props.minValue, props.maxValue)
-      ? "invalid"
-      : "valid");
+    (isInvalidDateRange(value, minValue, maxValue) ? "invalid" : "valid");
 
   React.useEffect(() => {
     if (popover.visible) {
       calendar.setFocused(true);
-      dateValue && calendar.focusCell(dateValue);
+      calendar.focusCell(value);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
 
@@ -107,11 +94,12 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     if (autoFocus) {
       segmentState.first();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
 
   return {
-    dateValue,
+    dateValue: value,
     setDateValue: setValue,
     selectDate,
     validationState,

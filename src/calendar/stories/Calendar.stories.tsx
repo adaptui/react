@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { addDays, addWeeks, subWeeks } from "date-fns";
+import { addWeeks, format, subWeeks } from "date-fns";
 
 import "./index.css";
-import { DateValue } from "../../utils/types";
 import { CalendarComponent } from "./CalendarComponent";
 
 export default {
@@ -12,39 +11,43 @@ export default {
 
 export const Default = () => <CalendarComponent />;
 export const DefaultValue = () => (
-  <CalendarComponent defaultValue={new Date(2001, 0, 1)} />
+  <CalendarComponent defaultValue="2001-01-01" />
 );
 export const ControlledValue = () => {
-  const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
+  const [value, setValue] = React.useState("2020-10-13");
 
   return (
     <div>
       <input
         type="date"
-        onChange={e => setValue(new Date(e.target.value))}
-        value={(value as Date).toISOString().slice(0, 10)}
+        onChange={e => setValue(e.target.value)}
+        value={value}
       />
       <CalendarComponent value={value} onChange={setValue} />
     </div>
   );
 };
+
 export const MinMaxDate = () => (
-  <CalendarComponent minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />
-);
-export const MinMaxDefaultDate = () => (
   <CalendarComponent
-    defaultValue={new Date()}
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
+    minValue={format(new Date(), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
   />
 );
-export const isDisabled = () => (
-  <CalendarComponent defaultValue={addDays(new Date(), 1)} isDisabled />
+
+export const MinMaxDefaultDate = () => (
+  <CalendarComponent
+    defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+    minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+  />
 );
-export const isReadOnly = () => (
-  <CalendarComponent defaultValue={addDays(new Date(), 1)} isReadOnly />
-);
+
+export const isDisabled = () => <CalendarComponent isDisabled />;
+
+export const isReadOnly = () => <CalendarComponent isReadOnly />;
+
 export const autoFocus = () => (
   // eslint-disable-next-line jsx-a11y/no-autofocus
-  <CalendarComponent defaultValue={addDays(new Date(), 1)} autoFocus />
+  <CalendarComponent autoFocus />
 );

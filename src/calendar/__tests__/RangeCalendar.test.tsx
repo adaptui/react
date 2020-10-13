@@ -80,7 +80,7 @@ describe("RangeCalendar", () => {
   it("should render correctly", () => {
     const { getByTestId: testId } = render(
       <RangeCalendarComp
-        defaultValue={{ start: "10-7-2020", end: "10-30-2020" }}
+        defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
       />,
     );
 
@@ -91,7 +91,7 @@ describe("RangeCalendar", () => {
   it("should have proper initial start and end ranges", () => {
     const { getByLabelText: label, baseElement } = render(
       <RangeCalendarComp
-        defaultValue={{ start: "10-7-2020", end: "10-30-2020" }}
+        defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
       />,
     );
 
@@ -109,7 +109,7 @@ describe("RangeCalendar", () => {
   it("should be able to select ranges with keyboard navigation", () => {
     const { getByLabelText: label, getByTestId: testId, baseElement } = render(
       <RangeCalendarComp
-        defaultValue={{ start: "10-7-2020", end: "10-30-2020" }}
+        defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
       />,
     );
 

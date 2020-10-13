@@ -24,10 +24,10 @@ export const useTimePickerColumn = createHook<
   compose: useComposite,
   keys: TIME_PICKER_COLUMN_KEYS,
 
-  useProps(options, htmlProps) {
+  useProps({ columnType }, htmlProps) {
     return {
       role: "listbox",
-      "aria-label": options.columnType,
+      "aria-label": columnType,
       ...htmlProps,
     };
   },

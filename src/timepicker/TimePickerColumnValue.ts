@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import {
   useCompositeItem,
   CompositeItemOptions,
@@ -7,12 +6,13 @@ import {
   ButtonHTMLProps,
   ButtonOptions,
 } from "reakit";
+import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
-import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 import { callAllHandlers } from "@chakra-ui/utils";
+import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 
 export type TimePickerColumnValueOptions = ButtonOptions &
   CompositeItemOptions &
@@ -58,7 +58,7 @@ export const useTimePickerColumnValue = createHook<
       }
     }, [id, move, selected, setCurrentId, value, visible]);
 
-    const onClick = useCallback(() => {
+    const onClick = React.useCallback(() => {
       setSelected(value);
     }, [setSelected, value]);
 
