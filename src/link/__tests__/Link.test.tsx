@@ -1,7 +1,7 @@
 import * as React from "react";
 import { axe, render } from "reakit-test-utils";
 
-import { Link } from "..";
+import { Link } from "../index";
 
 describe("ReakitLink", () => {
   it("should render correctly", () => {

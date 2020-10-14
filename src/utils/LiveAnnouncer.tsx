@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import React, { Fragment, useImperativeHandle, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { VisuallyHidden } from "@react-aria/visually-hidden";
+import { VisuallyHidden } from "reakit";
+import React, { Fragment, useImperativeHandle, useRef, useState } from "react";
 
 /* Inspired by https://github.com/AlmeroSteyn/react-aria-live */
 const liveRegionAnnouncer = React.createRef();
