@@ -48,8 +48,5 @@ const ACCORDION_STATE_KEYS = [
   "unregisterPanel",
 ] as const;
 export const ACCORDION_KEYS = ACCORDION_STATE_KEYS;
-export const ACCORDION_ITEM_KEYS = ACCORDION_KEYS;
-export const ACCORDION_PANEL_KEYS = [
-  ...ACCORDION_ITEM_KEYS,
-  "accordionId",
-] as const;
+export const ACCORDION_PANEL_KEYS = [...ACCORDION_KEYS, "accordionId"] as const;
+export const ACCORDION_TRIGGER_KEYS = ACCORDION_KEYS;

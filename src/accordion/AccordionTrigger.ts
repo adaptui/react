@@ -11,7 +11,7 @@ import { useLiveRef } from "reakit-utils";
 import { ariaAttr } from "@chakra-ui/utils";
 import { createHook, createComponent } from "reakit-system";
 
-import { ACCORDION_ITEM_KEYS } from "./__keys";
+import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionTriggerOptions = ButtonOptions &
@@ -40,7 +40,7 @@ export const useAccordionTrigger = createHook<
 >({
   name: "Accordion",
   compose: [useButton, useCompositeItem],
-  keys: ACCORDION_ITEM_KEYS,
+  keys: ACCORDION_TRIGGER_KEYS,
 
   useOptions({ focusable = true, ...options }) {
     return { focusable, ...options };
