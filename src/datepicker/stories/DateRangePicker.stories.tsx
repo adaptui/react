@@ -31,6 +31,7 @@ import {
   useDateRangePickerState,
   DateRangePickerInitialState,
 } from "../DateRangePickerState";
+import { stringifyDate } from "../../utils";
 
 export default {
   title: "Component/DateRangePicker",
@@ -95,7 +96,6 @@ const RangeCalendarComp: React.FC<RangeCalendarStateReturn> = state => {
 
 const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
   const state = useDateRangePickerState({
-    defaultValue: { start: new Date(2020, 0, 5), end: new Date(2020, 1, 5) },
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,
   });
@@ -153,14 +153,17 @@ const CalendarIcon = () => (
 export const Default = () => <DateRangePickerComp />;
 export const DefaultValue = () => (
   <DateRangePickerComp
-    defaultValue={{ start: setDate(new Date(), 10), end: new Date() }}
+    defaultValue={{
+      start: stringifyDate(setDate(new Date(), 10)),
+      end: stringifyDate(new Date()),
+    }}
   />
 );
 
 export const MinMaxDefaultDate = () => (
   <DateRangePickerComp
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
+    minValue={stringifyDate(subWeeks(new Date(), 1))}
+    maxValue={stringifyDate(addWeeks(new Date(), 1))}
   />
 );
 export const isDisabled = () => <DateRangePickerComp isDisabled />;

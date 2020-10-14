@@ -15,21 +15,25 @@ import * as React from "react";
 import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
 
+import {
+  parseDate,
+  stringifyDate,
+  parseRangeDate,
+  isInvalidDateRange,
+} from "../utils";
 import { useSegmentState } from "../segment";
-import { setTime, isInvalid } from "./__utils";
-import { convertValue } from "../segment/__utils";
-import { convertRange } from "../calendar/__utils";
+import { makeRange } from "../calendar/__utils";
 import { useRangeCalendarState } from "../calendar";
+import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { DateTimeFormatOpts, DateValue, RangeValueBase } from "../utils/types";
 
 export interface DateRangePickerInitialState
   extends PickerBaseInitialState,
     Validation,
     FocusableProps,
-    ValueBase<RangeValue<DateValue>>,
-    RangeValueBase<DateValue> {
-  placeholderDate?: DateValue;
+    ValueBase<RangeValue<string>>,
+    RangeValueBase<string> {
+  placeholderDate?: string;
   formatOptions?: DateTimeFormatOpts;
 }
 
@@ -39,7 +43,7 @@ export const useDateRangePickerState = (
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
-    onChange,
+    onChange: onChangeProp,
     minValue: minValueProp,
     maxValue: maxValueProp,
     isRequired,
@@ -48,40 +52,54 @@ export const useDateRangePickerState = (
     placeholderDate: placeholderDateProp,
   } = props;
 
-  const [value, setValue] = useControllableState({
-    value: initialDate,
-    defaultValue: defaultValueProp && convertRange(defaultValueProp),
+  const onChange = React.useCallback(
+    (date: RangeValue<Date>) => {
+      return onChangeProp?.({
+        start: stringifyDate(date.start),
+        end: stringifyDate(date.end),
+      });
+    },
+    [onChangeProp],
+  );
+
+  const [value, setValue] = useControllableState<RangeValue<Date>>({
+    value: parseRangeDate(initialDate),
+    defaultValue: parseRangeDate(defaultValueProp) || {
+      start: new Date(),
+      end: new Date(),
+    },
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
-  const minValue = convertValue(minValueProp);
-  const maxValue = convertValue(maxValueProp);
-  const placeholderDate = convertValue(placeholderDateProp);
+  const minValue = parseDate(minValueProp);
+  const maxValue = parseDate(maxValueProp);
+  const placeholderDate = parseDate(placeholderDateProp);
 
-  // Intercept setValue to make sure the Time section is not changed by date selection in Calendar
-  const selectDate = (range: RangeValue<DateValue>) => {
-    if (range) {
-      setTime(new Date(range.start), new Date(value.start));
-      setTime(new Date(range.end), new Date(value.end));
+  const selectDate = (date: RangeValue<string>) => {
+    if (props.isReadOnly || props.isDisabled) {
+      return;
     }
-    setValue(range);
+
+    setValue(
+      makeRange(parseDate(date.start) as Date, parseDate(date.end) as Date),
+    );
 
     popover.hide();
   };
 
   const segmentComposite = useCompositeState({ orientation: "horizontal" });
   const startSegmentState = useSegmentState({
-    value: convertValue(value.start),
-    defaultValue: convertValue(defaultValueProp?.start),
+    value: value.start,
+    defaultValue: parseDate(defaultValueProp?.start),
     onChange: date => setValue({ start: date, end: value.end }),
     formatOptions,
     placeholderDate,
   });
 
   const endSegmentState = useSegmentState({
-    value: convertValue(value.end),
-    defaultValue: convertValue(defaultValueProp?.end),
+    value: value.end,
+    defaultValue: parseDate(defaultValueProp?.end),
     onChange: date => setValue({ start: value.start, end: date }),
     formatOptions,
     placeholderDate,
@@ -91,17 +109,31 @@ export const useDateRangePickerState = (
     focus: segmentComposite.first,
     ...props,
   });
+
   const calendar = useRangeCalendarState({
-    value: value,
+    value: { start: stringifyDate(value.start), end: stringifyDate(value.end) },
     onChange: selectDate,
-    defaultValue: defaultValueProp,
+    minValue: minValueProp,
+    maxValue: maxValueProp,
   });
+
+  const isStartInRange = isInvalidDateRange(
+    value.start,
+    parseDate(props.minValue),
+    parseDate(props.maxValue),
+  );
+
+  const isEndInRange = isInvalidDateRange(
+    value.end,
+    parseDate(props.minValue),
+    parseDate(props.maxValue),
+  );
 
   const validationState: ValidationState | null =
     props.validationState ||
     (value != null &&
-    (isInvalid(value.start as Date, props.minValue, props.maxValue) ||
-      isInvalid(value.end as Date, props.minValue, props.maxValue) ||
+    (isStartInRange ||
+      isEndInRange ||
       (value.end != null && value.start != null && value.end < value.start))
       ? "invalid"
       : null);
