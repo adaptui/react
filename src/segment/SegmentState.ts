@@ -7,7 +7,7 @@
 import { useMemo, useState } from "react";
 import { useCompositeState } from "reakit";
 import { useDateFormatter } from "@react-aria/i18n";
-import { useControlledState } from "@react-stately/utils";
+import { useControllableState } from "@chakra-ui/hooks";
 
 import { DateTimeFormatOpts } from "../utils/types";
 import { add, setSegment, convertValue, getSegmentLimits } from "./__utils";
@@ -88,14 +88,14 @@ export function useSegmentState(props: SegmentStateProps) {
     convertValue(props.placeholderDate) ||
       new Date(new Date().getFullYear(), 0, 1),
   );
-  const [date, setDate] = useControlledState<Date>(
-    // @ts-ignore
-    props.value === null
-      ? convertValue(placeholderDate)
-      : convertValue(props.value),
-    convertValue(props.defaultValue),
-    props.onChange,
-  );
+  const [date, setDate] = useControllableState<Date>({
+    value:
+      props.value === null
+        ? convertValue(placeholderDate)
+        : convertValue(props.value),
+    defaultValue: convertValue(props.defaultValue),
+    onChange: props.onChange,
+  });
 
   // If all segments are valid, use the date from state, otherwise use the placeholder date.
   const value =
