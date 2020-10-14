@@ -1,4 +1,4 @@
 export * from "./AccordionState";
-export * from "./AccordionItem";
+export * from "./Accordion";
 export * from "./AccordionTrigger";
 export * from "./AccordionPanel";

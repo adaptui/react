@@ -17,18 +17,27 @@ test("initial state", () => {
   const result = render();
   expect(result.current).toMatchInlineSnapshot(`
     Object {
-      "activeItems": Array [],
       "allowMultiple": false,
-      "allowToggle": true,
+      "allowToggle": false,
       "baseId": "base",
-      "buttons": Array [],
-      "defaultActiveId": undefined,
+      "currentId": undefined,
+      "groups": Array [],
       "items": Array [],
-      "loop": true,
+      "loop": false,
       "manual": true,
+      "orientation": "vertical",
+      "panels": Array [],
+      "rtl": false,
+      "selectedId": undefined,
+      "selectedIds": Array [],
+      "unstable_angular": false,
+      "unstable_hasActiveWidget": false,
       "unstable_idCountRef": Object {
         "current": 0,
       },
+      "unstable_moves": 0,
+      "unstable_virtual": false,
+      "wrap": false,
     }
   `);
 });
