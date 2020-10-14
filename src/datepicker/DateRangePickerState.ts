@@ -42,7 +42,10 @@ export const useDateRangePickerState = (
 ) => {
   const {
     value: initialDate,
-    defaultValue: defaultValueProp,
+    defaultValue: defaultValueProp = {
+      start: stringifyDate(new Date()),
+      end: stringifyDate(new Date()),
+    },
     onChange: onChangeProp,
     minValue: minValueProp,
     maxValue: maxValueProp,
@@ -64,10 +67,12 @@ export const useDateRangePickerState = (
 
   const [value, setValue] = useControllableState<RangeValue<Date>>({
     value: parseRangeDate(initialDate),
-    defaultValue: parseRangeDate(defaultValueProp) || {
-      start: new Date(),
-      end: new Date(),
-    },
+    defaultValue:
+      parseRangeDate(defaultValueProp) ||
+      parseRangeDate({
+        start: stringifyDate(new Date()),
+        end: stringifyDate(new Date()),
+      }),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });

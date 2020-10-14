@@ -51,7 +51,8 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
   const [value, setValue] = useControllableState({
     value: parseDate(initialDate),
-    defaultValue: parseDate(defaultValueProp) || new Date(),
+    defaultValue:
+      parseDate(defaultValueProp) || parseDate(stringifyDate(new Date())),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
