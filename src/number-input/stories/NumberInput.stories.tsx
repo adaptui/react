@@ -9,7 +9,6 @@ import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
 
 const NumberInputComp = (props: UseNumberInputProps) => {
   const state = useNumberInputState(props);
-  console.log("%c state", "color: #5200cc", state);
 
   return (
     <div>

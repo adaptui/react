@@ -69,7 +69,6 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
-  console.log("%c value", "color: #d90000", value);
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);

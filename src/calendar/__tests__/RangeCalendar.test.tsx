@@ -17,11 +17,7 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
 
   return (
-    <Calendar
-      {...state}
-      onChange={() => console.log("change")}
-      className="calendar-range"
-    >
+    <Calendar {...state} className="calendar-range">
       <div className="header">
         <CalendarButton {...state} goto="previousYear">
           previous year

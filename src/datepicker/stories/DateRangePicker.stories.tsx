@@ -39,11 +39,7 @@ export default {
 
 const RangeCalendarComp: React.FC<RangeCalendarStateReturn> = state => {
   return (
-    <Calendar
-      {...state}
-      onChange={() => console.log("change")}
-      className="calendar-range"
-    >
+    <Calendar {...state} className="calendar-range">
       <div className="header">
         <CalendarButton {...state} goto="previousYear" className="prev-year">
           <DoubleChevronLeft />

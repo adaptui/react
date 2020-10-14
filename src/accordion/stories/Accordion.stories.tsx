@@ -5,7 +5,7 @@ import "./index.css";
 import {
   useAccordionState,
   Accordion,
-  AccordionItem,
+  AccordionTrigger,
   AccordionPanel,
   AccordionInitialState,
 } from "../index";
@@ -20,25 +20,25 @@ const AccordionComponent: React.FC<AccordionInitialState> = props => {
   return (
     <Accordion {...state}>
       <h2>
-        <AccordionItem {...state}>Trigger 1</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 1</AccordionPanel>
       <h2>
-        <AccordionItem {...state}>Trigger 2</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 2</AccordionPanel>
       <h2>
-        <AccordionItem {...state} id="accordion3">
+        <AccordionTrigger {...state} id="accordion3">
           Trigger 3
-        </AccordionItem>
+        </AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 3</AccordionPanel>
       <h2>
-        <AccordionItem {...state}>Trigger 4</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 4</AccordionPanel>
       <h2>
-        <AccordionItem {...state}>Trigger 5</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 5</AccordionPanel>
     </Accordion>
@@ -66,12 +66,12 @@ export const Styled = () => {
   return (
     <Accordion {...props} id="accordionGroup" className="accordion">
       <h2>
-        <AccordionItem {...props} className="accordion-trigger">
+        <AccordionTrigger {...props} className="accordion-trigger">
           <span className="accordion-title">
             Personal Information
             <span className="accordion-icon"></span>
           </span>
-        </AccordionItem>
+        </AccordionTrigger>
       </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>
@@ -117,12 +117,12 @@ export const Styled = () => {
       </AccordionPanel>
 
       <h2>
-        <AccordionItem {...props} className="accordion-trigger">
+        <AccordionTrigger {...props} className="accordion-trigger">
           <span className="accordion-title">
             Billing Address
             <span className="accordion-icon"></span>
           </span>
-        </AccordionItem>
+        </AccordionTrigger>
       </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>
@@ -152,12 +152,12 @@ export const Styled = () => {
       </AccordionPanel>
 
       <h2>
-        <AccordionItem {...props} className="accordion-trigger">
+        <AccordionTrigger {...props} className="accordion-trigger">
           <span className="accordion-title">
             Shipping Address
             <span className="accordion-icon"></span>
           </span>
-        </AccordionItem>
+        </AccordionTrigger>
       </h2>
       <AccordionPanel {...props} className="accordion-panel">
         <div>

@@ -14,7 +14,7 @@ import { createHook, createComponent } from "reakit-system";
 import { ACCORDION_ITEM_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
-export type AccordionItemOptions = ButtonOptions &
+export type AccordionTriggerOptions = ButtonOptions &
   CompositeItemOptions &
   Pick<Partial<AccordionStateReturn>, "manual"> &
   Pick<
@@ -28,13 +28,15 @@ export type AccordionItemOptions = ButtonOptions &
     | "allowToggle"
   >;
 
-export type AccordionItemHTMLProps = ButtonHTMLProps & CompositeItemHTMLProps;
+export type AccordionTriggerHTMLProps = ButtonHTMLProps &
+  CompositeItemHTMLProps;
 
-export type AccordionItemProps = AccordionItemOptions & AccordionItemHTMLProps;
+export type AccordionTriggerProps = AccordionTriggerOptions &
+  AccordionTriggerHTMLProps;
 
-export const useAccordionItem = createHook<
-  AccordionItemOptions,
-  AccordionItemHTMLProps
+export const useAccordionTrigger = createHook<
+  AccordionTriggerOptions,
+  AccordionTriggerHTMLProps
 >({
   name: "Accordion",
   compose: [useButton, useCompositeItem],
@@ -125,20 +127,20 @@ export const useAccordionItem = createHook<
   },
 });
 
-export const AccordionItem = createComponent({
+export const AccordionTrigger = createComponent({
   as: "button",
   memo: true,
-  useHook: useAccordionItem,
+  useHook: useAccordionTrigger,
 });
 
-function isAccordionSelected(options: AccordionItemOptions) {
+function isAccordionSelected(options: AccordionTriggerOptions) {
   const { id, allowMultiple, selectedId, selectedIds } = options;
 
   if (!allowMultiple) return selectedId === id;
   return selectedIds?.includes(id);
 }
 
-function useAccordionPanelId(options: AccordionItemOptions) {
+function useAccordionPanelId(options: AccordionTriggerOptions) {
   const { panels, id } = options;
 
   return React.useMemo(

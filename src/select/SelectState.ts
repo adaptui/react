@@ -92,7 +92,6 @@ export const useSelectState = (
   const setSelected = React.useCallback(
     (value: string, shouldRemainOpen?: boolean) => {
       if (allowMultiselect) {
-        console.log("%c selectedValue", "color: #00a3cc", selectedValue);
         selectedValue.includes(value)
           ? setSelectedValue(selectedValue.filter(item => item !== value))
           : setSelectedValue([...selectedValue, value]);

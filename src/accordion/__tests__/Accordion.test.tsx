@@ -4,7 +4,7 @@ import { axe, render, press } from "reakit-test-utils";
 import {
   AccordionPanel,
   Accordion,
-  AccordionItem,
+  AccordionTrigger,
   useAccordionState,
 } from "../index";
 
@@ -14,17 +14,17 @@ const AccordionComponent = (props: any) => {
   return (
     <Accordion {...state}>
       <h3>
-        <AccordionItem {...state}>Trigger 1</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
       </h3>
       <AccordionPanel {...state}>Panel 1</AccordionPanel>
       <h3>
-        <AccordionItem id="accordion-2" {...state}>
+        <AccordionTrigger id="accordion-2" {...state}>
           Trigger 2
-        </AccordionItem>
+        </AccordionTrigger>
       </h3>
       <AccordionPanel {...state}>Panel 2</AccordionPanel>
       <h3>
-        <AccordionItem {...state}>Trigger 3</AccordionItem>
+        <AccordionTrigger {...state}>Trigger 3</AccordionTrigger>
       </h3>
       <AccordionPanel {...state}>Panel 3</AccordionPanel>
     </Accordion>
