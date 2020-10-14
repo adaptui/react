@@ -15,10 +15,10 @@ import {
   setYear,
 } from "date-fns";
 
-import { DateTimeFormatOpts, DateValue } from "../utils/types";
+import { DateTimeFormatOpts } from "../utils/types";
 
-export function convertValue(value: DateValue | undefined): Date | undefined {
-  if (!value || !isValid(value)) {
+export function convertValue(value: Date | undefined): Date | undefined {
+  if (!value) {
     return undefined;
   }
 

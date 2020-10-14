@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { addDays, addWeeks, subWeeks } from "date-fns";
+import { addWeeks, subWeeks, format } from "date-fns";
 
 import "./index.css";
 import {
@@ -12,7 +12,6 @@ import {
   useDatePickerState,
   DatePickerInitialState,
 } from "../index";
-import { DateValue } from "../../utils/types";
 import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 
 export default {
@@ -61,19 +60,17 @@ const CalendarIcon = () => (
 
 export const Default = () => <DatePickerComp />;
 
-export const InitialDate = () => (
-  <DatePickerComp defaultValue={new Date(2001, 0, 1)} />
-);
+export const InitialDate = () => <DatePickerComp defaultValue="2020-02-29" />;
 
 export const ControllableState = () => {
-  const [value, setValue] = React.useState<DateValue>(addDays(new Date(), 1));
+  const [value, setValue] = React.useState("2020-10-13");
 
   return (
     <div>
       <input
         type="date"
-        onChange={e => setValue(new Date(e.target.value))}
-        value={new Date(value).toISOString().slice(0, 10)}
+        onChange={e => setValue(e.target.value)}
+        value={value}
       />
       <DatePickerComp value={value} onChange={setValue} />
     </div>
@@ -81,26 +78,25 @@ export const ControllableState = () => {
 };
 
 export const MinMaxDate = () => (
-  <DatePickerComp minValue={new Date()} maxValue={addWeeks(new Date(), 1)} />
+  <DatePickerComp
+    minValue={format(new Date(), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
+  />
 );
 
 export const InValidDate = () => (
   <DatePickerComp
-    defaultValue={addWeeks(new Date(), 2)}
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
+    defaultValue={format(addWeeks(new Date(), 2), "yyyy-MM-dd")}
+    minValue={format(subWeeks(new Date(), 1), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
   />
 );
 
-export const isDisabled = () => (
-  <DatePickerComp defaultValue={addDays(new Date(), 1)} isDisabled />
-);
+export const isDisabled = () => <DatePickerComp isDisabled />;
 
-export const isReadOnly = () => (
-  <DatePickerComp defaultValue={addDays(new Date(), 1)} isReadOnly />
-);
+export const isReadOnly = () => <DatePickerComp isReadOnly />;
 
 export const autoFocus = () => (
   // eslint-disable-next-line jsx-a11y/no-autofocus
-  <DatePickerComp defaultValue={addDays(new Date(), 1)} autoFocus />
+  <DatePickerComp autoFocus />
 );

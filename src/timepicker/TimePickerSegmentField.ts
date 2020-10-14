@@ -6,10 +6,8 @@ import {
   SegmentFieldOptions,
 } from "../segment";
 import { TIME_PICKER_SEGMENT_FIELD_KEYS } from "./__keys";
-import { TimePickerStateReturn } from "./TimePickerState";
 
-export type TimePickerSegmentFieldOptions = SegmentFieldOptions &
-  TimePickerStateReturn;
+export type TimePickerSegmentFieldOptions = SegmentFieldOptions;
 
 export type TimePickerSegmentFieldHTMLProps = SegmentFieldHTMLProps;
 

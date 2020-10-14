@@ -27,7 +27,6 @@ const CalendarIcon = () => (
 
 const TimePickerComp: React.FC<TimePickerStateProps> = props => {
   const state = useTimePickerState(props);
-  console.log("%c state", "color: #d0bfff", state);
 
   return (
     <>
@@ -104,18 +103,21 @@ export const Default = () => <TimePickerComp />;
 export const InitialDate = () => <TimePickerComp defaultValue="01:30" />;
 
 export const ControllableState = () => {
-  const [value, setValue] = React.useState("12:30");
+  const [value, setValue] = React.useState("12:30:20");
 
   return (
     <div>
       <input
         type="time"
-        onChange={e => {
-          setValue(e.target.value);
-        }}
+        onChange={e => setValue(e.target.value)}
+        step="1"
         value={value}
       />
-      <TimePickerComp value={value} onChange={setValue} />
+      <TimePickerComp
+        value={value}
+        onChange={setValue}
+        formatOptions={{ timeStyle: "medium" }}
+      />
     </div>
   );
 };

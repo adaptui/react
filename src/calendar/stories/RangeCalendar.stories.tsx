@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { addDays, addWeeks, setDate, subDays, subWeeks } from "date-fns";
+import { addDays, addWeeks, subDays, format } from "date-fns";
 import "./range-style.css";
 
 import {
@@ -23,7 +23,6 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
 } from "../RangeCalendarState";
-import { DateValue } from "../../utils/types";
 
 export default {
   title: "Component/RangeCalendar",
@@ -91,26 +90,29 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
 export const Default = () => <RangeCalendarComp />;
 export const DefaultValue = () => (
   <RangeCalendarComp
-    defaultValue={{ start: setDate(new Date(), 1), end: new Date() }}
+    defaultValue={{
+      start: format(new Date(), "yyyy-MM-dd"),
+      end: format(addDays(new Date(), 4), "yyyy-MM-dd"),
+    }}
   />
 );
 
 export const ControlledValue = () => {
-  const [start, setStart] = React.useState<DateValue>(subDays(new Date(), 1));
-  const [end, setEnd] = React.useState<DateValue>(addDays(new Date(), 1));
+  const [start, setStart] = React.useState(
+    format(subDays(new Date(), 1), "yyyy-MM-dd"),
+  );
+  const [end, setEnd] = React.useState(
+    format(addDays(new Date(), 1), "yyyy-MM-dd"),
+  );
 
   return (
     <div>
       <input
         type="date"
-        onChange={e => setStart(new Date(e.target.value))}
-        value={(start as Date).toISOString().slice(0, 10)}
+        onChange={e => setStart(e.target.value)}
+        value={start}
       />
-      <input
-        type="date"
-        onChange={e => setEnd(new Date(e.target.value))}
-        value={(end as Date).toISOString().slice(0, 10)}
-      />
+      <input type="date" onChange={e => setEnd(e.target.value)} value={end} />
       <RangeCalendarComp
         value={{ start, end }}
         onChange={({ end, start }) => {
@@ -124,12 +126,15 @@ export const ControlledValue = () => {
 
 export const MinMaxDefaultDate = () => (
   <RangeCalendarComp
-    minValue={subWeeks(new Date(), 1)}
-    maxValue={addWeeks(new Date(), 1)}
+    minValue={format(new Date(), "yyyy-MM-dd")}
+    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
   />
 );
+
 export const isDisabled = () => <RangeCalendarComp isDisabled />;
+
 export const isReadOnly = () => <RangeCalendarComp isReadOnly />;
+
 export const autoFocus = () => (
   // eslint-disable-next-line jsx-a11y/no-autofocus
   <RangeCalendarComp autoFocus />

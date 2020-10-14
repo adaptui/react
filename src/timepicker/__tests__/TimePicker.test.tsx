@@ -1,5 +1,6 @@
 import * as React from "react";
 import { axe, render, press } from "reakit-test-utils";
+
 import {
   TimePicker,
   TimePickerColumn,
@@ -10,7 +11,7 @@ import {
   TimePickerStateProps,
   TimePickerColumnValue,
   TimePickerSegmentField,
-} from "..";
+} from "../index";
 
 beforeAll(() => {
   // https://github.com/jsdom/jsdom/issues/1695
@@ -75,7 +76,7 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
 describe("TimePicker", () => {
   it("should render correctly", () => {
     const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45pm" />,
+      <TimePickerComp defaultValue="12:45" />,
     );
 
     expect(testId("current-time")).toHaveTextContent("12:45 PM");
@@ -83,7 +84,7 @@ describe("TimePicker", () => {
 
   it("should open and change time value", () => {
     const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45pm" />,
+      <TimePickerComp defaultValue="12:45" />,
     );
 
     expect(testId("timepicker-content")).not.toBeVisible();
@@ -104,7 +105,7 @@ describe("TimePicker", () => {
 
   it("should be able to navigate with keyboard", () => {
     const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45pm" />,
+      <TimePickerComp defaultValue="12:45" />,
     );
 
     expect(testId("timepicker-content")).not.toBeVisible();

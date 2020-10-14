@@ -7,7 +7,7 @@ import {
   PickerBaseTrigger,
   usePickerBaseState,
   PickerBaseInitialState,
-} from "..";
+} from "../index";
 
 const PickerBaseComp: React.FC<PickerBaseInitialState> = props => {
   const state = usePickerBaseState({
