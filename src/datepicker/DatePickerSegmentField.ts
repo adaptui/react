@@ -9,8 +9,10 @@ import { DATE_PICKER_SEGMENT_FIELD_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
 import { DateRangePickerStateReturn } from "./DateRangePickerState";
 
-export type DatePickerSegmentFieldOptions = SegmentFieldOptions &
-  Partial<DatePickerStateReturn & DateRangePickerStateReturn>;
+export type DatePickerSegmentFieldOptions =
+  | SegmentFieldOptions
+  | Partial<DatePickerStateReturn>
+  | Partial<DateRangePickerStateReturn>;
 
 export type DatePickerSegmentFieldHTMLProps = SegmentFieldHTMLProps;
 

@@ -6,7 +6,6 @@ import {
   getMonth,
   getSeconds,
   getYear,
-  isValid,
   setDate,
   setHours,
   setMinutes,

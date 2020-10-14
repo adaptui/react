@@ -114,6 +114,7 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
                 segment={segment}
                 className="datepicker__field--item"
                 {...state.startSegmentState}
+                {...state}
               />
             ))}
           </DatePickerSegmentField>
@@ -128,6 +129,7 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
                 segment={segment}
                 className="datepicker__field--item"
                 {...state.endSegmentState}
+                {...state}
               />
             ))}
           </DatePickerSegmentField>
