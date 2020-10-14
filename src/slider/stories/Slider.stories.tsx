@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reakit";
 import { Meta } from "@storybook/react";
 import { useForm, Controller } from "react-hook-form";
 
@@ -9,7 +10,7 @@ import {
   SliderThumb,
   useSliderState,
   SliderFilledTrack,
-} from "..";
+} from "../index";
 import {
   sliderHorizontalFilledTractStyle,
   sliderHorizontalStyle,
@@ -20,7 +21,6 @@ import {
   sliderVerticalThumbStyle,
   sliderVerticalTrackStyle,
 } from "./styles";
-import { Button } from "../../button";
 
 export default {
   title: "Component/Slider",
