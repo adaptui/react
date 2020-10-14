@@ -25,8 +25,8 @@ export interface DatePickerInitialState
     FocusableProps,
     ValueBase<string>,
     RangeValueBase<string> {
+  placeholderDate?: string;
   formatOptions?: DateTimeFormatOpts;
-  placeholderDate?: Date;
 }
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
@@ -39,7 +39,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     isRequired,
     autoFocus,
     formatOptions,
-    placeholderDate,
+    placeholderDate: placeholderDateProp,
   } = props;
 
   const onChange = React.useCallback(
@@ -58,6 +58,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
+  const placeholderDate = parseDate(placeholderDateProp);
 
   const selectDate = (newValue: string) => {
     const newDate = parseDate(newValue);
@@ -75,6 +76,8 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const calendar = useCalendarState({
     value: stringifyDate(value),
     onChange: selectDate,
+    minValue: minValueProp,
+    maxValue: maxValueProp,
   });
 
   const validationState: ValidationState =
