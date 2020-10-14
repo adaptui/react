@@ -32,15 +32,6 @@ export type AccordionItemHTMLProps = ButtonHTMLProps & CompositeItemHTMLProps;
 
 export type AccordionItemProps = AccordionItemOptions & AccordionItemHTMLProps;
 
-function useAccordionPanelId(options: AccordionItemOptions) {
-  const { panels, id } = options;
-
-  return React.useMemo(
-    () => panels?.find(panel => panel.groupId === id)?.id || undefined,
-    [panels, id],
-  );
-}
-
 export const useAccordionItem = createHook<
   AccordionItemOptions,
   AccordionItemHTMLProps
@@ -145,4 +136,13 @@ function isAccordionSelected(options: AccordionItemOptions) {
 
   if (!allowMultiple) return selectedId === id;
   return selectedIds?.includes(id);
+}
+
+function useAccordionPanelId(options: AccordionItemOptions) {
+  const { panels, id } = options;
+
+  return React.useMemo(
+    () => panels?.find(panel => panel.groupId === id)?.id || undefined,
+    [panels, id],
+  );
 }
