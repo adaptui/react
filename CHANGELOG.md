@@ -4,6 +4,93 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.4](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.3...v0.1.1-alpha.4) (2020-10-14)
+
+### Features
+
+- added DateRangePicker
+  ([#91](https://github.com/timelessco/renderless-components/issues/91))
+  ([0a1cabd](https://github.com/timelessco/renderless-components/commit/0a1cabdbb1a7172538ecf7853ef15d1e86b76388))
+- **accordion:** ✨ improve accordion state with better aria & tests
+  ([2f47dbc](https://github.com/timelessco/renderless-components/commit/2f47dbc12324ef75275da042a88515cb0064a428))
+- **time-picker:** ✨ add keyboard navigation to the column
+  ([0a514ad](https://github.com/timelessco/renderless-components/commit/0a514ad9f1d6cdf36d2c5fd928b7a513a20b2ca0))
+- added TimePicker v1
+  ([#59](https://github.com/timelessco/renderless-components/issues/59))
+  ([7295695](https://github.com/timelessco/renderless-components/commit/7295695a1961f3a303c04ef9386033a5d7f35461)),
+  closes [#75](https://github.com/timelessco/renderless-components/issues/75)
+
+### Bug Fixes
+
+- **buttons:** 🐛 remove buttons altogether
+  ([3d8bdf9](https://github.com/timelessco/renderless-components/commit/3d8bdf962ef662c6bf5b0dba5c70bb50c5bd867d))
+- **spin-buttons:** 🐛 add aria-buttons for spin button types
+  ([9606a7d](https://github.com/timelessco/renderless-components/commit/9606a7df2bf55ef001292d54103b1e64d56e0ded))
+- timepicker voiceover a11y
+  ([#84](https://github.com/timelessco/renderless-components/issues/84))
+  ([bf9cdc6](https://github.com/timelessco/renderless-components/commit/bf9cdc61eb6a3cae9972e190996b8d0c27b1d389))
+
+### Build System
+
+- added bundlesize configs
+  ([#77](https://github.com/timelessco/renderless-components/issues/77))
+  ([6b79e32](https://github.com/timelessco/renderless-components/commit/6b79e329621c1e3e90a104a5c9894a48485db033))
+
+### Tests
+
+- **pickers:** ✅ fix tests on pickers
+  ([1e2ac10](https://github.com/timelessco/renderless-components/commit/1e2ac103531665323d922aab55d4f1216518e7c6))
+- added test for BasePicker
+  ([#83](https://github.com/timelessco/renderless-components/issues/83))
+  ([02f7d87](https://github.com/timelessco/renderless-components/commit/02f7d87b2a9cf2b5c0daaae719eb80985605f6d8))
+- added test for timepicker
+  ([#86](https://github.com/timelessco/renderless-components/issues/86))
+  ([759e100](https://github.com/timelessco/renderless-components/commit/759e1003978fb197eca6a4d69d15495b64851c71))
+- added tests for calendar
+  ([#73](https://github.com/timelessco/renderless-components/issues/73))
+  ([3c2d16a](https://github.com/timelessco/renderless-components/commit/3c2d16a3b1776396822bd2d57e66c99bf773672e))
+- added tests for segment
+  ([#76](https://github.com/timelessco/renderless-components/issues/76))
+  ([456ce49](https://github.com/timelessco/renderless-components/commit/456ce49b1fd3f84acfd458ba3210981d306ebfdc))
+- added tests for SegmentState
+  ([#79](https://github.com/timelessco/renderless-components/issues/79))
+  ([55bc3c5](https://github.com/timelessco/renderless-components/commit/55bc3c58e788e248a0a5bb1e9fb8009e78b9b4fc))
+
+### Others
+
+- **accordion:** 💄 improve styled accordion css & markup
+  ([d2c6feb](https://github.com/timelessco/renderless-components/commit/d2c6feb91e95e954c0ccb77dabeb4328f62ae678))
+- rename DateFormatTime to prevent key generation
+  ([#87](https://github.com/timelessco/renderless-components/issues/87))
+  ([f8f72fd](https://github.com/timelessco/renderless-components/commit/f8f72fd23a0cc1293601d9326525623851ac7d49))
+- **deps:** ⬆️ upgrade project & dev deps
+  ([502eda3](https://github.com/timelessco/renderless-components/commit/502eda34416ca2837cfa152b9923bd7916187a88))
+- **release:** 0.1.1-alpha.3
+  ([70235ec](https://github.com/timelessco/renderless-components/commit/70235ec17428c7de32e7d255d47ef03f7478ccba))
+
+### Code Refactoring
+
+- **accordion:** ♻️ change accordion tsx to ts
+  ([7a4ebf3](https://github.com/timelessco/renderless-components/commit/7a4ebf3bf49b2ab12d99e81e587876d699c238e7))
+- **accordion:** ♻️ move functions to the bottom of the components
+  ([d525a8f](https://github.com/timelessco/renderless-components/commit/d525a8f42f1f113cf319080c7fab85f1f7a7b8b8))
+- **accordion:** ♻️ remove console logs & rename item to trigger
+  ([e6a998b](https://github.com/timelessco/renderless-components/commit/e6a998b3b21fb6c900a9b4c5b24c28a0e599b705))
+- **accordion:** ♻️ update initial state & tests
+  ([341b5c7](https://github.com/timelessco/renderless-components/commit/341b5c74af6ac35cb1b5d8e88c3b667047f9cae8))
+- **accordion:** ♻️ update keys for accordion trigger
+  ([dbf7fc5](https://github.com/timelessco/renderless-components/commit/dbf7fc5ce17ad9df91dcea1e3f77104788778383))
+- **aria:** ♻️ remove aria dependencies with button & interactions
+  ([f32199c](https://github.com/timelessco/renderless-components/commit/f32199cbabf5ac529786896aec26e6f305480dfb))
+- **pickers:** ♻️ improve state from dateValue to string
+  ([ade0a4e](https://github.com/timelessco/renderless-components/commit/ade0a4ef3621828d6dfb66b57ed4ca3a391279e5))
+- **pickers:** ♻️ update utils & add date utils
+  ([12ee6da](https://github.com/timelessco/renderless-components/commit/12ee6da780ae2a79d7d3e3878321945f0a1a1995))
+- **pickers:** ✨ utils date logic & naming
+  ([8638596](https://github.com/timelessco/renderless-components/commit/86385966345120a6650c70b49363d5e7ef643f4e))
+- **timepicker:** ♻️ add guard clause to createonkeydown
+  ([9e46551](https://github.com/timelessco/renderless-components/commit/9e46551db31c023b7f67a19c96c2ffd0ae739931))
+
 ### [0.1.1-alpha.3](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.2...v0.1.1-alpha.3) (2020-10-07)
 
 ### [0.1.1-alpha.2](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.1...v0.1.1-alpha.2) (2020-10-07)
