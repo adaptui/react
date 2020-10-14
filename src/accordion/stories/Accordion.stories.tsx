@@ -51,8 +51,6 @@ export const DefaultSelected = () => (
   <AccordionComponent selectedId="accordion3" />
 );
 
-export const NoneSelected = () => <AccordionComponent selectedId={null} />;
-
 export const AutoSelect = () => <AccordionComponent manual={false} />;
 
 export const Loop = () => <AccordionComponent loop />;

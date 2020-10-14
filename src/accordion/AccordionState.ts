@@ -19,7 +19,7 @@ export type AccordionState = CompositeState & {
    * Initial selected accordion's `id`.
    * @default []
    */
-  selectedIds?: AccordionState["currentId"][] | null;
+  selectedIds?: AccordionState["currentId"][];
   /**
    * Lists all the panels.
    */
@@ -58,7 +58,7 @@ export type AccordionActions = CompositeActions & {
    * Sets `selectedIds`.
    */
   setSelectedIds: React.Dispatch<
-    React.SetStateAction<CompositeState["currentId"][] | null | undefined>
+    React.SetStateAction<CompositeState["currentId"][]>
   >;
   /**
    * Registers a accordion panel.
@@ -85,7 +85,7 @@ export function useAccordionState(
 ): AccordionStateReturn {
   const {
     selectedId: initialSelectedId,
-    selectedIds: initialSelectedIds,
+    selectedIds: initialSelectedIds = [],
     allowMultiple = false,
     allowToggle: allowToggleProp = false,
     manual = true,
@@ -100,38 +100,10 @@ export function useAccordionState(
     ...sealed,
   });
 
+  // Single toggle accordion State
   const [selectedId, setSelectedId] = React.useState(initialSelectedId);
-
-  // If selectedId is not set, use the currentId. It's still possible to have
-  // no selected accordion with useAccordionState({ selectedId: null });
-  React.useEffect(() => {
-    if (selectedId === null) return;
-
-    const selectedItem = composite.items.find(item => item.id === selectedId);
-    if (selectedItem) return;
-
-    if (composite.currentId) {
-      setSelectedId(composite.currentId);
-    }
-  }, [selectedId, composite.items, composite.currentId]);
-
-  // Logic for Allow Multiple
+  // Multiple toggle accordion State
   const [selectedIds, setSelectedIds] = React.useState(initialSelectedIds);
-
-  React.useEffect(() => {
-    if (!allowMultiple) return;
-    if (selectedIds === null) return;
-    if (selectedIds?.length === 0) return;
-
-    const selectedItem = composite.items.find(item =>
-      selectedIds?.includes(item.id),
-    );
-    if (selectedItem) return;
-
-    if (composite.currentId) {
-      setSelectedIds([composite.currentId]);
-    }
-  }, [selectedIds, composite.items, composite.currentId, allowMultiple]);
 
   const select = React.useCallback(
     (id: string | null) => {

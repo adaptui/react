@@ -73,26 +73,30 @@ test("Accordion should have proper keyboard navigation when on loop", () => {
 
     press.Tab();
     expect(text("Trigger 1")).toHaveFocus();
-    expect(text("Panel 1")).toBeVisible();
+    expect(text("Panel 1")).not.toBeVisible();
 
     if (toggle) {
       // if allowToggle is true then pressing again will close it
+      press.Enter();
+      expect(text("Panel 1")).toBeVisible();
       press.Enter();
       expect(text("Panel 1")).not.toBeVisible();
     } else {
       // if allowToggle is false then pressing again will close it
       press.Enter();
       expect(text("Panel 1")).toBeVisible();
+      press.Enter();
+      expect(text("Panel 1")).toBeVisible();
     }
   });
 });
 
-test("Accordion should open/close properly with AllowMultiple: false", () => {
+test("Accordion should open/close properly", () => {
   const { getByText: text } = render(<AccordionComponent />);
 
   press.Tab();
   expect(text("Trigger 1")).toHaveFocus();
-  expect(text("Panel 1")).toBeVisible();
+  expect(text("Panel 1")).not.toBeVisible();
   press.Enter();
   expect(text("Panel 1")).toBeVisible();
 
@@ -106,16 +110,15 @@ test("Accordion should open/close properly with AllowMultiple: false", () => {
   expect(text("Panel 1")).not.toBeVisible();
 });
 
-test("Accordion should open/close properly with AllowMultiple: true", () => {
+test("Accordion should open/close properly with AllowMultiple", () => {
   const { getByText: text } = render(<AccordionComponent allowMultiple />);
 
   press.Tab();
   expect(text("Trigger 1")).toHaveFocus();
-  expect(text("Panel 1")).toBeVisible();
+  expect(text("Panel 1")).not.toBeVisible();
 
   press.Enter();
-  expect(text("Panel 1")).not.toBeVisible();
-  press.Enter();
+  expect(text("Panel 1")).toBeVisible();
 
   // go to next panel
   press.ArrowDown();
@@ -126,6 +129,15 @@ test("Accordion should open/close properly with AllowMultiple: true", () => {
   expect(text("Panel 1")).toBeVisible();
 });
 
+test("Accordion should have none selected by default", () => {
+  const { getByText: text } = render(<AccordionComponent />);
+
+  press.Tab();
+  expect(text("Panel 1")).not.toBeVisible();
+  expect(text("Panel 2")).not.toBeVisible();
+  expect(text("Panel 3")).not.toBeVisible();
+});
+
 test("Accordion with selectedId given to be selected properly", () => {
   const { getByText: text } = render(
     <AccordionComponent selectedId="accordion-2" />,
@@ -134,15 +146,6 @@ test("Accordion with selectedId given to be selected properly", () => {
   press.Tab();
   expect(text("Panel 1")).not.toBeVisible();
   expect(text("Panel 2")).toBeVisible();
-});
-
-test("Accordion should have none selected when selectedId is null", () => {
-  const { getByText: text } = render(<AccordionComponent selectedId={null} />);
-
-  press.Tab();
-  expect(text("Panel 1")).not.toBeVisible();
-  expect(text("Panel 2")).not.toBeVisible();
-  expect(text("Panel 3")).not.toBeVisible();
 });
 
 test("Accordion manual: false", () => {

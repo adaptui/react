@@ -73,17 +73,15 @@ function getPanelIndex(
  * return it. registerPanel is not called.
  */
 function getAccordionId(options: AccordionPanelOptions) {
-  const panel = options.panels?.find(p => p.id === options.id);
+  const { panels, id, items } = options;
+  const panel = panels?.find(p => p.id === id);
   const accordionId = options.accordionId || panel?.groupId;
-  if (accordionId || !panel || !options.panels || !options.items) {
+  if (accordionId || !panel || !panels || !items) {
     return accordionId;
   }
 
-  const panelIndex = getPanelIndex(options.panels, panel);
-  const accordionsWithoutPanel = getAccordionsWithoutPanel(
-    options.items,
-    options.panels,
-  );
+  const panelIndex = getPanelIndex(panels, panel);
+  const accordionsWithoutPanel = getAccordionsWithoutPanel(items, panels);
   return accordionsWithoutPanel[panelIndex]?.id || undefined;
 }
 
@@ -131,10 +129,9 @@ export const AccordionPanel = createComponent({
 });
 
 function isPanelVisible(options: AccordionPanelOptions) {
+  const { allowMultiple, selectedId, selectedIds } = options;
   const accordionId = getAccordionId(options);
 
-  if (!options.allowMultiple)
-    return accordionId ? options.selectedId === accordionId : false;
-
-  return accordionId ? options.selectedIds?.includes(accordionId) : false;
+  if (!allowMultiple) return accordionId ? selectedId === accordionId : false;
+  return accordionId ? selectedIds?.includes(accordionId) : false;
 }
