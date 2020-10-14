@@ -8,7 +8,6 @@ import { stringifyTime, parseTime } from "./__utils";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-// TODO: Voice Overing all button on dialog open
 export interface TimePickerStateProps
   extends PickerBaseInitialState,
     FocusableProps,
@@ -83,6 +82,7 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     if (autoFocus) {
       segmentState.first();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
 

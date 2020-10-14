@@ -1,6 +1,6 @@
 import * as React from "react";
-import { subWeeks, addWeeks } from "date-fns";
 import { axe, render, press } from "reakit-test-utils";
+import { subWeeks, addWeeks, format, addDays } from "date-fns";
 
 import {
   CalendarCell,
@@ -71,9 +71,7 @@ export const CalendarComp: React.FC<CalendarInitialState> = props => {
 
 describe("Calendar", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(
-      <CalendarComp defaultValue={"10-7-2020"} />,
-    );
+    const { getByTestId: testId } = render(<CalendarComp />);
 
     expect(testId("weekDays").children).toHaveLength(7);
     expect(testId("current-year")).toHaveTextContent("October 2020");
@@ -81,7 +79,7 @@ describe("Calendar", () => {
 
   it("should have proper calendar header keyboard navigation", () => {
     const { getByTestId: testId, getByText: text } = render(
-      <CalendarComp defaultValue={"10-7-2020"} />,
+      <CalendarComp defaultValue={"2020-10-07"} />,
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2020");
@@ -105,7 +103,7 @@ describe("Calendar", () => {
 
   it("should proper grid navigation", () => {
     const { getByTestId: testId, getByLabelText: label } = render(
-      <CalendarComp defaultValue={"10-7-2020"} />,
+      <CalendarComp defaultValue={"2020-10-07"} />,
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2020");
@@ -136,9 +134,9 @@ describe("Calendar", () => {
 test("should have min/max values", async () => {
   const { getByLabelText: label } = render(
     <CalendarComp
-      defaultValue={new Date(2020, 10, 7)}
-      minValue={subWeeks(new Date(2020, 10, 7), 1)}
-      maxValue={addWeeks(new Date(2020, 10, 7), 1)}
+      defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+      minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+      maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
     />,
   );
 

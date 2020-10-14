@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 
+import "./index.css";
 import { Segment } from "../Segment";
 import { SegmentField } from "../SegmentField";
 import { useSegmentState, SegmentStateProps } from "../SegmentState";
-import "./index.css";
 
 export default {
   title: "Component/Segment",

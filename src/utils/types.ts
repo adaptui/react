@@ -3,8 +3,6 @@ export type DateTimeFormatOpts = Intl.DateTimeFormatOptions & {
   dateStyle?: string;
 };
 
-export type DateValue = string | number | Date;
-
 export interface RangeValueBase<T> {
   /** The smallest value allowed. */
   minValue?: T;
