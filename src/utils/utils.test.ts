@@ -6,14 +6,16 @@ import {
 } from "./date";
 import { clampValue } from ".";
 
+jest.spyOn(new Date(), "getHours").mockImplementation(() => 6);
+
 describe("Utils", () => {
   test("parseDate", () => {
     expect(parseDate("2020-10-07")?.toString()).toEqual(
-      "Wed Oct 07 2020 16:00:00 GMT+0530 (India Standard Time)",
+      "Wed Oct 07 2020 17:00:00 GMT+0530 (India Standard Time)",
     );
 
     expect(parseDate("1-1-1")?.toString()).toEqual(
-      "Mon Jan 01 0001 16:00:00 GMT+0553 (India Standard Time)",
+      "Mon Jan 01 0001 17:00:00 GMT+0553 (India Standard Time)",
     );
 
     expect(parseDate("Hello world")).toBeUndefined();
@@ -35,11 +37,11 @@ describe("Utils", () => {
       end: parseDate("2020-8-12"),
     });
 
-    expect(parseRangeDate({ start: "invalid", end: "2020-8-12" })).toEqual(
-      undefined,
-    );
+    expect(
+      parseRangeDate({ start: "invalid", end: "2020-8-12" }),
+    ).toBeUndefined();
 
-    expect(parseRangeDate()).toEqual(undefined);
+    expect(parseRangeDate()).toBeUndefined();
   });
 
   test("isInvalidDateRange", () => {
