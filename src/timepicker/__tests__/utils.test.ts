@@ -3,8 +3,7 @@ import {
   getSelectedDateFromValue,
   getSelectedValueFromDate,
 } from "../__utils";
-
-jest.spyOn(new Date(), "getSeconds").mockImplementation(() => 0);
+import MockDate from "mockdate";
 
 describe("TimePicker Utils", () => {
   test("parseTime", () => {
@@ -27,6 +26,8 @@ describe("TimePicker Utils", () => {
   });
 
   test("getSelectedDateFromValue", () => {
+    MockDate.set(new Date("2020-05-03T19:42:00.000Z"));
+
     expect(
       getSelectedDateFromValue(
         1,
@@ -34,5 +35,7 @@ describe("TimePicker Utils", () => {
         "hour",
       ).toISOString(),
     ).toBe("2020-05-03T19:42:00.000Z");
+
+    MockDate.reset();
   });
 });

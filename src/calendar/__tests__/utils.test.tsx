@@ -1,11 +1,13 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { generateDaysInMonthArray, makeRange, useWeekDays } from "../__utils";
-
-jest.spyOn(new Date(), "getHours").mockImplementation(() => 6);
+import MockDate from "mockdate";
 
 describe("Calendar Utils", () => {
   test("makeRange", () => {
-    const range = makeRange(new Date(1999, 4, 4), new Date(2020, 4, 4));
+    const range = makeRange(
+      new Date(1999, 4, 4, 0, 0),
+      new Date(2020, 4, 4, 0, 0),
+    );
     expect(range.start.toISOString()).toEqual("1999-05-03T18:30:00.000Z");
     expect(range.end.toISOString()).toEqual("2020-05-03T18:30:00.000Z");
   });
@@ -45,6 +47,7 @@ describe("Calendar Utils", () => {
   });
 
   test("generateDaysInMonthArray", () => {
+    MockDate.set(new Date("2020-02-01T11:30:00.000Z"));
     const days = generateDaysInMonthArray(1, 0, 7, 2020);
 
     expect(days).toMatchInlineSnapshot(`
@@ -114,5 +117,7 @@ describe("Calendar Utils", () => {
         ],
       ]
     `);
+
+    MockDate.reset();
   });
 });

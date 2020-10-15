@@ -5,21 +5,26 @@ import {
   isInvalidDateRange,
 } from "./date";
 import { clampValue } from ".";
-
-jest.spyOn(new Date(), "getHours").mockImplementation(() => 6);
+import MockDate from "mockdate";
 
 describe("Utils", () => {
   test("parseDate", () => {
+    MockDate.set(
+      new Date("Wed Oct 07 2020 18:00:00 GMT+0530 (India Standard Time)"),
+    );
+
     expect(parseDate("2020-10-07")?.toString()).toEqual(
-      "Wed Oct 07 2020 17:00:00 GMT+0530 (India Standard Time)",
+      "Wed Oct 07 2020 18:00:00 GMT+0530 (India Standard Time)",
     );
 
     expect(parseDate("1-1-1")?.toString()).toEqual(
-      "Mon Jan 01 0001 17:00:00 GMT+0553 (India Standard Time)",
+      "Mon Jan 01 0001 18:00:00 GMT+0553 (India Standard Time)",
     );
 
     expect(parseDate("Hello world")).toBeUndefined();
     expect(parseDate("202020-2020-20")).toBeUndefined();
+
+    MockDate.reset();
   });
 
   test("stringifyDate", () => {
