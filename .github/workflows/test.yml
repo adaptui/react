@@ -35,7 +35,7 @@ jobs:
       - name: Setup timezone
         uses: zcong1993/setup-timezone@master
         with:
-          timezone: Asian/Kolkata
+          timezone: Asia/Kolkata
 
       - name: install deps
         run: yarn
