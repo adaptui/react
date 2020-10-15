@@ -87,12 +87,14 @@ describe("RangeCalendar", () => {
   it("should have proper initial start and end ranges", () => {
     const { getByLabelText: label, baseElement } = render(
       <RangeCalendarComp
-        defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
+        defaultValue={{ start: "2050-10-07", end: "2050-10-30" }}
       />,
     );
 
     const start = baseElement.querySelector("[data-is-selection-start]");
-    const anyMiddleDate = label("Thursday, October 15, 2020");
+    // If anyone is reading this code from future
+    // Note that this will fail again on 15th october 2050.
+    const anyMiddleDate = label("Saturday, October 15, 2050");
     const end = baseElement.querySelector("[data-is-selection-end]");
 
     expect(start).toHaveTextContent("7");
@@ -156,11 +158,11 @@ describe("RangeCalendar", () => {
     const start = baseElement.querySelector("[data-is-selection-start]");
     expect(start).toHaveTextContent("14");
   });
-});
 
-test("RangeCalendar renders with no a11y violations", async () => {
-  const { container } = render(<RangeCalendarComp />);
-  const results = await axe(container);
+  test("RangeCalendar renders with no a11y violations", async () => {
+    const { container } = render(<RangeCalendarComp />);
+    const results = await axe(container);
 
-  expect(results).toHaveNoViolations();
+    expect(results).toHaveNoViolations();
+  });
 });

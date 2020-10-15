@@ -2,7 +2,7 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
-import { endOfDay, setDay } from "date-fns";
+import { setDay } from "date-fns";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 

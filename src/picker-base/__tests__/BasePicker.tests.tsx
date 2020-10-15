@@ -30,7 +30,7 @@ const PickerBaseComp: React.FC<PickerBaseInitialState> = props => {
 };
 
 describe("PickerBase", () => {
-  test("should render correctly", () => {
+  it("should render correctly", () => {
     const { getByText: text, baseElement } = render(
       <PickerBaseComp visible={true} />,
     );

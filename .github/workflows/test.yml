@@ -32,6 +32,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Asia/Kolkata
+
       - name: install deps
         run: yarn
       - name: Test
