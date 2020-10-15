@@ -10,7 +10,7 @@ export function useWeekDays(weekStart: number) {
   const dayFormatter = useDateFormatter({ weekday: "short" });
   const dayFormatterLong = useDateFormatter({ weekday: "long" });
 
-  return [...new Array(7).keys()].map(index => {
+  return [0, 1, 2, 3, 4, 5, 6].map(index => {
     const dateDay = setDay(Date.now(), (index + weekStart) % 7);
     const day = dayFormatter.format(dateDay);
     const dayLong = dayFormatterLong.format(dateDay);
@@ -24,9 +24,10 @@ export function generateDaysInMonthArray(
   weeksInMonth: number,
   year: number,
 ) {
-  return [...new Array(weeksInMonth).keys()].reduce(
-    (weeks: Date[][], weekIndex) => {
-      const daysInWeek = [...new Array(7).keys()].reduce(
+  return Array(weeksInMonth)
+    .fill(1)
+    .reduce((weeks: Date[][], _, weekIndex) => {
+      const daysInWeek = [0, 1, 2, 3, 4, 5, 6].reduce(
         (days: Date[], dayIndex) => {
           const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
           const cellDate = new Date(year, month, day, new Date().getHours());
@@ -37,9 +38,7 @@ export function generateDaysInMonthArray(
       );
 
       return [...weeks, daysInWeek];
-    },
-    [],
-  );
+    }, []);
 }
 
 export function makeRange(start: Date, end: Date): RangeValue<Date> {
