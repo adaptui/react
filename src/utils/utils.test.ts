@@ -1,10 +1,10 @@
-import { clampValue } from "@chakra-ui/utils";
 import {
-  isInvalidDateRange,
   parseDate,
-  parseRangeDate,
   stringifyDate,
+  parseRangeDate,
+  isInvalidDateRange,
 } from "./date";
+import { clampValue } from ".";
 
 describe("Utils", () => {
   test("parseDate", () => {
