@@ -13,7 +13,7 @@ function render({
     .result;
 }
 
-test("initial state", () => {
+test("Accordion: initial state", () => {
   const result = render();
   expect(result.current).toMatchInlineSnapshot(`
     Object {

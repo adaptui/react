@@ -31,42 +31,42 @@ const AccordionComponent = (props: any) => {
   );
 };
 
-test("Accordion should have proper keyboard navigation", () => {
-  const { getByText: text } = render(<AccordionComponent />);
+describe("Accordion", () => {
+  it("Accordion should have proper keyboard navigation", () => {
+    const { getByText: text } = render(<AccordionComponent />);
 
-  press.Tab();
-  expect(text("Trigger 1")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 2")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 3")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 3")).toHaveFocus();
-  press.ArrowUp();
-  expect(text("Trigger 2")).toHaveFocus();
-  press.ArrowUp();
-  expect(text("Trigger 1")).toHaveFocus();
-});
+    press.Tab();
+    expect(text("Trigger 1")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 2")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 3")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 3")).toHaveFocus();
+    press.ArrowUp();
+    expect(text("Trigger 2")).toHaveFocus();
+    press.ArrowUp();
+    expect(text("Trigger 1")).toHaveFocus();
+  });
 
-test("Accordion should have proper keyboard navigation when on loop", () => {
-  const { getByText: text } = render(<AccordionComponent loop />);
+  it("Accordion should have proper keyboard navigation when on loop", () => {
+    const { getByText: text } = render(<AccordionComponent loop />);
 
-  press.Tab();
-  expect(text("Trigger 1")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 2")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 3")).toHaveFocus();
-  press.ArrowDown();
-  expect(text("Trigger 1")).toHaveFocus();
-  press.ArrowUp();
-  expect(text("Trigger 3")).toHaveFocus();
-  press.ArrowUp();
-  expect(text("Trigger 2")).toHaveFocus();
-});
+    press.Tab();
+    expect(text("Trigger 1")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 2")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 3")).toHaveFocus();
+    press.ArrowDown();
+    expect(text("Trigger 1")).toHaveFocus();
+    press.ArrowUp();
+    expect(text("Trigger 3")).toHaveFocus();
+    press.ArrowUp();
+    expect(text("Trigger 2")).toHaveFocus();
+  });
 
-[true, false].forEach(toggle => {
-  test(`Accordion allowToggle: ${toggle}`, () => {
+  it.each([true, false])("Accordion allowToggle: %s", toggle => {
     const { getByText: text } = render(
       <AccordionComponent allowToggle={toggle} />,
     );
@@ -89,86 +89,86 @@ test("Accordion should have proper keyboard navigation when on loop", () => {
       expect(text("Panel 1")).toBeVisible();
     }
   });
-});
 
-test("Accordion should open/close properly", () => {
-  const { getByText: text } = render(<AccordionComponent />);
+  it("Accordion should open/close properly", () => {
+    const { getByText: text } = render(<AccordionComponent />);
 
-  press.Tab();
-  expect(text("Trigger 1")).toHaveFocus();
-  expect(text("Panel 1")).not.toBeVisible();
-  press.Enter();
-  expect(text("Panel 1")).toBeVisible();
+    press.Tab();
+    expect(text("Trigger 1")).toHaveFocus();
+    expect(text("Panel 1")).not.toBeVisible();
+    press.Enter();
+    expect(text("Panel 1")).toBeVisible();
 
-  // go to next panel
-  press.ArrowDown();
-  expect(text("Panel 2")).not.toBeVisible();
-  press.Enter();
-  expect(text("Panel 2")).toBeVisible();
+    // go to next panel
+    press.ArrowDown();
+    expect(text("Panel 2")).not.toBeVisible();
+    press.Enter();
+    expect(text("Panel 2")).toBeVisible();
 
-  // panel 1 should be closed now if allowMultiple: false
-  expect(text("Panel 1")).not.toBeVisible();
-});
+    // panel 1 should be closed now if allowMultiple: false
+    expect(text("Panel 1")).not.toBeVisible();
+  });
 
-test("Accordion should open/close properly with AllowMultiple", () => {
-  const { getByText: text } = render(<AccordionComponent allowMultiple />);
+  it("Accordion should open/close properly with AllowMultiple", () => {
+    const { getByText: text } = render(<AccordionComponent allowMultiple />);
 
-  press.Tab();
-  expect(text("Trigger 1")).toHaveFocus();
-  expect(text("Panel 1")).not.toBeVisible();
+    press.Tab();
+    expect(text("Trigger 1")).toHaveFocus();
+    expect(text("Panel 1")).not.toBeVisible();
 
-  press.Enter();
-  expect(text("Panel 1")).toBeVisible();
+    press.Enter();
+    expect(text("Panel 1")).toBeVisible();
 
-  // go to next panel
-  press.ArrowDown();
-  press.Enter();
-  expect(text("Panel 2")).toBeVisible();
+    // go to next panel
+    press.ArrowDown();
+    press.Enter();
+    expect(text("Panel 2")).toBeVisible();
 
-  // panel 1 should be visible since allowmultiple is true
-  expect(text("Panel 1")).toBeVisible();
-});
+    // panel 1 should be visible since allowmultiple is true
+    expect(text("Panel 1")).toBeVisible();
+  });
 
-test("Accordion should have none selected by default", () => {
-  const { getByText: text } = render(<AccordionComponent />);
+  it("Accordion should have none selected by default", () => {
+    const { getByText: text } = render(<AccordionComponent />);
 
-  press.Tab();
-  expect(text("Panel 1")).not.toBeVisible();
-  expect(text("Panel 2")).not.toBeVisible();
-  expect(text("Panel 3")).not.toBeVisible();
-});
+    press.Tab();
+    expect(text("Panel 1")).not.toBeVisible();
+    expect(text("Panel 2")).not.toBeVisible();
+    expect(text("Panel 3")).not.toBeVisible();
+  });
 
-test("Accordion with selectedId given to be selected properly", () => {
-  const { getByText: text } = render(
-    <AccordionComponent selectedId="accordion-2" />,
-  );
+  it("Accordion with selectedId given to be selected properly", () => {
+    const { getByText: text } = render(
+      <AccordionComponent selectedId="accordion-2" />,
+    );
 
-  press.Tab();
-  expect(text("Panel 1")).not.toBeVisible();
-  expect(text("Panel 2")).toBeVisible();
-});
+    press.Tab();
+    expect(text("Panel 1")).not.toBeVisible();
+    expect(text("Panel 2")).toBeVisible();
+  });
 
-test("Accordion manual: false", () => {
-  const { getByText: text } = render(<AccordionComponent manual={false} />);
+  it("Accordion manual: false", () => {
+    const { getByText: text } = render(<AccordionComponent manual={false} />);
 
-  press.Tab();
-  expect(text("Trigger 1")).toHaveFocus();
-  expect(text("Panel 1")).toBeVisible();
+    press.Tab();
+    expect(text("Trigger 1")).toHaveFocus();
+    expect(text("Panel 1")).toBeVisible();
 
-  // go to next panel
-  press.ArrowDown();
-  expect(text("Trigger 2")).toHaveFocus();
-  expect(text("Panel 2")).toBeVisible();
+    // go to next panel
+    press.ArrowDown();
+    expect(text("Trigger 2")).toHaveFocus();
+    expect(text("Panel 2")).toBeVisible();
 
-  // go to next panel
-  press.ArrowDown();
-  expect(text("Trigger 3")).toHaveFocus();
-  expect(text("Panel 3")).toBeVisible();
-});
+    // go to next panel
+    press.ArrowDown();
+    expect(text("Trigger 3")).toHaveFocus();
+    expect(text("Panel 3")).toBeVisible();
+  });
 
-test("Accordion renders with no a11y violations", async () => {
-  const { container } = render(<AccordionComponent />);
-  const results = await axe(container);
+  test("Accordion renders with no a11y violations", async () => {
+    const { container } = render(<AccordionComponent />);
+    const results = await axe(container);
 
-  expect(results).toHaveNoViolations();
+    expect(results).toHaveNoViolations();
+  });
 });

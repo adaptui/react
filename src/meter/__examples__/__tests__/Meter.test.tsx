@@ -14,8 +14,8 @@ function renderMeterStateHook(props: UseMeterProps = {}) {
   return renderHook(() => useMeterState(props)).result;
 }
 
-describe("Meter", function () {
-  test("default meter markup", function () {
+describe("Meter", () => {
+  test("default meter markup", () => {
     const { container } = render(<MeterComp />);
 
     expect(container).toMatchInlineSnapshot(`

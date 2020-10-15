@@ -129,40 +129,40 @@ describe("Calendar", () => {
     expect(label("Friday, November 6, 2020")).toHaveFocus();
     expect(testId("current-year")).toHaveTextContent("November 2020");
   });
-});
 
-test("should have min/max values", async () => {
-  const { getByLabelText: label } = render(
-    <CalendarComp
-      defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
-      minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
-      maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
-    />,
-  );
+  test("should have min/max values", async () => {
+    const { getByLabelText: label } = render(
+      <CalendarComp
+        defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+      />,
+    );
 
-  press.Tab();
-  press.Tab();
-  press.Tab();
-  press.Tab();
-  press.Tab();
-  expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
 
-  // try to go outside the min max value
-  press.ArrowUp();
-  press.ArrowUp();
-  press.ArrowUp();
-  press.ArrowUp();
-  expect(label("Saturday, October 31, 2020")).toHaveFocus();
+    // try to go outside the min max value
+    press.ArrowUp();
+    press.ArrowUp();
+    press.ArrowUp();
+    press.ArrowUp();
+    expect(label("Saturday, October 31, 2020")).toHaveFocus();
 
-  press.ArrowDown();
-  press.ArrowDown();
-  press.ArrowDown();
-  expect(label("Saturday, November 14, 2020")).toHaveFocus();
-});
+    press.ArrowDown();
+    press.ArrowDown();
+    press.ArrowDown();
+    expect(label("Saturday, November 14, 2020")).toHaveFocus();
+  });
 
-test("Calendar renders with no a11y violations", async () => {
-  const { container } = render(<CalendarComp />);
-  const results = await axe(container);
+  test("Calendar renders with no a11y violations", async () => {
+    const { container } = render(<CalendarComp />);
+    const results = await axe(container);
 
-  expect(results).toHaveNoViolations();
+    expect(results).toHaveNoViolations();
+  });
 });
