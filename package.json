@@ -89,6 +89,7 @@
     "babel-eslint": "10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-chakra-ui": "1.0.0-rc.5",
+    "babel-plugin-date-fns": "^2.0.0",
     "bundlesize": "0.18.0",
     "chalk": "4.1.0",
     "concurrently": "5.3.0",

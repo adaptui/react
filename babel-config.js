@@ -21,6 +21,7 @@ module.exports = function (api) {
   ];
 
   const plugins = [
+    "date-fns",
     "babel-plugin-chakra-ui",
     "@babel/plugin-proposal-class-properties",
   ];
