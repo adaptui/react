@@ -52,8 +52,9 @@ describe("SegmentState", () => {
     `);
   });
 
-  ["increment", "decrement"].forEach(type => {
-    it(`should be able to ${type} a segment`, () => {
+  it.each(["increment", "decrement"])(
+    "should be able to %s a segment",
+    type => {
       const result = render();
 
       expect(result.current.segments[0].value).toBe(1);
@@ -72,11 +73,12 @@ describe("SegmentState", () => {
       expect(result.current.segments[2].value).toBe(
         type === "increment" ? 2 : 31,
       );
-    });
-  });
+    },
+  );
 
-  ["incrementPage", "decrementPage"].forEach(type => {
-    it(`should be able to ${type} a segment`, () => {
+  it.each(["incrementPage", "decrementPage"])(
+    "should be able to %s a segment",
+    type => {
       const result = render();
 
       expect(result.current.segments[0].value).toBe(1);
@@ -94,8 +96,8 @@ describe("SegmentState", () => {
       expect(result.current.segments[2].value).toBe(
         type === "incrementPage" ? 8 : 24,
       );
-    });
-  });
+    },
+  );
 
   it("should be able to setSegment", () => {
     const result = render();

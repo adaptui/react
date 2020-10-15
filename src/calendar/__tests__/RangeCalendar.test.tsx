@@ -158,11 +158,11 @@ describe("RangeCalendar", () => {
     const start = baseElement.querySelector("[data-is-selection-start]");
     expect(start).toHaveTextContent("14");
   });
-});
 
-test("RangeCalendar renders with no a11y violations", async () => {
-  const { container } = render(<RangeCalendarComp />);
-  const results = await axe(container);
+  test("RangeCalendar renders with no a11y violations", async () => {
+    const { container } = render(<RangeCalendarComp />);
+    const results = await axe(container);
 
-  expect(results).toHaveNoViolations();
+    expect(results).toHaveNoViolations();
+  });
 });
