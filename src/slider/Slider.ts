@@ -5,10 +5,10 @@
  * to work with Reakit System
  */
 import { useForkRef } from "reakit-utils";
-import { ariaAttr } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
+import { ariaAttr } from "../utils";
 import { SLIDER_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 

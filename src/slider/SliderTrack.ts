@@ -6,10 +6,10 @@
  */
 import { useId } from "@chakra-ui/hooks";
 import { useForkRef } from "reakit-utils";
-import { dataAttr } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
+import { dataAttr } from "../utils";
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 

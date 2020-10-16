@@ -1,10 +1,10 @@
 import { createOnKeyDown } from "reakit-utils";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
-import { isTouch } from "../utils";
 import { PICKER_BASE_KEYS } from "./__keys";
+import { isTouch, ariaAttr } from "../utils";
 import { PickerBaseStateReturn } from "./PickerBaseState";
 
 export type PickerBaseOptions = BoxOptions &
