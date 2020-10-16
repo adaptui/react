@@ -5,7 +5,7 @@ import { IStyledMeter, StyledMeter as Meter } from "../index";
 
 export default {
   component: Meter,
-  title: "Meter Linear",
+  title: "Meter/Linear",
 } as Meta;
 
 const Base: Story<IStyledMeter> = args => <Meter {...args} />;

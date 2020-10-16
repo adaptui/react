@@ -12,7 +12,7 @@ import {
 } from "./storybook-progress-utils";
 
 export default {
-  title: "Progress Linear",
+  title: "Progress/Linear",
 } as Meta;
 
 const examples = createLinearExamples({
