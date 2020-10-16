@@ -1,9 +1,52 @@
 import * as React from "react";
 import { css, cx, keyframes } from "emotion";
 
-import { MeterStateReturn } from "../MeterState";
-import { Meter, useMeterState, UseMeterProps } from "../index";
-import { generateStripe } from "../../progress/stories/storybook-progress-utils";
+import {
+  Meter,
+  useMeterState,
+  MeterStateReturn,
+  MeterInitialState,
+} from "../index";
+
+export interface StyledMeterInitialState extends MeterInitialState {
+  /**
+   * Adds a label to meter.
+   * @default false
+   */
+  withLabel?: boolean;
+  /**
+   * Adds a stripe style to meter bar.
+   * @default false
+   */
+  withStripe?: boolean;
+  /**
+   * Adds animation to the stripe.
+   * @default false
+   */
+  withStripeAnimation?: boolean;
+}
+
+export const StyledMeter: React.FC<StyledMeterInitialState> = props => {
+  const {
+    children,
+    withLabel = false,
+    withStripe = false,
+    withStripeAnimation = false,
+    ...rest
+  } = props;
+  const meter = useMeterState(rest);
+
+  return (
+    <div className={meterStyle}>
+      <Meter
+        className={cx(meterBarStyle(meter, props))}
+        {...meter}
+        {...rest}
+      ></Meter>
+      {withLabel && <div className={labelStyles}>{`${meter.percent}%`}</div>}
+    </div>
+  );
+};
 
 // CSS Styles from https://css-tricks.com/html5-meter-element/
 const meterStyle = css({
@@ -16,12 +59,6 @@ const meterStyle = css({
   boxShadow: "0 5px 5px -5px #333 inset",
   overflow: "hidden",
 });
-
-const background = {
-  safe: "#8bcf69",
-  caution: "#e6d450",
-  danger: "#f28f68",
-};
 
 const labelStyles = css({
   top: "50%",
@@ -40,7 +77,30 @@ const stripeAnim = keyframes({
   to: { backgroundPosition: "0 0" },
 });
 
-const meterBarStyle = (meter: MeterStateReturn, props: IStyledMeter) => {
+const background = {
+  safe: "#8bcf69",
+  caution: "#e6d450",
+  danger: "#f28f68",
+};
+
+const generateStripe = {
+  backgroundImage: `linear-gradient(
+  45deg,
+  rgba(255, 255, 255, 0.15) 25%,
+  transparent 25%,
+  transparent 50%,
+  rgba(255, 255, 255, 0.15) 50%,
+  rgba(255, 255, 255, 0.15) 75%,
+  transparent 75%,
+  transparent
+)`,
+  backgroundSize: "1rem 1rem",
+};
+
+function meterBarStyle(
+  meter: MeterStateReturn,
+  props: StyledMeterInitialState,
+) {
   const { percent, status } = meter;
   const { withStripe, withStripeAnimation } = props;
 
@@ -48,61 +108,8 @@ const meterBarStyle = (meter: MeterStateReturn, props: IStyledMeter) => {
     backgroundColor: status == null ? undefined : background[status],
     width: percent != null ? `${percent}%` : 0,
     height: "100%",
-    ...(withStripe && { ...generateStripe() }),
+    ...(withStripe && { ...generateStripe }),
     ...(withStripe &&
       withStripeAnimation && { animation: `${stripeAnim} 1s linear infinite` }),
   });
-};
-
-export interface IStyledMeter extends UseMeterProps {
-  /**
-   * Adds a label to meter.
-   * @default false
-   */
-  withLabel?: boolean;
-  /**
-   * Adds a stripe style to meter bar.
-   * @default false
-   */
-  withStripe?: boolean;
-  /**
-   * Adds animation to the stripe.
-   * @default false
-   */
-  withStripeAnimation?: boolean;
 }
-
-export const StyledMeter: React.FC<IStyledMeter> = props => {
-  const {
-    value,
-    low,
-    high,
-    optimum,
-    min,
-    max,
-    withLabel = false,
-    withStripe = false,
-    withStripeAnimation = false,
-    ...rest
-  } = props;
-
-  const meter = useMeterState({
-    value,
-    low,
-    high,
-    optimum,
-    min,
-    max,
-  });
-
-  return (
-    <div className={meterStyle}>
-      <Meter
-        className={cx(meterBarStyle(meter, props))}
-        {...meter}
-        {...rest}
-      ></Meter>
-      {withLabel && <div className={labelStyles}>{`${meter.percent}%`}</div>}
-    </div>
-  );
-};

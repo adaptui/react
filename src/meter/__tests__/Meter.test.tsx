@@ -6,15 +6,15 @@ import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerSt
 
 import { Meter } from "../Meter";
 import { data } from "./statehook-test-data";
-import { useMeterState, UseMeterProps } from "../../index";
+import { useMeterState, MeterInitialState } from "../../index";
 
 expect.addSnapshotSerializer(jestSerializerStripFunctions);
 
-function renderMeterStateHook(props: UseMeterProps = {}) {
+function renderMeterStateHook(props: MeterInitialState = {}) {
   return renderHook(() => useMeterState(props)).result;
 }
 
-const MeterComp: React.FC<UseMeterProps> = props => {
+const MeterComp: React.FC<MeterInitialState> = props => {
   const { value, low, high, optimum, min, max, ...rest } = props;
   const meter = useMeterState({
     value,

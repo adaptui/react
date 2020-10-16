@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { createComponent, createHook } from "reakit-system";

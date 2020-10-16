@@ -21,6 +21,22 @@ export function clampValue(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
+/**
+ * Convert a value to percentage based on lower and upper bound values
+ *
+ * @param value the value in number
+ * @param min the minimum value
+ * @param max the maximum value
+ */
+export function valueToPercent(value: number, min: number, max: number) {
+  return ((value - min) * 100) / (max - min);
+}
+
+// Function assertions
+export function isFunction(value: any): value is Function {
+  return typeof value === "function";
+}
+
 export function isTouch() {
   return Boolean(
     "ontouchstart" in window ||
