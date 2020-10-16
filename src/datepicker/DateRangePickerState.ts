@@ -134,14 +134,14 @@ export const useDateRangePickerState = (
     parseDate(props.maxValue),
   );
 
-  const validationState: ValidationState | null =
+  const validationState: ValidationState =
     props.validationState ||
     (value != null &&
     (isStartInRange ||
       isEndInRange ||
       (value.end != null && value.start != null && value.end < value.start))
       ? "invalid"
-      : null);
+      : "valid");
 
   React.useEffect(() => {
     if (popover.visible) {
