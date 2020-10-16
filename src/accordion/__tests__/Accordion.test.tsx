@@ -32,12 +32,6 @@ const AccordionComponent = (props: any) => {
 };
 
 describe("Accordion", () => {
-  it("should render correctly", () => {
-    const { asFragment } = render(<AccordionComponent />);
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it("Accordion should have proper keyboard navigation", () => {
     const { getByText: text } = render(<AccordionComponent />);
 
