@@ -5,7 +5,7 @@ import { PickerBase, PickerBaseContent, PickerBaseTrigger } from "../index";
 import { PickerBaseInitialState, usePickerBaseState } from "../PickerBaseState";
 
 export default {
-  title: "Component/PickerBase",
+  title: "PickerBase",
 } as Meta;
 
 const PickerBaseComp: React.FC<PickerBaseInitialState> = props => {

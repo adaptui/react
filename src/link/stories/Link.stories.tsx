@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react";
 import { Link } from "../Link";
 
 export default {
-  title: "Component/Link/Reakit",
+  title: "Link",
 } as Meta;
 
 export const Default = () => {

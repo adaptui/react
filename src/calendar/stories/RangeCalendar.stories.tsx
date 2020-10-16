@@ -25,7 +25,7 @@ import {
 } from "../RangeCalendarState";
 
 export default {
-  title: "Component/RangeCalendar",
+  title: "RangeCalendar",
 } as Meta;
 
 const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {

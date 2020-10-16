@@ -9,7 +9,7 @@ import {
 } from "./storybook-progress-utils";
 
 export default {
-  title: "Component/Progress/Circular",
+  title: "Progress Circular",
 } as Meta;
 
 const CircularProgress = createCircularExample({

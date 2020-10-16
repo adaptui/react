@@ -6,7 +6,7 @@ import "./index.css";
 import { CalendarComponent } from "./CalendarComponent";
 
 export default {
-  title: "Component/Calendar",
+  title: "Calendar",
 } as Meta;
 
 export const Default = () => <CalendarComponent />;

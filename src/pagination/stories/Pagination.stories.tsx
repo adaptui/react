@@ -6,7 +6,7 @@ import { PaginationButton, TGoto } from "../PaginationButton";
 import { UsePaginationProps, usePaginationState } from "../PaginationState";
 
 export default {
-  title: "Component/Pagination",
+  title: "Pagination",
 } as Meta;
 
 const PaginationComp: React.FC<UsePaginationProps> = props => {

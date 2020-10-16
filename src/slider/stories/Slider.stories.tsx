@@ -23,7 +23,7 @@ import {
 } from "./styles";
 
 export default {
-  title: "Component/Slider",
+  title: "Slider",
 } as Meta;
 
 const SliderComp: React.FC<any> = props => {

@@ -7,7 +7,7 @@ import { SegmentField } from "../SegmentField";
 import { useSegmentState, SegmentStateProps } from "../SegmentState";
 
 export default {
-  title: "Component/Segment",
+  title: "Segment",
 } as Meta;
 
 const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {

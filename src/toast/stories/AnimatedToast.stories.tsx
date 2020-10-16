@@ -8,7 +8,7 @@ import Demo, { getTransform } from "./Demo";
 import { ToastProvider, TToastWrapper } from "../index";
 
 export default {
-  title: "Component/Toast/Animated",
+  title: "Toast Animated",
 } as Meta;
 
 const CSSTransitionAnimationWrapper: TToastWrapper = ({

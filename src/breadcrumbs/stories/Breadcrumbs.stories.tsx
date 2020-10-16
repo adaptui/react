@@ -6,7 +6,7 @@ import { Breadcrumbs } from "../Breadcrumbs";
 import { BreadcrumbLink } from "../BreadcrumbLink";
 
 export default {
-  title: "Component/Breadcrumb",
+  title: "Breadcrumb",
 } as Meta;
 
 export const Default = () => {

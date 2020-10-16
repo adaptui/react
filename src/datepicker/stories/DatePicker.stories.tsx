@@ -15,7 +15,7 @@ import {
 import { CalendarComp } from "../../calendar/stories/CalendarComponent";
 
 export default {
-  title: "Component/DatePicker",
+  title: "DatePicker",
 } as Meta;
 
 const DatePickerComp: React.FC<DatePickerInitialState> = props => {

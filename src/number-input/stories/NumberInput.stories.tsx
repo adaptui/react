@@ -20,7 +20,7 @@ const NumberInputComp = (props: UseNumberInputProps) => {
 };
 
 export default {
-  title: "Component/NumberInput",
+  title: "NumberInput",
   component: NumberInput,
 } as Meta;
 

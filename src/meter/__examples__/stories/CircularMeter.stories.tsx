@@ -9,7 +9,7 @@ import {
 } from "../../../progress/stories/storybook-progress-utils";
 
 export default {
-  title: "Component/Meter/Circular",
+  title: "Meter Circular",
 } as Meta;
 
 const CircularMeter = createCircularExample({

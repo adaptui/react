@@ -15,7 +15,7 @@ import {
 } from "../index";
 
 export default {
-  title: "Component/TimePicker",
+  title: "TimePicker",
 } as Meta;
 
 const CalendarIcon = () => (
