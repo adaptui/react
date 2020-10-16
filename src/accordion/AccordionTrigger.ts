@@ -8,9 +8,9 @@ import {
 } from "reakit";
 import * as React from "react";
 import { useLiveRef } from "reakit-utils";
-import { ariaAttr } from "@chakra-ui/utils";
 import { createHook, createComponent } from "reakit-system";
 
+import { ariaAttr } from "../utils";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 

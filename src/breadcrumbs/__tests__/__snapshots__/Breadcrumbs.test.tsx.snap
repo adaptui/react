@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb should render correctly 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Breadcrumb"
+  >
+    <ol>
+      <li>
+        <a
+          href="https://www.w3.org/TR/wai-aria-practices-1.1/"
+        >
+          WAI-ARIA Authoring Practices 1.1
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex"
+        >
+          Design Patterns
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current="page"
+          href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
+        >
+          Breadcrumb Pattern
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/breadcrumb/index.html"
+        >
+          Breadcrumb Example
+        </a>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;
