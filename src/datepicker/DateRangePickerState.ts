@@ -6,11 +6,12 @@
 
 import {
   Validation,
-  FocusableProps,
   ValueBase,
   RangeValue,
+  FocusableProps,
   ValidationState,
 } from "@react-types/shared";
+import { v4 } from "uuid";
 import * as React from "react";
 import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
@@ -167,8 +168,16 @@ export const useDateRangePickerState = (
     maxValue,
     isRequired,
     ...popover,
-    startSegmentState: { ...startSegmentState, ...segmentComposite },
-    endSegmentState: { ...endSegmentState, ...segmentComposite },
+    startSegmentState: {
+      ...startSegmentState,
+      ...segmentComposite,
+      baseId: v4(),
+    },
+    endSegmentState: {
+      ...endSegmentState,
+      ...segmentComposite,
+      baseId: v4(),
+    },
     calendar,
   };
 };
