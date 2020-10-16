@@ -1,12 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { Meter } from "../../Meter";
-import { useMeterState } from "../../index";
+import { Meter } from "../Meter";
+import { useMeterState } from "../index";
 import {
   useFakeProgression,
   createCircularExample,
-} from "../../../progress/stories/storybook-progress-utils";
+} from "../../progress/stories/storybook-progress-utils";
 
 export default {
   title: "Meter/Circular",

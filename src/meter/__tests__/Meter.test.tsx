@@ -4,7 +4,7 @@ import { render } from "reakit-test-utils";
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
 
-import { MeterComp } from "../index";
+import { Meter } from "../Meter";
 import { data } from "./statehook-test-data";
 import { useMeterState, UseMeterProps } from "../../index";
 
@@ -13,6 +13,20 @@ expect.addSnapshotSerializer(jestSerializerStripFunctions);
 function renderMeterStateHook(props: UseMeterProps = {}) {
   return renderHook(() => useMeterState(props)).result;
 }
+
+const MeterComp: React.FC<UseMeterProps> = props => {
+  const { value, low, high, optimum, min, max, ...rest } = props;
+  const meter = useMeterState({
+    value,
+    low,
+    high,
+    optimum,
+    min,
+    max,
+  });
+
+  return <Meter {...meter} {...rest} />;
+};
 
 describe("Meter", () => {
   test("default meter markup", () => {

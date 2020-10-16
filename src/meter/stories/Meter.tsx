@@ -5,20 +5,6 @@ import { MeterStateReturn } from "../MeterState";
 import { Meter, useMeterState, UseMeterProps } from "../index";
 import { generateStripe } from "../../progress/stories/storybook-progress-utils";
 
-export const MeterComp: React.FC<UseMeterProps> = props => {
-  const { value, low, high, optimum, min, max, ...rest } = props;
-  const meter = useMeterState({
-    value,
-    low,
-    high,
-    optimum,
-    min,
-    max,
-  });
-
-  return <Meter {...meter} {...rest} />;
-};
-
 // CSS Styles from https://css-tricks.com/html5-meter-element/
 const meterStyle = css({
   position: "relative",
