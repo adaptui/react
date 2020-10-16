@@ -3,9 +3,25 @@ import { useTimeout } from "@chakra-ui/hooks";
 
 interface ToastControllerProps {
   id: string;
+  /**
+   * Duration after the toast will be removed automatically if autoDismiss is true
+   *
+   * @default 0
+   */
   duration?: number;
+  /**
+   * If True the toast will automatically dismiss after the specified duration
+   */
   autoDismiss?: boolean;
+  /**
+   * Dragging threshold at which point the toast will be swiped out
+   *
+   * @default 100
+   */
   dragThreshold?: number;
+  /**
+   * Callback will fire after the toast has been removed
+   */
   onRequestRemove: (id: string) => void;
 }
 

@@ -41,11 +41,31 @@ export type ToastTypes = Record<
 >;
 
 export type TToastWrapper = (props: any) => React.ReactElement<any>;
+
 type IToastProvider = {
+  /**
+   * Specify types of toast in an object
+   */
   toastTypes: ToastTypes;
+  /**
+   * If True the toast will automatically dismiss after the specified duration
+   */
   autoDismiss?: boolean;
+  /**
+   * Timeout after the toast will be removed automatically if autoDismiss is true
+   *
+   * @default 5000
+   */
   timeout?: number;
+  /**
+   * Duration of delay after the toast will be unmounted, so that animations can run
+   *
+   * @default 0
+   */
   animationTimeout?: number;
+  /**
+   * Callback function to enhance the behaviour of ToastControllers
+   */
   toastWrapper?: TToastWrapper;
   placement?: Placements;
 };

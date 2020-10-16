@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Placements } from "./ToastProvider";
 
-type JSXFunction = (props: any) => JSX.Element;
-type StringOrElement = string | JSXFunction;
+type StringOrElement = string | React.ReactNode;
 
 export interface IToast {
   id: string;
