@@ -1,31 +1,34 @@
-const { NODE_ENV, BABEL_ENV } = process.env;
-const cjs = NODE_ENV === "test" || BABEL_ENV === "commonjs";
-const loose = true;
+const BABEL_ENV = process.env.BABEL_ENV;
+const isCommonJS = BABEL_ENV !== undefined && BABEL_ENV === "cjs";
+const isESM = BABEL_ENV !== undefined && BABEL_ENV === "esm";
 
-module.exports = {
-  presets: [
+module.exports = function (api) {
+  api.cache(true);
+
+  const presets = [
     [
       "@babel/env",
       {
-        loose,
-        modules: false,
-        exclude: ["@babel/plugin-transform-regenerator"],
+        loose: true,
+        modules: isCommonJS ? "commonjs" : false,
+        targets: {
+          esmodules: isESM ? true : undefined,
+        },
       },
     ],
     "@babel/preset-typescript",
-    "@babel/react",
-  ],
-  plugins: [
-    cjs && ["@babel/plugin-transform-modules-commonjs", { loose }],
-    [
-      "@babel/transform-runtime",
-      {
-        useESModules: !cjs,
-        version: require("./package.json").dependencies[
-          "@babel/runtime"
-        ].replace(/^[^0-9]*/, ""),
-      },
-    ],
-  ].filter(Boolean),
-  ignore: ["**/*/__tests__", "**/*/stories", "**/*/__examples__"],
+    "@babel/preset-react",
+  ];
+
+  const plugins = [
+    "date-fns",
+    "babel-plugin-chakra-ui",
+    "@babel/plugin-proposal-class-properties",
+  ];
+
+  return {
+    presets,
+    plugins,
+    ignore: ["**/*/__tests__", "**/*/stories", "**/*/__examples__"],
+  };
 };
