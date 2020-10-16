@@ -4,11 +4,12 @@
  * to work with Reakit System
  */
 import { useCallback } from "react";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { getDaysInMonth, isSameDay, isWeekend } from "date-fns";
-import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
 
+import { dataAttr, ariaAttr } from "../utils";
 import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";

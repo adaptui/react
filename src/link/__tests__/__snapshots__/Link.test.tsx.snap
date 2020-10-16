@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReakitLink should render correctly 1`] = `
+<DocumentFragment>
+  <a
+    href="#"
+  >
+    link
+  </a>
+</DocumentFragment>
+`;
+
+exports[`ReakitLink should render correctly with isExternal & disabled 1`] = `
+<DocumentFragment>
+  <a
+    aria-disabled="true"
+    href="#"
+    rel="noopener noreferrer"
+    style="pointer-events: none;"
+    tabindex="-1"
+    target="_blank"
+  >
+    link
+  </a>
+</DocumentFragment>
+`;
+
+exports[`ReakitLink should render correctly with isExternal 1`] = `
+<DocumentFragment>
+  <a
+    href="#"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    link
+  </a>
+</DocumentFragment>
+`;
+
+exports[`ReakitLink should render correctly with non native link tag 1`] = `
+<DocumentFragment>
+  <span
+    role="link"
+    tabindex="0"
+  >
+    Reakit
+  </span>
+</DocumentFragment>
+`;

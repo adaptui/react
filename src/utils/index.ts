@@ -1,3 +1,4 @@
+import { Booleanish } from "./types";
 import { warn } from "@chakra-ui/utils";
 
 /**
@@ -27,5 +28,11 @@ export function isTouch() {
       window.navigator.msMaxTouchPoints > 0,
   );
 }
+
+export const dataAttr = (condition: boolean | undefined) =>
+  (condition ? "" : undefined) as Booleanish;
+
+export const ariaAttr = (condition: boolean | undefined) =>
+  condition ? true : undefined;
 
 export * from "./date";

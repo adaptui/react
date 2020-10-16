@@ -8,10 +8,11 @@ import { useId } from "@chakra-ui/hooks";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, useBox } from "reakit";
-import { ariaAttr, callAllHandlers, dataAttr } from "@chakra-ui/utils";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 import { SLIDER_THUMB_KEYS } from "./__keys";
+import { dataAttr, ariaAttr } from "../utils";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderThumbOptions = SliderStateReturn & {
