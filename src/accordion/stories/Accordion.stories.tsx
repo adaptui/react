@@ -11,7 +11,7 @@ import {
 } from "../index";
 
 export default {
-  title: "Component/Accordion",
+  title: "Accordion",
 } as Meta;
 
 const AccordionComponent: React.FC<AccordionInitialState> = props => {

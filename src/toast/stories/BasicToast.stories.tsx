@@ -6,7 +6,7 @@ import Demo from "./Demo";
 import { ToastProvider } from "../index";
 
 export default {
-  title: "Component/Toast/Base",
+  title: "Toast/Base",
 } as Meta;
 
 export const Default: React.FC = () => {

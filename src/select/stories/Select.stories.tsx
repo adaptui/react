@@ -11,7 +11,7 @@ import {
 import "./style.css";
 
 export default {
-  title: "Component/Select",
+  title: "Select",
 } as Meta;
 
 const countries = [

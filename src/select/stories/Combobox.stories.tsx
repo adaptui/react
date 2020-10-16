@@ -11,7 +11,7 @@ import {
 import "./style.css";
 
 export default {
-  title: "Component/Select-Combobox",
+  title: "Select-Combobox",
 } as Meta;
 
 interface Country {
