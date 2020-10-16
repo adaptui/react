@@ -7,6 +7,9 @@ import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
 import { LINK_KEYS } from "./__keys";
 
 export type LinkOptions = ClickableOptions & {
+  /**
+   * Opens the link in a new tab
+   */
   isExternal?: boolean;
 };
 

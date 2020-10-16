@@ -5,7 +5,7 @@ import { Breadcrumbs, BreadcrumbLink } from "../index";
 
 const BreadcrumbComp = () => {
   return (
-    <Breadcrumbs className="breadcrumb">
+    <Breadcrumbs>
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -13,7 +13,7 @@ const BreadcrumbComp = () => {
           </BreadcrumbLink>
         </li>
         <li>
-          <BreadcrumbLink as="span" onClick={() => alert("Go to link")}>
+          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex">
             Design Patterns
           </BreadcrumbLink>
         </li>
@@ -37,51 +37,9 @@ const BreadcrumbComp = () => {
 
 describe("Breadcrumb", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId, baseElement } = render(<BreadcrumbComp />);
+    const { asFragment } = render(<BreadcrumbComp />);
 
-    expect(baseElement).toMatchInlineSnapshot(`
-      <body>
-        <div>
-          <nav
-            aria-label="Breadcrumb"
-            class="breadcrumb"
-          >
-            <ol>
-              <li>
-                <a
-                  href="https://www.w3.org/TR/wai-aria-practices-1.1/"
-                >
-                  WAI-ARIA Authoring Practices 1.1
-                </a>
-              </li>
-              <li>
-                <span
-                  role="link"
-                  tabindex="0"
-                >
-                  Design Patterns
-                </span>
-              </li>
-              <li>
-                <a
-                  aria-current="page"
-                  href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
-                >
-                  Breadcrumb Pattern
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/breadcrumb/index.html"
-                >
-                  Breadcrumb Example
-                </a>
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </body>
-    `);
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test("Breadcrumb renders with no a11y violations", async () => {

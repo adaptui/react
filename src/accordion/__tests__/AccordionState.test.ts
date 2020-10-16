@@ -15,6 +15,7 @@ function render({
 
 test("Accordion: initial state", () => {
   const result = render();
+
   expect(result.current).toMatchInlineSnapshot(`
     Object {
       "allowMultiple": false,

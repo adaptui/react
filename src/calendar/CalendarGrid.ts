@@ -4,12 +4,13 @@
  * to work with Reakit System
  */
 import { chain } from "@react-aria/utils";
-import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { KeyboardEvent, useRef } from "react";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
-import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 
+import { ariaAttr } from "../utils";
 import { CALENDAR_GRID_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
