@@ -10,4 +10,11 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/src/__mocks__/styleMock.js",
   },
+  coveragePathIgnorePatterns: [
+    "node_modules",
+    "__mocks__",
+    "stories",
+    "<rootDir>/src/meter/__examples__/index.ts",
+    "<rootDir>/src/meter/__examples__/__tests__/statehook-test-data.ts",
+  ],
 };
