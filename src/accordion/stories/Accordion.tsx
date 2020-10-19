@@ -6,35 +6,10 @@ import {
   Accordion,
   AccordionTrigger,
   AccordionPanel,
-  AccordionState,
+  AccordionInitialState,
 } from "../index";
 
-export type AccordionComponentInitialState = {
-  /**
-   * The current selected accordion's `id`.
-   */
-  selectedId?: AccordionState["currentId"];
-  /**
-   * Whether the accodion selection should be manual.
-   * @default true
-   */
-  manual?: boolean;
-  /**
-   * Allow to open multiple accordion items
-   * @default false
-   */
-  allowMultiple?: boolean;
-  /**
-   * Allow to toggle accordion items
-   * @default false
-   */
-  allowToggle?: boolean;
-  /**
-   * Initial selected accordion's `id`.
-   * @default []
-   */
-  selectedIds?: AccordionState["currentId"][];
-};
+export interface AccordionComponentInitialState extends AccordionInitialState {}
 
 export const AccordionComponent: React.FC<AccordionComponentInitialState> = props => {
   const { children, ...rest } = props;

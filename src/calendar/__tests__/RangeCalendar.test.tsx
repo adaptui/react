@@ -12,6 +12,7 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
 } from "../index";
+import { isEndSelection, isStartSelection } from "../../utils/test-utils";
 
 const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
@@ -157,6 +158,37 @@ describe("RangeCalendar", () => {
     // We need to go to previous month to see/verify the start selection
     const start = baseElement.querySelector("[data-is-selection-start]");
     expect(start).toHaveTextContent("14");
+  });
+
+  it("should be able to cancel selection", () => {
+    const { getByLabelText: label, getByTestId: testId } = render(
+      <RangeCalendarComp
+        defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
+      />,
+    );
+
+    expect(testId("current-year")).toHaveTextContent("October 2019");
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+
+    expect(label("Monday, October 7, 2019 selected")).toHaveFocus();
+    press.ArrowDown();
+    press.Enter(); // start the selection
+
+    // Now we choose the end date, let's choose 19
+    press.ArrowDown();
+    press.ArrowRight();
+    press.ArrowRight();
+    expect(
+      label("Wednesday, October 23, 2019 (click to finish selecting range)"),
+    ).toHaveFocus();
+
+    press.Escape();
+    isEndSelection(label, /Wednesday, October 30, 2019/);
+    isStartSelection(label, /Monday, October 7, 2019 selected/);
   });
 
   test("RangeCalendar renders with no a11y violations", async () => {

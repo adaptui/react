@@ -128,6 +128,13 @@ describe("Calendar", () => {
     press.ArrowDown();
     expect(label("Friday, November 6, 2020")).toHaveFocus();
     expect(testId("current-year")).toHaveTextContent("November 2020");
+
+    // Grid navigation pageup/down
+    press.PageUp();
+    expect(testId("current-year")).toHaveTextContent("October 2020");
+
+    press.PageUp(null, { shiftKey: true });
+    expect(testId("current-year")).toHaveTextContent("October 2019");
   });
 
   test("should have min/max values", async () => {
