@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import { StyledProgress } from "./Progress";
+import { StyledProgress } from "./ProgressComponent";
 
 export default {
   title: "Progress/Linear",

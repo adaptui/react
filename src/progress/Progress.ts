@@ -4,13 +4,12 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { isFunction } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
+import { dataAttr } from "../utils";
 import { PROGRESS_KEYS } from "./__keys";
 import { ProgressStateReturn } from "./ProgressState";
-import { dataAttr } from "../utils";
 
 export type ProgressOptions = BoxOptions &
   Pick<
@@ -39,8 +38,8 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
 
     const getAriaValueText = () => {
       if (value == null) return;
-      return isFunction(options.getAriaValueText)
-        ? options.getAriaValueText(value, percent)
+      return options.getAriaValueText
+        ? options.getAriaValueText?.(value, percent)
         : ariaValueText ?? `${value}`;
     };
 
