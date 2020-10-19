@@ -30,6 +30,10 @@ export const StyledProgress: React.FC<StyledProgressInitialState> = props => {
     };
   }, [setValue, value]);
 
+  React.useEffect(() => {
+    state.setAriaValueText((value, percent) => `${value}`);
+  }, [state]);
+
   return (
     <div>
       <div style={progressStyle}>

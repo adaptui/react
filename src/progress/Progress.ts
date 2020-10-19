@@ -14,15 +14,8 @@ import { ProgressStateReturn } from "./ProgressState";
 export type ProgressOptions = BoxOptions &
   Pick<
     ProgressStateReturn,
-    "isIndeterminate" | "value" | "max" | "min" | "percent"
-  > & {
-    /**
-     * Function that returns the `aria-valuetext` for screen readers.
-     * It's mostly used to generate a more human-readable
-     * representation of the value for assistive technologies
-     */
-    getAriaValueText?: (value: number, percent: number) => string;
-  };
+    "isIndeterminate" | "value" | "max" | "min" | "ariaValueText"
+  > & {};
 
 export type ProgressHTMLProps = BoxHTMLProps;
 
@@ -33,15 +26,8 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   compose: useBox,
   keys: PROGRESS_KEYS,
 
-  useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
-    const { isIndeterminate, value, max, min, percent } = options;
-
-    const getAriaValueText = () => {
-      if (value == null) return;
-      return options.getAriaValueText
-        ? options.getAriaValueText?.(value, percent)
-        : ariaValueText ?? `${value}`;
-    };
+  useProps(options, { "aria-valuetext": htmlAriaValueText, ...htmlProps }) {
+    const { isIndeterminate, value, max, min, ariaValueText } = options;
 
     return {
       role: "progressbar",
@@ -49,7 +35,8 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": isIndeterminate ? undefined : value,
-      "aria-valuetext": getAriaValueText(),
+      "aria-valuetext":
+        htmlAriaValueText ?? ariaValueText ? ariaValueText : `${value}`,
       ...htmlProps,
     };
   },

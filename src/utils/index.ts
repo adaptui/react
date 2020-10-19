@@ -51,4 +51,11 @@ export const dataAttr = (condition: boolean | undefined) =>
 export const ariaAttr = (condition: boolean | undefined) =>
   condition ? true : undefined;
 
+export function runIfFn<T, U>(
+  valueOrFn: T | ((...args: U[]) => T),
+  ...args: U[]
+): T {
+  return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
+}
+
 export * from "./date";
