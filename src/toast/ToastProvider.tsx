@@ -67,6 +67,9 @@ type IToastProvider = {
    * Callback function to enhance the behaviour of ToastControllers
    */
   toastWrapper?: TToastWrapper;
+  /**
+   * Placement of the toast on the screen
+   */
   placement?: Placements;
 };
 
