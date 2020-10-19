@@ -4,31 +4,59 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { isUndefined, valueToPercent } from "@chakra-ui/utils";
+import * as React from "react";
+import { SealedInitialState, useSealedState } from "reakit-utils";
 
-export interface UseProgressProps {
+import { valueToPercent } from "../utils";
+
+export interface ProgressState {
   /**
    * The `value` of the progress indicator.
    * If `undefined` the progress bar will be in `indeterminate` state
+   * @default 0
    */
-  value?: number;
+  value: number;
   /**
    * The minimum value of the progress
+   * @default 0
    */
-  min?: number;
+  min: number;
   /**
-   * The maximum value of the progress
+   * The maximum value of the
+   * @default 100
    */
-  max?: number;
+  max: number;
+  /**
+   * Set isInterminate state
+   */
+  isIndeterminate?: boolean;
+  /**
+   * Percentage of the value progressed with respect to min & max
+   */
+  percent: number;
 }
 
-export const useProgressState = (props: UseProgressProps = {}) => {
-  const { value, min = 0, max = 100 } = props;
+export interface ProgressAction {
+  setValue?: React.Dispatch<React.SetStateAction<number>>;
+}
 
-  const percent = value != null ? valueToPercent(value, min, max) : undefined;
-  const isIndeterminate = isUndefined(value);
+export type ProgressInitialState = Partial<
+  Pick<ProgressState, "value" | "min" | "max" | "isIndeterminate">
+>;
 
-  return { value, isIndeterminate, min, max, percent };
-};
+export type ProgressStateReturn = ProgressState & ProgressAction;
 
-export type ProgressStateReturn = ReturnType<typeof useProgressState>;
+export function useProgressState(
+  initialState: SealedInitialState<ProgressInitialState> = {},
+): ProgressStateReturn {
+  const {
+    value: initialValue = 0,
+    min = 0,
+    max = 100,
+    isIndeterminate,
+  } = useSealedState(initialState);
+  const [value, setValue] = React.useState(initialValue);
+  const percent = valueToPercent(value, min, max);
+
+  return { value, setValue, percent, isIndeterminate, min, max };
+}

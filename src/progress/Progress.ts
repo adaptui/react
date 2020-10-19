@@ -10,6 +10,7 @@ import { createHook, createComponent } from "reakit-system";
 
 import { PROGRESS_KEYS } from "./__keys";
 import { ProgressStateReturn } from "./ProgressState";
+import { dataAttr } from "../utils";
 
 export type ProgressOptions = BoxOptions &
   Pick<
@@ -21,7 +22,7 @@ export type ProgressOptions = BoxOptions &
      * It's mostly used to generate a more human-readable
      * representation of the value for assistive technologies
      */
-    getAriaValueText?(value: number, percent: number): string;
+    getAriaValueText?: (value: number, percent: number) => string;
   };
 
 export type ProgressHTMLProps = BoxHTMLProps;
@@ -36,18 +37,20 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
     const { isIndeterminate, value, max, min, percent } = options;
 
+    const getAriaValueText = () => {
+      if (value == null) return;
+      return isFunction(options.getAriaValueText)
+        ? options.getAriaValueText(value, percent)
+        : ariaValueText ?? `${value}`;
+    };
+
     return {
       role: "progressbar",
-      "data-indeterminate": isIndeterminate ? "" : undefined,
+      "data-indeterminate": dataAttr(isIndeterminate),
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": isIndeterminate ? undefined : value,
-      "aria-valuetext":
-        value == null || percent == null
-          ? undefined
-          : isFunction(options.getAriaValueText)
-          ? options.getAriaValueText(value, percent)
-          : ariaValueText ?? String(value),
+      "aria-valuetext": getAriaValueText(),
       ...htmlProps,
     };
   },
