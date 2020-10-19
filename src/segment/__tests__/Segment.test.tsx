@@ -89,6 +89,45 @@ describe("Segment", () => {
     expect(label("year")).toHaveFocus();
   });
 
+  it("should be able to remove delete values backspace", async () => {
+    const { getByTestId: testId, getByLabelText: label } = render(
+      <SegmentSpinnerComp />,
+    );
+
+    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+
+    press.Tab();
+    press.Enter();
+    press.Enter();
+
+    expect(label("year")).toHaveTextContent("2020");
+    press.Backspace();
+    press.Backspace();
+    expect(label("year")).toHaveTextContent("20");
+    press.Backspace();
+    expect(label("year")).toHaveTextContent("2");
+    press.Backspace();
+    expect(label("year")).toHaveTextContent("1");
+  });
+
+  it("should be able to change dayPeriod AM/PM", async () => {
+    const { getByTestId: testId, getByLabelText: label } = render(
+      <SegmentSpinnerComp formatOptions={{ timeStyle: "short" }} />,
+    );
+
+    expect(testId("segment-field")).toHaveTextContent("12:00 AM");
+
+    press.Tab();
+    press.Enter();
+    press.Enter();
+
+    await userEvent.type(label("dayPeriod"), "a");
+    expect(label("dayPeriod")).toHaveTextContent("AM");
+
+    await userEvent.type(label("dayPeriod"), "p");
+    expect(label("dayPeriod")).toHaveTextContent("PM");
+  });
+
   it("can have other date formats", () => {
     const {
       getByTestId: testId,
