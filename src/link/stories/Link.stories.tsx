@@ -4,12 +4,9 @@ import { Meta } from "@storybook/react";
 import { Link } from "../Link";
 
 export default {
+  component: Link,
   title: "Link",
 } as Meta;
-
-export const Default = () => {
-  return <Link>Reakit</Link>;
-};
 
 export const LinkWithHref = () => {
   return <Link href="#">Reakit</Link>;

@@ -1,8 +1,14 @@
-import { valueToPercent } from "@chakra-ui/utils";
+import {
+  SealedInitialState,
+  useSealedState,
+} from "reakit-utils/useSealedState";
 
-import { getDefaultOptimumValue, calculateStatus, clamp } from "./__utils";
+import { valueToPercent } from "../utils";
+import { getDefaultOptimumValue, calculateStatus, clamp } from "./helpers";
 
-export interface UseMeterProps {
+export type TStatus = "safe" | "caution" | "danger" | undefined;
+
+export type MeterInitialState = {
   /**
    * The `value` of the meter indicator.
    * If `undefined`/`not valid` the meter bar will be equal to `min`
@@ -37,23 +43,26 @@ export interface UseMeterProps {
    * @default 0.5
    */
   optimum?: number;
-}
+};
 
-export type TStatus = "safe" | "caution" | "danger" | undefined;
+export const useMeterState = (
+  initialState: SealedInitialState<MeterInitialState> = {},
+) => {
+  const {
+    value: initialValue = 0,
+    min = 0,
+    max = 1,
+    ...sealed
+  } = useSealedState(initialState);
+  const initialLow = sealed.low ?? min;
+  const initialHigh = sealed.high ?? max;
+  const initialOptimum =
+    sealed.optimum ?? getDefaultOptimumValue(initialLow, initialHigh);
 
-export const useMeterState = (props: UseMeterProps = {}) => {
-  const { min = 0, max = 1 } = props;
-  let {
-    value = 0,
-    low = min,
-    high = max,
-    optimum = getDefaultOptimumValue(low, high),
-  } = props;
-
-  value = clamp(value, min, max);
-  low = clamp(low, min, max);
-  high = clamp(high, min, max);
-  optimum = clamp(optimum, min, max);
+  const value = clamp(initialValue, min, max);
+  const optimum = clamp(initialOptimum, min, max);
+  let low = clamp(initialLow, min, max);
+  let high = clamp(initialHigh, min, max);
 
   // More inequalities handled
   //  low ≤ high (if both low and high are specified)
@@ -62,15 +71,15 @@ export const useMeterState = (props: UseMeterProps = {}) => {
 
   const status: TStatus = calculateStatus({
     value,
-    optimum,
     min,
     max,
     low,
+    optimum,
     high,
   });
   const percent = valueToPercent(value, min, max);
 
-  return { value, low, high, optimum, min, max, status, percent };
+  return { value, min, max, low, optimum, high, status, percent };
 };
 
 export type MeterStateReturn = ReturnType<typeof useMeterState>;

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Meta } from "@storybook/react";
 
 import "./index.css";
@@ -6,6 +6,7 @@ import { Breadcrumbs } from "../Breadcrumbs";
 import { BreadcrumbLink } from "../BreadcrumbLink";
 
 export default {
+  component: Breadcrumbs,
   title: "Breadcrumb",
 } as Meta;
 

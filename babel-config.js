@@ -29,6 +29,6 @@ module.exports = function (api) {
   return {
     presets,
     plugins,
-    ignore: ["**/*/__tests__", "**/*/stories", "**/*/__examples__"],
+    ignore: ["**/*/__tests__", "**/*/stories"],
   };
 };
