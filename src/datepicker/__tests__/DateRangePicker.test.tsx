@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Matcher } from "@testing-library/react";
 import { axe, render, press, fireEvent } from "reakit-test-utils";
 
 import {
@@ -23,6 +22,11 @@ import {
   useDateRangePickerState,
   DateRangePickerInitialState,
 } from "../DateRangePickerState";
+import {
+  isEndSelection,
+  isStartSelection,
+  isInSelectionRange,
+} from "../../utils/test-utils";
 import { stringifyDate } from "../../utils";
 
 const RangeCalendarComp: React.FC<RangeCalendarStateReturn> = state => {
@@ -123,24 +127,6 @@ const openDatePicker = (text: any, testId: any) => {
   fireEvent.click(text("open"));
 
   expect(testId("datepicker-content")).toBeVisible();
-};
-
-const isEndSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-end",
-  );
-};
-
-const isStartSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-start",
-  );
-};
-
-const isInSelectionRange = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-range-selection",
-  );
 };
 
 describe("DateRangePicker", () => {

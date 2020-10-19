@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Matcher } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
 
 import {
@@ -13,6 +12,7 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
 } from "../index";
+import { isEndSelection, isStartSelection } from "../../utils/test-utils";
 
 const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
@@ -70,25 +70,6 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
         </tbody>
       </CalendarGrid>
     </Calendar>
-  );
-};
-
-// TODO: Put these in a util file
-const isEndSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-end",
-  );
-};
-
-const isStartSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-start",
-  );
-};
-
-const isInSelectionRange = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-range-selection",
   );
 };
 
