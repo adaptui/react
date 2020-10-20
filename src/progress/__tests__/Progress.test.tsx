@@ -25,7 +25,7 @@ describe("Progress", () => {
               aria-valuemax="100"
               aria-valuemin="0"
               aria-valuenow="10"
-              aria-valuetext="10%"
+              aria-valuetext="10"
               data-testid="progress"
               role="progressbar"
             />

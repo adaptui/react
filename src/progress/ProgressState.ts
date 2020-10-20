@@ -81,6 +81,6 @@ export function useProgressState(
     percent,
     ariaValueText: isFunction(ariaValueText)
       ? ariaValueText?.(value, percent)
-      : `${percent}%`,
+      : `${percent}`,
   };
 }
