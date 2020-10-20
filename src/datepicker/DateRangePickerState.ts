@@ -11,10 +11,9 @@ import {
   FocusableProps,
   ValidationState,
 } from "@react-types/shared";
-import { v4 } from "uuid";
 import * as React from "react";
-import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
+import { useCompositeState, unstable_useId as useId } from "reakit";
 
 import {
   parseDate,
@@ -159,6 +158,9 @@ export const useDateRangePickerState = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentComposite.first]);
 
+  const { id: startId } = useId({ baseId: "startsegment" });
+  const { id: endId } = useId({ baseId: "endsegment" });
+
   return {
     dateValue: value,
     setDateValue: setValue,
@@ -171,12 +173,12 @@ export const useDateRangePickerState = (
     startSegmentState: {
       ...startSegmentState,
       ...segmentComposite,
-      baseId: v4(),
+      baseId: startId,
     },
     endSegmentState: {
       ...endSegmentState,
       ...segmentComposite,
-      baseId: v4(),
+      baseId: endId,
     },
     calendar,
   };

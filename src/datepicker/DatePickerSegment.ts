@@ -1,4 +1,5 @@
 import { DatePickerStateReturn } from ".";
+import { unstable_useId as useId } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { DATE_PICKER_SEGMENT_KEYS } from "./__keys";
@@ -6,7 +7,7 @@ import { DateRangePickerStateReturn } from "./DateRangePickerState";
 import { useSegment, SegmentOptions, SegmentHTMLProps } from "../segment";
 
 export type DatePickerSegmentOptions =
-  | SegmentOptions
+  | (SegmentOptions & Pick<DatePickerStateReturn, "pickerId">)
   | Partial<DatePickerStateReturn>
   | Partial<DateRangePickerStateReturn>;
 
@@ -22,6 +23,16 @@ export const useDatePickerSegment = createHook<
   name: "DatePickerSegment",
   compose: useSegment,
   keys: DATE_PICKER_SEGMENT_KEYS,
+
+  useProps(options, htmlProps) {
+    const { id } = useId({ baseId: "datepicker-segment" });
+
+    return {
+      id,
+      "aria-labelledby": `${options.pickerId} ${options.baseId} ${id}`,
+      ...htmlProps,
+    };
+  },
 });
 
 export const DatePickerSegment = createComponent({
