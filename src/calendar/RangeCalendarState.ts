@@ -89,6 +89,7 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
 
     if (!anchorDate) {
       setAnchorDate(date);
+      announce(`Starting range from ${format(date, "do MMM yyyy")}`);
     } else {
       setValue(makeRange(anchorDate, date));
       announceRange();

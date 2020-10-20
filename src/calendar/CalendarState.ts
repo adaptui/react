@@ -111,15 +111,15 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     setFocusedDate(date);
   }
 
-  const announceSelectedDate = React.useCallback(() => {
+  const announceSelectedDate = React.useCallback((value: Date) => {
     if (!value) return;
     announce(`Selected Date: ${format(value, "do MMM yyyy")}`);
-  }, [value]);
+  }, []);
 
   function setValue(value: Date) {
     if (!isDisabled && !isReadOnly) {
-      announceSelectedDate();
       setControllableValue(value);
+      announceSelectedDate(value);
     }
   }
 
