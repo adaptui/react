@@ -30,16 +30,17 @@ export interface ProgressState {
   max: number;
   /**
    * Set isInterminate state
+   * @default false
    */
   isIndeterminate?: boolean;
-  /**
-   * Percentage of the value progressed with respect to min & max
-   */
-  percent: number;
   /**
    * Defines the human readable text alternative of aria-valuenow for a range widget.
    */
   ariaValueText: AriaValueText;
+  /**
+   * Percentage of the value progressed with respect to min & max
+   */
+  percent: number;
 }
 
 export interface ProgressAction {
@@ -66,7 +67,7 @@ export function useProgressState(
     min = 0,
     max = 100,
     ariaValueText,
-    ...sealed
+    isIndeterminate = false,
   } = useSealedState(initialState);
   const [value, setValue] = React.useState(initialValue);
   const percent = valueToPercent(value, min, max);
@@ -74,12 +75,12 @@ export function useProgressState(
   return {
     value,
     setValue,
-    percent,
     min,
     max,
+    isIndeterminate,
+    percent,
     ariaValueText: isFunction(ariaValueText)
       ? ariaValueText?.(value, percent)
-      : `${value}`,
-    ...sealed,
+      : `${value}%`,
   };
 }

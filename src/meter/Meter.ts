@@ -2,18 +2,10 @@ import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
-import { isFunction } from "../utils";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterOptions = BoxOptions &
-  Pick<MeterStateReturn, "value" | "max" | "min" | "percent"> & {
-    /**
-     * Function that returns the `aria-valuetext` for screen readers.
-     * It's mostly used to generate a more human-readable
-     * representation of the value for assistive technologies
-     */
-    getAriaValueText?(value: number): string;
-  };
+  Pick<MeterStateReturn, "value" | "max" | "min">;
 
 export type MeterHTMLProps = BoxHTMLProps;
 
@@ -25,7 +17,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   keys: METER_KEYS,
 
   useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
-    const { value, max, min, percent } = options;
+    const { value, max, min } = options;
 
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
@@ -38,12 +30,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": value == null ? undefined : value,
-      "aria-valuetext":
-        value == null
-          ? undefined
-          : isFunction(options.getAriaValueText)
-          ? options.getAriaValueText(value)
-          : ariaValueText ?? `${percent}%`,
+      "aria-valuetext": `${ariaValueText}`,
       ...htmlProps,
     };
   },

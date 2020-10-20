@@ -3,12 +3,14 @@ import {
   useSealedState,
 } from "reakit-utils/useSealedState";
 
-import { valueToPercent } from "../utils";
+import { isFunction, valueToPercent } from "../utils";
 import { getDefaultOptimumValue, calculateStatus, clamp } from "./helpers";
 
-export type TStatus = "safe" | "caution" | "danger" | undefined;
+type Status = "safe" | "caution" | "danger" | undefined;
 
-export type MeterInitialState = {
+type AriaValueText = string | ((value: number, percent: number) => string);
+
+export type MeterState = {
   /**
    * The `value` of the meter indicator.
    * If `undefined`/`not valid` the meter bar will be equal to `min`
@@ -43,15 +45,37 @@ export type MeterInitialState = {
    * @default 0.5
    */
   optimum?: number;
+  /**
+   * Defines the human readable text alternative of aria-valuenow for a range widget.
+   */
+  ariaValueText: AriaValueText;
+  /**
+   * Percentage of the value progressed with respect to min & max
+   */
+  percent: number;
+  /**
+   * Status of the Meter based on the optimum value
+   */
+  status: Status;
 };
+
+export type MeterInitialState = Partial<
+  Pick<
+    MeterState,
+    "value" | "min" | "max" | "low" | "optimum" | "high" | "ariaValueText"
+  >
+>;
+
+export type MeterStateReturn = MeterState;
 
 export const useMeterState = (
   initialState: SealedInitialState<MeterInitialState> = {},
-) => {
+): MeterStateReturn => {
   const {
     value: initialValue = 0,
     min = 0,
     max = 1,
+    ariaValueText,
     ...sealed
   } = useSealedState(initialState);
   const initialLow = sealed.low ?? min;
@@ -69,7 +93,7 @@ export const useMeterState = (
   if (low >= high) low = high;
   if (high <= low) high = low;
 
-  const status: TStatus = calculateStatus({
+  const status: Status = calculateStatus({
     value,
     min,
     max,
@@ -79,7 +103,17 @@ export const useMeterState = (
   });
   const percent = valueToPercent(value, min, max);
 
-  return { value, min, max, low, optimum, high, status, percent };
+  return {
+    value,
+    min,
+    max,
+    low,
+    optimum,
+    high,
+    status,
+    percent,
+    ariaValueText: isFunction(ariaValueText)
+      ? ariaValueText?.(value, percent)
+      : `${value}%`,
+  };
 };
-
-export type MeterStateReturn = ReturnType<typeof useMeterState>;

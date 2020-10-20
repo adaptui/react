@@ -1,5 +1,5 @@
 import * as React from "react";
-import { css, cx, keyframes } from "emotion";
+import { css, keyframes } from "emotion";
 
 import {
   Meter,
@@ -39,7 +39,7 @@ export const StyledMeter: React.FC<StyledMeterInitialState> = props => {
   return (
     <div className={meterStyle}>
       <Meter
-        className={cx(meterBarStyle(meter, props))}
+        className={meterBarStyle(meter, props)}
         {...meter}
         {...rest}
       ></Meter>

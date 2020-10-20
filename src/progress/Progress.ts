@@ -15,7 +15,7 @@ export type ProgressOptions = BoxOptions &
   Pick<
     ProgressStateReturn,
     "isIndeterminate" | "value" | "max" | "min" | "ariaValueText"
-  > & {};
+  >;
 
 export type ProgressHTMLProps = BoxHTMLProps;
 
