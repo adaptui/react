@@ -36,7 +36,7 @@ describe("Progress", () => {
   });
 
   it("should render isIndeterminate", () => {
-    const { getByTestId: testid } = render(<ProgressComp />);
+    const { getByTestId: testid } = render(<ProgressComp isIndeterminate />);
 
     expect(testid("progress")).toHaveAttribute("data-indeterminate", "");
   });

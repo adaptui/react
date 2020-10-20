@@ -1,85 +1,31 @@
 import React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
-import { StyledProgress } from "./ProgressComponent";
+import {
+  LinearProgress as Progress,
+  LinearProgressInitialState,
+} from "./LinearProgress";
 
 export default {
+  component: Progress,
   title: "Progress/Linear",
 } as Meta;
 
-export const Default = () => {
-  return <StyledProgress />;
+const Base: Story<LinearProgressInitialState> = args => <Progress {...args} />;
+
+export const Default = Base.bind({});
+
+export const WithLabel = Base.bind({});
+WithLabel.args = { withLabel: true };
+
+export const WithStripe = Base.bind({});
+WithStripe.args = { withStripe: true };
+
+export const WithStripeAnimation = Base.bind({});
+WithStripeAnimation.args = {
+  withStripe: true,
+  withStripeAnimation: true,
 };
 
-// const examples = createLinearExamples({
-//   stateHook: useProgressState,
-//   component: Progress,
-// })();
-
-// export const Default = examples.Default;
-// export const WithLabel = examples.WithLabel;
-// export const WithStripe = examples.WithStripe;
-// export const WithAnimatedStripe = examples.WithAnimatedStripe;
-
-// export const WhenIsIndeterminate = () => {
-//   const progress = useProgressState({ value: undefined });
-
-//   const progressAnim = keyframes({
-//     "0%": { left: "-40%" },
-//     "100%": { left: "100%" },
-//   });
-
-//   const indeterminateStyles = css({
-//     ...(progress.isIndeterminate && {
-//       position: "absolute",
-//       willChange: "left",
-//       minWidth: "50%",
-//       width: "100%",
-//       height: "100%",
-//       backgroundImage:
-//         "linear-gradient( to right, transparent 0%, #D53F8C 50%, transparent 100% )",
-//       animation: `${progressAnim} 1s ease infinite normal none running`,
-//     }),
-//   });
-
-//   return (
-//     <div style={progressStyle}>
-//       <Progress
-//         {...progress}
-//         style={{ ...progressBarStyle, backgroundColor: "none" }}
-//         className={indeterminateStyles}
-//       />
-//     </div>
-//   );
-// };
-
-// export const WhenIsIndeterminateStripe = () => {
-//   const progress = useProgressState();
-
-//   const progressAnim = keyframes({
-//     "0%": { left: "-40%" },
-//     "100%": { left: "100%" },
-//   });
-
-//   const indeterminateStyles = css({
-//     ...(progress.isIndeterminate && {
-//       position: "absolute",
-//       willChange: "left",
-//       minWidth: "50%",
-//       width: "100%",
-//       height: "100%",
-//       ...generateStripe(),
-//       animation: `${progressAnim} 1s ease infinite normal none running`,
-//     }),
-//   });
-
-//   return (
-//     <div style={progressStyle}>
-//       <Progress
-//         {...progress}
-//         style={{ ...progressBarStyle, backgroundColor: "#D53F8C" }}
-//         className={indeterminateStyles}
-//       />
-//     </div>
-//   );
-// };
+export const IsIndeterminate = Base.bind({});
+IsIndeterminate.args = { isIndeterminate: true };

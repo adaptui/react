@@ -7,7 +7,9 @@
 import * as React from "react";
 import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { valueToPercent, runIfFn } from "../utils";
+import { valueToPercent, isFunction } from "../utils";
+
+type AriaValueText = string | ((value: number, percent: number) => string);
 
 export interface ProgressState {
   /**
@@ -37,22 +39,14 @@ export interface ProgressState {
   /**
    * Defines the human readable text alternative of aria-valuenow for a range widget.
    */
-  ariaValueText: string;
+  ariaValueText: AriaValueText;
 }
-
-type GetAriaValueText = string | ((value: number, percent: number) => string);
 
 export interface ProgressAction {
   /**
    * Update the value of the progress indicator
    */
   setValue?: React.Dispatch<React.SetStateAction<number>>;
-  /**
-   * Function that returns the `aria-valuetext` for screen readers.
-   * It's mostly used to generate a more human-readable
-   * representation of the value for assistive technologies
-   */
-  setAriaValueText?: (getAriaValueText: GetAriaValueText) => void;
 }
 
 export type ProgressInitialState = Partial<
@@ -71,18 +65,11 @@ export function useProgressState(
     value: initialValue = 0,
     min = 0,
     max = 100,
+    ariaValueText,
     ...sealed
   } = useSealedState(initialState);
   const [value, setValue] = React.useState(initialValue);
   const percent = valueToPercent(value, min, max);
-
-  const [ariaValueText, setAriaValueTextState] = React.useState("");
-  const setAriaValueText = React.useCallback(
-    (getAriaValueText: GetAriaValueText) => {
-      setAriaValueTextState(runIfFn(getAriaValueText, value, percent));
-    },
-    [percent, value],
-  );
 
   return {
     value,
@@ -90,8 +77,9 @@ export function useProgressState(
     percent,
     min,
     max,
-    ariaValueText: ariaValueText ? ariaValueText : `${value}`,
-    setAriaValueText,
+    ariaValueText: isFunction(ariaValueText)
+      ? ariaValueText?.(value, percent)
+      : `${value}`,
     ...sealed,
   };
 }

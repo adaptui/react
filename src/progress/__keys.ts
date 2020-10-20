@@ -7,6 +7,5 @@ const PROGRESS_STATE_KEYS = [
   "percent",
   "ariaValueText",
   "setValue",
-  "setAriaValueText",
 ] as const;
 export const PROGRESS_KEYS = PROGRESS_STATE_KEYS;

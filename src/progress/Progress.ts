@@ -26,7 +26,7 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   compose: useBox,
   keys: PROGRESS_KEYS,
 
-  useProps(options, { "aria-valuetext": htmlAriaValueText, ...htmlProps }) {
+  useProps(options, htmlProps) {
     const { isIndeterminate, value, max, min, ariaValueText } = options;
 
     return {
@@ -35,8 +35,7 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": isIndeterminate ? undefined : value,
-      "aria-valuetext":
-        htmlAriaValueText ?? ariaValueText ? ariaValueText : `${value}`,
+      "aria-valuetext": `${ariaValueText}`,
       ...htmlProps,
     };
   },

@@ -5,7 +5,7 @@ import {
   AccordionComponent as Accordion,
   AccordionComponentInitialState,
   StyledAccordion,
-} from "./Accordion";
+} from "./AccordionComponent";
 
 export default {
   component: Accordion,
