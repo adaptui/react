@@ -3,14 +3,10 @@ import { unstable_useId as useId } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { DATE_PICKER_SEGMENT_KEYS } from "./__keys";
-import { DateRangePickerStateReturn } from "./DateRangePickerState";
 import { useSegment, SegmentOptions, SegmentHTMLProps } from "../segment";
 
-export type DatePickerSegmentOptions =
-  | (SegmentOptions &
-      Pick<DatePickerStateReturn, "pickerId" | "isRangeCalendar">)
-  | Partial<DatePickerStateReturn>
-  | Partial<DateRangePickerStateReturn>;
+export type DatePickerSegmentOptions = SegmentOptions &
+  Partial<Pick<DatePickerStateReturn, "pickerId" | "isRangeCalendar">>;
 
 export type DatePickerSegmentHTMLProps = SegmentHTMLProps;
 
