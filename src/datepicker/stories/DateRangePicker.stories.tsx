@@ -34,7 +34,7 @@ import {
 import { stringifyDate } from "../../utils";
 
 export default {
-  title: "Component/DateRangePicker",
+  title: "DateRangePicker",
 } as Meta;
 
 const RangeCalendarComp: React.FC<RangeCalendarStateReturn> = state => {

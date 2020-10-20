@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { createComponent, createHook } from "reakit-system";
@@ -7,6 +7,9 @@ import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
 import { LINK_KEYS } from "./__keys";
 
 export type LinkOptions = ClickableOptions & {
+  /**
+   * Opens the link in a new tab
+   */
   isExternal?: boolean;
 };
 

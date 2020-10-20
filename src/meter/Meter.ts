@@ -1,8 +1,8 @@
-import { isFunction } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
+import { isFunction } from "../utils";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterOptions = BoxOptions &
@@ -26,6 +26,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
 
   useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
     const { value, max, min, percent } = options;
+
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
     // does not support meter at all. Safari 13+ seems to support meter properly.

@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.5](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.4...v0.1.1-alpha.5) (2020-10-15)
+
+### Tests
+
+- fix range calendar broken tests for today
+  ([#93](https://github.com/timelessco/renderless-components/issues/93))
+  ([0512adb](https://github.com/timelessco/renderless-components/commit/0512adbbd641ceb08deb6af8e10d0d221696a0e7))
+- refactored tests & added utility tests
+  ([#94](https://github.com/timelessco/renderless-components/issues/94))
+  ([84614cb](https://github.com/timelessco/renderless-components/commit/84614cb4b4c21e2b496a4af261902dc04ea7b64a))
+
+### Build System
+
+- **bundle:** 👷 use chakra build setup
+  ([e5c9deb](https://github.com/timelessco/renderless-components/commit/e5c9deb652cda4003603c2a113aa623e9e44c2e8))
+- **date-fns:** 💚 tree shake date-fns with bable
+  ([44f067e](https://github.com/timelessco/renderless-components/commit/44f067e274d580c848b92870f82b4c6df8c5b29c))
+
 ### [0.1.1-alpha.4](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.3...v0.1.1-alpha.4) (2020-10-14)
 
 ### Features

@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    id="accordion"
+  >
+    <h3>
+      <button
+        aria-controls="accordion-3"
+        aria-expanded="false"
+        id="accordion-1"
+        tabindex="0"
+        type="button"
+      >
+        Trigger 1
+      </button>
+    </h3>
+    <div
+      aria-labelledby="accordion-1"
+      hidden=""
+      id="accordion-3"
+      role="region"
+      style="display: none;"
+    >
+      Panel 1
+    </div>
+    <h3>
+      <button
+        aria-controls="accordion-6"
+        aria-expanded="false"
+        id="accordion-2"
+        tabindex="0"
+        type="button"
+      >
+        Trigger 2
+      </button>
+    </h3>
+    <div
+      aria-labelledby="accordion-2"
+      hidden=""
+      id="accordion-6"
+      role="region"
+      style="display: none;"
+    >
+      Panel 2
+    </div>
+    <h3>
+      <button
+        aria-controls="accordion-9"
+        aria-expanded="false"
+        id="accordion-7"
+        tabindex="0"
+        type="button"
+      >
+        Trigger 3
+      </button>
+    </h3>
+    <div
+      aria-labelledby="accordion-7"
+      hidden=""
+      id="accordion-9"
+      role="region"
+      style="display: none;"
+    >
+      Panel 3
+    </div>
+  </div>
+</DocumentFragment>
+`;

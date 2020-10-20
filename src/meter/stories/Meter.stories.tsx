@@ -1,14 +1,14 @@
-import React from "react";
+import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { IStyledMeter, StyledMeter as Meter } from "../index";
+import { StyledMeterInitialState, StyledMeter as Meter } from "./Meter";
 
 export default {
   component: Meter,
-  title: "Component/Meter/Linear",
+  title: "Meter",
 } as Meta;
 
-const Base: Story<IStyledMeter> = args => <Meter {...args} />;
+const Base: Story<StyledMeterInitialState> = args => <Meter {...args} />;
 
 export const Playground = Base.bind({});
 Playground.args = {

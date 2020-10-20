@@ -4,6 +4,9 @@ import { BREADCRUMB_LINK_KEYS } from "./__keys";
 import { LinkHTMLProps, LinkOptions, useLink } from "../link";
 
 export type BreadcrumbLinkOptions = LinkOptions & {
+  /**
+   * If true, sets `aria-current: "page"`
+   */
   isCurrent?: boolean;
 };
 

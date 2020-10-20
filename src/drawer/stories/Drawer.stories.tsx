@@ -12,7 +12,7 @@ import {
 } from "../";
 
 export default {
-  title: "Component/Drawer",
+  title: "Drawer",
 } as Meta;
 
 const backdropStyles = css`

@@ -1,8 +1,9 @@
 import { useInterval } from "@chakra-ui/hooks";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions } from "reakit";
-import { ariaAttr, callAllHandlers } from "@chakra-ui/utils";
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
 
+import { ariaAttr } from "../utils";
 import { NumberInputStateReturn } from "./NumberInputState";
 
 const FLOATING_POINT_REGEX = /^[Ee0-9\+\-\.]$/;

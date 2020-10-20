@@ -1,4 +1,3 @@
-import { ariaAttr } from "@chakra-ui/utils";
 import { createComponent, createHook } from "reakit-system";
 
 import {
@@ -6,6 +5,7 @@ import {
   PickerBaseOptions,
   usePickerBase,
 } from "../picker-base";
+import { ariaAttr } from "../utils";
 import { DATE_PICKER_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";
 

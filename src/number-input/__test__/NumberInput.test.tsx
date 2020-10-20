@@ -36,6 +36,32 @@ describe("NumberInput", () => {
     expect(testId("numberinput")).toHaveFocus();
   });
 
+  it("should increase/decrease with keyboard", () => {
+    const { getByTestId: testId } = render(
+      <NumberInputComp defaultValue={0} max={10} min={0} />,
+    );
+
+    expect(testId("numberinput")).not.toHaveFocus();
+    press.Tab();
+    expect(testId("numberinput")).toHaveFocus();
+    expect(testId("numberinput")).toHaveValue("0");
+    press.ArrowUp();
+    press.ArrowUp();
+    press.ArrowUp();
+    expect(testId("numberinput")).toHaveValue("3");
+    press.ArrowDown();
+    press.ArrowDown();
+    press.ArrowDown();
+    expect(testId("numberinput")).toHaveValue("0");
+    press.ArrowUp();
+    expect(testId("numberinput")).toHaveValue("1");
+
+    press.Home();
+    expect(testId("numberinput")).toHaveValue("0");
+    press.End();
+    expect(testId("numberinput")).toHaveValue("10");
+  });
+
   it("should increase/decrease with buttons", () => {
     const { getByTestId: testId } = render(
       <NumberInputComp defaultValue={0} />,
