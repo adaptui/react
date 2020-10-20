@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { canUseDOM } from "reakit-utils";
 import { createContext } from "@chakra-ui/utils";
 
+import { isFunction } from "../utils";
 import { ToastStateReturn } from "./ToastState";
 import { ToastController } from "./ToastController";
 import { useToastState, IToast } from "./ToastState";
@@ -64,7 +65,7 @@ type IToastProvider = {
    */
   animationTimeout?: number;
   /**
-   * Callback function to enhance the behaviour of ToastControllers
+   * Wrapper function to enhance the behaviour of ToastController
    */
   toastWrapper?: TToastWrapper;
   /**
@@ -98,7 +99,7 @@ export const ToastProvider: React.FC<IToastProvider> = ({
           }}
         >
           {toastList.map(
-            ({ id, type, content, timeout, autoDismiss, isVisible }) => {
+            ({ id, type = "", content, timeout, autoDismiss, isVisible }) => {
               return (
                 <ToastWrapperComponent
                   key={id}
@@ -112,13 +113,13 @@ export const ToastProvider: React.FC<IToastProvider> = ({
                     duration={timeout ?? providerTimeout}
                     autoDismiss={autoDismiss ?? providerAutoDismiss}
                   >
-                    {typeof content === "function"
+                    {isFunction(content)
                       ? content({ id, isVisible, remove: state.hide })
-                      : toastTypes[type || ""]?.({
-                          content,
+                      : toastTypes[type]?.({
                           id,
-                          remove: state.hide,
+                          content,
                           isVisible,
+                          remove: state.hide,
                         }) || content}
                   </ToastController>
                 </ToastWrapperComponent>

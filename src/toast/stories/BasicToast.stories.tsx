@@ -1,7 +1,7 @@
+import "./style.css";
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import "./style.css";
 import Demo from "./Demo";
 import { ToastProvider } from "../index";
 

@@ -4,7 +4,7 @@ import { isString } from "@chakra-ui/utils";
 import { ColumnType } from "./TimePickerColumnState";
 
 // As per https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#times
-export function parseTime(timeValue: string | undefined) {
+export function parseTime(timeValue?: string) {
   if (timeValue == null || !isString(timeValue)) return;
 
   const timeRegex = timeValue.match(/(\d\d)(:(\d\d)){1,2}/i);
