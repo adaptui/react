@@ -7,7 +7,8 @@ import { DateRangePickerStateReturn } from "./DateRangePickerState";
 import { useSegment, SegmentOptions, SegmentHTMLProps } from "../segment";
 
 export type DatePickerSegmentOptions =
-  | (SegmentOptions & Pick<DatePickerStateReturn, "pickerId">)
+  | (SegmentOptions &
+      Pick<DatePickerStateReturn, "pickerId" | "isRangeCalendar">)
   | Partial<DatePickerStateReturn>
   | Partial<DateRangePickerStateReturn>;
 
@@ -26,10 +27,11 @@ export const useDatePickerSegment = createHook<
 
   useProps(options, htmlProps) {
     const { id } = useId({ baseId: "datepicker-segment" });
-
     return {
       id,
-      "aria-labelledby": `${options.pickerId} ${options.baseId} ${id}`,
+      ...(options.isRangeCalendar && {
+        "aria-labelledby": `${options.pickerId} ${options.baseId} ${id}`,
+      }),
       ...htmlProps,
     };
   },

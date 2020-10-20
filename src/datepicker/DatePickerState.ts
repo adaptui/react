@@ -113,6 +113,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     ...popover,
     ...segmentState,
     calendar,
+    isRangeCalendar: false,
   };
 };
 

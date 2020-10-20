@@ -181,6 +181,7 @@ export const useDateRangePickerState = (
       baseId: endId,
     },
     calendar,
+    isRangeCalendar: true,
   };
 };
 
