@@ -217,7 +217,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
         return mergeProps(spinButtonProps, {
           id,
           "aria-label": segment.type,
-          "aria-labelledby": `${options["aria-labelledby"]} ${id}`,
+          "aria-labelledby": `${id}`,
           tabIndex: options.isDisabled ? undefined : 0,
           onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
           onFocus: callAllHandlers(htmlOnFocus, onFocus),

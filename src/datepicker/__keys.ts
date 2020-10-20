@@ -1,7 +1,7 @@
 // Automatically generated
 const DATE_PICKER_STATE_KEYS = [
   "calendar",
-  "isRangeCalendar",
+  "isDateRangePicker",
   "fieldValue",
   "setFieldValue",
   "segments",
@@ -84,7 +84,7 @@ const DATE_RANGE_PICKER_STATE_KEYS = [
   "startSegmentState",
   "endSegmentState",
   "calendar",
-  "isRangeCalendar",
+  "isDateRangePicker",
   "baseId",
   "unstable_idCountRef",
   "visible",

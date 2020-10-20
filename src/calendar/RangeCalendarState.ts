@@ -113,6 +113,7 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
         calendar.setFocusedDate(date);
       }
     },
+    isRangeCalendar: true,
   };
 }
 

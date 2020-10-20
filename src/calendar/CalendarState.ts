@@ -191,6 +191,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     selectDate(date: Date) {
       setValue(date);
     },
+    isRangeCalendar: false,
   };
 }
 
