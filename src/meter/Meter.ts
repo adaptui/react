@@ -5,7 +5,7 @@ import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterOptions = BoxOptions &
-  Pick<MeterStateReturn, "value" | "max" | "min">;
+  Pick<MeterStateReturn, "value" | "max" | "min" | "ariaValueText">;
 
 export type MeterHTMLProps = BoxHTMLProps;
 
@@ -16,8 +16,9 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   compose: useBox,
   keys: METER_KEYS,
 
-  useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
-    const { value, max, min } = options;
+  useProps(options, htmlProps) {
+    const { value, max, min, ariaValueText } = options;
+    console.log("%c ariaValueText", "color: #99adcc", ariaValueText);
 
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox

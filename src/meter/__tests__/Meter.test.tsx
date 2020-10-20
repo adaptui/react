@@ -42,7 +42,7 @@ describe("Meter", () => {
           role="meter progressbar"
         />
       </div>
-  `);
+    `);
   });
 
   it("checks role", function () {

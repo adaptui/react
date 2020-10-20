@@ -114,6 +114,6 @@ export const useMeterState = (
     percent,
     ariaValueText: isFunction(ariaValueText)
       ? ariaValueText?.(value, percent)
-      : `${value}%`,
+      : `${percent}%`,
   };
 };
