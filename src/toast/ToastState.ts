@@ -3,16 +3,36 @@ import { v4 as uuidv4 } from "uuid";
 
 import { Placements } from "./ToastProvider";
 
-type JSXFunction = (props: any) => JSX.Element;
-type StringOrElement = string | JSXFunction;
+type StringOrElement = string | React.ReactNode;
 
 export interface IToast {
+  /**
+   * uniue id of toast
+   */
   id: string;
+  /**
+   * type of toast
+   */
   type?: string;
+  /**
+   * content inside the toast
+   */
   content: StringOrElement;
+  /**
+   * Timeout after the toast will be removed automatically if autoDismiss is true
+   */
   timeout?: number;
+  /**
+   * sets the placement of the toast
+   */
   placement?: Placements;
+  /**
+   * If True the toast will automatically dismiss after the specified duration
+   */
   autoDismiss?: boolean;
+  /**
+   * Sets toast initial visibility
+   */
   isVisible?: boolean;
 }
 

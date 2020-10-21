@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { canUseDOM } from "reakit-utils";
-import { createContext } from "@chakra-ui/utils";
 
 import { ToastStateReturn } from "./ToastState";
 import { ToastController } from "./ToastController";
 import { useToastState, IToast } from "./ToastState";
+import { isFunction, createContext } from "../utils";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -41,12 +41,35 @@ export type ToastTypes = Record<
 >;
 
 export type TToastWrapper = (props: any) => React.ReactElement<any>;
+
 type IToastProvider = {
+  /**
+   * Specify types of toast in an object
+   */
   toastTypes: ToastTypes;
+  /**
+   * If True the toast will automatically dismiss after the specified duration
+   */
   autoDismiss?: boolean;
+  /**
+   * Timeout after the toast will be removed automatically if autoDismiss is true
+   *
+   * @default 5000
+   */
   timeout?: number;
+  /**
+   * Duration of delay after the toast will be unmounted, so that animations can run
+   *
+   * @default 0
+   */
   animationTimeout?: number;
+  /**
+   * Wrapper function to enhance the behaviour of ToastController
+   */
   toastWrapper?: TToastWrapper;
+  /**
+   * Placement of the toast on the screen
+   */
   placement?: Placements;
 };
 
@@ -75,7 +98,7 @@ export const ToastProvider: React.FC<IToastProvider> = ({
           }}
         >
           {toastList.map(
-            ({ id, type, content, timeout, autoDismiss, isVisible }) => {
+            ({ id, type = "", content, timeout, autoDismiss, isVisible }) => {
               return (
                 <ToastWrapperComponent
                   key={id}
@@ -89,13 +112,13 @@ export const ToastProvider: React.FC<IToastProvider> = ({
                     duration={timeout ?? providerTimeout}
                     autoDismiss={autoDismiss ?? providerAutoDismiss}
                   >
-                    {typeof content === "function"
+                    {isFunction(content)
                       ? content({ id, isVisible, remove: state.hide })
-                      : toastTypes[type || ""]?.({
-                          content,
+                      : toastTypes[type]?.({
                           id,
-                          remove: state.hide,
+                          content,
                           isVisible,
+                          remove: state.hide,
                         }) || content}
                   </ToastController>
                 </ToastWrapperComponent>
