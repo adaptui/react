@@ -1,8 +1,8 @@
+import "./index.css";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { addWeeks, subWeeks, format } from "date-fns";
 
-import "./index.css";
 import DatePickerComponent from "./DatePickerComponent";
 
 export default {
