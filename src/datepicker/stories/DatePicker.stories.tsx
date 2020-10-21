@@ -1,66 +1,59 @@
+import "./index.css";
 import * as React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { addWeeks, subWeeks, format } from "date-fns";
 
-import "./index.css";
-import {
-  DatePicker,
-  DatePickerSegment,
-  DatePickerSegmentField,
-  DatePickerContent,
-  DatePickerTrigger,
-  useDatePickerState,
-  DatePickerInitialState,
-} from "../index";
-import { CalendarComp } from "../../calendar/stories/CalendarComponent";
+import DatePickerComponent from "./DatePickerComponent";
 
 export default {
+  component: DatePickerComponent,
   title: "DatePicker",
+  argTypes: {
+    value: { control: "date" },
+    minValue: { control: "date" },
+    maxValue: { control: "date" },
+    defaultValue: { control: "date" },
+  },
 } as Meta;
 
-const DatePickerComp: React.FC<DatePickerInitialState> = props => {
-  const state = useDatePickerState({
-    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
-    ...props,
-  });
+const Base: Story = args => {
+  args.value &&= format(new Date(args.value), "yyyy-MM-dd");
+  args.defaultValue &&= format(new Date(args.defaultValue), "yyyy-MM-dd");
+  args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
+  args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
 
-  return (
-    <>
-      <DatePicker className="datepicker" {...state}>
-        <div className="datepicker__header">
-          <DatePickerSegmentField {...state} className="datepicker__field">
-            {state.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                className="datepicker__field--item"
-                {...state}
-              />
-            ))}
-          </DatePickerSegmentField>
-
-          <DatePickerTrigger className="datepicker__trigger" {...state}>
-            <CalendarIcon />
-          </DatePickerTrigger>
-        </div>
-      </DatePicker>
-      <DatePickerContent {...state}>
-        <CalendarComp {...state.calendar} />
-      </DatePickerContent>
-    </>
-  );
+  return <DatePickerComponent {...args} />;
 };
 
-const CalendarIcon = () => (
-  <svg viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img">
-    <path d="M33 6h-5V3a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v3H10V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v3H1a1 1 0 0 0-1 1v26a1 1 0 0 0 1 1h32a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zm-1 26H2V8h4v1a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8h14v1a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8h4z"></path>
-    <path d="M6 12h4v4H6zM12 12h4v4h-4zM18 12h4v4h-4zM24 12h4v4h-4zM6 18h4v4H6zM12 18h4v4h-4zM18 18h4v4h-4zM24 18h4v4h-4zM6 24h4v4H6zM12 24h4v4h-4zM18 24h4v4h-4zM24 24h4v4h-4z"></path>
-  </svg>
-);
+export const Default = Base.bind({});
 
-export const Default = () => <DatePickerComp />;
+export const InitialDate = Base.bind({});
+InitialDate.args = { defaultDate: "2020-02-29" };
 
-export const InitialDate = () => <DatePickerComp defaultValue="2020-02-29" />;
+export const MinMaxDate = Base.bind({});
+MinMaxDate.args = {
+  minValue: new Date(),
+  maxValue: addWeeks(new Date(), 2),
+};
+
+export const InValidDate = Base.bind({});
+InValidDate.args = {
+  defaultValue: addWeeks(new Date(), 2),
+  minValue: subWeeks(new Date(), 1),
+  maxValue: addWeeks(new Date(), 1),
+};
+
+export const Options = Base.bind({});
+Options.args = {
+  defaultValue: addWeeks(new Date(), 2),
+  value: addWeeks(new Date(), 2),
+  minValue: null,
+  maxValue: null,
+  autoFocus: false,
+  isDisabled: false,
+  isReadOnly: false,
+  formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
+};
 
 export const ControllableState = () => {
   const [value, setValue] = React.useState("2020-10-13");
@@ -72,31 +65,7 @@ export const ControllableState = () => {
         onChange={e => setValue(e.target.value)}
         value={value}
       />
-      <DatePickerComp value={value} onChange={setValue} />
+      <DatePickerComponent value={value} onChange={setValue} />
     </div>
   );
 };
-
-export const MinMaxDate = () => (
-  <DatePickerComp
-    minValue={format(new Date(), "yyyy-MM-dd")}
-    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
-  />
-);
-
-export const InValidDate = () => (
-  <DatePickerComp
-    defaultValue={format(addWeeks(new Date(), 2), "yyyy-MM-dd")}
-    minValue={format(subWeeks(new Date(), 1), "yyyy-MM-dd")}
-    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
-  />
-);
-
-export const isDisabled = () => <DatePickerComp isDisabled />;
-
-export const isReadOnly = () => <DatePickerComp isReadOnly />;
-
-export const autoFocus = () => (
-  // eslint-disable-next-line jsx-a11y/no-autofocus
-  <DatePickerComp autoFocus />
-);
