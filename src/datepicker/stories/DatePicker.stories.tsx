@@ -50,7 +50,7 @@ Options.args = {
   value: addWeeks(new Date(), 2),
   minValue: null,
   maxValue: null,
-  autoFocus: true,
+  autoFocus: false,
   isDisabled: false,
   isReadOnly: false,
   formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },

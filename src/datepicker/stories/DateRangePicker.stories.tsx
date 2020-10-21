@@ -50,5 +50,5 @@ Options.args = {
   maxValue: null,
   isDisabled: false,
   isReadOnly: false,
-  autoFocus: true,
+  autoFocus: false,
 };
