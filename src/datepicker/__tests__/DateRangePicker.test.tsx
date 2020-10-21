@@ -146,12 +146,16 @@ describe("DateRangePicker", () => {
 
     openDatePicker(text, testId);
 
-    expect(label("Sunday, November 15, 2020 selected")).toHaveFocus();
+    expect(
+      label(
+        "Sunday, November 15, 2020 selected (click to start selecting range)",
+      ),
+    ).toHaveFocus();
 
     // check if current date is selected
-    isEndSelection(label, "Sunday, November 15, 2020 selected");
-    isStartSelection(label, "Sunday, November 15, 2020 selected");
-    isInSelectionRange(label, "Sunday, November 15, 2020 selected");
+    isEndSelection(label, /Sunday, November 15, 2020 selected/i);
+    isStartSelection(label, /Sunday, November 15, 2020 selected/i);
+    isInSelectionRange(label, /Sunday, November 15, 2020 selected/i);
 
     // change date selection
     press.Enter();

@@ -63,21 +63,7 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
     ? makeRange(anchorDate, calendar.focusedDate)
     : value && dateRange && makeRange(dateRange.start, dateRange.end);
 
-  const selectDate = (date: Date) => {
-    if (props.isReadOnly) {
-      return;
-    }
-
-    if (!anchorDate) {
-      setAnchorDate(date);
-    } else {
-      setValue(makeRange(anchorDate, date));
-      setAnchorDate(null);
-    }
-  };
-
-  useUpdateEffect(() => {
-    if (anchorDate) return;
+  const announceRange = React.useCallback(() => {
     if (!highlightedRange) return;
     if (isSameDay(highlightedRange.start, highlightedRange.end)) {
       announce(
@@ -96,6 +82,21 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
     }
   }, [highlightedRange]);
 
+  const selectDate = (date: Date) => {
+    if (props.isReadOnly) {
+      return;
+    }
+
+    if (!anchorDate) {
+      setAnchorDate(date);
+      announce(`Starting range from ${format(date, "do MMM yyyy")}`);
+    } else {
+      setValue(makeRange(anchorDate, date));
+      announceRange();
+      setAnchorDate(null);
+    }
+  };
+
   return {
     ...calendar,
     dateRangeValue: dateRange,
@@ -112,6 +113,7 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
         calendar.setFocusedDate(date);
       }
     },
+    isRangeCalendar: true,
   };
 }
 

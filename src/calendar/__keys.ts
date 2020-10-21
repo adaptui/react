@@ -31,6 +31,7 @@ const CALENDAR_STATE_KEYS = [
   "focusPreviousYear",
   "selectFocusedDate",
   "selectDate",
+  "isRangeCalendar",
 ] as const;
 const RANGE_CALENDAR_STATE_KEYS = [
   ...CALENDAR_STATE_KEYS,
