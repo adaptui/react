@@ -17,6 +17,14 @@ export default {
   argTypes: {
     start: { control: "date", name: "value.start" },
     end: { control: "date", name: "value.end" },
+    defaultStart: {
+      control: "date",
+      name: "default.start",
+    },
+    defaultEnd: {
+      control: "date",
+      name: "default.end",
+    },
     minValue: { control: "date" },
     maxValue: { control: "date" },
   },
@@ -26,6 +34,11 @@ const Base: Story = args => {
   args.value = {
     start: args.start && format(new Date(args.start), "yyyy-MM-dd"),
     end: args.end && format(new Date(args.end), "yyyy-MM-dd"),
+  };
+  args.defaultValue = {
+    start:
+      args.defaultStart && format(new Date(args.defaultStart), "yyyy-MM-dd"),
+    end: args.defaultEnd && format(new Date(args.defaultEnd), "yyyy-MM-dd"),
   };
   args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
   args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
@@ -37,8 +50,8 @@ export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
-  start: setDate(new Date(), 10),
-  end: new Date(),
+  defaultStart: setDate(new Date(), 10),
+  defaultEnd: new Date(),
 };
 
 export const MinMaxDefaultDate = Base.bind({});

@@ -12,7 +12,7 @@ export default {
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
-    defaultValue: { control: "date" },
+    defaultValue: { control: "date", defaultValue: new Date() },
   },
 } as Meta;
 
