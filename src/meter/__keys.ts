@@ -1,12 +1,13 @@
 // Automatically generated
 const METER_STATE_KEYS = [
   "value",
+  "min",
+  "max",
   "low",
   "high",
   "optimum",
-  "min",
-  "max",
-  "status",
+  "ariaValueText",
   "percent",
+  "status",
 ] as const;
-export const METER_KEYS = [...METER_STATE_KEYS, "getAriaValueText"] as const;
+export const METER_KEYS = METER_STATE_KEYS;

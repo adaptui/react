@@ -101,4 +101,7 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
   >;
 }
 
+export const cx = (...classNames: any[]) =>
+  classNames.filter(Boolean).join(" ");
+
 export * from "./date";

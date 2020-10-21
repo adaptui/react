@@ -111,9 +111,15 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     setFocusedDate(date);
   }
 
+  const announceSelectedDate = React.useCallback((value: Date) => {
+    if (!value) return;
+    announce(`Selected Date: ${format(value, "do MMM yyyy")}`);
+  }, []);
+
   function setValue(value: Date) {
     if (!isDisabled && !isReadOnly) {
       setControllableValue(value);
+      announceSelectedDate(value);
     }
   }
 
@@ -128,11 +134,6 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     // handle an update to the current month from the Previous or Next button
     // rather than move focus, we announce the new month value
   }, [currentMonth]);
-
-  useUpdateEffect(() => {
-    if (!value) return;
-    announce(`Selected Date: ${format(value, "do MMM yyyy")}`);
-  }, [value]);
 
   return {
     calendarId,
@@ -190,6 +191,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     selectDate(date: Date) {
       setValue(date);
     },
+    isRangeCalendar: false,
   };
 }
 

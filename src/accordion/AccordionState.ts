@@ -28,7 +28,7 @@ export type AccordionState = CompositeState & {
    * Whether the accodion selection should be manual.
    * @default true
    */
-  manual: boolean;
+  manual?: boolean;
   /**
    * Allow to open multiple accordion items
    * @default false

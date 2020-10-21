@@ -1,19 +1,12 @@
+import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
-import { createHook, createComponent } from "reakit-system";
+import { createHook, createComponent, useCreateElement } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
-import { isFunction } from "../utils";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterOptions = BoxOptions &
-  Pick<MeterStateReturn, "value" | "max" | "min" | "percent"> & {
-    /**
-     * Function that returns the `aria-valuetext` for screen readers.
-     * It's mostly used to generate a more human-readable
-     * representation of the value for assistive technologies
-     */
-    getAriaValueText?(value: number): string;
-  };
+  Pick<MeterStateReturn, "value" | "max" | "min" | "ariaValueText">;
 
 export type MeterHTMLProps = BoxHTMLProps;
 
@@ -24,8 +17,8 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   compose: useBox,
   keys: METER_KEYS,
 
-  useProps(options, { "aria-valuetext": ariaValueText, ...htmlProps }) {
-    const { value, max, min, percent } = options;
+  useProps(options, htmlProps) {
+    const { value, max, min, ariaValueText } = options;
 
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
@@ -37,13 +30,8 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
       role: "meter progressbar",
       "aria-valuemax": max,
       "aria-valuemin": min,
-      "aria-valuenow": value == null ? undefined : value,
-      "aria-valuetext":
-        value == null
-          ? undefined
-          : isFunction(options.getAriaValueText)
-          ? options.getAriaValueText(value)
-          : ariaValueText ?? `${percent}%`,
+      "aria-valuenow": value,
+      "aria-valuetext": `${ariaValueText}`,
       ...htmlProps,
     };
   },
@@ -53,4 +41,11 @@ export const Meter = createComponent({
   as: "div",
   memo: true,
   useHook: useMeter,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });

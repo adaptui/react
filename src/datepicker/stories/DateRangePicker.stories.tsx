@@ -98,19 +98,20 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
 
   return (
     <>
-      <DatePicker className="datepicker" {...state}>
+      <DatePicker aria-label="Date Range" className="datepicker" {...state}>
         <div className="datepicker__header">
           <DatePickerSegmentField
             {...state.startSegmentState}
             className="datepicker__field"
+            aria-label="start date"
           >
             {state.startSegmentState.segments.map((segment, i) => (
               <DatePickerSegment
                 key={i}
                 segment={segment}
                 className="datepicker__field--item"
-                {...state.startSegmentState}
                 {...state}
+                {...state.startSegmentState}
               />
             ))}
           </DatePickerSegmentField>
@@ -118,14 +119,15 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
           <DatePickerSegmentField
             {...state.endSegmentState}
             className="datepicker__field"
+            aria-label="end date"
           >
             {state.endSegmentState.segments.map((segment, i) => (
               <DatePickerSegment
                 key={i}
                 segment={segment}
                 className="datepicker__field--item"
-                {...state.endSegmentState}
                 {...state}
+                {...state.endSegmentState}
               />
             ))}
           </DatePickerSegmentField>

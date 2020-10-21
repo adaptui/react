@@ -28,6 +28,7 @@ export type CalendarCellButtonOptions = ButtonOptions &
     | "maxDate"
     | "dateValue"
     | "isFocused"
+    | "isRangeCalendar"
   > &
   Partial<Pick<RangeCalendarStateReturn, "anchorDate">> & {
     date: Date;
@@ -132,7 +133,7 @@ export const useCalendarCellButton = createHook<
 
     // When a cell is focused and this is a range calendar, add a prompt to help
     // screenreader users know that they are in a range selection mode.
-    if (anchorDate && isFocused && !isDisabled) {
+    if (options.isRangeCalendar && isFocused && !isDisabled) {
       let rangeSelectionPrompt = "";
 
       // If selection has started add "click to finish selecting range"
