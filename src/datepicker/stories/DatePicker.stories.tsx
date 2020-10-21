@@ -17,7 +17,6 @@ export default {
 } as Meta;
 
 const Base: Story = args => {
-  console.log(args);
   args.value &&= format(new Date(args.value), "yyyy-MM-dd");
   args.defaultValue &&= format(new Date(args.defaultValue), "yyyy-MM-dd");
   args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
