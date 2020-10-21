@@ -4,8 +4,9 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
+import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
-import { createHook, createComponent } from "reakit-system";
+import { createHook, createComponent, useCreateElement } from "reakit-system";
 
 import { dataAttr } from "../utils";
 import { PROGRESS_KEYS } from "./__keys";
@@ -45,4 +46,11 @@ export const Progress = createComponent({
   as: "div",
   memo: true,
   useHook: useProgress,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });

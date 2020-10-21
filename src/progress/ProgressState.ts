@@ -66,10 +66,12 @@ export function useProgressState(
     value: initialValue = 0,
     min = 0,
     max = 100,
-    ariaValueText,
     isIndeterminate = false,
+    ariaValueText,
   } = useSealedState(initialState);
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState(
+    initialValue == null ? 0 : initialValue,
+  );
   const percent = valueToPercent(value, min, max);
 
   return {

@@ -1,5 +1,6 @@
+import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
-import { createHook, createComponent } from "reakit-system";
+import { createHook, createComponent, useCreateElement } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
@@ -18,7 +19,6 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
 
   useProps(options, htmlProps) {
     const { value, max, min, ariaValueText } = options;
-    console.log("%c ariaValueText", "color: #99adcc", ariaValueText);
 
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
@@ -30,7 +30,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
       role: "meter progressbar",
       "aria-valuemax": max,
       "aria-valuemin": min,
-      "aria-valuenow": value == null ? undefined : value,
+      "aria-valuenow": value,
       "aria-valuetext": `${ariaValueText}`,
       ...htmlProps,
     };
@@ -41,4 +41,11 @@ export const Meter = createComponent({
   as: "div",
   memo: true,
   useHook: useMeter,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });

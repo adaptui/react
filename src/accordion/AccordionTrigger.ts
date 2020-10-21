@@ -48,7 +48,12 @@ export const useAccordionTrigger = createHook<
 
   useProps(
     options,
-    { onClick: htmlOnClick, onFocus: htmlOnFocus, ...htmlProps },
+    {
+      onClick: htmlOnClick,
+      onKeyDown: htmlOnKeyDown,
+      onFocus: htmlOnFocus,
+      ...htmlProps
+    },
   ) {
     const {
       manual,
@@ -61,8 +66,29 @@ export const useAccordionTrigger = createHook<
     } = options;
     const selected = isAccordionSelected(options);
     const accordionPanelId = useAccordionPanelId(options);
+    const onKeyDownRef = useLiveRef(htmlOnKeyDown);
     const onClickRef = useLiveRef(htmlOnClick);
     const onFocusRef = useLiveRef(htmlOnFocus);
+
+    const onKeyDown = React.useCallback(
+      (event: React.KeyboardEvent) => {
+        const first = options.first && (() => setTimeout(options.first));
+        const last = options.last && (() => setTimeout(options.last));
+        const keyMap = { Home: first, End: last };
+        const action = keyMap[event.key as keyof typeof keyMap];
+        if (action) {
+          event.preventDefault();
+          event.stopPropagation();
+          action();
+          return;
+        }
+
+        onKeyDownRef.current?.(event);
+      },
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [options.first, options.last],
+    );
 
     const handleSelection = React.useCallback(() => {
       if (disabled) return;
@@ -91,7 +117,8 @@ export const useAccordionTrigger = createHook<
         handleSelection();
       },
 
-      [handleSelection, onClickRef],
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [handleSelection],
     );
 
     const onFocus = React.useCallback(
@@ -103,7 +130,8 @@ export const useAccordionTrigger = createHook<
         handleSelection();
       },
 
-      [onFocusRef, manual, handleSelection],
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [manual, handleSelection],
     );
 
     return {
@@ -112,6 +140,7 @@ export const useAccordionTrigger = createHook<
       "aria-disabled": ariaAttr(!allowToggle && selected),
       onClick,
       onFocus,
+      onKeyDown,
       ...htmlProps,
     };
   },
