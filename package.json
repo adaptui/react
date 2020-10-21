@@ -30,6 +30,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly",
+    "check-types": "tsc --noEmit",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "keys": "node scripts/build/keys",

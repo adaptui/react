@@ -119,7 +119,11 @@ describe("RangeCalendar", () => {
     press.Tab();
     press.Tab();
 
-    expect(label("Wednesday, October 7, 2020 selected")).toHaveFocus();
+    expect(
+      label(
+        "Wednesday, October 7, 2020 selected (click to start selecting range)",
+      ),
+    ).toHaveFocus();
     press.ArrowDown(); // go to down just for some variety
 
     press.Enter(); // start the selection, currently the start and end should be the same date
@@ -145,9 +149,12 @@ describe("RangeCalendar", () => {
     // check if the selection is actually finished or not
     press.ArrowRight();
     press.ArrowRight();
-    expect(label("Wednesday, November 4, 2020")).toHaveFocus();
     expect(
-      label("Wednesday, November 4, 2020")?.parentElement,
+      label("Wednesday, November 4, 2020 (click to start selecting range)"),
+    ).toHaveFocus();
+    expect(
+      label("Wednesday, November 4, 2020 (click to start selecting range)")
+        ?.parentElement,
     ).not.toHaveAttribute("data-is-range-selection");
 
     // Verify selection ranges
@@ -174,7 +181,11 @@ describe("RangeCalendar", () => {
     press.Tab();
     press.Tab();
 
-    expect(label("Monday, October 7, 2019 selected")).toHaveFocus();
+    expect(
+      label(
+        "Monday, October 7, 2019 selected (click to start selecting range)",
+      ),
+    ).toHaveFocus();
     press.ArrowDown();
     press.Enter(); // start the selection
 

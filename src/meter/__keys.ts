@@ -1,11 +1,11 @@
 // Automatically generated
 const METER_STATE_KEYS = [
   "value",
-  "low",
-  "high",
-  "optimum",
   "min",
   "max",
+  "low",
+  "optimum",
+  "high",
   "status",
   "percent",
 ] as const;

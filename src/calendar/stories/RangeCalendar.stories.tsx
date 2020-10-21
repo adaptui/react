@@ -86,10 +86,7 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
 export const Default = () => <RangeCalendarComp />;
 export const DefaultValue = () => (
   <RangeCalendarComp
-    defaultValue={{
-      start: format(new Date(), "yyyy-MM-dd"),
-      end: format(addDays(new Date(), 4), "yyyy-MM-dd"),
-    }}
+    defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
   />
 );
 
