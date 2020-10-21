@@ -1,34 +1,24 @@
 import React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
-import { Progress } from "../Progress";
-import { useProgressState } from "../ProgressState";
 import {
-  useFakeProgression,
-  createCircularExample,
-} from "./storybook-progress-utils";
+  CircularProgress as Progress,
+  CircularProgressInitialState,
+} from "./CircularProgress";
 
 export default {
+  component: Progress,
   title: "Progress/Circular",
 } as Meta;
 
-const CircularProgress = createCircularExample({
-  stateHook: useProgressState,
-  component: Progress,
-});
+const Base: Story<CircularProgressInitialState> = args => (
+  <Progress {...args} />
+);
 
-export const Default = () => {
-  const value = useFakeProgression();
+export const Default = Base.bind({});
 
-  return <CircularProgress value={value} />;
-};
+export const WithLabel = Base.bind({});
+WithLabel.args = { withLabel: true };
 
-export const WithLabel = () => {
-  const value = useFakeProgression();
-
-  return <CircularProgress value={value} label />;
-};
-
-export const IsIndeterminate = () => {
-  return <CircularProgress />;
-};
+export const IsIndeterminate = Base.bind({});
+IsIndeterminate.args = { isIndeterminate: true };

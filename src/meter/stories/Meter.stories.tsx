@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { StyledMeterInitialState, StyledMeter as Meter } from "./Meter";
+import {
+  StyledMeterInitialState,
+  StyledMeter as Meter,
+} from "./MeterComponent";
 
 export default {
   component: Meter,

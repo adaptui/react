@@ -51,4 +51,7 @@ export const dataAttr = (condition: boolean | undefined) =>
 export const ariaAttr = (condition: boolean | undefined) =>
   condition ? true : undefined;
 
+export const cx = (...classNames: any[]) =>
+  classNames.filter(Boolean).join(" ");
+
 export * from "./date";

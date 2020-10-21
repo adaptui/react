@@ -1,12 +1,11 @@
 // Automatically generated
 const PROGRESS_STATE_KEYS = [
   "value",
-  "isIndeterminate",
   "min",
   "max",
+  "isIndeterminate",
+  "ariaValueText",
   "percent",
+  "setValue",
 ] as const;
-export const PROGRESS_KEYS = [
-  ...PROGRESS_STATE_KEYS,
-  "getAriaValueText",
-] as const;
+export const PROGRESS_KEYS = PROGRESS_STATE_KEYS;
