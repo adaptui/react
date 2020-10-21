@@ -21,4 +21,4 @@ export const WithLabel = Base.bind({});
 WithLabel.args = { withLabel: true };
 
 export const IsIndeterminate = Base.bind({});
-IsIndeterminate.args = { isIndeterminate: true };
+IsIndeterminate.args = { value: null };

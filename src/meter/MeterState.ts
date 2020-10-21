@@ -3,8 +3,8 @@ import {
   useSealedState,
 } from "reakit-utils/useSealedState";
 
-import { isFunction, valueToPercent } from "../utils";
-import { getDefaultOptimumValue, calculateStatus, clamp } from "./helpers";
+import { isFunction, valueToPercent, getOptimumValue } from "../utils";
+import { calculateStatus, clamp } from "./helpers";
 
 type Status = "safe" | "caution" | "danger" | undefined;
 
@@ -13,38 +13,42 @@ type AriaValueText = string | ((value: number, percent: number) => string);
 export type MeterState = {
   /**
    * The `value` of the meter indicator.
+   *
    * If `undefined`/`not valid` the meter bar will be equal to `min`
    * @default 0
    */
-  value?: number;
+  value: number;
   /**
    * The minimum value of the meter
    * @default 0
    */
-  min?: number;
+  min: number;
   /**
    * The maximum value of the meter
    * @default 1
    */
-  max?: number;
+  max: number;
   /**
    * The higher limit of min range.
+   *
    * Defaults to `min`.
    * @default 0
    */
-  low?: number;
+  low: number;
   /**
    * The lower limit of max range.
+   *
    * Defaults to `max`.
    * @default 1
    */
-  high?: number;
+  high: number;
   /**
    * The lower limit of max range.
+   *
    * Defaults to `median of low & high`.
    * @default 0.5
    */
-  optimum?: number;
+  optimum: number;
   /**
    * Defines the human readable text alternative of aria-valuenow for a range widget.
    */
@@ -59,11 +63,9 @@ export type MeterState = {
   status: Status;
 };
 
-export type MeterInitialState = Partial<
-  Pick<
-    MeterState,
-    "value" | "min" | "max" | "low" | "optimum" | "high" | "ariaValueText"
-  >
+export type MeterInitialState = Pick<
+  Partial<MeterState>,
+  "value" | "min" | "max" | "low" | "optimum" | "high" | "ariaValueText"
 >;
 
 export type MeterStateReturn = MeterState;
@@ -81,7 +83,7 @@ export const useMeterState = (
   const initialLow = sealed.low ?? min;
   const initialHigh = sealed.high ?? max;
   const initialOptimum =
-    sealed.optimum ?? getDefaultOptimumValue(initialLow, initialHigh);
+    sealed.optimum ?? getOptimumValue(initialLow, initialHigh);
 
   const value = clamp(initialValue, min, max);
   const optimum = clamp(initialOptimum, min, max);

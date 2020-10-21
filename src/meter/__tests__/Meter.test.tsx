@@ -1,6 +1,6 @@
 import * as React from "react";
 import cases from "jest-in-case";
-import { render } from "reakit-test-utils";
+import { axe, render } from "reakit-test-utils";
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
 
@@ -25,7 +25,7 @@ const MeterComp: React.FC<MeterInitialState> = props => {
     max,
   });
 
-  return <Meter {...meter} {...rest} />;
+  return <Meter aria-label="meter" {...meter} {...rest} />;
 };
 
 describe("Meter", () => {
@@ -35,6 +35,7 @@ describe("Meter", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
+          aria-label="meter"
           aria-valuemax="1"
           aria-valuemin="0"
           aria-valuenow="0"

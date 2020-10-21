@@ -8,8 +8,8 @@ import { useWarning } from "reakit-warning";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createHook, createComponent, useCreateElement } from "reakit-system";
 
-import { dataAttr } from "../utils";
 import { PROGRESS_KEYS } from "./__keys";
+import { dataAttr, isNull } from "../utils";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressOptions = BoxOptions &
@@ -35,7 +35,7 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
       "data-indeterminate": dataAttr(isIndeterminate),
       "aria-valuemax": max,
       "aria-valuemin": min,
-      "aria-valuenow": isIndeterminate ? undefined : value,
+      "aria-valuenow": isNull(value) ? undefined : value,
       "aria-valuetext": `${ariaValueText}`,
       ...htmlProps,
     };

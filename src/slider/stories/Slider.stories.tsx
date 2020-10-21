@@ -6,7 +6,6 @@ import { useForm, Controller } from "react-hook-form";
 import {
   Slider,
   SliderTrack,
-  SliderInput,
   SliderThumb,
   useSliderState,
   SliderFilledTrack,
@@ -21,10 +20,13 @@ import {
   sliderVerticalThumbStyle,
   sliderVerticalTrackStyle,
 } from "./styles";
+import { StyledSlider } from "./SliderComponent";
 
 export default {
   title: "Slider",
 } as Meta;
+
+export const New = () => <StyledSlider />;
 
 const SliderComp: React.FC<any> = props => {
   const slider = useSliderState(props);
@@ -51,7 +53,7 @@ const SliderComp: React.FC<any> = props => {
           }}
         />
 
-        <SliderInput name={name} {...slider} />
+        <input type="hidden" value={slider.state.value}></input>
       </Slider>
     </>
   );
@@ -112,7 +114,8 @@ export const Reversed = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -138,7 +141,8 @@ export const Min20Max80 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -164,7 +168,8 @@ export const Step10 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -190,7 +195,8 @@ export const DefaultValue90 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -216,7 +222,8 @@ export const Disabled = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -242,7 +249,8 @@ export const ReadOnly = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };
@@ -265,7 +273,8 @@ export const Vertical = () => {
             : sliderVerticalThumbStyle.transform,
         }}
       />
-      <SliderInput {...slider} name="slider" />
+
+      <input type="hidden" value={slider.state.value}></input>
     </Slider>
   );
 };

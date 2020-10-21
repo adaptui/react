@@ -1,12 +1,4 @@
-/**
- * The candidate optimum point is the midpoint between the minimum value and
- * the maximum value.
- *
- * @see https://html.spec.whatwg.org/multipage/form-elements.html#the-meter-element:attr-meter-high-8:~:text=boundary.-,The%20optimum%20point
- */
-export function getDefaultOptimumValue(min: number, max: number) {
-  return max < min ? min : min + (max - min) / 2;
-}
+import { isNull } from "../utils";
 
 /**
  * Handle Inequalities with received values
@@ -19,7 +11,7 @@ export function getDefaultOptimumValue(min: number, max: number) {
  * @see https://html.spec.whatwg.org/multipage/form-elements.html#the-meter-element:attr-meter-max-3:~:text=following%20inequalities%20must%20hold
  */
 export function clamp(value: number, min: number, max: number) {
-  if (value == null) return 0;
+  if (isNull(value)) return 0;
 
   return Math.min(Math.max(value, min), max);
 }
