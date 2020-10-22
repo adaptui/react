@@ -1,4 +1,6 @@
+jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
+import { cleanup } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
 
 import {
@@ -13,6 +15,13 @@ import {
   RangeCalendarInitialState,
 } from "../index";
 import { isEndSelection, isStartSelection } from "../../utils/test-utils";
+import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
+
+afterEach(cleanup);
+
+beforeEach(() => {
+  destroyAnnouncer();
+});
 
 const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
@@ -103,6 +112,29 @@ describe("RangeCalendar", () => {
       "data-is-range-selection",
     );
     expect(end).toHaveTextContent("30");
+  });
+
+  it("should announce selected range after finishing selection", async () => {
+    const { getByLabelText: label } = render(
+      <RangeCalendarComp
+        defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
+      />,
+    );
+
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Tab();
+    press.Enter(label(/Monday, October 7, 2019 selected/));
+    press.ArrowDown();
+    press.ArrowRight();
+    press.Enter(label(/Tuesday, October 15, 2019/));
+
+    expect(announce).toHaveBeenCalledTimes(2);
+    expect(announce).toHaveBeenLastCalledWith(
+      "Selected range, from 7th Oct 2019 to 15th Oct 2019",
+    );
   });
 
   it("should be able to select ranges with keyboard navigation", () => {
