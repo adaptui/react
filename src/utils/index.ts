@@ -4,6 +4,10 @@ import { warn } from "@chakra-ui/utils";
 // Null Assertion
 export const isNull = (value: any): value is null => value == null;
 
+export function clamp(value: number, min = -Infinity, max = Infinity): number {
+  return Math.min(Math.max(value, min), max);
+}
+
 /**
  * Clamps a value to ensure it stays within the min and max range.
  *

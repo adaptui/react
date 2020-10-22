@@ -20,13 +20,10 @@ import {
   sliderVerticalThumbStyle,
   sliderVerticalTrackStyle,
 } from "./styles";
-import { StyledSlider } from "./SliderComponent";
 
 export default {
   title: "Slider",
 } as Meta;
-
-export const New = () => <StyledSlider />;
 
 const SliderComp: React.FC<any> = props => {
   const slider = useSliderState(props);

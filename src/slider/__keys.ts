@@ -6,14 +6,7 @@ const SLIDER_STATE_KEYS = [
   "handlers",
   "styles",
 ] as const;
-export const SLIDER_KEYS = [
-  ...SLIDER_STATE_KEYS,
-  "value",
-  "min",
-  "max",
-  "ariaValueText",
-  "setValue",
-] as const;
+export const SLIDER_KEYS = SLIDER_STATE_KEYS;
 export const SLIDER_FILLED_TRACK_KEYS = SLIDER_KEYS;
 export const SLIDER_THUMB_KEYS = [
   ...SLIDER_FILLED_TRACK_KEYS,

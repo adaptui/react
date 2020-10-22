@@ -68,7 +68,7 @@ export function useProgressState(
     max = 100,
     ariaValueText,
   } = useSealedState(initialState);
-  const [value, setValue] = React.useState(clamp(initialValue, min, max));
+  const [value, setValue] = React.useState(clampValue(initialValue, min, max));
   const percent = isNull(value) ? null : valueToPercent(value, min, max);
 
   return {
@@ -86,7 +86,7 @@ export function useProgressState(
   };
 }
 
-function clamp(value: number | null, min: number, max: number) {
+function clampValue(value: number | null, min: number, max: number) {
   if (isNull(value)) return null;
 
   return Math.min(Math.max(value, min), max);
