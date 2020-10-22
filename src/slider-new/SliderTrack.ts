@@ -139,7 +139,7 @@ export const useSliderTrack = createHook<
           currentPointer.current = id;
 
           options.setThumbDragging(realTimeTrackDraggingIndex.current, true);
-          console.log("%c value", "color: #ffcc00", value);
+
           options.setThumbValue(index, value);
 
           addGlobalListener(window, "mouseup", onUpTrack, false);

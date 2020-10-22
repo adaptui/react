@@ -4,7 +4,10 @@ import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderInputOptions = InputOptions & SliderStateReturn;
+export type SliderInputOptions = InputOptions &
+  SliderStateReturn & {
+    index: number;
+  };
 
 export type SliderInputHTMLProps = InputHTMLProps;
 
@@ -19,7 +22,7 @@ export const useSliderInput = createHook<
   keys: SLIDER_INPUT_KEYS,
 
   useProps(options, htmlProps) {
-    const index = 0;
+    const { index } = options;
     const value = options.values[index];
 
     return {
@@ -29,7 +32,7 @@ export const useSliderInput = createHook<
       min: options.getThumbMinValue(index),
       max: options.getThumbMaxValue(index),
       step: options.step,
-      value: value,
+      value: options.getThumbValueLabel(index),
       disabled: options.isDisabled,
       "aria-orientation": options.orientation,
       "aria-valuetext": `${value}`,

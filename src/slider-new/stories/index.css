@@ -20,6 +20,35 @@
   margin-left: auto;
 }
 
+.trackContainer {
+  position: relative;
+  width: 100%;
+}
+
+.rail {
+  position: absolute;
+  background-color: #e4e4e4;
+  height: 3px;
+  top: 13px;
+  width: 100%;
+}
+
+.filledRail {
+  position: absolute;
+  height: 3px;
+  background-color: #707070;
+  top: 13px;
+  height: 3px;
+  top: 13px;
+  left: 0;
+}
+
+.track {
+  position: relative;
+  height: 30px;
+  width: 100%;
+}
+
 .thumb {
   position: absolute;
   top: 4px;
@@ -57,35 +86,6 @@
 
 .thumbDisabled label {
   cursor: inherit;
-}
-
-.rail {
-  position: absolute;
-  background-color: #e4e4e4;
-  height: 3px;
-  top: 13px;
-  width: 100%;
-}
-
-.filledRail {
-  position: absolute;
-  height: 3px;
-  background-color: #707070;
-  top: 13px;
-  height: 3px;
-  top: 13px;
-  left: 0;
-}
-
-.track {
-  position: relative;
-  height: 30px;
-  width: 100%;
-}
-
-.trackContainer {
-  position: relative;
-  width: 100%;
 }
 
 .tip {

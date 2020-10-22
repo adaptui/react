@@ -11,15 +11,13 @@ import {
 
 import { VisuallyHidden } from "reakit";
 
-interface StorySliderProps extends SliderInitialState {
+interface BasicSliderProps extends SliderInitialState {
   origin?: number;
   showTip?: boolean;
+  label?: string;
 }
 
-export const StorySlider: React.FC<StorySliderProps> = props => {
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
-
+export const BasicSlider: React.FC<BasicSliderProps> = props => {
   const { children, origin: OriginProp, showTip, ...rest } = props;
   const origin = OriginProp ?? props.min ?? 0;
   const state = useSliderState(rest);
@@ -27,15 +25,15 @@ export const StorySlider: React.FC<StorySliderProps> = props => {
   const value = state.values[0];
 
   return (
-    <div className="slider" role="group">
-      {/* <div className="sliderLabel">
+    <div className="slider" role="group" aria-labelledby="a11y-slider">
+      <div className="sliderLabel">
         {props.label && (
-          <label {...labelProps} className="label">
+          <label className="label" id="a11y-slider">
             {props.label}
           </label>
         )}
         <div className="value">{state.getThumbValueLabel(0)}</div>
-      </div> */}
+      </div>
       <div className="trackContainer">
         {
           // We make rail, filledRail, and track siblings in the DOM, so that trackRef has no children.
@@ -53,8 +51,8 @@ export const StorySlider: React.FC<StorySliderProps> = props => {
             }%`,
           }}
         />
-        <SliderTrack {...state} ref={trackRef} className="track" />
 
+        <SliderTrack {...state} className="track" />
         <div
           className="thumb"
           style={{
@@ -62,12 +60,14 @@ export const StorySlider: React.FC<StorySliderProps> = props => {
           }}
         >
           {/* We put thumbProps on thumbHandle, so that you cannot drag by the tip */}
-          <SliderThumb {...state} className="thumbHandle">
+          <SliderThumb {...state} index={0} className="thumbHandle">
             <VisuallyHidden>
-              <SliderInput className="input" ref={inputRef} {...state} />
+              <SliderInput index={0} aria-labelledby="a11y-slider" {...state} />
             </VisuallyHidden>
           </SliderThumb>
-          {props.showTip && <div className="tip">{value}</div>}
+          {props.showTip && (
+            <div className="tip">{state.getThumbValueLabel(0)}</div>
+          )}
         </div>
       </div>
     </div>

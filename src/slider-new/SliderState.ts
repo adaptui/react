@@ -4,10 +4,9 @@
  * We improved the Slider Component [Slider](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/Slider)
  * to work with Reakit System
  */
-import { isUndefined } from "@chakra-ui/utils";
 import * as React from "react";
 import { SealedInitialState, useSealedState } from "reakit-utils";
-
+import { useNumberFormatter } from "@react-aria/i18n";
 import { getOptimumValue, clamp, isNull } from "../utils";
 
 export interface SliderState {
@@ -81,6 +80,10 @@ export interface SliderState {
   // editable
   isThumbEditable: (index: number) => boolean;
   setThumbEditable: (index: number, editable: boolean) => void;
+
+  // Returns the string label for the value, per props.formatOptions
+  getThumbValueLabel: (index: number) => string;
+  getFormattedValue: (value: number) => string;
 }
 
 export interface SliderAction {
@@ -95,7 +98,9 @@ export type SliderInitialState = Partial<
     SliderState,
     "values" | "min" | "max" | "step" | "isDisabled" | "orientation"
   >
->;
+> & {
+  formatOptions?: Intl.NumberFormatOptions;
+};
 
 export type SliderStateReturn = SliderState & SliderAction;
 
@@ -109,6 +114,7 @@ export function useSliderState(
     step = 1,
     isDisabled,
     orientation = "horizontal",
+    formatOptions,
   } = useSealedState(initialState);
   const [values, setValues] = React.useState(
     clampValues(initialValues, min, max),
@@ -203,6 +209,12 @@ export function useSliderState(
     return clamp(getRoundedValue(val), min, max);
   }
 
+  const formatter = useNumberFormatter(formatOptions);
+
+  function getFormattedValue(value: number) {
+    return formatter.format(value);
+  }
+
   return {
     values,
     min,
@@ -224,6 +236,8 @@ export function useSliderState(
     getPercentValue,
     isThumbEditable,
     setThumbEditable,
+    getFormattedValue,
+    getThumbValueLabel: (index: number) => getFormattedValue(values[index]),
     trackRef,
     inputRef,
     orientation,

@@ -22,8 +22,10 @@ const SLIDER_STATE_KEYS = [
   "getPercentValue",
   "isThumbEditable",
   "setThumbEditable",
+  "getThumbValueLabel",
+  "getFormattedValue",
   "setValues",
 ] as const;
-export const SLIDER_INPUT_KEYS = SLIDER_STATE_KEYS;
+export const SLIDER_INPUT_KEYS = [...SLIDER_STATE_KEYS, "index"] as const;
 export const SLIDER_THUMB_KEYS = SLIDER_INPUT_KEYS;
-export const SLIDER_TRACK_KEYS = SLIDER_THUMB_KEYS;
+export const SLIDER_TRACK_KEYS = SLIDER_STATE_KEYS;

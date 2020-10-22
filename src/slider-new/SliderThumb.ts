@@ -9,7 +9,10 @@ import { SliderStateReturn } from "./SliderState";
 import { clamp } from "../utils";
 import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
 
-export type SliderThumbOptions = BoxOptions & SliderStateReturn;
+export type SliderThumbOptions = BoxOptions &
+  SliderStateReturn & {
+    index: number;
+  };
 
 export type SliderThumbHTMLProps = BoxHTMLProps;
 
@@ -24,8 +27,7 @@ export const useSliderThumb = createHook<
   keys: SLIDER_THUMB_KEYS,
 
   useProps(options, { ...htmlProps }) {
-    const index = 0;
-
+    const { index } = options;
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
