@@ -3,8 +3,8 @@ import {
   useSealedState,
 } from "reakit-utils/useSealedState";
 
-import { isFunction, valueToPercent, getOptimumValue } from "../utils";
 import { calculateStatus, clamp } from "./helpers";
+import { isFunction, valueToPercent, getOptimumValue } from "../utils";
 
 type Status = "safe" | "caution" | "danger" | undefined;
 
