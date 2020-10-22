@@ -1,5 +1,6 @@
-import { Booleanish } from "./types";
 import { warn } from "@chakra-ui/utils";
+
+import { Booleanish } from "./types";
 
 // Null Assertion
 export const isNull = (value: any): value is null => value == null;

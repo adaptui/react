@@ -1,6 +1,6 @@
 import * as React from "react";
 import cases from "jest-in-case";
-import { axe, render } from "reakit-test-utils";
+import { render } from "reakit-test-utils";
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
 
