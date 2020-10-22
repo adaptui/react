@@ -2,6 +2,7 @@ import "./index.css";
 import * as React from "react";
 import { format } from "date-fns";
 import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
 
 import DateRangePickerComponent from "./DateRangePickerComponent";
@@ -25,7 +26,20 @@ const Base: Story = args => {
   args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
   args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
 
-  return <DateRangePickerComponent {...args} />;
+  const [argProps, updateArgs] = useArgs();
+
+  return (
+    <DateRangePickerComponent
+      value={{ start: argProps["start"], end: argProps["nd"] }}
+      onChange={date => {
+        updateArgs({
+          start: format(new Date(date.start), "yyyy-MM-dd"),
+          end: format(new Date(date.end), "yyyy-MM-dd"),
+        });
+      }}
+      {...args}
+    />
+  );
 };
 
 export const Default = Base.bind({});
@@ -36,8 +50,10 @@ DefaultValue.args = {
   end: new Date(),
 };
 
-export const DateRangePickerComp = Base.bind({});
-DateRangePickerComp.args = {
+export const MinMaxValue = Base.bind({});
+MinMaxValue.args = {
+  start: setDate(new Date(), 10),
+  end: new Date(),
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };

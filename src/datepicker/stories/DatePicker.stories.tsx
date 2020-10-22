@@ -1,7 +1,8 @@
 import "./index.css";
 import * as React from "react";
+import { useArgs } from "@storybook/client-api";
 import { Meta, Story } from "@storybook/react";
-import { addWeeks, subWeeks, format } from "date-fns";
+import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
 import DatePickerComponent from "./DatePickerComponent";
 
@@ -22,23 +23,37 @@ const Base: Story = args => {
   args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
   args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
 
-  return <DatePickerComponent {...args} />;
+  const [{ value }, updateArgs] = useArgs();
+
+  return (
+    <DatePickerComponent
+      value={value}
+      onChange={date =>
+        updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
+      }
+      {...args}
+    />
+  );
 };
 
 export const Default = Base.bind({});
 
 export const InitialDate = Base.bind({});
-InitialDate.args = { defaultDate: "2020-02-29" };
+InitialDate.args = {
+  value: "2020-02-29",
+  defaultDate: "2020-02-29",
+};
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
+  value: addDays(new Date(), 2),
   minValue: new Date(),
   maxValue: addWeeks(new Date(), 2),
 };
 
 export const InValidDate = Base.bind({});
 InValidDate.args = {
-  defaultValue: addWeeks(new Date(), 2),
+  value: addWeeks(new Date(), 2),
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
