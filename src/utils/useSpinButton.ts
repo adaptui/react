@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-// import { announce } from "./storybook/";
 import {
   ValueBase,
   InputBase,
@@ -19,6 +18,8 @@ import {
 } from "@react-types/shared";
 import { AriaButtonProps } from "@react-types/button";
 import { HTMLAttributes, useCallback, useEffect, useRef } from "react";
+
+// import { announce } from "./LiveAnnouncer";
 
 export interface SpinButtonProps
   extends InputBase,
@@ -124,11 +125,11 @@ export function useSpinButton(props: SpinButtonProps): SpinbuttonAria {
     isFocused.current = false;
   };
 
-  //   useEffect(() => {
-  //     if (isFocused.current) {
-  //       announce(textValue || `${value}`);
-  //     }
-  //   }, [textValue, value]);
+  // useEffect(() => {
+  //   if (isFocused.current) {
+  //     announce(textValue || `${value}`, "assertive");
+  //   }
+  // }, [textValue, value]);
 
   const onIncrementPressStart = useCallback(
     (initialStepDelay: number) => {
