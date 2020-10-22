@@ -1,5 +1,6 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { useForm, Controller } from "react-hook-form";
 
 import { NumberInput } from "../NumberInput";
@@ -8,7 +9,9 @@ import { NumberInputIncrementButton } from "../NumberInputIncrementButton";
 import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
 
 const NumberInputComp = (props: UseNumberInputProps) => {
-  const state = useNumberInputState(props);
+  const state = useNumberInputState({
+    ...props,
+  });
 
   return (
     <div>
@@ -23,6 +26,7 @@ export default {
   title: "NumberInput",
   component: NumberInput,
   argTypes: {
+    value: { control: "number" },
     min: { control: "number" },
     step: { control: "number" },
     max: { control: "number" },
@@ -37,7 +41,18 @@ export default {
 } as Meta;
 
 const Base: Story = args => {
-  return <NumberInputComp {...args} />;
+  const [{ value, defaultValue }, updateArgs] = useArgs();
+
+  return (
+    <NumberInputComp
+      onChange={value => {
+        updateArgs({ value });
+      }}
+      defaultValue={defaultValue}
+      value={value || defaultValue}
+      {...args}
+    />
+  );
 };
 
 export const Default = Base.bind({});
