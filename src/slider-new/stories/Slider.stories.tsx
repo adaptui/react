@@ -7,4 +7,4 @@ export default {
   title: "SliderNew",
 } as Meta;
 
-export const Default = () => <StorySlider showTip values={[10]} />;
+export const Default = () => <StorySlider showTip />;

@@ -23,10 +23,8 @@ export const StorySlider: React.FC<StorySliderProps> = props => {
   const { children, origin: OriginProp, showTip, ...rest } = props;
   const origin = OriginProp ?? props.min ?? 0;
   const state = useSliderState(rest);
-  console.log("%c state", "color: #364cd9", state);
 
   const value = state.values[0];
-  console.log("%c value", "color: #ffa280", value);
 
   return (
     <div className="slider" role="group">

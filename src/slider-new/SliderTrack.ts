@@ -25,9 +25,7 @@ export const useSliderTrack = createHook<
 
   useProps(options, htmlProps) {
     const isVertical = options.orientation === "vertical";
-
     const { direction } = useLocale();
-
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
 
     // When the user clicks or drags the track, we want the motion to set and drag the
@@ -37,19 +35,19 @@ export const useSliderTrack = createHook<
     const realTimeTrackDraggingIndex = React.useRef<number | null>(null);
 
     const stateRef = React.useRef<SliderStateReturn>(options);
+    stateRef.current = options;
     const reverseX = direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
-
     const moveProps = useMove({
       onMoveStart() {
         currentPosition.current = null;
       },
       onMove({ deltaX, deltaY }) {
-        const size = isVertical
-          ? options.trackRef.current?.offsetHeight
-          : options.trackRef.current?.offsetWidth;
+        if (!options.trackRef.current) return;
 
-        if (!size) return;
+        const size = isVertical
+          ? options.trackRef.current.offsetHeight
+          : options.trackRef.current.offsetWidth;
 
         if (
           currentPosition.current == null &&
@@ -66,12 +64,12 @@ export const useSliderTrack = createHook<
           delta = -delta;
         }
 
-        if (currentPosition.current != null) currentPosition.current += delta;
+        if (currentPosition.current == null) return;
+        currentPosition.current += delta;
 
         if (
           realTimeTrackDraggingIndex.current != null &&
-          options.trackRef.current &&
-          currentPosition.current != null
+          options.trackRef.current
         ) {
           const percent = clamp(currentPosition.current / size, 0, 1);
           stateRef.current.setThumbPercent(
@@ -113,10 +111,12 @@ export const useSliderTrack = createHook<
         ];
         const clickPosition = isVertical ? clientY : clientX;
         const offset = clickPosition - trackPosition;
+
         let percent = offset / size;
         if (direction === "rtl" || isVertical) {
           percent = 1 - percent;
         }
+
         const value = options.getPercentValue(percent);
 
         // Only compute the diff for thumbs that are editable, as only they can be dragged
@@ -139,6 +139,7 @@ export const useSliderTrack = createHook<
           currentPointer.current = id;
 
           options.setThumbDragging(realTimeTrackDraggingIndex.current, true);
+          console.log("%c value", "color: #ffcc00", value);
           options.setThumbValue(index, value);
 
           addGlobalListener(window, "mouseup", onUpTrack, false);

@@ -117,29 +117,20 @@ export function useSliderState(
   const trackRef = React.useRef<HTMLDivElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const [isDraggings, setDraggings] = React.useState<boolean[]>(
-    new Array(values.length).fill(false),
-  );
-  const isEditablesRef = React.useRef<boolean[]>(
-    new Array(values.length).fill(true),
-  );
   const [focusedIndex, setFocusedIndex] = React.useState<number | undefined>(
     undefined,
   );
+  const [isDraggings, setDraggings] = React.useState<boolean[]>(
+    new Array(values.length).fill(false),
+  );
 
   const valuesRef = React.useRef<number[]>(values);
+  valuesRef.current = values;
   const isDraggingsRef = React.useRef<boolean[]>(isDraggings);
-
-  function getValuePercent(value: number) {
-    return (value - min) / (max - min);
-  }
-
-  function getThumbMinValue(index: number) {
-    return index === 0 ? min : values[index - 1];
-  }
-  function getThumbMaxValue(index: number) {
-    return index === values.length - 1 ? max : values[index + 1];
-  }
+  isDraggingsRef.current = isDraggings;
+  const isEditablesRef = React.useRef<boolean[]>(
+    new Array(values.length).fill(true),
+  );
 
   function isThumbEditable(index: number) {
     return isEditablesRef.current[index];
@@ -153,6 +144,7 @@ export function useSliderState(
     if (isDisabled || !isThumbEditable(index)) {
       return;
     }
+
     const thisMin = getThumbMinValue(index);
     const thisMax = getThumbMaxValue(index);
 
@@ -167,12 +159,13 @@ export function useSliderState(
       return;
     }
 
-    const wasDragging = isDraggingsRef.current[index];
+    // const wasDragging = isDraggingsRef.current[index];
     isDraggingsRef.current = replaceIndex(
       isDraggingsRef.current,
       index,
       dragging,
     );
+
     setDraggings(isDraggingsRef.current);
 
     // Call onChangeEnd if no handles are dragging.
@@ -187,6 +180,18 @@ export function useSliderState(
 
   function setThumbPercent(index: number, percent: number) {
     updateValue(index, getPercentValue(percent));
+  }
+
+  function getValuePercent(value: number) {
+    return (value - min) / (max - min);
+  }
+
+  function getThumbMinValue(index: number) {
+    return index === 0 ? min : values[index - 1];
+  }
+
+  function getThumbMaxValue(index: number) {
+    return index === values.length - 1 ? max : values[index + 1];
   }
 
   function getRoundedValue(value: number) {

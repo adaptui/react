@@ -24,12 +24,14 @@ export const useSliderThumb = createHook<
   keys: SLIDER_THUMB_KEYS,
 
   useProps(options, { ...htmlProps }) {
-    const {} = options;
     const index = 0;
 
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
+
+    // Immediately register editability with the state
+    options.setThumbEditable(index, !options.isDisabled);
 
     const focusInput = React.useCallback(() => {
       if (options.inputRef.current) {
@@ -45,35 +47,33 @@ export const useSliderThumb = createHook<
       }
     }, [isFocused, focusInput]);
 
-    const stateRef = React.useRef<SliderStateReturn>(options);
     const reverseX = direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
+
     const moveProps = useMove({
       onMoveStart() {
         currentPosition.current = null;
         options.setThumbDragging(index, true);
       },
       onMove({ deltaX, deltaY, pointerType }) {
-        const size = isVertical
-          ? options.trackRef.current?.offsetHeight
-          : options.trackRef.current?.offsetWidth;
+        if (!options.trackRef.current) return;
 
-        if (!size) return;
+        const size = isVertical
+          ? options.trackRef.current.offsetHeight
+          : options.trackRef.current.offsetWidth;
 
         if (currentPosition.current == null) {
-          currentPosition.current =
-            stateRef.current.getThumbPercent(index) * size;
+          currentPosition.current = options.getThumbPercent(index) * size;
         }
+
         if (pointerType === "keyboard") {
           // (invert left/right according to language direction) + (according to vertical)
           const delta =
             ((reverseX ? -deltaX : deltaX) + (isVertical ? -deltaY : -deltaY)) *
-            stateRef.current.step;
+            options.step;
+
           currentPosition.current += delta * size;
-          stateRef.current.setThumbValue(
-            index,
-            stateRef.current.getThumbValue(index) + delta,
-          );
+          options.setThumbValue(index, options.getThumbValue(index) + delta);
         } else {
           let delta = isVertical ? deltaY : deltaX;
           if (isVertical || reverseX) {
@@ -81,7 +81,7 @@ export const useSliderThumb = createHook<
           }
 
           currentPosition.current += delta;
-          stateRef.current.setThumbPercent(
+          options.setThumbPercent(
             index,
             clamp(currentPosition.current / size, 0, 1),
           );
@@ -114,17 +114,15 @@ export const useSliderThumb = createHook<
       }
     };
 
-    return mergeProps(htmlProps, moveProps, {
-      onMouseDown: () => {
-        onDown(null);
-      },
-      onPointerDown: (e: React.PointerEvent) => {
-        onDown(e.pointerId);
-      },
-      onTouchStart: (e: React.TouchEvent) => {
-        onDown(e.changedTouches[0].identifier);
-      },
-    });
+    return {
+      ...htmlProps,
+      ...mergeProps(moveProps, {
+        onMouseDown: () => onDown(null),
+        onPointerDown: (e: React.PointerEvent) => onDown(e.pointerId),
+        onTouchStart: (e: React.TouchEvent) =>
+          onDown(e.changedTouches[0].identifier),
+      }),
+    };
   },
 });
 
