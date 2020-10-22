@@ -5,6 +5,7 @@ import {
   Slider,
   SliderThumb,
   SliderTrack,
+  SliderInput,
   useSliderState,
   SliderFilledTrack,
   SliderStateProps,
@@ -38,7 +39,7 @@ export const SliderComp = (props: SliderStateProps) => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput data-testid="slider-input" {...slider} name="slider" />
     </Slider>
   );
 };

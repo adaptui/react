@@ -4,6 +4,7 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
+import { createOnKeyDown, ensureFocus } from "reakit-utils";
 import {
   useState,
   useRef,
@@ -29,10 +30,9 @@ import {
   isRightClick,
   Dict,
 } from "@chakra-ui/utils";
-import { createOnKeyDown, ensureFocus } from "reakit-utils";
 
 import { clampValue } from "../utils";
-import { getDefaultValue, orient } from "./helpers";
+import { getDefaultValue, orient } from "./__utils";
 
 export interface SliderStateProps {
   /**
@@ -94,7 +94,8 @@ type EventSource = "mouse" | "touch" | "keyboard";
 /**
  * React hook that implements an accessible range slider.
  *
- * It's an alternative to `<input type="range" />`
+ * It's an alternative to `<input type="range" />`, and returns
+ * prop getters for the component parts
  *
  * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices-1.1/#slider
  */

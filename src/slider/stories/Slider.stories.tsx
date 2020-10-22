@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import {
   Slider,
   SliderTrack,
+  SliderInput,
   SliderThumb,
   useSliderState,
   SliderFilledTrack,
@@ -50,7 +51,7 @@ const SliderComp: React.FC<any> = props => {
           }}
         />
 
-        <input type="hidden" value={slider.state.value}></input>
+        <SliderInput name={name} {...slider} />
       </Slider>
     </>
   );
@@ -111,8 +112,7 @@ export const Reversed = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -138,8 +138,7 @@ export const Min20Max80 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -165,8 +164,7 @@ export const Step10 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -192,8 +190,7 @@ export const DefaultValue90 = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -219,8 +216,7 @@ export const Disabled = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -246,8 +242,7 @@ export const ReadOnly = () => {
             : sliderHorizontalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };
@@ -270,8 +265,7 @@ export const Vertical = () => {
             : sliderVerticalThumbStyle.transform,
         }}
       />
-
-      <input type="hidden" value={slider.state.value}></input>
+      <SliderInput {...slider} name="slider" />
     </Slider>
   );
 };

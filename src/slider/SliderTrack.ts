@@ -4,6 +4,7 @@
  * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
  * to work with Reakit System
  */
+import { useId } from "@chakra-ui/hooks";
 import { useForkRef } from "reakit-utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
@@ -13,7 +14,12 @@ import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderTrackOptions = BoxOptions &
-  Pick<SliderStateReturn, "refs" | "state" | "styles">;
+  Pick<SliderStateReturn, "refs" | "state" | "styles"> & {
+    /**
+     * The base `id` to use for the sliderTrack
+     */
+    id?: string;
+  };
 
 export type SliderTrackHTMLProps = BoxHTMLProps;
 
@@ -30,7 +36,10 @@ export const useSliderTrack = createHook<
   useProps(options, { ref: htmlRef, style: htmlStyle, ...htmlProps }) {
     const { refs, state, styles } = options;
 
+    const id = useId(options.id, "slider-track");
+
     return {
+      id,
       "data-disabled": dataAttr(state.isDisabled),
       ref: useForkRef(htmlRef, refs.trackRef),
       style: { ...styles.trackStyle, ...htmlStyle },
