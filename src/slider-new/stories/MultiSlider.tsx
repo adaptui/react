@@ -64,7 +64,6 @@ interface MultiSliderThumbProps {
 }
 
 export function MultiSliderThumb(props: MultiSliderThumbProps) {
-  console.log("%c props", "color: #99adcc", props);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const { index, state, label } = props;
 
@@ -81,12 +80,14 @@ export function MultiSliderThumb(props: MultiSliderThumbProps) {
       <VisuallyHidden>
         <SliderInput
           ref={inputRef}
+          id={`${index}-${label}`}
           index={index}
           aria-label={label}
           aria-labelledby="a11y-slider"
           {...state}
         />
       </VisuallyHidden>
+      {label && <label htmlFor={`${index}-${label}`}>{label}</label>}
     </SliderThumb>
   );
 }
