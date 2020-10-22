@@ -1,15 +1,10 @@
 import "./range-style.css";
-import {
-  addDays,
-  addWeeks,
-  subDays,
-  format,
-  setDate,
-  subWeeks,
-} from "date-fns";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
+
 import RangeCalendarComponent from "./RangeCalendarComponent";
+import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
 export default {
   title: "RangeCalendar",
@@ -43,20 +38,37 @@ const Base: Story = args => {
   args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
   args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
 
-  return <RangeCalendarComponent {...args} />;
+  const [argProps, updateArgs] = useArgs();
+
+  return (
+    <RangeCalendarComponent
+      value={{ start: argProps["start"], end: argProps["nd"] }}
+      onChange={date => {
+        updateArgs({
+          start: format(new Date(date.start), "yyyy-MM-dd"),
+          end: format(new Date(date.end), "yyyy-MM-dd"),
+        });
+      }}
+      {...args}
+    />
+  );
 };
 
 export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
-  defaultStart: setDate(new Date(), 10),
-  defaultEnd: new Date(),
+  start: new Date(),
+  end: addWeeks(new Date(), 1),
+  defaultStart: new Date(),
+  defaultEnd: addWeeks(new Date(), 1),
 };
 
 export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
-  minValue: subWeeks(new Date(), 1),
+  start: new Date(),
+  end: addDays(new Date(), 1),
+  minValue: subWeeks(new Date(), 4),
   maxValue: addWeeks(new Date(), 1),
 };
 
