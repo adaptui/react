@@ -12,6 +12,7 @@ import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
 export type SliderThumbOptions = BoxOptions &
   SliderStateReturn & {
     index: number;
+    inputRef: React.RefObject<HTMLElement | null>;
   };
 
 export type SliderThumbHTMLProps = BoxHTMLProps;

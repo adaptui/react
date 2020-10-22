@@ -6,7 +6,6 @@ const SLIDER_STATE_KEYS = [
   "step",
   "isDisabled",
   "trackRef",
-  "inputRef",
   "orientation",
   "getThumbValue",
   "setThumbValue",
@@ -27,5 +26,5 @@ const SLIDER_STATE_KEYS = [
   "setValues",
 ] as const;
 export const SLIDER_INPUT_KEYS = [...SLIDER_STATE_KEYS, "index"] as const;
-export const SLIDER_THUMB_KEYS = SLIDER_INPUT_KEYS;
+export const SLIDER_THUMB_KEYS = [...SLIDER_INPUT_KEYS, "inputRef"] as const;
 export const SLIDER_TRACK_KEYS = SLIDER_STATE_KEYS;

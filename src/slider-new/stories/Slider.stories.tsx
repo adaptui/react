@@ -3,6 +3,7 @@ import { Meta } from "@storybook/react";
 
 import { BasicSlider } from "./BasicSlider";
 import { RangeSlider } from "./RangeSlider";
+import { MultiSlider, MultiSliderThumb } from "./MultiSlider";
 
 export default {
   title: "SliderNew",
@@ -34,4 +35,12 @@ export const Range = () => (
       } as any
     }
   />
+);
+
+export const Multi = () => (
+  <MultiSlider label="Ticks" values={[10, 40, 80]}>
+    <MultiSliderThumb label="A" />
+    <MultiSliderThumb label="B" />
+    <MultiSliderThumb label="C" />
+  </MultiSlider>
 );

@@ -36,13 +36,9 @@ export interface SliderState {
    */
   isDisabled?: boolean;
   /**
-   * The popover element.
+   * The track slider element.
    */
   trackRef: React.RefObject<HTMLElement | null>;
-  /**
-   * The arrow element.
-   */
-  inputRef: React.RefObject<HTMLElement | null>;
   /**
    * orientation of the slider
    * @default "horizontal"
@@ -121,7 +117,6 @@ export function useSliderState(
   );
 
   const trackRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const [focusedIndex, setFocusedIndex] = React.useState<number | undefined>(
     undefined,
@@ -239,7 +234,6 @@ export function useSliderState(
     getFormattedValue,
     getThumbValueLabel: (index: number) => getFormattedValue(values[index]),
     trackRef,
-    inputRef,
     orientation,
   };
 }

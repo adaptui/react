@@ -41,7 +41,6 @@ export const useSliderInput = createHook<
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         options.setThumbValue(index, parseFloat(e.target.value));
       },
-      ref: options.inputRef,
     };
   },
 });
