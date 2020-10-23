@@ -1,6 +1,7 @@
 import { disableTextSelection, restoreTextSelection } from "./textSelection";
 import React, { HTMLAttributes, useMemo, useRef } from "react";
 import { useGlobalListeners } from "./useGlobalListeners";
+import { isNull } from "../../utils";
 
 export interface BaseMoveEvent {
   pointerType: "mouse" | "pen" | "touch" | "keyboard";
@@ -78,6 +79,7 @@ export function useMove(props: MoveProps): HTMLAttributes<HTMLElement> {
     if (typeof PointerEvent === "undefined") {
       const onMouseMove = (e: MouseEvent) => {
         if (e.button === 0) {
+          if (isNull(state.current.lastPosition)) return;
           move(
             "mouse",
             e.pageX - state.current.lastPosition.pageX,
@@ -111,6 +113,7 @@ export function useMove(props: MoveProps): HTMLAttributes<HTMLElement> {
         );
         if (touch >= 0) {
           const { pageX, pageY } = e.changedTouches[touch];
+          if (isNull(state.current.lastPosition)) return;
           move(
             "touch",
             pageX - state.current.lastPosition.pageX,
@@ -157,6 +160,7 @@ export function useMove(props: MoveProps): HTMLAttributes<HTMLElement> {
           // Problems with PointerEvent#movementX/movementY:
           // 1. it is always 0 on macOS Safari.
           // 2. On Chrome Android, it's scaled by devicePixelRatio, but not on Chrome macOS
+          if (isNull(state.current.lastPosition)) return;
           move(
             pointerType,
             e.pageX - state.current.lastPosition.pageX,

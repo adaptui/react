@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useForkRef } from "reakit-utils";
 import { useLocale } from "@react-aria/i18n";
 import { mergeProps } from "@react-aria/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
@@ -9,7 +10,22 @@ import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 import { useGlobalListeners, useMove } from "./helpers";
 
-export type SliderTrackOptions = BoxOptions & SliderStateReturn;
+export type SliderTrackOptions = BoxOptions &
+  Pick<
+    SliderStateReturn,
+    | "orientation"
+    | "trackRef"
+    | "values"
+    | "isDisabled"
+    | "getThumbPercent"
+    | "setThumbPercent"
+    | "isThumbDragging"
+    | "setThumbDragging"
+    | "setThumbValue"
+    | "isThumbEditable"
+    | "getPercentValue"
+    | "setFocusedThumb"
+  >;
 
 export type SliderTrackHTMLProps = BoxHTMLProps;
 
@@ -23,7 +39,7 @@ export const useSliderTrack = createHook<
   compose: useBox,
   keys: SLIDER_TRACK_KEYS,
 
-  useProps(options, htmlProps) {
+  useProps(options, { ref: htmlRef, ...htmlProps }) {
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
@@ -34,7 +50,7 @@ export const useSliderTrack = createHook<
     // It is set onMouseDown/onTouchDown; see trackProps below.
     const realTimeTrackDraggingIndex = React.useRef<number | null>(null);
 
-    const stateRef = React.useRef<SliderStateReturn>(options);
+    const stateRef = React.useRef<SliderTrackOptions>(options);
     stateRef.current = options;
     const reverseX = direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
@@ -166,9 +182,7 @@ export const useSliderTrack = createHook<
     };
 
     return mergeProps(
-      htmlProps,
       {
-        ref: options.trackRef,
         onMouseDown(e: React.MouseEvent<HTMLElement>) {
           onDownTrack(e, undefined, e.clientX, e.clientY);
         },
@@ -185,6 +199,7 @@ export const useSliderTrack = createHook<
         },
       },
       moveProps,
+      { ref: useForkRef(options.trackRef, htmlRef), ...htmlProps },
     );
   },
 });

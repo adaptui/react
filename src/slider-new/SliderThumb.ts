@@ -8,10 +8,23 @@ import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 import { useGlobalListeners, useMove } from "./helpers";
-import { Item } from "reakit/ts/Composite/__utils/types";
 
 export type SliderThumbOptions = BoxOptions &
-  SliderStateReturn & {
+  Pick<
+    SliderStateReturn,
+    | "inputs"
+    | "orientation"
+    | "setThumbEditable"
+    | "isDisabled"
+    | "focusedThumb"
+    | "setThumbDragging"
+    | "trackRef"
+    | "getThumbValue"
+    | "setThumbValue"
+    | "setThumbPercent"
+    | "getThumbPercent"
+    | "step"
+  > & {
     index: number;
   };
 
@@ -27,7 +40,7 @@ export const useSliderThumb = createHook<
   compose: useBox,
   keys: SLIDER_THUMB_KEYS,
 
-  useProps(options, { ...htmlProps }) {
+  useProps(options, htmlProps) {
     const { index, inputs } = options;
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
@@ -43,7 +56,7 @@ export const useSliderThumb = createHook<
       if (inputRef.current?.ref.current) {
         focusWithoutScrolling(inputRef.current.ref.current);
       }
-    }, [inputRef]);
+    }, []);
 
     const isFocused = options.focusedThumb === index;
 
@@ -120,15 +133,16 @@ export const useSliderThumb = createHook<
       }
     };
 
-    return {
-      ...htmlProps,
-      ...mergeProps(moveProps, {
+    return mergeProps(
+      moveProps,
+      {
         onMouseDown: () => onDown(null),
         onPointerDown: (e: React.PointerEvent) => onDown(e.pointerId),
         onTouchStart: (e: React.TouchEvent) =>
           onDown(e.changedTouches[0].identifier),
-      }),
-    };
+      },
+      htmlProps,
+    );
   },
 });
 

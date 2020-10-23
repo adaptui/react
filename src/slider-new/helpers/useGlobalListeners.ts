@@ -44,9 +44,9 @@ export function useGlobalListeners(): GlobalListeners {
     [],
   );
 
-  // eslint-disable-next-line arrow-body-style
   useEffect(() => {
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       globalListeners.current.forEach((value, key) => {
         removeGlobalListener(value.eventTarget, value.type, key, value.options);
       });

@@ -19,8 +19,8 @@ const SLIDER_STATE_KEYS = [
   "isThumbEditable",
   "isThumbDragging",
   "inputs",
-  "registerInputs",
-  "unregisterInputs",
+  "registerInput",
+  "unregisterInput",
   "setFocusedThumb",
   "setThumbValue",
   "setThumbPercent",
@@ -28,5 +28,5 @@ const SLIDER_STATE_KEYS = [
   "setThumbDragging",
 ] as const;
 export const SLIDER_INPUT_KEYS = [...SLIDER_STATE_KEYS, "index"] as const;
-export const SLIDER_THUMB_KEYS = [...SLIDER_INPUT_KEYS, "inputRef"] as const;
+export const SLIDER_THUMB_KEYS = SLIDER_INPUT_KEYS;
 export const SLIDER_TRACK_KEYS = SLIDER_STATE_KEYS;

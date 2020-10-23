@@ -1,21 +1,33 @@
-import * as React from "react";
-import { useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
 import {
-  InputHTMLProps,
-  InputOptions,
-  unstable_IdHTMLProps,
-  unstable_IdOptions,
-  unstable_useId,
   useInput,
+  InputOptions,
+  InputHTMLProps,
+  unstable_useId,
+  unstable_IdOptions,
+  unstable_IdHTMLProps,
 } from "reakit";
+import * as React from "react";
+import { useForkRef, useLiveRef } from "reakit-utils";
+import { createComponent, createHook } from "reakit-system";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderInputOptions = InputOptions &
   unstable_IdOptions &
-  SliderStateReturn & {
+  Pick<
+    SliderStateReturn,
+    | "isDisabled"
+    | "registerInput"
+    | "unregisterInput"
+    | "setFocusedThumb"
+    | "setThumbValue"
+    | "getThumbMaxValue"
+    | "getThumbMinValue"
+    | "getThumbValueLabel"
+    | "step"
+    | "orientation"
+  > & {
     index: number;
   };
 
@@ -31,35 +43,92 @@ export const useSliderInput = createHook<
   compose: [unstable_useId, useInput],
   keys: SLIDER_INPUT_KEYS,
 
-  useProps(options, { ref: htmlRef, ...htmlProps }) {
+  useOptions(options, { disabled: htmlDisabled, ...htmlProps }) {
+    const disabled = options.isDisabled || htmlDisabled;
+    return { disabled, ...options };
+  },
+
+  useProps(
+    options,
+    {
+      ref: htmlRef,
+      onFocus: onHtmlFocus,
+      onBlur: onHtmlBlur,
+      onChange: onHtmlChange,
+      ...htmlProps
+    },
+  ) {
     const ref = React.useRef<HTMLElement>(null);
-    const { index, id, registerInputs, unregisterInputs } = options;
+    const onFocusRef = useLiveRef(onHtmlFocus);
+    const onBlurRef = useLiveRef(onHtmlBlur);
+    const onChangeRef = useLiveRef(onHtmlChange);
+
+    const {
+      index,
+      id,
+      registerInput,
+      unregisterInput,
+      disabled,
+      setFocusedThumb,
+      setThumbValue,
+    } = options;
 
     React.useLayoutEffect(() => {
       if (!id) return undefined;
-      registerInputs?.({ id, ref });
+      registerInput?.({ id, ref });
 
       return () => {
-        unregisterInputs?.(id);
+        unregisterInput?.(id);
       };
-    }, [id, registerInputs, unregisterInputs]);
+    }, [id, registerInput, unregisterInput]);
+
+    const onFocus = React.useCallback(
+      (event: React.FocusEvent) => {
+        onFocusRef.current?.(event);
+        if (event.defaultPrevented) return;
+        if (disabled) return;
+
+        setFocusedThumb(index);
+      },
+      [disabled, index, onFocusRef, setFocusedThumb],
+    );
+
+    const onBlur = React.useCallback(
+      (event: React.FocusEvent) => {
+        onBlurRef.current?.(event);
+        if (event.defaultPrevented) return;
+        if (disabled) return;
+
+        setFocusedThumb(undefined);
+      },
+      [disabled, onBlurRef, setFocusedThumb],
+    );
+
+    const onChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChangeRef.current?.(event);
+        if (event.defaultPrevented) return;
+        if (disabled) return;
+
+        setThumbValue(index, parseFloat(event.target.value));
+      },
+      [disabled, index, onChangeRef, setThumbValue],
+    );
 
     return {
       type: "range",
-      tabIndex: !options.isDisabled ? 0 : undefined,
+      tabIndex: !disabled ? 0 : undefined,
       min: options.getThumbMinValue(index),
       max: options.getThumbMaxValue(index),
       step: options.step,
       value: options.getThumbValueLabel(index),
-      disabled: options.isDisabled,
+      disabled: disabled,
       "aria-orientation": options.orientation,
       "aria-valuetext": options.getThumbValueLabel(index),
       ref: useForkRef(ref, htmlRef),
-      onFocus: () => options.setFocusedThumb(index),
-      onBlur: () => options.setFocusedThumb(undefined),
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        options.setThumbValue(index, parseFloat(e.target.value));
-      },
+      onFocus,
+      onBlur,
+      onChange,
       ...htmlProps,
     };
   },

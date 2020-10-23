@@ -2,8 +2,7 @@ import * as React from "react";
 import { useNumberFormatter } from "@react-aria/i18n";
 import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { useItems } from "../hooks";
-import { Item } from "../hooks/useItems/types";
+import { Item, useItems } from "../hooks";
 import { getOptimumValue, clamp } from "../utils";
 
 export interface SliderState {
@@ -86,9 +85,18 @@ export interface SliderState {
    *  Whether a specific index is being dragged
    */
   isThumbDragging: (index: number) => boolean;
+  /**
+   * Get all the inputs in the DOM
+   */
   inputs: Item[];
-  registerInputs: (item: Item) => void;
-  unregisterInputs: (id: string) => void;
+  /**
+   * Register the inputs on mount
+   */
+  registerInput: (item: Item) => void;
+  /**
+   * Unregister the inputs on mount
+   */
+  unregisterInput: (id: string) => void;
 }
 
 export interface SliderAction {
@@ -119,6 +127,17 @@ export type SliderInitialState = Pick<
   Partial<SliderState>,
   "values" | "min" | "max" | "step" | "isDisabled" | "orientation"
 > & {
+  /**
+   * Get the value when dragging is started
+   */
+  onChangeEnd?: (value: number[]) => void;
+  /**
+   * Get the value when dragging is stopped
+   */
+  onChangeStart?: (value: number[]) => void;
+  /**
+   * Get the formated value based on number format options
+   */
   formatOptions?: Intl.NumberFormatOptions;
 };
 
@@ -134,6 +153,8 @@ export function useSliderState(
     step = 1,
     isDisabled = false,
     orientation = "horizontal",
+    onChangeStart,
+    onChangeEnd,
     formatOptions,
   } = useSealedState(initialState);
 
@@ -145,6 +166,7 @@ export function useSliderState(
   );
 
   const trackRef = React.useRef<HTMLDivElement>(null);
+  const inputs = useItems();
   const valuesRef = React.useRef<number[]>(values);
   valuesRef.current = values;
 
@@ -175,7 +197,7 @@ export function useSliderState(
       return;
     }
 
-    // const wasDragging = isDraggingsRef.current[index];
+    const wasDragging = isDraggingsRef.current[index];
     isDraggingsRef.current = replaceIndex(
       isDraggingsRef.current,
       index,
@@ -185,13 +207,14 @@ export function useSliderState(
     setDraggings(isDraggingsRef.current);
 
     // Call onChangeEnd if no handles are dragging.
-    // if (
-    //   props.onChangeEnd &&
-    //   wasDragging &&
-    //   !isDraggingsRef.current.some(Boolean)
-    // ) {
-    //   props.onChangeEnd(valuesRef.current);
-    // }
+    if (!wasDragging && isDraggingsRef.current.every(Boolean)) {
+      onChangeStart?.(valuesRef.current);
+    }
+
+    // Call onChangeEnd if no handles are dragging.
+    if (wasDragging && !isDraggingsRef.current.some(Boolean)) {
+      onChangeEnd?.(valuesRef.current);
+    }
   }
 
   // Get and Set values based on the index
@@ -252,8 +275,6 @@ export function useSliderState(
     return getFormattedValue(values[index]);
   }
 
-  const inputs = useItems();
-
   return {
     values,
     min,
@@ -279,8 +300,8 @@ export function useSliderState(
     isThumbDragging,
     setThumbDragging,
     inputs: inputs.items,
-    registerInputs: inputs.registerItem,
-    unregisterInputs: inputs.unregisterItem,
+    registerInput: inputs.registerItem,
+    unregisterInput: inputs.unregisterItem,
   };
 }
 
