@@ -39,7 +39,7 @@ export const CircularProgress: React.FC<CircularProgressInitialState> = props =>
   return (
     <div>
       <div>
-        <Progress {...state} className={rootStyles}>
+        <Progress {...state} className={rootStyles} aria-label="progress">
           <svg viewBox="0 0 100 100" className={svgStyles(isIndeterminate)}>
             <circle
               cx={50}

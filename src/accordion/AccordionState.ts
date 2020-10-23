@@ -14,12 +14,12 @@ export type AccordionState = CompositeState & {
   /**
    * The current selected accordion's `id`.
    */
-  selectedId?: AccordionState["currentId"];
+  selectedId: AccordionState["currentId"];
   /**
    * Initial selected accordion's `id`.
    * @default []
    */
-  selectedIds?: AccordionState["currentId"][];
+  selectedIds: AccordionState["currentId"][];
   /**
    * Lists all the panels.
    */
@@ -28,17 +28,17 @@ export type AccordionState = CompositeState & {
    * Whether the accodion selection should be manual.
    * @default true
    */
-  manual?: boolean;
+  manual: boolean;
   /**
    * Allow to open multiple accordion items
    * @default false
    */
-  allowMultiple?: boolean;
+  allowMultiple: boolean;
   /**
    * Allow to toggle accordion items
    * @default false
    */
-  allowToggle?: boolean;
+  allowToggle: boolean;
 };
 
 export type AccordionActions = CompositeActions & {
@@ -71,11 +71,9 @@ export type AccordionActions = CompositeActions & {
 };
 
 export type AccordionInitialState = CompositeInitialState &
-  Partial<
-    Pick<
-      AccordionState,
-      "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
-    >
+  Pick<
+    Partial<AccordionState>,
+    "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
   >;
 
 export type AccordionStateReturn = AccordionState & AccordionActions;

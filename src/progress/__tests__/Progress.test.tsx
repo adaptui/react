@@ -8,7 +8,7 @@ const ProgressComp = (props: Partial<ProgressProps>) => {
 
   return (
     <div>
-      <Progress data-testid="progress" {...progress} />
+      <Progress data-testid="progress" aria-label="progress" {...progress} />
     </div>
   );
 };
@@ -22,6 +22,7 @@ describe("Progress", () => {
         <div>
           <div>
             <div
+              aria-label="progress"
               aria-valuemax="100"
               aria-valuemin="0"
               aria-valuenow="10"
@@ -36,7 +37,7 @@ describe("Progress", () => {
   });
 
   it("should render isIndeterminate", () => {
-    const { getByTestId: testid } = render(<ProgressComp isIndeterminate />);
+    const { getByTestId: testid } = render(<ProgressComp value={null} />);
 
     expect(testid("progress")).toHaveAttribute("data-indeterminate", "");
   });

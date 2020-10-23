@@ -28,4 +28,4 @@ WithStripeAnimation.args = {
 };
 
 export const IsIndeterminate = Base.bind({});
-IsIndeterminate.args = { isIndeterminate: true };
+IsIndeterminate.args = { value: null };
