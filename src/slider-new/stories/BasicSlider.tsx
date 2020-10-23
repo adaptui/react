@@ -21,7 +21,6 @@ export const BasicSlider: React.FC<BasicSliderProps> = props => {
   const origin = OriginProp ?? props.min ?? 0;
   const state = useSliderState(rest);
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
   const value = state.values[0];
 
   return (
@@ -60,19 +59,9 @@ export const BasicSlider: React.FC<BasicSliderProps> = props => {
           }}
         >
           {/* We put thumbProps on thumbHandle, so that you cannot drag by the tip */}
-          <SliderThumb
-            {...state}
-            index={0}
-            inputRef={inputRef}
-            className="thumbHandle"
-          >
+          <SliderThumb {...state} index={0} className="thumbHandle">
             <VisuallyHidden>
-              <SliderInput
-                index={0}
-                aria-labelledby="a11y-slider"
-                {...state}
-                ref={inputRef}
-              />
+              <SliderInput index={0} aria-labelledby="a11y-slider" {...state} />
             </VisuallyHidden>
           </SliderThumb>
           {props.showTip && (

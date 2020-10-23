@@ -23,9 +23,6 @@ export const RangeSlider: React.FC<RangeSliderProps> = props => {
     throw new Error("Must specify an array of two numbers");
   }
 
-  const inputRef1 = React.useRef<HTMLInputElement>(null);
-  const inputRef2 = React.useRef<HTMLInputElement>(null);
-
   return (
     <div className="slider" role="group" aria-labelledby="a11y-slider">
       <div className="sliderLabel">
@@ -66,15 +63,9 @@ export const RangeSlider: React.FC<RangeSliderProps> = props => {
           }}
         >
           {/* We put thumbProps on thumbHandle, so that you cannot drag by the tip */}
-          <SliderThumb
-            {...state}
-            index={0}
-            inputRef={inputRef1}
-            className="thumbHandle"
-          >
+          <SliderThumb {...state} index={0} className="thumbHandle">
             <VisuallyHidden>
               <SliderInput
-                ref={inputRef1}
                 index={0}
                 arai-label="minimum"
                 aria-labelledby="a11y-slider"
@@ -90,7 +81,6 @@ export const RangeSlider: React.FC<RangeSliderProps> = props => {
         <SliderThumb
           {...state}
           index={1}
-          inputRef={inputRef2}
           className="thumb"
           style={{
             left: `${state.getThumbPercent(1) * 100}%`,
@@ -103,7 +93,6 @@ export const RangeSlider: React.FC<RangeSliderProps> = props => {
           <div className="thumbHandle">
             <VisuallyHidden>
               <SliderInput
-                ref={inputRef2}
                 index={1}
                 arai-label="maximum"
                 aria-labelledby="a11y-slider"

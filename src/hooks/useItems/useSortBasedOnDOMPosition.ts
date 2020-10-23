@@ -21,6 +21,7 @@ function useIntersectionObserver(items: Item[], setItems: SetItems) {
   React.useEffect(() => {
     const callback = () => {
       const hasPreviousItems = !!previousItems.current.length;
+      console.log("%c hasPreviousItems", "color: #ffa640", hasPreviousItems);
       // We don't want to sort items if items have been just registered.
       if (hasPreviousItems) {
         setItemsBasedOnDOMPosition(items, setItems);

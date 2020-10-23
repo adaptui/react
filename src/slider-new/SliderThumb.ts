@@ -8,11 +8,11 @@ import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 import { useGlobalListeners, useMove } from "./helpers";
+import { Item } from "reakit/ts/Composite/__utils/types";
 
 export type SliderThumbOptions = BoxOptions &
   SliderStateReturn & {
     index: number;
-    inputRef: React.RefObject<HTMLElement | null>;
   };
 
 export type SliderThumbHTMLProps = BoxHTMLProps;
@@ -28,7 +28,7 @@ export const useSliderThumb = createHook<
   keys: SLIDER_THUMB_KEYS,
 
   useProps(options, { ...htmlProps }) {
-    const { index } = options;
+    const { index, inputs } = options;
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
@@ -36,11 +36,14 @@ export const useSliderThumb = createHook<
     // Immediately register editability with the state
     options.setThumbEditable(index, !options.isDisabled);
 
+    const inputRef = React.useRef(inputs[index]);
+    inputRef.current = inputs[index];
+
     const focusInput = React.useCallback(() => {
-      if (options.inputRef.current) {
-        focusWithoutScrolling(options.inputRef.current);
+      if (inputRef.current?.ref.current) {
+        focusWithoutScrolling(inputRef.current.ref.current);
       }
-    }, [options.inputRef]);
+    }, [inputRef]);
 
     const isFocused = options.focusedThumb === index;
 

@@ -50,7 +50,7 @@ export const useAccordionPanel = createHook<
     const accordionId = getAccordionId(options);
     const { id, registerPanel, unregisterPanel } = options;
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (!id) return undefined;
       registerPanel?.({ id, ref, groupId: accordionId });
 

@@ -2,6 +2,8 @@ import * as React from "react";
 import { useNumberFormatter } from "@react-aria/i18n";
 import { SealedInitialState, useSealedState } from "reakit-utils";
 
+import { useItems } from "../hooks";
+import { Item } from "../hooks/useItems/types";
 import { getOptimumValue, clamp } from "../utils";
 
 export interface SliderState {
@@ -84,6 +86,9 @@ export interface SliderState {
    *  Whether a specific index is being dragged
    */
   isThumbDragging: (index: number) => boolean;
+  inputs: Item[];
+  registerInputs: (item: Item) => void;
+  unregisterInputs: (id: string) => void;
 }
 
 export interface SliderAction {
@@ -247,6 +252,8 @@ export function useSliderState(
     return getFormattedValue(values[index]);
   }
 
+  const inputs = useItems();
+
   return {
     values,
     min,
@@ -271,6 +278,9 @@ export function useSliderState(
     setThumbEditable,
     isThumbDragging,
     setThumbDragging,
+    inputs: inputs.items,
+    registerInputs: inputs.registerItem,
+    unregisterInputs: inputs.unregisterItem,
   };
 }
 
@@ -286,7 +296,7 @@ function clampValues(values: number[] | undefined, min: number, max: number) {
   if (!values) return [getOptimumValue(min, max)];
 
   return values.reduce<number[]>(
-    (acc, value) => [...acc, Math.min(Math.max(value, min), max)],
+    (acc, value) => [...acc, clamp(value, min, max)],
     [],
   );
 }

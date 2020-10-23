@@ -63,14 +63,12 @@ interface MultiSliderThumbProps {
 }
 
 export function MultiSliderThumb(props: MultiSliderThumbProps) {
-  const inputRef = React.useRef<HTMLInputElement>(null);
   const { index, state, label } = props;
 
   return (
     <SliderThumb
       {...state}
       index={index}
-      inputRef={inputRef}
       className={cx("thumb", "thumbHandle")}
       style={{
         left: `${state.getThumbPercent(index) * 100}%`,
@@ -78,7 +76,6 @@ export function MultiSliderThumb(props: MultiSliderThumbProps) {
     >
       <VisuallyHidden>
         <SliderInput
-          ref={inputRef}
           id={`${index}-${label}`}
           index={index}
           aria-label={label}

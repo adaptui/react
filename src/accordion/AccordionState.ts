@@ -9,6 +9,7 @@ import {
   SealedInitialState,
   useSealedState,
 } from "reakit-utils/useSealedState";
+import { useItems } from "../hooks";
 
 export type AccordionState = CompositeState & {
   /**
@@ -137,17 +138,7 @@ export function useAccordionState(
     [composite.move],
   );
 
-  const panels = useCompositeState();
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const registerPanel = React.useCallback(panel => panels.registerItem(panel), [
-    panels.registerItem,
-  ]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const unregisterPanel = React.useCallback(id => panels.unregisterItem(id), [
-    panels.unregisterItem,
-  ]);
+  const panels = useItems();
 
   return {
     manual,
@@ -160,8 +151,8 @@ export function useAccordionState(
     select,
     unSelect,
     panels: panels.items,
-    registerPanel,
-    unregisterPanel,
+    registerPanel: panels.registerItem,
+    unregisterPanel: panels.unregisterItem,
     ...composite,
   };
 }
