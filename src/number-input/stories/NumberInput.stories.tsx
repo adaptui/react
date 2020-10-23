@@ -1,5 +1,6 @@
 import React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { useForm, Controller } from "react-hook-form";
 
 import { NumberInput } from "../NumberInput";
@@ -8,7 +9,9 @@ import { NumberInputIncrementButton } from "../NumberInputIncrementButton";
 import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
 
 const NumberInputComp = (props: UseNumberInputProps) => {
-  const state = useNumberInputState(props);
+  const state = useNumberInputState({
+    ...props,
+  });
 
   return (
     <div>
@@ -22,12 +25,112 @@ const NumberInputComp = (props: UseNumberInputProps) => {
 export default {
   title: "NumberInput",
   component: NumberInput,
+  argTypes: {
+    value: { control: "number" },
+    min: { control: "number" },
+    step: { control: "number" },
+    max: { control: "number" },
+    precision: { control: "number" },
+    defaultValue: { control: "number" },
+    isDisabled: { control: "boolean" },
+    isReadOnly: { control: "boolean" },
+    keepWithinRange: { control: "boolean" },
+    clampValueOnBlur: { control: "boolean" },
+    focusInputOnChange: { control: "boolean" },
+  },
 } as Meta;
 
-export const Default = () => {
-  const props = {};
+const Base: Story = args => {
+  const [{ value, defaultValue }, updateArgs] = useArgs();
 
-  return <NumberInputComp {...props} />;
+  return (
+    <NumberInputComp
+      onChange={value => {
+        updateArgs({ value });
+      }}
+      defaultValue={defaultValue}
+      value={value || defaultValue}
+      {...args}
+    />
+  );
+};
+
+export const Default = Base.bind({});
+
+export const DefaultValue = Base.bind({});
+DefaultValue.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 20,
+};
+
+export const Step = Base.bind({});
+Step.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+};
+
+export const Precision = Base.bind({});
+Precision.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 30,
+  step: 0.2,
+  precision: 2,
+};
+
+export const ClampValueOnBlurFalse = Base.bind({});
+ClampValueOnBlurFalse.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 30,
+  step: 0.2,
+  precision: 2,
+  clampValueOnBlur: false,
+  keepWithinRange: false,
+};
+
+export const KeepWithinRangeFalse = Base.bind({});
+KeepWithinRangeFalse.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 30,
+  step: 0.2,
+  precision: 2,
+  clampValueOnBlur: false,
+  keepWithinRange: false,
+};
+
+export const Disabled = Base.bind({});
+Disabled.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 20,
+  isDisabled: true,
+};
+
+export const ReadOnly = Base.bind({});
+ReadOnly.args = {
+  defaultValue: 15,
+  min: 10,
+  max: 20,
+  isReadOnly: true,
+};
+
+export const Options = Base.bind({});
+Options.args = {
+  min: 0,
+  step: 1,
+  max: 100,
+  precision: 1,
+  defaultValue: 5,
+  isDisabled: false,
+  isReadOnly: false,
+  keepWithinRange: true,
+  clampValueOnBlur: false,
+  focusInputOnChange: false,
 };
 
 const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
@@ -64,87 +167,4 @@ export const ReactHookForm = () => {
       </div>
     </form>
   );
-};
-
-export const DefaultValue = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 20,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const Step = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 30,
-    step: 5,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const Precision = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 30,
-    step: 0.2,
-    precision: 2,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const ClampValueOnBlurFalse = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 30,
-    step: 0.2,
-    precision: 2,
-    clampValueOnBlur: false,
-    keepWithinRange: false,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const KeepWithinRangeFalse = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 30,
-    step: 0.2,
-    precision: 2,
-    clampValueOnBlur: false,
-    keepWithinRange: false,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const Disabled = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 20,
-    isDisabled: true,
-  };
-
-  return <NumberInputComp {...props} />;
-};
-
-export const ReadOnly = () => {
-  const props = {
-    defaultValue: 15,
-    min: 10,
-    max: 20,
-    isReadOnly: true,
-  };
-
-  return <NumberInputComp {...props} />;
 };

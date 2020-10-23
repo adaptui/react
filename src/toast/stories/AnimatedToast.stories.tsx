@@ -1,9 +1,9 @@
+import "./style.css";
 import React from "react";
 import { Meta } from "@storybook/react";
-import { useTransition, animated } from "react-spring";
 import { CSSTransition } from "react-transition-group";
+import { useTransition, animated } from "react-spring";
 
-import "./style.css";
 import Demo, { getTransform } from "./Demo";
 import { ToastProvider, TToastWrapper } from "../index";
 

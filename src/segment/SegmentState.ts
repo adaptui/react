@@ -48,6 +48,20 @@ const TYPE_MAPPING = {
 export interface SegmentStateProps {
   value?: Date;
   defaultValue?: Date;
+  /**
+   * Sets formmating of date based on Intl.DateFormatOptions
+   *
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+   *
+   * @example
+   * {
+   *   year: "numeric",
+   *   month: "2-digit",
+   *   day: "2-digit",
+   *   weekday: "long",
+   * }
+   *
+   */
   formatOptions?: DateTimeFormatOpts;
   placeholderDate?: Date;
   onChange?: (value: Date, ...args: any[]) => void;
@@ -124,8 +138,7 @@ export function useSegmentState(props: SegmentStateProps) {
   ) => {
     validSegments[type] = true;
     setValidSegments({ ...validSegments });
-    // @ts-ignore
-    setValue(add(value, type, amount, resolvedOptions));
+    setValue(add(value, type, amount, resolvedOptions) as Date);
   };
 
   return {

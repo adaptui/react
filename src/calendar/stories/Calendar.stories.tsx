@@ -1,18 +1,67 @@
+import "./index.css";
 import * as React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { addWeeks, format, subWeeks } from "date-fns";
 
-import "./index.css";
 import { CalendarComponent } from "./CalendarComponent";
 
 export default {
   title: "Calendar",
+  component: CalendarComponent,
+  argTypes: {
+    value: { control: "date" },
+    minValue: { control: "date" },
+    maxValue: { control: "date" },
+    defaultValue: { control: "date", defaultValue: new Date() },
+  },
 } as Meta;
 
-export const Default = () => <CalendarComponent />;
-export const DefaultValue = () => (
-  <CalendarComponent defaultValue="2001-01-01" />
-);
+const Base: Story = args => {
+  args.value &&= format(new Date(args.value), "yyyy-MM-dd");
+  args.defaultValue &&= format(new Date(args.defaultValue), "yyyy-MM-dd");
+  args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
+  args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
+
+  const [{ value }, updateArgs] = useArgs();
+
+  return (
+    <CalendarComponent
+      value={value}
+      onChange={date =>
+        updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
+      }
+      {...args}
+    />
+  );
+};
+
+export const Default = Base.bind({});
+
+export const DefaultValue = Base.bind({});
+DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
+
+export const MinMaxDate = Base.bind({});
+MinMaxDate.args = {
+  minValue: format(new Date(), "yyyy-MM-dd"),
+  maxValue: format(addWeeks(new Date(), 1), "yyyy-MM-dd"),
+};
+
+export const MinMaxDefaultDate = Base.bind({});
+MinMaxDefaultDate.args = {
+  defaultValue: format(new Date(2020, 10, 7), "yyyy-MM-dd"),
+  minValue: format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd"),
+  maxValue: format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd"),
+};
+
+export const Options = Base.bind({});
+Options.args = {
+  value: format(new Date(), "yyyy-MM-dd"),
+  isDisabled: false,
+  isReadOnly: false,
+  autoFocus: false,
+};
+
 export const ControlledValue = () => {
   const [value, setValue] = React.useState("2020-10-13");
 
@@ -27,27 +76,3 @@ export const ControlledValue = () => {
     </div>
   );
 };
-
-export const MinMaxDate = () => (
-  <CalendarComponent
-    minValue={format(new Date(), "yyyy-MM-dd")}
-    maxValue={format(addWeeks(new Date(), 1), "yyyy-MM-dd")}
-  />
-);
-
-export const MinMaxDefaultDate = () => (
-  <CalendarComponent
-    defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
-    minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
-    maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
-  />
-);
-
-export const isDisabled = () => <CalendarComponent isDisabled />;
-
-export const isReadOnly = () => <CalendarComponent isReadOnly />;
-
-export const autoFocus = () => (
-  // eslint-disable-next-line jsx-a11y/no-autofocus
-  <CalendarComponent autoFocus />
-);

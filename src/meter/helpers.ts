@@ -50,5 +50,5 @@ export const calculateStatus = (props: CalculateStatusProps) => {
   return "safe";
 };
 
-const isInRange = (value: number, min: number, max: number) =>
+export const isInRange = (value: number, min: number, max: number) =>
   value >= min && value <= max;
