@@ -1,5 +1,3 @@
-import { isString } from "@chakra-ui/utils";
-
 export function setTime(date: Date, time: Date) {
   if (!date || !time) {
     return;
