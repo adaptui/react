@@ -1,4 +1,5 @@
 import * as React from "react";
+import { VisuallyHidden } from "reakit";
 
 import "./index.css";
 import {
@@ -8,8 +9,6 @@ import {
   SliderThumb,
   SliderInput,
 } from "../index";
-
-import { VisuallyHidden } from "reakit";
 
 interface RangeSliderProps extends SliderInitialState {
   showTip?: boolean;

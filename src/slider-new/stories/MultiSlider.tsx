@@ -1,4 +1,5 @@
 import * as React from "react";
+import { VisuallyHidden } from "reakit";
 
 import "./index.css";
 import {
@@ -9,8 +10,6 @@ import {
   SliderInput,
   SliderStateReturn,
 } from "../index";
-
-import { VisuallyHidden } from "reakit";
 import { cx } from "../../utils";
 
 interface MultiSliderProps extends SliderInitialState {

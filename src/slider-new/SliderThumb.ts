@@ -2,12 +2,12 @@ import * as React from "react";
 import { useLocale } from "@react-aria/i18n";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
 
-import { useGlobalListeners, useMove } from "./helpers";
+import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
-import { clamp } from "../utils";
-import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
+import { useGlobalListeners, useMove } from "./helpers";
 
 export type SliderThumbOptions = BoxOptions &
   SliderStateReturn & {
