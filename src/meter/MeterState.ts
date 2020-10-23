@@ -3,8 +3,8 @@ import {
   useSealedState,
 } from "reakit-utils/useSealedState";
 
-import { isFunction, valueToPercent, clampValue } from "../utils";
-import { getDefaultOptimumValue, calculateStatus } from "./helpers";
+import { isFunction, valueToPercent } from "../utils";
+import { getDefaultOptimumValue, calculateStatus, clamp } from "./helpers";
 
 type Status = "safe" | "caution" | "danger" | undefined;
 
@@ -83,10 +83,10 @@ export const useMeterState = (
   const initialOptimum =
     sealed.optimum ?? getDefaultOptimumValue(initialLow, initialHigh);
 
-  const value = clampValue(initialValue, min, max);
-  const optimum = clampValue(initialOptimum, min, max);
-  let low = clampValue(initialLow, min, max);
-  let high = clampValue(initialHigh, min, max);
+  const value = clamp(initialValue, min, max);
+  const optimum = clamp(initialOptimum, min, max);
+  let low = clamp(initialLow, min, max);
+  let high = clamp(initialHigh, min, max);
 
   // More inequalities handled
   //  low ≤ high (if both low and high are specified)
