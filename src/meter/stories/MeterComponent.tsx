@@ -40,6 +40,7 @@ export const StyledMeter: React.FC<StyledMeterInitialState> = props => {
     <div className={meterStyle}>
       <Meter
         className={meterBarStyle(meter, props)}
+        aria-label="meter"
         {...meter}
         {...rest}
       ></Meter>

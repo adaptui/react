@@ -8,7 +8,7 @@ import {
   parseRangeDate,
   isInvalidDateRange,
 } from "./date";
-import { clampValue, createContext, valueToPercent } from ".";
+import { clampValue, createContext, valueToPercent, getOptimumValue } from ".";
 
 describe("Utils", () => {
   test("parseDate", () => {
@@ -98,6 +98,12 @@ describe("Utils", () => {
     expect(valueToPercent(10, 0, 1)).toEqual(1000);
     expect(valueToPercent(10, 0, 1000)).toEqual(1);
     expect(valueToPercent(0.5, 0, 100)).toEqual(0.5);
+  });
+
+  test("getOptimumValue", () => {
+    expect(getOptimumValue(0, 100)).toBe(50);
+    expect(getOptimumValue(100, 0)).toBe(100);
+    expect(getOptimumValue(100, 500)).toBe(300);
   });
 });
 

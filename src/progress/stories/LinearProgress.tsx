@@ -37,6 +37,7 @@ export const LinearProgress: React.FC<LinearProgressInitialState> = props => {
     ...rest
   } = props;
   const state = useProgressState(rest);
+  console.log("%c state", "color: #33cc99", state);
   const { value, setValue, percent, isIndeterminate } = state;
 
   React.useEffect(() => {
@@ -60,6 +61,7 @@ export const LinearProgress: React.FC<LinearProgressInitialState> = props => {
         <Progress
           {...state}
           value={value}
+          aria-label="progress"
           className={cx(
             progressBarStyle(percent),
             withStripe && stripStyles,

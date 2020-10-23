@@ -25,7 +25,7 @@ const MeterComp: React.FC<MeterInitialState> = props => {
     max,
   });
 
-  return <Meter {...meter} {...rest} />;
+  return <Meter aria-label="meter" {...meter} {...rest} />;
 };
 
 describe("Meter", () => {
@@ -35,6 +35,7 @@ describe("Meter", () => {
     expect(container).toMatchInlineSnapshot(`
       <div>
         <div
+          aria-label="meter"
           aria-valuemax="1"
           aria-valuemin="0"
           aria-valuenow="0"
