@@ -16,6 +16,7 @@ describe("Meter Helpers", () => {
   });
 
   test("clamp", () => {
+    // @ts-ignore
     expect(clamp(null, 1, 2)).toBe(0);
     expect(clamp(5, 0, 2)).toBe(2);
     expect(clamp(-5, 0, 2)).toBe(0);
