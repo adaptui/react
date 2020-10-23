@@ -4,7 +4,7 @@ import {
   parseRangeDate,
   isInvalidDateRange,
 } from "./date";
-import { clampValue } from ".";
+import { clampValue, getOptimumValue } from "./index";
 import MockDate from "mockdate";
 
 describe("Utils", () => {
@@ -87,5 +87,11 @@ describe("Utils", () => {
     expect(clampValue(5, 1, 8)).toEqual(5);
     expect(clampValue(5, 1, 3)).toEqual(3);
     expect(clampValue(5, 6, 8)).toEqual(6);
+  });
+
+  test("getOptimumValue", () => {
+    expect(getOptimumValue(0, 100)).toBe(50);
+    expect(getOptimumValue(100, 0)).toBe(100);
+    expect(getOptimumValue(100, 500)).toBe(300);
   });
 });
