@@ -1,7 +1,11 @@
 import React from "react";
-import { fireEvent, render } from "reakit-test-utils";
+import { cleanup } from "@testing-library/react";
 import { renderHook } from "reakit-test-utils/hooks";
+import { fireEvent, render } from "reakit-test-utils";
+
 import { useSpinner } from "../__utils";
+
+afterEach(cleanup);
 
 const noop = () => {};
 function renderUseSpinner(increment = noop, decrement = noop) {
@@ -39,18 +43,18 @@ describe("useSpinner", () => {
     `);
   });
 
-  it("press up", async () => {
+  it("press up", () => {
     const { getByTestId: testId, getByText: text } = render(<Example />);
 
-    fireEvent.mouseDown(text("+"));
-    expect(testId("value")).toBe("1");
+    fireEvent.click(text("+"));
+    expect(testId("value")).toHaveTextContent("1");
   });
 
-  it("press down", async () => {
+  it("press down", () => {
     const { getByTestId: testId, getByText: text } = render(<Example />);
 
-    fireEvent.mouseDown(text("-"));
-    expect(testId("value")).toBe("-1");
+    fireEvent.click(text("-"));
+    expect(testId("value")).toHaveTextContent("-1");
   });
 
   // TODO: Simulate mouse hold to check for timeout and intervals of increments
