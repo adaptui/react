@@ -1,4 +1,8 @@
 import React from "react";
+import MockDate from "mockdate";
+import { render } from "reakit-test-utils";
+import { valueToPercent } from "@chakra-ui/utils";
+
 import {
   parseDate,
   stringifyDate,
@@ -6,9 +10,6 @@ import {
   isInvalidDateRange,
 } from "./date";
 import { clampValue, createContext } from ".";
-import MockDate from "mockdate";
-import { valueToPercent } from "@chakra-ui/utils";
-import { render } from "reakit-test-utils";
 
 describe("Utils", () => {
   test("parseDate", () => {
