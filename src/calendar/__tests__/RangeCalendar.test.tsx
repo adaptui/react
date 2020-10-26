@@ -14,7 +14,11 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
 } from "../index";
-import { isEndSelection, isStartSelection } from "../../utils/test-utils";
+import {
+  isEndSelection,
+  isStartSelection,
+  repeat,
+} from "../../utils/test-utils";
 import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
 
 afterEach(cleanup);
@@ -121,11 +125,7 @@ describe("RangeCalendar", () => {
       />,
     );
 
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
     press.Enter(label(/Monday, October 7, 2019 selected/));
     press.ArrowDown();
     press.ArrowRight();
@@ -145,11 +145,7 @@ describe("RangeCalendar", () => {
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2020");
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
 
     expect(
       label(
@@ -167,11 +163,8 @@ describe("RangeCalendar", () => {
     ).toHaveTextContent("14");
 
     // Now we choose the end date, let's choose 19
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowLeft();
-    press.ArrowLeft();
+    repeat(press.ArrowDown, 3);
+    repeat(press.ArrowLeft, 2);
     expect(
       label("Monday, November 2, 2020 (click to finish selecting range)"),
     ).toHaveFocus();
@@ -179,8 +172,7 @@ describe("RangeCalendar", () => {
     press.Enter();
 
     // check if the selection is actually finished or not
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowRight, 2);
     expect(
       label("Wednesday, November 4, 2020 (click to start selecting range)"),
     ).toHaveFocus();
@@ -207,11 +199,7 @@ describe("RangeCalendar", () => {
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2019");
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
 
     expect(
       label(
@@ -223,8 +211,7 @@ describe("RangeCalendar", () => {
 
     // Now we choose the end date, let's choose 19
     press.ArrowDown();
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowRight, 2);
     expect(
       label("Wednesday, October 23, 2019 (click to finish selecting range)"),
     ).toHaveFocus();

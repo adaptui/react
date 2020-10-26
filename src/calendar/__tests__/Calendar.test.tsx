@@ -1,6 +1,6 @@
 import * as React from "react";
+import { subWeeks, addWeeks, format } from "date-fns";
 import { axe, render, press } from "reakit-test-utils";
-import { subWeeks, addWeeks, format, addDays } from "date-fns";
 
 import {
   CalendarCell,
@@ -13,6 +13,7 @@ import {
   CalendarInitialState,
   Calendar as CalendarWrapper,
 } from "../index";
+import { repeat } from "../../utils/test-utils";
 
 export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
@@ -107,19 +108,13 @@ describe("Calendar", () => {
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2020");
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
 
     expect(label("Wednesday, October 7, 2020 selected")).toHaveFocus();
 
     // Let's navigate to 30
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowDown, 2);
+    repeat(press.ArrowRight, 2);
     press.ArrowDown();
 
     expect(label("Friday, October 30, 2020")).toHaveFocus();
@@ -146,23 +141,14 @@ describe("Calendar", () => {
       />,
     );
 
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
     expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
 
     // try to go outside the min max value
-    press.ArrowUp();
-    press.ArrowUp();
-    press.ArrowUp();
-    press.ArrowUp();
+    repeat(press.ArrowUp, 4);
     expect(label("Saturday, October 31, 2020")).toHaveFocus();
 
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
+    repeat(press.ArrowDown, 3);
     expect(label("Saturday, November 14, 2020")).toHaveFocus();
   });
 

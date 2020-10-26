@@ -4,6 +4,7 @@ import { axe, render, press } from "reakit-test-utils";
 
 import { Segment } from "../Segment";
 import { SegmentField } from "../SegmentField";
+import { repeat } from "../../utils/test-utils";
 import { SegmentStateProps, useSegmentState } from "../SegmentState";
 
 const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
@@ -18,12 +19,6 @@ const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
   );
 };
 
-const loop = (cb: Function, times: number) => {
-  for (let i = 0; i < times; i++) {
-    cb();
-  }
-};
-
 describe("Segment", () => {
   it("should render correctly", () => {
     const { getByTestId: testId } = render(<SegmentSpinnerComp />);
@@ -36,18 +31,21 @@ describe("Segment", () => {
       <SegmentSpinnerComp />,
     );
 
+    const month = label("month");
+    const year = label("year");
+
     expect(testId("segment-field")).toHaveTextContent("1/1/2020");
 
     press.Tab();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
     press.ArrowRight();
     expect(label("day")).toHaveFocus();
     press.ArrowRight();
-    expect(label("year")).toHaveFocus();
+    expect(year).toHaveFocus();
     press.Home();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
     press.End();
-    expect(label("year")).toHaveFocus();
+    expect(year).toHaveFocus();
   });
 
   it("should have proper spinbutton keyboard navigation", () => {
@@ -60,7 +58,7 @@ describe("Segment", () => {
     press.Tab();
     expect(label("month")).toHaveFocus();
 
-    loop(() => press.ArrowUp(), 10);
+    repeat(() => press.ArrowUp(), 10);
     expect(label("month")).toHaveTextContent("11");
     press.ArrowUp();
     press.ArrowUp();
@@ -94,20 +92,21 @@ describe("Segment", () => {
       <SegmentSpinnerComp />,
     );
 
+    const year = label("year");
     expect(testId("segment-field")).toHaveTextContent("1/1/2020");
 
     press.Tab();
     press.Enter();
     press.Enter();
 
-    expect(label("year")).toHaveTextContent("2020");
+    expect(year).toHaveTextContent("2020");
     press.Backspace();
     press.Backspace();
-    expect(label("year")).toHaveTextContent("20");
+    expect(year).toHaveTextContent("20");
     press.Backspace();
-    expect(label("year")).toHaveTextContent("2");
+    expect(year).toHaveTextContent("2");
     press.Backspace();
-    expect(label("year")).toHaveTextContent("1");
+    expect(year).toHaveTextContent("1");
   });
 
   it("should be able to change dayPeriod AM/PM", async () => {
@@ -115,17 +114,18 @@ describe("Segment", () => {
       <SegmentSpinnerComp formatOptions={{ timeStyle: "short" }} />,
     );
 
+    const dayPeriod = label("dayPeriod");
     expect(testId("segment-field")).toHaveTextContent("12:00 AM");
 
     press.Tab();
     press.Enter();
     press.Enter();
 
-    await userEvent.type(label("dayPeriod"), "a");
-    expect(label("dayPeriod")).toHaveTextContent("AM");
+    await userEvent.type(dayPeriod, "a");
+    expect(dayPeriod).toHaveTextContent("AM");
 
-    await userEvent.type(label("dayPeriod"), "p");
-    expect(label("dayPeriod")).toHaveTextContent("PM");
+    await userEvent.type(dayPeriod, "p");
+    expect(dayPeriod).toHaveTextContent("PM");
   });
 
   it("can have other date formats", () => {
@@ -144,15 +144,17 @@ describe("Segment", () => {
       />,
     );
 
+    const month = label("month");
+
     expect(testId("segment-field")).toHaveTextContent("Wednesday, 01/01/2020");
 
     press.Tab();
     expect(text("Wednesday")).toHaveFocus();
 
     press.Tab();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
     press.ArrowUp();
-    expect(label("month")).toHaveTextContent("2");
+    expect(month).toHaveTextContent("2");
     expect(text("Saturday")).toBeInTheDocument();
   });
 
@@ -165,19 +167,22 @@ describe("Segment", () => {
       />,
     );
 
+    const hour = label("hour");
+    const dayPeriod = label("dayPeriod");
+
     expect(testId("segment-field")).toHaveTextContent("12:00 AM");
 
     press.Tab();
-    expect(label("hour")).toHaveFocus();
+    expect(hour).toHaveFocus();
 
     press.ArrowUp();
-    expect(label("hour")).toHaveTextContent("1");
+    expect(hour).toHaveTextContent("1");
 
     press.Tab();
     press.Tab();
-    expect(label("dayPeriod")).toHaveFocus();
+    expect(dayPeriod).toHaveFocus();
     press.ArrowUp();
-    expect(label("dayPeriod")).toHaveTextContent("PM");
+    expect(dayPeriod).toHaveTextContent("PM");
   });
 
   it("should onChange", () => {
@@ -200,13 +205,14 @@ describe("Segment", () => {
       <Controlled />,
     );
 
+    const month = label("month");
     expect(testId("segment-field")).toHaveTextContent("5/31/2020");
 
     press.Tab();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
 
     press.ArrowUp();
-    expect(label("month")).toHaveTextContent("6");
+    expect(month).toHaveTextContent("6");
 
     expect(onChangefn).toHaveBeenCalledWith(new Date(2020, 6, 0));
   });
