@@ -1,11 +1,14 @@
+import React from "react";
+import MockDate from "mockdate";
+import { render } from "reakit-test-utils";
+
 import {
   parseDate,
   stringifyDate,
   parseRangeDate,
   isInvalidDateRange,
 } from "./date";
-import { clampValue, getOptimumValue } from "./index";
-import MockDate from "mockdate";
+import { clampValue, createContext, valueToPercent, getOptimumValue } from ".";
 
 describe("Utils", () => {
   test("parseDate", () => {
@@ -89,9 +92,89 @@ describe("Utils", () => {
     expect(clampValue(5, 6, 8)).toEqual(6);
   });
 
+  test("valueToPercent", () => {
+    expect(valueToPercent(10, 0, 100)).toEqual(10);
+    expect(valueToPercent(10, 0, 50)).toEqual(20);
+    expect(valueToPercent(10, 0, 1)).toEqual(1000);
+    expect(valueToPercent(10, 0, 1000)).toEqual(1);
+    expect(valueToPercent(0.5, 0, 100)).toEqual(0.5);
+  });
+
   test("getOptimumValue", () => {
     expect(getOptimumValue(0, 100)).toBe(50);
     expect(getOptimumValue(100, 0)).toBe(100);
     expect(getOptimumValue(100, 500)).toBe(300);
   });
 });
+
+// Error logs are not for PRO devs 😎
+// we can debug without it
+const oldLog = console.error;
+beforeAll(() => {
+  console.error = () => {};
+});
+
+afterAll(() => {
+  console.error = oldLog;
+});
+
+describe("createContext", () => {
+  it("should create a context", () => {
+    const [Provider, useContext, Context] = createContext({
+      errorMessage: "context is undefined",
+      name: "Test",
+    });
+
+    const ExampleContext: React.FC = () => {
+      const { count } = useContext() as any;
+
+      return <p data-testid="val">{count}</p>;
+    };
+
+    const { getByTestId } = render(
+      <Provider value={{ count: 1 }}>
+        <ExampleContext />
+      </Provider>,
+    );
+
+    expect(getByTestId("val")).toHaveTextContent("1");
+  });
+
+  it("should throw error if Provider not wrapped", () => {
+    const [Provider, useContext, Context] = createContext({
+      errorMessage: "context is undefined",
+      name: "Test",
+    });
+
+    const ExampleContext: React.FC = () => {
+      const { count } = useContext() as any;
+      return <p data-testid="val">{count}</p>;
+    };
+
+    const spy = jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
+
+    render(
+      <ErrorBoundary>
+        <ExampleContext />
+      </ErrorBoundary>,
+    );
+
+    expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalled();
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+});
+
+class ErrorBoundary extends React.Component<any, { hasError: boolean }> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  componentDidCatch(error: any, info: any) {
+    this.setState({ hasError: true });
+  }
+  render() {
+    if (this.state.hasError) return null;
+    return this.props.children;
+  }
+}
