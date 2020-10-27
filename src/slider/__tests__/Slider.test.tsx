@@ -7,15 +7,16 @@ import {
   SliderTrack,
   SliderInput,
   useSliderState,
-  SliderFilledTrack,
   SliderStateProps,
+  SliderFilledTrack,
 } from "..";
 import {
   sliderHorizontalStyle,
   sliderHorizontalTrackStyle,
-  sliderHorizontalFilledTractStyle,
   sliderHorizontalThumbStyle,
+  sliderHorizontalFilledTractStyle,
 } from "../stories/styles";
+import { repeat } from "../../utils/test-utils";
 
 export const SliderComp = (props: SliderStateProps) => {
   const slider = useSliderState(props);
@@ -56,26 +57,25 @@ describe("Slider", () => {
   it("should have proper keyboard navigation", () => {
     const { getByTestId: testId } = render(<SliderComp min={0} max={100} />);
 
-    expect(testId("slider-thumb")).not.toHaveFocus();
-    press.Tab();
-    expect(testId("slider-thumb")).toHaveFocus();
+    const sliderInput = testId("slider-input");
+    const sliderThumb = testId("slider-thumb");
 
-    press.ArrowRight();
-    press.ArrowRight();
-    press.ArrowRight();
-    expect(testId("slider-input")).toHaveValue("53");
-    press.ArrowLeft();
-    press.ArrowLeft();
-    press.ArrowLeft();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderThumb).not.toHaveFocus();
+    press.Tab();
+    expect(sliderThumb).toHaveFocus();
+
+    repeat(press.ArrowRight, 3);
+    expect(sliderInput).toHaveValue("53");
+    repeat(press.ArrowLeft, 3);
+    expect(sliderInput).toHaveValue("50");
     press.PageUp();
-    expect(testId("slider-input")).toHaveValue("60");
+    expect(sliderInput).toHaveValue("60");
     press.PageDown();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderInput).toHaveValue("50");
     press.Home();
-    expect(testId("slider-input")).toHaveValue("0");
+    expect(sliderInput).toHaveValue("0");
     press.End();
-    expect(testId("slider-input")).toHaveValue("100");
+    expect(sliderInput).toHaveValue("100");
   });
 
   it("should behave properly on reverse: true", () => {
@@ -83,57 +83,62 @@ describe("Slider", () => {
       <SliderComp isReversed min={0} max={100} />,
     );
 
-    expect(testId("slider-thumb")).not.toHaveFocus();
-    press.Tab();
-    expect(testId("slider-thumb")).toHaveFocus();
+    const sliderInput = testId("slider-input");
+    const sliderThumb = testId("slider-thumb");
 
-    press.ArrowRight();
-    press.ArrowRight();
-    press.ArrowRight();
-    expect(testId("slider-input")).toHaveValue("47");
-    press.ArrowLeft();
-    press.ArrowLeft();
-    press.ArrowLeft();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderThumb).not.toHaveFocus();
+    press.Tab();
+    expect(sliderThumb).toHaveFocus();
+
+    repeat(press.ArrowRight, 3);
+    expect(sliderInput).toHaveValue("47");
+    repeat(press.ArrowLeft, 3);
+    expect(sliderInput).toHaveValue("50");
     press.PageUp();
-    expect(testId("slider-input")).toHaveValue("40");
+    expect(sliderInput).toHaveValue("40");
     press.PageDown();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderInput).toHaveValue("50");
     press.Home();
-    expect(testId("slider-input")).toHaveValue("0");
+    expect(sliderInput).toHaveValue("0");
     press.End();
-    expect(testId("slider-input")).toHaveValue("100");
+    expect(sliderInput).toHaveValue("100");
   });
 
   it("should behave proper min, max values", () => {
     const { getByTestId: testId } = render(<SliderComp min={-50} max={50} />);
 
-    expect(testId("slider-thumb")).not.toHaveFocus();
+    const sliderInput = testId("slider-input");
+    const sliderThumb = testId("slider-thumb");
+
+    expect(sliderThumb).not.toHaveFocus();
     press.Tab();
-    expect(testId("slider-thumb")).toHaveFocus();
+    expect(sliderThumb).toHaveFocus();
 
     // middle
-    expect(testId("slider-input")).toHaveValue("0");
+    expect(sliderInput).toHaveValue("0");
 
     press.Home();
-    expect(testId("slider-input")).toHaveValue("-50");
+    expect(sliderInput).toHaveValue("-50");
     press.End();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderInput).toHaveValue("50");
   });
 
   it("should behave proper step", () => {
     const { getByTestId: testId } = render(<SliderComp step={25} />);
 
-    expect(testId("slider-thumb")).not.toHaveFocus();
-    press.Tab();
-    expect(testId("slider-thumb")).toHaveFocus();
+    const sliderInput = testId("slider-input");
+    const sliderThumb = testId("slider-thumb");
 
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderThumb).not.toHaveFocus();
+    press.Tab();
+    expect(sliderThumb).toHaveFocus();
+
+    expect(sliderInput).toHaveValue("50");
 
     press.ArrowLeft();
-    expect(testId("slider-input")).toHaveValue("25");
+    expect(sliderInput).toHaveValue("25");
     press.ArrowRight();
-    expect(testId("slider-input")).toHaveValue("50");
+    expect(sliderInput).toHaveValue("50");
   });
 
   it("should behave properly on disabled", () => {
@@ -150,11 +155,12 @@ describe("Slider", () => {
 
   it("should behave properly on readonly", () => {
     const { getByTestId: testId } = render(<SliderComp isReadOnly />);
+    const sliderThumb = testId("slider-thumb");
 
-    expect(testId("slider-thumb")).not.toHaveFocus();
-    expect(testId("slider-thumb")).toHaveAttribute("aria-readonly");
+    expect(sliderThumb).not.toHaveFocus();
+    expect(sliderThumb).toHaveAttribute("aria-readonly");
     press.Tab();
-    expect(testId("slider-thumb")).toHaveFocus();
+    expect(sliderThumb).toHaveFocus();
 
     press.ArrowLeft();
     expect(testId("slider-input")).toHaveValue("50");

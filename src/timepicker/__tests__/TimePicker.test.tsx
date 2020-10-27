@@ -12,6 +12,7 @@ import {
   TimePickerColumnValue,
   TimePickerSegmentField,
 } from "../index";
+import { repeat } from "../../utils/test-utils";
 
 beforeAll(() => {
   // https://github.com/jsdom/jsdom/issues/1695
@@ -87,19 +88,21 @@ describe("TimePicker", () => {
       <TimePickerComp defaultValue="12:45" />,
     );
 
-    expect(testId("timepicker-content")).not.toBeVisible();
+    const timepickerContent = testId("timepicker-content");
+
+    expect(timepickerContent).not.toBeVisible();
     press.Tab();
 
     press.ArrowDown(null, { altKey: true });
 
-    expect(testId("timepicker-content")).toBeVisible();
+    expect(timepickerContent).toBeVisible();
 
     expect(document.activeElement).toHaveTextContent("12");
     press.ArrowDown();
     expect(document.activeElement).toHaveTextContent("1");
 
     press.Enter();
-    expect(testId("timepicker-content")).not.toBeVisible();
+    expect(timepickerContent).not.toBeVisible();
     expect(testId("current-time")).toHaveTextContent("1:45 PM");
   });
 
@@ -108,25 +111,23 @@ describe("TimePicker", () => {
       <TimePickerComp defaultValue="12:45" />,
     );
 
-    expect(testId("timepicker-content")).not.toBeVisible();
+    const timepickerContent = testId("timepicker-content");
+
+    expect(timepickerContent).not.toBeVisible();
     press.Tab();
 
     press.ArrowDown(null, { altKey: true });
 
-    expect(testId("timepicker-content")).toBeVisible();
+    expect(timepickerContent).toBeVisible();
 
     expect(document.activeElement).toHaveTextContent("12");
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
+    repeat(press.ArrowDown, 3);
     expect(document.activeElement).toHaveTextContent("3");
 
     // Go to minute column
     press.ArrowRight();
     expect(document.activeElement).toHaveTextContent("45");
-    press.ArrowUp();
-    press.ArrowUp();
-    press.ArrowUp();
+    repeat(press.ArrowUp, 3);
     expect(document.activeElement).toHaveTextContent("42");
 
     // Go to meridian column
@@ -136,7 +137,7 @@ describe("TimePicker", () => {
     expect(document.activeElement).toHaveTextContent("AM");
 
     press.Enter();
-    expect(testId("timepicker-content")).not.toBeVisible();
+    expect(timepickerContent).not.toBeVisible();
     expect(testId("current-time")).toHaveTextContent("12:45 AM");
   });
 

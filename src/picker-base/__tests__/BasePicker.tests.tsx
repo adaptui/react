@@ -92,12 +92,14 @@ describe("PickerBase", () => {
   it("should open/close properly", () => {
     const { getByText: text, getByTestId: testId } = render(<PickerBaseComp />);
 
-    expect(testId("picker-content")).not.toBeVisible();
+    const pickerContent = testId("picker-content");
+
+    expect(pickerContent).not.toBeVisible();
     fireEvent.click(text("open"));
-    expect(testId("picker-content")).toBeVisible();
+    expect(pickerContent).toBeVisible();
 
     press.Escape();
-    expect(testId("picker-content")).not.toBeVisible();
+    expect(pickerContent).not.toBeVisible();
   });
 
   test("PickerBase renders with no a11y violations", async () => {

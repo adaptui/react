@@ -26,6 +26,7 @@ import {
   isEndSelection,
   isStartSelection,
   isInSelectionRange,
+  repeat,
 } from "../../utils/test-utils";
 import { stringifyDate } from "../../utils";
 
@@ -188,13 +189,8 @@ describe("DateRangePicker", () => {
     expect(testId("datepicker")).not.toHaveAttribute("aria-invalid");
 
     // reverse dates are invalid
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-
-    press.ArrowDown();
-    press.ArrowDown();
+    repeat(press.Tab, 4);
+    repeat(press.ArrowDown, 2);
 
     expect(document.activeElement).toHaveTextContent("09");
     expect(testId("datepicker")).toHaveAttribute("aria-invalid", "true");
@@ -214,8 +210,7 @@ describe("DateRangePicker", () => {
 
     expect(testId("datepicker")).not.toHaveAttribute("aria-invalid");
 
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 2);
     press.ArrowUp();
 
     expect(document.activeElement).toHaveTextContent("16");
