@@ -41,13 +41,15 @@ export const useSliderThumb = createHook<
   keys: SLIDER_THUMB_KEYS,
 
   useProps(options, htmlProps) {
-    const { index, inputs } = options;
+    const { index, inputs, isDisabled, setThumbEditable } = options;
     const isVertical = options.orientation === "vertical";
     const { direction } = useLocale();
     const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
 
-    // Immediately register editability with the state
-    options.setThumbEditable(index, !options.isDisabled);
+    React.useEffect(() => {
+      // Immediately register editability with the state
+      setThumbEditable(index, !isDisabled);
+    }, [isDisabled, index, setThumbEditable]);
 
     const inputRef = React.useRef(inputs[index]);
     inputRef.current = inputs[index];

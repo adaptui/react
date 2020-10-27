@@ -9,7 +9,6 @@ import {
   SealedInitialState,
   useSealedState,
 } from "reakit-utils/useSealedState";
-import { useItems } from "../hooks";
 
 export type AccordionState = CompositeState & {
   /**
@@ -138,7 +137,7 @@ export function useAccordionState(
     [composite.move],
   );
 
-  const panels = useItems();
+  const panels = useCompositeState();
 
   return {
     manual,

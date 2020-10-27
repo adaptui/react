@@ -1,24 +1,25 @@
 import * as React from "react";
+import { useCompositeState } from "reakit";
 import { useNumberFormatter } from "@react-aria/i18n";
+import { Item } from "reakit/ts/Composite/__utils/types";
 import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { Item, useItems } from "../hooks";
 import { getOptimumValue, clamp } from "../utils";
 
 export interface SliderState {
   /**
-   * The `value` of the meter indicator.
-   * If `undefined`/`not valid` the meter bar will be equal to `min`
-   * @default 0
+   * The `value` of the slider indicator.
+   * If `undefined`/`not valid` the slider bar will be the optimum of min & max
+   * @default [50]
    */
   values: number[];
   /**
-   * The minimum value of the meter
+   * The minimum value of the slider
    * @default 0
    */
   min: number;
   /**
-   * The maximum value of the meter
+   * The maximum value of the slider
    * @default 100
    */
   max: number;
@@ -147,7 +148,7 @@ export function useSliderState(
   initialState: SealedInitialState<SliderInitialState> = {},
 ): SliderStateReturn {
   const {
-    values: initialValues,
+    values: valuesProp,
     min = 0,
     max = 100,
     step = 1,
@@ -158,15 +159,16 @@ export function useSliderState(
     formatOptions,
   } = useSealedState(initialState);
 
+  const initialValues = valuesProp ? valuesProp : [getOptimumValue(min, max)];
   const [values, setValues] = React.useState(
-    clampValues(initialValues, min, max),
+    bulkClamp(initialValues, min, max),
   );
   const [focusedThumb, setFocusedThumb] = React.useState<number | undefined>(
     undefined,
   );
 
   const trackRef = React.useRef<HTMLDivElement>(null);
-  const inputs = useItems();
+  const inputs = useCompositeState();
   const valuesRef = React.useRef<number[]>(values);
   valuesRef.current = values;
 
@@ -174,12 +176,17 @@ export function useSliderState(
   const isEditablesRef = React.useRef<boolean[]>(
     new Array(values.length).fill(true),
   );
+
   function isThumbEditable(index: number) {
     return isEditablesRef.current[index];
   }
-  function setThumbEditable(index: number, editable: boolean) {
-    isEditablesRef.current[index] = editable;
-  }
+
+  const setThumbEditable = React.useCallback(
+    (index: number, editable: boolean) => {
+      isEditablesRef.current[index] = editable;
+    },
+    [],
+  );
 
   const [isDraggings, setDraggings] = React.useState<boolean[]>(
     new Array(values.length).fill(false),
@@ -313,9 +320,7 @@ function replaceIndex<T>(array: T[], index: number, value: T) {
   return [...array.slice(0, index), value, ...array.slice(index + 1)];
 }
 
-function clampValues(values: number[] | undefined, min: number, max: number) {
-  if (!values) return [getOptimumValue(min, max)];
-
+function bulkClamp(values: number[], min: number, max: number) {
   return values.reduce<number[]>(
     (acc, value) => [...acc, clamp(value, min, max)],
     [],
