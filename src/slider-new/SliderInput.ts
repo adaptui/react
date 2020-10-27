@@ -7,8 +7,9 @@ import {
   unstable_IdHTMLProps,
 } from "reakit";
 import * as React from "react";
+import { useWarning } from "reakit-warning";
 import { useForkRef, useLiveRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
@@ -138,4 +139,11 @@ export const SliderInput = createComponent({
   as: "input",
   memo: true,
   useHook: useSliderInput,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });

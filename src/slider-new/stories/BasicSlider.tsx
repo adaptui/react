@@ -1,7 +1,7 @@
 import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
-import "./index.css";
+import "./aria.css";
 import {
   useSliderState,
   SliderInitialState,

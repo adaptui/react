@@ -6,12 +6,18 @@ import { RangeSlider } from "./RangeSlider";
 import { MultiSlider, MultiSliderThumb } from "./MultiSlider";
 
 export default {
-  title: "SliderNew",
+  title: "SliderNew/ReactAria",
 } as Meta;
 
-export const Default = () => <BasicSlider label="Size" showTip />;
-export const BigSteps = () => <BasicSlider label="Size" showTip step={10} />;
-export const Origin = () => (
+export const Default = () => <BasicSlider label="Size" />;
+
+export const WithTips = () => <BasicSlider label="Size" showTip />;
+
+export const WithBigSteps = () => (
+  <BasicSlider label="Size" showTip step={10} />
+);
+
+export const WithOrigin = () => (
   <BasicSlider
     label="Exposure"
     origin={0}

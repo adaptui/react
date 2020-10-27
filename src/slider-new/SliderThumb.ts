@@ -24,6 +24,7 @@ export type SliderThumbOptions = BoxOptions &
     | "setThumbPercent"
     | "getThumbPercent"
     | "step"
+    | "reversed"
   > & {
     index: number;
   };
@@ -68,7 +69,7 @@ export const useSliderThumb = createHook<
       }
     }, [isFocused, focusInput]);
 
-    const reverseX = direction === "rtl";
+    const reverseX = options.reversed || direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
 
     const moveProps = useMove({

@@ -17,6 +17,7 @@ export type SliderTrackOptions = BoxOptions &
     | "trackRef"
     | "values"
     | "isDisabled"
+    | "reversed"
     | "getThumbPercent"
     | "setThumbPercent"
     | "isThumbDragging"
@@ -52,7 +53,8 @@ export const useSliderTrack = createHook<
 
     const stateRef = React.useRef<SliderTrackOptions>(options);
     stateRef.current = options;
-    const reverseX = direction === "rtl";
+    const reverseX = options.reversed || direction === "rtl";
+
     const currentPosition = React.useRef<number | null>(null);
     const moveProps = useMove({
       onMoveStart() {
@@ -129,7 +131,7 @@ export const useSliderTrack = createHook<
         const offset = clickPosition - trackPosition;
 
         let percent = offset / size;
-        if (direction === "rtl" || isVertical) {
+        if (reverseX || isVertical) {
           percent = 1 - percent;
         }
 

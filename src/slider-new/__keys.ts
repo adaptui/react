@@ -6,6 +6,7 @@ const SLIDER_STATE_KEYS = [
   "step",
   "isDisabled",
   "orientation",
+  "reversed",
   "trackRef",
   "focusedThumb",
   "getThumbValue",

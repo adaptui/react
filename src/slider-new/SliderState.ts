@@ -34,10 +34,15 @@ export interface SliderState {
    */
   isDisabled: boolean;
   /**
-   * orientation of the slider
+   * Orientation of the slider
    * @default "horizontal"
    */
   orientation: "horizontal" | "vertical";
+  /**
+   * Direction of the slider
+   * @default "false"
+   */
+  reversed: boolean;
   /**
    * The track slider element.
    */
@@ -126,7 +131,7 @@ export interface SliderAction {
 
 export type SliderInitialState = Pick<
   Partial<SliderState>,
-  "values" | "min" | "max" | "step" | "isDisabled" | "orientation"
+  "values" | "min" | "max" | "step" | "isDisabled" | "orientation" | "reversed"
 > & {
   /**
    * Get the value when dragging is started
@@ -154,6 +159,7 @@ export function useSliderState(
     step = 1,
     isDisabled = false,
     orientation = "horizontal",
+    reversed = false,
     onChangeStart,
     onChangeEnd,
     formatOptions,
@@ -289,6 +295,7 @@ export function useSliderState(
     step,
     isDisabled,
     orientation,
+    reversed,
     trackRef,
     focusedThumb,
     setFocusedThumb,
