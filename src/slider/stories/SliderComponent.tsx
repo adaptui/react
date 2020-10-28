@@ -94,7 +94,7 @@ export const ChakraSlider: React.FC<ChakraSliderProps> = props => {
 
         {[...new Array(values.length).keys()].map(i => (
           <Thumb
-            keys={`thumb-${i}`}
+            key={`thumb-${i}`}
             index={i}
             state={state}
             isReversed={isReversed}
