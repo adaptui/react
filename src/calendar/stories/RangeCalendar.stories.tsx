@@ -68,7 +68,7 @@ export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
   start: new Date(),
   end: addDays(new Date(), 1),
-  minValue: subWeeks(new Date(), 4),
+  minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
 
