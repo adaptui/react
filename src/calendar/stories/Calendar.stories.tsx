@@ -43,6 +43,7 @@ DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
+  defaultValue: format(new Date(2020, 10, 1), "yyyy-MM-dd"),
   minValue: format(new Date(), "yyyy-MM-dd"),
   maxValue: format(addWeeks(new Date(), 1), "yyyy-MM-dd"),
 };

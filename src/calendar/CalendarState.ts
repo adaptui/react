@@ -9,10 +9,13 @@ import {
   addMonths,
   addWeeks,
   addYears,
+  closestTo,
   endOfMonth,
   format,
   getDaysInMonth,
+  getMonth,
   isSameMonth,
+  isWithinInterval,
   startOfDay,
   startOfMonth,
   subDays,
@@ -101,6 +104,17 @@ export function useCalendarState(props: CalendarInitialState = {}) {
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
     if (isInvalidDateRange(date, minValue, maxValue)) {
+      if (minValue && maxValue) {
+        if (!isSameMonth(date, minValue) && !isSameMonth(date, maxValue))
+          return;
+
+        const nextDate = closestTo(date, [minValue, maxValue]);
+        if (!isSameMonth(nextDate, currentMonth)) {
+          setCurrentMonth(startOfMonth(nextDate));
+        }
+        setFocusedDate(nextDate);
+      }
+
       return;
     }
 
