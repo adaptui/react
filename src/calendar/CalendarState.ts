@@ -9,6 +9,7 @@ import {
   addMonths,
   addWeeks,
   addYears,
+  closestTo,
   endOfMonth,
   format,
   getDaysInMonth,
@@ -101,6 +102,20 @@ export function useCalendarState(props: CalendarInitialState = {}) {
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
     if (isInvalidDateRange(date, minValue, maxValue)) {
+      // Fixes https://github.com/timelessco/renderless-components/issues/116
+      // Issue causing the focusNextMonth & focusPrevMonth to not work because
+      // of adding one month to the current date which becomes invalid above.
+      if (minValue && maxValue) {
+        if (!isSameMonth(date, minValue) && !isSameMonth(date, maxValue))
+          return;
+
+        const nextDate = closestTo(date, [minValue, maxValue]);
+        if (!isSameMonth(nextDate, currentMonth)) {
+          setCurrentMonth(startOfMonth(nextDate));
+        }
+        setFocusedDate(nextDate);
+      }
+
       return;
     }
 
