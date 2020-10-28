@@ -139,16 +139,6 @@ export function useAccordionState(
 
   const panels = useCompositeState();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const registerPanel = React.useCallback(panel => panels.registerItem(panel), [
-    panels.registerItem,
-  ]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const unregisterPanel = React.useCallback(id => panels.unregisterItem(id), [
-    panels.unregisterItem,
-  ]);
-
   return {
     manual,
     allowMultiple,
@@ -160,8 +150,8 @@ export function useAccordionState(
     select,
     unSelect,
     panels: panels.items,
-    registerPanel,
-    unregisterPanel,
+    registerPanel: panels.registerItem,
+    unregisterPanel: panels.unregisterItem,
     ...composite,
   };
 }

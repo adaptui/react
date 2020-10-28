@@ -1,489 +1,335 @@
-/**
- * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
- * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
- * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
- * to work with Reakit System
- */
-import { createOnKeyDown, ensureFocus } from "reakit-utils";
-import {
-  useState,
-  useRef,
-  useCallback,
-  useMemo,
-  useEffect,
-  CSSProperties,
-} from "react";
-import {
-  useBoolean,
-  useControllableState,
-  useDimensions,
-  useEventCallback,
-  useEventListener,
-  useUpdateEffect,
-} from "@chakra-ui/hooks";
-import {
-  getBox,
-  getOwnerDocument,
-  percentToValue,
-  roundValueToStep,
-  valueToPercent,
-  isRightClick,
-  Dict,
-} from "@chakra-ui/utils";
+import * as React from "react";
+import { useCompositeState } from "reakit";
+import { useNumberFormatter } from "@react-aria/i18n";
+import { Item } from "reakit/ts/Composite/__utils/types";
+import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { clampValue } from "../utils";
-import { getDefaultValue, orient } from "./__utils";
+import { getOptimumValue, clamp } from "../utils";
 
-export interface SliderStateProps {
+export interface SliderState {
   /**
-   * The minimum allowed value of the slider. Cannot be greater than max.
+   * The `value` of the slider indicator.
+   * If `undefined`/`not valid` the slider bar will be the optimum of min & max
+   * @default [50]
+   */
+  values: number[];
+  /**
+   * The minimum value of the slider
    * @default 0
    */
-  min?: number;
+  min: number;
   /**
-   * The maximum allowed value of the slider. Cannot be less than min.
+   * The maximum value of the slider
    * @default 100
    */
-  max?: number;
+  max: number;
   /**
    * The step in which increments/decrements have to be made
    * @default 1
    */
-  step?: number;
-  /**
-   * The value of the slider in controlled mode
-   */
-  value?: number;
-  /**
-   * The initial value of the slider in uncontrolled mode
-   */
-  defaultValue?: number;
-  /**
-   * orientation of the slider
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
-  /**
-   * If `true`, the value will be incremented or decremented in reverse.
-   */
-  isReversed?: boolean;
-  /**
-   * function gets called whenever the user starts dragging the slider handle
-   */
-  onChangeStart?(value: number): void;
-  /**
-   * function gets called whenever the user stops dragging the slider handle.
-   */
-  onChangeEnd?(value: number): void;
-  /**
-   * function gets called whenever the slider handle is being dragged or clicked
-   */
-  onChange?(value: number): void;
+  step: number;
   /**
    * If `true`, the slider will be disabled
+   * @default false
    */
-  isDisabled?: boolean;
+  isDisabled: boolean;
   /**
-   * If `true`, the slider will be in `read-only` state
+   * Orientation of the slider
+   * @default "horizontal"
    */
-  isReadOnly?: boolean;
+  orientation: "horizontal" | "vertical";
+  /**
+   * Direction of the slider
+   * @default "false"
+   */
+  reversed: boolean;
+  /**
+   * The track slider element.
+   */
+  trackRef: React.RefObject<HTMLElement | null>;
+  /**
+   * Currently focused thumb
+   */
+  focusedThumb: number | undefined;
+  /**
+   * Get Thumb value based on its index
+   */
+  getThumbValue: (index: number) => number;
+  /**
+   * Returns a percentage from 0 to 1 with respect to min & max
+   */
+  getValuePercent: (value: number) => number;
+  /**
+   * Returns the value offset as a percentage from 0 to 1.
+   */
+  getThumbPercent: (index: number) => number;
+  /**
+   * Returns the min values for the index
+   */
+  getThumbMinValue: (index: number) => number;
+  /**
+   * Returns the max values for the index
+   */
+  getThumbMaxValue: (index: number) => number;
+  /**
+   * Returns the string label for the value, per props.formatOptions
+   */
+  getFormattedValue: (value: number) => string;
+  /**
+   * Returns the formatted thumb value based on it's index
+   */
+  getThumbValueLabel: (index: number) => string;
+  /**
+   * Converts a percent along track (between 0 and 1) to the corresponding value
+   */
+  getPercentValue: (percent: number) => number;
+  /**
+   * Get editableThumb based on the index
+   */
+  isThumbEditable: (index: number) => boolean;
+  /**
+   *  Whether a specific index is being dragged
+   */
+  isThumbDragging: (index: number) => boolean;
+  /**
+   * Get all the inputs in the DOM
+   */
+  inputs: Item[];
+  /**
+   * Register the inputs on mount
+   */
+  registerInput: (item: Item) => void;
+  /**
+   * Unregister the inputs on mount
+   */
+  unregisterInput: (id: string) => void;
 }
 
-type EventSource = "mouse" | "touch" | "keyboard";
+export interface SliderAction {
+  /**
+   * Set currently Focused Thumb
+   */
+  setFocusedThumb: (index: number | undefined) => void;
+  /**
+   * Sets value for thumb.  The actually value set will be clamped and
+   * rounded according to min/max/step
+   */
+  setThumbValue: (index: number, value: number) => void;
+  /**
+   * Sets value for thumb by percent offset (between 0 and 1)
+   */
+  setThumbPercent: (index: number, percent: number) => void;
+  /**
+   * Set true if the thumb registered is editable
+   */
+  setThumbEditable: (index: number, editable: boolean) => void;
+  /**
+   * set dragging true if the thumb registered is being currently dragged
+   */
+  setThumbDragging: (index: number, dragging: boolean) => void;
+}
 
-/**
- * React hook that implements an accessible range slider.
- *
- * It's an alternative to `<input type="range" />`, and returns
- * prop getters for the component parts
- *
- * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices-1.1/#slider
- */
-export function useSliderState(props: SliderStateProps = {}) {
+export type SliderInitialState = Pick<
+  Partial<SliderState>,
+  "values" | "min" | "max" | "step" | "isDisabled" | "orientation" | "reversed"
+> & {
+  /**
+   * Get the value when dragging is started
+   */
+  onChangeEnd?: (value: number[]) => void;
+  /**
+   * Get the value when dragging is stopped
+   */
+  onChangeStart?: (value: number[]) => void;
+  /**
+   * Get the formated value based on number format options
+   */
+  formatOptions?: Intl.NumberFormatOptions;
+};
+
+export type SliderStateReturn = SliderState & SliderAction;
+
+export function useSliderState(
+  initialState: SealedInitialState<SliderInitialState> = {},
+): SliderStateReturn {
   const {
+    values: valuesProp,
     min = 0,
     max = 100,
-    onChange,
-    value: valueProp,
-    defaultValue,
-    isReversed,
+    step = 1,
+    isDisabled = false,
     orientation = "horizontal",
-    isDisabled,
-    isReadOnly,
+    reversed = false,
     onChangeStart,
     onChangeEnd,
-    step = 1,
-  } = props;
+    formatOptions,
+  } = useSealedState(initialState);
 
-  const [isDragging, setDragging] = useBoolean();
+  const initialValues = valuesProp ? valuesProp : [getOptimumValue(min, max)];
+  const [values, setValues] = React.useState(
+    bulkClamp(initialValues, min, max),
+  );
+  const [focusedThumb, setFocusedThumb] = React.useState<number | undefined>(
+    undefined,
+  );
 
-  const [eventSource, setEventSource] = useState<EventSource>();
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const inputs = useCompositeState();
+  const valuesRef = React.useRef<number[]>(values);
+  valuesRef.current = values;
 
-  const isInteractive = !(isDisabled || isReadOnly);
+  // Get & Set Editable Thumb
+  const isEditablesRef = React.useRef<boolean[]>(
+    new Array(values.length).fill(true),
+  );
 
-  /**
-   * Enable the slider handle controlled and uncontrolled scenarios
-   */
-  const [computedValue, setValue] = useControllableState({
-    value: valueProp,
-    defaultValue: defaultValue ?? getDefaultValue(min, max),
-    onChange,
-    shouldUpdate: (prev, next) => prev !== next,
-  });
+  function isThumbEditable(index: number) {
+    return isEditablesRef.current[index];
+  }
 
-  /**
-   * Slider uses DOM APIs to add and remove event listeners.
-   * Noticed some issues with React's synthetic events.
-   *
-   * We use `ref` to save the functions used to remove
-   * the event listeners.
-   *
-   * Ideally, we'll love to use pointer-events API but it's
-   * not fully supported in all browsers.
-   */
-  const cleanUpRef = useRef<Dict<Function>>({});
-
-  /**
-   * Constrain the value because it can't be less than min
-   * or greater than max
-   */
-  const value = clampValue(computedValue, min, max);
-  const prev = useRef<number>();
-
-  const reversedValue = max - value + min;
-  const trackValue = isReversed ? reversedValue : value;
-  const trackPercent = valueToPercent(trackValue, min, max);
-
-  const isVertical = orientation === "vertical";
-
-  /**
-   * Let's keep a reference to the slider track and thumb
-   */
-  const trackRef = useRef<any>(null);
-  const thumbRef = useRef<any>(null);
-  const rootRef = useRef<any>(null);
-
-  /**
-   * Get relative value of slider from the event by tracking
-   * how far you clicked within the track to determine the value
-   */
-  const getValueFromPointer = useCallback(
-    event => {
-      if (!trackRef.current) return;
-
-      const trackRect = getBox(trackRef.current).borderBox;
-      const { clientX, clientY } = event.touches?.[0] ?? event;
-
-      const diff = isVertical
-        ? trackRect.bottom - clientY
-        : clientX - trackRect.left;
-
-      const length = isVertical ? trackRect.height : trackRect.width;
-      let percent = diff / length;
-
-      if (isReversed) {
-        percent = 1 - percent;
-      }
-
-      let nextValue = percentToValue(percent, min, max);
-
-      if (step) {
-        nextValue = parseFloat(roundValueToStep(nextValue, min, step));
-      }
-
-      nextValue = clampValue(nextValue, min, max);
-
-      return nextValue;
+  const setThumbEditable = React.useCallback(
+    (index: number, editable: boolean) => {
+      isEditablesRef.current[index] = editable;
     },
-    [isVertical, isReversed, max, min, step],
+    [],
   );
 
-  const tenSteps = (max - min) / 10;
-  const oneStep = step || (max - min) / 100;
-
-  const constrain = useCallback(
-    (value: number) => {
-      // bail out if slider isn't interactive
-      if (!isInteractive) return;
-      prev.current = value;
-      value = parseFloat(roundValueToStep(value, min, oneStep));
-      value = clampValue(value, min, max);
-      setValue(value);
-    },
-    [oneStep, max, min, setValue, isInteractive],
+  const [isDraggings, setDraggings] = React.useState<boolean[]>(
+    new Array(values.length).fill(false),
   );
 
-  const actions = useMemo(
-    () => ({
-      stepUp: (step = oneStep) => {
-        const next = isReversed ? value - step : value + step;
-        constrain(next);
-      },
-      stepDown: (step = oneStep) => {
-        const next = isReversed ? value + step : value - step;
-        constrain(next);
-      },
-      reset: () => constrain(defaultValue || 0),
-      stepTo: (value: number) => constrain(value),
-    }),
-    [constrain, isReversed, value, oneStep, defaultValue],
-  );
+  const isDraggingsRef = React.useRef<boolean[]>(isDraggings);
+  isDraggingsRef.current = isDraggings;
 
-  /**
-   * Keyboard interaction to ensure users can operate
-   * the slider using only their keyboard.
-   */
-  const onKeyDown = createOnKeyDown({
-    stopPropagation: true,
-    onKey: () => setEventSource("keyboard"),
-    keyMap: {
-      ArrowRight: () => actions.stepUp(),
-      ArrowUp: () => actions.stepUp(),
-      ArrowLeft: () => actions.stepDown(),
-      ArrowDown: () => actions.stepDown(),
-      PageUp: () => actions.stepUp(tenSteps),
-      PageDown: () => actions.stepDown(tenSteps),
-      Home: () => constrain(min),
-      End: () => constrain(max),
-    },
-  });
+  function isThumbDragging(index: number) {
+    return isDraggings[index];
+  }
 
-  /**
-   * Measure the dimensions of the thumb so
-   * we can center it within the track properly
-   */
-  const thumbBoxModel = useDimensions(thumbRef);
-  const thumbRect = thumbBoxModel?.borderBox ?? {
-    width: 0,
-    height: 0,
-  };
-
-  /**
-   * Compute styles for all component parts.
-   */
-  const thumbStyle: CSSProperties = {
-    position: "absolute",
-    userSelect: "none",
-    touchAction: "none",
-    ...orient({
-      orientation,
-      vertical: {
-        bottom: `calc(${trackPercent}% - ${thumbRect.height / 2}px)`,
-      },
-      horizontal: {
-        left: `calc(${trackPercent}% - ${thumbRect.width / 2}px)`,
-      },
-    }),
-  };
-
-  const rootStyle: CSSProperties = {
-    position: "relative",
-    touchAction: "none",
-    WebkitTapHighlightColor: "rgba(0,0,0,0)",
-    userSelect: "none",
-    outline: 0,
-    ...orient({
-      orientation,
-      vertical: {
-        paddingLeft: thumbRect.width / 2,
-        paddingRight: thumbRect.width / 2,
-      },
-      horizontal: {
-        paddingTop: thumbRect.height / 2,
-        paddingBottom: thumbRect.height / 2,
-      },
-    }),
-  };
-
-  const trackStyle: CSSProperties = {
-    position: "absolute",
-    ...orient({
-      orientation,
-      vertical: {
-        left: "50%",
-        transform: "translateX(-50%)",
-        height: "100%",
-      },
-      horizontal: {
-        top: "50%",
-        transform: "translateY(-50%)",
-        width: "100%",
-      },
-    }),
-  };
-
-  const innerTrackStyle: CSSProperties = {
-    ...trackStyle,
-    ...orient({
-      orientation,
-      vertical: isReversed
-        ? { height: `${100 - trackPercent}%`, top: 0 }
-        : { height: `${trackPercent}%`, bottom: 0 },
-      horizontal: isReversed
-        ? { width: `${100 - trackPercent}%`, right: 0 }
-        : { width: `${trackPercent}%`, left: 0 },
-    }),
-  };
-
-  useUpdateEffect(() => {
-    if (thumbRef.current) {
-      ensureFocus(thumbRef.current);
-    }
-  }, [value]);
-
-  useUpdateEffect(() => {
-    const shouldUpdate =
-      !isDragging && eventSource !== "keyboard" && prev.current !== value;
-
-    if (shouldUpdate) {
-      onChangeEnd?.(value);
+  function setThumbDragging(index: number, dragging: boolean) {
+    if (isDisabled || !isThumbEditable(index)) {
+      return;
     }
 
-    if (eventSource === "keyboard") {
-      onChangeEnd?.(value);
+    const wasDragging = isDraggingsRef.current[index];
+    isDraggingsRef.current = replaceIndex(
+      isDraggingsRef.current,
+      index,
+      dragging,
+    );
+
+    setDraggings(isDraggingsRef.current);
+
+    // Call onChangeEnd if no handles are dragging.
+    if (!wasDragging && isDraggingsRef.current.every(Boolean)) {
+      onChangeStart?.(valuesRef.current);
     }
-  }, [isDragging, onChangeEnd, value, eventSource]);
 
-  const onMouseDown = useEventCallback((event: MouseEvent) => {
-    /**
-     * Prevent update if it's right-click
-     */
-    if (isRightClick(event)) return;
-
-    if (!isInteractive || !rootRef.current) return;
-
-    setDragging.on();
-    prev.current = value;
-    onChangeStart?.(value);
-
-    const doc = getOwnerDocument(rootRef.current);
-
-    const run = (event: MouseEvent) => {
-      const nextValue = getValueFromPointer(event);
-      if (nextValue != null && nextValue !== value) {
-        setEventSource("mouse");
-        setValue(nextValue);
-      }
-    };
-
-    run(event);
-
-    doc.addEventListener("mousemove", run);
-
-    const clean = () => {
-      doc.removeEventListener("mousemove", run);
-      setDragging.off();
-    };
-
-    doc.addEventListener("mouseup", clean);
-    cleanUpRef.current.mouseup = () => {
-      doc.removeEventListener("mouseup", clean);
-    };
-  });
-
-  const onTouchStart = useEventCallback((event: TouchEvent) => {
-    if (!isInteractive || !rootRef.current) return;
-
-    // Prevent scrolling for touch events
-    event.preventDefault();
-
-    setDragging.on();
-    prev.current = value;
-    onChangeStart?.(value);
-
-    const doc = getOwnerDocument(rootRef.current);
-
-    const run = (event: TouchEvent) => {
-      const nextValue = getValueFromPointer(event);
-
-      if (nextValue != null && nextValue !== value) {
-        setEventSource("touch");
-        setValue(nextValue);
-      }
-    };
-
-    run(event);
-
-    doc.addEventListener("touchmove", run);
-
-    const clean = () => {
-      doc.removeEventListener("touchmove", run);
-      setDragging.off();
-    };
-
-    doc.addEventListener("touchend", clean);
-    doc.addEventListener("touchcancel", clean);
-
-    cleanUpRef.current.touchend = () => {
-      doc.removeEventListener("touchend", clean);
-    };
-
-    cleanUpRef.current.touchcancel = () => {
-      doc.removeEventListener("touchcancel", clean);
-    };
-  });
-
-  /**
-   * Remove all event handlers
-   */
-  const detach = () => {
-    Object.values(cleanUpRef.current).forEach(cleanup => {
-      cleanup?.();
-    });
-    cleanUpRef.current = {};
-  };
-
-  /**
-   * Ensure we clean up listeners when slider unmounts
-   */
-  useEffect(() => {
-    return () => detach();
-  }, []);
-
-  useUpdateEffect(() => {
-    if (!isDragging) {
-      detach();
+    // Call onChangeEnd if no handles are dragging.
+    if (wasDragging && !isDraggingsRef.current.some(Boolean)) {
+      onChangeEnd?.(valuesRef.current);
     }
-  }, [isDragging]);
+  }
 
-  cleanUpRef.current.mousedown = useEventListener(
-    "mousedown",
-    onMouseDown,
-    rootRef.current,
-  );
+  // Get and Set values based on the index
+  function getThumbValue(index: number) {
+    return values[index];
+  }
 
-  cleanUpRef.current.touchstart = useEventListener(
-    "touchstart",
-    onTouchStart,
-    rootRef.current,
-  );
+  function setThumbValue(index: number, value: number) {
+    if (isDisabled || !isThumbEditable(index)) {
+      return;
+    }
+
+    const thisMin = getThumbMinValue(index);
+    const thisMax = getThumbMaxValue(index);
+
+    // Round value to multiple of step, clamp value between min and max
+    value = clamp(getRoundedValue(value), thisMin, thisMax);
+    valuesRef.current = replaceIndex(valuesRef.current, index, value);
+    setValues(valuesRef.current);
+  }
+
+  function setThumbPercent(index: number, percent: number) {
+    setThumbValue(index, getPercentValue(percent));
+  }
+
+  function getValuePercent(value: number) {
+    return (value - min) / (max - min);
+  }
+
+  function getThumbPercent(index: number) {
+    return getValuePercent(values[index]);
+  }
+
+  function getRoundedValue(value: number) {
+    return Math.round((value - min) / step) * step + min;
+  }
+
+  function getPercentValue(percent: number) {
+    const val = percent * (max - min) + min;
+    return clamp(getRoundedValue(val), min, max);
+  }
+
+  function getThumbMinValue(index: number) {
+    return index === 0 ? min : values[index - 1];
+  }
+
+  function getThumbMaxValue(index: number) {
+    return index === values.length - 1 ? max : values[index + 1];
+  }
+
+  const formatter = useNumberFormatter(formatOptions);
+
+  function getFormattedValue(value: number) {
+    return formatter.format(value);
+  }
+
+  function getThumbValueLabel(index: number) {
+    return getFormattedValue(values[index]);
+  }
 
   return {
-    actions,
-    state: {
-      min,
-      max,
-      value,
-      isDragging,
-      isDisabled,
-      isReadOnly,
-      orientation,
-    },
-    refs: {
-      rootRef,
-      trackRef,
-      thumbRef,
-    },
-    handlers: {
-      onKeyDown,
-    },
-    styles: {
-      rootStyle,
-      trackStyle,
-      innerTrackStyle,
-      thumbStyle,
-    },
+    values,
+    min,
+    max,
+    step,
+    isDisabled,
+    orientation,
+    reversed,
+    trackRef,
+    focusedThumb,
+    setFocusedThumb,
+    getThumbValue,
+    setThumbValue,
+    setThumbPercent,
+    getThumbPercent,
+    getValuePercent,
+    getThumbMinValue,
+    getThumbMaxValue,
+    getPercentValue,
+    getFormattedValue,
+    getThumbValueLabel,
+    isThumbEditable,
+    setThumbEditable,
+    isThumbDragging,
+    setThumbDragging,
+    inputs: inputs.items,
+    registerInput: inputs.registerItem,
+    unregisterInput: inputs.unregisterItem,
   };
 }
 
-export type SliderStateReturn = ReturnType<typeof useSliderState>;
+function replaceIndex<T>(array: T[], index: number, value: T) {
+  if (array[index] === value) {
+    return array;
+  }
+
+  return [...array.slice(0, index), value, ...array.slice(index + 1)];
+}
+
+function bulkClamp(values: number[], min: number, max: number) {
+  return values.reduce<number[]>(
+    (acc, value) => [...acc, clamp(value, min, max)],
+    [],
+  );
+}
