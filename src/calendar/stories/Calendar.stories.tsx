@@ -43,21 +43,21 @@ DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
-  defaultValue: format(new Date(2020, 10, 1), "yyyy-MM-dd"),
-  minValue: format(new Date(), "yyyy-MM-dd"),
-  maxValue: format(addWeeks(new Date(), 1), "yyyy-MM-dd"),
+  defaultValue: new Date(2020, 10, 1),
+  minValue: new Date(),
+  maxValue: addWeeks(new Date(), 1),
 };
 
 export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
-  defaultValue: format(new Date(2020, 10, 7), "yyyy-MM-dd"),
-  minValue: format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd"),
-  maxValue: format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd"),
+  defaultValue: new Date(2020, 10, 7),
+  minValue: subWeeks(new Date(2020, 10, 7), 1),
+  maxValue: addWeeks(new Date(2020, 10, 7), 1),
 };
 
 export const Options = Base.bind({});
 Options.args = {
-  value: format(new Date(), "yyyy-MM-dd"),
+  value: new Date(),
   isDisabled: false,
   isReadOnly: false,
   autoFocus: false,

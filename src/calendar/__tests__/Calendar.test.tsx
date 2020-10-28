@@ -152,6 +152,59 @@ describe("Calendar", () => {
     expect(label("Saturday, November 14, 2020")).toHaveFocus();
   });
 
+  test("should be able to go to prev/next month when min/max values are set", async () => {
+    const { getByLabelText: label } = render(
+      <CalendarComp
+        defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+      />,
+    );
+
+    repeat(press.Tab, 5);
+    expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
+
+    press.PageUp();
+    expect(label("Saturday, October 31, 2020")).toHaveFocus();
+
+    press.PageDown();
+    expect(label("Saturday, November 14, 2020")).toHaveFocus();
+
+    // Should not be able to go to next/prev year
+    press.PageDown(null, { shiftKey: true });
+    expect(label("Saturday, November 14, 2020")).toHaveFocus();
+    press.PageUp(null, { shiftKey: true });
+    expect(label("Saturday, November 14, 2020")).toHaveFocus();
+  });
+
+  test("should be able to go to prev/next year when min/max values are set", async () => {
+    const { getByLabelText: label } = render(
+      <CalendarComp
+        defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
+        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "yyyy-MM-dd")}
+        maxValue={format(addWeeks(new Date(2021, 10, 7), 1), "yyyy-MM-dd")}
+      />,
+    );
+
+    repeat(press.Tab, 5);
+    expect(label("Saturday, November 7, 2020 selected")).toHaveFocus();
+
+    press.PageUp();
+    expect(label("Saturday, October 31, 2020")).toHaveFocus();
+
+    press.PageDown(null, { shiftKey: true });
+    expect(label("Sunday, October 31, 2021")).toHaveFocus();
+
+    press.PageDown();
+    expect(label("Sunday, November 14, 2021")).toHaveFocus();
+
+    press.PageUp();
+    expect(label("Thursday, October 14, 2021")).toHaveFocus();
+
+    press.PageUp(null, { shiftKey: true });
+    expect(label("Saturday, October 31, 2020")).toHaveFocus();
+  });
+
   test("Calendar renders with no a11y violations", async () => {
     const { container } = render(<CalendarComp />);
     const results = await axe(container);
