@@ -56,6 +56,7 @@ export const ChakraSlider: React.FC<ChakraSliderProps> = props => {
   const trackLeft = !isRange
     ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
     : `${getThumbPercent(0) * 100}%`;
+  const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
 
   React.useEffect(() => {
     onChange?.(values);
@@ -86,7 +87,8 @@ export const ChakraSlider: React.FC<ChakraSliderProps> = props => {
                 width: !isVertical && trackWidth,
                 height: isVertical && trackWidth,
                 left: !isReversed && !isVertical && trackLeft,
-                right: isReversed && "0px",
+                right: isReversed && trackRight,
+                bottom: isVertical && isRange && `${getThumbPercent(0) * 100}%`,
               }}
             />
           ) : null}
