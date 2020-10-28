@@ -27,7 +27,7 @@ type TAriaLive = "assertive" | "off" | "polite" | undefined;
  */
 export function announce(
   message: string,
-  assertiveness = "assertive",
+  assertiveness: TAriaLive = "assertive",
   timeout = LIVEREGION_TIMEOUT_DELAY,
 ) {
   ensureInstance(announcer =>
@@ -70,7 +70,7 @@ function ensureInstance(callback: (announcer: any) => void) {
   }
 }
 
-const LiveRegionAnnouncer = React.forwardRef((props, ref) => {
+export const LiveRegionAnnouncer = React.forwardRef((props, ref) => {
   const [assertiveMessage, setAssertiveMessage] = useState("");
   const [politeMessage, setPoliteMessage] = useState("");
 
@@ -153,6 +153,7 @@ function MessageBlock({
 }) {
   return (
     <VisuallyHidden
+      data-testid={`announcer-${ariaLive}`}
       aria-live={ariaLive}
       aria-relevant="additions"
       aria-atomic="true"

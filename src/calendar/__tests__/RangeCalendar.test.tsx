@@ -1,4 +1,6 @@
+jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
+import { cleanup } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
 
 import {
@@ -12,7 +14,18 @@ import {
   useRangeCalendarState,
   RangeCalendarInitialState,
 } from "../index";
-import { isEndSelection, isStartSelection } from "../../utils/test-utils";
+import {
+  isEndSelection,
+  isStartSelection,
+  repeat,
+} from "../../utils/test-utils";
+import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
+
+afterEach(cleanup);
+
+beforeEach(() => {
+  destroyAnnouncer();
+});
 
 const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
@@ -105,6 +118,25 @@ describe("RangeCalendar", () => {
     expect(end).toHaveTextContent("30");
   });
 
+  it("should announce selected range after finishing selection", async () => {
+    const { getByLabelText: label } = render(
+      <RangeCalendarComp
+        defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
+      />,
+    );
+
+    repeat(press.Tab, 5);
+    press.Enter(label(/Monday, October 7, 2019 selected/));
+    press.ArrowDown();
+    press.ArrowRight();
+    press.Enter(label(/Tuesday, October 15, 2019/));
+
+    expect(announce).toHaveBeenCalledTimes(2);
+    expect(announce).toHaveBeenLastCalledWith(
+      "Selected range, from 7th Oct 2019 to 15th Oct 2019",
+    );
+  });
+
   it("should be able to select ranges with keyboard navigation", () => {
     const { getByLabelText: label, getByTestId: testId, baseElement } = render(
       <RangeCalendarComp
@@ -113,11 +145,7 @@ describe("RangeCalendar", () => {
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2020");
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
 
     expect(
       label(
@@ -135,11 +163,8 @@ describe("RangeCalendar", () => {
     ).toHaveTextContent("14");
 
     // Now we choose the end date, let's choose 19
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowLeft();
-    press.ArrowLeft();
+    repeat(press.ArrowDown, 3);
+    repeat(press.ArrowLeft, 2);
     expect(
       label("Monday, November 2, 2020 (click to finish selecting range)"),
     ).toHaveFocus();
@@ -147,8 +172,7 @@ describe("RangeCalendar", () => {
     press.Enter();
 
     // check if the selection is actually finished or not
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowRight, 2);
     expect(
       label("Wednesday, November 4, 2020 (click to start selecting range)"),
     ).toHaveFocus();
@@ -175,11 +199,7 @@ describe("RangeCalendar", () => {
     );
 
     expect(testId("current-year")).toHaveTextContent("October 2019");
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 5);
 
     expect(
       label(
@@ -191,8 +211,7 @@ describe("RangeCalendar", () => {
 
     // Now we choose the end date, let's choose 19
     press.ArrowDown();
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowRight, 2);
     expect(
       label("Wednesday, October 23, 2019 (click to finish selecting range)"),
     ).toHaveFocus();

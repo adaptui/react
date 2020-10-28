@@ -17,3 +17,9 @@ export const isInSelectionRange = (getByLabelText: any, label: Matcher) => {
     "data-is-range-selection",
   );
 };
+
+export const repeat = (cb: Function, times: number) => {
+  for (let i = 0; i < times; i++) {
+    cb();
+  }
+};

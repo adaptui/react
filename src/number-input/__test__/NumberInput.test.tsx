@@ -8,6 +8,7 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "..";
+import { repeat } from "../../utils/test-utils";
 
 const NumberInputComp = (props: UseNumberInputProps) => {
   const state = useNumberInputState(props);
@@ -30,36 +31,38 @@ describe("NumberInput", () => {
     const { getByTestId: testId } = render(
       <NumberInputComp defaultValue={0} />,
     );
+    const numberInput = testId("numberinput");
 
-    expect(testId("numberinput")).not.toHaveFocus();
+    expect(numberInput).not.toHaveFocus();
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
+    expect(numberInput).toHaveFocus();
   });
 
   it("should increase/decrease with keyboard", () => {
     const { getByTestId: testId } = render(
       <NumberInputComp defaultValue={0} max={10} min={0} />,
     );
+    const numberInput = testId("numberinput");
 
-    expect(testId("numberinput")).not.toHaveFocus();
+    expect(numberInput).not.toHaveFocus();
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("0");
+    expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveValue("0");
+
+    repeat(press.ArrowUp, 3);
+    expect(numberInput).toHaveValue("3");
+
+    repeat(press.ArrowDown, 3);
+    expect(numberInput).toHaveValue("0");
+
     press.ArrowUp();
-    press.ArrowUp();
-    press.ArrowUp();
-    expect(testId("numberinput")).toHaveValue("3");
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
-    expect(testId("numberinput")).toHaveValue("0");
-    press.ArrowUp();
-    expect(testId("numberinput")).toHaveValue("1");
+    expect(numberInput).toHaveValue("1");
 
     press.Home();
-    expect(testId("numberinput")).toHaveValue("0");
+    expect(numberInput).toHaveValue("0");
+
     press.End();
-    expect(testId("numberinput")).toHaveValue("10");
+    expect(numberInput).toHaveValue("10");
   });
 
   it("should increase/decrease with buttons", () => {
@@ -69,37 +72,35 @@ describe("NumberInput", () => {
 
     const incBtn = testId("inc");
     const decBtn = testId("dec");
+    const numberInput = testId("numberinput");
 
-    expect(testId("numberinput")).not.toHaveFocus();
+    expect(numberInput).not.toHaveFocus();
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("0");
-    click(incBtn);
-    click(incBtn);
-    click(incBtn);
-    expect(testId("numberinput")).toHaveValue("3");
-    click(decBtn);
-    click(decBtn);
-    click(decBtn);
-    expect(testId("numberinput")).toHaveValue("0");
+    expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveValue("0");
+    repeat(() => click(incBtn), 3);
+    expect(numberInput).toHaveValue("3");
+    repeat(() => click(decBtn), 3);
+    expect(numberInput).toHaveValue("0");
   });
 
   it("should increase/decrease with scrollwheel", () => {
     const { getByTestId: testId } = render(
       <NumberInputComp defaultValue={0} />,
     );
+    const numberInput = testId("numberinput");
 
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("0");
+    expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveValue("0");
 
-    fireEvent.wheel(testId("numberinput"), { deltaY: -100 });
-    fireEvent.wheel(testId("numberinput"), { deltaY: -100 });
-    expect(testId("numberinput")).toHaveValue("2");
+    fireEvent.wheel(numberInput, { deltaY: -100 });
+    fireEvent.wheel(numberInput, { deltaY: -100 });
+    expect(numberInput).toHaveValue("2");
 
-    fireEvent.wheel(testId("numberinput"), { deltaY: 100 });
-    fireEvent.wheel(testId("numberinput"), { deltaY: 100 });
-    expect(testId("numberinput")).toHaveValue("0");
+    fireEvent.wheel(numberInput, { deltaY: 100 });
+    fireEvent.wheel(numberInput, { deltaY: 100 });
+    expect(numberInput).toHaveValue("0");
   });
 
   it("should behave properly with min/max/step options", () => {
@@ -109,29 +110,26 @@ describe("NumberInput", () => {
 
     const incBtn = testId("inc");
     const decBtn = testId("dec");
+    const numberInput = testId("numberinput");
 
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
+    expect(numberInput).toHaveFocus();
     // 3 times pressing wont matter since min value is 10
-    click(decBtn);
-    click(decBtn);
-    click(decBtn);
-    expect(testId("numberinput")).toHaveValue("10");
+    repeat(() => click(decBtn), 3);
+    expect(numberInput).toHaveValue("10");
 
     click(incBtn);
     // step is 10
-    expect(testId("numberinput")).toHaveValue("20");
+    expect(numberInput).toHaveValue("20");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("30");
+    expect(numberInput).toHaveValue("30");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("40");
+    expect(numberInput).toHaveValue("40");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("50");
+    expect(numberInput).toHaveValue("50");
     // 3 times pressing wont matter since max value is 50
-    click(incBtn);
-    click(incBtn);
-    click(incBtn);
-    expect(testId("numberinput")).toHaveValue("50");
+    repeat(() => click(incBtn), 3);
+    expect(numberInput).toHaveValue("50");
   });
 
   it("should behave properly precision value", () => {
@@ -141,18 +139,19 @@ describe("NumberInput", () => {
 
     const incBtn = testId("inc");
     const decBtn = testId("dec");
+    const numberInput = testId("numberinput");
 
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("0.00");
+    expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveValue("0.00");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("0.65");
+    expect(numberInput).toHaveValue("0.65");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("1.30");
+    expect(numberInput).toHaveValue("1.30");
     click(incBtn);
-    expect(testId("numberinput")).toHaveValue("1.95");
+    expect(numberInput).toHaveValue("1.95");
     click(decBtn);
-    expect(testId("numberinput")).toHaveValue("1.30");
+    expect(numberInput).toHaveValue("1.30");
   });
 
   it("should behave properly clampValueOnBlur/keepWithinRange", () => {
@@ -166,24 +165,25 @@ describe("NumberInput", () => {
         max={50}
       />,
     );
+    const numberInput = testId("numberinput");
 
     press.Tab();
-    expect(testId("numberinput")).toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("15");
+    expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveValue("15");
 
-    fireEvent.change(testId("numberinput"), { target: { value: "25" } });
-    expect(testId("numberinput")).toHaveValue("25");
+    fireEvent.change(numberInput, { target: { value: "25" } });
+    expect(numberInput).toHaveValue("25");
 
-    fireEvent.change(testId("numberinput"), { target: { value: "999999" } });
+    fireEvent.change(numberInput, { target: { value: "999999" } });
     click(document.body); // blur
-    expect(testId("numberinput")).not.toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("50");
+    expect(numberInput).not.toHaveFocus();
+    expect(numberInput).toHaveValue("50");
 
     press.Tab(); // get back focus
-    fireEvent.change(testId("numberinput"), { target: { value: "0" } });
+    fireEvent.change(numberInput, { target: { value: "0" } });
     click(document.body); // blur
-    expect(testId("numberinput")).not.toHaveFocus();
-    expect(testId("numberinput")).toHaveValue("10");
+    expect(numberInput).not.toHaveFocus();
+    expect(numberInput).toHaveValue("10");
   });
 
   test("NumberInput renders with no a11y violations", async () => {

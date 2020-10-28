@@ -22,6 +22,7 @@ import {
   CalendarCell,
   CalendarCellButton,
 } from "../../calendar";
+import { repeat } from "../../utils/test-utils";
 
 /*
 // Mocking useId otherwise snapshots will change each time
@@ -127,15 +128,17 @@ describe("DatePicker", () => {
       <DatePickerComp defaultValue={"2020-11-1"} />,
     );
 
+    const datepickerContent = testId("datepicker-content");
+
     expect(testId("segment")).toHaveTextContent("11/01/2020");
-    expect(testId("datepicker-content")).not.toBeVisible();
+    expect(datepickerContent).not.toBeVisible();
 
     // open
     openDatePicker(label, testId);
 
     // close
     press.Escape();
-    expect(testId("datepicker-content")).not.toBeVisible();
+    expect(datepickerContent).not.toBeVisible();
     expect(label("month", { selector: "div" })).toHaveFocus();
   });
 
@@ -151,11 +154,8 @@ describe("DatePicker", () => {
     expect(label("Sunday, November 1, 2020 selected")).toHaveFocus();
 
     // go to 24
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowDown();
-    press.ArrowRight();
-    press.ArrowRight();
+    repeat(press.ArrowDown, 3);
+    repeat(press.ArrowRight, 2);
 
     expect(label("Tuesday, November 24, 2020")).toHaveFocus();
 
@@ -170,6 +170,7 @@ describe("DatePicker", () => {
       <DatePickerComp defaultValue={"2020-11-1"} />,
     );
 
+    const calendarHeader = testId("calendar-header");
     // open
     openDatePicker(label, testId);
 
@@ -177,16 +178,17 @@ describe("DatePicker", () => {
     expect(label("Sunday, November 1, 2020 selected")).toHaveFocus();
 
     // jump month
-    expect(testId("calendar-header")).toHaveTextContent("November 2020");
-    press.PageDown();
-    press.PageDown();
-    expect(testId("calendar-header")).toHaveTextContent("January 2021");
+    expect(calendarHeader).toHaveTextContent("November 2020");
+    repeat(press.PageDown, 2);
+
+    expect(calendarHeader).toHaveTextContent("January 2021");
 
     // jump year
-    expect(testId("calendar-header")).toHaveTextContent("January 2021");
-    press.PageDown(null, { shiftKey: true });
-    press.PageDown(null, { shiftKey: true });
-    expect(testId("calendar-header")).toHaveTextContent("January 2023");
+    expect(calendarHeader).toHaveTextContent("January 2021");
+    repeat(() => {
+      press.PageDown(null, { shiftKey: true });
+    }, 2);
+    expect(calendarHeader).toHaveTextContent("January 2023");
 
     press.Enter();
     expect(testId("datepicker-content")).not.toBeVisible();

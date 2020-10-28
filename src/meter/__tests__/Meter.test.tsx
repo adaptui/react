@@ -125,4 +125,18 @@ describe("Meter", () => {
     },
     data,
   );
+
+  test("useMeterState: low >= high", function () {
+    const { current } = renderMeterStateHook({ low: 1, high: 0.2 });
+
+    expect(current.low).toBe(0.2);
+    expect(current.high).toBe(0.2);
+  });
+
+  test("useMeterState: high >= low", function () {
+    const { current } = renderMeterStateHook({ high: 1, low: 0.2 });
+
+    expect(current.low).toBe(0.2);
+    expect(current.high).toBe(1);
+  });
 });

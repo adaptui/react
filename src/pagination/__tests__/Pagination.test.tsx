@@ -8,6 +8,7 @@ import {
   usePaginationState,
   UsePaginationProps,
 } from "..";
+import { repeat } from "../../utils/test-utils";
 
 const PaginationComp: React.FC<UsePaginationProps> = props => {
   const state = usePaginationState({ count: 10, ...props });
@@ -61,34 +62,34 @@ const PaginationComp: React.FC<UsePaginationProps> = props => {
 
 describe("Pagination", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId, queryByText: text } = render(
-      <PaginationComp />,
-    );
+    const { queryByText: text } = render(<PaginationComp />);
+
+    const prev = text("Previous");
+    const next = text("Next");
+    const first = text("First");
+    const last = text("Last");
 
     press.Tab();
     expect(text("1")).toHaveFocus();
-    expect(text("Previous")).toBeDisabled();
-    expect(text("First")).toBeDisabled();
+    expect(prev).toBeDisabled();
+    expect(first).toBeDisabled();
 
     press.Tab();
     expect(text("2")).toHaveFocus();
 
     press.Enter();
-    expect(text("First")).not.toBeDisabled();
-    expect(text("Previous")).not.toBeDisabled();
+    expect(first).not.toBeDisabled();
+    expect(prev).not.toBeDisabled();
 
-    press.Tab();
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 3);
     press.Enter();
     expect(text("2")).toBeNull();
 
-    press.Tab();
-    press.Tab();
+    repeat(press.Tab, 2);
     press.Enter();
     expect(text("5")).toBeNull();
-    expect(text("Last")).toBeDisabled();
-    expect(text("Next")).toBeDisabled();
+    expect(last).toBeDisabled();
+    expect(next).toBeDisabled();
   });
 
   test("Pagination renders with no a11y violations", async () => {
