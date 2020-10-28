@@ -1,271 +1,188 @@
 import React from "react";
-import { Button } from "reakit";
-import { Meta } from "@storybook/react";
-import { useForm, Controller } from "react-hook-form";
+import { Meta, Story } from "@storybook/react";
 
-import {
-  Slider,
-  SliderTrack,
-  SliderInput,
-  SliderThumb,
-  useSliderState,
-  SliderFilledTrack,
-} from "../index";
-import {
-  sliderHorizontalFilledTractStyle,
-  sliderHorizontalStyle,
-  sliderHorizontalThumbStyle,
-  sliderHorizontalTrackStyle,
-  sliderVerticalFilledTractStyle,
-  sliderVerticalStyle,
-  sliderVerticalThumbStyle,
-  sliderVerticalTrackStyle,
-} from "./styles";
+import { ChakraSlider } from "./SliderComponent";
 
 export default {
   title: "Slider",
+  argTypes: {
+    label: {
+      control: { type: "text" },
+      defaultValue: "Styled",
+      table: {
+        type: { summary: "Label for the slider" },
+        defaultValue: { summary: "Styled" },
+      },
+    },
+    showTip: {
+      control: { type: "boolean" },
+      defaultValue: false,
+      table: {
+        type: { summary: "Show tip for the slider thumb" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    origin: {
+      control: { type: "number" },
+      defaultValue: 0,
+      table: {
+        type: { summary: "Origin for the slider thumb" },
+        defaultValue: { summary: "0" },
+      },
+    },
+    values: {
+      control: { type: "array" },
+      defaultValue: [50],
+      table: {
+        type: { summary: "The `value` of the slider indicator." },
+        defaultValue: { summary: "[50]" },
+      },
+    },
+    min: {
+      control: { type: "number" },
+      defaultValue: 0,
+      table: {
+        type: { summary: "The minimum value of the slider" },
+        defaultValue: { summary: "0" },
+      },
+    },
+    step: {
+      control: { type: "number" },
+      defaultValue: 1,
+      table: {
+        type: {
+          summary: "The step in which increments/decrements have to be made",
+        },
+        defaultValue: { summary: "1" },
+      },
+    },
+    max: {
+      control: { type: "number" },
+      defaultValue: 100,
+      table: {
+        type: { summary: "The maximum value of the slider" },
+        defaultValue: { summary: "100" },
+      },
+    },
+    orientation: {
+      control: { type: "radio", options: ["vertical", "horizontal"] },
+      defaultValue: "horizontal",
+      table: {
+        type: { summary: "Orientation of the slider" },
+        defaultValue: { summary: "horizontal" },
+      },
+    },
+    isReversed: {
+      control: { type: "boolean" },
+      defaultValue: false,
+      table: {
+        type: { summary: "If true, Slider will render reversed" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    formatOptions: {
+      control: { type: "object" },
+      defaultValue: {},
+      table: {
+        type: { summary: "Intl format options" },
+        defaultValue: { summary: "object" },
+      },
+    },
+    isDisabled: {
+      control: { type: "boolean" },
+      defaultValue: false,
+      table: {
+        type: { summary: "If `true`, the slider will be disabled" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    onChangeStart: { action: "Value Change Started" },
+    onChange: { action: "Value Changed" },
+    onChangeEnd: { action: "Value Change Stopped" },
+  },
 } as Meta;
 
-const SliderComp: React.FC<any> = props => {
-  const slider = useSliderState(props);
+const Base: Story = args => <ChakraSlider {...args} />;
 
-  return (
-    <>
-      <label htmlFor="slider">{slider.state.value}</label>
+export const Default = Base.bind({});
 
-      <Slider {...slider} style={sliderHorizontalStyle}>
-        <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-          <SliderFilledTrack
-            {...slider}
-            style={sliderHorizontalFilledTractStyle}
-          />
-        </SliderTrack>
-        <SliderThumb
-          {...slider}
-          aria-label="slider-thumb"
-          style={{
-            ...sliderHorizontalThumbStyle,
-            transform: slider.state.isDragging
-              ? "translateY(-50%) scale(1.15)"
-              : sliderHorizontalThumbStyle.transform,
-          }}
-        />
-
-        <SliderInput name={name} {...slider} />
-      </Slider>
-    </>
-  );
+export const ThumbTip = Base.bind({});
+ThumbTip.args = {
+  label: "Thumb Tipped",
+  showTip: true,
 };
 
-export const Default = () => {
-  return <SliderComp />;
+export const Origin = Base.bind({});
+Origin.args = {
+  label: "Origin Changed",
+  showTip: true,
+  values: [0],
+  origin: 0,
+  min: -50,
+  max: 50,
 };
 
-export const ReactHookForm = () => {
-  const { handleSubmit, control, errors } = useForm<{
-    slider: number;
-  }>({
-    mode: "onChange",
-    defaultValues: { slider: 10 },
-  });
-
-  return (
-    <form
-      onSubmit={handleSubmit(values => {
-        alert(JSON.stringify(values));
-      })}
-    >
-      <Controller
-        name="slider"
-        control={control}
-        rules={{
-          required: true,
-          max: { value: 70, message: "Overflow" },
-          min: { value: 30, message: "Underflow" },
-        }}
-        render={SliderComp as any}
-      />
-      <span>{errors.slider?.message}</span>
-      <Button type="submit">Submit</Button>
-    </form>
-  );
+export const Reversed = Base.bind({});
+Reversed.args = {
+  label: "Reversed",
+  isReversed: true,
 };
 
-export const Reversed = () => {
-  const slider = useSliderState({ isReversed: true });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const Vertical = Base.bind({});
+Vertical.args = {
+  label: "Vertical",
+  orientation: "vertical",
 };
 
-export const Min20Max80 = () => {
-  const slider = useSliderState({ min: 20, max: 80 });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const MinMax = Base.bind({});
+MinMax.args = {
+  label: "Min Max",
+  min: 20,
+  max: 80,
 };
 
-export const Step10 = () => {
-  const slider = useSliderState({ step: 10 });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const Step = Base.bind({});
+Step.args = {
+  label: "Stepped",
+  step: 10,
 };
 
-export const DefaultValue90 = () => {
-  const slider = useSliderState({ defaultValue: 90 });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const DefaultValue = Base.bind({});
+DefaultValue.args = {
+  label: "Default Valued",
+  values: [80],
 };
 
-export const Disabled = () => {
-  const slider = useSliderState({ isDisabled: true });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const FormatOptions = Base.bind({});
+FormatOptions.args = {
+  label: "Temperature Formatted",
+  formatOptions: {
+    style: "unit",
+    unit: "celsius",
+    unitDisplay: "narrow",
+  },
 };
 
-export const ReadOnly = () => {
-  const slider = useSliderState({ isReadOnly: true });
-
-  return (
-    <Slider {...slider} style={sliderHorizontalStyle}>
-      <SliderTrack {...slider} style={sliderHorizontalTrackStyle}>
-        <SliderFilledTrack
-          {...slider}
-          style={sliderHorizontalFilledTractStyle}
-        />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderHorizontalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateY(-50%) scale(1.15)"
-            : sliderHorizontalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const Disabled = Base.bind({});
+Disabled.args = {
+  label: "Disabled",
+  isDisabled: true,
 };
 
-export const Vertical = () => {
-  const slider = useSliderState({ orientation: "vertical" });
+export const Range = Base.bind({});
+Range.args = {
+  label: "Range",
+  values: [25, 75],
+};
 
-  return (
-    <Slider {...slider} style={sliderVerticalStyle}>
-      <SliderTrack {...slider} style={sliderVerticalTrackStyle}>
-        <SliderFilledTrack {...slider} style={sliderVerticalFilledTractStyle} />
-      </SliderTrack>
-      <SliderThumb
-        {...slider}
-        aria-label="slider-thumb"
-        style={{
-          ...sliderVerticalThumbStyle,
-          transform: slider.state.isDragging
-            ? "translateX(-50%) scale(1.15)"
-            : sliderVerticalThumbStyle.transform,
-        }}
-      />
-      <SliderInput {...slider} name="slider" />
-    </Slider>
-  );
+export const Multi = Base.bind({});
+Multi.args = {
+  label: "Range",
+  values: [25, 50, 75],
+};
+
+export const Multis = Base.bind({});
+Multis.args = {
+  label: "Range",
+  values: [20, 40, 60, 80],
 };

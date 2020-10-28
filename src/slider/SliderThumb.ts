@@ -1,32 +1,33 @@
-/**
- * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
- * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
- * We improved the hook [useSlider](https://github.com/chakra-ui/chakra-ui/blob/af613020125265914a9dcb74c92a07a16aa4ff8e/packages/slider/src/use-slider.ts)
- * to work with Reakit System
- */
-import { useId } from "@chakra-ui/hooks";
-import { useForkRef } from "reakit-utils";
-import { useWarning } from "reakit-warning";
-import { BoxHTMLProps, useBox } from "reakit";
-import { callAllHandlers } from "@chakra-ui/utils";
-import { createComponent, createHook, useCreateElement } from "reakit-system";
+import * as React from "react";
+import { useLocale } from "@react-aria/i18n";
+import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { createComponent, createHook } from "reakit-system";
+import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
 
+import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
-import { dataAttr, ariaAttr } from "../utils";
 import { SliderStateReturn } from "./SliderState";
+import { useGlobalListeners, useMove } from "./helpers";
 
-export type SliderThumbOptions = SliderStateReturn & {
-  /**
-   * The base `id` to use for the sliderThumb
-   */
-  id?: string;
-  /**
-   * Function that returns the `aria-valuetext` for screen readers.
-   * It's mostly used to generate a more human-readable
-   * representation of the value for assistive technologies
-   */
-  getAriaValueText?(value: number): string;
-};
+export type SliderThumbOptions = BoxOptions &
+  Pick<
+    SliderStateReturn,
+    | "inputs"
+    | "orientation"
+    | "setThumbEditable"
+    | "isDisabled"
+    | "focusedThumb"
+    | "setThumbDragging"
+    | "trackRef"
+    | "getThumbValue"
+    | "setThumbValue"
+    | "setThumbPercent"
+    | "getThumbPercent"
+    | "step"
+    | "reversed"
+  > & {
+    index: number;
+  };
 
 export type SliderThumbHTMLProps = BoxHTMLProps;
 
@@ -40,46 +41,111 @@ export const useSliderThumb = createHook<
   compose: useBox,
   keys: SLIDER_THUMB_KEYS,
 
-  useProps(
-    options,
-    {
-      ref: htmlRef,
-      style: htmlStyle,
-      onKeyDown: htmlOnKeyDown,
-      "aria-label": ariaLabel,
-      "aria-labelledby": ariaLabelledBy,
-      "aria-valuetext": ariaValueText,
-      ...htmlProps
-    },
-  ) {
-    const { state, handlers, styles, refs } = options;
-    const id = useId(options.id, "slider-thumb");
+  useProps(options, htmlProps) {
+    const { index, inputs, isDisabled, setThumbEditable } = options;
+    const isVertical = options.orientation === "vertical";
+    const { direction } = useLocale();
+    const { addGlobalListener, removeGlobalListener } = useGlobalListeners();
 
-    /**
-     * ARIA (Optional): To define a human readable representation of the value,
-     * we allow users pass aria-valuetext.
-     */
-    const valueText = options.getAriaValueText?.(state.value) ?? ariaValueText;
+    React.useEffect(() => {
+      // Immediately register editability with the state
+      setThumbEditable(index, !isDisabled);
+    }, [isDisabled, index, setThumbEditable]);
 
-    return {
-      id,
-      tabIndex: 0,
-      role: "slider",
-      "aria-valuetext": valueText,
-      "aria-valuemin": state.min,
-      "aria-valuemax": state.max,
-      "aria-valuenow": state.value,
-      "aria-orientation": state.orientation,
-      "data-active": dataAttr(state.isDragging),
-      "aria-disabled": ariaAttr(state.isDisabled),
-      "aria-readonly": ariaAttr(state.isReadOnly),
-      "aria-label": ariaLabel,
-      "aria-labelledby": ariaLabel ? undefined : ariaLabelledBy,
-      onKeyDown: callAllHandlers(htmlOnKeyDown, handlers.onKeyDown),
-      ref: useForkRef(htmlRef, refs.thumbRef),
-      style: { ...styles.thumbStyle, ...htmlStyle },
-      ...htmlProps,
+    const inputRef = React.useRef(inputs[index]);
+    inputRef.current = inputs[index];
+
+    const focusInput = React.useCallback(() => {
+      if (inputRef.current?.ref.current) {
+        focusWithoutScrolling(inputRef.current.ref.current);
+      }
+    }, []);
+
+    const isFocused = options.focusedThumb === index;
+
+    React.useEffect(() => {
+      if (isFocused) {
+        focusInput();
+      }
+    }, [isFocused, focusInput]);
+
+    const reverseX = options.reversed || direction === "rtl";
+    const currentPosition = React.useRef<number | null>(null);
+
+    const moveProps = useMove({
+      onMoveStart() {
+        currentPosition.current = null;
+        options.setThumbDragging(index, true);
+      },
+      onMove({ deltaX, deltaY, pointerType }) {
+        if (!options.trackRef.current) return;
+
+        const size = isVertical
+          ? options.trackRef.current.offsetHeight
+          : options.trackRef.current.offsetWidth;
+
+        if (currentPosition.current == null) {
+          currentPosition.current = options.getThumbPercent(index) * size;
+        }
+
+        if (pointerType === "keyboard") {
+          // (invert left/right according to language direction) + (according to vertical)
+          const delta =
+            ((reverseX ? -deltaX : deltaX) + (isVertical ? -deltaY : -deltaY)) *
+            options.step;
+
+          currentPosition.current += delta * size;
+          options.setThumbValue(index, options.getThumbValue(index) + delta);
+        } else {
+          let delta = isVertical ? deltaY : deltaX;
+          if (isVertical || reverseX) {
+            delta = -delta;
+          }
+
+          currentPosition.current += delta;
+          options.setThumbPercent(
+            index,
+            clamp(currentPosition.current / size, 0, 1),
+          );
+        }
+      },
+      onMoveEnd() {
+        options.setThumbDragging(index, false);
+      },
+    });
+
+    const currentPointer = React.useRef<number | null | undefined>(undefined);
+    const onDown = (id: number | null) => {
+      focusInput();
+      currentPointer.current = id;
+      options.setThumbDragging(index, true);
+
+      addGlobalListener(window, "mouseup", onUp, false);
+      addGlobalListener(window, "touchend", onUp, false);
+      addGlobalListener(window, "pointerup", onUp, false);
     };
+
+    const onUp = (e: any) => {
+      const id = e.pointerId ?? e.changedTouches?.[0].identifier;
+      if (id === currentPointer.current) {
+        focusInput();
+        options.setThumbDragging(index, false);
+        removeGlobalListener(window, "mouseup", onUp, false);
+        removeGlobalListener(window, "touchend", onUp, false);
+        removeGlobalListener(window, "pointerup", onUp, false);
+      }
+    };
+
+    return mergeProps(
+      moveProps,
+      {
+        onMouseDown: () => onDown(null),
+        onPointerDown: (e: React.PointerEvent) => onDown(e.pointerId),
+        onTouchStart: (e: React.TouchEvent) =>
+          onDown(e.changedTouches[0].identifier),
+      },
+      htmlProps,
+    );
   },
 });
 
@@ -87,16 +153,4 @@ export const SliderThumb = createComponent({
   as: "div",
   memo: true,
   useHook: useSliderThumb,
-  useCreateElement: (type, props, children) => {
-    useWarning(
-      props.role !== "slider",
-      "You should provide a valid `role` attribute to SliderThumb component.",
-    );
-
-    useWarning(
-      !props["aria-label"] && !props["aria-labelledby"],
-      "You should provide either `aria-label` or `aria-labelledby` props.",
-    );
-    return useCreateElement(type, props, children);
-  },
 });
