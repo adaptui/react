@@ -118,7 +118,7 @@ describe("RangeCalendar", () => {
     expect(end).toHaveTextContent("30");
   });
 
-  it("should announce selected range after finishing selection", async () => {
+  it("should announce selected range after finishing selection", () => {
     const { getByLabelText: label } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}

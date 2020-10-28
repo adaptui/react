@@ -132,7 +132,7 @@ describe("Calendar", () => {
     expect(testId("current-year")).toHaveTextContent("October 2019");
   });
 
-  test("should have min/max values", async () => {
+  test("should have min/max values", () => {
     const { getByLabelText: label } = render(
       <CalendarComp
         defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
@@ -152,7 +152,7 @@ describe("Calendar", () => {
     expect(label("Saturday, November 14, 2020")).toHaveFocus();
   });
 
-  test("should be able to go to prev/next month when min/max values are set", async () => {
+  test("should be able to go to prev/next month when min/max values are set", () => {
     const { getByLabelText: label } = render(
       <CalendarComp
         defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
@@ -177,7 +177,7 @@ describe("Calendar", () => {
     expect(label("Saturday, November 14, 2020")).toHaveFocus();
   });
 
-  test("should be able to go to prev/next year when min/max values are set", async () => {
+  test("should be able to go to prev/next year when min/max values are set", () => {
     const { getByLabelText: label } = render(
       <CalendarComp
         defaultValue={format(new Date(2020, 10, 7), "yyyy-MM-dd")}
