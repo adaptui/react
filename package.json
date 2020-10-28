@@ -26,7 +26,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "concurrently yarn:build:*",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook --no-dll",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly",
@@ -41,7 +41,7 @@
     "postrelease": "concurrently yarn:release:*",
     "release:github": "conventional-github-releaser -p angular",
     "release:tags": "git push --follow-tags origin master",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --no-dll",
     "test": "jest"
   },
   "dependencies": {
