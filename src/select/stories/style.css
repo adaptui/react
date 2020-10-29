@@ -3,13 +3,18 @@
 }
 
 .select [aria-selected="true"] {
-  color: white;
-  background-color: rgb(103, 126, 255) !important;
+  color: rgb(61, 77, 185);
+  background-color: rgb(234, 237, 255) !important;
 }
 
 .select [data-selected="true"] {
   color: white;
-  background-color: rgb(49, 78, 240);
+  background-color: rgb(61, 77, 185);
+}
+
+.select [data-selected="true"][aria-selected="true"] {
+  color: white;
+  background-color: rgb(81, 99, 218) !important;
 }
 
 .select {
@@ -20,7 +25,7 @@
 .select__header {
   display: flex;
   align-items: center;
-  padding: 5px 0;
+  padding: 10px;
   border-radius: 4px;
   border: 1px solid rgb(182, 188, 221);
 }
@@ -59,7 +64,6 @@
 }
 
 .select__dropdown {
-  padding: 5px;
   width: 100%;
   max-height: 200px;
   overflow-y: scroll;
@@ -68,5 +72,4 @@
 
 .select__dropdown--item {
   padding: 5px;
-  border-radius: 4px;
 }
