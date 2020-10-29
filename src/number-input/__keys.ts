@@ -1,10 +1,9 @@
 // Automatically generated
 const NUMBER_INPUT_STATE_KEYS = [
-  "inputRef",
-  "focusInput",
-  "spinUp",
-  "spinDown",
-  "spinStop",
+  "keepWithinRange",
+  "min",
+  "max",
+  "step",
   "isOutOfRange",
   "isAtMax",
   "isAtMin",
@@ -17,10 +16,11 @@ const NUMBER_INPUT_STATE_KEYS = [
   "decrement",
   "clamp",
   "cast",
-  "keepWithinRange",
-  "min",
-  "max",
-  "step",
+  "inputRef",
+  "focusInput",
+  "spinUp",
+  "spinDown",
+  "spinStop",
 ] as const;
 export const NUMBER_INPUT_KEYS = [
   ...NUMBER_INPUT_STATE_KEYS,

@@ -99,3 +99,5 @@ export function useSpinner(increment: Function, decrement: Function) {
 
   return { up, down, stop };
 }
+
+export type useSpinnerReturn = ReturnType<typeof useSpinner>;
