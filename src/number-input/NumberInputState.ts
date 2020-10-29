@@ -4,16 +4,26 @@
  * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
  * to work with Reakit System
  */
-import { minSafeInteger, maxSafeInteger } from "@chakra-ui/utils";
+import * as React from "react";
+import { minSafeInteger, maxSafeInteger, focus } from "@chakra-ui/utils";
 import { useCounter, UseCounterProps } from "@chakra-ui/counter";
 
 import { useSpinner } from "./helpers";
 
-export interface NumberInputState extends UseCounterProps {}
+export interface NumberInputState extends UseCounterProps {
+  /**
+   * If `true`, the input will be focused as you increment
+   * or decrement the value with the stepper
+   *
+   * @default true
+   */
+  focusInputOnChange?: boolean;
+}
 
 export function useNumberInputState(props: NumberInputState = {}) {
   const {
     keepWithinRange = true,
+    focusInputOnChange = true,
     min = minSafeInteger,
     max = maxSafeInteger,
     step: stepProp = 1,
@@ -34,12 +44,22 @@ export function useNumberInputState(props: NumberInputState = {}) {
    */
   const spinner = useSpinner(counter.increment, counter.decrement);
 
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const focusInput = React.useCallback(() => {
+    if (focusInputOnChange && inputRef.current) {
+      focus(inputRef.current);
+    }
+  }, [focusInputOnChange]);
+
   return {
     keepWithinRange,
     min,
     max,
     step: stepProp,
     ...counter,
+    inputRef,
+    focusInput,
     spinUp: spinner.up,
     spinDown: spinner.down,
     spinStop: spinner.stop,

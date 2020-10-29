@@ -4,7 +4,13 @@ import { Button } from "reakit";
 import { useArgs } from "@storybook/client-api";
 import { useForm, Controller } from "react-hook-form";
 
-import { NumberInput, NumberInputState, useNumberInputState } from "../index";
+import {
+  NumberInput,
+  NumberInputState,
+  useNumberInputState,
+  NumberInputDecrementButton,
+  NumberInputIncrementButton,
+} from "../index";
 
 export default {
   title: "NumberInput",
@@ -15,27 +21,9 @@ export const Default = (props: NumberInputState) => {
 
   return (
     <div>
-      <Button
-        onMouseDown={state.spinDown}
-        onMouseUp={state.spinStop}
-        onMouseLeave={state.spinStop}
-        onTouchStart={state.spinDown}
-        onTouchEnd={state.spinStop}
-        disabled={state.keepWithinRange && state.isAtMin}
-      >
-        -
-      </Button>
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
       <NumberInput {...state} />
-      <Button
-        onMouseDown={state.spinUp}
-        onMouseUp={state.spinStop}
-        onMouseLeave={state.spinStop}
-        onTouchStart={state.spinUp}
-        onTouchEnd={state.spinStop}
-        disabled={state.keepWithinRange && state.isAtMax}
-      >
-        +
-      </Button>
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
     </div>
   );
 };

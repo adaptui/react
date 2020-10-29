@@ -3,14 +3,14 @@ import { axe, render, press, click, fireEvent } from "reakit-test-utils";
 
 import {
   NumberInput,
-  UseNumberInputProps,
+  NumberInputState,
   useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "..";
 import { repeat } from "../../utils/test-utils";
 
-const NumberInputComp = (props: UseNumberInputProps) => {
+const NumberInputComp = (props: NumberInputState) => {
   const state = useNumberInputState(props);
 
   return (

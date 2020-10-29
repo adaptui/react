@@ -40,6 +40,7 @@ export type NumberInputOptions = InputOptions &
     | "valueAsNumber"
     | "isOutOfRange"
     | "cast"
+    | "inputRef"
   > & {
     /**
      * This controls the value update when you blur out of the input.
@@ -98,10 +99,9 @@ export const useNumberInput = createHook<
       valueAsNumber,
       clampValueOnBlur,
       cast,
+      inputRef,
       disabled,
     } = options;
-
-    const ref = React.useRef<HTMLInputElement>(null);
 
     /**
      * The `onChange` handler filters out any character typed
@@ -189,7 +189,7 @@ export const useNumberInput = createHook<
     useEventListener(
       "wheel",
       function onWheel(event) {
-        const isInputFocused = document.activeElement === ref.current;
+        const isInputFocused = document.activeElement === inputRef.current;
         if (!options.allowMouseWheel || !isInputFocused) return;
 
         event.preventDefault();
@@ -203,23 +203,23 @@ export const useNumberInput = createHook<
           decrement(stepFactor);
         }
       },
-      ref.current,
+      inputRef.current,
     );
 
     return {
       value,
-      role: "spinbutton",
       type: "text",
+      role: "spinbutton",
       inputMode: "decimal",
       pattern: "[0-9]*(.[0-9]+)?",
+      autoComplete: "off",
+      autoCorrect: "off",
       "aria-valuemin": min,
       "aria-valuemax": max,
       "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
       "aria-valuetext": !value.toString() ? undefined : value.toString(),
       "aria-invalid": ariaAttr(options.isOutOfRange),
-      autoComplete: "off",
-      autoCorrect: "off",
-      ref: useForkRef(htmlRef, ref),
+      ref: useForkRef(htmlRef, inputRef),
       onChange: callAllHandlers(htmlOnChange, onChange),
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),

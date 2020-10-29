@@ -1,5 +1,7 @@
 // Automatically generated
 const NUMBER_INPUT_STATE_KEYS = [
+  "inputRef",
+  "focusInput",
   "spinUp",
   "spinDown",
   "spinStop",
