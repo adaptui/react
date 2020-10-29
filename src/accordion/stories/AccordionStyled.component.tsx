@@ -1,52 +1,59 @@
 import * as React from "react";
 
-import "./index.css";
 import {
   useAccordionState,
   Accordion,
   AccordionTrigger,
   AccordionPanel,
-  AccordionInitialState,
-} from "../index";
+  AccordionState,
+} from "renderless-components";
 
-export interface AccordionComponentInitialState extends AccordionInitialState {}
-
-export const AccordionComponent: React.FC<AccordionComponentInitialState> = props => {
-  const { children, ...rest } = props;
-  const state = useAccordionState(rest);
-
-  return (
-    <Accordion {...state}>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state} id="accordion3">
-          Trigger 3
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 4</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 5</AccordionPanel>
-    </Accordion>
-  );
-};
+interface AppProps {
+  /**
+   * The current selected accordion's `id`.
+   */
+  selectedId?: AccordionState["currentId"];
+  /**
+   * Initial selected accordion's `id`.
+   * @default []
+   */
+  selectedIds?: AccordionState["currentId"][];
+  /**
+   * Whether the accodion selection should be manual.
+   * @default true
+   */
+  manual?: boolean;
+  /**
+   * Whether to loop through the accordion triggers
+   * @default false
+   */
+  loop?: boolean;
+  /**
+   * Allow to open multiple accordion items
+   * @default false
+   */
+  allowMultiple?: boolean;
+  /**
+   * Allow to toggle accordion items
+   * @default false
+   */
+  allowToggle?: boolean;
+}
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const StyledAccordion: React.FC<AccordionComponentInitialState> = props => {
-  const { children, ...rest } = props;
-  const state = useAccordionState(rest);
+export const App: React.FC<AppProps> = props => {
+  const state = useAccordionState(props);
+
+  // const initialProps = {
+  //   selectedId: "accordion2",
+  //   manual: false,
+  //   loop: true,
+  //   allowToggle: true,
+  //   allowMultiple: true,
+  //   selectedIds: [],
+  // };
+
+  // const state = useAccordionState(initialProps);
 
   return (
     <Accordion {...state} id="accordionGroup" className="accordion">
@@ -102,7 +109,11 @@ export const StyledAccordion: React.FC<AccordionComponentInitialState> = props =
       </AccordionPanel>
 
       <h2>
-        <AccordionTrigger {...state} className="accordion-trigger">
+        <AccordionTrigger
+          {...state}
+          className="accordion-trigger"
+          id="accordion2"
+        >
           <span className="accordion-title">
             Billing Address
             <span className="accordion-icon"></span>
@@ -173,3 +184,5 @@ export const StyledAccordion: React.FC<AccordionComponentInitialState> = props =
     </Accordion>
   );
 };
+
+export default App;
