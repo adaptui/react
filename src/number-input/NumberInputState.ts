@@ -5,13 +5,12 @@
  * to work with Reakit System
  */
 import { useCallback, useRef } from "react";
-import { useBoolean } from "@chakra-ui/hooks";
 import { useCounter, UseCounterProps } from "@chakra-ui/counter";
 import { focus, minSafeInteger, maxSafeInteger } from "@chakra-ui/utils";
 
-import { useSpinner } from "./__utils";
+import { useSpinner } from "./helpers";
 
-export interface UseNumberInputProps extends UseCounterProps {
+export interface NumberInputState extends UseCounterProps {
   /**
    * If `true`, the input will be focused as you increment
    * or decrement the value with the stepper
@@ -37,7 +36,7 @@ export interface UseNumberInputProps extends UseCounterProps {
   isDisabled?: boolean;
 }
 
-export function useNumberInputState(props: UseNumberInputProps = {}) {
+export function useNumberInputState(props: NumberInputState = {}) {
   const {
     focusInputOnChange = true,
     clampValueOnBlur = true,
@@ -49,6 +48,8 @@ export function useNumberInputState(props: UseNumberInputProps = {}) {
     isDisabled,
   } = props;
 
+  const isInteractive = !(isReadOnly || isDisabled);
+
   /**
    * Leverage the `useCounter` hook since it provides
    * the functionality to `increment`, `decrement` and `update`
@@ -58,14 +59,8 @@ export function useNumberInputState(props: UseNumberInputProps = {}) {
   const {
     increment: incrementFn,
     decrement: decrementFn,
-    isAtMax,
-    isAtMin,
     ...counterProp
   } = counter;
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const isInteractive = !(isReadOnly || isDisabled);
 
   const increment = useCallback(
     (step = stepProp) => {
@@ -93,18 +88,13 @@ export function useNumberInputState(props: UseNumberInputProps = {}) {
    */
   const spinner = useSpinner(increment, decrement);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const focusInput = useCallback(() => {
     if (focusInputOnChange && inputRef.current) {
       focus(inputRef.current);
     }
   }, [focusInputOnChange]);
-
-  /**
-   * Keep track of the focused state of the input,
-   * so user can this to change the styles of the
-   * `spinners`, maybe :)
-   */
-  const [isFocused, setFocused] = useBoolean();
 
   return {
     keepWithinRange,
@@ -117,12 +107,8 @@ export function useNumberInputState(props: UseNumberInputProps = {}) {
     isInteractive,
     inputRef,
     focusInput,
-    isFocused,
-    setFocused,
     increment,
     decrement,
-    isAtMin,
-    isAtMax,
     ...counterProp,
     spinner,
   };

@@ -1,7 +1,7 @@
 import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit/Button";
 
-import { useSpinButton } from "./__utils";
+import { useSpinButton } from "./helpers";
 import { NUMBER_INPUT_BUTTON_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./NumberInputState";
 

@@ -9,15 +9,11 @@ import { createComponent, createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import {
   callAllHandlers,
+  EventKeyMap,
   normalizeEventKey,
   StringOrNumber,
 } from "@chakra-ui/utils";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  InputHTMLAttributes,
-  useCallback,
-} from "react";
+import { ChangeEvent, KeyboardEvent, useCallback } from "react";
 
 import { NUMBER_INPUT_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./NumberInputState";
@@ -25,7 +21,8 @@ import {
   isFloatingPointNumericCharacter,
   isValidNumericKeyboardEvent,
   getStepFactor,
-} from "./__utils";
+} from "./helpers";
+import { isNull } from "../utils";
 
 export type NumberInputOptions = InputOptions &
   Pick<
@@ -39,7 +36,6 @@ export type NumberInputOptions = InputOptions &
     | "step"
     | "isAtMax"
     | "inputRef"
-    | "setFocused"
     | "update"
     | "increment"
     | "decrement"
@@ -60,7 +56,6 @@ export type NumberInputOptions = InputOptions &
 export type NumberInputHTMLProps = InputHTMLProps;
 
 export type NumberInputProps = NumberInputOptions & NumberInputHTMLProps;
-type InputMode = InputHTMLAttributes<any>["inputMode"];
 
 export const useNumberInput = createHook<
   NumberInputOptions,
@@ -70,7 +65,17 @@ export const useNumberInput = createHook<
   compose: useInput,
   keys: NUMBER_INPUT_KEYS,
 
-  useProps(options, htmlProps) {
+  useProps(
+    options,
+    {
+      ref: htmlRef,
+      onChange: htmlOnChange,
+      onWheel: htmlOnWheel,
+      onKeyDown: htmlOnKeyDown,
+      onBlur: htmlOnBlur,
+      ...htmlProps
+    },
+  ) {
     const {
       getAriaValueText,
       clampValueOnBlur,
@@ -80,7 +85,6 @@ export const useNumberInput = createHook<
       isReadOnly,
       isDisabled,
       inputRef,
-      setFocused,
       update,
       increment,
       decrement,
@@ -89,15 +93,6 @@ export const useNumberInput = createHook<
       isOutOfRange,
       cast,
     } = options;
-    const {
-      ref,
-      onChange: htmlOnChange,
-      onWheel: htmlOnWheel,
-      onKeyDown: htmlOnKeyDown,
-      onFocus,
-      onBlur: htmlOnBlur,
-      ...restHtmlProps
-    } = htmlProps;
 
     /**
      * If user would like to use a human-readable representation
@@ -106,10 +101,18 @@ export const useNumberInput = createHook<
      * @see https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-18
      * @see https://www.w3.org/TR/wai-aria-1.1/#aria-valuetext
      */
-    const ariaValueText =
-      value === null || value === ""
-        ? undefined
-        : getAriaValueText?.(value) ?? String(value);
+    const _getAriaValueText = () => {
+      const text = getAriaValueText?.(value);
+      if (!isNull(text)) {
+        return text;
+      }
+
+      const defaultText = value.toString();
+      // empty string is an invalid ARIA attribute value
+      return !defaultText ? undefined : defaultText;
+    };
+
+    const ariaValueText = _getAriaValueText();
 
     /**
      * The `onChange` handler filters out any character typed
@@ -147,25 +150,18 @@ export const useNumberInput = createHook<
 
         const eventKey = normalizeEventKey(event);
 
-        switch (eventKey) {
-          case "ArrowUp":
-            event.preventDefault();
-            increment(stepFactor);
-            break;
-          case "ArrowDown":
-            event.preventDefault();
-            decrement(stepFactor);
-            break;
-          case "Home":
-            event.preventDefault();
-            update(min);
-            break;
-          case "End":
-            event.preventDefault();
-            update(max);
-            break;
-          default:
-            break;
+        const keyMap: EventKeyMap = {
+          ArrowUp: () => increment(stepFactor),
+          ArrowDown: () => decrement(stepFactor),
+          Home: () => update(min),
+          End: () => update(max),
+        };
+
+        const action = keyMap[eventKey];
+
+        if (action) {
+          event.preventDefault();
+          action(event);
         }
       },
       [decrement, increment, max, min, stepProp, update],
@@ -199,12 +195,10 @@ export const useNumberInput = createHook<
     }, [cast, max, min, value, valueAsNumber]);
 
     const onBlur = useCallback(() => {
-      setFocused.off();
-
       if (clampValueOnBlur) {
         validateAndClamp();
       }
-    }, [clampValueOnBlur, setFocused, validateAndClamp]);
+    }, [clampValueOnBlur, validateAndClamp]);
 
     const onWheel = useCallback(
       event => {
@@ -225,8 +219,8 @@ export const useNumberInput = createHook<
       value,
       role: "spinbutton",
       type: "text",
-      inputMode: "numeric" as InputMode,
-      pattern: "[0-9]*",
+      inputMode: "decimal",
+      pattern: "[0-9]*(.[0-9]+)?",
       "aria-valuemin": min,
       "aria-valuemax": max,
       "aria-valuenow": isNaN(valueAsNumber) ? undefined : valueAsNumber,
@@ -237,13 +231,12 @@ export const useNumberInput = createHook<
       disabled: isDisabled,
       autoComplete: "off",
       autoCorrect: "off",
-      ref: useForkRef(inputRef, ref),
+      ref: useForkRef(inputRef, htmlRef),
       onChange: callAllHandlers(htmlOnChange, onChange),
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
-      onFocus: callAllHandlers(onFocus, setFocused.on),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),
       onWheel: callAllHandlers(htmlOnWheel, onWheel),
-      ...restHtmlProps,
+      ...htmlProps,
     };
   },
 });

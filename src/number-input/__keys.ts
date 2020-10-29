@@ -2,6 +2,8 @@
 const NUMBER_INPUT_STATE_KEYS = [
   "spinner",
   "isOutOfRange",
+  "isAtMax",
+  "isAtMin",
   "precision",
   "value",
   "valueAsNumber",
@@ -19,12 +21,8 @@ const NUMBER_INPUT_STATE_KEYS = [
   "isInteractive",
   "inputRef",
   "focusInput",
-  "isFocused",
-  "setFocused",
   "increment",
   "decrement",
-  "isAtMin",
-  "isAtMax",
 ] as const;
 export const NUMBER_INPUT_KEYS = [
   ...NUMBER_INPUT_STATE_KEYS,

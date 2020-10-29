@@ -6,12 +6,10 @@ import { useForm, Controller } from "react-hook-form";
 import { NumberInput } from "../NumberInput";
 import { NumberInputDecrementButton } from "../NumberInputDecrementButton";
 import { NumberInputIncrementButton } from "../NumberInputIncrementButton";
-import { UseNumberInputProps, useNumberInputState } from "../NumberInputState";
+import { NumberInputState, useNumberInputState } from "../NumberInputState";
 
-const NumberInputComp = (props: UseNumberInputProps) => {
-  const state = useNumberInputState({
-    ...props,
-  });
+const NumberInputComp = (props: NumberInputState) => {
+  const state = useNumberInputState(props);
 
   return (
     <div>
