@@ -47,4 +47,3 @@ export function getStepFactor(event: KeyboardEvent) {
 }
 
 export * from "./useSpinner";
-export * from "./useSpinButton";

@@ -1,6 +1,8 @@
 // Automatically generated
 const NUMBER_INPUT_STATE_KEYS = [
-  "spinner",
+  "spinUp",
+  "spinDown",
+  "spinStop",
   "isOutOfRange",
   "isAtMax",
   "isAtMin",
@@ -9,23 +11,18 @@ const NUMBER_INPUT_STATE_KEYS = [
   "valueAsNumber",
   "update",
   "reset",
+  "increment",
+  "decrement",
   "clamp",
   "cast",
   "keepWithinRange",
-  "clampValueOnBlur",
   "min",
   "max",
   "step",
-  "isReadOnly",
-  "isDisabled",
-  "isInteractive",
-  "inputRef",
-  "focusInput",
-  "increment",
-  "decrement",
 ] as const;
 export const NUMBER_INPUT_KEYS = [
   ...NUMBER_INPUT_STATE_KEYS,
-  "getAriaValueText",
+  "clampValueOnBlur",
+  "allowMouseWheel",
 ] as const;
 export const NUMBER_INPUT_BUTTON_KEYS = NUMBER_INPUT_STATE_KEYS;
