@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { VisuallyHidden } from "reakit";
 import userEvent from "@testing-library/user-event";
 import { axe, render, press, fireEvent } from "reakit-test-utils";
@@ -10,66 +10,7 @@ import {
 } from "../index";
 import { SliderInitialState } from "../SliderState";
 
-beforeAll(() => {
-  // @ts-ignore
-  global.PointerEvent = class FakePointerEvent extends MouseEvent {
-    _init: {
-      pageX: number;
-      pageY: number;
-      pointerType: string;
-      pointerId: number;
-    };
-    constructor(name: string, init: any) {
-      super(name, init);
-      this._init = init;
-    }
-    get pointerType() {
-      return this._init.pointerType;
-    }
-    get pointerId() {
-      return this._init.pointerId;
-    }
-    get pageX() {
-      return this._init.pageX;
-    }
-    get pageY() {
-      return this._init.pageY;
-    }
-  };
-});
-afterAll(() => {
-  // @ts-ignore
-  delete global.PointerEvent;
-});
-
-/**
- * Enables reading pageX/pageY from fireEvent.mouse*(..., {pageX: ..., pageY: ...}).
- */
-function installMouseEvent() {
-  beforeAll(() => {
-    const oldMouseEvent = MouseEvent;
-    // @ts-ignore
-    global.MouseEvent = class FakeMouseEvent extends MouseEvent {
-      _init: { pageX: number; pageY: number };
-      constructor(name: string, init: any) {
-        super(name, init);
-        this._init = init;
-      }
-      get pageX() {
-        return this._init.pageX;
-      }
-      get pageY() {
-        return this._init.pageY;
-      }
-    };
-    // @ts-ignore
-    global.MouseEvent.oldMouseEvent = oldMouseEvent;
-  });
-  afterAll(() => {
-    // @ts-ignore
-    global.MouseEvent = global.MouseEvent.oldMouseEvent;
-  });
-}
+import { installMouseEvent, installPointerEvent } from "../../utils/test-utils";
 
 export const SliderComponent = (props: SliderInitialState) => {
   const state = useSliderState(props);
@@ -140,7 +81,7 @@ export const SliderComponent = (props: SliderInitialState) => {
 };
 
 describe("Slider", () => {
-  // installPointerEvent();
+  installMouseEvent();
 
   it("should drag and change slider value", () => {
     const onStart = jest.fn();
@@ -154,9 +95,9 @@ describe("Slider", () => {
 
     expect(sliderValue).toHaveTextContent("50");
 
-    fireEvent.pointerDown(sliderThumb, { clientX: 10, pageX: 10 });
-    fireEvent.pointerMove(sliderThumb, { clientX: 20, pageX: 20 });
-    fireEvent.pointerUp(sliderThumb, { clientX: 40, pageX: 40 });
+    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    fireEvent.mouseUp(sliderThumb, { clientX: 40, pageX: 40 });
 
     // expect(onStart).toBeCalledTimes(1);
     // expect(onEnd).toBeCalledTimes(1);
