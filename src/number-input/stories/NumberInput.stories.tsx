@@ -21,9 +21,9 @@ export const Default = (props: NumberInputState) => {
 
   return (
     <div>
-      {/* <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton> */}
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
       <NumberInput {...state} />
-      {/* <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton> */}
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
     </div>
   );
 };

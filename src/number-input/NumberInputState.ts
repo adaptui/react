@@ -4,23 +4,27 @@
  * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
  * to work with Reakit System
  */
-import * as React from "react";
 import {
   minSafeInteger,
   maxSafeInteger,
   focus,
   toPrecision,
   StringOrNumber,
-  countDecimalPlaces,
   clampValue,
 } from "@chakra-ui/utils";
+import * as React from "react";
 import {
   SealedInitialState,
   useSealedState,
 } from "reakit-utils/useSealedState";
 
-import { useSpinner, useSpinnerReturn } from "./helpers";
-import { useControllableProp } from "@chakra-ui/hooks";
+import {
+  cast,
+  getDecimalPlaces,
+  parse,
+  useSpinner,
+  useSpinnerReturn,
+} from "./helpers";
 
 export type NumberInputState = {
   /**
@@ -240,17 +244,4 @@ export function useNumberInputState(
     spinDown: spinner.down,
     spinStop: spinner.stop,
   };
-}
-
-function parse(value: StringOrNumber) {
-  return parseFloat(value.toString().replace(/[^\w.-]+/g, ""));
-}
-
-function getDecimalPlaces(value: number, step: number) {
-  return Math.max(countDecimalPlaces(step), countDecimalPlaces(value));
-}
-
-function cast(value: StringOrNumber, step: number, precision?: number) {
-  const decimalPlaces = getDecimalPlaces(parse(value), step);
-  return toPrecision(parse(value), precision ?? decimalPlaces);
 }
