@@ -24,18 +24,9 @@ import { useControllableProp } from "@chakra-ui/hooks";
 
 export type NumberInputState = {
   /**
-   * The number of decimal points used to round the value
-   */
-  precision: number;
-  /**
    * The value of the counter. Should be less than `max` and greater than `min`
    */
   value: StringOrNumber;
-  /**
-   * The step used to increment or decrement the value
-   * @default 1
-   */
-  step: number;
   /**
    * The minimum value of the counter
    * @default -Infinity
@@ -46,6 +37,15 @@ export type NumberInputState = {
    * @default Infinity
    */
   max: number;
+  /**
+   * The step used to increment or decrement the value
+   * @default 1
+   */
+  step: number;
+  /**
+   * The number of decimal points used to round the value
+   */
+  precision: number;
   /**
    * This controls the value update behavior in general.
    *
@@ -58,17 +58,17 @@ export type NumberInputState = {
    */
   keepWithinRange: boolean;
 
+  valueAsNumber: number;
   isOutOfRange: boolean;
   isAtMax: boolean;
   isAtMin: boolean;
-  valueAsNumber: number;
   inputRef: React.RefObject<HTMLElement | null>;
 };
 
 export type NumberInputAction = {
+  setValue: (next: StringOrNumber) => void;
   increment: (step: NumberInputState["step"]) => void;
   decrement: (step: NumberInputState["step"]) => void;
-  update: (next: StringOrNumber) => void;
   reset: () => void;
   clamp: (value: number) => void;
   cast: (value: StringOrNumber) => void;
@@ -82,14 +82,6 @@ export type NumberinputInitialState = Pick<
   Partial<NumberInputState>,
   "value" | "keepWithinRange" | "min" | "max" | "step" | "precision"
 > & {
-  /**
-   * The callback fired when the value changes
-   */
-  onChange?(valueAsString: string, valueAsNumber: number): void;
-  /**
-   * The initial value of the counter. Should be less than `max` and greater than `min`
-   */
-  defaultValue?: StringOrNumber;
   /**
    * If `true`, the input will be focused as you increment
    * or decrement the value with the stepper
@@ -105,10 +97,8 @@ export function useNumberInputState(
   initialState: SealedInitialState<NumberinputInitialState> = {},
 ): NumberInputStateReturn {
   const {
-    onChange,
     precision: precisionProp,
-    defaultValue,
-    value: valueProp,
+    value: initialValue,
     keepWithinRange = true,
     focusInputOnChange = true,
     min = minSafeInteger,
@@ -116,30 +106,19 @@ export function useNumberInputState(
     step: stepProp = 1,
   } = useSealedState(initialState);
 
-  const [valueState, setValue] = React.useState<StringOrNumber>(() => {
-    if (defaultValue == null) return "";
-    return cast(defaultValue, stepProp, precisionProp);
+  const [value, setValueProp] = React.useState<StringOrNumber>(() => {
+    if (initialValue == null) return "";
+    return cast(initialValue, stepProp, precisionProp);
   });
 
-  /**
-   * Because the component that consumes this hook can be controlled or uncontrolled
-   * we'll keep track of that
-   */
-  const [isControlled, value] = useControllableProp(valueProp, valueState);
+  console.log("%c value", "color: #eeff00", value);
+  const setValue = React.useCallback((next: StringOrNumber) => {
+    setValueProp(next.toString());
+  }, []);
 
   const decimalPlaces = getDecimalPlaces(parse(value), stepProp);
 
   const precision = precisionProp ?? decimalPlaces;
-
-  const update = React.useCallback(
-    (next: StringOrNumber) => {
-      if (!isControlled) {
-        setValue(next.toString());
-      }
-      onChange?.(next.toString(), parse(next));
-    },
-    [onChange, isControlled],
-  );
 
   // Function to clamp the value and round it to the precision
   const clamp = React.useCallback(
@@ -174,9 +153,9 @@ export function useNumberInputState(
       }
 
       next = clamp(next as number);
-      update(next);
+      setValue(next);
     },
-    [clamp, stepProp, update, value],
+    [clamp, stepProp, setValue, value],
   );
 
   const decrement = React.useCallback(
@@ -191,26 +170,26 @@ export function useNumberInputState(
       }
 
       next = clamp(next as number);
-      update(next);
+      setValue(next);
     },
-    [clamp, stepProp, update, value],
+    [clamp, stepProp, setValue, value],
   );
 
   const reset = React.useCallback(() => {
     let next: StringOrNumber;
-    if (defaultValue == null) {
+    if (initialValue == null) {
       next = "";
     } else {
-      next = cast(defaultValue, stepProp, precisionProp);
+      next = cast(initialValue, stepProp, precisionProp);
     }
-    update(next);
-  }, [defaultValue, precisionProp, stepProp, update]);
+    setValue(next);
+  }, [initialValue, precisionProp, stepProp, setValue]);
 
   const castValue = React.useCallback(
     (value: StringOrNumber) => {
-      update(cast(value, stepProp, precision));
+      setValue(cast(value, stepProp, precision));
     },
-    [precision, stepProp, update],
+    [precision, stepProp, setValue],
   );
 
   const valueAsNumber = parse(value);
@@ -239,20 +218,20 @@ export function useNumberInputState(
   }, [focusInputOnChange]);
 
   return {
-    keepWithinRange,
+    value,
     min,
     max,
     step: stepProp,
+    precision,
+    keepWithinRange,
+    valueAsNumber,
     isOutOfRange,
     isAtMax,
     isAtMin,
-    precision,
-    value,
-    valueAsNumber,
-    update,
-    reset,
+    setValue,
     increment,
     decrement,
+    reset,
     clamp,
     cast: castValue,
     inputRef,

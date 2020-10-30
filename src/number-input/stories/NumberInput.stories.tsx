@@ -17,13 +17,13 @@ export default {
 } as Meta;
 
 export const Default = (props: NumberInputState) => {
-  const state = useNumberInputState({ defaultValue: 15, min: 10, max: 20 });
+  const state = useNumberInputState({ value: 15, min: 10, max: 20 });
 
   return (
     <div>
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      {/* <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton> */}
       <NumberInput {...state} />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+      {/* <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton> */}
     </div>
   );
 };

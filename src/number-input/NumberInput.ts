@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/utils";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { useEventListener } from "@chakra-ui/hooks";
 import { createComponent, createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { ChangeEvent, KeyboardEvent, useCallback } from "react";
@@ -33,7 +32,7 @@ export type NumberInputOptions = InputOptions &
     | "min"
     | "max"
     | "step"
-    | "update"
+    | "setValue"
     | "increment"
     | "decrement"
     | "value"
@@ -84,6 +83,7 @@ export const useNumberInput = createHook<
       ref: htmlRef,
       onChange: htmlOnChange,
       onKeyDown: htmlOnKeyDown,
+      onFocus: htmlOnFocus,
       onBlur: htmlOnBlur,
       ...htmlProps
     },
@@ -92,7 +92,7 @@ export const useNumberInput = createHook<
       min,
       max,
       step,
-      update,
+      setValue,
       increment,
       decrement,
       value,
@@ -115,9 +115,9 @@ export const useNumberInput = createHook<
           .split("")
           .filter(isFloatingPointNumericCharacter)
           .join("");
-        update(valueString);
+        setValue(valueString);
       },
-      [disabled, update],
+      [disabled, setValue],
     );
 
     const onKeyDown = useCallback(
@@ -146,8 +146,8 @@ export const useNumberInput = createHook<
         const keyMap: EventKeyMap = {
           ArrowUp: () => increment(stepFactor),
           ArrowDown: () => decrement(stepFactor),
-          Home: () => update(min),
-          End: () => update(max),
+          Home: () => setValue(min),
+          End: () => setValue(max),
         };
 
         const action = keyMap[eventKey];
@@ -157,7 +157,7 @@ export const useNumberInput = createHook<
           action(event);
         }
       },
-      [disabled, decrement, increment, max, min, step, update],
+      [disabled, decrement, increment, max, min, step, setValue],
     );
 
     const onBlur = useCallback(() => {
@@ -186,9 +186,11 @@ export const useNumberInput = createHook<
       }
     }, [cast, clampValueOnBlur, max, min, value, valueAsNumber]);
 
-    useEventListener(
-      "wheel",
-      function onWheel(event) {
+    React.useEffect(() => {
+      const input = inputRef.current;
+      if (!input) return undefined;
+
+      function onWheel(event: WheelEvent) {
         const isInputFocused = document.activeElement === inputRef.current;
         if (!options.allowMouseWheel || !isInputFocused) return;
 
@@ -202,9 +204,14 @@ export const useNumberInput = createHook<
         } else if (direction === 1) {
           decrement(stepFactor);
         }
-      },
-      inputRef.current,
-    );
+      }
+
+      input.addEventListener("wheel", onWheel);
+
+      return () => {
+        input.removeEventListener("wheel", onWheel);
+      };
+    }, [decrement, increment, inputRef, options.allowMouseWheel, step]);
 
     return {
       value,

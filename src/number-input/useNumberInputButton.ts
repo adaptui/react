@@ -15,11 +15,11 @@ export function useNumberInputButton(
   const {
     keepWithinRange,
     focusInput,
-    isAtMin: isAtMinProp,
-    isAtMax: isAtMaxProp,
-    spinUp: spinUpProp,
-    spinDown: spinDownProp,
-    spinStop: spinStopProp,
+    isAtMin,
+    isAtMax,
+    spinUp,
+    spinDown,
+    spinStop,
   } = options;
   const {
     onMouseDown,
@@ -30,42 +30,44 @@ export function useNumberInputButton(
     ...restHtmlProps
   } = htmlProps;
 
-  const [isAtMin, setIsAtMin] = useState(false);
-  const [isAtMax, setIsAtMax] = useState(false);
+  console.log("%c isAtMin", "color: #ffa280", isAtMin);
+  console.log("%c isAtMin", "color: #ffa280", isAtMax);
+  // const [isAtMin, setIsAtMin] = useState(false);
+  // const [isAtMax, setIsAtMax] = useState(false);
 
-  const spinUp = useCallback(
-    (event: any) => {
-      event.preventDefault();
-      spinUpProp();
-      focusInput();
-      setIsAtMax(false);
-    },
-    [focusInput, spinUpProp],
-  );
+  // const spinUp = useCallback(
+  //   (event: any) => {
+  //     event.preventDefault();
+  //     spinUpProp();
+  //     focusInput();
+  //     setIsAtMax(false);
+  //   },
+  //   [focusInput, spinUpProp],
+  // );
 
-  const spinDown = useCallback(
-    (event: any) => {
-      event.preventDefault();
-      spinDownProp();
-      focusInput();
-      setIsAtMin(false);
-    },
-    [focusInput, spinDownProp],
-  );
+  // const spinDown = useCallback(
+  //   (event: any) => {
+  //     event.preventDefault();
+  //     spinDownProp();
+  //     focusInput();
+  //     setIsAtMin(false);
+  //   },
+  //   [focusInput, spinDownProp],
+  // );
 
-  const spinStop = useCallback(
-    (event: any) => {
-      event.preventDefault();
-      spinStopProp();
+  // const spinStop = useCallback(
+  //   (event: any) => {
+  //     event.preventDefault();
+  //     spinStopProp();
 
-      if (action === "increment") {
-        isAtMaxProp && setIsAtMax(true);
-      } else {
-        isAtMinProp && setIsAtMin(true);
-      }
-    },
-    [action, isAtMaxProp, isAtMinProp, spinStopProp],
-  );
+  //     if (action === "increment") {
+  //       isAtMaxProp && setIsAtMax(true);
+  //     } else {
+  //       isAtMinProp && setIsAtMin(true);
+  //     }
+  //   },
+  //   [action, isAtMaxProp, isAtMinProp, spinStopProp],
+  // );
 
   const commonReturn = {
     tabIndex: -1,
@@ -79,8 +81,8 @@ export function useNumberInputButton(
     return {
       onMouseDown: callAllHandlers(onMouseDown, spinUp),
       onTouchStart: callAllHandlers(onTouchStart, spinUp),
-      disabled: keepWithinRange && isAtMaxProp && isAtMax,
-      "aria-disabled": ariaAttr(keepWithinRange && isAtMaxProp && isAtMax),
+      disabled: keepWithinRange && isAtMax,
+      "aria-disabled": ariaAttr(keepWithinRange && isAtMax),
       ...commonReturn,
     };
   }
@@ -88,8 +90,8 @@ export function useNumberInputButton(
   return {
     onMouseDown: callAllHandlers(onMouseDown, spinDown),
     onTouchStart: callAllHandlers(onTouchStart, spinDown),
-    disabled: keepWithinRange && isAtMinProp && isAtMin,
-    "aria-disabled": ariaAttr(keepWithinRange && isAtMinProp && isAtMin),
+    disabled: keepWithinRange && isAtMin,
+    "aria-disabled": ariaAttr(keepWithinRange && isAtMin),
     ...commonReturn,
   };
 }
