@@ -3,6 +3,8 @@ const isCommonJS = BABEL_ENV !== undefined && BABEL_ENV === "cjs";
 const isESM = BABEL_ENV !== undefined && BABEL_ENV === "esm";
 
 module.exports = function (api) {
+  const isTest = api.env("test");
+
   api.cache(true);
 
   const presets = [
@@ -29,6 +31,11 @@ module.exports = function (api) {
   return {
     presets,
     plugins,
-    ignore: ["**/*/__tests__", "**/*/stories"],
+    env: {
+      test: {
+        presets: [["@babel/env", { targets: { node: "current" } }]],
+      },
+    },
+    ignore: isTest ? [] : ["**/*/__tests__", "**/*/stories"],
   };
 };
