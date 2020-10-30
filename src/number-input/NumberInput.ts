@@ -1,9 +1,3 @@
-/**
- * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
- * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
- * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
- * to work with Reakit System
- */
 import {
   callAllHandlers,
   EventKeyMap,
@@ -14,7 +8,6 @@ import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
-import { ChangeEvent, KeyboardEvent, useCallback } from "react";
 
 import {
   isFloatingPointNumericCharacter,
@@ -38,7 +31,7 @@ export type NumberInputOptions = InputOptions &
     | "value"
     | "valueAsNumber"
     | "isOutOfRange"
-    | "cast"
+    | "setCastedValue"
     | "inputRef"
   > & {
     /**
@@ -98,7 +91,7 @@ export const useNumberInput = createHook<
       value,
       valueAsNumber,
       clampValueOnBlur,
-      cast,
+      setCastedValue,
       inputRef,
       disabled,
     } = options;
@@ -107,8 +100,8 @@ export const useNumberInput = createHook<
      * The `onChange` handler filters out any character typed
      * that isn't floating point compatible.
      */
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
+    const onChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
         if (disabled) return;
 
         const valueString = event.target.value
@@ -120,8 +113,8 @@ export const useNumberInput = createHook<
       [disabled, setValue],
     );
 
-    const onKeyDown = useCallback(
-      (event: KeyboardEvent) => {
+    const onKeyDown = React.useCallback(
+      (event: React.KeyboardEvent) => {
         if (disabled) return;
 
         /**
@@ -160,7 +153,7 @@ export const useNumberInput = createHook<
       [disabled, decrement, increment, max, min, step, setValue],
     );
 
-    const onBlur = useCallback(() => {
+    const onBlur = React.useCallback(() => {
       if (!clampValueOnBlur) return;
 
       let next = value as StringOrNumber;
@@ -176,15 +169,15 @@ export const useNumberInput = createHook<
       }
 
       /**
-       * `cast` does 2 things:
+       * `setCastedValue` does 2 things:
        *
        * - sanitize the value by using parseFloat and some Regex
        * - used to round value to computed precision or decimal points
        */
       if (value !== next) {
-        cast(next);
+        setCastedValue(next);
       }
-    }, [cast, clampValueOnBlur, max, min, value, valueAsNumber]);
+    }, [setCastedValue, clampValueOnBlur, max, min, value, valueAsNumber]);
 
     React.useEffect(() => {
       const input = inputRef.current;

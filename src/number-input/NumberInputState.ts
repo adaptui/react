@@ -19,9 +19,9 @@ import {
 } from "reakit-utils/useSealedState";
 
 import {
-  cast,
+  castValue,
   getDecimalPlaces,
-  parse,
+  parseValue,
   useSpinner,
   useSpinnerReturn,
 } from "./helpers";
@@ -61,24 +61,68 @@ export type NumberInputState = {
    * @default true
    */
   keepWithinRange: boolean;
-
+  /**
+   * The value of the counter in number.
+   */
   valueAsNumber: number;
+  /**
+   * True, if value is less than `min` & greater than `max`.
+   */
   isOutOfRange: boolean;
+  /**
+   * True, if value is equal to max.
+   */
   isAtMax: boolean;
+  /**
+   * Truw, if value is equal to min.
+   */
   isAtMin: boolean;
+  /**
+   * The Input Element.
+   */
   inputRef: React.RefObject<HTMLElement | null>;
 };
 
 export type NumberInputAction = {
+  /**
+   * Set the value which will be converted to string.
+   */
   setValue: (next: StringOrNumber) => void;
+  /**
+   * Set the casted value based on precision & step.
+   */
+  setCastedValue: (value: StringOrNumber) => void;
+  /**
+   * Increment the value based on the step
+   */
   increment: (step: NumberInputState["step"]) => void;
+  /**
+   * Decrement the value based on the step
+   */
   decrement: (step: NumberInputState["step"]) => void;
+  /**
+   * Reset the value back to initial value
+   */
   reset: () => void;
-  clamp: (value: number) => void;
-  cast: (value: StringOrNumber) => void;
+  /**
+   * Clamp value with precision
+   */
+  clampToPrecision: (value: number) => void;
+  /**
+   * Focus input if focus input on value change is `true`
+   */
   focusInput: () => void;
+  /**
+   * Spinner handler that increments the value after an interval
+   */
   spinUp: useSpinnerReturn["up"];
+  /**
+   * Spinner handler that decrements the value after an interval
+   */
   spinDown: useSpinnerReturn["down"];
+  /**
+   * Spinner handler that Stop it from incrementing or decrementing
+   */
   spinStop: useSpinnerReturn["stop"];
 };
 
@@ -101,31 +145,43 @@ export function useNumberInputState(
   initialState: SealedInitialState<NumberinputInitialState> = {},
 ): NumberInputStateReturn {
   const {
-    precision: precisionProp,
     value: initialValue,
-    keepWithinRange = true,
-    focusInputOnChange = true,
     min = minSafeInteger,
     max = maxSafeInteger,
     step: stepProp = 1,
+    precision: precisionProp,
+    keepWithinRange = true,
+    focusInputOnChange = true,
   } = useSealedState(initialState);
 
   const [value, setValueProp] = React.useState<StringOrNumber>(() => {
     if (initialValue == null) return "";
-    return cast(initialValue, stepProp, precisionProp);
+    return castValue(initialValue, stepProp, precisionProp);
   });
 
-  console.log("%c value", "color: #eeff00", value);
+  /**
+   * Common range checks
+   */
+  const valueAsNumber = parseValue(value);
+  const isOutOfRange = valueAsNumber > max || valueAsNumber < min;
+  const isAtMax = valueAsNumber === max;
+  const isAtMin = valueAsNumber === min;
+  const decimalPlaces = getDecimalPlaces(parseValue(value), stepProp);
+  const precision = precisionProp ?? decimalPlaces;
+
   const setValue = React.useCallback((next: StringOrNumber) => {
     setValueProp(next.toString());
   }, []);
 
-  const decimalPlaces = getDecimalPlaces(parse(value), stepProp);
-
-  const precision = precisionProp ?? decimalPlaces;
+  const setCastedValue = React.useCallback(
+    (value: StringOrNumber) => {
+      setValue(castValue(value, stepProp, precision));
+    },
+    [precision, stepProp, setValue],
+  );
 
   // Function to clamp the value and round it to the precision
-  const clamp = React.useCallback(
+  const clampToPrecision = React.useCallback(
     (value: number) => {
       let nextValue = value;
 
@@ -151,15 +207,15 @@ export function useNumberInputState(
          * If `min` is set, native input, starts at the `min`.
          * Else, it starts at `step`
          */
-        next = parse(step);
+        next = parseValue(step);
       } else {
-        next = parse(value) + step;
+        next = parseValue(value) + step;
       }
 
-      next = clamp(next as number);
+      next = clampToPrecision(next as number);
       setValue(next);
     },
-    [clamp, stepProp, setValue, value],
+    [clampToPrecision, stepProp, setValue, value],
   );
 
   const decrement = React.useCallback(
@@ -168,15 +224,15 @@ export function useNumberInputState(
 
       // Same thing here. We'll follow native implementation
       if (value === "") {
-        next = parse(-step);
+        next = parseValue(-step);
       } else {
-        next = parse(value) - step;
+        next = parseValue(value) - step;
       }
 
-      next = clamp(next as number);
+      next = clampToPrecision(next as number);
       setValue(next);
     },
-    [clamp, stepProp, setValue, value],
+    [clampToPrecision, stepProp, setValue, value],
   );
 
   const reset = React.useCallback(() => {
@@ -184,26 +240,10 @@ export function useNumberInputState(
     if (initialValue == null) {
       next = "";
     } else {
-      next = cast(initialValue, stepProp, precisionProp);
+      next = castValue(initialValue, stepProp, precisionProp);
     }
     setValue(next);
   }, [initialValue, precisionProp, stepProp, setValue]);
-
-  const castValue = React.useCallback(
-    (value: StringOrNumber) => {
-      setValue(cast(value, stepProp, precision));
-    },
-    [precision, stepProp, setValue],
-  );
-
-  const valueAsNumber = parse(value);
-
-  /**
-   * Common range checks
-   */
-  const isOutOfRange = valueAsNumber > max || valueAsNumber < min;
-  const isAtMax = valueAsNumber === max;
-  const isAtMin = valueAsNumber === min;
 
   /**
    * Leverage the `useSpinner` hook to spin the input's value
@@ -233,11 +273,11 @@ export function useNumberInputState(
     isAtMax,
     isAtMin,
     setValue,
+    setCastedValue,
     increment,
     decrement,
     reset,
-    clamp,
-    cast: castValue,
+    clampToPrecision,
     inputRef,
     focusInput,
     spinUp: spinner.up,
