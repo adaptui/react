@@ -29,27 +29,32 @@ import {
 export type NumberInputState = {
   /**
    * The value of the counter. Should be less than `max` and greater than `min`
+   *
    * If no value, initial value is set to `""`
    */
   value: StringOrNumber;
   /**
    * The minimum value of the counter
-   * @default -Infinity
+   *
+   * @default Number.MIN_SAFE_INTEGER
    */
-  min: number;
+  min?: number;
   /**
    * The maximum value of the counter
-   * @default Infinity
+   *
+   * @default Number.MAX_SAFE_INTEGER
    */
-  max: number;
+  max?: number;
   /**
    * The step used to increment or decrement the value
+   *
    * @default 1
    */
   step: number;
   /**
    * The number of decimal points used to round the value
-   * If no precision, initial value is from the decimal places from value/step
+   *
+   * If no precision, initial value is from the decimal places from value/step - `0`
    */
   precision: number;
   /**

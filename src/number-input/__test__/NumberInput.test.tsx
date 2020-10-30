@@ -3,22 +3,29 @@ import { axe, render, press, click, fireEvent } from "reakit-test-utils";
 
 import {
   NumberInput,
-  NumberInputState,
   useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
-} from "..";
+} from "../index";
+import { AppProps } from "../stories/NumberInput.component";
 import { repeat } from "../../utils/test-utils";
 
-const NumberInputComp = (props: NumberInputState) => {
+const NumberInputComp = (props: AppProps) => {
   const state = useNumberInputState(props);
+  const { clampValueOnBlur, allowMouseWheel } = props;
 
   return (
     <label htmlFor="numberinput">
       <NumberInputDecrementButton data-testid="dec" {...state}>
         -
       </NumberInputDecrementButton>
-      <NumberInput id="numberinput" data-testid="numberinput" {...state} />
+      <NumberInput
+        id="numberinput"
+        data-testid="numberinput"
+        clampValueOnBlur={clampValueOnBlur}
+        allowMouseWheel={allowMouseWheel}
+        {...state}
+      />
       <NumberInputIncrementButton data-testid="inc" {...state}>
         +
       </NumberInputIncrementButton>
@@ -28,9 +35,7 @@ const NumberInputComp = (props: NumberInputState) => {
 
 describe("NumberInput", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
+    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
     const numberInput = testId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
@@ -40,7 +45,7 @@ describe("NumberInput", () => {
 
   it("should increase/decrease with keyboard", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} max={10} min={0} />,
+      <NumberInputComp value={0} max={10} min={0} />,
     );
     const numberInput = testId("numberinput");
 
@@ -66,9 +71,7 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with buttons", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
+    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
 
     const incBtn = testId("inc");
     const decBtn = testId("dec");
@@ -85,9 +88,7 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with scrollwheel", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
+    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
     const numberInput = testId("numberinput");
 
     press.Tab();
@@ -105,7 +106,7 @@ describe("NumberInput", () => {
 
   it("should behave properly with min/max/step options", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} min={10} max={50} step={10} />,
+      <NumberInputComp value={0} min={10} max={50} step={10} />,
     );
 
     const incBtn = testId("inc");
@@ -134,7 +135,7 @@ describe("NumberInput", () => {
 
   it("should behave properly precision value", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} step={0.65} precision={2} />,
+      <NumberInputComp value={0} step={0.65} precision={2} />,
     );
 
     const incBtn = testId("inc");
@@ -160,7 +161,7 @@ describe("NumberInput", () => {
       <NumberInputComp
         clampValueOnBlur={true}
         keepWithinRange={true}
-        defaultValue={15}
+        value={15}
         min={10}
         max={50}
       />,
