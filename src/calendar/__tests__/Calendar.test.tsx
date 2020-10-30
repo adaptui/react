@@ -1,4 +1,5 @@
 import * as React from "react";
+import MockDate from "mockdate";
 import { subWeeks, addWeeks, format } from "date-fns";
 import { axe, render, press } from "reakit-test-utils";
 
@@ -69,6 +70,15 @@ export const CalendarComp: React.FC<CalendarInitialState> = props => {
     </CalendarWrapper>
   );
 };
+
+beforeEach(() => {
+  // You SHALL Freeze 🧙
+  MockDate.set(new Date(2020, 9, 29));
+});
+
+afterEach(() => {
+  MockDate.reset();
+});
 
 describe("Calendar", () => {
   it("should render correctly", () => {

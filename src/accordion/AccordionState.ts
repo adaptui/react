@@ -21,10 +21,6 @@ export type AccordionState = CompositeState & {
    */
   selectedIds: AccordionState["currentId"][];
   /**
-   * Lists all the panels.
-   */
-  panels: AccordionState["items"];
-  /**
    * Whether the accodion selection should be manual.
    * @default true
    */
@@ -39,6 +35,10 @@ export type AccordionState = CompositeState & {
    * @default false
    */
   allowToggle: boolean;
+  /**
+   * Lists all the panels.
+   */
+  panels: AccordionState["items"];
 };
 
 export type AccordionActions = CompositeActions & {
