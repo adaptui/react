@@ -38,13 +38,13 @@ export type NumberInputState = {
    *
    * @default Number.MIN_SAFE_INTEGER
    */
-  min?: number;
+  min: number;
   /**
    * The maximum value of the counter
    *
    * @default Number.MAX_SAFE_INTEGER
    */
-  max?: number;
+  max: number;
   /**
    * The step used to increment or decrement the value
    *
