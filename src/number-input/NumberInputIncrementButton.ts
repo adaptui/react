@@ -43,12 +43,7 @@ export const useNumberInputIncrementButton = createHook<
       ...htmlProps
     },
   ) {
-    const {
-      isAtMax,
-      spinUp: spinUpProp,
-      spinStop: spinStopProp,
-      focusInput,
-    } = options;
+    const { spinUp: spinUpProp, spinStop: spinStopProp, focusInput } = options;
 
     const spinUp = React.useCallback(
       (event: any) => {
@@ -68,8 +63,9 @@ export const useNumberInputIncrementButton = createHook<
     );
 
     React.useEffect(() => {
-      if (isAtMax) spinStopProp();
-    }, [isAtMax, spinStopProp]);
+      // Need to stop the spinner when isAtMax
+      if (options.disabled) spinStopProp();
+    }, [options.disabled, spinStopProp]);
 
     return {
       tabIndex: -1,

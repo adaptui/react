@@ -44,7 +44,6 @@ export const useNumberInputDecrementButton = createHook<
     },
   ) {
     const {
-      isAtMin,
       spinDown: spinDownProp,
       spinStop: spinStopProp,
       focusInput,
@@ -68,8 +67,9 @@ export const useNumberInputDecrementButton = createHook<
     );
 
     React.useEffect(() => {
-      if (isAtMin) spinStopProp();
-    }, [isAtMin, spinStopProp]);
+      // Need to stop the spinner when isAtMin
+      if (options.disabled) spinStopProp();
+    }, [options.disabled, spinStopProp]);
 
     return {
       tabIndex: -1,

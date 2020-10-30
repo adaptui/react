@@ -29,6 +29,7 @@ import {
 export type NumberInputState = {
   /**
    * The value of the counter. Should be less than `max` and greater than `min`
+   * If no value, initial value is set to `""`
    */
   value: StringOrNumber;
   /**
@@ -48,6 +49,7 @@ export type NumberInputState = {
   step: number;
   /**
    * The number of decimal points used to round the value
+   * If no precision, initial value is from the decimal places from value/step
    */
   precision: number;
   /**

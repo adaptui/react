@@ -1,126 +1,92 @@
-import React from "react";
+import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { Button } from "reakit";
-import { useArgs } from "@storybook/client-api";
-import { useForm, Controller } from "react-hook-form";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import {
-  NumberInput,
-  NumberInputState,
-  useNumberInputState,
-  NumberInputDecrementButton,
-  NumberInputIncrementButton,
-} from "../index";
+import { appTemplate } from "./templates";
+import { App as NumberInput } from "./NumberInput.component";
 
 export default {
+  component: NumberInput,
   title: "NumberInput",
+  parameters: {
+    preview: [
+      {
+        tab: "React",
+        template: appTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+    ],
+  },
 } as Meta;
 
-export const Default = (props: NumberInputState) => {
-  const state = useNumberInputState({ value: 15, min: 10, max: 20 });
+const Base: Story = args => <NumberInput {...args} />;
 
-  return (
-    <div>
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInput {...state} />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-    </div>
-  );
+export const Default = Base.bind({});
+
+export const DefaultValue = Base.bind({});
+DefaultValue.args = {
+  value: 15,
+  min: 10,
+  max: 20,
 };
 
-// const Base: Story = args => {
-//   const [{ value, defaultValue }, updateArgs] = useArgs();
+export const Step = Base.bind({});
+Step.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+};
 
-//   return (
-//     <NumberInputComp
-//       onChange={value => {
-//         updateArgs({ value });
-//       }}
-//       defaultValue={defaultValue}
-//       value={value || defaultValue}
-//       {...args}
-//     />
-//   );
-// };
+export const Precision = Base.bind({});
+Precision.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 0.5,
+  precision: 2,
+};
 
-// export const Default = Base.bind({});
+export const KeepWithinRangeFalse = Base.bind({});
+KeepWithinRangeFalse.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+  keepWithinRange: false,
+};
 
-// export const DefaultValue = Base.bind({});
-// DefaultValue.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 20,
-// };
+export const FocusInputOnChangeFalse = Base.bind({});
+FocusInputOnChangeFalse.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+  focusInputOnChange: false,
+};
 
-// export const Step = Base.bind({});
-// Step.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 30,
-//   step: 5,
-// };
+export const ClampValueOnBlurFalse = Base.bind({});
+ClampValueOnBlurFalse.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+  clampValueOnBlur: false,
+};
 
-// export const Precision = Base.bind({});
-// Precision.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 30,
-//   step: 0.2,
-//   precision: 2,
-// };
+export const MouseWheelScrollFalse = Base.bind({});
+MouseWheelScrollFalse.args = {
+  value: 15,
+  min: 10,
+  max: 30,
+  step: 5,
+  allowMouseWheel: false,
+};
 
-// export const ClampValueOnBlurFalse = Base.bind({});
-// ClampValueOnBlurFalse.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 30,
-//   step: 0.2,
-//   precision: 2,
-//   clampValueOnBlur: false,
-//   keepWithinRange: false,
-// };
-
-// export const KeepWithinRangeFalse = Base.bind({});
-// KeepWithinRangeFalse.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 30,
-//   step: 0.2,
-//   precision: 2,
-//   clampValueOnBlur: false,
-//   keepWithinRange: false,
-// };
-
-// export const Disabled = Base.bind({});
-// Disabled.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 20,
-//   isDisabled: true,
-// };
-
-// export const ReadOnly = Base.bind({});
-// ReadOnly.args = {
-//   defaultValue: 15,
-//   min: 10,
-//   max: 20,
-//   isReadOnly: true,
-// };
-
-// export const Options = Base.bind({});
-// Options.args = {
-//   min: 0,
-//   step: 1,
-//   max: 100,
-//   precision: 1,
-//   defaultValue: 5,
-//   isDisabled: false,
-//   isReadOnly: false,
-//   keepWithinRange: true,
-//   clampValueOnBlur: false,
-//   focusInputOnChange: false,
-// };
-
+// * We can add this back Story once we have a styled example
+// * Lets keep the basic example with bare minimum setup.
 // const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
 //   const state = useNumberInputState({
 //     onChange,
