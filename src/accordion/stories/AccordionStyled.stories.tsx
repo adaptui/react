@@ -2,20 +2,27 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { appTemplate } from "./templates";
-import { App as Accordion } from "./Accordion.component";
+import "./AccordionStyled.css";
+import { App as Accordion } from "./AccordionStyled.component";
+import { styledAppTemplate, cssTemplate } from "./templates";
 
 export default {
   component: Accordion,
-  title: "Accordion",
+  title: "AccordionStyled",
   parameters: {
     preview: [
       {
         tab: "React",
-        template: appTemplate,
+        template: styledAppTemplate,
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

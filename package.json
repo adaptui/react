@@ -26,7 +26,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "concurrently yarn:build:*",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook --no-dll",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx --config-file ./babel-config.js -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly",
@@ -41,7 +41,7 @@
     "postrelease": "concurrently yarn:release:*",
     "release:github": "conventional-github-releaser -p angular",
     "release:tags": "git push --follow-tags origin master",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --no-dll",
     "test": "jest"
   },
   "dependencies": {
@@ -69,8 +69,6 @@
     "@storybook/addon-a11y": "6.0.27",
     "@storybook/addon-actions": "6.0.27",
     "@storybook/addon-essentials": "6.0.27",
-    "@storybook/addon-links": "6.0.27",
-    "@storybook/addon-storysource": "6.0.27",
     "@storybook/react": "6.0.27",
     "@testing-library/jest-dom": "5.11.5",
     "@testing-library/react": "11.1.0",
@@ -115,6 +113,7 @@
     "lodash": "4.17.20",
     "mockdate": "^3.0.2",
     "prettier": "2.1.2",
+    "raw-loader": "^4.0.2",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-hook-form": "6.9.6",
@@ -126,6 +125,7 @@
     "rimraf": "3.0.2",
     "sort-package-json": "1.46.1",
     "standard-version": "9.0.0",
+    "storybook-addon-preview": "^2.0.1",
     "ts-jest": "26.4.3",
     "ts-morph": "8.1.2",
     "typescript": "4.0.5"
