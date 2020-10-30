@@ -1,6 +1,5 @@
 import React from "react";
 import { VisuallyHidden } from "reakit";
-import userEvent from "@testing-library/user-event";
 import { axe, render, press, fireEvent } from "reakit-test-utils";
 import {
   SliderTrack,
@@ -57,13 +56,17 @@ export const SliderComponent = (props: SliderInitialState) => {
         </SliderTrack>
         <div
           className="slider-thumb"
-          data-testid="slider-thumb"
           style={{
             top: "26px",
             left: `calc(${getThumbPercent(0) * 100}% - 7px)`,
           }}
         >
-          <SliderThumb className="slider-thumb-handle" index={0} {...state}>
+          <SliderThumb
+            className="slider-thumb-handle"
+            data-testid="slider-thumb"
+            index={0}
+            {...state}
+          >
             <VisuallyHidden>
               <SliderInput
                 index={0}
@@ -81,13 +84,34 @@ export const SliderComponent = (props: SliderInitialState) => {
 };
 
 describe("Slider", () => {
+  let widthStub: jest.SpyInstance<number, []>,
+    heightStub: jest.SpyInstance<number, []>;
+  beforeAll(() => {
+    widthStub = jest
+      .spyOn(window.HTMLElement.prototype, "offsetWidth", "get")
+      .mockImplementation(() => 100);
+    heightStub = jest
+      .spyOn(window.HTMLElement.prototype, "offsetHeight", "get")
+      .mockImplementation(() => 100);
+  });
+  afterAll(() => {
+    widthStub.mockReset();
+    heightStub.mockReset();
+  });
   installMouseEvent();
 
+  // installPointerEvent();
   it("should drag and change slider value", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
     const { getByTestId: testId } = render(
-      <SliderComponent onChangeStart={onStart} onChangeEnd={onEnd} />,
+      <SliderComponent
+        onChangeStart={onStart}
+        onChangeEnd={onEnd}
+        min={0}
+        max={100}
+        step={1}
+      />,
     );
 
     const sliderValue = testId("slider-value");
@@ -96,12 +120,21 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("50");
 
     fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+    expect(onEnd).not.toHaveBeenCalled();
+
     fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("60");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("70");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 40, pageX: 40 });
     fireEvent.mouseUp(sliderThumb, { clientX: 40, pageX: 40 });
-
-    // expect(onStart).toBeCalledTimes(1);
-    // expect(onEnd).toBeCalledTimes(1);
-
-    expect(sliderValue).toHaveTextContent("50");
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+    expect(onEnd).toHaveBeenLastCalledWith([80]);
+    expect(sliderValue).toHaveTextContent("80");
   });
 });
