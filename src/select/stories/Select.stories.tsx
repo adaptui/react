@@ -15,36 +15,49 @@ export default {
 } as Meta;
 
 const countries = [
-  { name: "australia" },
-  { name: "russia" },
-  { name: "new zealand" },
-  { name: "india" },
-  { name: "california" },
-  { name: "ireland" },
-  { name: "indonesia" },
-  { name: "chennai" },
-  { name: "mexico" },
-  { name: "sydney" },
-  { name: "africa" },
-  { name: "las vagas" },
-  { name: "vietnam" },
-  { name: "zimbabwe" },
+  { name: "australia", emoji: "🇦🇺" },
+  { name: "russia", emoji: "🇷🇺" },
+  { name: "new zealand", emoji: "🇳🇿" },
+  { name: "india", emoji: "🇮🇳" },
+  { name: "niger", emoji: "🇳🇪" },
+  { name: "canada", emoji: "🇨🇦" },
+  { name: "indonesia", emoji: "🇮🇩" },
+  { name: "portugal", emoji: "🇵🇹" },
+  { name: "norway", emoji: "🇳🇴" },
+  { name: "switzerland", emoji: "🇨🇭" },
+  { name: "africa", emoji: "🇨🇫" },
+  { name: "colombia", emoji: "🇨🇴" },
+  { name: "costa rica", emoji: "🇨🇷" },
+  { name: "zimbabwe", emoji: "🇿🇼" },
 ];
 
 const SelectPicker: React.FC<{ state: any }> = ({ state }) => {
   return (
-    <Select {...state} onChange={(value: any) => console.log(value)}>
-      <SelectTrigger {...state}>
-        <b style={{ color: state.isPlaceholder ? "gray" : "black" }}>
+    <Select
+      className="select"
+      {...state}
+      onChange={(value: any) => console.log(value)}
+    >
+      <SelectTrigger className="select__header" {...state}>
+        <b style={{ color: state.isPlaceholder ? "#5d5b97" : "#33324d" }}>
           {state.isPlaceholder ? "Select one.." : state.selected.join(",")}
         </b>
       </SelectTrigger>
 
-      <SelectMenu {...state} style={{ maxHeight: 200, overflowY: "scroll" }}>
+      <SelectMenu
+        {...state}
+        className="select__dropdown"
+        style={{ maxHeight: 200, overflowY: "scroll" }}
+      >
         {countries.map(item => {
           return (
-            <SelectOption {...state} key={item.name} value={item.name}>
-              {item.name}
+            <SelectOption
+              className="select__dropdown--item"
+              {...state}
+              key={item.name}
+              value={item.name}
+            >
+              {item.emoji} - {item.name}
             </SelectOption>
           );
         })}
@@ -62,15 +75,50 @@ export const Default: React.FC = () => {
 export const MultiSelect: React.FC = () => {
   const state = useSelectState({ allowMultiselect: true });
 
-  return <SelectPicker state={state} />;
+  return (
+    <Select
+      className="select"
+      {...state}
+      onChange={(value: any) => console.log(value)}
+    >
+      <SelectTrigger className="select__header" {...state}>
+        <b style={{ color: state.isPlaceholder ? "#5d5b97" : "#33324d" }}>
+          {state.isPlaceholder ? "Select one.." : state.selected.join(" ")}
+        </b>
+      </SelectTrigger>
+
+      <SelectMenu
+        {...state}
+        className="select__dropdown"
+        style={{ maxHeight: 200, overflowY: "scroll" }}
+      >
+        {countries.map(item => {
+          return (
+            <SelectOption
+              className="select__dropdown--item"
+              {...state}
+              key={item.name}
+              value={item.emoji}
+            >
+              {item.emoji} - {item.name}
+            </SelectOption>
+          );
+        })}
+      </SelectMenu>
+    </Select>
+  );
 };
 
 export const MultiSelectCheckboxes: React.FC = () => {
   const state = useSelectState({ allowMultiselect: true });
 
   return (
-    <Select {...state} onChange={(value: any) => console.log(value)}>
-      <SelectTrigger {...state}>
+    <Select
+      className="select"
+      {...state}
+      onChange={(value: any) => console.log(value)}
+    >
+      <SelectTrigger className="select__header" {...state}>
         <b style={{ color: state.isPlaceholder ? "gray" : "black" }}>
           {state.isPlaceholder
             ? "Select one.."
@@ -78,10 +126,19 @@ export const MultiSelectCheckboxes: React.FC = () => {
         </b>
       </SelectTrigger>
 
-      <SelectMenu {...state} style={{ maxHeight: 200, overflowY: "scroll" }}>
+      <SelectMenu
+        className="select__dropdown"
+        {...state}
+        style={{ maxHeight: 200, overflowY: "scroll" }}
+      >
         {countries.map(item => {
           return (
-            <SelectOption {...state} key={item.name} value={item.name}>
+            <SelectOption
+              className="select__dropdown--item"
+              {...state}
+              key={item.name}
+              value={item.name}
+            >
               <label>
                 <input
                   type="checkbox"
