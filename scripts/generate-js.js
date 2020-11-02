@@ -49,7 +49,7 @@ const generateJsFiles = filePath => {
 
   const templatePath = path.join(process.cwd(), templateFilePath);
 
-  const componentName = templatePath.split("__js\\")[1];
+  const componentName = templatePath.split(`__js${path.sep}`)[1];
   console.log(chalk.green.bold(`CREATED: ${componentName}`), `${filePath}`);
 
   createFile(templatePath, transpiledCode);
