@@ -4,12 +4,20 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import { appTemplate } from "./templates";
 import { App as Accordion } from "./Accordion.component";
+import { transformTs } from "../../../scripts/transpile-ts";
 
 export default {
   component: Accordion,
   title: "Accordion",
   parameters: {
     preview: [
+      {
+        tab: "ReactJS",
+        template: transformTs(appTemplate),
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
       {
         tab: "React",
         template: appTemplate,
