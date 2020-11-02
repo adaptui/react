@@ -1,10 +1,11 @@
-import * as ts from "typescript";
-import prettier from "prettier/standalone";
-import parserBabel from "prettier/parser-babel";
-import prettierConfig from "../.prettierrc.json";
+const ts = require("typescript");
+const prettier = require("prettier/standalone");
+const parserBabel = require("prettier/parser-babel");
+const prettierConfig = require("../.prettierrc.json");
 
-export function transformTs(file) {
-  const emptyLinesPreserved = file.replace(/\n\n/g, "\n/** NEWLINE **/");
+module.exports = function transformTs(file) {
+  const emptyLinesPreserved = file.replace(/\n$/gm, "\n/** NEWLINE **/");
+
   const { outputText } = ts.transpileModule(emptyLinesPreserved, {
     compilerOptions: {
       target: ts.ScriptTarget.ESNext,
@@ -19,4 +20,4 @@ export function transformTs(file) {
     plugins: [parserBabel],
     ...prettierConfig,
   });
-}
+};

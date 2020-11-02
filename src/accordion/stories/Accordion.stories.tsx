@@ -2,9 +2,8 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { appTemplate } from "./templates";
+import { appTemplate, appTemplateJs } from "./templates";
 import { App as Accordion } from "./Accordion.component";
-import { transformTs } from "../../../scripts/transpile-ts";
 
 export default {
   component: Accordion,
@@ -13,7 +12,7 @@ export default {
     preview: [
       {
         tab: "ReactJS",
-        template: transformTs(appTemplate),
+        template: appTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
