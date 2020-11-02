@@ -160,9 +160,10 @@ const Base: Story<ChakraSliderProps> = args => {
       aria-labelledby="styled-slider"
     >
       <div className="slider-label">
-        <label className="label" id="styled-slider">
+        <label className="label">
           {`${args.label ? args.label : "Styled"} Slider`}
         </label>
+
         <div className="value">
           {!isMulti ? labelValue : JSON.stringify(state.values)}
         </div>
