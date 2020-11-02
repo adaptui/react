@@ -1,21 +1,21 @@
-nav.breadcrumb {
+.breadcrumb {
   padding: 0.8em 1em;
   border: 1px solid hsl(0, 0%, 90%);
   border-radius: 4px;
   background: hsl(300, 14%, 97%);
 }
 
-nav.breadcrumb ol {
+.breadcrumb ol {
   margin: 0;
   padding-left: 0;
   list-style: none;
 }
 
-nav.breadcrumb li {
+.breadcrumb li {
   display: inline;
 }
 
-nav.breadcrumb li + li::before {
+.breadcrumb li + li::before {
   display: inline-block;
   margin: 0 0.25em;
   transform: rotate(15deg);
@@ -24,7 +24,7 @@ nav.breadcrumb li + li::before {
   content: "";
 }
 
-nav.breadcrumb [aria-current="page"] {
+.breadcrumb [aria-current="page"] {
   color: #000;
   font-weight: 700;
   text-decoration: none;
