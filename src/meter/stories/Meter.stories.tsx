@@ -1,17 +1,40 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import {
-  StyledMeterInitialState,
-  StyledMeter as Meter,
-} from "./MeterComponent";
+import { App as Meter } from "./Meter.component";
+import { appTemplate, appTemplateJs } from "./templates";
 
 export default {
   component: Meter,
   title: "Meter",
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX([
+          "renderless-components@alpha",
+          "emotion",
+        ]),
+      },
+      {
+        tab: "React",
+        template: appTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX([
+          "renderless-components@alpha",
+          "emotion",
+        ]),
+      },
+    ],
+  },
 } as Meta;
 
-const Base: Story<StyledMeterInitialState> = args => <Meter {...args} />;
+const Base: Story = args => <Meter {...args} />;
 
 export const Playground = Base.bind({});
 Playground.args = {
@@ -21,6 +44,19 @@ Playground.args = {
   low: 0,
   high: 10,
   optimum: 5,
+};
+
+export const WithLabel = Base.bind({});
+WithLabel.args = { ...Playground.args, withLabel: true };
+
+export const WithStripe = Base.bind({});
+WithStripe.args = { ...Playground.args, withStripe: true };
+
+export const WithStripeAnimation = Base.bind({});
+WithStripeAnimation.args = {
+  ...Playground.args,
+  withStripe: true,
+  withStripeAnimation: true,
 };
 
 // Examples from https://css-tricks.com/html5-meter-element/
@@ -147,17 +183,4 @@ export const Stories = () => {
       <Meter low={0.25} optimum={0.2} high={0.75} value={0.8} />
     </div>
   );
-};
-
-export const WithLabel = Base.bind({});
-WithLabel.args = { ...Playground.args, withLabel: true };
-
-export const WithStripe = Base.bind({});
-WithStripe.args = { ...Playground.args, withStripe: true };
-
-export const WithStripeAnimation = Base.bind({});
-WithStripeAnimation.args = {
-  ...Playground.args,
-  withStripe: true,
-  withStripeAnimation: true,
 };

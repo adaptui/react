@@ -1,14 +1,11 @@
 import * as React from "react";
 import { css, keyframes } from "emotion";
 
-import {
-  Meter,
-  useMeterState,
-  MeterStateReturn,
-  MeterInitialState,
-} from "../index";
+import { Meter, useMeterState, MeterStateReturn } from "renderless-components";
 
-export interface StyledMeterInitialState extends MeterInitialState {
+type AriaValueText = string | ((value: number, percent: number) => string);
+
+export interface AppProps {
   /**
    * Adds a label to meter.
    * @default false
@@ -24,9 +21,51 @@ export interface StyledMeterInitialState extends MeterInitialState {
    * @default false
    */
   withStripeAnimation?: boolean;
+  /**
+   * The `value` of the meter indicator.
+   *
+   * If `undefined`/`not valid` the meter bar will be equal to `min`
+   * @default 0
+   */
+  value?: number;
+  /**
+   * The minimum value of the meter
+   * @default 0
+   */
+  min?: number;
+  /**
+   * The maximum value of the meter
+   * @default 1
+   */
+  max?: number;
+  /**
+   * The higher limit of min range.
+   *
+   * Defaults to `min`.
+   * @default 0
+   */
+  low?: number;
+  /**
+   * The lower limit of max range.
+   *
+   * Defaults to `max`.
+   * @default 1
+   */
+  high?: number;
+  /**
+   * The lower limit of max range.
+   *
+   * Defaults to `median of low & high`.
+   * @default 0.5
+   */
+  optimum?: number;
+  /**
+   * Defines the human readable text alternative of aria-valuenow for a range widget.
+   */
+  ariaValueText?: AriaValueText;
 }
 
-export const StyledMeter: React.FC<StyledMeterInitialState> = props => {
+export const App: React.FC<AppProps> = props => {
   const {
     children,
     withLabel = false,
@@ -48,6 +87,8 @@ export const StyledMeter: React.FC<StyledMeterInitialState> = props => {
     </div>
   );
 };
+
+export default App;
 
 // CSS Styles from https://css-tricks.com/html5-meter-element/
 const meterStyle = css({
@@ -98,10 +139,7 @@ const generateStripe = {
   backgroundSize: "1rem 1rem",
 };
 
-function meterBarStyle(
-  meter: MeterStateReturn,
-  props: StyledMeterInitialState,
-) {
+function meterBarStyle(meter: MeterStateReturn, props: AppProps) {
   const { percent, status } = meter;
   const { withStripe, withStripeAnimation } = props;
 

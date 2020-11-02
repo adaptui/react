@@ -32,13 +32,13 @@ export interface ProgressState {
    */
   max: number;
   /**
-   * Set isInterminate state
-   */
-  isIndeterminate: boolean;
-  /**
    * Defines the human readable text alternative of aria-valuenow for a range widget.
    */
   ariaValueText: AriaValueText;
+  /**
+   * Set isInterminate state
+   */
+  isIndeterminate: boolean;
   /**
    * Percentage of the value progressed with respect to min & max
    */
