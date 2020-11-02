@@ -4,13 +4,24 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./AccordionStyled.css";
 import { App as Accordion } from "./AccordionStyled.component";
-import { styledAppTemplate, cssTemplate } from "./templates";
+import {
+  styledAppTemplate,
+  appTemplateStyledJs,
+  cssTemplate,
+} from "./templates";
 
 export default {
   component: Accordion,
   title: "AccordionStyled",
   parameters: {
     preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateStyledJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
       {
         tab: "React",
         template: styledAppTemplate,
