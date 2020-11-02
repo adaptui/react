@@ -2,6 +2,7 @@ jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
 import { cleanup } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
+import MockDate from "mockdate";
 
 import {
   Calendar,
@@ -138,6 +139,7 @@ describe("RangeCalendar", () => {
   });
 
   it("should be able to select ranges with keyboard navigation", () => {
+    MockDate.set(new Date(2020, 10, 7));
     const { getByLabelText: label, getByTestId: testId, baseElement } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
