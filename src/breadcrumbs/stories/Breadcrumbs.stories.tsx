@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Breadcrumbs.css";
-import { appTemplate } from "./templates";
+import { appTemplate, appTemplateJs } from "./templates";
 import { App as Breadcrumbs } from "./Breadcrumbs.component";
 
 export default {
@@ -11,6 +11,13 @@ export default {
   title: "Breadcrumbs",
   parameters: {
     preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
       {
         tab: "React",
         template: appTemplate,

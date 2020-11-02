@@ -2,14 +2,21 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { appTemplate } from "./templates";
 import { App as Link } from "./Link.component";
+import { appTemplate, appTemplateJs } from "./templates";
 
 export default {
   component: Link,
   title: "Link",
   parameters: {
     preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
       {
         tab: "React",
         template: appTemplate,

@@ -3,14 +3,24 @@ import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
-import { appTemplate } from "./templates";
 import { App as Slider } from "./Slider.component";
+import { appTemplate, appTemplateJs } from "./templates";
 
 export default {
   component: Slider,
   title: "Slider",
   parameters: {
     preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX([
+          "renderless-components@alpha",
+          "reakit",
+        ]),
+      },
       {
         tab: "React",
         template: appTemplate,
