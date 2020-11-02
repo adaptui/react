@@ -12,7 +12,6 @@ function recurse(file) {
 
 // Create a new folder at the specified path
 function createDirectory(path) {
-  console.log("%c path", "color: #cc0088", path);
   try {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path);
@@ -28,20 +27,19 @@ function createFile(filePath, fileContent = "") {
       console.log(`Failed to create ${filePath}`, chalk.red.bold("ERROR"));
       throw error;
     }
-
-    console.log(`Create ${filePath}`, chalk.green.bold("DONE"));
   });
 }
 
 const generateJsFiles = filePath => {
-  const accordionComponent = fs.readFileSync(
-    path.join(process.cwd(), filePath),
-    { encoding: "utf8" },
-  );
-  const appTemplateJs = transpileTs(accordionComponent);
+  const code = fs.readFileSync(path.join(process.cwd(), filePath), {
+    encoding: "utf8",
+  });
+
+  const transpiledCode = transpileTs(code);
   const templateFilePath = filePath
     .replace("stories", "stories/__js")
     .replace(".tsx", ".jsx");
+
   const templateDir = path.join(
     process.cwd(),
     templateFilePath.substring(0, templateFilePath.lastIndexOf("/")),
@@ -51,7 +49,10 @@ const generateJsFiles = filePath => {
 
   const templatePath = path.join(process.cwd(), templateFilePath);
 
-  createFile(templatePath, appTemplateJs);
+  const componentName = templatePath.split("__js\\")[1];
+  console.log(chalk.green.bold(`CREATED: ${componentName}`), `${filePath}`);
+
+  createFile(templatePath, transpiledCode);
 };
 
 const files = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
