@@ -42,7 +42,7 @@ const generateJsFiles = filePath => {
 
   const templateDir = path.join(
     process.cwd(),
-    templateFilePath.substring(0, templateFilePath.lastIndexOf("/")),
+    templateFilePath.substring(0, templateFilePath.lastIndexOf(path.sep)),
   );
 
   createDirectory(templateDir);
