@@ -160,7 +160,7 @@ const Base: Story<ChakraSliderProps> = args => {
       aria-labelledby="styled-slider"
     >
       <div className="slider-label">
-        <label className="label" htmlFor="styled-slider">
+        <label className="label">
           {`${args.label ? args.label : "Styled"} Slider`}
         </label>
 
@@ -209,7 +209,6 @@ const Base: Story<ChakraSliderProps> = args => {
                 <VisuallyHidden>
                   <SliderInput
                     index={index}
-                    id="styled-slider"
                     aria-label={`Thumb-${index}`}
                     aria-labelledby="styled-slider"
                     {...state}
