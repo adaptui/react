@@ -9,6 +9,7 @@ import { getOptimumValue, clamp } from "../utils";
 export interface SliderState {
   /**
    * The `value` of the slider indicator.
+   *
    * If `undefined`/`not valid` the slider bar will be the optimum of min & max
    * @default [50]
    */
@@ -40,7 +41,7 @@ export interface SliderState {
   orientation: "horizontal" | "vertical";
   /**
    * Direction of the slider
-   * @default "false"
+   * @default false
    */
   reversed: boolean;
   /**

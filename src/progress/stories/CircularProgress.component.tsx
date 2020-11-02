@@ -2,22 +2,42 @@ import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
-import {
-  Progress,
-  useProgressState,
-  ProgressInitialState,
-  ProgressState,
-} from "../index";
+import { Progress, useProgressState, ProgressState } from "../index";
 
-export interface CircularProgressInitialState extends ProgressInitialState {
+type AriaValueText =
+  | string
+  | ((value: number | null, percent: number | null) => string);
+
+export interface AppProps {
   /**
    * Adds a label to meter.
    * @default false
    */
   withLabel?: boolean;
+  /**
+   * The `value` of the progress indicator.
+   *
+   * If `null` the progress bar will be in `indeterminate` state
+   * @default 0
+   */
+  value?: number | null;
+  /**
+   * The minimum value of the progress
+   * @default 0
+   */
+  min?: number;
+  /**
+   * The maximum value of the
+   * @default 100
+   */
+  max?: number;
+  /**
+   * Defines the human readable text alternative of aria-valuenow for a range widget.
+   */
+  ariaValueText?: AriaValueText;
 }
 
-export const CircularProgress: React.FC<CircularProgressInitialState> = props => {
+export const App: React.FC<AppProps> = props => {
   const { withLabel = false, children, ...rest } = props;
   const state = useProgressState(rest);
   const { value, setValue, percent, isIndeterminate } = state;
@@ -71,6 +91,8 @@ export const CircularProgress: React.FC<CircularProgressInitialState> = props =>
     </div>
   );
 };
+
+export default App;
 
 const rootStyles = css({
   display: "inline-block",

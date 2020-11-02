@@ -2,15 +2,35 @@ import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
-import {
-  Progress,
-  useProgressState,
-  ProgressState,
-  ProgressInitialState,
-} from "../index";
 import { cx } from "../../utils";
+import { Progress, useProgressState, ProgressState } from "../index";
 
-export interface LinearProgressInitialState extends ProgressInitialState {
+type AriaValueText =
+  | string
+  | ((value: number | null, percent: number | null) => string);
+
+export interface AppProps {
+  /**
+   * The `value` of the progress indicator.
+   *
+   * If `null` the progress bar will be in `indeterminate` state
+   * @default 0
+   */
+  value?: number | null;
+  /**
+   * The minimum value of the progress
+   * @default 0
+   */
+  min?: number;
+  /**
+   * The maximum value of the
+   * @default 100
+   */
+  max?: number;
+  /**
+   * Defines the human readable text alternative of aria-valuenow for a range widget.
+   */
+  ariaValueText?: AriaValueText;
   /**
    * Adds a label to meter.
    * @default false
@@ -28,7 +48,7 @@ export interface LinearProgressInitialState extends ProgressInitialState {
   withStripeAnimation?: boolean;
 }
 
-export const LinearProgress: React.FC<LinearProgressInitialState> = props => {
+export const App: React.FC<AppProps> = props => {
   const {
     children,
     withLabel = false,
@@ -37,7 +57,6 @@ export const LinearProgress: React.FC<LinearProgressInitialState> = props => {
     ...rest
   } = props;
   const state = useProgressState(rest);
-  console.log("%c state", "color: #33cc99", state);
   const { value, setValue, percent, isIndeterminate } = state;
 
   React.useEffect(() => {
@@ -77,6 +96,8 @@ export const LinearProgress: React.FC<LinearProgressInitialState> = props => {
     </div>
   );
 };
+
+export default App;
 
 const progressStyle = css({
   background: "rgb(237, 242, 247)",
