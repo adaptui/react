@@ -70,7 +70,7 @@ export const SliderComponent = (props: SliderInitialState) => {
     <div
       role="group"
       className="chakra-slider-group"
-      aria-labelledby="styled-slider"
+      aria-label="styled-slider"
     >
       <div className="slider-label">
         <label className="label" htmlFor="styled-slider">
@@ -110,7 +110,6 @@ export const SliderComponent = (props: SliderInitialState) => {
                 index={0}
                 id="styled-slider"
                 aria-label={`Thumb-${0}`}
-                aria-labelledby="styled-slider"
                 {...state}
               />
             </VisuallyHidden>
