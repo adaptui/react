@@ -78,6 +78,7 @@ export const useNumberInput = createHook<
       onKeyDown: htmlOnKeyDown,
       onFocus: htmlOnFocus,
       onBlur: htmlOnBlur,
+      onWheel: htmlOnWheel,
       ...htmlProps
     },
   ) {
@@ -206,6 +207,25 @@ export const useNumberInput = createHook<
       };
     }, [decrement, increment, inputRef, options.allowMouseWheel, step]);
 
+    const onWheel = React.useCallback(
+      (event: React.WheelEvent) => {
+        const isInputFocused = document.activeElement === inputRef.current;
+        if (!options.allowMouseWheel || !isInputFocused) return;
+
+        event.preventDefault();
+
+        const stepFactor = getStepFactor(event as any) * step;
+        const direction = Math.sign(event.deltaY);
+
+        if (direction === -1) {
+          increment(stepFactor);
+        } else if (direction === 1) {
+          decrement(stepFactor);
+        }
+      },
+      [decrement, increment, inputRef, options.allowMouseWheel, step],
+    );
+
     return {
       value,
       type: "text",
@@ -223,6 +243,7 @@ export const useNumberInput = createHook<
       onChange: callAllHandlers(htmlOnChange, onChange),
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),
+      onWheel: callAllHandlers(htmlOnWheel, onWheel),
       ...htmlProps,
     };
   },
