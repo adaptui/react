@@ -92,37 +92,8 @@ MouseWheelScrollFalse.args = {
   allowMouseWheel: false,
 };
 
-const Direct: React.FC<any> = () => {
-  const state = useNumberInputState();
-
-  return (
-    <>
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInputComp name={name} {...state} />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-    </>
-  );
-};
-
-const OnChange: React.FC<any> = ({ onChange, value, name }) => {
-  const state = useNumberInputState({ value });
-
-  React.useEffect(() => {
-    onChange?.(state.value);
-  }, [onChange, state.value]);
-
-  return (
-    <>
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInputComp name={name} {...state} />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-    </>
-  );
-};
-
 const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
   const state = useNumberInputState({ value });
-  console.log("%c state", "color: #00258c", state);
   const { value: stateValue, setValue: setStateValue } = state;
 
   React.useEffect(() => {
@@ -139,49 +110,6 @@ const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
       <NumberInputComp name={name} {...state} />
       <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
     </>
-  );
-};
-
-export const Controllable = () => {
-  const [value, setValue] = React.useState("42");
-
-  return (
-    <div>
-      <p>Direct usage</p>
-      <Direct />
-      <br />
-      <br />
-
-      <p>With OnChange</p>
-      <p>
-        Changing the native input value does not change the NumberInput's value
-      </p>
-      <p>
-        Because the value prop we send to NumberComponent will only be taken on
-        first render as initial value. Any further changes will be ignored
-        because we sealed that initial value.
-      </p>
-      <input
-        type="number"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-      <br />
-      <OnChange value={value} onChange={setValue} />
-      <br />
-      <br />
-      <p>With both Value & OnChange</p>
-      <p>Now changing the native input value changes the NumberInput's value</p>
-      <input
-        type="number"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-      <br />
-      <NumberComponent value={value} onChange={setValue} />
-      <br />
-      <br />
-    </div>
   );
 };
 
