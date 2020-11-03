@@ -5,10 +5,6 @@ import { css, keyframes } from "emotion";
 import { cx } from "../../utils";
 import { Progress, useProgressState, ProgressState } from "../index";
 
-type AriaValueText =
-  | string
-  | ((value: number | null, percent: number | null) => string);
-
 export interface AppProps {
   /**
    * The `value` of the progress indicator.
@@ -27,10 +23,6 @@ export interface AppProps {
    * @default 100
    */
   max?: number;
-  /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText?: AriaValueText;
   /**
    * Adds a label to meter.
    * @default false

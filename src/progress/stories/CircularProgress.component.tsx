@@ -4,10 +4,6 @@ import { css, keyframes } from "emotion";
 
 import { Progress, useProgressState, ProgressState } from "../index";
 
-type AriaValueText =
-  | string
-  | ((value: number | null, percent: number | null) => string);
-
 export interface AppProps {
   /**
    * Adds a label to meter.
@@ -31,10 +27,6 @@ export interface AppProps {
    * @default 100
    */
   max?: number;
-  /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText?: AriaValueText;
 }
 
 export const App: React.FC<AppProps> = props => {

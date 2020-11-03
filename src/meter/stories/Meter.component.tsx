@@ -3,8 +3,6 @@ import { css, keyframes } from "emotion";
 
 import { Meter, useMeterState, MeterStateReturn } from "renderless-components";
 
-type AriaValueText = string | ((value: number, percent: number) => string);
-
 export interface AppProps {
   /**
    * Adds a label to meter.
@@ -59,10 +57,6 @@ export interface AppProps {
    * @default 0.5
    */
   optimum?: number;
-  /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText?: AriaValueText;
 }
 
 export const App: React.FC<AppProps> = props => {
