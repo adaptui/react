@@ -3,17 +3,21 @@ import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
-import { App as Slider } from "./Slider.component";
-import { appTemplate, appTemplateJs } from "./templates";
+import {
+  verticalAppTemplate,
+  verticalAppTemplateJs,
+  cssTemplate,
+} from "./templates";
+import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
 
 export default {
-  component: Slider,
-  title: "Slider/AllInOne",
+  component: SingleVerticalSlider,
+  title: "Slider/SingleVertical",
   parameters: {
     preview: [
       {
         tab: "ReactJS",
-        template: appTemplateJs,
+        template: verticalAppTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX([
@@ -23,7 +27,7 @@ export default {
       },
       {
         tab: "React",
-        template: appTemplate,
+        template: verticalAppTemplate,
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX([
@@ -31,11 +35,17 @@ export default {
           "reakit",
         ]),
       },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
+      },
     ],
   },
 } as Meta;
 
-const Base: Story = args => <Slider {...args} />;
+const Base: Story = args => <SingleVerticalSlider {...args} />;
 
 export const Default = Base.bind({});
 
@@ -43,28 +53,6 @@ export const ThumbTip = Base.bind({});
 ThumbTip.args = {
   label: "Thumb Tipped",
   showTip: true,
-};
-
-export const Origin = Base.bind({});
-Origin.args = {
-  label: "Origin Changed",
-  showTip: true,
-  values: [0],
-  origin: 0,
-  min: -50,
-  max: 50,
-};
-
-export const Reversed = Base.bind({});
-Reversed.args = {
-  label: "Reversed",
-  isReversed: true,
-};
-
-export const Vertical = Base.bind({});
-Vertical.args = {
-  label: "Vertical",
-  orientation: "vertical",
 };
 
 export const MinMax = Base.bind({});
@@ -100,22 +88,4 @@ export const Disabled = Base.bind({});
 Disabled.args = {
   label: "Disabled",
   isDisabled: true,
-};
-
-export const Range = Base.bind({});
-Range.args = {
-  label: "Range",
-  values: [25, 75],
-};
-
-export const Multi = Base.bind({});
-Multi.args = {
-  label: "Range",
-  values: [25, 50, 75],
-};
-
-export const Multis = Base.bind({});
-Multis.args = {
-  label: "Range",
-  values: [20, 40, 60, 80],
 };
