@@ -113,6 +113,7 @@ export const SliderComponent = (
           >
             <VisuallyHidden>
               <SliderInput
+                data-testid="slider-input"
                 index={0}
                 id="styled-slider"
                 aria-label={`Thumb-${0}`}
@@ -343,5 +344,22 @@ describe("Slider", () => {
     expect(onStart).toHaveBeenLastCalledWith([50]);
     expect(onEnd).toHaveBeenLastCalledWith([70]);
     expect(sliderValue).toHaveTextContent("70°C");
+  });
+
+  it("supports disabled slider", () => {
+    const { getByTestId: testId } = render(
+      <SliderComponent isDisabled={true} />,
+    );
+
+    const sliderInput = testId("slider-input");
+
+    expect(sliderInput).toBeDisabled();
+  });
+
+  test("Slider renders with no a11y violations", async () => {
+    const { container } = render(<SliderComponent />);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
   });
 });
