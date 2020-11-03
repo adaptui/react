@@ -151,7 +151,7 @@ export const MultiSliderComponent = (
                   <SliderInput
                     index={index}
                     aria-label={`Thumb-${index}`}
-                    aria-labelledby="styled-slider"
+                    data-testid={`slider-input-${index}`}
                     {...state}
                   />
                 </VisuallyHidden>
@@ -314,5 +314,25 @@ describe("Slider", () => {
     const sliderValue = testId("slider-value");
 
     expect(sliderValue).toHaveTextContent([...new Array(50).keys()].toString());
+  });
+
+  it("supports isDisabled", () => {
+    const { getByTestId: testId } = render(
+      <MultiSliderComponent
+        isDisabled={true}
+        values={[10, 50]}
+        min={0}
+        max={50}
+        step={1}
+      />,
+    );
+
+    const sliderValue = testId("slider-value");
+    const sliderInput0 = testId("slider-input-0");
+    const sliderInput1 = testId("slider-input-1");
+
+    expect(sliderValue).toHaveTextContent("10 to 50");
+    expect(sliderInput0).toBeDisabled();
+    expect(sliderInput1).toBeDisabled();
   });
 });
