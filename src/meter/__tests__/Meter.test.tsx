@@ -39,7 +39,7 @@ describe("Meter", () => {
           aria-valuemax="1"
           aria-valuemin="0"
           aria-valuenow="0"
-          aria-valuetext="0%"
+          aria-valuetext="0"
           role="meter progressbar"
         />
       </div>
@@ -60,7 +60,7 @@ describe("Meter", () => {
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
     expect(meter).toHaveAttribute("aria-valuenow", "0");
-    expect(meter).toHaveAttribute("aria-valuetext", "0%");
+    expect(meter).toHaveAttribute("aria-valuetext", "0");
   });
 
   it("value between min and max", function () {
@@ -70,7 +70,7 @@ describe("Meter", () => {
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
     expect(meter).toHaveAttribute("aria-valuenow", "0.5");
-    expect(meter).toHaveAttribute("aria-valuetext", "50%");
+    expect(meter).toHaveAttribute("aria-valuetext", "50");
   });
 
   it("value below min", function () {
@@ -80,7 +80,7 @@ describe("Meter", () => {
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
     expect(meter).toHaveAttribute("aria-valuenow", "0");
-    expect(meter).toHaveAttribute("aria-valuetext", "0%");
+    expect(meter).toHaveAttribute("aria-valuetext", "0");
   });
 
   it("value above max", function () {
@@ -90,7 +90,7 @@ describe("Meter", () => {
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
     expect(meter).toHaveAttribute("aria-valuenow", "1");
-    expect(meter).toHaveAttribute("aria-valuetext", "100%");
+    expect(meter).toHaveAttribute("aria-valuetext", "100");
   });
 
   it("custom min and max", function () {
@@ -100,7 +100,7 @@ describe("Meter", () => {
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "10");
     expect(meter).toHaveAttribute("aria-valuenow", "5");
-    expect(meter).toHaveAttribute("aria-valuetext", "50%");
+    expect(meter).toHaveAttribute("aria-valuetext", "50");
   });
 
   it("supports aria-label", function () {
