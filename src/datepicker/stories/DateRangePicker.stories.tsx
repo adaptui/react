@@ -1,20 +1,40 @@
-import "./index.css";
 import * as React from "react";
 import { format } from "date-fns";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import DateRangePickerComponent from "./DateRangePickerComponent";
+import "./DatePicker.css";
+import { rangeAppTemplate, rangeAppTemplateJs } from "./templates";
+import { App as DateRangePicker } from "./DateRangePicker.component";
 
 export default {
   title: "DateRangePicker",
-  component: DateRangePickerComponent,
+  component: DateRangePicker,
   argTypes: {
     start: { control: "date", name: "value.start" },
     end: { control: "date", name: "value.end" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
+  },
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: rangeAppTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "React",
+        template: rangeAppTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+    ],
   },
 } as Meta;
 
@@ -29,7 +49,7 @@ const Base: Story = args => {
   const [argProps, updateArgs] = useArgs();
 
   return (
-    <DateRangePickerComponent
+    <DateRangePicker
       value={{ start: argProps["start"], end: argProps["nd"] }}
       onChange={date => {
         updateArgs({

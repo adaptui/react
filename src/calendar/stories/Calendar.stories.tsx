@@ -1,19 +1,39 @@
-import "./index.css";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, format, subWeeks } from "date-fns";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { CalendarComponent } from "./CalendarComponent";
+import "./Calendar.css";
+import { appTemplate, appTemplateJs } from "./templates";
+import { App as Calendar } from "./Calendar.component";
 
 export default {
+  component: Calendar,
   title: "Calendar",
-  component: CalendarComponent,
   argTypes: {
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
     defaultValue: { control: "date", defaultValue: new Date() },
+  },
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "React",
+        template: appTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+    ],
   },
 } as Meta;
 
@@ -26,7 +46,7 @@ const Base: Story = args => {
   const [{ value }, updateArgs] = useArgs();
 
   return (
-    <CalendarComponent
+    <Calendar
       value={value}
       onChange={date =>
         updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
@@ -55,15 +75,25 @@ MinMaxDefaultDate.args = {
   maxValue: addWeeks(new Date(2020, 10, 7), 1),
 };
 
-export const Options = Base.bind({});
-Options.args = {
+export const IsDisabled = Base.bind({});
+IsDisabled.args = {
   value: new Date(),
-  isDisabled: false,
-  isReadOnly: false,
-  autoFocus: false,
+  isDisabled: true,
 };
 
-export const ControlledValue = () => {
+export const IsReadonly = Base.bind({});
+IsReadonly.args = {
+  value: new Date(),
+  isReadonly: true,
+};
+
+export const AutoFocus = Base.bind({});
+AutoFocus.args = {
+  value: new Date(),
+  autoFocus: true,
+};
+
+export const WithNativeDateInput = () => {
   const [value, setValue] = React.useState("2020-10-13");
 
   return (
@@ -73,7 +103,7 @@ export const ControlledValue = () => {
         onChange={e => setValue(e.target.value)}
         value={value}
       />
-      <CalendarComponent value={value} onChange={setValue} />
+      <Calendar value={value} onChange={setValue} />
     </div>
   );
 };

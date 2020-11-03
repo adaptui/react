@@ -1,19 +1,39 @@
-import "./index.css";
 import * as React from "react";
-import { useArgs } from "@storybook/client-api";
 import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { addWeeks, subWeeks, format, addDays } from "date-fns";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import DatePickerComponent from "./DatePickerComponent";
+import "./DatePicker.css";
+import { appTemplate, appTemplateJs } from "./templates";
+import { App as DatePicker } from "./DatePicker.component";
 
 export default {
-  component: DatePickerComponent,
+  component: DatePicker,
   title: "DatePicker",
   argTypes: {
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
-    defaultValue: { control: "date" },
+    defaultValue: { control: "date", defaultValue: new Date() },
+  },
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "React",
+        template: appTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+    ],
   },
 } as Meta;
 
@@ -26,7 +46,7 @@ const Base: Story = args => {
   const [{ value }, updateArgs] = useArgs();
 
   return (
-    <DatePickerComponent
+    <DatePicker
       value={value}
       onChange={date =>
         updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
@@ -80,7 +100,7 @@ export const ControllableState = () => {
         onChange={e => setValue(e.target.value)}
         value={value}
       />
-      <DatePickerComponent value={value} onChange={setValue} />
+      <DatePicker value={value} onChange={setValue} />
     </div>
   );
 };
