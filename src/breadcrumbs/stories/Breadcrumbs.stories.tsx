@@ -1,75 +1,34 @@
 import * as React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import "./index.css";
-import { Breadcrumbs } from "../Breadcrumbs";
-import { BreadcrumbLink } from "../BreadcrumbLink";
+import "./Breadcrumbs.css";
+import { appTemplate, appTemplateJs } from "./templates";
+import { App as Breadcrumbs } from "./Breadcrumbs.component";
 
 export default {
   component: Breadcrumbs,
-  title: "Breadcrumb",
+  title: "Breadcrumbs",
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: appTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "React",
+        template: appTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+    ],
+  },
 } as Meta;
 
-export const Default = () => {
-  return (
-    <Breadcrumbs className="breadcrumb">
-      <ol>
-        <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
-            WAI-ARIA Authoring Practices 1.1
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex">
-            Design Patterns
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink
-            isCurrent
-            href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
-          >
-            Breadcrumb Pattern
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/breadcrumb/index.html">
-            Breadcrumb Example
-          </BreadcrumbLink>
-        </li>
-      </ol>
-    </Breadcrumbs>
-  );
-};
+const Base: Story = args => <Breadcrumbs {...args} />;
 
-export const CurrentAsSpan = () => {
-  return (
-    <Breadcrumbs className="breadcrumb">
-      <ol>
-        <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
-            WAI-ARIA Authoring Practices 1.1
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex">
-            Design Patterns
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink as="span" onClick={() => alert("Go to Link")}>
-            Breadcrumb Pattern
-          </BreadcrumbLink>
-        </li>
-        <li>
-          <BreadcrumbLink
-            isCurrent
-            href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/breadcrumb/index.html"
-          >
-            Breadcrumb Example
-          </BreadcrumbLink>
-        </li>
-      </ol>
-    </Breadcrumbs>
-  );
-};
+export const Default = Base.bind({});

@@ -1,17 +1,42 @@
-import React from "react";
+import * as React from "react";
 import { Meta, Story } from "@storybook/react";
+import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import {
-  LinearProgress as Progress,
-  LinearProgressInitialState,
-} from "./LinearProgress";
+import { App as Progress } from "./LinearProgress.component";
+import { linearAppTemplate, linearAppTemplateJs } from "./templates";
 
 export default {
   component: Progress,
-  title: "Progress/Linear",
+  title: "ProgressLinear",
+  parameters: {
+    preview: [
+      {
+        tab: "ReactJS",
+        template: linearAppTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX([
+          "renderless-components@alpha",
+          "reakit",
+          "emotion",
+        ]),
+      },
+      {
+        tab: "React",
+        template: linearAppTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: DEFAULT_REACT_CODESANDBOX([
+          "renderless-components@alpha",
+          "reakit",
+          "emotion",
+        ]),
+      },
+    ],
+  },
 } as Meta;
 
-const Base: Story<LinearProgressInitialState> = args => <Progress {...args} />;
+const Base: Story = args => <Progress {...args} />;
 
 export const Default = Base.bind({});
 
