@@ -1,66 +1,58 @@
-/**
- * All credit goes to [Segun Adebayo](https://github.com/segunadebayo) for
- * creating an Awesome Library [Chakra UI](https://github.com/chakra-ui/chakra-ui/)
- * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
- * to work with Reakit System
- */
-import { useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
-import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import {
   callAllHandlers,
+  EventKeyMap,
   normalizeEventKey,
   StringOrNumber,
 } from "@chakra-ui/utils";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  InputHTMLAttributes,
-  useCallback,
-} from "react";
+import * as React from "react";
+import { useForkRef } from "reakit-utils";
+import { createComponent, createHook } from "reakit-system";
+import { InputHTMLProps, InputOptions, useInput } from "reakit";
 
-import { NUMBER_INPUT_KEYS } from "./__keys";
-import { NumberInputStateReturn } from "./NumberInputState";
 import {
   isFloatingPointNumericCharacter,
   isValidNumericKeyboardEvent,
   getStepFactor,
-} from "./__utils";
+} from "./helpers";
+import { ariaAttr } from "../utils";
+import { NUMBER_INPUT_KEYS } from "./__keys";
+import { NumberInputStateReturn } from "./NumberInputState";
 
 export type NumberInputOptions = InputOptions &
-  Pick<
-    Partial<NumberInputStateReturn>,
-    "keepWithinRange" | "clampValueOnBlur" | "isReadOnly" | "isDisabled"
-  > &
+  Pick<Partial<NumberInputStateReturn>, "keepWithinRange"> &
   Pick<
     NumberInputStateReturn,
     | "min"
     | "max"
     | "step"
-    | "isAtMax"
-    | "inputRef"
-    | "setFocused"
-    | "update"
+    | "setValue"
     | "increment"
     | "decrement"
     | "value"
     | "valueAsNumber"
     | "isOutOfRange"
-    | "cast"
+    | "setCastedValue"
+    | "inputRef"
   > & {
     /**
-     * This is used to format the value so that screen readers
-     * can speak out a more human-friendly value.
+     * This controls the value update when you blur out of the input.
+     * - If `true` and the value is greater than `max`, the value will be reset to `max`
+     * - Else, the value remains the same.
      *
-     * It is used to set the `aria-valuetext` property of the input
+     * @default true
      */
-    getAriaValueText?(value: StringOrNumber): string;
+    clampValueOnBlur?: boolean;
+    /**
+     * If `true`, the input's value will change based on mouse wheel
+     *
+     * @default true
+     */
+    allowMouseWheel?: boolean;
   };
 
 export type NumberInputHTMLProps = InputHTMLProps;
 
 export type NumberInputProps = NumberInputOptions & NumberInputHTMLProps;
-type InputMode = InputHTMLAttributes<any>["inputMode"];
 
 export const useNumberInput = createHook<
   NumberInputOptions,
@@ -70,64 +62,62 @@ export const useNumberInput = createHook<
   compose: useInput,
   keys: NUMBER_INPUT_KEYS,
 
-  useProps(options, htmlProps) {
-    const {
-      getAriaValueText,
+  useOptions({ allowMouseWheel = true, clampValueOnBlur = true, ...options }) {
+    return {
+      allowMouseWheel,
       clampValueOnBlur,
+      ...options,
+    };
+  },
+
+  useProps(
+    options,
+    {
+      ref: htmlRef,
+      onChange: htmlOnChange,
+      onKeyDown: htmlOnKeyDown,
+      onFocus: htmlOnFocus,
+      onBlur: htmlOnBlur,
+      onWheel: htmlOnWheel,
+      ...htmlProps
+    },
+  ) {
+    const {
       min,
       max,
-      step: stepProp,
-      isReadOnly,
-      isDisabled,
-      inputRef,
-      setFocused,
-      update,
+      step,
+      setValue,
       increment,
       decrement,
       value,
       valueAsNumber,
-      isOutOfRange,
-      cast,
+      clampValueOnBlur,
+      setCastedValue,
+      inputRef,
+      disabled,
     } = options;
-    const {
-      ref,
-      onChange: htmlOnChange,
-      onWheel: htmlOnWheel,
-      onKeyDown: htmlOnKeyDown,
-      onFocus,
-      onBlur: htmlOnBlur,
-      ...restHtmlProps
-    } = htmlProps;
-
-    /**
-     * If user would like to use a human-readable representation
-     * of the value, rather than the value itself they can pass `getAriaValueText`
-     *
-     * @see https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-18
-     * @see https://www.w3.org/TR/wai-aria-1.1/#aria-valuetext
-     */
-    const ariaValueText =
-      value === null || value === ""
-        ? undefined
-        : getAriaValueText?.(value) ?? String(value);
 
     /**
      * The `onChange` handler filters out any character typed
      * that isn't floating point compatible.
      */
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
+    const onChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (disabled) return;
+
         const valueString = event.target.value
           .split("")
           .filter(isFloatingPointNumericCharacter)
           .join("");
-        update(valueString);
+        setValue(valueString);
       },
-      [update],
+      [disabled, setValue],
     );
 
-    const onKeyDown = useCallback(
-      (event: KeyboardEvent) => {
+    const onKeyDown = React.useCallback(
+      (event: React.KeyboardEvent) => {
+        if (disabled) return;
+
         /**
          * only allow valid numeric keys
          */
@@ -143,38 +133,30 @@ export const useNumberInput = createHook<
          *
          * @see https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-17
          */
-        const stepFactor = getStepFactor(event) * stepProp;
+        const stepFactor = getStepFactor(event) * step;
 
         const eventKey = normalizeEventKey(event);
 
-        switch (eventKey) {
-          case "ArrowUp":
-            event.preventDefault();
-            increment(stepFactor);
-            break;
-          case "ArrowDown":
-            event.preventDefault();
-            decrement(stepFactor);
-            break;
-          case "Home":
-            event.preventDefault();
-            update(min);
-            break;
-          case "End":
-            event.preventDefault();
-            update(max);
-            break;
-          default:
-            break;
+        const keyMap: EventKeyMap = {
+          ArrowUp: () => increment(stepFactor),
+          ArrowDown: () => decrement(stepFactor),
+          Home: () => setValue(min),
+          End: () => setValue(max),
+        };
+
+        const action = keyMap[eventKey];
+
+        if (action) {
+          event.preventDefault();
+          action(event);
         }
       },
-      [decrement, increment, max, min, stepProp, update],
+      [disabled, decrement, increment, max, min, step, setValue],
     );
 
-    /**
-     * Function that clamps the input's value on blur
-     */
-    const validateAndClamp = useCallback(() => {
+    const onBlur = React.useCallback(() => {
+      if (!clampValueOnBlur) return;
+
       let next = value as StringOrNumber;
 
       if (next === "") return;
@@ -188,62 +170,81 @@ export const useNumberInput = createHook<
       }
 
       /**
-       * `cast` does 2 things:
+       * `setCastedValue` does 2 things:
        *
        * - sanitize the value by using parseFloat and some Regex
        * - used to round value to computed precision or decimal points
        */
       if (value !== next) {
-        cast(next);
+        setCastedValue(next);
       }
-    }, [cast, max, min, value, valueAsNumber]);
+    }, [setCastedValue, clampValueOnBlur, max, min, value, valueAsNumber]);
 
-    const onBlur = useCallback(() => {
-      setFocused.off();
+    React.useEffect(() => {
+      const input = inputRef.current;
+      if (!input) return undefined;
 
-      if (clampValueOnBlur) {
-        validateAndClamp();
-      }
-    }, [clampValueOnBlur, setFocused, validateAndClamp]);
+      function onWheel(event: WheelEvent) {
+        const isInputFocused = document.activeElement === inputRef.current;
+        if (!options.allowMouseWheel || !isInputFocused) return;
 
-    const onWheel = useCallback(
-      event => {
         event.preventDefault();
-        const stepFactor = getStepFactor(event) * stepProp;
-        const wheelDirection = Math.sign(event.deltaY);
 
-        if (wheelDirection === -1) {
+        const stepFactor = getStepFactor(event as any) * step;
+        const direction = Math.sign(event.deltaY);
+
+        if (direction === -1) {
           increment(stepFactor);
-        } else if (wheelDirection === 1) {
+        } else if (direction === 1) {
+          decrement(stepFactor);
+        }
+      }
+
+      input.addEventListener("wheel", onWheel);
+
+      return () => {
+        input.removeEventListener("wheel", onWheel);
+      };
+    }, [decrement, increment, inputRef, options.allowMouseWheel, step]);
+
+    const onWheel = React.useCallback(
+      (event: React.WheelEvent) => {
+        const isInputFocused = document.activeElement === inputRef.current;
+        if (!options.allowMouseWheel || !isInputFocused) return;
+
+        event.preventDefault();
+
+        const stepFactor = getStepFactor(event as any) * step;
+        const direction = Math.sign(event.deltaY);
+
+        if (direction === -1) {
+          increment(stepFactor);
+        } else if (direction === 1) {
           decrement(stepFactor);
         }
       },
-      [increment, decrement, stepProp],
+      [decrement, increment, inputRef, options.allowMouseWheel, step],
     );
 
     return {
       value,
-      role: "spinbutton",
       type: "text",
-      inputMode: "numeric" as InputMode,
-      pattern: "[0-9]*",
-      "aria-valuemin": min,
-      "aria-valuemax": max,
-      "aria-valuenow": isNaN(valueAsNumber) ? undefined : valueAsNumber,
-      "aria-valuetext": ariaValueText,
-      "aria-invalid": isOutOfRange,
-      "aria-disabled": isDisabled,
-      readOnly: isReadOnly,
-      disabled: isDisabled,
+      role: "spinbutton",
+      inputMode: "decimal",
+      pattern: "[0-9]*(.[0-9]+)?",
       autoComplete: "off",
       autoCorrect: "off",
-      ref: useForkRef(inputRef, ref),
+      "aria-valuemin": min,
+      "aria-valuemax": max,
+      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
+      "aria-valuetext": !value.toString() ? undefined : value.toString(),
+      "aria-invalid": ariaAttr(options.isOutOfRange),
+      ref: useForkRef(htmlRef, inputRef),
       onChange: callAllHandlers(htmlOnChange, onChange),
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
-      onFocus: callAllHandlers(onFocus, setFocused.on),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),
       onWheel: callAllHandlers(htmlOnWheel, onWheel),
-      ...restHtmlProps,
+      ...htmlProps,
     };
   },
 });

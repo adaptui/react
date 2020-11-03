@@ -3,7 +3,7 @@ import { cleanup } from "@testing-library/react";
 import { renderHook } from "reakit-test-utils/hooks";
 import { fireEvent, render } from "reakit-test-utils";
 
-import { useSpinner } from "../__utils";
+import { useSpinner } from "../helpers";
 
 afterEach(cleanup);
 
