@@ -140,11 +140,12 @@ export const App: React.FC<AppProps> = args => {
             <div
               className="slider-filled-track"
               style={{
-                width: !isVertical && trackWidth,
-                height: isVertical && trackWidth,
-                left: !isReversed && !isVertical && trackLeft,
-                right: isReversed && trackRight,
-                bottom: isVertical && isRange && `${getThumbPercent(0) * 100}%`,
+                width: !isVertical ? trackWidth : "",
+                height: isVertical ? trackWidth : "",
+                left: !isReversed && !isVertical && trackLeft ? trackLeft : "",
+                right: isReversed ? trackRight : "",
+                bottom:
+                  isVertical && isRange ? `${getThumbPercent(0) * 100}%` : "",
               }}
             />
           ) : null}
@@ -156,14 +157,16 @@ export const App: React.FC<AppProps> = args => {
               className="slider-thumb"
               key={`thumb-${index}`}
               style={{
-                right:
-                  isReversed && `calc(${getThumbPercent(index) * 100}% - 7px)`,
+                right: isReversed
+                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                  : "",
                 left:
-                  !isReversed &&
-                  !isVertical &&
-                  `calc(${getThumbPercent(index) * 100}% - 7px)`,
-                bottom:
-                  isVertical && `calc(${getThumbPercent(index) * 100}% - 7px)`,
+                  !isReversed && !isVertical
+                    ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                    : "",
+                bottom: isVertical
+                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                  : "",
               }}
             >
               <SliderThumb
