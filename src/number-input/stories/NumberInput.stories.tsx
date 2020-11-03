@@ -1,7 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
+import { Controller, useForm } from "react-hook-form";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
+import {
+  NumberInput as NumberInputComp,
+  useNumberInputState,
+  NumberInputDecrementButton,
+  NumberInputIncrementButton,
+} from "../index";
 import { appTemplate } from "./templates";
 import { App as NumberInput } from "./NumberInput.component";
 
@@ -85,40 +92,117 @@ MouseWheelScrollFalse.args = {
   allowMouseWheel: false,
 };
 
-// * We can add this back Story once we have a styled example
-// * Lets keep the basic example with bare minimum setup.
-// const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
-//   const state = useNumberInputState({
-//     onChange,
-//     value,
-//   });
-//   return (
-//     <>
-//       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-//       <NumberInput name={name} {...state} />
-//       <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-//     </>
-//   );
-// };
+const Direct: React.FC<any> = () => {
+  const state = useNumberInputState();
 
-// export const ReactHookForm = () => {
-//   const { control, handleSubmit } = useForm<{
-//     num: number;
-//   }>({ defaultValues: { num: 20 } });
+  return (
+    <>
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInputComp name={name} {...state} />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </>
+  );
+};
 
-//   return (
-//     <form
-//       onSubmit={handleSubmit(values => {
-//         alert(JSON.stringify(values));
-//       })}
-//     >
-//       <div>
-//         <Controller
-//           name="num"
-//           control={control}
-//           render={NumberComponent as any}
-//         />
-//       </div>
-//     </form>
-//   );
-// };
+const OnChange: React.FC<any> = ({ onChange, value, name }) => {
+  const state = useNumberInputState({ value });
+
+  React.useEffect(() => {
+    onChange?.(state.value);
+  }, [onChange, state.value]);
+
+  return (
+    <>
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInputComp name={name} {...state} />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </>
+  );
+};
+
+const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
+  const state = useNumberInputState({ value });
+  console.log("%c state", "color: #00258c", state);
+  const { value: stateValue, setValue: setStateValue } = state;
+
+  React.useEffect(() => {
+    onChange?.(stateValue);
+  }, [onChange, stateValue]);
+
+  React.useEffect(() => {
+    setStateValue(value);
+  }, [setStateValue, value]);
+
+  return (
+    <>
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInputComp name={name} {...state} />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </>
+  );
+};
+
+export const Controllable = () => {
+  const [value, setValue] = React.useState("42");
+
+  return (
+    <div>
+      <p>Direct usage</p>
+      <Direct />
+      <br />
+      <br />
+
+      <p>With OnChange</p>
+      <p>
+        Changing the native input value does not change the NumberInput's value
+      </p>
+      <p>
+        Because the value prop we send to NumberComponent will only be taken on
+        first render as initial value. Any further changes will be ignored
+        because we sealed that initial value.
+      </p>
+      <input
+        type="number"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+      />
+      <br />
+      <OnChange value={value} onChange={setValue} />
+      <br />
+      <br />
+      <p>With both Value & OnChange</p>
+      <p>Now changing the native input value changes the NumberInput's value</p>
+      <input
+        type="number"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+      />
+      <br />
+      <NumberComponent value={value} onChange={setValue} />
+      <br />
+      <br />
+    </div>
+  );
+};
+
+export const ReactHookForm = () => {
+  const { control, handleSubmit } = useForm<{
+    num: number;
+  }>({ defaultValues: { num: 20 } });
+
+  return (
+    <form
+      onSubmit={handleSubmit(values => {
+        alert(JSON.stringify(values));
+      })}
+    >
+      <div>
+        <Controller
+          name="num"
+          control={control}
+          render={NumberComponent as any}
+        />
+      </div>
+    </form>
+  );
+};
