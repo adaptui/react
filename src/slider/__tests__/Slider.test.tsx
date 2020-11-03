@@ -48,9 +48,13 @@ import {
 import { SliderInitialState } from "../SliderState";
 
 import { installMouseEvent } from "../../utils/test-utils";
+import { cleanup } from "@testing-library/react";
 
-export const SliderComponent = (props: SliderInitialState) => {
+export const SliderComponent = (
+  props: SliderInitialState & { origin?: number },
+) => {
   const state = useSliderState(props);
+  const originProp = props.origin ?? state.min ?? 0;
   const {
     values,
     getValuePercent,
@@ -59,11 +63,13 @@ export const SliderComponent = (props: SliderInitialState) => {
   } = state;
 
   const trackWidth = `${
-    (getValuePercent(Math.max(values[0], state.min)) -
-      getValuePercent(Math.min(values[0], state.min))) *
+    (getValuePercent(Math.max(values[0], originProp)) -
+      getValuePercent(Math.min(values[0], originProp))) *
     100
   }%`;
-  const trackLeft = `${getValuePercent(Math.min(values[0], state.min)) * 100}%`;
+  const trackLeft = `${
+    getValuePercent(Math.min(values[0], originProp)) * 100
+  }%`;
   const labelValue = getThumbValueLabel(0);
 
   return (
@@ -107,6 +113,7 @@ export const SliderComponent = (props: SliderInitialState) => {
           >
             <VisuallyHidden>
               <SliderInput
+                data-testid="slider-input"
                 index={0}
                 id="styled-slider"
                 aria-label={`Thumb-${0}`}
@@ -119,6 +126,7 @@ export const SliderComponent = (props: SliderInitialState) => {
     </div>
   );
 };
+afterEach(cleanup);
 
 describe("Slider", () => {
   // IMPORTANT!
@@ -178,5 +186,180 @@ describe("Slider", () => {
     expect(onStart).toHaveBeenLastCalledWith([50]);
     expect(onEnd).toHaveBeenLastCalledWith([80]);
     expect(sliderValue).toHaveTextContent("80");
+  });
+
+  it("should work with reversed input", () => {
+    const onStart = jest.fn();
+    const onEnd = jest.fn();
+    const { getByTestId: testId } = render(
+      <SliderComponent
+        reversed={true}
+        onChangeStart={onStart}
+        onChangeEnd={onEnd}
+        min={0}
+        max={100}
+        step={1}
+      />,
+    );
+
+    const sliderValue = testId("slider-value");
+    const sliderThumb = testId("slider-thumb");
+
+    expect(sliderValue).toHaveTextContent("50");
+
+    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+    expect(onEnd).not.toHaveBeenCalled();
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("40");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("30");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 40, pageX: 40 });
+    fireEvent.mouseUp(sliderThumb, { clientX: 40, pageX: 40 });
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+    expect(onEnd).toHaveBeenLastCalledWith([20]);
+    expect(sliderValue).toHaveTextContent("20");
+  });
+
+  it("should have proper min/max values", () => {
+    const onStart = jest.fn();
+    const onEnd = jest.fn();
+    const { getByTestId: testId } = render(
+      <SliderComponent
+        onChangeStart={onStart}
+        onChangeEnd={onEnd}
+        min={50}
+        max={80}
+        step={1}
+      />,
+    );
+
+    const sliderValue = testId("slider-value");
+    const sliderThumb = testId("slider-thumb");
+
+    expect(sliderValue).toHaveTextContent("65");
+
+    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    expect(onStart).toHaveBeenLastCalledWith([65]);
+    expect(onEnd).not.toHaveBeenCalled();
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("68");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("71");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 40, pageX: 40 });
+    expect(onEnd).not.toHaveBeenCalled();
+    expect(sliderValue).toHaveTextContent("74");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 140, pageX: 140 });
+    fireEvent.mouseUp(sliderThumb, { clientX: 140, pageX: 140 });
+    expect(onStart).toHaveBeenLastCalledWith([65]);
+    expect(onEnd).toHaveBeenLastCalledWith([80]);
+    expect(sliderValue).toHaveTextContent("80");
+  });
+
+  it("should have proper values when origin is set", () => {
+    const onStart = jest.fn();
+    const onEnd = jest.fn();
+    const { getByTestId: testId } = render(
+      <SliderComponent
+        onChangeStart={onStart}
+        onChangeEnd={onEnd}
+        values={[0]}
+        origin={0}
+        min={-50}
+        max={50}
+        step={1}
+      />,
+    );
+
+    const sliderValue = testId("slider-value");
+    const sliderThumb = testId("slider-thumb");
+
+    expect(sliderValue).toHaveTextContent("0");
+
+    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    expect(onStart).toHaveBeenLastCalledWith([0]);
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    expect(sliderValue).toHaveTextContent("10");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 50, pageX: 50 });
+    expect(sliderValue).toHaveTextContent("40");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 0, pageX: 0 });
+    expect(sliderValue).toHaveTextContent("-10");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: -50, pageX: -50 });
+    expect(sliderValue).toHaveTextContent("-50");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: -50, pageX: -50 });
+    fireEvent.mouseUp(sliderThumb, { clientX: -50, pageX: -50 });
+    expect(onStart).toHaveBeenLastCalledWith([0]);
+    expect(onEnd).toHaveBeenLastCalledWith([-50]);
+    expect(sliderValue).toHaveTextContent("-50");
+  });
+
+  it("supports formatOptions", () => {
+    const onStart = jest.fn();
+    const onEnd = jest.fn();
+    const { getByTestId: testId } = render(
+      <SliderComponent
+        formatOptions={{
+          style: "unit",
+          // @ts-ignore
+          unit: "celsius",
+          unitDisplay: "narrow",
+        }}
+        onChangeStart={onStart}
+        onChangeEnd={onEnd}
+        min={0}
+        max={100}
+        step={1}
+      />,
+    );
+
+    const sliderValue = testId("slider-value");
+    const sliderThumb = testId("slider-thumb");
+
+    expect(sliderValue).toHaveTextContent("50°C");
+
+    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
+    expect(sliderValue).toHaveTextContent("60°C");
+
+    fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
+    fireEvent.mouseUp(sliderThumb, { clientX: 30, pageX: 30 });
+    expect(onStart).toHaveBeenLastCalledWith([50]);
+    expect(onEnd).toHaveBeenLastCalledWith([70]);
+    expect(sliderValue).toHaveTextContent("70°C");
+  });
+
+  it("supports disabled slider", () => {
+    const { getByTestId: testId } = render(
+      <SliderComponent isDisabled={true} />,
+    );
+
+    const sliderInput = testId("slider-input");
+
+    expect(sliderInput).toBeDisabled();
+  });
+
+  test("Slider renders with no a11y violations", async () => {
+    const { container } = render(<SliderComponent />);
+    const results = await axe(container);
+
+    expect(results).toHaveNoViolations();
   });
 });
