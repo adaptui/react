@@ -4,7 +4,7 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import { App as Slider } from "./Slider.component";
-import { appTemplate, appTemplateJs } from "./templates";
+import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
 
 export default {
   component: Slider,
@@ -30,6 +30,12 @@ export default {
           "renderless-components@alpha",
           "reakit",
         ]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

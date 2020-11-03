@@ -5,8 +5,12 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
 import "./RangeCalendar.css";
-import { rangeAppTemplate, rangeAppTemplateJs } from "./templates";
 import { App as RangeCalendar } from "./RangeCalendar.component";
+import {
+  rangeAppTemplate,
+  rangeAppTemplateJs,
+  rangeCssTemplate,
+} from "./templates";
 
 export default {
   title: "RangeCalendar",
@@ -40,6 +44,12 @@ export default {
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "CSS",
+        template: rangeCssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

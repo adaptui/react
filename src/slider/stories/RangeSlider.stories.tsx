@@ -4,7 +4,7 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import { App as RangeSlider } from "./RangeSlider.component";
-import { rangeAppTemplate, rangeAppTemplateJs } from "./templates";
+import { rangeAppTemplate, rangeAppTemplateJs, cssTemplate } from "./templates";
 
 export default {
   component: RangeSlider,
@@ -30,6 +30,12 @@ export default {
           "renderless-components@alpha",
           "reakit",
         ]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

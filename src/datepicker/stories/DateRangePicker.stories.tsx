@@ -5,8 +5,12 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
+import {
+  rangeAppTemplate,
+  rangeAppTemplateJs,
+  rangeCssTemplate,
+} from "./templates";
 import "./DatePicker.css";
-import { rangeAppTemplate, rangeAppTemplateJs } from "./templates";
 import { App as DateRangePicker } from "./DateRangePicker.component";
 
 export default {
@@ -33,6 +37,12 @@ export default {
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "CSS",
+        template: rangeCssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

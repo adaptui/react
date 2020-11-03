@@ -2,13 +2,13 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import "./AccordionStyled.css";
-import { App as Accordion } from "./AccordionStyled.component";
 import {
   styledAppTemplate,
   appTemplateStyledJs,
   cssTemplate,
 } from "./templates";
+import "./AccordionStyled.css";
+import { App as Accordion } from "./AccordionStyled.component";
 
 export default {
   component: Accordion,

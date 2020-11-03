@@ -204,7 +204,7 @@ const CalendarIcon = () => (
   </svg>
 );
 
-const DoubleChevronLeft = props => {
+const DoubleChevronLeft = (props: any) => {
   return (
     <svg
       {...props}
@@ -223,7 +223,7 @@ const DoubleChevronLeft = props => {
   );
 };
 
-const ChevronLeft = props => {
+const ChevronLeft = (props: any) => {
   return (
     <svg
       {...props}
@@ -242,10 +242,10 @@ const ChevronLeft = props => {
   );
 };
 
-const ChevronRight = props => (
+const ChevronRight = (props: any) => (
   <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 
-const DoubleChevronRight = props => (
+const DoubleChevronRight = (props: any) => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );

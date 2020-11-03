@@ -9,3 +9,9 @@ export { default as rangeAppTemplate } from "!!raw-loader!./RangeCalendar.compon
 
 // @ts-ignore
 export { default as rangeAppTemplateJs } from "!!raw-loader!./__js/RangeCalendar.component.jsx";
+
+// @ts-ignore
+export { default as cssTemplate } from "!!raw-loader!./Calendar.css";
+
+// @ts-ignore
+export { default as rangeCssTemplate } from "!!raw-loader!./RangeCalendar.css";

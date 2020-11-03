@@ -5,8 +5,8 @@ import { addWeeks, format, subWeeks } from "date-fns";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Calendar.css";
-import { appTemplate, appTemplateJs } from "./templates";
 import { App as Calendar } from "./Calendar.component";
+import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
 
 export default {
   component: Calendar,
@@ -32,6 +32,12 @@ export default {
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

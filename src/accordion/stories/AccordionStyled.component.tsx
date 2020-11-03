@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
   AccordionPanel,
   AccordionState,
-  // @ts-ignore
 } from "renderless-components";
 
 interface AppProps {

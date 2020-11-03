@@ -4,7 +4,7 @@ import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import { App as MultiSlider } from "./MultiSlider.component";
-import { multiAppTemplate, multiAppTemplateJs } from "./templates";
+import { multiAppTemplate, multiAppTemplateJs, cssTemplate } from "./templates";
 
 export default {
   component: MultiSlider,
@@ -30,6 +30,12 @@ export default {
           "renderless-components@alpha",
           "reakit",
         ]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },

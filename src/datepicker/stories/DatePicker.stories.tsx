@@ -5,8 +5,8 @@ import { addWeeks, subWeeks, format, addDays } from "date-fns";
 import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./DatePicker.css";
-import { appTemplate, appTemplateJs } from "./templates";
 import { App as DatePicker } from "./DatePicker.component";
+import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
 
 export default {
   component: DatePicker,
@@ -32,6 +32,12 @@ export default {
         language: "tsx",
         copy: true,
         codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+      },
+      {
+        tab: "CSS",
+        template: cssTemplate,
+        language: "css",
+        copy: true,
       },
     ],
   },
