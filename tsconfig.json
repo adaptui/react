@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "esnext",
     "lib": ["dom", "esnext"],
@@ -20,8 +21,10 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "sourceMap": true,
     "declaration": true,
-    "declarationDir": "dist/types"
-  },
-  "include": ["src"],
-  "exclude": ["**/*/stories", "**/*/__tests__"]
+    "declarationDir": "dist/types",
+    "paths": {
+      "renderless-components": ["src"],
+      "renderless-components/*": ["src/*"]
+    }
+  }
 }
