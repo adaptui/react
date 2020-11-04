@@ -1,19 +1,27 @@
-import "./style.css";
 import React from "react";
-import { Meta } from "@storybook/react";
+import { CSSTransition } from "react-transition-group";
+import { ToastProvider, TToastWrapper } from "renderless-components";
 
-import Demo from "./Demo";
-import { ToastProvider } from "../index";
+import { Variants, Placements } from "./ToastUtils.component";
 
-export default {
-  title: "Toast/Base",
-} as Meta;
+const CSSTransitionAnimationWrapper: TToastWrapper = ({
+  isVisible,
+  children,
+}) => {
+  return (
+    <CSSTransition in={isVisible} timeout={500} classNames="alert">
+      {children}
+    </CSSTransition>
+  );
+};
 
-export const Default: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <ToastProvider
       autoDismiss={true}
       placement="bottom-center"
+      animationTimeout={500}
+      toastWrapper={CSSTransitionAnimationWrapper}
       toastTypes={{
         error: ({ remove, content, id }) => {
           return (
@@ -38,7 +46,11 @@ export const Default: React.FC = () => {
         },
       }}
     >
-      <Demo />
+      <Variants />
+      <br />
+      <Placements />
     </ToastProvider>
   );
 };
+
+export default App;
