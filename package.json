@@ -129,7 +129,7 @@
     "rimraf": "3.0.2",
     "sort-package-json": "1.46.1",
     "standard-version": "9.0.0",
-    "storybook-addon-preview": "^2.0.1",
+    "storybook-addon-preview": "^2.1.0",
     "ts-jest": "26.4.3",
     "ts-morph": "8.1.2",
     "ts-node": "^9.0.0",

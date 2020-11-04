@@ -11,7 +11,7 @@ import {
 } from "@react-types/shared";
 import * as React from "react";
 import { format, isSameDay } from "date-fns";
-import { useControllableState, useUpdateEffect } from "@chakra-ui/hooks";
+import { useControllableState } from "@chakra-ui/hooks";
 
 import { makeRange } from "./__utils";
 import { RangeValueBase } from "../utils/types";
@@ -20,10 +20,13 @@ import { useCalendarState } from "./CalendarState";
 import { parseRangeDate, stringifyDate } from "../utils";
 
 export interface RangeCalendarInitialState
-  extends FocusableProps,
+  extends ValueBase<RangeValue<string>>,
+    RangeValueBase<string>,
     InputBase,
-    ValueBase<RangeValue<string>>,
-    RangeValueBase<string> {
+    FocusableProps {
+  /**
+   * Id for the calendar grid
+   */
   id?: string;
 }
 

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { Controller, useForm } from "react-hook-form";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import {
   NumberInput as NumberInputComp,
@@ -9,22 +8,18 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "../index";
-import { appTemplate } from "./templates";
+import { appTemplate, appTemplateJs } from "./templates";
 import { App as NumberInput } from "./NumberInput.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: NumberInput,
   title: "NumberInput",
   parameters: {
-    preview: [
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-    ],
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+    }),
   },
 } as Meta;
 

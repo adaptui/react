@@ -14681,10 +14681,10 @@ store2@^2.7.1:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
 
-storybook-addon-preview@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/storybook-addon-preview/-/storybook-addon-preview-2.0.1.tgz#3cd5ecf4f5c2bc931f8c3082a3d04b42d3fa3cf1"
-  integrity sha512-KmQwItIeTG1SVOTvKHkhf+cL95dlx9B5W68N1zkesvKEYAbz+WgolO9P3Gjf/IktnUn2IRfgdTcIE2erACF18Q==
+storybook-addon-preview@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-preview/-/storybook-addon-preview-2.1.0.tgz#fa12c9e07a2243d9b5e6d0e945c54b15827a71dc"
+  integrity sha512-y9leUzM1MwF45OwvUJjkatQ6Y7Jle/jc6u3317GsK3G6TKVGtT53ovbRyHVnX/QRHRNqA32okiUovchrej/g0w==
   dependencies:
     "@storybook/addon-knobs" "^6.0.0"
     "@types/prismjs" "^1.16.0"

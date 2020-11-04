@@ -35,10 +35,13 @@ import { useWeekDays, generateDaysInMonthArray } from "./__utils";
 import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 
 export interface CalendarInitialState
-  extends FocusableProps,
+  extends ValueBase<string>,
+    RangeValueBase<string>,
     InputBase,
-    ValueBase<string>,
-    RangeValueBase<string> {
+    FocusableProps {
+  /**
+   * Id for the calendar grid
+   */
   id?: string;
 }
 

@@ -4,11 +4,9 @@ import {
 } from "reakit-utils/useSealedState";
 
 import { calculateStatus, clamp } from "./helpers";
-import { isFunction, valueToPercent, getOptimumValue } from "../utils";
+import { valueToPercent, getOptimumValue } from "../utils";
 
 type Status = "safe" | "caution" | "danger" | undefined;
-
-type AriaValueText = string | ((value: number, percent: number) => string);
 
 export type MeterState = {
   /**
@@ -50,10 +48,6 @@ export type MeterState = {
    */
   optimum: number;
   /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText: AriaValueText;
-  /**
    * Percentage of the value progressed with respect to min & max
    */
   percent: number;
@@ -65,7 +59,7 @@ export type MeterState = {
 
 export type MeterInitialState = Pick<
   Partial<MeterState>,
-  "value" | "min" | "max" | "low" | "optimum" | "high" | "ariaValueText"
+  "value" | "min" | "max" | "low" | "optimum" | "high"
 >;
 
 export type MeterStateReturn = MeterState;
@@ -77,7 +71,6 @@ export const useMeterState = (
     value: initialValue = 0,
     min = 0,
     max = 1,
-    ariaValueText,
     ...sealed
   } = useSealedState(initialState);
   const initialLow = sealed.low ?? min;
@@ -114,8 +107,5 @@ export const useMeterState = (
     high,
     status,
     percent,
-    ariaValueText: isFunction(ariaValueText)
-      ? ariaValueText?.(value, percent)
-      : `${percent}%`,
   };
 };

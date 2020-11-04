@@ -13,10 +13,7 @@ import { dataAttr, isNull } from "../utils";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressOptions = BoxOptions &
-  Pick<
-    ProgressStateReturn,
-    "isIndeterminate" | "value" | "max" | "min" | "ariaValueText"
-  >;
+  Pick<ProgressStateReturn, "isIndeterminate" | "value" | "max" | "min">;
 
 export type ProgressHTMLProps = BoxHTMLProps;
 
@@ -28,7 +25,7 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   keys: PROGRESS_KEYS,
 
   useProps(options, htmlProps) {
-    const { isIndeterminate, value, max, min, ariaValueText } = options;
+    const { isIndeterminate, value, max, min } = options;
 
     return {
       role: "progressbar",
@@ -36,7 +33,7 @@ export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": isNull(value) ? undefined : value,
-      "aria-valuetext": `${ariaValueText}`,
+      "aria-valuetext": !value?.toString() ? "intermediate" : value.toString(),
       ...htmlProps,
     };
   },

@@ -1,82 +1,40 @@
-import React from "react";
-import { Meta } from "@storybook/react";
+import * as React from "react";
+import { Meta, Story } from "@storybook/react";
 
-import { Pagination } from "../Pagination";
-import { PaginationButton, TGoto } from "../PaginationButton";
-import { UsePaginationProps, usePaginationState } from "../PaginationState";
+import { appTemplate, appTemplateJs } from "./templates";
+import { App as Pagination } from "./Pagination.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
+  component: Pagination,
   title: "Pagination",
+  parameters: {
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+    }),
+  },
 } as Meta;
 
-const PaginationComp: React.FC<UsePaginationProps> = props => {
-  const state = usePaginationState({ count: 10, ...props });
+const Base: Story = args => <Pagination {...args} />;
 
-  return (
-    <Pagination {...state}>
-      <ul style={{ display: "flex", listStyle: "none" }}>
-        <li>
-          <PaginationButton goto="first" {...state}>
-            First
-          </PaginationButton>
-        </li>
-        <li>
-          <PaginationButton goto="prev" {...state}>
-            Previous
-          </PaginationButton>
-        </li>
-        {state.pages.map(page => {
-          if (page === "start-ellipsis" || page === "end-ellipsis") {
-            return <li key={page}>...</li>;
-          }
+export const Default = Base.bind({});
 
-          return (
-            <li key={page}>
-              <PaginationButton
-                goto={page as TGoto}
-                style={{
-                  fontWeight: state.currentPage === page ? "bold" : undefined,
-                }}
-                {...state}
-              >
-                {page}
-              </PaginationButton>
-            </li>
-          );
-        })}
-        <li>
-          <PaginationButton goto="next" {...state}>
-            Next
-          </PaginationButton>
-        </li>
-        <li>
-          <PaginationButton goto="last" {...state}>
-            Last
-          </PaginationButton>
-        </li>
-      </ul>
-    </Pagination>
-  );
+export const DefaultPage = Base.bind({});
+DefaultPage.args = {
+  defaultPage: 5,
 };
 
-export const Default = () => {
-  return <PaginationComp />;
+export const BoundaryCount = Base.bind({});
+BoundaryCount.args = {
+  count: 50,
+  boundaryCount: 5,
+  defaultPage: 25,
 };
 
-export const Controlled = () => {
-  const [page, setPage] = React.useState(1);
-
-  return <PaginationComp page={page} onChange={value => setPage(value)} />;
-};
-
-export const DefaultPage = () => {
-  return <PaginationComp defaultPage={5} />;
-};
-
-export const BoundaryCount = () => {
-  return <PaginationComp count={50} boundaryCount={5} defaultPage={25} />;
-};
-
-export const SibilingCount = () => {
-  return <PaginationComp count={50} siblingCount={2} defaultPage={25} />;
+export const SibilingCount = Base.bind({});
+SibilingCount.args = {
+  count: 50,
+  sibilingCount: 5,
+  defaultPage: 25,
 };

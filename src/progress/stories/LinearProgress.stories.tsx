@@ -1,38 +1,19 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import { App as Progress } from "./LinearProgress.component";
 import { linearAppTemplate, linearAppTemplateJs } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Progress,
   title: "ProgressLinear",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: linearAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-          "emotion",
-        ]),
-      },
-      {
-        tab: "React",
-        template: linearAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-          "emotion",
-        ]),
-      },
-    ],
+    preview: createPreviewTabs({
+      js: linearAppTemplateJs,
+      ts: linearAppTemplate,
+      deps: ["reakit@latest", "emotion@latest"],
+    }),
   },
 } as Meta;
 
