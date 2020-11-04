@@ -2,38 +2,19 @@ import "./TimePicker.css";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
-
 import { App as TimePicker } from "./TimePicker.component";
 import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: TimePicker,
   title: "TimePicker",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-    ],
+    preview: createPreviewTabs({
+      ts: appTemplate,
+      js: appTemplateJs,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 
