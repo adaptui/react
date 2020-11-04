@@ -39,7 +39,7 @@ describe("Meter", () => {
           aria-valuemax="1"
           aria-valuemin="0"
           aria-valuenow="0"
-          aria-valuetext="0"
+          aria-valuetext="0%"
           role="meter progressbar"
         />
       </div>
