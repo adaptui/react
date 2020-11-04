@@ -1,10 +1,25 @@
 import "./Toast.css";
 import React from "react";
 import { Meta } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  cssTemplate,
+  appTemplate,
+  appTemplateJs,
+  appUtilsTemplate,
+  appUtilsTemplateJs,
+} from "./templates";
 import { App as Toast } from "./Toast.component";
+import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
+
+const sandboxJs = CreateToastSandbox({
+  type: "jsx",
+  deps: ["renderless-components@alpha"],
+});
+const sandboxTs = CreateToastSandbox({
+  type: "tsx",
+  deps: ["renderless-components@alpha"],
+});
 
 export default {
   component: Toast,
@@ -16,21 +31,35 @@ export default {
         template: appTemplateJs,
         language: "jsx",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+        codesandbox: sandboxJs,
       },
       {
         tab: "React",
         template: appTemplate,
         language: "tsx",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+        codesandbox: sandboxTs,
       },
       {
         tab: "CSS",
         template: cssTemplate,
         language: "css",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
+        codesandbox: sandboxTs,
+      },
+      {
+        tab: "Utils.tsx",
+        template: appUtilsTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: sandboxTs,
+      },
+      {
+        tab: "Utils.jsx",
+        template: appUtilsTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: sandboxJs,
       },
     ],
   },

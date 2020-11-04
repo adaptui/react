@@ -1,14 +1,25 @@
 import "./Toast.css";
 import React from "react";
 import { Meta } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import {
   cssTemplate,
+  appUtilsTemplate,
+  appUtilsTemplateJs,
   appTemplateReactSpring,
   appTemplateJsReactSpring,
 } from "./templates";
 import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
+import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
+
+const sandboxJs = CreateToastSandbox({
+  type: "jsx",
+  deps: ["renderless-components@alpha", "react-spring"],
+});
+const sandboxTs = CreateToastSandbox({
+  type: "tsx",
+  deps: ["renderless-components@alpha", "react-spring"],
+});
 
 export default {
   component: ReactSpringToast,
@@ -20,30 +31,35 @@ export default {
         template: appTemplateJsReactSpring,
         language: "jsx",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "react-transition-group",
-        ]),
+        codesandbox: sandboxJs,
       },
       {
         tab: "React",
         template: appTemplateReactSpring,
         language: "tsx",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "react-transition-group",
-        ]),
+        codesandbox: sandboxTs,
       },
       {
         tab: "CSS",
         template: cssTemplate,
         language: "css",
         copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "react-transition-group",
-        ]),
+        codesandbox: sandboxTs,
+      },
+      {
+        tab: "Utils.tsx",
+        template: appUtilsTemplate,
+        language: "tsx",
+        copy: true,
+        codesandbox: sandboxTs,
+      },
+      {
+        tab: "Utils.jsx",
+        template: appUtilsTemplateJs,
+        language: "jsx",
+        copy: true,
+        codesandbox: sandboxJs,
       },
     ],
   },
