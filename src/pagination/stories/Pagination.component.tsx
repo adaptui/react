@@ -4,18 +4,12 @@ import {
   Pagination,
   PaginationButton,
   usePaginationState,
+  PaginationInitialState,
 } from "renderless-components";
 
-type TGoto = "next" | "prev" | "last" | "first" | number;
+type TGoto = "nextPage" | "prevPage" | "lastPage" | "firstPage" | number;
 
-export interface AppProps {
-  count?: number;
-  defaultPage?: number;
-  boundaryCount?: number;
-  page?: number;
-  siblingCount?: number;
-  onChange?(value: number): void;
-}
+export interface AppProps extends PaginationInitialState {}
 
 export const App = (props: AppProps) => {
   const state = usePaginationState({ count: 10, ...props });
@@ -24,12 +18,12 @@ export const App = (props: AppProps) => {
     <Pagination {...state}>
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
-          <PaginationButton goto="first" {...state}>
+          <PaginationButton goto="firstPage" {...state}>
             First
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="prev" {...state}>
+          <PaginationButton goto="prevPage" {...state}>
             Previous
           </PaginationButton>
         </li>
@@ -53,12 +47,12 @@ export const App = (props: AppProps) => {
           );
         })}
         <li>
-          <PaginationButton goto="next" {...state}>
+          <PaginationButton goto="nextPage" {...state}>
             Next
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="last" {...state}>
+          <PaginationButton goto="lastPage" {...state}>
             Last
           </PaginationButton>
         </li>

@@ -3,7 +3,6 @@ const PROGRESS_STATE_KEYS = [
   "value",
   "min",
   "max",
-  "ariaValueText",
   "isIndeterminate",
   "percent",
   "setValue",

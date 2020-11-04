@@ -3,33 +3,86 @@
  * Based on the logic from [usePagination Hook](https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/Pagination/usePagination.js)
  */
 import React from "react";
-import { useControllableState } from "@chakra-ui/hooks";
+import {
+  SealedInitialState,
+  useSealedState,
+} from "reakit-utils/useSealedState";
 
-export interface UsePaginationProps {
+export type PaginationState = {
+  /**
+   * The current active page
+   *
+   * @default 1
+   */
+  currentPage: number;
+  /**
+   * All the page with start & end ellipsis
+   */
+  pages: (string | number)[];
+  /**
+   * True, if the currentPage is at first page
+   */
+  isAtFirstPage: boolean;
+  /**
+   * True, if the currentPage is at last page
+   */
+  isAtLastPage: boolean;
+};
+
+export type PaginationAction = {
+  /**
+   * Go to the specified page number
+   */
+  movePage: (page: number) => void;
+  /**
+   * Go to next page
+   */
+  nextPage: () => void;
+  /**
+   * Go to previous page
+   */
+  prevPage: () => void;
+  /**
+   * Go to first page
+   */
+  firstPage: () => void;
+  /**
+   * Go to last page
+   */
+  lastPage: () => void;
+};
+
+export type PaginationInitialState = Pick<
+  Partial<PaginationState>,
+  "currentPage"
+> & {
+  /**
+   * Total no. of pages
+   */
   count?: number;
-  defaultPage?: number;
+  /**
+   * No. of boundary pages to be visible
+   */
   boundaryCount?: number;
-  page?: number;
+  /**
+   * No. of sibiling pages allowed before/after the current page
+   */
   siblingCount?: number;
-  onChange?(value: number): void;
-}
+};
 
-export const usePaginationState = (props: UsePaginationProps = {}) => {
+export type PaginationStateReturn = PaginationState & PaginationAction;
+
+export const usePaginationState = (
+  props: SealedInitialState<PaginationInitialState> = {},
+): PaginationStateReturn => {
   const {
+    currentPage: initialCurrentPage = 1,
     count = 1,
-    defaultPage = 1,
     boundaryCount = 1,
     siblingCount = 1,
-    page: currentPage,
-    onChange,
-  } = props;
+  } = useSealedState(props);
 
-  const [page, setPage] = useControllableState({
-    value: currentPage,
-    defaultValue: defaultPage,
-    onChange,
-    shouldUpdate: (prev, next) => prev !== next,
-  });
+  const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
 
   const startPages = range(1, Math.min(boundaryCount, count));
   const endPages = range(
@@ -40,7 +93,7 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
   const siblingsStart = Math.max(
     Math.min(
       // Natural start
-      page - siblingCount,
+      currentPage - siblingCount,
       // Lower boundary when page is high
       count - boundaryCount - siblingCount * 2 - 1,
     ),
@@ -51,7 +104,7 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
   const siblingsEnd = Math.min(
     Math.max(
       // Natural end
-      page + siblingCount,
+      currentPage + siblingCount,
       // Upper boundary when page is low
       boundaryCount + siblingCount * 2 + 2,
     ),
@@ -84,43 +137,41 @@ export const usePaginationState = (props: UsePaginationProps = {}) => {
     ...endPages,
   ];
 
-  const next = React.useCallback(() => {
-    setPage(prevPage => prevPage + 1);
-  }, [setPage]);
+  const nextPage = React.useCallback(() => {
+    setCurrentPage(prevPage => prevPage + 1);
+  }, [setCurrentPage]);
 
-  const prev = React.useCallback(() => {
-    setPage(prevPage => prevPage - 1);
-  }, [setPage]);
+  const prevPage = React.useCallback(() => {
+    setCurrentPage(prevPage => prevPage - 1);
+  }, [setCurrentPage]);
 
-  const first = React.useCallback(() => {
-    setPage(1);
-  }, [setPage]);
+  const firstPage = React.useCallback(() => {
+    setCurrentPage(1);
+  }, [setCurrentPage]);
 
-  const last = React.useCallback(() => {
-    setPage(count);
-  }, [count, setPage]);
+  const lastPage = React.useCallback(() => {
+    setCurrentPage(count);
+  }, [count, setCurrentPage]);
 
-  const move = React.useCallback(
+  const movePage = React.useCallback(
     page => {
-      if (page >= 1 && page <= count) setPage(page);
+      if (page >= 1 && page <= count) setCurrentPage(page);
     },
-    [count, setPage],
+    [count, setCurrentPage],
   );
 
   return {
     pages,
-    currentPage: page,
-    isAtMax: page >= count,
-    isAtMin: page <= 1,
-    next,
-    prev,
-    move,
-    first,
-    last,
+    currentPage,
+    isAtLastPage: currentPage >= count,
+    isAtFirstPage: currentPage <= 1,
+    nextPage,
+    prevPage,
+    movePage,
+    firstPage,
+    lastPage,
   };
 };
-
-export type PaginationStateReturn = ReturnType<typeof usePaginationState>;
 
 function range(start: number, end: number) {
   const length = end - start + 1;
