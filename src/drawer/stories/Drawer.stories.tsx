@@ -1,30 +1,19 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import { appTemplate, appTemplateJs } from "./templates";
 import { App as Drawer } from "./Drawer.component";
+import { appTemplate, appTemplateJs } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   title: "Drawer",
   component: Drawer,
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-    ],
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+      deps: ["emotion@latest"],
+    }),
   },
 } as Meta;
 

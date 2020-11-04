@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import {
@@ -8,40 +7,18 @@ import {
   singleAppTemplateJs,
   cssTemplate,
 } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleOriginSlider } from "./SingleOriginSlider.component";
 
 export default {
   component: SingleOriginSlider,
   title: "Slider/SingleOrigin",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: singleAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "React",
-        template: singleAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: singleAppTemplateJs,
+      ts: singleAppTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

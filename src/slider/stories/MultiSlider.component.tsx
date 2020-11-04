@@ -80,10 +80,10 @@ interface AppProps {
 }
 
 export const App: React.FC<AppProps> = args => {
-  const { label, isReversed, origin: originProp, onChange, ...rest } = args;
+  const { label, isReversed, onChange, ...rest } = args;
 
   const state = useSliderState({
-    value: [25, 50, 75],
+    values: [25, 50, 75],
     reversed: isReversed,
     ...rest,
   });
@@ -119,14 +119,16 @@ export const App: React.FC<AppProps> = args => {
               className="slider-thumb"
               key={`thumb-${index}`}
               style={{
-                right:
-                  isReversed && `calc(${getThumbPercent(index) * 100}% - 7px)`,
+                right: isReversed
+                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                  : "",
                 left:
-                  !isReversed &&
-                  !isVertical &&
-                  `calc(${getThumbPercent(index) * 100}% - 7px)`,
-                bottom:
-                  isVertical && `calc(${getThumbPercent(index) * 100}% - 7px)`,
+                  !isReversed && !isVertical
+                    ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                    : "",
+                bottom: isVertical
+                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+                  : "",
               }}
             >
               <SliderThumb

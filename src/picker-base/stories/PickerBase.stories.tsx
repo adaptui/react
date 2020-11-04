@@ -1,30 +1,18 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import { appTemplate, appTemplateJs } from "./templates";
 import { App as PickerBase } from "./PickerBase.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: PickerBase,
   title: "PickerBase",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-    ],
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+    }),
   },
 } as Meta;
 

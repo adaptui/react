@@ -1,43 +1,20 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import { App as Slider } from "./Slider.component";
 import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Slider,
   title: "Slider/AllInOne",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

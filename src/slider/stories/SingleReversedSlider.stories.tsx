@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import {
@@ -8,40 +7,18 @@ import {
   reversedAppTemplateJs,
   cssTemplate,
 } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleReversedSlider } from "./SingleReversedSlider.component";
 
 export default {
   component: SingleReversedSlider,
   title: "Slider/SingleReversed",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: reversedAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "React",
-        template: reversedAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: reversedAppTemplateJs,
+      ts: reversedAppTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

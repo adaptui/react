@@ -8,7 +8,7 @@ export { default as styledAppTemplate } from "!!raw-loader!./AccordionStyled.com
 export { default as appTemplateJs } from "!!raw-loader!./__js/Accordion.component.jsx";
 
 // @ts-ignore
-export { default as appTemplateStyledJs } from "!!raw-loader!./__js/AccordionStyled.component.jsx";
+export { default as styledAppTemplateJs } from "!!raw-loader!./__js/AccordionStyled.component.jsx";
 
 // @ts-ignore
 export { default as cssTemplate } from "!!raw-loader!./AccordionStyled.css";

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./Slider.css";
 import {
@@ -8,40 +7,18 @@ import {
   verticalAppTemplateJs,
   cssTemplate,
 } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
 
 export default {
   component: SingleVerticalSlider,
   title: "Slider/SingleVertical",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: verticalAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "React",
-        template: verticalAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX([
-          "renderless-components@alpha",
-          "reakit",
-        ]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: verticalAppTemplateJs,
+      ts: verticalAppTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

@@ -5,7 +5,6 @@ import {
   useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
-  // @ts-ignore
 } from "renderless-components";
 
 export interface AppProps {

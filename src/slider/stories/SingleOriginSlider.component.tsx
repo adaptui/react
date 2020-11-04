@@ -68,7 +68,7 @@ interface AppProps {
 export const App: React.FC<AppProps> = args => {
   const { label, onChange, ...rest } = args;
 
-  const state = useSliderState({ min: -10, max: +10, value: [0], ...rest });
+  const state = useSliderState({ min: -10, max: +10, values: [0], ...rest });
   const {
     values,
     getValuePercent,

@@ -2,7 +2,12 @@ import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
-import { Progress, useProgressState, ProgressState } from "../index";
+import {
+  Progress,
+  useProgressState,
+  ProgressState,
+  isNull,
+} from "renderless-components";
 
 export interface AppProps {
   /**
@@ -36,7 +41,11 @@ export const App: React.FC<AppProps> = props => {
 
   React.useEffect(() => {
     const clearId = setInterval(() => {
-      !isIndeterminate && setValue(prevValue => prevValue + 5);
+      !isIndeterminate &&
+        setValue(prevValue => {
+          if (isNull(prevValue)) return prevValue;
+          return prevValue + 5;
+        });
     }, 500);
 
     if (value === 100) {

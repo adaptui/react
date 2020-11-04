@@ -1,9 +1,11 @@
+import * as React from "react";
+
 import {
   PickerBase,
   PickerBaseTrigger,
   PickerBaseContent,
   usePickerBaseState,
-} from "../index";
+} from "renderless-components";
 
 export interface AppProps {
   visible?: boolean;

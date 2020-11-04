@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import {
   rangeAppTemplate,
@@ -12,6 +11,7 @@ import {
 } from "./templates";
 import "./DatePicker.css";
 import { App as DateRangePicker } from "./DateRangePicker.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   title: "DateRangePicker",
@@ -23,28 +23,11 @@ export default {
     maxValue: { control: "date" },
   },
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: rangeAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: rangeAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "CSS",
-        template: rangeCssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: rangeAppTemplateJs,
+      ts: rangeAppTemplate,
+      css: rangeCssTemplate,
+    }),
   },
 } as Meta;
 

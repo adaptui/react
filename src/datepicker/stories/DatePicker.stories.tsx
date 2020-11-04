@@ -2,11 +2,11 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, subWeeks, format, addDays } from "date-fns";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
 import "./DatePicker.css";
 import { App as DatePicker } from "./DatePicker.component";
 import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: DatePicker,
@@ -18,28 +18,11 @@ export default {
     defaultValue: { control: "date", defaultValue: new Date() },
   },
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: appTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

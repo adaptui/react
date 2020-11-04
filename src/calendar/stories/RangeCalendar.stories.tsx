@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
 import "./RangeCalendar.css";
-import { App as RangeCalendar } from "./RangeCalendar.component";
 import {
   rangeAppTemplate,
   rangeAppTemplateJs,
   rangeCssTemplate,
 } from "./templates";
+import { App as RangeCalendar } from "./RangeCalendar.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   title: "RangeCalendar",
@@ -30,28 +30,11 @@ export default {
     maxValue: { control: "date" },
   },
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: rangeAppTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: rangeAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "CSS",
-        template: rangeCssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: rangeAppTemplateJs,
+      ts: rangeAppTemplate,
+      css: rangeCssTemplate,
+    }),
   },
 } as Meta;
 
