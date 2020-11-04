@@ -3,6 +3,7 @@ const path = require("path");
 const chalk = require("chalk");
 const globFs = require("glob-fs")();
 const transpileTs = require("./transpile-ts");
+const { capitalize } = require("lodash");
 
 function recurse(file) {
   // `file.pattern` is an object with a `glob` (string) property
@@ -54,6 +55,46 @@ const generateJsFiles = filePath => {
 
   createFile(templatePath, transpiledCode);
 };
+
+const generateTemplateFile = () => {
+  const allfiles = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
+
+  let prevComponent = "";
+  allfiles.forEach(filePath => {
+    const componentPath = filePath.split("stories")[1].replace(path.sep, "");
+
+    console.log(chalk.red.bold(`CREATED: ${componentPath}`));
+    const importString = `
+// @ts-ignore
+export { default as appTemplate } from "!!raw-loader!./${capitalize(
+      componentPath,
+    )}";
+
+// @ts-ignore
+export { default as appTemplate } from "!!raw-loader!./__js/${capitalize(
+      componentPath.replace("tsx", "jsx"),
+    )}";
+`;
+
+    const templateFilePath = filePath.split("stories")[0];
+
+    // console.log({ componentPath, prevComponent });
+    // if (componentPath.includes(prevComponent.replace(".component.tsx", ""))) {
+    //   createFile(path.join(templateFilePath, "stories", "template.ts"), "");
+    // }
+
+    fs.appendFileSync(
+      path.join(templateFilePath, "stories", "template.ts"),
+      importString,
+      "UTF-8",
+      { flags: "a+" },
+    );
+
+    prevComponent = componentPath;
+  });
+};
+
+generateTemplateFile();
 
 const files = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
 files.forEach(filePath => generateJsFiles(filePath));
