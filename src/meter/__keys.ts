@@ -6,7 +6,6 @@ const METER_STATE_KEYS = [
   "low",
   "high",
   "optimum",
-  "ariaValueText",
   "percent",
   "status",
 ] as const;

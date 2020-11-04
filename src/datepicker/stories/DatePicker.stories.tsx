@@ -1,19 +1,28 @@
-import "./index.css";
 import * as React from "react";
-import { useArgs } from "@storybook/client-api";
 import { Meta, Story } from "@storybook/react";
+import { useArgs } from "@storybook/client-api";
 import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
-import DatePickerComponent from "./DatePickerComponent";
+import "./DatePicker.css";
+import { App as DatePicker } from "./DatePicker.component";
+import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: DatePickerComponent,
+  component: DatePicker,
   title: "DatePicker",
   argTypes: {
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
-    defaultValue: { control: "date" },
+    defaultValue: { control: "date", defaultValue: new Date() },
+  },
+  parameters: {
+    preview: createPreviewTabs({
+      js: appTemplateJs,
+      ts: appTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 
@@ -26,7 +35,7 @@ const Base: Story = args => {
   const [{ value }, updateArgs] = useArgs();
 
   return (
-    <DatePickerComponent
+    <DatePicker
       value={value}
       onChange={date =>
         updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
@@ -80,7 +89,7 @@ export const ControllableState = () => {
         onChange={e => setValue(e.target.value)}
         value={value}
       />
-      <DatePickerComponent value={value} onChange={setValue} />
+      <DatePicker value={value} onChange={setValue} />
     </div>
   );
 };

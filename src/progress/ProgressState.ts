@@ -9,10 +9,6 @@ import { SealedInitialState, useSealedState } from "reakit-utils";
 
 import { valueToPercent, isFunction, isNull } from "../utils";
 
-type AriaValueText =
-  | string
-  | ((value: number | null, percent: number | null) => string);
-
 export interface ProgressState {
   /**
    * The `value` of the progress indicator.
@@ -32,10 +28,6 @@ export interface ProgressState {
    */
   max: number;
   /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText: AriaValueText;
-  /**
    * Set isInterminate state
    */
   isIndeterminate: boolean;
@@ -54,7 +46,7 @@ export interface ProgressAction {
 
 export type ProgressInitialState = Pick<
   Partial<ProgressState>,
-  "value" | "min" | "max" | "ariaValueText"
+  "value" | "min" | "max"
 >;
 
 export type ProgressStateReturn = ProgressState & ProgressAction;
@@ -62,12 +54,9 @@ export type ProgressStateReturn = ProgressState & ProgressAction;
 export function useProgressState(
   initialState: SealedInitialState<ProgressInitialState> = {},
 ): ProgressStateReturn {
-  const {
-    value: initialValue = 0,
-    min = 0,
-    max = 100,
-    ariaValueText,
-  } = useSealedState(initialState);
+  const { value: initialValue = 0, min = 0, max = 100 } = useSealedState(
+    initialState,
+  );
   const [value, setValue] = React.useState(clampValue(initialValue, min, max));
   const percent = isNull(value) ? null : valueToPercent(value, min, max);
 
@@ -78,11 +67,6 @@ export function useProgressState(
     max,
     isIndeterminate: isNull(value),
     percent,
-    ariaValueText: isFunction(ariaValueText)
-      ? ariaValueText?.(value, percent)
-      : isNull(value)
-      ? "indeterminate"
-      : `${percent}`,
   };
 }
 

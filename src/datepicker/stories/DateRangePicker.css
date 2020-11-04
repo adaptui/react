@@ -1,0 +1,194 @@
+.datepicker__trigger {
+  display: flex;
+  padding: 5px;
+  margin-left: 10px;
+  background-color: #f8f8f8;
+}
+
+.datepicker__trigger svg {
+  fill: #43424d;
+  width: 20px;
+}
+
+.datepicker__header {
+  padding: 0;
+  border-radius: 4px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.datepicker__header:focus-within {
+  border: 1px solid #1e65fd;
+}
+
+[aria-invalid="true"] > .datepicker__header {
+  border: 1px solid #c00000;
+}
+
+.datepicker__field {
+  font-family: monospace;
+  display: flex;
+}
+
+.datepicker__field--item {
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.datepicker__field--item:focus {
+  background-color: #1e65fd;
+  color: white;
+  outline: none;
+}
+
+.datepicker [aria-disabled="true"] {
+  opacity: 0.5;
+}
+
+.calendar-range {
+  margin-top: 1em;
+  max-width: 320px;
+  position: relative;
+}
+
+.calendar-range .header {
+  cursor: default;
+  background-color: #fbfbff;
+  padding: 7px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #676d7e;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.calendar-range h2 {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 1em;
+  color: #676d7e;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.calendar-range button {
+  border-style: none;
+  background: transparent;
+}
+
+.calendar-range button::-moz-focus-inner {
+  border: 0;
+}
+
+.calendar-range .prev-year,
+.calendar-range .prev-month,
+.calendar-range .next-month,
+.calendar-range .next-year {
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  color: #676d7e;
+}
+
+.calendar-range .prev-year:focus,
+.calendar-range .prev-month:focus,
+.calendar-range .next-month:focus,
+.calendar-range .next-year:focus {
+  padding: 2px;
+  border: 2px solid #676d7e;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.calendar-range .prev-year:hover,
+.calendar-range .prev-month:hover,
+.calendar-range .next-month:hover,
+.calendar-range .next-year:hover {
+  padding: 3px;
+  border: 1px solid #676d7e;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.calendar-range .month-year {
+  display: inline-block;
+  width: 12em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-range .dates {
+  width: 320px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+  background-color: #fbfbff;
+  border-spacing: 0;
+}
+
+.calendar-range .dates th,
+.calendar-range .dates td {
+  text-align: center;
+}
+
+.calendar-range .dates tr {
+  border: 1px solid black;
+}
+
+.calendar-range .dates td {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 1px 0;
+}
+
+.calendar-range .dates td span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.calendar-range [aria-disabled="true"] {
+  color: #959595;
+}
+.calendar-range [data-weekend] {
+  color: #fa3131;
+}
+
+[data-is-range-start] > span,
+[data-is-range-end] > span,
+[data-is-range-selection] > span,
+[data-is-selection-start] > span,
+[data-is-selection-end] > span {
+  color: white !important;
+}
+
+[data-is-range-start] > span {
+  background-color: #1141aa;
+}
+[data-is-range-end] > span {
+  background-color: #1141aa;
+}
+[data-is-range-selection] > span {
+  background-color: #427af3;
+}
+[data-is-selection-start] > span {
+  background-color: #1141aa;
+  border-radius: 50% 0 0 50%;
+}
+[data-is-selection-end] > span {
+  background-color: #1141aa;
+  border-radius: 0% 50% 50% 0%;
+}

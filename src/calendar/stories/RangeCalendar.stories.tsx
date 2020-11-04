@@ -1,14 +1,20 @@
-import "./range-style.css";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-
-import RangeCalendarComponent from "./RangeCalendarComponent";
 import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
+
+import "./RangeCalendar.css";
+import {
+  rangeAppTemplate,
+  rangeAppTemplateJs,
+  rangeCssTemplate,
+} from "./templates";
+import { App as RangeCalendar } from "./RangeCalendar.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   title: "RangeCalendar",
-  component: RangeCalendarComponent,
+  component: RangeCalendar,
   argTypes: {
     start: { control: "date", name: "value.start" },
     end: { control: "date", name: "value.end" },
@@ -22,6 +28,13 @@ export default {
     },
     minValue: { control: "date" },
     maxValue: { control: "date" },
+  },
+  parameters: {
+    preview: createPreviewTabs({
+      js: rangeAppTemplateJs,
+      ts: rangeAppTemplate,
+      css: rangeCssTemplate,
+    }),
   },
 } as Meta;
 
@@ -41,7 +54,7 @@ const Base: Story = args => {
   const [argProps, updateArgs] = useArgs();
 
   return (
-    <RangeCalendarComponent
+    <RangeCalendar
       value={{ start: argProps["start"], end: argProps["nd"] }}
       onChange={date => {
         updateArgs({
@@ -99,7 +112,7 @@ export const ControlledValue = () => {
         value={start}
       />
       <input type="date" onChange={e => setEnd(e.target.value)} value={end} />
-      <RangeCalendarComponent
+      <RangeCalendar
         value={{ start, end }}
         onChange={({ end, start }) => {
           setStart(start);

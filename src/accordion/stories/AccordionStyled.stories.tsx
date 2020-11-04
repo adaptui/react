@@ -1,41 +1,24 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { DEFAULT_REACT_CODESANDBOX } from "storybook-addon-preview";
 
-import "./AccordionStyled.css";
-import { App as Accordion } from "./AccordionStyled.component";
 import {
   styledAppTemplate,
-  appTemplateStyledJs,
+  styledAppTemplateJs,
   cssTemplate,
 } from "./templates";
+import "./AccordionStyled.css";
+import { App as Accordion } from "./AccordionStyled.component";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Accordion,
   title: "AccordionStyled",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: appTemplateStyledJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "React",
-        template: styledAppTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: DEFAULT_REACT_CODESANDBOX(["renderless-components@alpha"]),
-      },
-      {
-        tab: "CSS",
-        template: cssTemplate,
-        language: "css",
-        copy: true,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: styledAppTemplateJs,
+      ts: styledAppTemplate,
+      css: cssTemplate,
+    }),
   },
 } as Meta;
 

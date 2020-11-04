@@ -6,7 +6,7 @@ import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
 export type MeterOptions = BoxOptions &
-  Pick<MeterStateReturn, "value" | "max" | "min" | "ariaValueText">;
+  Pick<MeterStateReturn, "value" | "max" | "min" | "percent">;
 
 export type MeterHTMLProps = BoxHTMLProps;
 
@@ -18,7 +18,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   keys: METER_KEYS,
 
   useProps(options, htmlProps) {
-    const { value, max, min, ariaValueText } = options;
+    const { value, max, min, percent } = options;
 
     // Use the meter role if available, but fall back to progressbar if not
     // Chrome currently falls back from meter automatically, and Firefox
@@ -31,7 +31,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": value,
-      "aria-valuetext": `${ariaValueText}`,
+      "aria-valuetext": !percent.toString() ? undefined : `${percent}%`,
       ...htmlProps,
     };
   },

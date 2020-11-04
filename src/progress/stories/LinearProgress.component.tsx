@@ -2,12 +2,13 @@ import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
-import { cx } from "../../utils";
-import { Progress, useProgressState, ProgressState } from "../index";
-
-type AriaValueText =
-  | string
-  | ((value: number | null, percent: number | null) => string);
+import {
+  Progress,
+  useProgressState,
+  ProgressState,
+  cx,
+} from "renderless-components";
+import { isNull } from "renderless-components/utils";
 
 export interface AppProps {
   /**
@@ -27,10 +28,6 @@ export interface AppProps {
    * @default 100
    */
   max?: number;
-  /**
-   * Defines the human readable text alternative of aria-valuenow for a range widget.
-   */
-  ariaValueText?: AriaValueText;
   /**
    * Adds a label to meter.
    * @default false
@@ -61,7 +58,11 @@ export const App: React.FC<AppProps> = props => {
 
   React.useEffect(() => {
     const clearId = setInterval(() => {
-      !isIndeterminate && setValue(prevValue => prevValue + 5);
+      !isIndeterminate &&
+        setValue(prevValue => {
+          if (isNull(prevValue)) return prevValue;
+          return prevValue + 5;
+        });
     }, 500);
 
     if (value === 100) {
