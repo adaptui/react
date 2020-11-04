@@ -1,32 +1,13 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
-
-import {
-  cssTemplate,
-  appTemplateCombobox,
-  appTemplateJsCombobox,
-} from "./templates";
-import { App as Combobox } from "./Combobox.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { CompositeInitialState, PopoverInitialState } from "reakit";
 import {
   Select,
   SelectMenu,
   SelectInput,
   SelectOption,
   useSelectState,
-} from "..";
-
-export default {
-  component: Combobox,
-  title: "Select/Combobox",
-  parameters: {
-    preview: createPreviewTabs({
-      js: appTemplateJsCombobox,
-      ts: appTemplateCombobox,
-      css: cssTemplate,
-    }),
-  },
-} as Meta;
+  SelectInitialState,
+} from "renderless-components";
 
 const countries = [
   { name: "australia", emoji: "🇦🇺" },
@@ -45,12 +26,14 @@ const countries = [
   { name: "zimbabwe", emoji: "🇿🇼" },
 ];
 
-const Base: Story = args => <Combobox {...args} />;
+type AppProps = Omit<
+  SelectInitialState,
+  keyof (PopoverInitialState & CompositeInitialState)
+>;
 
-export const Default = Base.bind({});
-
-export const WithoutFilter: React.FC = () => {
+export const App: React.FC<AppProps> = props => {
   const state = useSelectState({
+    ...props,
     allowMultiselect: true,
     selected: "india",
     isCombobox: true,
@@ -86,17 +69,22 @@ export const WithoutFilter: React.FC = () => {
       <SelectMenu className="select__dropdown" {...state}>
         {countries.map(item => {
           return (
-            <SelectOption
-              className="select__dropdown--item"
-              {...state}
-              key={item.name}
-              value={item.name}
-            >
-              {item.name}
-            </SelectOption>
+            item.name.match(state.inputValue) &&
+            !state.selected.includes(item.name) && (
+              <SelectOption
+                className="select__dropdown--item"
+                {...state}
+                key={item.name}
+                value={item.name}
+              >
+                {item.name}
+              </SelectOption>
+            )
           );
         })}
       </SelectMenu>
     </Select>
   );
 };
+
+export default App;
