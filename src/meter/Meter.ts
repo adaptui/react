@@ -31,7 +31,7 @@ const useMeter = createHook<MeterOptions, MeterHTMLProps>({
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": value,
-      "aria-valuetext": !percent.toString() ? undefined : percent.toString(),
+      "aria-valuetext": !percent.toString() ? undefined : `${percent}%`,
       ...htmlProps,
     };
   },
