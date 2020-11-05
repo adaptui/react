@@ -15,6 +15,7 @@ export const Variants: React.FC = () => {
       {variants.map(variant => {
         return (
           <button
+            key={variant}
             onClick={() => {
               show({ type: variant, content: `This is ${variant}` });
             }}
@@ -68,6 +69,7 @@ export const Placements: React.FC = () => {
       {placements.map(placement => {
         return (
           <button
+            key={placement}
             onClick={() => {
               show({
                 type: randomType(),
