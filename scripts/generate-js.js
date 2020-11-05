@@ -102,18 +102,18 @@ function generateImportString(component, index) {
     // @ts-ignore
     export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
     // @ts-ignore
-    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponent}";
+    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponent}";\n
   `;
 
   if (component.endsWith(".css")) {
     importString = outdent`
-
-      // @ts-ignore
-      export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
+    ${warningMsg}
+    // @ts-ignore
+    export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
     `;
   }
 
-  return index === 0 ? importString.trim() : importString;
+  return importString;
 }
 
 function generateTemplateFile() {

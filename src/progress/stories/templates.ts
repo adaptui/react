@@ -5,6 +5,7 @@ export { default as circularProgressTemplate } from "!!raw-loader!./CircularProg
 
 // @ts-ignore
 export { default as circularProgressTemplateJs } from "!!raw-loader!./__js/CircularProgress.component.jsx";
+
 // @ts-ignore
 export { default as linearProgressTemplate } from "!!raw-loader!./LinearProgress.component.tsx";
 

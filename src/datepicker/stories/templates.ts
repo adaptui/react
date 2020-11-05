@@ -5,6 +5,7 @@ export { default as datePickerTemplate } from "!!raw-loader!./DatePicker.compone
 
 // @ts-ignore
 export { default as datePickerTemplateJs } from "!!raw-loader!./__js/DatePicker.component.jsx";
+
 // @ts-ignore
 export { default as datePickerCssTemplate } from "!!raw-loader!./DatePicker.css";
 
@@ -13,5 +14,6 @@ export { default as dateRangePickerTemplate } from "!!raw-loader!./DateRangePick
 
 // @ts-ignore
 export { default as dateRangePickerTemplateJs } from "!!raw-loader!./__js/DateRangePicker.component.jsx";
+
 // @ts-ignore
 export { default as dateRangePickerCssTemplate } from "!!raw-loader!./DateRangePicker.css";

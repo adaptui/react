@@ -5,5 +5,6 @@ export { default as breadcrumbsTemplate } from "!!raw-loader!./Breadcrumbs.compo
 
 // @ts-ignore
 export { default as breadcrumbsTemplateJs } from "!!raw-loader!./__js/Breadcrumbs.component.jsx";
+
 // @ts-ignore
 export { default as breadcrumbsCssTemplate } from "!!raw-loader!./Breadcrumbs.css";
