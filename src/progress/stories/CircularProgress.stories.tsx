@@ -2,7 +2,10 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Progress } from "./CircularProgress.component";
-import { circularAppTemplate, circularAppTemplateJs } from "./templates";
+import {
+  circularProgressTemplate,
+  circularProgressTemplateJs,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -10,8 +13,8 @@ export default {
   title: "ProgressCircular",
   parameters: {
     preview: createPreviewTabs({
-      js: circularAppTemplateJs,
-      ts: circularAppTemplate,
+      js: circularProgressTemplateJs,
+      ts: circularProgressTemplate,
       deps: ["reakit@latest", "emotion@latest"],
     }),
   },

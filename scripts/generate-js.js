@@ -3,6 +3,8 @@ const path = require("path");
 const chalk = require("chalk");
 const globFs = require("glob-fs")();
 const transpileTs = require("./transpile-ts");
+const outdent = require("outdent");
+const { camelCase } = require("lodash");
 
 function recurse(file) {
   // `file.pattern` is an object with a `glob` (string) property
@@ -54,6 +56,99 @@ const generateJsFiles = filePath => {
 
   createFile(templatePath, transpiledCode);
 };
+
+// -> get all the component folders [accordion, breadcrumb...]
+// -> find all the .components inside the folders
+// -> create object with component pairs
+// { accordion: [Accordion.component.tsx, AccordionStyled.component.tsx] }
+// -> loop through them and create template.ts file
+const isDirectory = source => fs.lstatSync(source).isDirectory();
+const getDirectories = source =>
+  fs
+    .readdirSync(source)
+    .map(name => path.join(source, name))
+    .filter(isDirectory);
+
+function getComponentFolderPairs() {
+  const componentFolders = getDirectories(
+    path.resolve(__dirname, "../src"),
+  ).filter(path => !path.match(/(__mocks__|utils)/));
+
+  const components = componentFolders.reduce((prev, curr) => {
+    const folderName = path.parse(curr);
+    const allfiles = fs
+      .readdirSync(`${curr}/stories`)
+      .filter(fn => fn.match(/(\.component\.tsx|\.css)$/));
+
+    return { ...prev, [folderName.base]: allfiles };
+  }, {});
+
+  return components;
+}
+
+function generateImportString(component, index) {
+  const templateVarName = camelCase(
+    component.replace(".component.tsx", "").replace(".css", ""),
+  );
+
+  const warningMsg =
+    index === 0
+      ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
+      : "";
+
+  const jsComponent = component.replace("tsx", "jsx");
+  let importString = outdent`
+    ${warningMsg}
+    // @ts-ignore
+    export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
+    // @ts-ignore
+    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponent}";\n
+  `;
+
+  if (component.endsWith(".css")) {
+    importString = outdent`
+    ${warningMsg}
+    // @ts-ignore
+    export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
+    `;
+  }
+
+  return importString;
+}
+
+function generateTemplateFile() {
+  const components = getComponentFolderPairs();
+
+  Object.keys(components).forEach(componentName => {
+    const componentPairs = components[componentName];
+
+    const templateFilePath = path.join(
+      __dirname,
+      "../src",
+      componentName,
+      "stories",
+      "templates.ts",
+    );
+
+    createFile(templateFilePath, "");
+
+    componentPairs.forEach((component, index) => {
+      const importString = generateImportString(component, index);
+
+      console.log(
+        chalk.red.yellow(
+          `Writing template.ts (${chalk.cyanBright(component)})`,
+        ),
+      );
+
+      fs.appendFileSync(templateFilePath, importString, "UTF-8", {
+        flags: "a+",
+      });
+    });
+  });
+}
+
+generateTemplateFile();
 
 const files = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
 files.forEach(filePath => generateJsFiles(filePath));

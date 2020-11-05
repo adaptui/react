@@ -2,9 +2,9 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import {
-  styledAppTemplate,
-  styledAppTemplateJs,
-  cssTemplate,
+  accordionStyledTemplate,
+  accordionStyledTemplateJs,
+  accordionStyledCssTemplate,
 } from "./templates";
 import "./AccordionStyled.css";
 import { App as Accordion } from "./AccordionStyled.component";
@@ -15,9 +15,9 @@ export default {
   title: "AccordionStyled",
   parameters: {
     preview: createPreviewTabs({
-      js: styledAppTemplateJs,
-      ts: styledAppTemplate,
-      css: cssTemplate,
+      js: accordionStyledTemplate,
+      ts: accordionStyledTemplateJs,
+      css: accordionStyledCssTemplate,
     }),
   },
 } as Meta;

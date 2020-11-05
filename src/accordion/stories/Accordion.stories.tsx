@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { appTemplate, appTemplateJs } from "./templates";
+import { accordionTemplate, accordionTemplateJs } from "./templates";
 import { App as Accordion } from "./Accordion.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -9,7 +9,10 @@ export default {
   component: Accordion,
   title: "Accordion",
   parameters: {
-    preview: createPreviewTabs({ js: appTemplateJs, ts: appTemplate }),
+    preview: createPreviewTabs({
+      js: accordionTemplate,
+      ts: accordionTemplateJs,
+    }),
   },
 } as Meta;
 
