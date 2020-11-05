@@ -1,14 +1,14 @@
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { useLocale } from "@react-aria/i18n";
-import { mergeProps } from "@react-aria/utils";
+import { useMove } from "@react-aria/interactions";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { mergeProps, useGlobalListeners } from "@react-aria/utils";
 
 import { clamp } from "../utils";
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
-import { useGlobalListeners, useMove } from "./helpers";
 
 export type SliderTrackOptions = BoxOptions &
   Pick<
