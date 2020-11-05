@@ -12,14 +12,14 @@ module.exports = {
   ],
   // Need to configure typescript manually otherwise addons will not infer from types
   // https://github.com/storybookjs/storybook/issues/11146#issuecomment-643878741
-  typescript: {
-    check: true,
-    checkOptions: { tsconfig },
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      tsconfigPath: tsconfig,
-      propFilter: (prop: { name: string }) => !/^(testID)$/.test(prop.name),
-    },
-  },
+  // typescript: {
+  //   check: true,
+  //   checkOptions: { tsconfig },
+  //   reactDocgen: "react-docgen-typescript",
+  //   reactDocgenTypescriptOptions: {
+  //     shouldExtractLiteralValuesFromEnum: true,
+  //     tsconfigPath: tsconfig,
+  //     propFilter: (prop: { name: string }) => !/^(testID)$/.test(prop.name),
+  //   },
+  // },
 };
