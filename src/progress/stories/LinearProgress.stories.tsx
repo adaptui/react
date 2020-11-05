@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Progress } from "./LinearProgress.component";
-import { linearAppTemplate, linearAppTemplateJs } from "./templates";
+import { linearProgressTemplate, linearProgressTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -10,8 +10,8 @@ export default {
   title: "ProgressLinear",
   parameters: {
     preview: createPreviewTabs({
-      js: linearAppTemplateJs,
-      ts: linearAppTemplate,
+      js: linearProgressTemplateJs,
+      ts: linearProgressTemplate,
       deps: ["reakit@latest", "emotion@latest"],
     }),
   },

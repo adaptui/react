@@ -1,5 +1,7 @@
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./NumberInput.component.tsx";
+// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate
 
 // @ts-ignore
-export { default as appTemplateJs } from "!!raw-loader!./__js/NumberInput.component.jsx";
+export { default as numberInputTemplate } from "!!raw-loader!./NumberInput.component.tsx";
+
+// @ts-ignore
+export { default as numberInputTemplateJs } from "!!raw-loader!./__js/NumberInput.component.jsx";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Link } from "./Link.component";
-import { appTemplate, appTemplateJs } from "./templates";
+import { linkTemplate, linkTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -10,8 +10,8 @@ export default {
   title: "Link",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
+      js: linkTemplateJs,
+      ts: linkTemplate,
     }),
   },
 } as Meta;

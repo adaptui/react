@@ -1,17 +1,17 @@
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./Calendar.component.tsx";
+// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate
 
 // @ts-ignore
-export { default as appTemplateJs } from "!!raw-loader!./__js/Calendar.component.jsx";
+export { default as calendarTemplate } from "!!raw-loader!./Calendar.component.tsx";
 
 // @ts-ignore
-export { default as rangeAppTemplate } from "!!raw-loader!./RangeCalendar.component.tsx";
+export { default as calendarTemplateJs } from "!!raw-loader!./__js/Calendar.component.jsx";
+// @ts-ignore
+export { default as calendarCssTemplate } from "!!raw-loader!./Calendar.css";
 
 // @ts-ignore
-export { default as rangeAppTemplateJs } from "!!raw-loader!./__js/RangeCalendar.component.jsx";
+export { default as rangeCalendarTemplate } from "!!raw-loader!./RangeCalendar.component.tsx";
 
 // @ts-ignore
-export { default as cssTemplate } from "!!raw-loader!./Calendar.css";
-
+export { default as rangeCalendarTemplateJs } from "!!raw-loader!./__js/RangeCalendar.component.jsx";
 // @ts-ignore
-export { default as rangeCssTemplate } from "!!raw-loader!./RangeCalendar.css";
+export { default as rangeCalendarCssTemplate } from "!!raw-loader!./RangeCalendar.css";

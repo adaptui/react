@@ -3,7 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Breadcrumbs.css";
 import { App as Breadcrumbs } from "./Breadcrumbs.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  breadcrumbsTemplate,
+  breadcrumbsTemplateJs,
+  breadcrumbsCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -11,9 +15,9 @@ export default {
   title: "Breadcrumbs",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
-      css: cssTemplate,
+      js: breadcrumbsTemplateJs,
+      ts: breadcrumbsTemplate,
+      css: breadcrumbsCssTemplate,
     }),
   },
 } as Meta;

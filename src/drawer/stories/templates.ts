@@ -1,5 +1,7 @@
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./Drawer.component.tsx";
+// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate
 
 // @ts-ignore
-export { default as appTemplateJs } from "!!raw-loader!./Drawer.component.tsx";
+export { default as drawerTemplate } from "!!raw-loader!./Drawer.component.tsx";
+
+// @ts-ignore
+export { default as drawerTemplateJs } from "!!raw-loader!./__js/Drawer.component.jsx";

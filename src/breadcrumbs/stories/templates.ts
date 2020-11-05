@@ -1,8 +1,9 @@
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./Breadcrumbs.component.tsx";
+// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate
 
 // @ts-ignore
-export { default as appTemplateJs } from "!!raw-loader!./__js/Breadcrumbs.component.jsx";
+export { default as breadcrumbsTemplate } from "!!raw-loader!./Breadcrumbs.component.tsx";
 
 // @ts-ignore
-export { default as cssTemplate } from "!!raw-loader!./Breadcrumbs.css";
+export { default as breadcrumbsTemplateJs } from "!!raw-loader!./__js/Breadcrumbs.component.jsx";
+// @ts-ignore
+export { default as breadcrumbsCssTemplate } from "!!raw-loader!./Breadcrumbs.css";

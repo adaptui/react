@@ -1,14 +1,14 @@
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./Accordion.component.tsx";
+// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate
 
 // @ts-ignore
-export { default as styledAppTemplate } from "!!raw-loader!./AccordionStyled.component.tsx";
+export { default as accordionTemplate } from "!!raw-loader!./Accordion.component.tsx";
 
 // @ts-ignore
-export { default as appTemplateJs } from "!!raw-loader!./__js/Accordion.component.jsx";
+export { default as accordionTemplateJs } from "!!raw-loader!./__js/Accordion.component.jsx";
+// @ts-ignore
+export { default as accordionStyledTemplate } from "!!raw-loader!./AccordionStyled.component.tsx";
 
 // @ts-ignore
-export { default as styledAppTemplateJs } from "!!raw-loader!./__js/AccordionStyled.component.jsx";
-
+export { default as accordionStyledTemplateJs } from "!!raw-loader!./__js/AccordionStyled.component.jsx";
 // @ts-ignore
-export { default as cssTemplate } from "!!raw-loader!./AccordionStyled.css";
+export { default as accordionStyledCssTemplate } from "!!raw-loader!./AccordionStyled.css";

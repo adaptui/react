@@ -4,7 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import {
   accordionStyledTemplate,
   accordionStyledTemplateJs,
-  accordionStyledStyleCssTemplate,
+  accordionStyledCssTemplate,
 } from "./templates";
 import "./AccordionStyled.css";
 import { App as Accordion } from "./AccordionStyled.component";
@@ -17,7 +17,7 @@ export default {
     preview: createPreviewTabs({
       js: accordionStyledTemplate,
       ts: accordionStyledTemplateJs,
-      css: accordionStyledStyleCssTemplate,
+      css: accordionStyledCssTemplate,
     }),
   },
 } as Meta;

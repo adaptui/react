@@ -3,9 +3,9 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
 import {
-  verticalAppTemplate,
-  verticalAppTemplateJs,
-  cssTemplate,
+  singleVerticalSliderTemplate,
+  singleVerticalSliderTemplateJs,
+  sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
@@ -15,9 +15,9 @@ export default {
   title: "Slider/SingleVertical",
   parameters: {
     preview: createPreviewTabs({
-      js: verticalAppTemplateJs,
-      ts: verticalAppTemplate,
-      css: cssTemplate,
+      js: singleVerticalSliderTemplateJs,
+      ts: singleVerticalSliderTemplate,
+      css: sliderCssTemplate,
     }),
   },
 } as Meta;

@@ -4,16 +4,20 @@ import { Meta, Story } from "@storybook/react";
 import "./Slider.css";
 import { App as RangeSlider } from "./RangeSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { rangeAppTemplate, rangeAppTemplateJs, cssTemplate } from "./templates";
+import {
+  rangeSliderTemplate,
+  rangeSliderTemplateJs,
+  sliderCssTemplate,
+} from "./templates";
 
 export default {
   component: RangeSlider,
   title: "Slider/Range",
   parameters: {
     preview: createPreviewTabs({
-      js: rangeAppTemplateJs,
-      ts: rangeAppTemplate,
-      css: cssTemplate,
+      js: rangeSliderTemplateJs,
+      ts: rangeSliderTemplate,
+      css: sliderCssTemplate,
     }),
   },
 } as Meta;
