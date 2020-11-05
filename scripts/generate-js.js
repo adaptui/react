@@ -3,7 +3,8 @@ const path = require("path");
 const chalk = require("chalk");
 const globFs = require("glob-fs")();
 const transpileTs = require("./transpile-ts");
-const { capitalize } = require("lodash");
+const outdent = require("outdent");
+const { camelCase } = require("lodash");
 
 function recurse(file) {
   // `file.pattern` is an object with a `glob` (string) property
@@ -56,43 +57,90 @@ const generateJsFiles = filePath => {
   createFile(templatePath, transpiledCode);
 };
 
-const generateTemplateFile = () => {
-  const allfiles = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
+// -> get all the component folders [accordion, breadcrumb...]
+// -> find all the .components inside the folders
+// -> create object with component pairs
+// { accordion: [Accordion.component.tsx, AccordionStyled.component.tsx] }
+// -> loop through them and create template.ts file
+const isDirectory = source => fs.lstatSync(source).isDirectory();
+const getDirectories = source =>
+  fs
+    .readdirSync(source)
+    .map(name => path.join(source, name))
+    .filter(isDirectory);
 
-  let prevComponent = "";
-  allfiles.forEach(filePath => {
-    const componentPath = filePath.split("stories")[1].replace(path.sep, "");
+function generateTemplateFile() {
+  const componentFolders = getDirectories(
+    path.resolve(__dirname, "../src"),
+  ).filter(path => !path.match(/(__mocks__|utils)/));
 
-    console.log(chalk.red.bold(`CREATED: ${componentPath}`));
-    const importString = `
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./${capitalize(
-      componentPath,
-    )}";
+  const components = componentFolders.reduce((prev, curr) => {
+    const folderName = path.parse(curr);
+    const allfiles = fs
+      .readdirSync(`${curr}/stories`)
+      .filter(fn => fn.match(/(\.component\.tsx|\.css)$/));
 
-// @ts-ignore
-export { default as appTemplate } from "!!raw-loader!./__js/${capitalize(
-      componentPath.replace("tsx", "jsx"),
-    )}";
-`;
+    return { ...prev, [folderName.base]: allfiles };
+  }, {});
 
-    const templateFilePath = filePath.split("stories")[0];
+  Object.keys(components).forEach(componentName => {
+    const componentPairs = components[componentName];
 
-    // console.log({ componentPath, prevComponent });
-    // if (componentPath.includes(prevComponent.replace(".component.tsx", ""))) {
-    //   createFile(path.join(templateFilePath, "stories", "template.ts"), "");
-    // }
-
-    fs.appendFileSync(
-      path.join(templateFilePath, "stories", "template.ts"),
-      importString,
-      "UTF-8",
-      { flags: "a+" },
+    const templateFilePath = path.join(
+      __dirname,
+      "../src",
+      componentName,
+      "stories",
+      "templates.ts",
     );
 
-    prevComponent = componentPath;
+    createFile(templateFilePath, "");
+
+    componentPairs.forEach((component, index) => {
+      const templateVarName = camelCase(
+        component.replace(".component.tsx", "").replace(".css", ""),
+      );
+
+      let importString = outdent`
+        ${
+          index === 0
+            ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
+            : ""
+        }
+        // @ts-ignore
+        export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
+        // @ts-ignore
+        export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${component.replace(
+        "tsx",
+        "jsx",
+      )}";
+      `;
+
+      if (component.endsWith(".css")) {
+        importString = outdent`
+        
+          // @ts-ignore
+          export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
+        `;
+      }
+
+      console.log(
+        chalk.red.yellow(
+          `Writing template.ts (${chalk.cyanBright(component)})`,
+        ),
+      );
+
+      fs.appendFileSync(
+        templateFilePath,
+        index === 0 ? importString.trim() : importString,
+        "UTF-8",
+        {
+          flags: "a+",
+        },
+      );
+    });
   });
-};
+}
 
 generateTemplateFile();
 
