@@ -69,7 +69,7 @@ const getDirectories = source =>
     .map(name => path.join(source, name))
     .filter(isDirectory);
 
-function generateTemplateFile() {
+function getComponentFolderPairs() {
   const componentFolders = getDirectories(
     path.resolve(__dirname, "../src"),
   ).filter(path => !path.match(/(__mocks__|utils)/));
@@ -82,6 +82,44 @@ function generateTemplateFile() {
 
     return { ...prev, [folderName.base]: allfiles };
   }, {});
+
+  return components;
+}
+
+function generateImportString(component, index) {
+  const templateVarName = camelCase(
+    component.replace(".component.tsx", "").replace(".css", ""),
+  );
+
+  const warningMsg =
+    index === 0
+      ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
+      : "";
+
+  let importString = outdent`
+      ${warningMsg}
+      // @ts-ignore
+      export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
+      // @ts-ignore
+      export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${component.replace(
+    "tsx",
+    "jsx",
+  )}";
+    `;
+
+  if (component.endsWith(".css")) {
+    importString = outdent`
+
+      // @ts-ignore
+      export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
+    `;
+  }
+
+  return index === 0 ? importString.trim() : importString;
+}
+
+function generateTemplateFile() {
+  const components = getComponentFolderPairs();
 
   Object.keys(components).forEach(componentName => {
     const componentPairs = components[componentName];
@@ -97,32 +135,7 @@ function generateTemplateFile() {
     createFile(templateFilePath, "");
 
     componentPairs.forEach((component, index) => {
-      const templateVarName = camelCase(
-        component.replace(".component.tsx", "").replace(".css", ""),
-      );
-
-      let importString = outdent`
-        ${
-          index === 0
-            ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
-            : ""
-        }
-        // @ts-ignore
-        export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
-        // @ts-ignore
-        export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${component.replace(
-        "tsx",
-        "jsx",
-      )}";
-      `;
-
-      if (component.endsWith(".css")) {
-        importString = outdent`
-        
-          // @ts-ignore
-          export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
-        `;
-      }
+      const importString = generateImportString(component, index);
 
       console.log(
         chalk.red.yellow(
@@ -130,14 +143,9 @@ function generateTemplateFile() {
         ),
       );
 
-      fs.appendFileSync(
-        templateFilePath,
-        index === 0 ? importString.trim() : importString,
-        "UTF-8",
-        {
-          flags: "a+",
-        },
-      );
+      fs.appendFileSync(templateFilePath, importString, "UTF-8", {
+        flags: "a+",
+      });
     });
   });
 }
