@@ -76,7 +76,7 @@ export const useSliderThumb = createHook<
     const reverseX = options.reversed || direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
 
-    const moveProps = useMove({
+    const { moveProps } = useMove({
       onMoveStart() {
         currentPosition.current = null;
         options.setThumbDragging(index, true);
