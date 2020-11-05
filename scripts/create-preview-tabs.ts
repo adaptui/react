@@ -1,4 +1,5 @@
 import {
+  CodeSandboxTemplate,
   DEFAULT_REACT_CODESANDBOX,
   DEFAULT_REACTJS_CODESANDBOX,
 } from "storybook-addon-preview";
@@ -46,3 +47,30 @@ export function createPreviewTabs(props: Props) {
 
   return tabs;
 }
+
+const joinStrs = (strs: string[]) => {
+  return `[${strs.map(str => `"${str}"`).join(", ")}]`;
+};
+
+export const CreateToastSandbox = ({
+  type = "tsx",
+  deps = [],
+}: {
+  type?: string;
+  deps?: string[];
+}) => {
+  const utilTab = type === "tsx" ? "Utils.tsx" : "Utils.jsx";
+  const ReactTab = type === "tsx" ? "React" : "ReactJS";
+
+  return new Function(`
+  var previews = arguments[0];
+  return {
+      framework: "${ReactTab.toLowerCase()}",
+      files: {
+          "src/App.${type}": previews["${ReactTab}"][0],
+          "src/styles.css": previews["CSS"] ? previews["CSS"][0] : "",
+          "src/ToastUtils.component.${type}": previews["${utilTab}"] ? previews["${utilTab}"][0] : "",
+      },
+      userDependencies: ${joinStrs(deps)},
+  };`) as CodeSandboxTemplate;
+};

@@ -46,7 +46,13 @@ const TYPE_MAPPING = {
 };
 
 export interface SegmentStateProps {
+  /**
+   * segment value
+   */
   value?: Date;
+  /**
+   * default segment value
+   */
   defaultValue?: Date;
   /**
    * Sets formmating of date based on Intl.DateFormatOptions
@@ -63,7 +69,13 @@ export interface SegmentStateProps {
    *
    */
   formatOptions?: DateTimeFormatOpts;
+  /**
+   * placeholder date
+   */
   placeholderDate?: Date;
+  /**
+   * callback to fire on value change
+   */
   onChange?: (value: Date, ...args: any[]) => void;
 }
 

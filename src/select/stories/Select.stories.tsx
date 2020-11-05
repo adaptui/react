@@ -1,17 +1,32 @@
+import "./Select.css";
 import React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
+import { App as Select } from "./Select.component";
 import {
-  Select,
+  selectTemplate,
+  selectTemplateJs,
+  selectCssTemplate,
+} from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import {
+  SelectMenu,
   SelectOption,
   SelectTrigger,
-  SelectMenu,
   useSelectState,
-} from "../";
-import "./style.css";
+  Select as SelectComponent,
+} from "..";
 
 export default {
-  title: "Select",
+  component: Select,
+  title: "Select/Basic",
+  parameters: {
+    preview: createPreviewTabs({
+      js: selectTemplateJs,
+      ts: selectTemplate,
+      css: selectCssTemplate,
+    }),
+  },
 } as Meta;
 
 const countries = [
@@ -31,81 +46,20 @@ const countries = [
   { name: "zimbabwe", emoji: "🇿🇼" },
 ];
 
-const SelectPicker: React.FC<{ state: any }> = ({ state }) => {
+const Base: Story = args => <Select {...args} />;
+
+export const Default = Base.bind({});
+export const MultiSelect = Base.bind({});
+MultiSelect.args = { allowMultiselect: true };
+
+export const DefaultSelected = Base.bind({});
+DefaultSelected.args = { selected: "india" };
+
+export const Scrolling: React.FC = () => {
   return (
-    <Select
-      className="select"
-      {...state}
-      onChange={(value: any) => console.log(value)}
-    >
-      <SelectTrigger className="select__header" {...state}>
-        <b style={{ color: state.isPlaceholder ? "#5d5b97" : "#33324d" }}>
-          {state.isPlaceholder ? "Select one.." : state.selected.join(",")}
-        </b>
-      </SelectTrigger>
-
-      <SelectMenu
-        {...state}
-        className="select__dropdown"
-        style={{ maxHeight: 200, overflowY: "scroll" }}
-      >
-        {countries.map(item => {
-          return (
-            <SelectOption
-              className="select__dropdown--item"
-              {...state}
-              key={item.name}
-              value={item.name}
-            >
-              {item.emoji} - {item.name}
-            </SelectOption>
-          );
-        })}
-      </SelectMenu>
-    </Select>
-  );
-};
-
-export const Default: React.FC = () => {
-  const state = useSelectState({});
-
-  return <SelectPicker state={state} />;
-};
-
-export const MultiSelect: React.FC = () => {
-  const state = useSelectState({ allowMultiselect: true });
-
-  return (
-    <Select
-      className="select"
-      {...state}
-      onChange={(value: any) => console.log(value)}
-    >
-      <SelectTrigger className="select__header" {...state}>
-        <b style={{ color: state.isPlaceholder ? "#5d5b97" : "#33324d" }}>
-          {state.isPlaceholder ? "Select one.." : state.selected.join(" ")}
-        </b>
-      </SelectTrigger>
-
-      <SelectMenu
-        {...state}
-        className="select__dropdown"
-        style={{ maxHeight: 200, overflowY: "scroll" }}
-      >
-        {countries.map(item => {
-          return (
-            <SelectOption
-              className="select__dropdown--item"
-              {...state}
-              key={item.name}
-              value={item.emoji}
-            >
-              {item.emoji} - {item.name}
-            </SelectOption>
-          );
-        })}
-      </SelectMenu>
-    </Select>
+    <div style={{ margin: "800px 0" }}>
+      <Select />
+    </div>
   );
 };
 
@@ -113,7 +67,7 @@ export const MultiSelectCheckboxes: React.FC = () => {
   const state = useSelectState({ allowMultiselect: true });
 
   return (
-    <Select
+    <SelectComponent
       className="select"
       {...state}
       onChange={(value: any) => console.log(value)}
@@ -150,22 +104,6 @@ export const MultiSelectCheckboxes: React.FC = () => {
           );
         })}
       </SelectMenu>
-    </Select>
-  );
-};
-
-export const DefaultSelected: React.FC = () => {
-  const state = useSelectState({ selected: "india" });
-
-  return <SelectPicker state={state} />;
-};
-
-export const Scrolling: React.FC = () => {
-  const state = useSelectState({ selected: "india" });
-
-  return (
-    <div style={{ margin: "800px 0" }}>
-      <SelectPicker state={state} />
-    </div>
+    </SelectComponent>
   );
 };
