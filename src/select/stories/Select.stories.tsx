@@ -3,7 +3,11 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Select } from "./Select.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  selectTemplate,
+  selectTemplateJs,
+  selectCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import {
   SelectMenu,
@@ -18,9 +22,9 @@ export default {
   title: "Select/Basic",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
-      css: cssTemplate,
+      js: selectTemplateJs,
+      ts: selectTemplate,
+      css: selectCssTemplate,
     }),
   },
 } as Meta;

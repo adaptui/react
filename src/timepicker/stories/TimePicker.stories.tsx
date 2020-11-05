@@ -3,7 +3,11 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as TimePicker } from "./TimePicker.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  timePickerTemplate,
+  timePickerTemplateJs,
+  timePickerCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -11,9 +15,9 @@ export default {
   title: "TimePicker",
   parameters: {
     preview: createPreviewTabs({
-      ts: appTemplate,
-      js: appTemplateJs,
-      css: cssTemplate,
+      ts: timePickerTemplate,
+      js: timePickerTemplateJs,
+      css: timePickerCssTemplate,
     }),
   },
 } as Meta;

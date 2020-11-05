@@ -2,9 +2,9 @@ import React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import {
-  cssTemplate,
-  appTemplateCombobox,
-  appTemplateJsCombobox,
+  selectCssTemplate,
+  comboboxTemplate,
+  comboboxTemplateJs,
 } from "./templates";
 import { App as Combobox } from "./Combobox.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -21,9 +21,9 @@ export default {
   title: "Select/Combobox",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJsCombobox,
-      ts: appTemplateCombobox,
-      css: cssTemplate,
+      js: comboboxTemplateJs,
+      ts: comboboxTemplate,
+      css: selectCssTemplate,
     }),
   },
 } as Meta;

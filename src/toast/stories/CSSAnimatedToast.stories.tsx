@@ -3,11 +3,11 @@ import React from "react";
 import { Meta } from "@storybook/react";
 
 import {
-  cssTemplate,
-  appUtilsTemplate,
-  appUtilsTemplateJs,
-  appTemplateCssAnimation,
-  appTemplateJsCssAnimation,
+  toastCssTemplate,
+  toastUtilsTemplate,
+  toastUtilsTemplateJs,
+  toastCssAnimatedTemplate,
+  toastCssAnimatedTemplateJs,
 } from "./templates";
 import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
 import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
@@ -28,35 +28,35 @@ export default {
     preview: [
       {
         tab: "ReactJS",
-        template: appTemplateJsCssAnimation,
+        template: toastCssAnimatedTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: sandboxJs,
       },
       {
         tab: "React",
-        template: appTemplateCssAnimation,
+        template: toastCssAnimatedTemplate,
         language: "tsx",
         copy: true,
         codesandbox: sandboxTs,
       },
       {
         tab: "CSS",
-        template: cssTemplate,
+        template: toastCssTemplate,
         language: "css",
         copy: true,
         codesandbox: sandboxTs,
       },
       {
         tab: "Utils.tsx",
-        template: appUtilsTemplate,
+        template: toastUtilsTemplate,
         language: "tsx",
         copy: true,
         codesandbox: sandboxTs,
       },
       {
         tab: "Utils.jsx",
-        template: appUtilsTemplateJs,
+        template: toastUtilsTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: sandboxJs,

@@ -3,7 +3,11 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Segment } from "./Segment.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  segmentTemplate,
+  segmentTemplateJs,
+  segmentCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -12,9 +16,9 @@ export default {
   parameters: {
     preview: {
       preview: createPreviewTabs({
-        ts: appTemplate,
-        js: appTemplateJs,
-        css: cssTemplate,
+        ts: segmentTemplate,
+        js: segmentTemplateJs,
+        css: segmentCssTemplate,
       }),
     },
   },
