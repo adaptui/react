@@ -5,13 +5,10 @@ import {
   PaginationButton,
   usePaginationState,
   PaginationInitialState,
+  TGoto,
 } from "renderless-components";
 
-type TGoto = "nextPage" | "prevPage" | "lastPage" | "firstPage" | number;
-
-export interface AppProps extends PaginationInitialState {}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
