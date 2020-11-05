@@ -6,22 +6,21 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { PAGINATION_BUTTON_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";
 
-export type TGoto = "next" | "prev" | "last" | "first" | number;
+export type TGoto = "nextPage" | "prevPage" | "lastPage" | "firstPage" | number;
 
 export type PaginationButtonOptions = ButtonOptions &
   Pick<
     PaginationStateReturn,
     | "currentPage"
-    | "move"
-    | "next"
-    | "prev"
-    | "first"
-    | "last"
-    | "isAtMax"
-    | "isAtMin"
+    | "movePage"
+    | "nextPage"
+    | "prevPage"
+    | "firstPage"
+    | "lastPage"
+    | "isAtLastPage"
+    | "isAtFirstPage"
   > & {
     goto: TGoto;
-    getAriaLabel?: (goto: TGoto, isCurrent: boolean) => string;
   };
 
 export type PaginationButtonHTMLProps = ButtonHTMLProps;
@@ -38,15 +37,15 @@ export const usePaginationButton = createHook<
   keys: PAGINATION_BUTTON_KEYS,
 
   useOptions(options, { disabled: htmlDisabled }) {
-    const { goto, isAtMax, isAtMin } = options;
+    const { goto, isAtLastPage, isAtFirstPage } = options;
     let disabled = false;
 
-    if (goto === "next" || goto === "last") {
-      disabled = isAtMax;
+    if (goto === "nextPage" || goto === "lastPage") {
+      disabled = isAtLastPage;
     }
 
-    if (goto === "prev" || goto === "first") {
-      disabled = isAtMin;
+    if (goto === "prevPage" || goto === "firstPage") {
+      disabled = isAtFirstPage;
     }
 
     return {
@@ -56,21 +55,26 @@ export const usePaginationButton = createHook<
   },
 
   useProps(options, { onClick: htmlOnClick, ...htmlProps }) {
-    const { currentPage, goto, getAriaLabel } = options;
+    const { currentPage, goto } = options;
     const isCurrent = currentPage === goto;
 
     const onClick = React.useCallback(() => {
+      if (options.disabled) return;
+
       if (isNumber(goto)) {
-        options.move?.(goto);
-      } else if (["next", "prev", "last", "first"].includes(goto)) {
+        options.movePage?.(goto);
+        return;
+      }
+
+      if (["nextPage", "prevPage", "lastPage", "firstPage"].includes(goto)) {
         options[goto]?.();
+        return;
       }
     }, [goto, options]);
 
-    const ariaLabel =
-      getAriaLabel?.(goto, isCurrent) ?? isCurrent
-        ? `Page ${goto}`
-        : `Go to ${goto === "prev" ? "previous" : goto} Page`;
+    const ariaLabel = isCurrent
+      ? `Page ${goto}`
+      : `Go to ${goto === "prevPage" ? "previous" : goto} Page`;
 
     return {
       "aria-label": ariaLabel,
