@@ -5,7 +5,11 @@ import { addWeeks, format, subWeeks } from "date-fns";
 
 import "./Calendar.css";
 import { App as Calendar } from "./Calendar.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  calendarTemplate,
+  calendarTemplateJs,
+  calendarCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -19,9 +23,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
-      css: cssTemplate,
+      js: calendarTemplateJs,
+      ts: calendarTemplate,
+      css: calendarCssTemplate,
     }),
   },
 } as Meta;

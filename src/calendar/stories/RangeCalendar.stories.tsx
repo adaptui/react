@@ -5,9 +5,9 @@ import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
 import "./RangeCalendar.css";
 import {
-  rangeAppTemplate,
-  rangeAppTemplateJs,
-  rangeCssTemplate,
+  rangeCalendarTemplate,
+  rangeCalendarTemplateJs,
+  rangeCalendarCssTemplate,
 } from "./templates";
 import { App as RangeCalendar } from "./RangeCalendar.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -31,9 +31,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: rangeAppTemplateJs,
-      ts: rangeAppTemplate,
-      css: rangeCssTemplate,
+      js: rangeCalendarTemplateJs,
+      ts: rangeCalendarTemplate,
+      css: rangeCalendarCssTemplate,
     }),
   },
 } as Meta;

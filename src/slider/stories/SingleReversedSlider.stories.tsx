@@ -3,9 +3,9 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
 import {
-  reversedAppTemplate,
-  reversedAppTemplateJs,
-  cssTemplate,
+  singleReversedSliderTemplate,
+  singleReversedSliderTemplateJs,
+  sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleReversedSlider } from "./SingleReversedSlider.component";
@@ -15,9 +15,9 @@ export default {
   title: "Slider/SingleReversed",
   parameters: {
     preview: createPreviewTabs({
-      js: reversedAppTemplateJs,
-      ts: reversedAppTemplate,
-      css: cssTemplate,
+      js: singleReversedSliderTemplateJs,
+      ts: singleReversedSliderTemplate,
+      css: sliderCssTemplate,
     }),
   },
 } as Meta;

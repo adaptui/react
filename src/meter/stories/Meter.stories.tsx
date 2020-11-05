@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Meter } from "./Meter.component";
-import { appTemplate, appTemplateJs } from "./templates";
+import { meterTemplate, meterTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -10,8 +10,8 @@ export default {
   title: "Meter",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
+      js: meterTemplateJs,
+      ts: meterTemplate,
       deps: ["emotion@latest"],
     }),
   },

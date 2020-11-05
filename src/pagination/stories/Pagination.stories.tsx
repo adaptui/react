@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { appTemplate, appTemplateJs } from "./templates";
+import { paginationTemplate, paginationTemplateJs } from "./templates";
 import { App as Pagination } from "./Pagination.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -10,8 +10,8 @@ export default {
   title: "Pagination",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
+      js: paginationTemplateJs,
+      ts: paginationTemplate,
     }),
   },
 } as Meta;

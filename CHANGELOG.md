@@ -4,6 +4,157 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-alpha.6](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.5...v0.1.1-alpha.6) (2020-11-05)
+
+### Features
+
+- **progress:** ✨ improve progress state
+  ([b3300ad](https://github.com/timelessco/renderless-components/commit/b3300ad2bb33ceda3b882cb7d81bb7d44c86a8d9))
+- **storybook:** 📝 add csb, copy & preview for accordion
+  ([#123](https://github.com/timelessco/renderless-components/issues/123))
+  ([7cc6bd5](https://github.com/timelessco/renderless-components/commit/7cc6bd561f1d6b4d30ae8f96fff8430a1bdbf167))
+
+### Bug Fixes
+
+- js generate script path.sep
+  ([#132](https://github.com/timelessco/renderless-components/issues/132))
+  ([e6873a0](https://github.com/timelessco/renderless-components/commit/e6873a0be471435ee3999061bec556d61c80e375))
+- **a11y:** date range picker voiceover fix
+  ([#105](https://github.com/timelessco/renderless-components/issues/105))
+  ([9993df4](https://github.com/timelessco/renderless-components/commit/9993df4e7530d8ad45ad8c7cbb7aef5293070075))
+- wrong validation state in date range picker & reexport it
+  ([#100](https://github.com/timelessco/renderless-components/issues/100))
+  ([584fae5](https://github.com/timelessco/renderless-components/commit/584fae5e6477a88d910e3cab3eb3fb134f6eb810))
+
+### Docs
+
+- **accordion:** 📝 improve stories types
+  ([ac443c6](https://github.com/timelessco/renderless-components/commit/ac443c64d0dfa9878f44b53576b9143c6ec6f612))
+
+### Code Refactoring
+
+- **meter:** ♻️ better stories & stablize meter
+  ([642f331](https://github.com/timelessco/renderless-components/commit/642f331b77695293f59ba8d982b89bf1c2eb3866))
+- **meter:** ♻️ meter state done
+  ([e199382](https://github.com/timelessco/renderless-components/commit/e199382c6bb8776f95569d059439c1270f7114a3))
+- **meter:** ♻️ remove **examples** to be consistent
+  ([1f63176](https://github.com/timelessco/renderless-components/commit/1f6317670b0d7026464cd2bd971a5b72e9bc114d))
+- **progress:** ♻️ progress stories & state done
+  ([5320ce1](https://github.com/timelessco/renderless-components/commit/5320ce12d948f4eba75562bd628e4c4defce81d2))
+- **progress:** ♻️ refactor state & stories
+  ([56d0cb3](https://github.com/timelessco/renderless-components/commit/56d0cb3358f71254a30f52f49710e1366db16ca6))
+- **progress:** ♻️ update stories & component
+  ([5bd038f](https://github.com/timelessco/renderless-components/commit/5bd038f2cc051228a9c9e3a612b129b739c971ac))
+- **reakit:** ♻️ remove external deps in 3 components
+  ([54f2752](https://github.com/timelessco/renderless-components/commit/54f2752205822c0fb48c66f6bb830bf52c445b19))
+- **storybook:** ♻️ easier access to stories - removing sub folders
+  ([d1336d6](https://github.com/timelessco/renderless-components/commit/d1336d687a5819a5d8a2422a4bd00d1c1ecb0f03))
+- **storybook:** ♻️ group commons stories
+  ([262bfb5](https://github.com/timelessco/renderless-components/commit/262bfb5634de8f31bacdb670be83e5ff6855ae4e))
+- **tests:** ✅ updated tests for meter & progress
+  ([6ebb5c8](https://github.com/timelessco/renderless-components/commit/6ebb5c8ab263eaababf9d649a30f271f5c4dc58c))
+
+### Others
+
+- added number input storybook controls
+  ([#108](https://github.com/timelessco/renderless-components/issues/108))
+  ([3e15246](https://github.com/timelessco/renderless-components/commit/3e152461da40e7ac4a33ad0a2d3c1009d0bbee25))
+- datepicker & calendar storybook controls
+  ([#106](https://github.com/timelessco/renderless-components/issues/106))
+  ([6579b8f](https://github.com/timelessco/renderless-components/commit/6579b8f4d4079244af7abd90353403e6b6106970))
+- fixed broken storybook examples and improved them
+  ([#125](https://github.com/timelessco/renderless-components/issues/125))
+  ([443f766](https://github.com/timelessco/renderless-components/commit/443f766306a27a853fa446d4a8d473f033b180eb))
+- revert meter clamp function
+  ([#113](https://github.com/timelessco/renderless-components/issues/113))
+  ([cf52991](https://github.com/timelessco/renderless-components/commit/cf5299177737abf3abd1fd748ac665022b8885e1))
+- transpile examples from ts to js
+  ([#129](https://github.com/timelessco/renderless-components/issues/129))
+  ([5a4729f](https://github.com/timelessco/renderless-components/commit/5a4729f5aecf30b77db9e2824b007b1b7e31f681))
+- **aria:** ♿️ improve progress, meter & accordion accessibility
+  ([3d6a77f](https://github.com/timelessco/renderless-components/commit/3d6a77f949685a76f784090ce18eef4d2c4d15b0))
+- **deps:** ⬆️ update babel deps
+  ([6ec1abe](https://github.com/timelessco/renderless-components/commit/6ec1abe7eb76b10428b4fb9eb1541ba70ecc3f6f))
+- **deps:** ⬆️ upgrading deps except react 17
+  ([#119](https://github.com/timelessco/renderless-components/issues/119))
+  ([f2917e8](https://github.com/timelessco/renderless-components/commit/f2917e88314e532e47b0cf4fdfee99d42aecbbbf))
+- **jsdoc:** toast jsdoc and improvements
+  ([#104](https://github.com/timelessco/renderless-components/issues/104))
+  ([7ed738e](https://github.com/timelessco/renderless-components/commit/7ed738e3d9f121c4ca06dc2fe5dd03bfc61024ca))
+- **progress:** ♿️ improve VO of progress
+  ([e91a07f](https://github.com/timelessco/renderless-components/commit/e91a07fe975eadce1540a61991bbade66eb92128))
+- **react deps:** ⬆️ upgrade react & react-dom
+  ([8cc250b](https://github.com/timelessco/renderless-components/commit/8cc250b3954c79eb7daa268374124c7604f752ef))
+- **release:** 0.1.1-alpha.5
+  ([3173150](https://github.com/timelessco/renderless-components/commit/3173150e7d0ee5b6e47a920780eea4903f00c094))
+
+### Build System
+
+- fix typescript component resolve
+  ([#134](https://github.com/timelessco/renderless-components/issues/134))
+  ([b97e10d](https://github.com/timelessco/renderless-components/commit/b97e10dc3de23daf15d2b88f34647aa65b243a75))
+- **bundle:** 👷 use chakra build setup
+  ([e5c9deb](https://github.com/timelessco/renderless-components/commit/e5c9deb652cda4003603c2a113aa623e9e44c2e8))
+- **date-fns:** 💚 tree shake date-fns with bable
+  ([44f067e](https://github.com/timelessco/renderless-components/commit/44f067e274d580c848b92870f82b4c6df8c5b29c))
+
+### Tests
+
+- added datepicker tests
+  ([#98](https://github.com/timelessco/renderless-components/issues/98))
+  ([e4b8bb9](https://github.com/timelessco/renderless-components/commit/e4b8bb9c5d98f02254e986da49606de5551ed9c1))
+- added more test cases for calendar
+  ([#121](https://github.com/timelessco/renderless-components/issues/121))
+  ([a5cbfc6](https://github.com/timelessco/renderless-components/commit/a5cbfc6af120b5233abb68c09c4ba62ee1a524bb))
+- added more test cases for slider
+  ([#133](https://github.com/timelessco/renderless-components/issues/133))
+  ([c02daf8](https://github.com/timelessco/renderless-components/commit/c02daf8ffd8a18399c2f801a9730ba6ffd93d829))
+- added more tests for utils
+  ([#114](https://github.com/timelessco/renderless-components/issues/114))
+  ([d8dc0f8](https://github.com/timelessco/renderless-components/commit/d8dc0f8c55e71976635b8ba504e9c80755193dfa))
+- added multi slider tests
+  ([#135](https://github.com/timelessco/renderless-components/issues/135))
+  ([c2b94b0](https://github.com/timelessco/renderless-components/commit/c2b94b0e1b4ca0011e60b1a244b69b026011a35d))
+- added slider tests
+  ([#126](https://github.com/timelessco/renderless-components/issues/126))
+  ([6b1977e](https://github.com/timelessco/renderless-components/commit/6b1977e925e5a1862c9cfc73da7e7ce829579a52))
+- added tests for createContext
+  ([#115](https://github.com/timelessco/renderless-components/issues/115))
+  ([65e60bc](https://github.com/timelessco/renderless-components/commit/65e60bcf3e6617ac34eae6f828aac787bdb46797))
+- added tests for date range picker
+  ([#101](https://github.com/timelessco/renderless-components/issues/101))
+  ([a3eabc2](https://github.com/timelessco/renderless-components/commit/a3eabc21767277593cc5b5dbf58b6482f1f2438d))
+- added tests for live announcer
+  ([#109](https://github.com/timelessco/renderless-components/issues/109))
+  ([97f10e7](https://github.com/timelessco/renderless-components/commit/97f10e77bff33f47ebd6f162fd04c17e0593495f))
+- added tests for useSpinButton
+  ([#110](https://github.com/timelessco/renderless-components/issues/110))
+  ([90caad1](https://github.com/timelessco/renderless-components/commit/90caad1129021d43f46144ca8454fc9d5ee6e865))
+- added unit test for segment utils
+  ([#118](https://github.com/timelessco/renderless-components/issues/118))
+  ([722da0b](https://github.com/timelessco/renderless-components/commit/722da0b5bc8c9fcdae1c80c6a9a5d4614e9e052a))
+- fixed broken tests for today
+  ([#128](https://github.com/timelessco/renderless-components/issues/128))
+  ([ddf0f66](https://github.com/timelessco/renderless-components/commit/ddf0f66141a61812bab0efeca1e744f6fd525c32))
+- fixed tests
+  ([#130](https://github.com/timelessco/renderless-components/issues/130))
+  ([709f80f](https://github.com/timelessco/renderless-components/commit/709f80f183f6b38e33fed18fc2f6ebf05e6ccc81))
+- improve meter and range calendar tests
+  ([#111](https://github.com/timelessco/renderless-components/issues/111))
+  ([2ab8185](https://github.com/timelessco/renderless-components/commit/2ab8185f172e3d066b05d53fe53a61edd6ab9127))
+- improve tests & test coverage
+  ([#102](https://github.com/timelessco/renderless-components/issues/102))
+  ([7c0db38](https://github.com/timelessco/renderless-components/commit/7c0db387df7088f32fb4e1cf2017ad11ab487163))
+- refactored all tests
+  ([#117](https://github.com/timelessco/renderless-components/issues/117))
+  ([fa6de56](https://github.com/timelessco/renderless-components/commit/fa6de56697f04f4326d97bb89841c9b96763af86))
+- **accordion:** ✅ added correct snapshot testing with baseId
+  ([e715ec3](https://github.com/timelessco/renderless-components/commit/e715ec31e84297c3e6a86612e318012ba37d50dd))
+- **accordion:** ✅ removing snapshot test for accordion
+  ([43403fc](https://github.com/timelessco/renderless-components/commit/43403fcf9b492e0cc0a32478ccdff63e455356c3))
+- **link:** ✅ add inline test snapshot for link
+  ([e999dcd](https://github.com/timelessco/renderless-components/commit/e999dcd034bd6bad98d7385a91cc9b46f7170422))
+
 ### [0.1.1-alpha.5](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.4...v0.1.1-alpha.5) (2020-10-15)
 
 ### Tests
