@@ -1,62 +1,7 @@
-import "./style.css";
 import React from "react";
-import { Meta } from "@storybook/react";
-import { CSSTransition } from "react-transition-group";
-import { useTransition, animated } from "react-spring";
-
-import Demo, { getTransform } from "./Demo";
-import { ToastProvider, TToastWrapper } from "../index";
-
-export default {
-  title: "Toast/Animated",
-} as Meta;
-
-const CSSTransitionAnimationWrapper: TToastWrapper = ({
-  isVisible,
-  children,
-}) => {
-  return (
-    <CSSTransition in={isVisible} timeout={500} classNames="alert">
-      {children}
-    </CSSTransition>
-  );
-};
-
-export const CSSTransitionAnimation: React.FC = () => {
-  return (
-    <ToastProvider
-      autoDismiss={true}
-      placement="bottom-center"
-      animationTimeout={500}
-      toastWrapper={CSSTransitionAnimationWrapper}
-      toastTypes={{
-        error: ({ remove, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
-            </div>
-          );
-        },
-        success: ({ remove, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
-            </div>
-          );
-        },
-        warning: ({ remove, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#ef5013" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
-            </div>
-          );
-        },
-      }}
-    >
-      <Demo />
-    </ToastProvider>
-  );
-};
+import { animated, useTransition } from "react-spring";
+import { ToastProvider, TToastWrapper } from "renderless-components";
+import { Variants, Placements } from "./ToastUtils.component";
 
 const SpringAnimationWrapper: TToastWrapper = ({
   placement,
@@ -89,7 +34,7 @@ const SpringAnimationWrapper: TToastWrapper = ({
   );
 };
 
-export const ReactSpringAnimation: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <ToastProvider
       autoDismiss={true}
@@ -120,7 +65,40 @@ export const ReactSpringAnimation: React.FC = () => {
         },
       }}
     >
-      <Demo />
+      <Variants />
+      <br />
+      <Placements />
     </ToastProvider>
   );
 };
+
+// Animation util
+export const getTransform = (placement: string, pixels: number) => {
+  const pos = { from: "", enter: "", leave: "" };
+  pos.enter = `translate(0, 0)`;
+
+  if (placement === "bottom-center") {
+    pos.from = `translate(0, ${pixels}px)`;
+    pos.leave = `translate(0, ${pixels}px)`;
+    return pos;
+  }
+  if (placement === "top-center") {
+    pos.from = `translate(0, ${-pixels}px)`;
+    pos.leave = `translate(0, ${-pixels}px)`;
+    return pos;
+  }
+  if (["bottom-left", "top-left"].includes(placement)) {
+    pos.from = `translate(${-pixels}px, 0)`;
+    pos.leave = `translate(${-pixels}px, 0)`;
+    return pos;
+  }
+  if (["bottom-right", "top-right"].includes(placement)) {
+    pos.from = `translate(${pixels}px, 0)`;
+    pos.leave = `translate(${pixels}px, 0)`;
+    return pos;
+  }
+
+  return pos;
+};
+
+export default App;

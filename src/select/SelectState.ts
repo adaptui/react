@@ -39,9 +39,30 @@ export type SelectActions = CompositeActions &
 
 export type SelectInitialState = CompositeInitialState &
   PopoverInitialState & {
+    /**
+     * default selected item
+     *
+     * @default undefined
+     */
     selected?: string;
+    /**
+     * If `true` enables multiple selections
+     *
+     * @default false
+     */
     allowMultiselect?: boolean;
+    /**
+     * If `true` arrow key navigation loops back
+     *
+     * @default false
+     */
     loop?: boolean;
+    /**
+     * If `true` enables the select to work with SelectInput
+     * which acts as combobox
+     *
+     * @default false
+     */
     isCombobox?: boolean;
   };
 

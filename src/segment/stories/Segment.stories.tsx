@@ -1,40 +1,37 @@
+import "./Segment.css";
 import * as React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
-import "./index.css";
-import { Segment } from "../Segment";
-import { SegmentField } from "../SegmentField";
-import { useSegmentState, SegmentStateProps } from "../SegmentState";
+import { App as Segment } from "./Segment.component";
+import {
+  segmentTemplate,
+  segmentTemplateJs,
+  segmentCssTemplate,
+} from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
+  component: Segment,
   title: "Segment",
+  parameters: {
+    preview: {
+      preview: createPreviewTabs({
+        ts: segmentTemplate,
+        js: segmentTemplateJs,
+        css: segmentCssTemplate,
+      }),
+    },
+  },
 } as Meta;
 
-const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
-  const state = useSegmentState(props);
-
-  return (
-    <div>
-      <SegmentField {...state} className="segment__field">
-        {state.segments.map((segment, i) => (
-          <Segment
-            key={i}
-            segment={segment}
-            className="segment__field--item"
-            {...state}
-          />
-        ))}
-      </SegmentField>
-    </div>
-  );
-};
+const Base: Story = args => <Segment {...args} />;
 
 export const Default = () => (
   <div className="segment_demo">
     <pre>
       year: "numeric", month: "2-digit", day: "2-digit", weekday: "long",
     </pre>
-    <SegmentSpinnerComp
+    <Base
       formatOptions={{
         year: "numeric",
         month: "2-digit",
@@ -44,7 +41,7 @@ export const Default = () => (
     />
 
     <pre>timeStyle: "long", dateStyle: "short"</pre>
-    <SegmentSpinnerComp
+    <Base
       formatOptions={{
         timeStyle: "long",
         dateStyle: "short",
@@ -52,7 +49,7 @@ export const Default = () => (
     />
 
     <pre>timeStyle: "short", dateStyle: "long"</pre>
-    <SegmentSpinnerComp
+    <Base
       formatOptions={{
         timeStyle: "short",
         dateStyle: "long",
@@ -60,7 +57,7 @@ export const Default = () => (
     />
 
     <pre>timeStyle: "full", dateStyle: "full"</pre>
-    <SegmentSpinnerComp
+    <Base
       formatOptions={{
         timeStyle: "full",
         dateStyle: "full",
