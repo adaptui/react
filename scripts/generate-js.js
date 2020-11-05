@@ -96,16 +96,14 @@ function generateImportString(component, index) {
       ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
       : "";
 
+  const jsComponent = component.replace("tsx", "jsx");
   let importString = outdent`
-      ${warningMsg}
-      // @ts-ignore
-      export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
-      // @ts-ignore
-      export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${component.replace(
-    "tsx",
-    "jsx",
-  )}";
-    `;
+    ${warningMsg}
+    // @ts-ignore
+    export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
+    // @ts-ignore
+    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponent}";
+  `;
 
   if (component.endsWith(".css")) {
     importString = outdent`
