@@ -221,7 +221,7 @@ export function useSliderState(
     setDraggings(isDraggingsRef.current);
 
     // Call onChangeEnd if no handles are dragging.
-    if (!wasDragging && isDraggingsRef.current.every(Boolean)) {
+    if (!wasDragging && isDraggingsRef.current.some(Boolean)) {
       onChangeStart?.(valuesRef.current);
     }
 
