@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { appTemplate, appTemplateJs } from "./templates";
+import { pickerBaseTemplate, pickerBaseTemplateJs } from "./templates";
 import { App as PickerBase } from "./PickerBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -10,8 +10,8 @@ export default {
   title: "PickerBase",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
+      js: pickerBaseTemplateJs,
+      ts: pickerBaseTemplate,
     }),
   },
 } as Meta;

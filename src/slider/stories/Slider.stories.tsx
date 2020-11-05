@@ -3,7 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
 import { App as Slider } from "./Slider.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  sliderTemplate,
+  sliderTemplateJs,
+  sliderCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -11,9 +15,9 @@ export default {
   title: "Slider/AllInOne",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
-      css: cssTemplate,
+      js: sliderTemplateJs,
+      ts: sliderTemplate,
+      css: sliderCssTemplate,
     }),
   },
 } as Meta;

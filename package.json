@@ -116,6 +116,7 @@
     "lint-staged": "10.5.1",
     "lodash": "4.17.20",
     "mockdate": "^3.0.2",
+    "outdent": "^0.7.1",
     "prettier": "2.1.2",
     "raw-loader": "^4.0.2",
     "react": "16.14.0",

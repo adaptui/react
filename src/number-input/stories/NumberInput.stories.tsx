@@ -8,7 +8,7 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "../index";
-import { appTemplate, appTemplateJs } from "./templates";
+import { numberInputTemplate, numberInputTemplateJs } from "./templates";
 import { App as NumberInput } from "./NumberInput.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -17,8 +17,8 @@ export default {
   title: "NumberInput",
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
+      js: numberInputTemplateJs,
+      ts: numberInputTemplate,
     }),
   },
 } as Meta;

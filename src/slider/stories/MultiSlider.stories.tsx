@@ -3,7 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
 import { App as MultiSlider } from "./MultiSlider.component";
-import { multiAppTemplate, multiAppTemplateJs, cssTemplate } from "./templates";
+import {
+  multiSliderTemplate,
+  multiSliderTemplateJs,
+  sliderCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -11,9 +15,9 @@ export default {
   title: "Slider/Multi",
   parameters: {
     preview: createPreviewTabs({
-      js: multiAppTemplateJs,
-      ts: multiAppTemplate,
-      css: cssTemplate,
+      js: multiSliderTemplateJs,
+      ts: multiSliderTemplate,
+      css: sliderCssTemplate,
       deps: ["reakit@latest"],
     }),
   },

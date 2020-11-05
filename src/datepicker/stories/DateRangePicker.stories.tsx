@@ -5,9 +5,9 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
 
 import {
-  rangeAppTemplate,
-  rangeAppTemplateJs,
-  rangeCssTemplate,
+  dateRangePickerTemplate,
+  dateRangePickerTemplateJs,
+  dateRangePickerCssTemplate,
 } from "./templates";
 import "./DatePicker.css";
 import { App as DateRangePicker } from "./DateRangePicker.component";
@@ -24,9 +24,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: rangeAppTemplateJs,
-      ts: rangeAppTemplate,
-      css: rangeCssTemplate,
+      js: dateRangePickerTemplateJs,
+      ts: dateRangePickerTemplate,
+      css: dateRangePickerCssTemplate,
     }),
   },
 } as Meta;

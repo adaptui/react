@@ -5,7 +5,11 @@ import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
 import "./DatePicker.css";
 import { App as DatePicker } from "./DatePicker.component";
-import { appTemplate, appTemplateJs, cssTemplate } from "./templates";
+import {
+  datePickerTemplate,
+  datePickerTemplateJs,
+  datePickerCssTemplate,
+} from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -19,9 +23,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: appTemplateJs,
-      ts: appTemplate,
-      css: cssTemplate,
+      js: datePickerTemplateJs,
+      ts: datePickerTemplate,
+      css: datePickerCssTemplate,
     }),
   },
 } as Meta;

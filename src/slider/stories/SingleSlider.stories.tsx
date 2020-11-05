@@ -3,9 +3,9 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
 import {
-  singleAppTemplate,
-  singleAppTemplateJs,
-  cssTemplate,
+  singleSliderTemplate,
+  singleSliderTemplateJs,
+  sliderCssTemplate,
 } from "./templates";
 import { App as SingleSlider } from "./SingleSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -15,9 +15,9 @@ export default {
   title: "Slider/Single",
   parameters: {
     preview: createPreviewTabs({
-      js: singleAppTemplateJs,
-      ts: singleAppTemplate,
-      css: cssTemplate,
+      js: singleSliderTemplateJs,
+      ts: singleSliderTemplate,
+      css: sliderCssTemplate,
     }),
   },
 } as Meta;
