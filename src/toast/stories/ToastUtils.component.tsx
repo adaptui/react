@@ -6,7 +6,7 @@ const randomType = (): string => {
 };
 
 export const Variants: React.FC = () => {
-  const { show } = useToast();
+  const { showToast } = useToast();
 
   const variants = ["error", "success", "warning"];
 
@@ -17,7 +17,7 @@ export const Variants: React.FC = () => {
           <button
             key={variant}
             onClick={() => {
-              show({ type: variant, content: `This is ${variant}` });
+              showToast({ type: variant, content: `This is ${variant}` });
             }}
           >
             {variant}
@@ -26,7 +26,7 @@ export const Variants: React.FC = () => {
       })}
       <button
         onClick={() => {
-          show({
+          showToast({
             type: "error",
             content: "This is error",
             autoDismiss: false,
@@ -37,7 +37,7 @@ export const Variants: React.FC = () => {
       </button>
       <button
         onClick={() => {
-          show({
+          showToast({
             content: () => (
               <p style={{ fontFamily: "Impact", color: "black" }}>
                 This is Custom
@@ -53,7 +53,7 @@ export const Variants: React.FC = () => {
 };
 
 export const Placements: React.FC = () => {
-  const { show } = useToast();
+  const { showToast } = useToast();
 
   const placements = [
     "top-left",
@@ -71,7 +71,7 @@ export const Placements: React.FC = () => {
           <button
             key={placement}
             onClick={() => {
-              show({
+              showToast({
                 type: randomType(),
                 content: `This is ${placement}`,
                 placement: placement as IPlacements,

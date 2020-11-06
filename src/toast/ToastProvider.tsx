@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { canUseDOM } from "reakit-utils";
 
-import { ToastStateReturn } from "./ToastState";
 import { ToastController } from "./ToastController";
-import { useToastState, IToast } from "./ToastState";
 import { isFunction, createContext } from "../utils";
+import { IToast, useToastState, ToastStateReturn } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -35,7 +34,7 @@ export type ToastTypes = Record<
   string,
   React.FC<
     Pick<IToast, "content" | "id" | "isVisible"> & {
-      remove: ToastStateReturn["remove"];
+      hideToast: ToastStateReturn["hideToast"];
     }
   >
 >;
@@ -48,6 +47,12 @@ type IToastProvider = {
    */
   toastTypes: ToastTypes;
   /**
+   * Placement of the toast on the screen
+   *
+   * @default "bottom-center"
+   */
+  placement?: Placements;
+  /**
    * If True the toast will automatically dismiss after the specified duration
    */
   autoDismiss?: boolean;
@@ -56,7 +61,7 @@ type IToastProvider = {
    *
    * @default 5000
    */
-  timeout?: number;
+  autoCloseTimeout?: number;
   /**
    * Duration of delay after the toast will be unmounted, so that animations can run
    *
@@ -67,68 +72,68 @@ type IToastProvider = {
    * Wrapper function to enhance the behaviour of ToastController
    */
   toastWrapper?: TToastWrapper;
-  /**
-   * Placement of the toast on the screen
-   */
-  placement?: Placements;
 };
 
 export const ToastProvider: React.FC<IToastProvider> = ({
   children,
   toastTypes,
-  toastWrapper: ToastWrapperComponent = ({ children }) => children,
-  animationTimeout,
-  autoDismiss: providerAutoDismiss,
-  timeout: providerTimeout = DEFAULT_TIMEOUT,
   placement: providerPlacement = "bottom-center",
+  animationTimeout,
+  toastWrapper: ToastWrapperComponent = ({ children }) => children,
+  autoDismiss: providerAutoDismiss,
+  autoCloseTimeout: providerTimeout = DEFAULT_TIMEOUT,
 }) => {
-  const portalTarget = canUseDOM ? document.body : null;
-  const state = useToastState({ animationTimeout });
+  const state = useToastState({
+    defaultPlacement: providerPlacement,
+    animationTimeout,
+  });
+  const { sortedToasts, hideToast } = state;
 
-  const Toasts = state.getToastToRender(
-    providerPlacement,
-    (position, toastList) => {
-      return (
-        <div
-          key={position}
-          className={`toast__container toast__container--${position}`}
-          style={{
-            position: "fixed",
-            ...PLACEMENTS[position],
-          }}
-        >
-          {toastList.map(
-            ({ id, type = "", content, timeout, autoDismiss, isVisible }) => {
-              return (
-                <ToastWrapperComponent
-                  key={id}
-                  id={id}
-                  isVisible={isVisible}
-                  placement={position}
-                >
-                  <ToastController
-                    id={id}
-                    onRequestRemove={state.hide}
-                    duration={timeout ?? providerTimeout}
-                    autoDismiss={autoDismiss ?? providerAutoDismiss}
-                  >
-                    {isFunction(content)
-                      ? content({ id, isVisible, remove: state.hide })
-                      : toastTypes[type]?.({
-                          id,
-                          content,
-                          isVisible,
-                          remove: state.hide,
-                        }) || content}
-                  </ToastController>
-                </ToastWrapperComponent>
-              );
-            },
-          )}
-        </div>
-      );
-    },
-  );
+  const Toasts = Object.keys(sortedToasts).map(placement => {
+    const toastsList: IToast[] = sortedToasts[placement];
+
+    return (
+      <div
+        key={placement}
+        className={`toast__container toast__container--${placement}`}
+        style={{
+          position: "fixed",
+          ...PLACEMENTS[placement],
+        }}
+      >
+        {toastsList.map(toast => {
+          const { id, type, content, timeout, autoDismiss, isVisible } = toast;
+
+          return (
+            <ToastWrapperComponent
+              key={id}
+              id={id}
+              isVisible={isVisible}
+              placement={placement}
+            >
+              <ToastController
+                id={id}
+                onRequestRemove={hideToast}
+                duration={timeout ?? providerTimeout}
+                autoDismiss={autoDismiss ?? providerAutoDismiss}
+              >
+                {isFunction(content)
+                  ? content({ id, isVisible, hideToast })
+                  : toastTypes[type]?.({
+                      id,
+                      content,
+                      isVisible,
+                      hideToast,
+                    }) || content}
+              </ToastController>
+            </ToastWrapperComponent>
+          );
+        })}
+      </div>
+    );
+  });
+
+  const portalTarget = canUseDOM ? document.body : null;
 
   return (
     <ToastContextProvider value={{ ...state, toastTypes }}>
