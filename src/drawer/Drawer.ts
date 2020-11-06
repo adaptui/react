@@ -30,9 +30,9 @@ const PLACEMENTS = {
   },
 };
 
-export type TPlacement = keyof typeof PLACEMENTS;
+export type Placement = keyof typeof PLACEMENTS;
 
-export type DrawerOptions = DialogOptions & { placement?: TPlacement };
+export type DrawerOptions = DialogOptions & { placement?: Placement };
 
 export type DrawerHTMLProps = DialogHTMLProps;
 
