@@ -1,20 +1,20 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
 
-import { accordionTemplate, accordionTemplateJs } from "./templates";
-import { App as Accordion } from "./Accordion.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { AccordionState } from "../AccordionState";
 import { CompositeState } from "reakit/ts";
+import { App as Accordion } from "./Accordion.component";
+import { AccordionInitialState } from "../AccordionState";
+import { accordionTemplate, accordionTemplateJs } from "./templates";
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export const Default: React.FC<Omit<
-  Partial<AccordionState>,
+  Partial<AccordionInitialState>,
   keyof CompositeState
 >> = args => <Accordion {...args} />;
 
 export default {
   component: Default,
-  title: "Accordion",
+  title: "Accordion/Basic",
   parameters: {
     preview: createPreviewTabs({
       js: accordionTemplate,
@@ -24,7 +24,7 @@ export default {
 } as Meta;
 
 export const DefaultSelected = Default.bind({});
-DefaultSelected.args = { selectedId: "accordion3" };
+DefaultSelected.args = { defaultSelectedId: "accordion3" };
 
 export const AutoSelect = Default.bind({});
 AutoSelect.args = { manual: false };

@@ -8,18 +8,18 @@ import {
   accordionStyledCssTemplate,
 } from "./templates";
 import "./AccordionStyled.css";
+import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { AccordionState } from "../AccordionState";
 
 export const Default: React.FC<Omit<
-  Partial<AccordionState>,
+  Partial<AccordionInitialState>,
   keyof CompositeState
 >> = args => <Accordion {...args} />;
 
 export default {
   component: Default,
-  title: "AccordionStyled",
+  title: "Accordion/Styled",
   parameters: {
     preview: createPreviewTabs({
       js: accordionStyledTemplate,
@@ -30,7 +30,7 @@ export default {
 } as Meta;
 
 export const DefaultSelected = Default.bind({});
-DefaultSelected.args = { selectedId: "accordion3" };
+DefaultSelected.args = { defaultSelectedId: "accordion2" };
 
 export const AutoSelect = Default.bind({});
 AutoSelect.args = { manual: false };

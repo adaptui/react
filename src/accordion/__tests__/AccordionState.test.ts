@@ -29,7 +29,7 @@ test("Accordion: initial state", () => {
       "orientation": "vertical",
       "panels": Array [],
       "rtl": false,
-      "selectedId": undefined,
+      "selectedId": null,
       "selectedIds": Array [],
       "unstable_angular": false,
       "unstable_hasActiveWidget": false,
