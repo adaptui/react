@@ -18,9 +18,7 @@ const CalendarIcon = () => (
   </svg>
 );
 
-interface AppProps extends TimePickerStateProps {}
-
-export const App: React.FC<AppProps> = props => {
+export const App: React.FC<TimePickerStateProps> = props => {
   const state = useTimePickerState(props);
 
   return (

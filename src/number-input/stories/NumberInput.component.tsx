@@ -3,60 +3,12 @@ import * as React from "react";
 import {
   NumberInput,
   useNumberInputState,
+  NumberinputInitialState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "renderless-components";
 
-export interface AppProps {
-  /**
-   * The value of the counter. Should be less than `max` and greater than `min`
-   *
-   * If no value, initial value is set to `""`
-   */
-  value?: string | number;
-  /**
-   * The minimum value of the counter
-   *
-   * @default Number.MIN_SAFE_INTEGER
-   */
-  min?: number;
-  /**
-   * The maximum value of the counter
-   *
-   * @default Number.MAX_SAFE_INTEGER
-   */
-  max?: number;
-  /**
-   * The step used to increment or decrement the value
-   *
-   * @default 1
-   */
-  step?: number;
-  /**
-   * The number of decimal points used to round the value
-   *
-   * If no precision, initial value is from the decimal places
-   * from value/step - `0`
-   */
-  precision?: number;
-  /**
-   * This controls the value update behavior in general.
-   *
-   * - If `true` and you use the stepper or up/down arrow keys,
-   *  the value will not exceed the `max` or go lower than `min`
-   *
-   * - If `false`, the value will be allowed to go out of range.
-   *
-   * @default true
-   */
-  keepWithinRange?: boolean;
-  /**
-   * If `true`, the input will be focused as you increment
-   * or decrement the value with the stepper
-   *
-   * @default true
-   */
-  focusInputOnChange?: boolean;
+export interface AppProps extends NumberinputInitialState {
   /**
    * This controls the value update when you blur out of the input.
    * - If `true` and the value is greater than `max`, the value will be reset to `max`

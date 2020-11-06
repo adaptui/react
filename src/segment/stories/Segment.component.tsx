@@ -6,9 +6,7 @@ import {
   SegmentStateProps,
 } from "renderless-components";
 
-interface AppProps extends SegmentStateProps {}
-
-export const App: React.FC<AppProps> = props => {
+export const App: React.FC<SegmentStateProps> = props => {
   const state = useSegmentState(props);
 
   return (

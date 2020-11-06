@@ -6,23 +6,23 @@ import {
   Pagination,
   PaginationButton,
   usePaginationState,
-  UsePaginationProps,
-} from "..";
+  PaginationInitialState,
+} from "../index";
 import { repeat } from "../../utils/test-utils";
 
-const PaginationComp: React.FC<UsePaginationProps> = props => {
+const PaginationComp: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
     <Pagination {...state}>
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
-          <PaginationButton goto="first" {...state}>
+          <PaginationButton goto="firstPage" {...state}>
             First
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="prev" {...state}>
+          <PaginationButton goto="prevPage" {...state}>
             Previous
           </PaginationButton>
         </li>
@@ -46,12 +46,12 @@ const PaginationComp: React.FC<UsePaginationProps> = props => {
           );
         })}
         <li>
-          <PaginationButton goto="next" {...state}>
+          <PaginationButton goto="nextPage" {...state}>
             Next
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="last" {...state}>
+          <PaginationButton goto="lastPage" {...state}>
             Last
           </PaginationButton>
         </li>

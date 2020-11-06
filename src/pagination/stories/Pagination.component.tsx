@@ -4,32 +4,23 @@ import {
   Pagination,
   PaginationButton,
   usePaginationState,
+  PaginationInitialState,
+  TGoto,
 } from "renderless-components";
 
-type TGoto = "next" | "prev" | "last" | "first" | number;
-
-export interface AppProps {
-  count?: number;
-  defaultPage?: number;
-  boundaryCount?: number;
-  page?: number;
-  siblingCount?: number;
-  onChange?(value: number): void;
-}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
     <Pagination {...state}>
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
-          <PaginationButton goto="first" {...state}>
+          <PaginationButton goto="firstPage" {...state}>
             First
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="prev" {...state}>
+          <PaginationButton goto="prevPage" {...state}>
             Previous
           </PaginationButton>
         </li>
@@ -53,12 +44,12 @@ export const App = (props: AppProps) => {
           );
         })}
         <li>
-          <PaginationButton goto="next" {...state}>
+          <PaginationButton goto="nextPage" {...state}>
             Next
           </PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="last" {...state}>
+          <PaginationButton goto="lastPage" {...state}>
             Last
           </PaginationButton>
         </li>

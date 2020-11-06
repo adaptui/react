@@ -3,35 +3,15 @@ import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
 import {
-  Progress,
-  useProgressState,
-  ProgressState,
   cx,
   isNull,
+  Progress,
+  ProgressState,
+  useProgressState,
+  ProgressInitialState,
 } from "renderless-components";
 
-export interface AppProps {
-  /**
-   * The `value` of the progress indicator.
-   *
-   * If `null` the progress bar will be in `indeterminate` state
-   * @default 0
-   */
-  value?: number | null;
-  /**
-   * The minimum value of the progress
-   * @default 0
-   */
-  min?: number;
-  /**
-   * The maximum value of the
-   * @default 100
-   */
-  max?: number;
-  /**
-   * Adds a label to meter.
-   * @default false
-   */
+export interface AppProps extends ProgressInitialState {
   withLabel?: boolean;
   /**
    * Adds a stripe style to meter bar.

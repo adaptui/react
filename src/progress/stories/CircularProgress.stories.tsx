@@ -10,7 +10,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Progress,
-  title: "ProgressCircular",
+  title: "Progress/Circular",
   parameters: {
     preview: createPreviewTabs({
       js: circularProgressTemplateJs,

@@ -1,12 +1,19 @@
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta } from "@storybook/react";
 
 import { accordionTemplate, accordionTemplateJs } from "./templates";
 import { App as Accordion } from "./Accordion.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { AccordionState } from "../AccordionState";
+import { CompositeState } from "reakit/ts";
+
+export const Default: React.FC<Omit<
+  Partial<AccordionState>,
+  keyof CompositeState
+>> = args => <Accordion {...args} />;
 
 export default {
-  component: Accordion,
+  component: Default,
   title: "Accordion",
   parameters: {
     preview: createPreviewTabs({
@@ -16,21 +23,17 @@ export default {
   },
 } as Meta;
 
-const Base: Story = args => <Accordion {...args} />;
-
-export const Default = Base.bind({});
-
-export const DefaultSelected = Base.bind({});
+export const DefaultSelected = Default.bind({});
 DefaultSelected.args = { selectedId: "accordion3" };
 
-export const AutoSelect = Base.bind({});
+export const AutoSelect = Default.bind({});
 AutoSelect.args = { manual: false };
 
-export const Loop = Base.bind({});
+export const Loop = Default.bind({});
 Loop.args = { loop: true };
 
-export const AllowToggle = Base.bind({});
+export const AllowToggle = Default.bind({});
 AllowToggle.args = { allowToggle: true };
 
-export const AllowMultiple = Base.bind({});
+export const AllowMultiple = Default.bind({});
 AllowMultiple.args = { allowMultiple: true };

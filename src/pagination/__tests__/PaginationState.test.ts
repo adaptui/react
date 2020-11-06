@@ -11,12 +11,12 @@ describe("usePaginationState", () => {
     expect(current).toMatchInlineSnapshot(`
       Object {
         "currentPage": 1,
-        "first": [Function],
-        "isAtMax": false,
-        "isAtMin": true,
-        "last": [Function],
-        "move": [Function],
-        "next": [Function],
+        "firstPage": [Function],
+        "isAtFirstPage": true,
+        "isAtLastPage": false,
+        "lastPage": [Function],
+        "movePage": [Function],
+        "nextPage": [Function],
         "pages": Array [
           1,
           2,
@@ -24,7 +24,7 @@ describe("usePaginationState", () => {
           4,
           5,
         ],
-        "prev": [Function],
+        "prevPage": [Function],
       }
     `);
   });
@@ -32,68 +32,68 @@ describe("usePaginationState", () => {
   it("should rover to next/prev/last/first/move", async () => {
     const { result } = renderHook(() => usePaginationState({ count: 5 }));
 
-    expect(result.current.isAtMin).toBe(true);
-    expect(result.current.isAtMax).toBe(false);
+    expect(result.current.isAtFirstPage).toBe(true);
+    expect(result.current.isAtLastPage).toBe(false);
     expect(result.current.currentPage).toBe(1);
 
     act(() => {
-      result.current.next();
+      result.current.nextPage();
     });
 
-    expect(result.current.isAtMin).toBe(false);
-    expect(result.current.isAtMax).toBe(false);
+    expect(result.current.isAtFirstPage).toBe(false);
+    expect(result.current.isAtLastPage).toBe(false);
     expect(result.current.currentPage).toBe(2);
 
     act(() => {
-      result.current.next();
+      result.current.nextPage();
     });
 
     expect(result.current.currentPage).toBe(3);
 
     // last
     act(() => {
-      result.current.last();
+      result.current.lastPage();
     });
 
-    expect(result.current.isAtMin).toBe(false);
-    expect(result.current.isAtMax).toBe(true);
+    expect(result.current.isAtFirstPage).toBe(false);
+    expect(result.current.isAtLastPage).toBe(true);
     expect(result.current.currentPage).toBe(5);
 
     // first
     act(() => {
-      result.current.first();
+      result.current.firstPage();
     });
 
-    expect(result.current.isAtMin).toBe(true);
-    expect(result.current.isAtMax).toBe(false);
+    expect(result.current.isAtFirstPage).toBe(true);
+    expect(result.current.isAtLastPage).toBe(false);
     expect(result.current.currentPage).toBe(1);
 
     // move
     act(() => {
-      result.current.move(3);
+      result.current.movePage(3);
     });
 
-    expect(result.current.isAtMin).toBe(false);
-    expect(result.current.isAtMax).toBe(false);
+    expect(result.current.isAtFirstPage).toBe(false);
+    expect(result.current.isAtLastPage).toBe(false);
     expect(result.current.currentPage).toBe(3);
   });
 
   it("has a disabled previous button & an enabled next button when count > 1", () => {
-    const { isAtMin, isAtMax } = renderHook(() =>
+    const { isAtFirstPage, isAtLastPage } = renderHook(() =>
       usePaginationState({ count: 2 }),
     ).result.current;
 
-    expect(isAtMin).toBe(true);
-    expect(isAtMax).toBe(false);
+    expect(isAtFirstPage).toBe(true);
+    expect(isAtLastPage).toBe(false);
   });
 
-  it("should have disabled next button if defaultPage === count & enabled previous button", () => {
-    const { isAtMin, isAtMax } = renderHook(() =>
-      usePaginationState({ count: 2, defaultPage: 2 }),
+  it("should have disabled next button if currentPage === count & enabled previous button", () => {
+    const { isAtFirstPage, isAtLastPage } = renderHook(() =>
+      usePaginationState({ count: 2, currentPage: 2 }),
     ).result.current;
 
-    expect(isAtMin).toBe(false);
-    expect(isAtMax).toBe(true);
+    expect(isAtFirstPage).toBe(false);
+    expect(isAtLastPage).toBe(true);
   });
 
   it("has no ellipses when count <= 7", () => {
@@ -112,9 +112,9 @@ describe("usePaginationState", () => {
     expect(pages).toContain("end-ellipsis");
   });
 
-  it("should have start-ellipses when defaultPage >= 5", () => {
+  it("should have start-ellipses when currentPage >= 5", () => {
     const { pages } = renderHook(() =>
-      usePaginationState({ count: 8, defaultPage: 5 }),
+      usePaginationState({ count: 8, currentPage: 5 }),
     ).result.current;
 
     expect(pages).toContain("start-ellipsis");
@@ -122,7 +122,7 @@ describe("usePaginationState", () => {
 
   it("should have start-ellipses & end-ellipsis when count >= 5", () => {
     const { pages } = renderHook(() =>
-      usePaginationState({ count: 9, defaultPage: 5 }),
+      usePaginationState({ count: 9, currentPage: 5 }),
     ).result.current;
 
     expect(pages).toContain("start-ellipsis");
@@ -138,7 +138,7 @@ describe("usePaginationState", () => {
       usePaginationState({
         count: 40,
         boundaryCount: 5,
-        defaultPage: 20,
+        currentPage: 20,
       }),
     );
 
@@ -156,7 +156,7 @@ describe("usePaginationState", () => {
       usePaginationState({
         count: 11,
         siblingCount: 2,
-        defaultPage: 6,
+        currentPage: 6,
       }),
     );
 
