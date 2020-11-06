@@ -1,8 +1,3 @@
-import {
-  SealedInitialState,
-  useSealedState,
-} from "reakit-utils/useSealedState";
-
 import { calculateStatus, clamp } from "./helpers";
 import { valueToPercent, getOptimumValue } from "../utils";
 
@@ -13,6 +8,7 @@ export type MeterState = {
    * The `value` of the meter indicator.
    *
    * If `undefined`/`not valid` the meter bar will be equal to `min`
+   *
    * @default 0
    */
   value: number;
@@ -65,20 +61,15 @@ export type MeterInitialState = Pick<
 export type MeterStateReturn = MeterState;
 
 export const useMeterState = (
-  initialState: SealedInitialState<MeterInitialState> = {},
+  initialState: MeterInitialState = {},
 ): MeterStateReturn => {
-  const {
-    value: initialValue = 0,
-    min = 0,
-    max = 1,
-    ...sealed
-  } = useSealedState(initialState);
+  const { value: defaultValue = 0, min = 0, max = 1, ...sealed } = initialState;
   const initialLow = sealed.low ?? min;
   const initialHigh = sealed.high ?? max;
   const initialOptimum =
     sealed.optimum ?? getOptimumValue(initialLow, initialHigh);
 
-  const value = clamp(initialValue, min, max);
+  const value = clamp(defaultValue, min, max);
   const optimum = clamp(initialOptimum, min, max);
   let low = clamp(initialLow, min, max);
   let high = clamp(initialHigh, min, max);
