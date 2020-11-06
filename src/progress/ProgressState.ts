@@ -5,9 +5,8 @@
  * to work with Reakit System
  */
 import * as React from "react";
-import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { valueToPercent, isFunction, isNull } from "../utils";
+import { valueToPercent, isNull } from "../utils";
 
 export interface ProgressState {
   /**
@@ -52,12 +51,10 @@ export type ProgressInitialState = Pick<
 export type ProgressStateReturn = ProgressState & ProgressAction;
 
 export function useProgressState(
-  initialState: SealedInitialState<ProgressInitialState> = {},
+  props: ProgressInitialState = {},
 ): ProgressStateReturn {
-  const { value: initialValue = 0, min = 0, max = 100 } = useSealedState(
-    initialState,
-  );
-  const [value, setValue] = React.useState(clampValue(initialValue, min, max));
+  const { value: defaultValue = 0, min = 0, max = 100 } = props;
+  const [value, setValue] = React.useState(clampValue(defaultValue, min, max));
   const percent = isNull(value) ? null : valueToPercent(value, min, max);
 
   return {
