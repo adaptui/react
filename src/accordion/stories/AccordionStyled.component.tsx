@@ -1,47 +1,15 @@
 import * as React from "react";
 
 import {
-  useAccordionState,
   Accordion,
-  AccordionTrigger,
   AccordionPanel,
-  AccordionState,
+  AccordionTrigger,
+  useAccordionState,
+  AccordionInitialState,
 } from "renderless-components";
 
-interface AppProps {
-  /**
-   * The current selected accordion's `id`.
-   */
-  selectedId?: AccordionState["currentId"];
-  /**
-   * Initial selected accordion's `id`.
-   * @default []
-   */
-  selectedIds?: AccordionState["currentId"][];
-  /**
-   * Whether the accodion selection should be manual.
-   * @default true
-   */
-  manual?: boolean;
-  /**
-   * Whether to loop through the accordion triggers
-   * @default false
-   */
-  loop?: boolean;
-  /**
-   * Allow to open multiple accordion items
-   * @default false
-   */
-  allowMultiple?: boolean;
-  /**
-   * Allow to toggle accordion items
-   * @default false
-   */
-  allowToggle?: boolean;
-}
-
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const App: React.FC<AppProps> = props => {
+export const App: React.FC<AccordionInitialState> = props => {
   const state = useAccordionState(props);
 
   // const initialProps = {
