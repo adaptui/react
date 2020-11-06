@@ -5,33 +5,32 @@ import {
   CompositeInitialState,
 } from "reakit";
 import * as React from "react";
-import {
-  SealedInitialState,
-  useSealedState,
-} from "reakit-utils/useSealedState";
+import { useControllableState } from "@chakra-ui/hooks";
 
 export type AccordionState = CompositeState & {
   /**
-   * The current selected accordion's `id`.
+   * The current selected(controlled) accordion's `id`.
    */
-  selectedId: AccordionState["currentId"];
+  selectedId: string | null;
   /**
-   * Initial selected accordion's `id`.
-   * @default []
+   * The current selected(controlled) accordion's `id`.
    */
-  selectedIds: AccordionState["currentId"][];
+  selectedIds: (string | null)[];
   /**
    * Whether the accodion selection should be manual.
+   *
    * @default true
    */
   manual: boolean;
   /**
    * Allow to open multiple accordion items
+   *
    * @default false
    */
   allowMultiple: boolean;
   /**
    * Allow to toggle accordion items
+   *
    * @default false
    */
   allowToggle: boolean;
@@ -53,13 +52,11 @@ export type AccordionActions = CompositeActions & {
   /**
    * Sets `selectedId`.
    */
-  setSelectedId: AccordionActions["setCurrentId"];
+  setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
   /**
    * Sets `selectedIds`.
    */
-  setSelectedIds: React.Dispatch<
-    React.SetStateAction<CompositeState["currentId"][]>
-  >;
+  setSelectedIds: React.Dispatch<React.SetStateAction<(string | null)[]>>;
   /**
    * Registers a accordion panel.
    */
@@ -74,34 +71,68 @@ export type AccordionInitialState = CompositeInitialState &
   Pick<
     Partial<AccordionState>,
     "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
-  >;
+  > & {
+    /**
+     * Set default selected id(uncontrolled)
+     *
+     * @default null
+     */
+    defaultSelectedId?: string | null;
+    /**
+     * Handler that is called when the selectedId changes.
+     */
+    onSelectedIdChange?: (value: string | null) => void;
+    /**
+     * Set default selected ids(uncontrolled)
+     *
+     * @default []
+     */
+    defaultSelectedIds?: (string | null)[];
+    /**
+     * Handler that is called when the selectedIds changes.
+     */
+    onSelectedIdsChange?: (value: (string | null)[]) => void;
+  };
 
 export type AccordionStateReturn = AccordionState & AccordionActions;
 
 export function useAccordionState(
-  initialState: SealedInitialState<AccordionInitialState> = {},
+  initialState: AccordionInitialState = {},
 ): AccordionStateReturn {
   const {
-    selectedId: initialSelectedId,
-    selectedIds: initialSelectedIds = [],
+    selectedId: selectedIdProp,
+    defaultSelectedId = null,
+    onSelectedIdChange,
+    selectedIds: selectedIdsProp,
+    defaultSelectedIds = [],
+    onSelectedIdsChange,
     allowMultiple = false,
     allowToggle: allowToggleProp = false,
     manual = true,
-    ...sealed
-  } = useSealedState(initialState);
-  const allowToggle = useSealedState(
-    allowMultiple ? allowMultiple : allowToggleProp,
-  );
-  const composite = useCompositeState({
-    currentId: initialSelectedId,
-    orientation: "vertical",
-    ...sealed,
-  });
+    ...rest
+  } = initialState;
+  const allowToggle = allowMultiple ? allowMultiple : allowToggleProp;
 
   // Single toggle accordion State
-  const [selectedId, setSelectedId] = React.useState(initialSelectedId);
+  const [selectedId, setSelectedId] = useControllableState({
+    defaultValue: defaultSelectedId,
+    value: selectedIdProp,
+    onChange: onSelectedIdChange,
+    shouldUpdate: (prev, next) => prev !== next,
+  });
+
   // Multiple toggle accordion State
-  const [selectedIds, setSelectedIds] = React.useState(initialSelectedIds);
+  const [selectedIds, setSelectedIds] = useControllableState({
+    defaultValue: defaultSelectedIds,
+    value: selectedIdsProp,
+    onChange: onSelectedIdsChange,
+    shouldUpdate: (prev, next) => prev !== next,
+  });
+
+  const composite = useCompositeState({
+    orientation: "vertical",
+    ...rest,
+  });
 
   const select = React.useCallback(
     (id: string | null) => {

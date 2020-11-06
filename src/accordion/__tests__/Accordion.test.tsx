@@ -145,7 +145,7 @@ describe("Accordion", () => {
 
   it("Accordion with selectedId given to be selected properly", () => {
     const { getByText: text } = render(
-      <AccordionComponent selectedId="accordion-2" />,
+      <AccordionComponent defaultSelectedId="accordion-2" />,
     );
 
     press.Tab();

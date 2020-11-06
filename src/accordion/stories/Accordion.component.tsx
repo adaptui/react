@@ -12,12 +12,12 @@ export const App: React.FC<AccordionInitialState> = props => {
   const state = useAccordionState(props);
 
   // const initialProps = {
-  //   selectedId: "accordion3",
+  //   defaultSelectedId: "accordion3",
   //   manual: true,
   //   loop: true,
   //   allowToggle: true,
   //   allowMultiple: true,
-  //   selectedIds: [],
+  //   defaultSelectedIds: [],
   // };
 
   // const state = useAccordionState(initialProps);
