@@ -36,7 +36,7 @@ export const Origin = Base.bind({});
 Origin.args = {
   label: "Origin Changed",
   showTip: true,
-  values: [0],
+  defaultValues: [0],
   origin: 0,
   min: -50,
   max: 50,
@@ -70,7 +70,7 @@ Step.args = {
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  values: [80],
+  defaultValues: [80],
 };
 
 export const FormatOptions = Base.bind({});
@@ -92,17 +92,17 @@ Disabled.args = {
 export const Range = Base.bind({});
 Range.args = {
   label: "Range",
-  values: [25, 75],
+  defaultValues: [25, 75],
 };
 
 export const Multi = Base.bind({});
 Multi.args = {
   label: "Range",
-  values: [25, 50, 75],
+  defaultValues: [25, 50, 75],
 };
 
 export const Multis = Base.bind({});
 Multis.args = {
   label: "Range",
-  values: [20, 40, 60, 80],
+  defaultValues: [20, 40, 60, 80],
 };

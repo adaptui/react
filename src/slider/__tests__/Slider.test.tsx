@@ -2,10 +2,10 @@
 // https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/slider/test/useSliderThumb.test.js
 
 /**
- 
+
 NOTES on Testing slider component.
 
-### The Error: 
+### The Error:
 TypeError : Class constructor MouseEvent cannot be invoed with "new"
 https://github.com/kulshekhar/ts-jest/issues/571#issuecomment-719352005
 
@@ -18,8 +18,8 @@ https://stackoverflow.com/questions/51860043/javascript-es6-typeerror-class-cons
 Accordion to some github issues setting target: "ES2015" should fix the issues but did not worked in this project for some reason
 
 
-## Solution: 
-Adding env preset in the babel config and setting the targets to node: "current" seems to be fixing the issue, 
+## Solution:
+Adding env preset in the babel config and setting the targets to node: "current" seems to be fixing the issue,
 note that we are only setting this on test env.
 ```js
 env: {
@@ -30,7 +30,7 @@ env: {
 ```
 
 Now our project had custom babel-(DASH)-config.js file because of storybook config, but jest won't pick that file up
-So i had to rename the file to babel.config.js which seems to be working 
+So i had to rename the file to babel.config.js which seems to be working
 
 Along the way i also stumbed upon this bug too: https://github.com/facebook/jest/issues/9292
 This possibly was because of wrong jest config.
@@ -274,7 +274,7 @@ describe("Slider", () => {
       <SliderComponent
         onChangeStart={onStart}
         onChangeEnd={onEnd}
-        values={[0]}
+        defaultValues={[0]}
         origin={0}
         min={-50}
         max={50}

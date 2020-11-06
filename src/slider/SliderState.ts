@@ -5,13 +5,13 @@ import { Item } from "reakit/ts/Composite/__utils/types";
 import { SealedInitialState, useSealedState } from "reakit-utils";
 
 import { getOptimumValue, clamp } from "../utils";
+import { useControllableState } from "@chakra-ui/hooks";
 
 export interface SliderState {
   /**
    * The `value` of the slider indicator.
    *
    * If `undefined`/`not valid` the slider bar will be the optimum of min & max
-   * @default [50]
    */
   values: number[];
   /**
@@ -135,6 +135,16 @@ export type SliderInitialState = Pick<
   "values" | "min" | "max" | "step" | "isDisabled" | "orientation" | "reversed"
 > & {
   /**
+   * The `defaultValue` of the slider indicator.
+   *
+   * @default [50]
+   */
+  defaultValues?: number[];
+  /**
+   * Handler that is called when the value changes.
+   */
+  onChange?: (value: number[]) => void;
+  /**
    * Get the value when dragging is started
    */
   onChangeEnd?: (value: number[]) => void;
@@ -151,10 +161,12 @@ export type SliderInitialState = Pick<
 export type SliderStateReturn = SliderState & SliderAction;
 
 export function useSliderState(
-  initialState: SealedInitialState<SliderInitialState> = {},
+  props: SliderInitialState = {},
 ): SliderStateReturn {
   const {
+    defaultValues,
     values: valuesProp,
+    onChange,
     min = 0,
     max = 100,
     step = 1,
@@ -164,12 +176,16 @@ export function useSliderState(
     onChangeStart,
     onChangeEnd,
     formatOptions,
-  } = useSealedState(initialState);
+  } = props;
 
-  const initialValues = valuesProp ? valuesProp : [getOptimumValue(min, max)];
-  const [values, setValues] = React.useState(
-    bulkClamp(initialValues, min, max),
-  );
+  const [rawValues, setValues] = useControllableState({
+    value: valuesProp,
+    defaultValue: defaultValues || [getOptimumValue(min, max)],
+    onChange,
+    shouldUpdate: (prev, next) => prev !== next,
+  });
+  const values = bulkClamp(rawValues, min, max);
+
   const [focusedThumb, setFocusedThumb] = React.useState<number | undefined>(
     undefined,
   );

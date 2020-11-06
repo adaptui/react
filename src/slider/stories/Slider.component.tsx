@@ -21,11 +21,6 @@ interface AppProps extends SliderInitialState {
    */
   showTip?: boolean;
   /**
-   * Orientation of the slider
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
-  /**
    * True, if the direction of the slider is reversed
    * @default false
    */
@@ -34,14 +29,10 @@ interface AppProps extends SliderInitialState {
    * Origin on the slider, calculated based on min & max
    */
   origin?: number;
-  /**
-   * Get the value when it changes
-   */
-  onChange?: (values: number[]) => void;
 }
 
 export const App: React.FC<AppProps> = args => {
-  const { label, isReversed, origin: originProp, onChange, ...rest } = args;
+  const { label, isReversed, origin: originProp, ...rest } = args;
   const origin = originProp ?? args.min ?? 0;
 
   const state = useSliderState({ reversed: isReversed, ...rest });
@@ -70,10 +61,6 @@ export const App: React.FC<AppProps> = args => {
     ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
     : `${getThumbPercent(0) * 100}%`;
   const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
-
-  React.useEffect(() => {
-    onChange?.(values);
-  }, [onChange, values]);
 
   return (
     <div

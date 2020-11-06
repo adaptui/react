@@ -2,12 +2,12 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
-import { App as MultiSlider } from "./MultiSlider.component";
 import {
   multiSliderTemplate,
   multiSliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
+import { App as MultiSlider } from "./MultiSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -26,27 +26,34 @@ export default {
 const Base: Story = args => <MultiSlider {...args} />;
 
 export const Default = Base.bind({});
+Default.args = {
+  defaultValues: [25, 50, 75],
+};
 
 export const ThumbTip = Base.bind({});
 ThumbTip.args = {
+  defaultValues: [25, 50, 75],
   label: "Thumb Tipped",
   showTip: true,
 };
 
 export const Reversed = Base.bind({});
 Reversed.args = {
+  defaultValues: [25, 50, 75],
   label: "Reversed",
   isReversed: true,
 };
 
 export const Vertical = Base.bind({});
 Vertical.args = {
+  defaultValues: [25, 50, 75],
   label: "Vertical",
   orientation: "vertical",
 };
 
 export const MinMax = Base.bind({});
 MinMax.args = {
+  defaultValues: [25, 50, 75],
   label: "Min Max",
   min: 20,
   max: 80,
@@ -54,6 +61,7 @@ MinMax.args = {
 
 export const Step = Base.bind({});
 Step.args = {
+  defaultValues: [25, 50, 75],
   label: "Stepped",
   step: 10,
 };
@@ -61,11 +69,12 @@ Step.args = {
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  values: [10, 20, 30],
+  defaultValues: [10, 20, 30],
 };
 
 export const Disabled = Base.bind({});
 Disabled.args = {
+  defaultValues: [25, 50, 75],
   label: "Disabled",
   isDisabled: true,
 };
