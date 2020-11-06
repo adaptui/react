@@ -97,7 +97,7 @@ export type AccordionInitialState = CompositeInitialState &
 export type AccordionStateReturn = AccordionState & AccordionActions;
 
 export function useAccordionState(
-  initialState: AccordionInitialState = {},
+  props: AccordionInitialState = {},
 ): AccordionStateReturn {
   const {
     selectedId: selectedIdProp,
@@ -110,7 +110,7 @@ export function useAccordionState(
     allowToggle: allowToggleProp = false,
     manual = true,
     ...rest
-  } = initialState;
+  } = props;
   const allowToggle = allowMultiple ? allowMultiple : allowToggleProp;
 
   // Single toggle accordion State

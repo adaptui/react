@@ -61,9 +61,9 @@ export type MeterInitialState = Pick<
 export type MeterStateReturn = MeterState;
 
 export const useMeterState = (
-  initialState: MeterInitialState = {},
+  props: MeterInitialState = {},
 ): MeterStateReturn => {
-  const { value: defaultValue = 0, min = 0, max = 1, ...sealed } = initialState;
+  const { value: defaultValue = 0, min = 0, max = 1, ...sealed } = props;
   const initialLow = sealed.low ?? min;
   const initialHigh = sealed.high ?? max;
   const initialOptimum =
