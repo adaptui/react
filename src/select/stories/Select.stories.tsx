@@ -1,6 +1,7 @@
 import "./Select.css";
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta } from "@storybook/react";
+import { CompositeInitialState, PopoverInitialState } from "reakit";
 
 import { App as Select } from "./Select.component";
 import {
@@ -14,11 +15,17 @@ import {
   SelectOption,
   SelectTrigger,
   useSelectState,
+  SelectInitialState,
   Select as SelectComponent,
 } from "..";
 
+export const Default: React.FC<Omit<
+  SelectInitialState,
+  keyof (PopoverInitialState & CompositeInitialState)
+>> = props => <Select {...props} />;
+
 export default {
-  component: Select,
+  component: Default,
   title: "Select/Basic",
   parameters: {
     preview: createPreviewTabs({
@@ -46,13 +53,10 @@ const countries = [
   { name: "zimbabwe", emoji: "🇿🇼" },
 ];
 
-const Base: Story = args => <Select {...args} />;
-
-export const Default = Base.bind({});
-export const MultiSelect = Base.bind({});
+export const MultiSelect = Default.bind({});
 MultiSelect.args = { allowMultiselect: true };
 
-export const DefaultSelected = Base.bind({});
+export const DefaultSelected = Default.bind({});
 DefaultSelected.args = { selected: "india" };
 
 export const Scrolling: React.FC = () => {

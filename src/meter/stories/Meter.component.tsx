@@ -1,9 +1,14 @@
 import * as React from "react";
 import { css, keyframes } from "emotion";
 
-import { Meter, useMeterState, MeterStateReturn } from "renderless-components";
+import {
+  Meter,
+  useMeterState,
+  MeterStateReturn,
+  MeterInitialState,
+} from "renderless-components";
 
-export interface AppProps {
+export interface AppProps extends MeterInitialState {
   /**
    * Adds a label to meter.
    * @default false
@@ -19,44 +24,6 @@ export interface AppProps {
    * @default false
    */
   withStripeAnimation?: boolean;
-  /**
-   * The `value` of the meter indicator.
-   *
-   * If `undefined`/`not valid` the meter bar will be equal to `min`
-   * @default 0
-   */
-  value?: number;
-  /**
-   * The minimum value of the meter
-   * @default 0
-   */
-  min?: number;
-  /**
-   * The maximum value of the meter
-   * @default 1
-   */
-  max?: number;
-  /**
-   * The higher limit of min range.
-   *
-   * Defaults to `min`.
-   * @default 0
-   */
-  low?: number;
-  /**
-   * The lower limit of max range.
-   *
-   * Defaults to `max`.
-   * @default 1
-   */
-  high?: number;
-  /**
-   * The lower limit of max range.
-   *
-   * Defaults to `median of low & high`.
-   * @default 0.5
-   */
-  optimum?: number;
 }
 
 export const App: React.FC<AppProps> = props => {

@@ -1,5 +1,6 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta } from "@storybook/react";
+import { PopoverInitialState, CompositeInitialState } from "reakit";
 
 import {
   selectCssTemplate,
@@ -14,10 +15,16 @@ import {
   SelectInput,
   SelectOption,
   useSelectState,
+  SelectInitialState,
 } from "..";
 
+export const Default: React.FC<Omit<
+  SelectInitialState,
+  keyof (PopoverInitialState & CompositeInitialState)
+>> = props => <Combobox {...props} />;
+
 export default {
-  component: Combobox,
+  component: Default,
   title: "Select/Combobox",
   parameters: {
     preview: createPreviewTabs({
@@ -44,10 +51,6 @@ const countries = [
   { name: "costa rica", emoji: "🇨🇷" },
   { name: "zimbabwe", emoji: "🇿🇼" },
 ];
-
-const Base: Story = args => <Combobox {...args} />;
-
-export const Default = Base.bind({});
 
 export const WithoutFilter: React.FC = () => {
   const state = useSelectState({

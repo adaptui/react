@@ -2,13 +2,14 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
-  useSliderState,
   SliderTrack,
   SliderThumb,
   SliderInput,
+  useSliderState,
+  SliderInitialState,
 } from "renderless-components";
 
-interface AppProps {
+interface AppProps extends SliderInitialState {
   /**
    * Label for the slider
    *
@@ -20,67 +21,23 @@ interface AppProps {
    */
   showTip?: boolean;
   /**
-   * Origin on the slider, calculated based on min & max
-   */
-  origin?: number;
-  /**
-   * The `value` of the slider indicator.
-   *
-   * If `undefined`/`not valid` the slider bar will be the optimum of min & max
-   * @default [50]
-   */
-  values?: number[];
-  /**
-   * The minimum value of the slider
-   * @default 0
-   */
-  min?: number;
-  /**
-   * The maximum value of the slider
-   * @default 100
-   */
-  max?: number;
-  /**
-   * The step in which increments/decrements have to be made
-   * @default 1
-   */
-  step?: number;
-  /**
-   * If `true`, the slider will be disabled
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
    * Orientation of the slider
    * @default "horizontal"
    */
   orientation?: "horizontal" | "vertical";
-  /**
-   * Direction of the slider
-   * @default false
-   */
-  reversed?: boolean;
   /**
    * True, if the direction of the slider is reversed
    * @default false
    */
   isReversed?: boolean;
   /**
-   * Get the formated value based on number format options
+   * Origin on the slider, calculated based on min & max
    */
-  formatOptions?: Intl.NumberFormatOptions;
+  origin?: number;
   /**
    * Get the value when it changes
    */
   onChange?: (values: number[]) => void;
-  /**
-   * Get the value when dragging is started
-   */
-  onChangeEnd?: (value: number[]) => void;
-  /**
-   * Get the value when dragging is stopped
-   */
-  onChangeStart?: (value: number[]) => void;
 }
 
 export const App: React.FC<AppProps> = args => {

@@ -1,5 +1,4 @@
 import React from "react";
-import { CompositeInitialState, PopoverInitialState } from "reakit";
 import {
   Select,
   SelectMenu,
@@ -26,12 +25,7 @@ const countries = [
   { name: "zimbabwe", emoji: "🇿🇼" },
 ];
 
-type AppProps = Omit<
-  SelectInitialState,
-  keyof (PopoverInitialState & CompositeInitialState)
->;
-
-export const App: React.FC<AppProps> = props => {
+export const App: React.FC<SelectInitialState> = props => {
   const state = useSelectState({
     ...props,
     allowMultiselect: true,
