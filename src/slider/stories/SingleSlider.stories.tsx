@@ -48,7 +48,7 @@ Step.args = {
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  values: [80],
+  defaultValues: [80],
 };
 
 export const FormatOptions = Base.bind({});
