@@ -3,16 +3,11 @@
  * Based on the logic from [usePagination Hook](https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/Pagination/usePagination.js)
  */
 import React from "react";
-import {
-  SealedInitialState,
-  useSealedState,
-} from "reakit-utils/useSealedState";
+import { useControllableState } from "@chakra-ui/hooks";
 
 export type PaginationState = {
   /**
    * The current active page
-   *
-   * @default 1
    */
   currentPage: number;
   /**
@@ -52,20 +47,37 @@ export type PaginationAction = {
   lastPage: () => void;
 };
 
-export type PaginationInitialState = Pick<
-  Partial<PaginationState>,
-  "currentPage"
-> & {
+export type PaginationInitialState = {
+  /**
+   * Set the default page(uncontrollable)
+   *
+   * @default 1
+   */
+  defaultPage?: number;
+  /**
+   * Set the page(controllable)
+   */
+  page?: number;
+  /**
+   *
+   */
+  onChange?: (page: number) => void;
   /**
    * Total no. of pages
+   *
+   * @default 1
    */
   count?: number;
   /**
    * No. of boundary pages to be visible
+   *
+   * @default 1
    */
   boundaryCount?: number;
   /**
    * No. of sibiling pages allowed before/after the current page
+   *
+   * @default 1
    */
   siblingCount?: number;
 };
@@ -73,16 +85,23 @@ export type PaginationInitialState = Pick<
 export type PaginationStateReturn = PaginationState & PaginationAction;
 
 export const usePaginationState = (
-  props: SealedInitialState<PaginationInitialState> = {},
+  props: PaginationInitialState = {},
 ): PaginationStateReturn => {
   const {
-    currentPage: initialCurrentPage = 1,
+    defaultPage = 1,
+    page: currentPageProp,
+    onChange,
     count = 1,
     boundaryCount = 1,
     siblingCount = 1,
-  } = useSealedState(props);
+  } = props;
 
-  const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
+  const [currentPage, setCurrentPage] = useControllableState({
+    value: currentPageProp,
+    defaultValue: defaultPage,
+    onChange,
+    shouldUpdate: (prev, next) => prev !== next,
+  });
 
   const startPages = range(1, Math.min(boundaryCount, count));
   const endPages = range(

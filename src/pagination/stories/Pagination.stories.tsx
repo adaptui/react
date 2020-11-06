@@ -22,19 +22,20 @@ export const Default = Base.bind({});
 
 export const DefaultPage = Base.bind({});
 DefaultPage.args = {
-  currentPage: 5,
+  defaultPage: 5,
+  count: 10,
 };
 
 export const BoundaryCount = Base.bind({});
 BoundaryCount.args = {
-  currentPage: 25,
+  defaultPage: 25,
   count: 50,
   boundaryCount: 5,
 };
 
 export const SibilingCount = Base.bind({});
 SibilingCount.args = {
-  currentPage: 25,
+  defaultPage: 25,
   count: 50,
   sibilingCount: 5,
 };
