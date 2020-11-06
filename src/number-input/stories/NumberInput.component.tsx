@@ -30,7 +30,7 @@ export const App: React.FC<AppProps> = props => {
   const { clampValueOnBlur, allowMouseWheel } = props;
 
   // const initialProps = {
-  //   vconstalue: 15,
+  //   defaultValue: 15,
   //   min: 10,
   //   max: 30,
   //   step: 1,

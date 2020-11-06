@@ -1,26 +1,4 @@
-import {
-  countDecimalPlaces,
-  StringOrNumber,
-  toPrecision,
-} from "@chakra-ui/utils";
 import { KeyboardEvent } from "react";
-
-export function parseValue(value: StringOrNumber) {
-  return parseFloat(value.toString().replace(/[^\w.-]+/g, ""));
-}
-
-export function getDecimalPlaces(value: number, step: number) {
-  return Math.max(countDecimalPlaces(step), countDecimalPlaces(value));
-}
-
-export function castValue(
-  value: StringOrNumber,
-  step: number,
-  precision?: number,
-) {
-  const decimalPlaces = getDecimalPlaces(parseValue(value), step);
-  return toPrecision(parseValue(value), precision ?? decimalPlaces);
-}
 
 const FLOATING_POINT_REGEX = /^[Ee0-9+\-.]$/;
 
