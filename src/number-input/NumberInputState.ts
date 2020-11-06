@@ -5,26 +5,15 @@
  * to work with Reakit System
  */
 import {
+  focus,
   minSafeInteger,
   maxSafeInteger,
-  focus,
-  toPrecision,
   StringOrNumber,
-  clampValue,
 } from "@chakra-ui/utils";
 import * as React from "react";
-import {
-  SealedInitialState,
-  useSealedState,
-} from "reakit-utils/useSealedState";
+import { useCounter } from "@chakra-ui/counter";
 
-import {
-  castValue,
-  getDecimalPlaces,
-  parseValue,
-  useSpinner,
-  useSpinnerReturn,
-} from "./helpers";
+import { useSpinner, useSpinnerReturn } from "./helpers";
 
 export type NumberInputState = {
   /**
@@ -138,6 +127,16 @@ export type NumberinputInitialState = Pick<
   "value" | "keepWithinRange" | "min" | "max" | "step" | "precision"
 > & {
   /**
+   * The initial value of the counter. Should be less than `max` and greater than `min`
+   *
+   * @default ""
+   */
+  defaultValue?: StringOrNumber;
+  /**
+   * The callback fired when the value changes
+   */
+  onChange?(valueAsString: string, valueAsNumber: number): void;
+  /**
    * If `true`, the input will be focused as you increment
    * or decrement the value with the stepper
    *
@@ -149,108 +148,29 @@ export type NumberinputInitialState = Pick<
 export type NumberInputStateReturn = NumberInputState & NumberInputAction;
 
 export function useNumberInputState(
-  initialState: SealedInitialState<NumberinputInitialState> = {},
+  props: NumberinputInitialState = {},
 ): NumberInputStateReturn {
   const {
-    value: initialValue,
     min = minSafeInteger,
     max = maxSafeInteger,
     step: stepProp = 1,
-    precision: precisionProp,
     keepWithinRange = true,
     focusInputOnChange = true,
-  } = useSealedState(initialState);
-
-  const [value, setValueProp] = React.useState<StringOrNumber>(() => {
-    if (initialValue == null) return "";
-    return castValue(initialValue, stepProp, precisionProp);
-  });
+  } = props;
 
   /**
-   * Common range checks
+   * Leverage the `useCounter` hook since it provides
+   * the functionality to `increment`, `decrement` and `update`
+   * counter values
    */
-  const valueAsNumber = parseValue(value);
-  const isOutOfRange = valueAsNumber > max || valueAsNumber < min;
-  const isAtMax = valueAsNumber === max;
-  const isAtMin = valueAsNumber === min;
-  const decimalPlaces = getDecimalPlaces(parseValue(value), stepProp);
-  const precision = precisionProp ?? decimalPlaces;
+  const counter = useCounter(props);
 
-  const setValue = React.useCallback((next: StringOrNumber) => {
-    setValueProp(next.toString());
-  }, []);
-
-  const setCastedValue = React.useCallback(
-    (value: StringOrNumber) => {
-      setValue(castValue(value, stepProp, precision));
-    },
-    [precision, stepProp, setValue],
-  );
-
-  // Function to clamp the value and round it to the precision
-  const clampToPrecision = React.useCallback(
-    (value: number) => {
-      let nextValue = value;
-
-      if (keepWithinRange) {
-        nextValue = clampValue(nextValue, min, max);
-      }
-
-      return toPrecision(nextValue, precision);
-    },
-    [precision, keepWithinRange, max, min],
-  );
-
-  const increment = React.useCallback(
-    (step = stepProp) => {
-      let next: StringOrNumber;
-
-      /**
-       * Let's follow the native browser behavior for
-       * scenarios where the input starts empty ("")
-       */
-      if (value === "") {
-        /**
-         * If `min` is set, native input, starts at the `min`.
-         * Else, it starts at `step`
-         */
-        next = parseValue(step);
-      } else {
-        next = parseValue(value) + step;
-      }
-
-      next = clampToPrecision(next as number);
-      setValue(next);
-    },
-    [clampToPrecision, stepProp, setValue, value],
-  );
-
-  const decrement = React.useCallback(
-    (step = stepProp) => {
-      let next: StringOrNumber;
-
-      // Same thing here. We'll follow native implementation
-      if (value === "") {
-        next = parseValue(-step);
-      } else {
-        next = parseValue(value) - step;
-      }
-
-      next = clampToPrecision(next as number);
-      setValue(next);
-    },
-    [clampToPrecision, stepProp, setValue, value],
-  );
-
-  const reset = React.useCallback(() => {
-    let next: StringOrNumber;
-    if (initialValue == null) {
-      next = "";
-    } else {
-      next = castValue(initialValue, stepProp, precisionProp);
-    }
-    setValue(next);
-  }, [initialValue, precisionProp, stepProp, setValue]);
+  const {
+    update: setValue,
+    cast: setCastedValue,
+    clamp: clampToPrecision,
+    ...counterProps
+  } = counter;
 
   /**
    * Leverage the `useSpinner` hook to spin the input's value
@@ -258,7 +178,7 @@ export function useNumberInputState(
    *
    * This leverages `setInterval` internally
    */
-  const spinner = useSpinner(increment, decrement);
+  const spinner = useSpinner(counter.increment, counter.decrement);
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -269,22 +189,14 @@ export function useNumberInputState(
   }, [focusInputOnChange]);
 
   return {
-    value,
     min,
     max,
     step: stepProp,
-    precision,
     keepWithinRange,
-    valueAsNumber,
-    isOutOfRange,
-    isAtMax,
-    isAtMin,
     setValue,
     setCastedValue,
-    increment,
-    decrement,
-    reset,
     clampToPrecision,
+    ...counterProps,
     inputRef,
     focusInput,
     spinUp: spinner.up,
