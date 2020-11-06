@@ -5,6 +5,7 @@ import { canUseDOM } from "reakit-utils";
 import { ToastController } from "./ToastController";
 import { isFunction, createContext } from "../utils";
 import { IToast, useToastState, ToastStateReturn } from "./ToastState";
+import { objectKeys } from "@chakra-ui/utils";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -89,8 +90,8 @@ export const ToastProvider: React.FC<IToastProvider> = ({
   });
   const { sortedToasts, hideToast } = state;
 
-  const Toasts = Object.keys(sortedToasts).map(placement => {
-    const toastsList: IToast[] = sortedToasts[placement];
+  const Toasts = objectKeys(sortedToasts).map(placement => {
+    const toastsList = sortedToasts[placement];
 
     return (
       <div

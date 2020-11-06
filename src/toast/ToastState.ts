@@ -38,6 +38,7 @@ export interface IToast {
 }
 
 export type ToastList = Record<string, IToast>;
+export type SortedToastList = Record<Placements, IToast[]>;
 
 interface ToastStateProps {
   defaultPlacement?: Placements;
@@ -167,5 +168,5 @@ function getPlacementSortedToasts(toasts: ToastList) {
     }
   }
 
-  return sortedToasts;
+  return sortedToasts as SortedToastList;
 }
