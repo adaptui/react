@@ -20,13 +20,13 @@ describe("ToastState", () => {
 
     expect(state.current).toMatchInlineSnapshot(`
       Object {
-        "getToastToRender": [Function],
-        "hide": [Function],
-        "remove": [Function],
-        "setToasts": [Function],
-        "show": [Function],
+        "hideToast": [Function],
+        "isToastVisible": [Function],
+        "removeToast": [Function],
+        "showToast": [Function],
+        "sortedToasts": Object {},
         "toasts": Object {},
-        "toggle": [Function],
+        "toggleToast": [Function],
       }
     `);
   });
@@ -37,14 +37,14 @@ describe("ToastState", () => {
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
-      result.current.show({ type: "primary", content: "Hello world" });
+      result.current.showToast({ type: "primary", content: "Hello world" });
     });
     expect(Object.values(result.current.toasts)).toMatchObject([
       {
         autoDismiss: undefined,
         content: "Hello world",
         isVisible: true,
-        placement: undefined,
+        placement: "bottom-center",
         timeout: undefined,
         type: "primary",
       },
@@ -57,13 +57,13 @@ describe("ToastState", () => {
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
-      result.current.show({ type: "primary", content: "Hello world" });
+      result.current.showToast({ type: "primary", content: "Hello world" });
     });
 
     const id = Object.values(result.current.toasts)[0].id;
 
     act(() => {
-      result.current.toggle({ id, isVisible: false });
+      result.current.toggleToast({ id, isVisible: false });
     });
     expect(result.current.toasts[id]).toMatchObject({ isVisible: false });
   });
@@ -74,13 +74,13 @@ describe("ToastState", () => {
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
-      result.current.show({ type: "primary", content: "Hello world" });
+      result.current.showToast({ type: "primary", content: "Hello world" });
     });
     expect(Object.values(result.current.toasts)).toHaveLength(1);
     const id = Object.values(result.current.toasts)[0].id;
 
     act(() => {
-      result.current.remove(id);
+      result.current.removeToast(id);
     });
     expect(result.current.toasts).toStrictEqual({});
   });
@@ -92,20 +92,20 @@ describe("ToastState", () => {
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
-      result.current.show({ type: "primary", content: "Hello world" });
+      result.current.showToast({ type: "primary", content: "Hello world" });
     });
     expect(Object.values(result.current.toasts)).toHaveLength(1);
     id = Object.values(result.current.toasts)[0].id;
 
     act(() => {
-      result.current.hide(id);
+      result.current.hideToast(id);
     });
     expect(Object.values(result.current.toasts)).toMatchObject([
       {
         autoDismiss: undefined,
         content: "Hello world",
         isVisible: false,
-        placement: undefined,
+        placement: "bottom-center",
         timeout: undefined,
         type: "primary",
       },
@@ -126,47 +126,44 @@ describe("ToastState", () => {
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
-      result.current.show({
+      result.current.showToast({
         type: "primary",
         placement: "top-center",
         content: "Hello world 1",
       });
-      result.current.show({
+      result.current.showToast({
         type: "primary",
         placement: "bottom-center",
         content: "Hello world 2",
       });
-      result.current.show({
+      result.current.showToast({
         type: "primary",
         placement: "bottom-left",
         content: "Hello world 3",
       });
-      result.current.show({
+      result.current.showToast({
         type: "primary",
         placement: "bottom-left",
         content: "Hello world 4",
       });
-      result.current.show({
+      result.current.showToast({
         type: "primary",
         placement: "top-right",
         content: "Hello world 5",
       });
     });
 
-    const allPositions: any[] = [];
-    result.current.getToastToRender("bottom-center", (pos, toastList) => {
-      allPositions.push(toastList);
-    });
-    expect(allPositions[0]).toHaveLength(1);
-    expect(allPositions[1]).toHaveLength(1);
-    expect(allPositions[2]).toHaveLength(2);
-    expect(allPositions[3]).toHaveLength(1);
+    const sortedToasts = result.current.sortedToasts;
+    expect(sortedToasts["top-center"]).toHaveLength(1);
+    expect(sortedToasts["bottom-center"]).toHaveLength(1);
+    expect(sortedToasts["bottom-left"]).toHaveLength(2);
+    expect(sortedToasts["top-right"]).toHaveLength(1);
 
-    expect(allPositions[2][0]).toMatchObject({
+    expect(sortedToasts["bottom-left"][0]).toMatchObject({
       content: "Hello world 3",
       placement: "bottom-left",
     });
-    expect(allPositions[2][1]).toMatchObject({
+    expect(sortedToasts["bottom-left"][1]).toMatchObject({
       content: "Hello world 4",
       placement: "bottom-left",
     });

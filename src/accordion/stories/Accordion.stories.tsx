@@ -17,8 +17,8 @@ export default {
   title: "Accordion",
   parameters: {
     preview: createPreviewTabs({
-      js: accordionTemplate,
-      ts: accordionTemplateJs,
+      js: accordionTemplateJs,
+      ts: accordionTemplate,
     }),
   },
 } as Meta;

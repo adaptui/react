@@ -1,13 +1,17 @@
+import {
+  focusWithoutScrolling,
+  mergeProps,
+  useGlobalListeners,
+} from "@react-aria/utils";
 import * as React from "react";
 import { useLocale } from "@react-aria/i18n";
+import { useMove } from "@react-aria/interactions";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { focusWithoutScrolling, mergeProps } from "@react-aria/utils";
 
 import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
-import { useGlobalListeners, useMove } from "./helpers";
 
 export type SliderThumbOptions = BoxOptions &
   Pick<
@@ -72,7 +76,7 @@ export const useSliderThumb = createHook<
     const reverseX = options.reversed || direction === "rtl";
     const currentPosition = React.useRef<number | null>(null);
 
-    const moveProps = useMove({
+    const { moveProps } = useMove({
       onMoveStart() {
         currentPosition.current = null;
         options.setThumbDragging(index, true);
