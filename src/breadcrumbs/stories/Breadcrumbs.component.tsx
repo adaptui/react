@@ -2,9 +2,7 @@ import * as React from "react";
 
 import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
 
-export interface AppProps {}
-
-export const App: React.FC<AppProps> = props => {
+export const App: React.FC = props => {
   return (
     <Breadcrumbs className="breadcrumb">
       <ol>

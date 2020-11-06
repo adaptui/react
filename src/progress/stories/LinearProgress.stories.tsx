@@ -7,7 +7,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Progress,
-  title: "ProgressLinear",
+  title: "Progress/Linear",
   parameters: {
     preview: createPreviewTabs({
       js: linearProgressTemplateJs,

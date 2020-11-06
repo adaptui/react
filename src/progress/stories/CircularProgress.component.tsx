@@ -3,35 +3,19 @@ import { Button } from "reakit";
 import { css, keyframes } from "emotion";
 
 import {
-  Progress,
-  useProgressState,
-  ProgressState,
   isNull,
+  Progress,
+  ProgressState,
+  useProgressState,
+  ProgressInitialState,
 } from "renderless-components";
 
-export interface AppProps {
+export interface AppProps extends ProgressInitialState {
   /**
    * Adds a label to meter.
    * @default false
    */
   withLabel?: boolean;
-  /**
-   * The `value` of the progress indicator.
-   *
-   * If `null` the progress bar will be in `indeterminate` state
-   * @default 0
-   */
-  value?: number | null;
-  /**
-   * The minimum value of the progress
-   * @default 0
-   */
-  min?: number;
-  /**
-   * The maximum value of the
-   * @default 100
-   */
-  max?: number;
 }
 
 export const App: React.FC<AppProps> = props => {
