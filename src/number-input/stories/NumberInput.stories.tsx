@@ -29,14 +29,14 @@ export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 20,
 };
 
 export const Step = Base.bind({});
 Step.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 5,
@@ -44,7 +44,7 @@ Step.args = {
 
 export const Precision = Base.bind({});
 Precision.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 0.5,
@@ -53,7 +53,7 @@ Precision.args = {
 
 export const KeepWithinRangeFalse = Base.bind({});
 KeepWithinRangeFalse.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 5,
@@ -62,7 +62,7 @@ KeepWithinRangeFalse.args = {
 
 export const FocusInputOnChangeFalse = Base.bind({});
 FocusInputOnChangeFalse.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 5,
@@ -71,7 +71,7 @@ FocusInputOnChangeFalse.args = {
 
 export const ClampValueOnBlurFalse = Base.bind({});
 ClampValueOnBlurFalse.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 5,
@@ -80,7 +80,7 @@ ClampValueOnBlurFalse.args = {
 
 export const MouseWheelScrollFalse = Base.bind({});
 MouseWheelScrollFalse.args = {
-  value: 15,
+  defaultValue: 15,
   min: 10,
   max: 30,
   step: 5,

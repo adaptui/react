@@ -164,6 +164,7 @@ export const AccordionTrigger = createComponent({
 
 function isAccordionSelected(options: AccordionTriggerOptions) {
   const { id, allowMultiple, selectedId, selectedIds } = options;
+  if (!id) return;
 
   if (!allowMultiple) return selectedId === id;
   return selectedIds?.includes(id);

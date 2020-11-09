@@ -25,15 +25,20 @@ export default {
 const Base: Story = args => <SingleReversedSlider {...args} />;
 
 export const Default = Base.bind({});
+Default.args = {
+  reversed: true,
+};
 
 export const ThumbTip = Base.bind({});
 ThumbTip.args = {
+  reversed: true,
   label: "Thumb Tipped",
   showTip: true,
 };
 
 export const MinMax = Base.bind({});
 MinMax.args = {
+  reversed: true,
   label: "Min Max",
   min: 20,
   max: 80,
@@ -41,18 +46,21 @@ MinMax.args = {
 
 export const Step = Base.bind({});
 Step.args = {
+  reversed: true,
   label: "Stepped",
   step: 10,
 };
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
+  reversed: true,
   label: "Default Valued",
-  values: [80],
+  defaultValues: [80],
 };
 
 export const FormatOptions = Base.bind({});
 FormatOptions.args = {
+  reversed: true,
   label: "Temperature Formatted",
   formatOptions: {
     style: "unit",
@@ -63,6 +71,7 @@ FormatOptions.args = {
 
 export const Disabled = Base.bind({});
 Disabled.args = {
+  reversed: true,
   label: "Disabled",
   isDisabled: true,
 };

@@ -2,10 +2,10 @@
 // https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/slider/test/useSliderThumb.test.js
 
 /**
- 
+
 NOTES on Testing slider component.
 
-### The Error: 
+### The Error:
 TypeError : Class constructor MouseEvent cannot be invoed with "new"
 https://github.com/kulshekhar/ts-jest/issues/571#issuecomment-719352005
 
@@ -18,8 +18,8 @@ https://stackoverflow.com/questions/51860043/javascript-es6-typeerror-class-cons
 Accordion to some github issues setting target: "ES2015" should fix the issues but did not worked in this project for some reason
 
 
-## Solution: 
-Adding env preset in the babel config and setting the targets to node: "current" seems to be fixing the issue, 
+## Solution:
+Adding env preset in the babel config and setting the targets to node: "current" seems to be fixing the issue,
 note that we are only setting this on test env.
 ```js
 env: {
@@ -30,22 +30,22 @@ env: {
 ```
 
 Now our project had custom babel-(DASH)-config.js file because of storybook config, but jest won't pick that file up
-So i had to rename the file to babel.config.js which seems to be working 
+So i had to rename the file to babel.config.js which seems to be working
 
 Along the way i also stumbed upon this bug too: https://github.com/facebook/jest/issues/9292
 This possibly was because of wrong jest config.
 */
 
-import React from "react";
-import { VisuallyHidden } from "reakit";
-import { axe, render, press, fireEvent } from "reakit-test-utils";
 import {
   SliderTrack,
   SliderThumb,
   SliderInput,
   useSliderState,
 } from "../index";
+import React from "react";
+import { VisuallyHidden } from "reakit";
 import { SliderInitialState } from "../SliderState";
+import { render, fireEvent } from "reakit-test-utils";
 
 import { installMouseEvent } from "../../utils/test-utils";
 import { cleanup } from "@testing-library/react";
@@ -56,7 +56,7 @@ export const MultiSliderComponent = (
     onChange?: (values: number[]) => void;
   },
 ) => {
-  const { reversed, origin: originProp, onChange, ...rest } = props;
+  const { reversed, origin: originProp, ...rest } = props;
 
   const state = useSliderState({ reversed: reversed, ...rest });
   const origin = originProp ?? state.min ?? 0;
@@ -85,10 +85,6 @@ export const MultiSliderComponent = (
     ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
     : `${getThumbPercent(0) * 100}%`;
   const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
-
-  React.useEffect(() => {
-    onChange?.(values);
-  }, [onChange, values]);
 
   return (
     <div
@@ -196,7 +192,7 @@ describe("Slider", () => {
         onChange={onChange}
         onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}
-        values={[25, 50, 75]}
+        defaultValues={[25, 50, 75]}
         min={0}
         max={100}
         step={1}
@@ -213,7 +209,7 @@ describe("Slider", () => {
     fireEvent.mouseDown(thumb0, { clientX: 10, pageX: 10 });
     expect(onChangeStart).toHaveBeenLastCalledWith([25, 50, 75]);
     expect(onChangeEnd).not.toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith([25, 50, 75]);
+    expect(onChange).not.toHaveBeenCalled();
 
     // Let's drag the first thumb0 exceeding thumb1
     fireEvent.mouseMove(thumb0, { clientX: 20, pageX: 20 });
@@ -260,7 +256,7 @@ describe("Slider", () => {
         onChange={onChange}
         onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}
-        values={[25, 50]}
+        defaultValues={[25, 50]}
         min={0}
         max={100}
         step={1}
@@ -276,7 +272,7 @@ describe("Slider", () => {
     fireEvent.mouseDown(thumb0, { clientX: 10, pageX: 10 });
     expect(onChangeStart).toHaveBeenLastCalledWith([25, 50]);
     expect(onChangeEnd).not.toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith([25, 50]);
+    expect(onChange).not.toHaveBeenCalled();
 
     // Let's drag the first thumb0 to 5
     fireEvent.mouseMove(thumb0, { clientX: -10, pageX: -10 });
@@ -304,7 +300,7 @@ describe("Slider", () => {
   test("stress test with 50 thumbs", () => {
     const { getByTestId: testId } = render(
       <MultiSliderComponent
-        values={[...new Array(50).keys()]}
+        defaultValues={[...new Array(50).keys()]}
         min={0}
         max={50}
         step={1}
@@ -320,7 +316,7 @@ describe("Slider", () => {
     const { getByTestId: testId } = render(
       <MultiSliderComponent
         isDisabled={true}
-        values={[10, 50]}
+        defaultValues={[10, 50]}
         min={0}
         max={50}
         step={1}

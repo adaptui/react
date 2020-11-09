@@ -89,7 +89,7 @@ describe("usePaginationState", () => {
 
   it("should have disabled next button if currentPage === count & enabled previous button", () => {
     const { isAtFirstPage, isAtLastPage } = renderHook(() =>
-      usePaginationState({ count: 2, currentPage: 2 }),
+      usePaginationState({ count: 2, defaultPage: 2 }),
     ).result.current;
 
     expect(isAtFirstPage).toBe(false);
@@ -114,7 +114,7 @@ describe("usePaginationState", () => {
 
   it("should have start-ellipses when currentPage >= 5", () => {
     const { pages } = renderHook(() =>
-      usePaginationState({ count: 8, currentPage: 5 }),
+      usePaginationState({ count: 8, defaultPage: 5 }),
     ).result.current;
 
     expect(pages).toContain("start-ellipsis");
@@ -122,7 +122,7 @@ describe("usePaginationState", () => {
 
   it("should have start-ellipses & end-ellipsis when count >= 5", () => {
     const { pages } = renderHook(() =>
-      usePaginationState({ count: 9, currentPage: 5 }),
+      usePaginationState({ count: 9, defaultPage: 5 }),
     ).result.current;
 
     expect(pages).toContain("start-ellipsis");
@@ -138,7 +138,7 @@ describe("usePaginationState", () => {
       usePaginationState({
         count: 40,
         boundaryCount: 5,
-        currentPage: 20,
+        defaultPage: 20,
       }),
     );
 
@@ -156,7 +156,7 @@ describe("usePaginationState", () => {
       usePaginationState({
         count: 11,
         siblingCount: 2,
-        currentPage: 6,
+        defaultPage: 6,
       }),
     );
 

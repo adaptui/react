@@ -21,36 +21,22 @@ interface AppProps extends SliderInitialState {
    */
   showTip?: boolean;
   /**
-   * Orientation of the slider
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
-  /**
    * True, if the direction of the slider is reversed
    * @default false
    */
   isReversed?: boolean;
-  /**
-   * Get the value when it changes
-   */
-  onChange?: (values: number[]) => void;
 }
 
 export const App: React.FC<AppProps> = args => {
-  const { label, isReversed, onChange, ...rest } = args;
+  const { label, isReversed, ...rest } = args;
 
   const state = useSliderState({
-    values: [25, 50, 75],
     reversed: isReversed,
     ...rest,
   });
   const { values, getThumbValueLabel, getThumbPercent } = state;
 
   const isVertical = args.orientation === "vertical";
-
-  React.useEffect(() => {
-    onChange?.(values);
-  }, [onChange, values]);
 
   return (
     <div

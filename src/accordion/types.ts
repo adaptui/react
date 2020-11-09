@@ -63,6 +63,16 @@ interface SingleProps extends CommonAccordionProps {
    * The current selected accordion's `id`.
    */
   selectedId?: string | null;
+  /**
+   * Set default selected id(uncontrolled)
+   *
+   * @default null
+   */
+  defaultSelectedId?: string | null;
+  /**
+   * Handler that is called when the selectedId changes.
+   */
+  onSelectedIdChange?: (value: string | null) => void;
 }
 
 interface MultipleProps extends CommonAccordionProps {
@@ -76,6 +86,16 @@ interface MultipleProps extends CommonAccordionProps {
    * @default []
    */
   selectedIds?: (string | null)[];
+  /**
+   * Set default selected ids(uncontrolled)
+   *
+   * @default []
+   */
+  defaultSelectedIds?: (string | null)[];
+  /**
+   * Handler that is called when the selectedIds changes.
+   */
+  onSelectedIdsChange: (value: (string | null)[]) => void;
 }
 
 // State return types //

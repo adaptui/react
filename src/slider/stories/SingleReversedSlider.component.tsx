@@ -20,36 +20,18 @@ interface AppProps extends SliderInitialState {
    * True, if thumb needs a tip to show it's current percent
    */
   showTip?: boolean;
-  /**
-   * Orientation of the slider
-   * @default "horizontal"
-   */
-  orientation?: "horizontal" | "vertical";
-  /**
-   * True, if the direction of the slider is reversed
-   * @default false
-   */
-  isReversed?: boolean;
-  /**
-   * Get the value when it changes
-   */
-  onChange?: (values: number[]) => void;
 }
 
 export const App: React.FC<AppProps> = args => {
-  const { label, onChange, ...rest } = args;
+  const { label, ...rest } = args;
 
-  const state = useSliderState({ reversed: true, ...rest });
+  const state = useSliderState(rest);
   const {
     values,
     getValuePercent,
     getThumbValueLabel,
     getThumbPercent,
   } = state;
-
-  React.useEffect(() => {
-    onChange?.(values);
-  }, [onChange, values]);
 
   return (
     <div

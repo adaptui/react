@@ -35,7 +35,9 @@ const NumberInputComp = (props: AppProps) => {
 
 describe("NumberInput", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
+    const { getByTestId: testId } = render(
+      <NumberInputComp defaultValue={0} />,
+    );
     const numberInput = testId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
@@ -45,7 +47,7 @@ describe("NumberInput", () => {
 
   it("should increase/decrease with keyboard", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp value={0} max={10} min={0} />,
+      <NumberInputComp defaultValue={0} max={10} min={0} />,
     );
     const numberInput = testId("numberinput");
 
@@ -71,7 +73,9 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with buttons", () => {
-    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
+    const { getByTestId: testId } = render(
+      <NumberInputComp defaultValue={0} />,
+    );
 
     const incBtn = testId("inc");
     const decBtn = testId("dec");
@@ -88,7 +92,9 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with scrollwheel", () => {
-    const { getByTestId: testId } = render(<NumberInputComp value={0} />);
+    const { getByTestId: testId } = render(
+      <NumberInputComp defaultValue={0} />,
+    );
     const numberInput = testId("numberinput");
 
     press.Tab();
@@ -106,7 +112,7 @@ describe("NumberInput", () => {
 
   it("should behave properly with min/max/step options", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp value={0} min={10} max={50} step={10} />,
+      <NumberInputComp defaultValue={0} min={10} max={50} step={10} />,
     );
 
     const incBtn = testId("inc");
@@ -135,7 +141,7 @@ describe("NumberInput", () => {
 
   it("should behave properly precision value", () => {
     const { getByTestId: testId } = render(
-      <NumberInputComp value={0} step={0.65} precision={2} />,
+      <NumberInputComp defaultValue={0} step={0.65} precision={2} />,
     );
 
     const incBtn = testId("inc");
@@ -161,7 +167,7 @@ describe("NumberInput", () => {
       <NumberInputComp
         clampValueOnBlur={true}
         keepWithinRange={true}
-        value={15}
+        defaultValue={15}
         min={10}
         max={50}
       />,
