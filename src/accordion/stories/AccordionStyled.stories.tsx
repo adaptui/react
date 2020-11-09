@@ -22,8 +22,8 @@ export default {
   title: "Accordion/Styled",
   parameters: {
     preview: createPreviewTabs({
-      js: accordionStyledTemplate,
-      ts: accordionStyledTemplateJs,
+      js: accordionStyledTemplateJs,
+      ts: accordionStyledTemplate,
       css: accordionStyledCssTemplate,
     }),
   },

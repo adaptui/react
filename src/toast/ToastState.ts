@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 
 import { Placements } from "./ToastProvider";
 
@@ -7,25 +6,27 @@ type StringOrElement = string | React.ReactNode;
 
 export interface IToast {
   /**
-   * uniue id of toast
+   * Unique id for the toast
    */
   id: string;
   /**
-   * type of toast
+   * Type of toast
    */
-  type?: string;
+  type: string;
   /**
-   * content inside the toast
+   * Content inside the toast
    */
-  content: StringOrElement;
+  content?: StringOrElement;
+  /**
+   * Sets the placement of the toast
+   *
+   * @default "bottom-center"
+   */
+  placement: Placements;
   /**
    * Timeout after the toast will be removed automatically if autoDismiss is true
    */
   timeout?: number;
-  /**
-   * sets the placement of the toast
-   */
-  placement?: Placements;
   /**
    * If True the toast will automatically dismiss after the specified duration
    */
@@ -37,22 +38,25 @@ export interface IToast {
 }
 
 export type ToastList = Record<string, IToast>;
-
-type GetToastToRenderType = (
-  defaultPlacement: Placements,
-  callback: (position: Placements, toastList: IToast[]) => void,
-) => Array<any>;
+export type SortedToastList = Record<Placements, IToast[]>;
 
 interface ToastStateProps {
+  defaultPlacement?: Placements;
   animationTimeout?: number;
 }
 
-export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
+let COUNTER = 0;
+
+export const useToastState = ({
+  defaultPlacement = "bottom-center",
+  animationTimeout = 0,
+}: ToastStateProps) => {
   const [toasts, setToasts] = React.useState<ToastList>({});
+  const sortedToasts = getPlacementSortedToasts(toasts);
 
   // toggle can be used to just hide/show the toast instead of removing it.
   // used for animations, since we don't want to unmount the component directly
-  const toggle = React.useCallback(
+  const toggleToast = React.useCallback(
     ({ id, isVisible }: { id: string; isVisible: boolean }) => {
       setToasts(queue => ({
         ...queue,
@@ -65,15 +69,18 @@ export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
     [],
   );
 
-  const show = React.useCallback(
+  const showToast = React.useCallback(
     ({
+      id: idProps,
       type = "",
       content,
       timeout,
       autoDismiss,
-      placement,
-    }: Omit<IToast, "id" | "isVisible">) => {
-      const uid = uuidv4();
+      placement = defaultPlacement,
+    }: Partial<Omit<IToast, "isVisible">>) => {
+      COUNTER = COUNTER + 1;
+      const id = idProps || `toast-${COUNTER}`;
+
       /*
         wait until the next frame so we can animate
         wierd bug while using CSSTrasition
@@ -83,9 +90,9 @@ export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
       requestAnimationFrame(() => {
         setToasts(toasts => ({
           ...toasts,
-          [uid]: {
+          [id]: {
             type,
-            id: uid,
+            id,
             content,
             timeout,
             placement,
@@ -96,13 +103,13 @@ export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
 
         // causes rerender in order to trigger
         // the animation after mount in CSSTrasition
-        toggle({ id: uid, isVisible: true });
+        toggleToast({ id, isVisible: true });
       });
     },
-    [toggle],
+    [defaultPlacement, toggleToast],
   );
 
-  const remove = React.useCallback((id: string) => {
+  const removeToast = React.useCallback((id: string) => {
     // need to use callback based setState otherwise
     // the remove function would take the queue as dependency
     // and cause render when changed which would effectively
@@ -115,48 +122,51 @@ export const useToastState = ({ animationTimeout = 0 }: ToastStateProps) => {
     });
   }, []);
 
-  const hide = React.useCallback(
+  const hideToast = React.useCallback(
     (id: string) => {
-      toggle({ id, isVisible: false });
+      toggleToast({ id, isVisible: false });
 
       window.setTimeout(() => {
-        remove(id);
+        removeToast(id);
       }, animationTimeout);
     },
-    [toggle, animationTimeout, remove],
+    [toggleToast, animationTimeout, removeToast],
   );
 
-  // The idea here is to normalize the [...] single array to object with
-  // position keys & arrays containing the toasts
-  const getToastToRender: GetToastToRenderType = (
-    defaultPlacement,
-    callback,
-  ) => {
-    const toastToRender = {};
-    const toastList = Object.keys(toasts);
-
-    for (let i = 0; i < toastList.length; i++) {
-      const toast = toasts[toastList[i]];
-      const { placement = defaultPlacement } = toast;
-      toastToRender[placement] || (toastToRender[placement] = []);
-
-      toastToRender[placement].push(toast);
-    }
-
-    return Object.keys(toastToRender).map(position =>
-      callback(position as Placements, toastToRender[position]),
-    );
-  };
+  const isToastVisible = React.useCallback(
+    (id: string) => Boolean(toasts[id]),
+    [toasts],
+  );
 
   return {
-    setToasts,
-    getToastToRender,
     toasts,
-    toggle,
-    show,
-    hide,
-    remove,
+    sortedToasts,
+    showToast,
+    hideToast,
+    toggleToast,
+    removeToast,
+    isToastVisible,
   };
 };
 
 export type ToastStateReturn = ReturnType<typeof useToastState>;
+
+function getPlacementSortedToasts(toasts: ToastList) {
+  const sortedToasts = {};
+
+  for (const key in toasts) {
+    const toast = toasts[key];
+    const { placement } = toast;
+    const isTop = placement.includes("top");
+
+    sortedToasts[placement] || (sortedToasts[placement] = []);
+
+    if (isTop) {
+      sortedToasts[placement].unshift(toast);
+    } else {
+      sortedToasts[placement].push(toast);
+    }
+  }
+
+  return sortedToasts as SortedToastList;
+}

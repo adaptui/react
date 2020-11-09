@@ -37,7 +37,6 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
-
   const [active, setActive] = React.useState<boolean>(false);
   const [currentX, setCurrentX] = React.useState<number>(0);
   const [initialX, setInitialX] = React.useState<number>(0);

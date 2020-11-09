@@ -17,13 +17,13 @@ afterEach(() => {
 });
 
 const Demo = () => {
-  const { show } = useToast();
+  const { showToast } = useToast();
 
   return (
     <div>
       <button
         onClick={() => {
-          show({
+          showToast({
             type: "error",
             content: "This is error",
           });
@@ -33,21 +33,21 @@ const Demo = () => {
       </button>
       <button
         onClick={() => {
-          show({ type: "success", content: "This is success" });
+          showToast({ type: "success", content: "This is success" });
         }}
       >
         Success
       </button>
       <button
         onClick={() => {
-          show({ type: "warning", content: "This is warning" });
+          showToast({ type: "warning", content: "This is warning" });
         }}
       >
         Warning
       </button>
       <button
         onClick={() => {
-          show({
+          showToast({
             content: () => (
               <p style={{ fontFamily: "Impact", color: "black" }}>
                 This is Custom
@@ -67,7 +67,7 @@ const ToastComp: React.FC = () => {
     <ToastProvider
       placement="bottom-center"
       toastTypes={{
-        error: ({ remove, content, id }) => {
+        error: ({ hideToast, content, id }) => {
           return (
             <div
               data-testid="error"
@@ -75,23 +75,23 @@ const ToastComp: React.FC = () => {
               style={{ backgroundColor: "#f02c2d" }}
             >
               {content}{" "}
-              <button data-testid="error-close" onClick={() => remove(id)}>
+              <button data-testid="error-close" onClick={() => hideToast(id)}>
                 x
               </button>
             </div>
           );
         },
-        success: ({ remove, content, id }) => {
+        success: ({ hideToast, content, id }) => {
           return (
             <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
+              {content} <button onClick={() => hideToast(id)}>x</button>
             </div>
           );
         },
-        warning: ({ remove, content, id }) => {
+        warning: ({ hideToast, content, id }) => {
           return (
             <div className="toast" style={{ backgroundColor: "#ef5013" }}>
-              {content} <button onClick={() => remove(id)}>x</button>
+              {content} <button onClick={() => hideToast(id)}>x</button>
             </div>
           );
         },
@@ -140,7 +140,7 @@ describe("Toast", () => {
     expect(id("error")).toHaveTextContent("This is error");
   });
 
-  it("should be removed after clicking close button", () => {
+  it("should be hideToastd after clicking close button", () => {
     const {
       getByText: text,
       getByTestId: getId,
@@ -156,7 +156,7 @@ describe("Toast", () => {
 
     expect(getId("error")).toHaveTextContent("This is error");
 
-    // let remove now
+    // let hideToast now
     act(() => {
       click(getId("error-close"));
     });
