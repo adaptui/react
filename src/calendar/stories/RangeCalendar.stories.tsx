@@ -71,22 +71,24 @@ export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
+  start: new Date(),
+  end: addWeeks(new Date(), 1),
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
 };
 
 export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
-  defaultStart: new Date(),
-  defaultEnd: addDays(new Date(), 1),
+  start: new Date(),
+  end: addDays(new Date(), 1),
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
 
 export const Options = Base.bind({});
 Options.args = {
-  defaultStart: new Date(),
-  defaultEnd: addWeeks(new Date(), 1),
+  start: new Date(),
+  end: addWeeks(new Date(), 1),
   minValue: null,
   maxValue: null,
   isDisabled: false,

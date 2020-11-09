@@ -145,7 +145,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
     );
 
     const onKeyDown = React.useCallback(
-      (e: any) => {
+      (e: React.KeyboardEvent) => {
         if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
           return;
         }

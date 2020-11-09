@@ -52,37 +52,37 @@ const Base: Story = args => {
 export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
-DefaultValue.args = { defaultValue: "2001-01-01" };
+DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
-  defaultValue: new Date(2020, 10, 1),
+  value: new Date(2020, 10, 1),
   minValue: new Date(),
   maxValue: addWeeks(new Date(), 1),
 };
 
 export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
-  defaultValue: new Date(2020, 10, 7),
+  value: new Date(2020, 10, 7),
   minValue: subWeeks(new Date(2020, 10, 7), 1),
   maxValue: addWeeks(new Date(2020, 10, 7), 1),
 };
 
 export const IsDisabled = Base.bind({});
 IsDisabled.args = {
-  defaultValue: new Date(),
+  value: new Date(),
   isDisabled: true,
 };
 
 export const IsReadonly = Base.bind({});
 IsReadonly.args = {
-  defaultValue: new Date(),
+  value: new Date(),
   isReadonly: true,
 };
 
 export const AutoFocus = Base.bind({});
 AutoFocus.args = {
-  defaultValue: new Date(),
+  value: new Date(),
   autoFocus: true,
 };
 
