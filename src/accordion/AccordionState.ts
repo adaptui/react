@@ -29,7 +29,7 @@ export function useAccordionState(
     ...sealed
   } = useSealedState(initialState);
 
-  const allowMultiple = sealed.allowMultiple;
+  const allowMultiple = sealed.allowMultiple ? sealed.allowMultiple : false;
   const initialSelectedId =
     sealed.allowMultiple === false ? sealed.selectedId : null;
   const initialSelectedIds =
@@ -86,33 +86,28 @@ export function useAccordionState(
 
   const panels = useCompositeState();
 
-  if (sealed.allowMultiple === true) {
-    return {
-      manual,
-      select,
-      unSelect,
-      allowToggle,
-      allowMultiple: true,
-      selectedIds,
-      setSelectedIds,
-      panels: panels.items,
-      registerPanel: panels.registerItem,
-      unregisterPanel: panels.unregisterItem,
-      ...composite,
-    };
-  }
-
-  return {
+  const common = {
     manual,
     select,
     unSelect,
     allowToggle,
-    allowMultiple: false,
-    selectedId,
-    setSelectedId,
     panels: panels.items,
     registerPanel: panels.registerItem,
     unregisterPanel: panels.unregisterItem,
     ...composite,
   };
+
+  return allowMultiple === true
+    ? {
+        allowMultiple: false,
+        selectedId,
+        setSelectedId,
+        ...common,
+      }
+    : {
+        allowMultiple: true,
+        selectedIds,
+        setSelectedIds,
+        ...common,
+      };
 }
