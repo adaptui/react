@@ -46,7 +46,10 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     placeholderDate,
   });
 
-  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
+  const popover = usePickerBaseState({
+    segmentFocus: segmentState.first,
+    ...props,
+  });
 
   const setTimeProp = (date: Date) => {
     setTime(date);

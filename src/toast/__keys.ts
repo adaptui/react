@@ -1,10 +1,10 @@
 // Automatically generated
 const TOAST_STATE_KEYS = [
-  "setToasts",
-  "getToastToRender",
   "toasts",
-  "toggle",
-  "show",
-  "hide",
-  "remove",
+  "sortedToasts",
+  "showToast",
+  "hideToast",
+  "toggleToast",
+  "removeToast",
+  "isToastVisible",
 ] as const;

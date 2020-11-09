@@ -28,7 +28,7 @@ const PICKER_BASE_STATE_KEYS = [
   "dialogId",
   "isDisabled",
   "isReadOnly",
-  "focus",
+  "segmentFocus",
 ] as const;
 export const PICKER_BASE_KEYS = PICKER_BASE_STATE_KEYS;
 export const PICKER_BASE_CONTENT_KEYS = PICKER_BASE_KEYS;

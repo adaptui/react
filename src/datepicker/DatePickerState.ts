@@ -4,14 +4,9 @@
  * to work with Reakit System
  */
 
-import {
-  Validation,
-  FocusableProps,
-  ValueBase,
-  ValidationState,
-} from "@react-types/shared";
 import * as React from "react";
 import { useControllableState } from "@chakra-ui/hooks";
+import { Validation, ValueBase, ValidationState } from "@react-types/shared";
 
 import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
@@ -20,11 +15,14 @@ import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface DatePickerInitialState
-  extends PickerBaseInitialState,
+  extends ValueBase<string>,
+    RangeValueBase<string>,
     Validation,
-    FocusableProps,
-    ValueBase<string>,
-    RangeValueBase<string> {
+    PickerBaseInitialState {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
   placeholderDate?: string;
   formatOptions?: DateTimeFormatOpts;
 }
@@ -73,7 +71,10 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     formatOptions,
     placeholderDate,
   });
-  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
+  const popover = usePickerBaseState({
+    segmentFocus: segmentState.first,
+    ...props,
+  });
   const calendar = useCalendarState({
     value: stringifyDate(value),
     onChange: selectDate,

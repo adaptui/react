@@ -3,15 +3,10 @@
  * We improved the Calendar from Stately [useRangeCalendar](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useRangeCalendar.ts)
  * to work with Reakit System
  */
-import {
-  FocusableProps,
-  InputBase,
-  ValueBase,
-  RangeValue,
-} from "@react-types/shared";
 import * as React from "react";
 import { format, isSameDay } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
+import { InputBase, ValueBase, RangeValue } from "@react-types/shared";
 
 import { makeRange } from "./helpers";
 import { RangeValueBase } from "../utils/types";

@@ -20,11 +20,8 @@ export const usePickerBaseContent = createHook<
   compose: usePopover,
   keys: PICKER_BASE_CONTENT_KEYS,
 
-  useProps({ dialogId }, { onMouseDown: htmlOnMouseDown, ...htmlProps }) {
-    return {
-      id: dialogId,
-      ...htmlProps,
-    };
+  useProps(options, htmlProps) {
+    return { id: options.dialogId, ...htmlProps };
   },
 });
 
