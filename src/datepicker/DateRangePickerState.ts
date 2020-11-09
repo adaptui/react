@@ -22,7 +22,7 @@ import {
   isInvalidDateRange,
 } from "../utils";
 import { useSegmentState } from "../segment";
-import { makeRange } from "../calendar/__utils";
+import { makeRange } from "../calendar/helpers";
 import { useRangeCalendarState } from "../calendar";
 import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";

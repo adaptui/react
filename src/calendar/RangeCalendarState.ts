@@ -13,7 +13,7 @@ import * as React from "react";
 import { format, isSameDay } from "date-fns";
 import { useControllableState } from "@chakra-ui/hooks";
 
-import { makeRange } from "./__utils";
+import { makeRange } from "./helpers";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
@@ -22,8 +22,11 @@ import { parseRangeDate, stringifyDate } from "../utils";
 export interface RangeCalendarInitialState
   extends ValueBase<RangeValue<string>>,
     RangeValueBase<string>,
-    InputBase,
-    FocusableProps {
+    InputBase {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
   /**
    * Id for the calendar grid
    */

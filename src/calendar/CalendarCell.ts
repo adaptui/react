@@ -15,7 +15,10 @@ import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
 export type CalendarCellOptions = BoxOptions &
-  Pick<CalendarStateReturn, "dateValue" | "isDisabled" | "currentMonth"> &
+  Pick<
+    CalendarStateReturn,
+    "dateValue" | "isDisabled" | "currentMonth" | "isRangeCalendar"
+  > &
   Partial<
     Pick<RangeCalendarStateReturn, "highlightDate" | "highlightedRange">
   > & {
@@ -45,10 +48,9 @@ export const useCalendarCell = createHook<
     return {
       role: "gridcell",
       "data-weekend": dataAttr(isWeekend(date)),
-      onMouseEnter:
-        "highlightDate" in options
-          ? callAllHandlers(htmlOnMouseEnter, onMouseEnter)
-          : htmlOnMouseEnter,
+      onMouseEnter: options.isRangeCalendar
+        ? callAllHandlers(htmlOnMouseEnter, onMouseEnter)
+        : htmlOnMouseEnter,
       ...getCalendarCellProps(options),
       ...htmlProps,
     };
@@ -64,7 +66,7 @@ export const CalendarCell = createComponent({
 const getCalendarCellProps = (options: CalendarCellOptions) => {
   const { date, dateValue, highlightedRange, currentMonth } = options;
 
-  if ("highlightDate" in options) {
+  if (options.isRangeCalendar) {
     const isSelected = highlightedRange
       ? date >= highlightedRange.start && date <= highlightedRange.end
       : false;

@@ -33,6 +33,7 @@ export type CalendarGridOptions = BoxOptions &
     | "focusPreviousDay"
     | "focusNextWeek"
     | "focusPreviousWeek"
+    | "isRangeCalendar"
   > &
   Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
 
@@ -105,7 +106,7 @@ export const useCalendarGrid = createHook<
 
     let rangeCalendarProps = {};
 
-    if ("highlightDate" in options) {
+    if (options.isRangeCalendar) {
       const onRangeKeyDown = (e: KeyboardEvent) => {
         switch (e.key) {
           case "Escape":

@@ -9,50 +9,10 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarWeekTitle,
+  CalendarInitialState,
 } from "renderless-components";
 
-export interface AppProps {
-  /**
-   * The current value (controlled).
-   */
-  value?: string;
-  /**
-   * The default value (uncontrolled).
-   */
-  defaultValue?: string;
-  /**
-   *  Handler that is called when the value changes.
-   */
-  onChange?: (value: string) => void;
-  /**
-   * The smallest value allowed for the input.
-   */
-  minValue?: string;
-  /**
-   * The largest value allowed for the input.
-   */
-  maxValue?: string;
-  /**
-   * Whether the input is disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Whether the input can be selected but not changed by the user.
-   *
-   * @default false
-   */
-  isReadOnly?: boolean;
-  /**
-   * Whether the element should receive focus on render.
-   *
-   * @default false
-   */
-  autoFocus?: boolean;
-}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
 
   return (

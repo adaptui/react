@@ -4,12 +4,12 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, format, subWeeks } from "date-fns";
 
 import "./Calendar.css";
-import { App as Calendar } from "./Calendar.component";
 import {
   calendarTemplate,
   calendarTemplateJs,
   calendarCssTemplate,
 } from "./templates";
+import { App as Calendar } from "./Calendar.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -52,7 +52,7 @@ const Base: Story = args => {
 export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
-DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
+DefaultValue.args = { defaultValue: "2001-01-01" };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
@@ -70,19 +70,19 @@ MinMaxDefaultDate.args = {
 
 export const IsDisabled = Base.bind({});
 IsDisabled.args = {
-  value: new Date(),
+  defaultValue: new Date(),
   isDisabled: true,
 };
 
 export const IsReadonly = Base.bind({});
 IsReadonly.args = {
-  value: new Date(),
+  defaultValue: new Date(),
   isReadonly: true,
 };
 
 export const AutoFocus = Base.bind({});
 AutoFocus.args = {
-  value: new Date(),
+  defaultValue: new Date(),
   autoFocus: true,
 };
 
