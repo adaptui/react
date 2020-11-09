@@ -37,18 +37,18 @@ export type AccordionState = CompositeState & {
   /**
    * Lists all the panels.
    */
-  panels: AccordionState["items"];
+  panels: CompositeState["items"];
 };
 
 export type AccordionActions = CompositeActions & {
   /**
    * Moves into and selects an accordion by its `id`.
    */
-  select: AccordionActions["move"];
+  select: CompositeActions["move"];
   /**
    * Moves into and unSelects an accordion by its `id` if it's already selected.
    */
-  unSelect: AccordionActions["move"];
+  unSelect: CompositeActions["move"];
   /**
    * Sets `selectedId`.
    */
@@ -60,11 +60,11 @@ export type AccordionActions = CompositeActions & {
   /**
    * Registers a accordion panel.
    */
-  registerPanel: AccordionActions["registerItem"];
+  registerPanel: CompositeActions["registerItem"];
   /**
    * Unregisters a accordion panel.
    */
-  unregisterPanel: AccordionActions["unregisterItem"];
+  unregisterPanel: CompositeActions["unregisterItem"];
 };
 
 export type AccordionInitialState = CompositeInitialState &
