@@ -113,7 +113,7 @@ interface SingleStateReturn {
   /**
    * Sets `selectedId`.
    */
-  setSelectedId: AccordionActions["setCurrentId"];
+  setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 interface MultiStateReturn {
@@ -129,9 +129,7 @@ interface MultiStateReturn {
   /**
    * Sets `selectedIds`.
    */
-  setSelectedIds: React.Dispatch<
-    React.SetStateAction<(string | null)[] | undefined>
-  >;
+  setSelectedIds: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 }
 
 // Overload signatures for useAccordionState
