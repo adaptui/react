@@ -1,97 +1,44 @@
-import {
-  useCompositeState,
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-} from "reakit";
 import * as React from "react";
+import { useCompositeState } from "reakit";
 import {
-  SealedInitialState,
   useSealedState,
+  SealedInitialState,
 } from "reakit-utils/useSealedState";
-
-export type AccordionState = CompositeState & {
-  /**
-   * The current selected accordion's `id`.
-   */
-  selectedId: AccordionState["currentId"];
-  /**
-   * Initial selected accordion's `id`.
-   * @default []
-   */
-  selectedIds: AccordionState["currentId"][];
-  /**
-   * Whether the accodion selection should be manual.
-   * @default true
-   */
-  manual: boolean;
-  /**
-   * Allow to open multiple accordion items
-   * @default false
-   */
-  allowMultiple: boolean;
-  /**
-   * Allow to toggle accordion items
-   * @default false
-   */
-  allowToggle: boolean;
-  /**
-   * Lists all the panels.
-   */
-  panels: AccordionState["items"];
-};
-
-export type AccordionActions = CompositeActions & {
-  /**
-   * Moves into and selects an accordion by its `id`.
-   */
-  select: AccordionActions["move"];
-  /**
-   * Moves into and unSelects an accordion by its `id` if it's already selected.
-   */
-  unSelect: AccordionActions["move"];
-  /**
-   * Sets `selectedId`.
-   */
-  setSelectedId: AccordionActions["setCurrentId"];
-  /**
-   * Sets `selectedIds`.
-   */
-  setSelectedIds: React.Dispatch<
-    React.SetStateAction<CompositeState["currentId"][]>
-  >;
-  /**
-   * Registers a accordion panel.
-   */
-  registerPanel: AccordionActions["registerItem"];
-  /**
-   * Unregisters a accordion panel.
-   */
-  unregisterPanel: AccordionActions["unregisterItem"];
-};
-
-export type AccordionInitialState = CompositeInitialState &
-  Pick<
-    Partial<AccordionState>,
-    "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
-  >;
-
-export type AccordionStateReturn = AccordionState & AccordionActions;
+import {
+  AccordionStateReturn,
+  AccordionInitialState,
+  MultiOverloadSignature,
+  SingleOverloadSignature,
+  AccordionInitialStateMulti,
+  AccordionInitialStateSingle,
+} from "./types";
 
 export function useAccordionState(
-  initialState: SealedInitialState<AccordionInitialState> = {},
+  initialState: SealedInitialState<Partial<AccordionInitialStateSingle>>,
+): SingleOverloadSignature;
+export function useAccordionState(
+  initialState: SealedInitialState<Partial<AccordionInitialStateMulti>>,
+): MultiOverloadSignature;
+
+export function useAccordionState(
+  initialState: SealedInitialState<Partial<AccordionInitialState>> = {},
 ): AccordionStateReturn {
   const {
-    selectedId: initialSelectedId,
-    selectedIds: initialSelectedIds = [],
-    allowMultiple = false,
-    allowToggle: allowToggleProp = false,
     manual = true,
+    allowToggle: allowToggleProp = false,
     ...sealed
   } = useSealedState(initialState);
+
+  const allowMultiple = sealed.allowMultiple;
+  const initialSelectedId =
+    sealed.allowMultiple === false ? sealed.selectedId : null;
+  const initialSelectedIds =
+    sealed.allowMultiple === true ? sealed.selectedIds : [];
+
   const allowToggle = useSealedState(
     allowMultiple ? allowMultiple : allowToggleProp,
   );
+
   const composite = useCompositeState({
     currentId: initialSelectedId,
     orientation: "vertical",
@@ -139,16 +86,30 @@ export function useAccordionState(
 
   const panels = useCompositeState();
 
+  if (sealed.allowMultiple === true) {
+    return {
+      manual,
+      select,
+      unSelect,
+      allowToggle,
+      allowMultiple: true,
+      selectedIds,
+      setSelectedIds,
+      panels: panels.items,
+      registerPanel: panels.registerItem,
+      unregisterPanel: panels.unregisterItem,
+      ...composite,
+    };
+  }
+
   return {
     manual,
-    allowMultiple,
-    allowToggle,
-    selectedId,
-    setSelectedId,
-    selectedIds,
-    setSelectedIds,
     select,
     unSelect,
+    allowToggle,
+    allowMultiple: false,
+    selectedId,
+    setSelectedId,
     panels: panels.items,
     registerPanel: panels.registerItem,
     unregisterPanel: panels.unregisterItem,
