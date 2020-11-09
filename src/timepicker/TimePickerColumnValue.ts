@@ -8,11 +8,11 @@ import {
 } from "reakit";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
-import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
-
 import { callAllHandlers } from "@chakra-ui/utils";
+import { createComponent, createHook } from "reakit-system";
+
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
+import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
 
 export type TimePickerColumnValueOptions = ButtonOptions &
   CompositeItemOptions &
@@ -64,9 +64,9 @@ export const useTimePickerColumnValue = createHook<
 
     return {
       role: "option",
+      "aria-selected": selected == value,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
-      "aria-selected": selected == value,
       ...htmlProps,
     };
   },

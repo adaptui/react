@@ -2,7 +2,7 @@ import {
   parseTime,
   getSelectedDateFromValue,
   getSelectedValueFromDate,
-} from "../__utils";
+} from "../helpers";
 import MockDate from "mockdate";
 
 describe("TimePicker Utils", () => {

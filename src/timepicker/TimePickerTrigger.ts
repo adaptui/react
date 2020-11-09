@@ -33,7 +33,7 @@ export const useTimePickerTrigger = createHook<
 });
 
 export const TimePickerTrigger = createComponent({
-  as: "div",
+  as: "button",
   memo: true,
   useHook: useTimePickerTrigger,
 });
