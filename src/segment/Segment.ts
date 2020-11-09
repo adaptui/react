@@ -4,16 +4,15 @@ import {
   CompositeItemHTMLProps,
   unstable_useId as useId,
 } from "reakit";
-import { MouseEvent, useState } from "react";
+import * as React from "react";
 import { mergeProps } from "@react-aria/utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
 
 import { SEGMENT_KEYS } from "./__keys";
-import { isNumeric, parseNumber } from "./__utils";
-import { useSpinButton } from "../utils/useSpinButton";
-import { IDateSegment, SegmentStateReturn } from "./SegmentState";
+import { DateSegment, SegmentStateReturn } from "./SegmentState";
+import { useSpinButton, isNumeric, parseNumber } from "./helpers";
 
 export type SegmentOptions = CompositeItemOptions &
   Pick<
@@ -28,7 +27,7 @@ export type SegmentOptions = CompositeItemOptions &
     | "dateFormatter"
     | "confirmPlaceholder"
   > & {
-    segment: IDateSegment;
+    segment: DateSegment;
     isDisabled?: boolean;
     isReadOnly?: boolean;
     isRequired?: boolean;
@@ -43,7 +42,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
   compose: useCompositeItem,
   keys: SEGMENT_KEYS,
 
-  useOptions(options, htmlProps) {
+  useOptions(options, _) {
     return {
       disabled:
         options.isDisabled ||
@@ -62,7 +61,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       ...htmlProps
     },
   ) {
-    const [enteredKeys, setEnteredKeys] = useState("");
+    const [enteredKeys, setEnteredKeys] = React.useState("");
 
     let textValue = segment.text;
     const monthDateFormatter = useDateFormatter({ month: "long" });
@@ -95,99 +94,116 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
         options.setSegment(segment.type, segment.minValue as number),
     });
 
-    const onKeyDown = (e: any) => {
-      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
-        return;
-      }
+    const onInput = React.useCallback(
+      (key: string) => {
+        const newValue = enteredKeys + key;
 
-      switch (e.key) {
-        case "Enter":
-          e.preventDefault();
-          if (segment.isPlaceholder && !options.isReadOnly) {
-            options.confirmPlaceholder(segment.type);
-          }
-          next();
-          break;
-        case "Tab":
-          break;
-        case "Backspace": {
-          e.preventDefault();
-          if (isNumeric(segment.text) && !options.isReadOnly) {
-            const newValue = segment.text.slice(0, -1);
-            options.setSegment(
-              segment.type,
-              newValue.length === 0
-                ? (segment.minValue as number)
-                : parseNumber(newValue),
-            );
-            setEnteredKeys(newValue);
-          }
-          break;
-        }
-        default:
-          e.preventDefault();
-          e.stopPropagation();
-          if (
-            (isNumeric(e.key) || /^[ap]$/.test(e.key)) &&
-            !options.isReadOnly
-          ) {
-            onInput(e.key);
-          }
-      }
-    };
-
-    const onInput = (key: string) => {
-      const newValue = enteredKeys + key;
-
-      switch (segment.type) {
-        case "dayPeriod":
-          if (key === "a") {
-            options.setSegment("dayPeriod", 0);
-          } else if (key === "p") {
-            options.setSegment("dayPeriod", 12);
-          }
-          next();
-          break;
-        case "day":
-        case "hour":
-        case "minute":
-        case "second":
-        case "month":
-        case "year": {
-          if (!isNumeric(newValue)) {
-            return;
-          }
-
-          const numberValue = parseNumber(newValue);
-          let segmentValue = numberValue;
-          if (
-            segment.type === "hour" &&
-            options.dateFormatter.resolvedOptions().hour12 &&
-            numberValue === 12
-          ) {
-            segmentValue = 0;
-          } else if (numberValue > (segment.maxValue as number)) {
-            segmentValue = parseNumber(key);
-          }
-
-          options.setSegment(segment.type, segmentValue);
-
-          if (Number(numberValue + "0") > (segment.maxValue as number)) {
-            setEnteredKeys("");
+        switch (segment.type) {
+          case "dayPeriod":
+            if (key === "a") {
+              options.setSegment("dayPeriod", 0);
+            } else if (key === "p") {
+              options.setSegment("dayPeriod", 12);
+            }
             next();
-          } else {
-            setEnteredKeys(newValue);
+            break;
+          case "day":
+          case "hour":
+          case "minute":
+          case "second":
+          case "month":
+          case "year": {
+            if (!isNumeric(newValue)) {
+              return;
+            }
+
+            const numberValue = parseNumber(newValue);
+            let segmentValue = numberValue;
+            if (
+              segment.type === "hour" &&
+              options.dateFormatter.resolvedOptions().hour12 &&
+              numberValue === 12
+            ) {
+              segmentValue = 0;
+            } else if (numberValue > (segment.maxValue as number)) {
+              segmentValue = parseNumber(key);
+            }
+
+            options.setSegment(segment.type, segmentValue);
+
+            if (Number(numberValue + "0") > (segment.maxValue as number)) {
+              setEnteredKeys("");
+              next();
+            } else {
+              setEnteredKeys(newValue);
+            }
+            break;
           }
-          break;
         }
-      }
-    };
+      },
+      [enteredKeys, next, options, segment.maxValue, segment.type],
+    );
 
-    const onFocus = () => {
+    const onKeyDown = React.useCallback(
+      (e: any) => {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
+          return;
+        }
+
+        switch (e.key) {
+          case "Enter":
+            e.preventDefault();
+            if (segment.isPlaceholder && !options.isReadOnly) {
+              options.confirmPlaceholder(segment.type);
+            }
+            next();
+            break;
+          case "Tab":
+            break;
+          case "Backspace": {
+            e.preventDefault();
+            if (isNumeric(segment.text) && !options.isReadOnly) {
+              const newValue = segment.text.slice(0, -1);
+              options.setSegment(
+                segment.type,
+                newValue.length === 0
+                  ? (segment.minValue as number)
+                  : parseNumber(newValue),
+              );
+              setEnteredKeys(newValue);
+            }
+            break;
+          }
+          default:
+            e.preventDefault();
+            e.stopPropagation();
+            if (
+              (isNumeric(e.key) || /^[ap]$/.test(e.key)) &&
+              !options.isReadOnly
+            ) {
+              onInput(e.key);
+            }
+        }
+      },
+      [
+        next,
+        onInput,
+        options,
+        segment.isPlaceholder,
+        segment.minValue,
+        segment.text,
+        segment.type,
+      ],
+    );
+
+    const onFocus = React.useCallback(() => {
       setEnteredKeys("");
-    };
+    }, []);
 
-    const onMouseDown = (e: MouseEvent) => e.stopPropagation();
+    const onMouseDown = React.useCallback(
+      (e: React.MouseEvent) => e.stopPropagation(),
+      [],
+    );
 
     const { id } = useId({ baseId: "segment-spin-button" });
 

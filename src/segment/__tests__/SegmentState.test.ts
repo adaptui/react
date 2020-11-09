@@ -1,8 +1,8 @@
 import { act, renderHook } from "reakit-test-utils/hooks";
 
-import { useSegmentState, SegmentStateProps } from "../SegmentState";
+import { useSegmentState, SegmentInitialState } from "../SegmentState";
 
-function render({ ...initialState }: SegmentStateProps = {}) {
+function render({ ...initialState }: SegmentInitialState = {}) {
   return renderHook(() => useSegmentState({ ...initialState })).result;
 }
 

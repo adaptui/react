@@ -49,15 +49,25 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
   const [value, setValue] = useControllableState({
     value: parseDate(initialDate),
-    defaultValue:
-      parseDate(defaultValueProp) || parseDate(stringifyDate(new Date())),
+    defaultValue: parseDate(defaultValueProp) || new Date(),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
-  const placeholderDate = parseDate(placeholderDateProp);
+
+  const segmentState = useSegmentState({
+    value,
+    onChange: setValue,
+    formatOptions,
+    placeholderDate: parseDate(placeholderDateProp),
+  });
+
+  const popover = usePickerBaseState({
+    segmentFocus: segmentState.first,
+    ...props,
+  });
 
   const selectDate = (newValue: string) => {
     const newDate = parseDate(newValue);
@@ -65,16 +75,6 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     popover.hide();
   };
 
-  const segmentState = useSegmentState({
-    value,
-    onChange: setValue,
-    formatOptions,
-    placeholderDate,
-  });
-  const popover = usePickerBaseState({
-    segmentFocus: segmentState.first,
-    ...props,
-  });
   const calendar = useCalendarState({
     value: stringifyDate(value),
     onChange: selectDate,
