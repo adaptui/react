@@ -8,9 +8,9 @@ import * as React from "react";
 import { useControllableState } from "@chakra-ui/hooks";
 import { Validation, ValueBase, ValidationState } from "@react-types/shared";
 
-import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
-import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
+import { RangeValueBase } from "../utils/types";
+import { SegmentInitialState, useSegmentState } from "../segment";
 import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
@@ -18,13 +18,12 @@ export interface DatePickerInitialState
   extends ValueBase<string>,
     RangeValueBase<string>,
     Validation,
-    PickerBaseInitialState {
+    PickerBaseInitialState,
+    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
   /**
    * Whether the element should receive focus on render.
    */
   autoFocus?: boolean;
-  placeholderDate?: string;
-  formatOptions?: DateTimeFormatOpts;
 }
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
@@ -37,7 +36,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     isRequired,
     autoFocus,
     formatOptions,
-    placeholderDate: placeholderDateProp,
+    placeholderDate,
   } = props;
 
   const onChange = React.useCallback(
@@ -61,7 +60,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     value,
     onChange: setValue,
     formatOptions,
-    placeholderDate: parseDate(placeholderDateProp),
+    placeholderDate,
   });
 
   const popover = usePickerBaseState({

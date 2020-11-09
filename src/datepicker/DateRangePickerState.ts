@@ -21,20 +21,22 @@ import {
   parseRangeDate,
   isInvalidDateRange,
 } from "../utils";
-import { useSegmentState } from "../segment";
 import { makeRange } from "../calendar/helpers";
+import { RangeValueBase } from "../utils/types";
 import { useRangeCalendarState } from "../calendar";
-import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
+import { SegmentInitialState, useSegmentState } from "../segment";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface DateRangePickerInitialState
-  extends PickerBaseInitialState,
+  extends ValueBase<RangeValue<string>>,
+    RangeValueBase<string>,
     Validation,
-    FocusableProps,
-    ValueBase<RangeValue<string>>,
-    RangeValueBase<string> {
-  placeholderDate?: string;
-  formatOptions?: DateTimeFormatOpts;
+    PickerBaseInitialState,
+    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
 }
 
 export const useDateRangePickerState = (
@@ -52,7 +54,7 @@ export const useDateRangePickerState = (
     isRequired,
     autoFocus,
     formatOptions,
-    placeholderDate: placeholderDateProp,
+    placeholderDate,
   } = props;
 
   const onChange = React.useCallback(
@@ -79,7 +81,6 @@ export const useDateRangePickerState = (
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
-  const placeholderDate = parseDate(placeholderDateProp);
 
   const selectDate = (date: RangeValue<string>) => {
     if (props.isReadOnly || props.isDisabled) {
@@ -94,6 +95,7 @@ export const useDateRangePickerState = (
   };
 
   const segmentComposite = useCompositeState({ orientation: "horizontal" });
+
   const startSegmentState = useSegmentState({
     value: value.start,
     defaultValue: parseDate(defaultValueProp?.start),
@@ -111,7 +113,7 @@ export const useDateRangePickerState = (
   });
 
   const popover = usePickerBaseState({
-    focus: segmentComposite.first,
+    segmentFocus: segmentComposite.first,
     ...props,
   });
 

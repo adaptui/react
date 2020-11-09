@@ -40,7 +40,7 @@ export const Playground = () => (
       }}
     />
 
-    {/* <pre>timeStyle: "long", dateStyle: "short"</pre>
+    <pre>timeStyle: "long", dateStyle: "short"</pre>
     <Base
       formatOptions={{
         timeStyle: "long",
@@ -62,6 +62,6 @@ export const Playground = () => (
         timeStyle: "full",
         dateStyle: "full",
       }}
-    /> */}
+    />
   </div>
 );
