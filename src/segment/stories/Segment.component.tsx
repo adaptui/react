@@ -1,12 +1,13 @@
 import React from "react";
+
 import {
   Segment,
   SegmentField,
   useSegmentState,
-  SegmentStateProps,
+  SegmentInitialState,
 } from "renderless-components";
 
-export const App: React.FC<SegmentStateProps> = props => {
+export const App: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
 
   return (

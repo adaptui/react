@@ -1,6 +1,6 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
 import { createOnKeyDown, useForkRef } from "reakit-utils";
+import { createComponent, createHook } from "reakit-system";
 import { focus, getNextTabbable, getPreviousTabbable } from "@chakra-ui/utils";
 
 import {

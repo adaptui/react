@@ -4,29 +4,26 @@
  * to work with Reakit System
  */
 
-import {
-  Validation,
-  FocusableProps,
-  ValueBase,
-  ValidationState,
-} from "@react-types/shared";
 import * as React from "react";
 import { useControllableState } from "@chakra-ui/hooks";
+import { Validation, ValueBase, ValidationState } from "@react-types/shared";
 
-import { useSegmentState } from "../segment";
 import { useCalendarState } from "../calendar";
-import { DateTimeFormatOpts, RangeValueBase } from "../utils/types";
+import { RangeValueBase } from "../utils/types";
+import { SegmentInitialState, useSegmentState } from "../segment";
 import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface DatePickerInitialState
-  extends PickerBaseInitialState,
+  extends ValueBase<string>,
+    RangeValueBase<string>,
     Validation,
-    FocusableProps,
-    ValueBase<string>,
-    RangeValueBase<string> {
-  placeholderDate?: string;
-  formatOptions?: DateTimeFormatOpts;
+    PickerBaseInitialState,
+    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
 }
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
@@ -39,7 +36,7 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     isRequired,
     autoFocus,
     formatOptions,
-    placeholderDate: placeholderDateProp,
+    placeholderDate,
   } = props;
 
   const onChange = React.useCallback(
@@ -51,21 +48,13 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
   const [value, setValue] = useControllableState({
     value: parseDate(initialDate),
-    defaultValue:
-      parseDate(defaultValueProp) || parseDate(stringifyDate(new Date())),
+    defaultValue: parseDate(defaultValueProp) || new Date(),
     onChange,
     shouldUpdate: (prev, next) => prev !== next,
   });
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
-  const placeholderDate = parseDate(placeholderDateProp);
-
-  const selectDate = (newValue: string) => {
-    const newDate = parseDate(newValue);
-    if (newDate) setValue(newDate);
-    popover.hide();
-  };
 
   const segmentState = useSegmentState({
     value,
@@ -73,7 +62,18 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     formatOptions,
     placeholderDate,
   });
-  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
+
+  const popover = usePickerBaseState({
+    segmentFocus: segmentState.first,
+    ...props,
+  });
+
+  const selectDate = (newValue: string) => {
+    const newDate = parseDate(newValue);
+    if (newDate) setValue(newDate);
+    popover.hide();
+  };
+
   const calendar = useCalendarState({
     value: stringifyDate(value),
     onChange: selectDate,

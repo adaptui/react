@@ -11,9 +11,9 @@ import { ensureFocus, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
+import { isInvalidDateRange } from "../utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
-import { isInvalidDateRange, ariaAttr } from "../utils";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
 export type CalendarCellButtonOptions = ButtonOptions &
@@ -95,22 +95,17 @@ export const useCalendarCellButton = createHook<
     }, [date, focusedDate, isFocused, ref]);
 
     const onClick = React.useCallback(() => {
-      if (!disabled) {
-        selectDate(date);
-        setFocusedDate(date);
-      }
+      if (disabled) return;
+
+      selectDate(date);
+      setFocusedDate(date);
     }, [date, disabled, selectDate, setFocusedDate]);
 
     const onFocus = React.useCallback(() => {
-      if (!disabled) {
-        setFocusedDate(date);
-      }
-    }, [date, disabled, setFocusedDate]);
+      if (disabled) return;
 
-    let tabIndex = undefined;
-    if (!disabled) {
-      tabIndex = isSameDay(date, focusedDate) ? 0 : -1;
-    }
+      setFocusedDate(date);
+    }, [date, disabled, setFocusedDate]);
 
     const dateFormatter = useDateFormatter({
       weekday: "long",
@@ -152,9 +147,8 @@ export const useCalendarCellButton = createHook<
 
     return {
       children: useDateFormatter({ day: "numeric" }).format(date),
-      tabIndex,
       "aria-label": ariaLabel,
-      "aria-disabled": ariaAttr(disabled),
+      tabIndex: !disabled ? (isSameDay(date, focusedDate) ? 0 : -1) : undefined,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
       onFocus: callAllHandlers(htmlOnFocus, onFocus),

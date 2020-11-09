@@ -5,9 +5,9 @@ import { axe, render, press } from "reakit-test-utils";
 import { Segment } from "../Segment";
 import { SegmentField } from "../SegmentField";
 import { repeat } from "../../utils/test-utils";
-import { SegmentStateProps, useSegmentState } from "../SegmentState";
+import { SegmentInitialState, useSegmentState } from "../SegmentState";
 
-const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
+const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
 
   return (

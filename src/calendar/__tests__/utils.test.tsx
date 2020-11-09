@@ -1,6 +1,7 @@
-import { renderHook } from "@testing-library/react-hooks";
-import { generateDaysInMonthArray, makeRange, useWeekDays } from "../__utils";
 import MockDate from "mockdate";
+import { renderHook } from "@testing-library/react-hooks";
+
+import { generateDaysInMonthArray, makeRange, useWeekDays } from "../helpers";
 
 describe("Calendar Utils", () => {
   test("makeRange", () => {

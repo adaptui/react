@@ -24,7 +24,7 @@ export const useDatePickerTrigger = createHook<
 });
 
 export const DatePickerTrigger = createComponent({
-  as: "div",
+  as: "button",
   memo: true,
   useHook: useDatePickerTrigger,
 });

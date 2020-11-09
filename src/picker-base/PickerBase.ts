@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createOnKeyDown } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
@@ -16,7 +17,7 @@ export type PickerBaseOptions = BoxOptions &
     | "show"
     | "pickerId"
     | "dialogId"
-    | "focus"
+    | "segmentFocus"
   >;
 
 export type PickerBaseHTMLProps = BoxHTMLProps;
@@ -45,12 +46,12 @@ export const usePickerBase = createHook<PickerBaseOptions, PickerBaseHTMLProps>(
         show,
         pickerId,
         dialogId,
-        focus,
+        segmentFocus,
       } = options;
 
-      const onClick = () => {
+      const onClick = React.useCallback(() => {
         if (isTouch()) show();
-      };
+      }, [show]);
 
       // Open the popover on alt + arrow down
       const onKeyDown = createOnKeyDown({
@@ -67,10 +68,13 @@ export const usePickerBase = createHook<PickerBaseOptions, PickerBaseHTMLProps>(
         },
       });
 
-      const onMouseDown = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        focus?.();
-      };
+      const onMouseDown = React.useCallback(
+        (e: React.MouseEvent) => {
+          e.stopPropagation();
+          segmentFocus?.();
+        },
+        [segmentFocus],
+      );
 
       return {
         id: pickerId,
