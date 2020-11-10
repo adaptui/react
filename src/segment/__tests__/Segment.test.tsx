@@ -2,10 +2,8 @@ import * as React from "react";
 import userEvent from "@testing-library/user-event";
 import { axe, render, press } from "reakit-test-utils";
 
-import { Segment } from "../Segment";
-import { SegmentField } from "../SegmentField";
 import { repeat } from "../../utils/test-utils";
-import { SegmentStateProps, useSegmentState } from "../SegmentState";
+import { SegmentStateProps, useSegmentState, Segment, SegmentField } from "..";
 
 const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
   const state = useSegmentState(props);

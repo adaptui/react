@@ -1,5 +1,5 @@
-import { getSegmentLimits, setSegment, cycleValue } from "../__utils";
 import MockDate from "mockdate";
+import { getSegmentLimits, setSegment, cycleValue } from "../__utils";
 
 describe("Segment Utils", () => {
   test("getSegmentLimits", () => {
@@ -46,20 +46,20 @@ describe("Segment Utils", () => {
     MockDate.set(new Date("2020-02-01T11:30:00.000Z"));
 
     const options = new Intl.DateTimeFormat().resolvedOptions();
-    expect(setSegment(new Date(), "month", 5, options)).toEqual(
-      new Date("2020-05-01T11:30:00.000Z"),
+    expect(setSegment(new Date(), "month", 5, options)).toMatchInlineSnapshot(
+      `2020-05-01T11:30:00.000Z`,
     );
 
-    expect(setSegment(new Date(), "day", 5, options)).toEqual(
-      new Date("2020-02-05T11:30:00.000Z"),
+    expect(setSegment(new Date(), "day", 5, options)).toMatchInlineSnapshot(
+      `2020-02-05T11:30:00.000Z`,
     );
 
-    expect(setSegment(new Date(), "hour", 10, options)).toEqual(
-      new Date("2020-02-01T04:30:00.000Z"),
+    expect(setSegment(new Date(), "hour", 10, options)).toMatchInlineSnapshot(
+      `2020-02-01T04:30:00.000Z`,
     );
 
-    expect(setSegment(new Date(), "year", 2050, options)).toEqual(
-      new Date("2050-02-01T11:30:00.000Z"),
+    expect(setSegment(new Date(), "year", 2050, options)).toMatchInlineSnapshot(
+      `2050-02-01T11:30:00.000Z`,
     );
   });
 
