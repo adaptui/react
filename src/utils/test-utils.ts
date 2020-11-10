@@ -1,21 +1,13 @@
-import { Matcher, screen } from "@testing-library/react";
-
-export const isEndSelection = (label: Matcher) => {
-  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-end",
-  );
+export const isEndSelection = (element: HTMLElement) => {
+  expect(element.parentElement).toHaveAttribute("data-is-selection-end");
 };
 
-export const isStartSelection = (label: Matcher) => {
-  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-selection-start",
-  );
+export const isStartSelection = (element: HTMLElement) => {
+  expect(element.parentElement).toHaveAttribute("data-is-selection-start");
 };
 
-export const isInSelectionRange = (label: Matcher) => {
-  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
-    "data-is-range-selection",
-  );
+export const isInSelectionRange = (element: HTMLElement) => {
+  expect(element.parentElement).toHaveAttribute("data-is-range-selection");
 };
 
 export const repeat = (cb: Function, times: number) => {

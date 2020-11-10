@@ -144,20 +144,25 @@ describe("DateRangePicker", () => {
       />,
     );
 
-    screen.logTestingPlaygroundURL();
-
     openDatePicker();
+    screen.logTestingPlaygroundURL();
 
     expect(
       screen.getByLabelText(
-        "Sunday, November 15, 2020 selected (click to start selecting range)",
+        /Sunday, November 15, 2020 selected \(click to start selecting range\)/i,
       ),
     ).toHaveFocus();
 
     // check if current date is selected
-    isEndSelection(/Sunday, November 15, 2020 selected/i);
-    isStartSelection(/Sunday, November 15, 2020 selected/i);
-    isInSelectionRange(/Sunday, November 15, 2020 selected/i);
+    isEndSelection(
+      screen.getByLabelText(/Sunday, November 15, 2020 selected/i),
+    );
+    isStartSelection(
+      screen.getByLabelText(/Sunday, November 15, 2020 selected/i),
+    );
+    isInSelectionRange(
+      screen.getByLabelText(/Sunday, November 15, 2020 selected/i),
+    );
 
     // change date selection
     press.Enter();
@@ -167,9 +172,9 @@ describe("DateRangePicker", () => {
 
     expect(screen.getByLabelText(/Tuesday, November 24, 2020/gi)).toHaveFocus();
 
-    isEndSelection(/Tuesday, November 24, 2020/gi);
-    isStartSelection(/Sunday, November 15, 2020/gi);
-    isInSelectionRange(/Wednesday, November 18, 2020/gi);
+    isEndSelection(screen.getByLabelText(/Tuesday, November 24, 2020/gi));
+    isStartSelection(screen.getByLabelText(/Sunday, November 15, 2020/gi));
+    isInSelectionRange(screen.getByLabelText(/Wednesday, November 18, 2020/gi));
 
     // Finish selection
     press.Enter();
