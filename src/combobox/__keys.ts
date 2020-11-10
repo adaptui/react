@@ -9,10 +9,9 @@ const COMBOBOX_LIST_STATE_KEYS = [
   "currentId",
   "loop",
   "wrap",
-  "shift",
   "unstable_moves",
+  "unstable_angular",
   "unstable_hasActiveWidget",
-  "unstable_includesBaseElement",
   "items",
   "menuRole",
   "inputValue",
@@ -43,9 +42,7 @@ const COMBOBOX_LIST_STATE_KEYS = [
   "setCurrentId",
   "setLoop",
   "setWrap",
-  "setShift",
   "reset",
-  "unstable_setIncludesBaseElement",
   "unstable_setHasActiveWidget",
   "registerItem",
   "setInputValue",
@@ -56,13 +53,16 @@ const COMBOBOX_LIST_STATE_KEYS = [
   "setInline",
   "setAutoSelect",
 ] as const;
+const COMBOBOX_BASE_STATE_KEYS = COMBOBOX_LIST_STATE_KEYS;
 const COMBOBOX_LIST_GRID_STATE_KEYS = [
-  ...COMBOBOX_LIST_STATE_KEYS,
+  ...COMBOBOX_BASE_STATE_KEYS,
   "columns",
   "setColumns",
 ] as const;
-const COMBOBOX_STATE_KEYS = [
-  ...COMBOBOX_LIST_STATE_KEYS,
+const COMBOBOX_POPOVER_STATE_KEYS = [
+  "baseId",
+  "unstable_idCountRef",
+  "visible",
   "animated",
   "animating",
   "modal",
@@ -75,6 +75,7 @@ const COMBOBOX_STATE_KEYS = [
   "unstable_originalPlacement",
   "unstable_update",
   "placement",
+  "setBaseId",
   "show",
   "hide",
   "toggle",
@@ -83,6 +84,10 @@ const COMBOBOX_STATE_KEYS = [
   "stopAnimation",
   "setModal",
   "place",
+] as const;
+const COMBOBOX_STATE_KEYS = [
+  ...COMBOBOX_BASE_STATE_KEYS,
+  ...COMBOBOX_POPOVER_STATE_KEYS,
 ] as const;
 const COMBOBOX_GRID_STATE_KEYS = [
   ...COMBOBOX_LIST_GRID_STATE_KEYS,

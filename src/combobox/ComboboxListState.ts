@@ -19,20 +19,17 @@ import {
 export function useComboboxListState(
   initialState: SealedInitialState<ComboboxListInitialState> = {},
 ): ComboboxListStateReturn {
-  const {
-    currentId = null,
-    orientation = "vertical",
-    loop = true,
-    ...sealed
-  } = useSealedState(initialState);
+  const { orientation = "vertical", loop = true, ...sealed } = useSealedState(
+    initialState,
+  );
 
   const composite = useCompositeState({
-    currentId,
     orientation,
     loop,
     ...sealed,
     unstable_virtual: true,
   });
+  console.log("%c composite", "color: #cc0088", composite.currentId);
 
   return useComboboxBaseState(composite, sealed);
 }
