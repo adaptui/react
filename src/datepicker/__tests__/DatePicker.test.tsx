@@ -1,7 +1,8 @@
-import { format, addWeeks, subWeeks } from "date-fns";
 import * as React from "react";
+import { cleanup } from "@testing-library/react";
+import { format, addWeeks, subWeeks } from "date-fns";
 
-import { axe, render, press } from "reakit-test-utils";
+import { axe, render, press, screen } from "reakit-test-utils";
 import {
   DatePicker,
   DatePickerSegment,
@@ -31,6 +32,7 @@ jest.spyOn(reakit, "unstable_useId").mockImplementation(options => ({
   id: options.baseId + "myid"
 }));
 */
+afterEach(cleanup);
 
 export const CalendarComp: React.FC<CalendarStateReturn> = state => {
   return (
@@ -114,99 +116,116 @@ const DatePickerComp: React.FC<DatePickerInitialState> = props => {
   );
 };
 
-const openDatePicker = (label: any, testId: any) => {
+const openDatePicker = () => {
   press.Tab();
-  expect(label("month", { selector: "div" })).toHaveFocus();
+  expect(screen.getByLabelText("month", { selector: "div" })).toHaveFocus();
 
   press.ArrowDown(null, { altKey: true });
-  expect(testId("datepicker-content")).toBeVisible();
+  expect(screen.getByTestId("datepicker-content")).toBeVisible();
 };
 
 describe("DatePicker", () => {
   it("should open/close the datepicker", () => {
-    const { getByLabelText: label, getByTestId: testId } = render(
-      <DatePickerComp defaultValue={"2020-11-1"} />,
-    );
+    render(<DatePickerComp defaultValue={"2020-11-1"} />);
 
-    const datepickerContent = testId("datepicker-content");
+    const datepickerContent = screen.getByTestId("datepicker-content");
+    const segment = screen.getByTestId("segment");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
 
-    expect(testId("segment")).toHaveTextContent("11/01/2020");
+    expect(segment).toHaveTextContent("11/01/2020");
     expect(datepickerContent).not.toBeVisible();
 
     // open
-    openDatePicker(label, testId);
+    openDatePicker();
 
     // close
     press.Escape();
     expect(datepickerContent).not.toBeVisible();
-    expect(label("month", { selector: "div" })).toHaveFocus();
+    expect(month).toHaveFocus();
   });
 
   it("should be able to open and select date", () => {
-    const { getByLabelText: label, getByTestId: testId } = render(
-      <DatePickerComp defaultValue={"2020-11-1"} />,
-    );
+    render(<DatePickerComp defaultValue={"2020-11-1"} />);
+
+    const segment = screen.getByTestId("segment");
+    const datepickerContent = screen.getByTestId("datepicker-content");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
 
     // open
-    openDatePicker(label, testId);
+    openDatePicker();
 
     // assert focused date on calendar
-    expect(label("Sunday, November 1, 2020 selected")).toHaveFocus();
+    expect(
+      screen.getByLabelText(/Sunday, November 1, 2020 selected/i),
+    ).toHaveFocus();
 
     // go to 24
     repeat(press.ArrowDown, 3);
     repeat(press.ArrowRight, 2);
 
-    expect(label("Tuesday, November 24, 2020")).toHaveFocus();
+    expect(screen.getByLabelText(/Tuesday, November 24, 2020/i)).toHaveFocus();
 
     press.Enter();
-    expect(testId("datepicker-content")).not.toBeVisible();
-    expect(label("month", { selector: "div" })).toHaveFocus();
-    expect(testId("segment")).toHaveTextContent("11/24/2020");
+    expect(datepickerContent).not.toBeVisible();
+    expect(month).toHaveFocus();
+    expect(segment).toHaveTextContent("11/24/2020");
   });
 
   it("should be able to open and select date and jump to different dates", () => {
-    const { getByLabelText: label, getByTestId: testId } = render(
-      <DatePickerComp defaultValue={"2020-11-1"} />,
-    );
+    render(<DatePickerComp defaultValue={"2020-11-1"} />);
+    const segment = screen.getByTestId("segment");
+    const calendarHeader = screen.getByTestId("calendar-header");
+    const datepickerContent = screen.getByTestId("datepicker-content");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
 
-    const calendarHeader = testId("calendar-header");
     // open
-    openDatePicker(label, testId);
+    openDatePicker();
 
     // assert focused date on calendar
-    expect(label("Sunday, November 1, 2020 selected")).toHaveFocus();
+    expect(
+      screen.getByLabelText(/^Sunday, November 1, 2020 selected$/i),
+    ).toHaveFocus();
 
     // jump month
-    expect(calendarHeader).toHaveTextContent("November 2020");
+    expect(calendarHeader).toHaveTextContent(/November 2020/i);
     repeat(press.PageDown, 2);
 
-    expect(calendarHeader).toHaveTextContent("January 2021");
+    expect(calendarHeader).toHaveTextContent(/January 2021/i);
 
     // jump year
-    expect(calendarHeader).toHaveTextContent("January 2021");
+    expect(calendarHeader).toHaveTextContent(/January 2021/i);
     repeat(() => {
       press.PageDown(null, { shiftKey: true });
     }, 2);
-    expect(calendarHeader).toHaveTextContent("January 2023");
+    expect(calendarHeader).toHaveTextContent(/January 2023/i);
 
     press.Enter();
-    expect(testId("datepicker-content")).not.toBeVisible();
-    expect(label("month", { selector: "div" })).toHaveFocus();
-    expect(testId("segment")).toHaveTextContent("01/01/2023");
+    expect(datepickerContent).not.toBeVisible();
+    expect(month).toHaveFocus();
+    expect(segment).toHaveTextContent("01/01/2023");
   });
 
   it("should work with AutoFocus", () => {
-    const { getByLabelText: label } = render(
+    render(
       // eslint-disable-next-line jsx-a11y/no-autofocus
       <DatePickerComp autoFocus />,
     );
 
-    expect(label("month", { selector: "div" })).toHaveFocus();
+    expect(
+      screen.getByRole("spinbutton", {
+        name: /month/i,
+      }),
+    ).toHaveFocus();
   });
 
   it("should be invalid on out of range value", () => {
-    const { getByLabelText: label, getByTestId: testId } = render(
+    render(
       <DatePickerComp
         defaultValue={format(addWeeks(new Date(), 2), "yyyy-MM-dd")}
         minValue={format(subWeeks(new Date(), 1), "yyyy-MM-dd")}
@@ -214,19 +233,28 @@ describe("DatePicker", () => {
       />,
     );
 
-    expect(testId("datepicker")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
   });
 
   it("should be disabled", () => {
-    const { getByTestId: testId } = render(<DatePickerComp isDisabled />);
+    render(<DatePickerComp isDisabled />);
 
-    expect(testId("datepicker")).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   });
 
   it("should be readonly", () => {
-    const { getByTestId: testId } = render(<DatePickerComp isReadOnly />);
+    render(<DatePickerComp isReadOnly />);
 
-    expect(testId("datepicker")).toHaveAttribute("aria-readonly", "true");
+    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+      "aria-readonly",
+      "true",
+    );
   });
 
   test("DatePicker renders with no a11y violations", async () => {

@@ -1,19 +1,19 @@
-import { Matcher } from "@testing-library/react";
+import { Matcher, screen } from "@testing-library/react";
 
-export const isEndSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
+export const isEndSelection = (label: Matcher) => {
+  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
     "data-is-selection-end",
   );
 };
 
-export const isStartSelection = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
+export const isStartSelection = (label: Matcher) => {
+  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
     "data-is-selection-start",
   );
 };
 
-export const isInSelectionRange = (getByLabelText: any, label: Matcher) => {
-  expect(getByLabelText(label).parentElement).toHaveAttribute(
+export const isInSelectionRange = (label: Matcher) => {
+  expect(screen.getByLabelText(label).parentElement).toHaveAttribute(
     "data-is-range-selection",
   );
 };

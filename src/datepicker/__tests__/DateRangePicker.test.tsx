@@ -1,5 +1,6 @@
 import * as React from "react";
-import { axe, render, press, fireEvent } from "reakit-test-utils";
+import { cleanup } from "@testing-library/react";
+import { axe, render, press, fireEvent, screen } from "reakit-test-utils";
 
 import {
   DatePicker,
@@ -29,6 +30,8 @@ import {
   repeat,
 } from "../../utils/test-utils";
 import { stringifyDate } from "../../utils";
+
+afterEach(cleanup);
 
 const RangeCalendarComp: React.FC<RangeCalendarStateReturn> = state => {
   return (
@@ -124,19 +127,15 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
   );
 };
 
-const openDatePicker = (text: any, testId: any) => {
-  fireEvent.click(text("open"));
+const openDatePicker = () => {
+  fireEvent.click(screen.getByText(/open/i));
 
-  expect(testId("datepicker-content")).toBeVisible();
+  expect(screen.getByTestId("datepicker-content")).toBeVisible();
 };
 
 describe("DateRangePicker", () => {
   it("should select date ranges correctly", () => {
-    const {
-      getByText: text,
-      getByTestId: testId,
-      getByLabelText: label,
-    } = render(
+    render(
       <DateRangePickerComp
         defaultValue={{
           start: stringifyDate(new Date(2020, 10, 15)),
@@ -145,18 +144,20 @@ describe("DateRangePicker", () => {
       />,
     );
 
-    openDatePicker(text, testId);
+    screen.logTestingPlaygroundURL();
+
+    openDatePicker();
 
     expect(
-      label(
+      screen.getByLabelText(
         "Sunday, November 15, 2020 selected (click to start selecting range)",
       ),
     ).toHaveFocus();
 
     // check if current date is selected
-    isEndSelection(label, /Sunday, November 15, 2020 selected/i);
-    isStartSelection(label, /Sunday, November 15, 2020 selected/i);
-    isInSelectionRange(label, /Sunday, November 15, 2020 selected/i);
+    isEndSelection(/Sunday, November 15, 2020 selected/i);
+    isStartSelection(/Sunday, November 15, 2020 selected/i);
+    isInSelectionRange(/Sunday, November 15, 2020 selected/i);
 
     // change date selection
     press.Enter();
@@ -164,20 +165,22 @@ describe("DateRangePicker", () => {
     press.ArrowRight();
     press.ArrowDown();
 
-    expect(label(/Tuesday, November 24, 2020/gi)).toHaveFocus();
+    expect(screen.getByLabelText(/Tuesday, November 24, 2020/gi)).toHaveFocus();
 
-    isEndSelection(label, /Tuesday, November 24, 2020/gi);
-    isStartSelection(label, /Sunday, November 15, 2020/gi);
-    isInSelectionRange(label, /Wednesday, November 18, 2020/gi);
+    isEndSelection(/Tuesday, November 24, 2020/gi);
+    isStartSelection(/Sunday, November 15, 2020/gi);
+    isInSelectionRange(/Wednesday, November 18, 2020/gi);
 
     // Finish selection
     press.Enter();
-    expect(testId("datepicker-content")).not.toBeVisible();
-    expect(testId("segment")).toHaveTextContent("11/15/2020 - 11/24/2020");
+    expect(screen.getByTestId("datepicker-content")).not.toBeVisible();
+    expect(screen.getByTestId("segment")).toHaveTextContent(
+      "11/15/2020 - 11/24/2020",
+    );
   });
 
   it("should be invalid on wrong date selection", () => {
-    const { getByTestId: testId } = render(
+    render(
       <DateRangePickerComp
         defaultValue={{
           start: stringifyDate(new Date(2020, 10, 15)),
@@ -186,18 +189,20 @@ describe("DateRangePicker", () => {
       />,
     );
 
-    expect(testId("datepicker")).not.toHaveAttribute("aria-invalid");
+    const datepicker = screen.getByTestId("datepicker");
+
+    expect(datepicker).not.toHaveAttribute("aria-invalid");
 
     // reverse dates are invalid
     repeat(press.Tab, 4);
     repeat(press.ArrowDown, 2);
 
     expect(document.activeElement).toHaveTextContent("09");
-    expect(testId("datepicker")).toHaveAttribute("aria-invalid", "true");
+    expect(datepicker).toHaveAttribute("aria-invalid", "true");
   });
 
   it("should be invalid if selection range is out of min max values", () => {
-    const { getByTestId: testId } = render(
+    render(
       <DateRangePickerComp
         defaultValue={{
           start: stringifyDate(new Date(2020, 10, 15)),
@@ -207,35 +212,44 @@ describe("DateRangePicker", () => {
         maxValue={stringifyDate(new Date(2020, 10, 15))}
       />,
     );
+    const datepicker = screen.getByTestId("datepicker");
 
-    expect(testId("datepicker")).not.toHaveAttribute("aria-invalid");
+    expect(datepicker).not.toHaveAttribute("aria-invalid");
 
     repeat(press.Tab, 2);
     press.ArrowUp();
 
     expect(document.activeElement).toHaveTextContent("16");
-    expect(testId("datepicker")).toHaveAttribute("aria-invalid", "true");
+    expect(datepicker).toHaveAttribute("aria-invalid", "true");
   });
 
   it("should be disabled", () => {
-    const { getByTestId: testId } = render(<DateRangePickerComp isDisabled />);
+    render(<DateRangePickerComp isDisabled />);
 
-    expect(testId("datepicker")).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   });
 
   it("should be readonly", () => {
-    const { getByTestId: testId } = render(<DateRangePickerComp isReadOnly />);
+    render(<DateRangePickerComp isReadOnly />);
 
-    expect(testId("datepicker")).toHaveAttribute("aria-readonly", "true");
+    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+      "aria-readonly",
+      "true",
+    );
   });
 
   it("should work with AutoFocus", () => {
-    const { getAllByLabelText: labelAll } = render(
+    render(
       // eslint-disable-next-line jsx-a11y/no-autofocus
       <DateRangePickerComp autoFocus />,
     );
 
-    expect(labelAll("month", { selector: "div" })[0]).toHaveFocus();
+    expect(
+      screen.getAllByLabelText("month", { selector: "div" })[0],
+    ).toHaveFocus();
   });
 
   test("DateRangePicker renders with no a11y violations", async () => {
