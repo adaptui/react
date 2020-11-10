@@ -15,24 +15,22 @@ const ProgressComp = (props: Partial<ProgressProps>) => {
 
 describe("Progress", () => {
   it("should render correctly", () => {
-    const { baseElement } = render(<ProgressComp value={10} />);
+    const { asFragment } = render(<ProgressComp value={10} />);
 
-    expect(baseElement).toMatchInlineSnapshot(`
-      <body>
+    expect(asFragment()).toMatchInlineSnapshot(`
+      <DocumentFragment>
         <div>
-          <div>
-            <div
-              aria-label="progress"
-              aria-valuemax="100"
-              aria-valuemin="0"
-              aria-valuenow="10"
-              aria-valuetext="10"
-              data-testid="progress"
-              role="progressbar"
-            />
-          </div>
+          <div
+            aria-label="progress"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="10"
+            aria-valuetext="10"
+            data-testid="progress"
+            role="progressbar"
+          />
         </div>
-      </body>
+      </DocumentFragment>
     `);
   });
 
