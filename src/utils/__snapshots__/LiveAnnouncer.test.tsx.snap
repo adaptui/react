@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LiveAnnouncer should render correctly 1`] = `
+<body>
+  <div>
+    <span
+      aria-atomic="true"
+      aria-live="assertive"
+      aria-relevant="additions"
+      data-testid="announcer-assertive"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
+    />
+    <span
+      aria-atomic="true"
+      aria-live="assertive"
+      aria-relevant="additions"
+      data-testid="announcer-assertive"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
+    >
+      Hello world
+    </span>
+    <span
+      aria-atomic="true"
+      aria-live="polite"
+      aria-relevant="additions"
+      data-testid="announcer-polite"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
+    />
+    <span
+      aria-atomic="true"
+      aria-live="polite"
+      aria-relevant="additions"
+      data-testid="announcer-polite"
+      style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
+    />
+  </div>
+</body>
+`;

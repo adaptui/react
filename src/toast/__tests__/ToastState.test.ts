@@ -2,6 +2,7 @@ import { wait } from "reakit-test-utils";
 import { renderHook, act } from "@testing-library/react-hooks";
 
 import { useToastState } from "..";
+import { cleanup } from "@testing-library/react-hooks";
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -11,6 +12,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  cleanup();
   (window.requestAnimationFrame as any).mockRestore();
 });
 
@@ -18,17 +20,17 @@ describe("ToastState", () => {
   it("should render correctly", () => {
     const state = renderHook(() => useToastState({})).result;
 
-    expect(state.current).toMatchInlineSnapshot(`
-      Object {
-        "hideToast": [Function],
-        "isToastVisible": [Function],
-        "removeToast": [Function],
-        "showToast": [Function],
-        "sortedToasts": Object {},
-        "toasts": Object {},
-        "toggleToast": [Function],
-      }
-    `);
+    state.current.showToast({ content: "hello world" });
+    state.current.showToast({ content: "hello world 2" });
+    state.current.showToast({
+      content: "hello world 3",
+      autoDismiss: true,
+      timeout: 5000,
+      type: "warning",
+      placement: "top-right",
+    });
+
+    expect(state.current).toMatchSnapshot();
   });
 
   it("should add a new toast", () => {
@@ -39,55 +41,57 @@ describe("ToastState", () => {
     act(() => {
       result.current.showToast({ type: "primary", content: "Hello world" });
     });
-    expect(Object.values(result.current.toasts)).toMatchObject([
-      {
-        autoDismiss: undefined,
-        content: "Hello world",
-        isVisible: true,
-        placement: "bottom-center",
-        timeout: undefined,
-        type: "primary",
-      },
-    ]);
+
+    expect(result.current.toasts).toMatchInlineSnapshot(`
+      Object {
+        "toast-1": Object {
+          "autoDismiss": undefined,
+          "content": "Hello world",
+          "id": "toast-1",
+          "isVisible": true,
+          "placement": "bottom-center",
+          "timeout": undefined,
+          "type": "primary",
+        },
+      }
+    `);
   });
 
   it("should toggle toast", () => {
     const { result } = renderHook(() => useToastState({}));
-
+    const toastId = "toast-1";
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
       result.current.showToast({ type: "primary", content: "Hello world" });
     });
 
-    const id = Object.values(result.current.toasts)[0].id;
-
     act(() => {
-      result.current.toggleToast({ id, isVisible: false });
+      result.current.toggleToast({ id: toastId, isVisible: false });
     });
-    expect(result.current.toasts[id]).toMatchObject({ isVisible: false });
+
+    expect(result.current.toasts[toastId]).toMatchObject({
+      isVisible: false,
+    });
   });
 
   it("should remove toast", () => {
     const { result } = renderHook(() => useToastState({}));
-
     expect(result.current.toasts).toStrictEqual({});
 
     act(() => {
       result.current.showToast({ type: "primary", content: "Hello world" });
     });
     expect(Object.values(result.current.toasts)).toHaveLength(1);
-    const id = Object.values(result.current.toasts)[0].id;
 
     act(() => {
-      result.current.removeToast(id);
+      result.current.removeToast("toast-1");
     });
     expect(result.current.toasts).toStrictEqual({});
   });
 
   it("should hide toast", () => {
     const { result } = renderHook(() => useToastState({ animationTimeout: 5 }));
-    let id = "";
 
     expect(result.current.toasts).toStrictEqual({});
 
@@ -95,21 +99,24 @@ describe("ToastState", () => {
       result.current.showToast({ type: "primary", content: "Hello world" });
     });
     expect(Object.values(result.current.toasts)).toHaveLength(1);
-    id = Object.values(result.current.toasts)[0].id;
 
     act(() => {
-      result.current.hideToast(id);
+      result.current.hideToast("toast-1");
     });
-    expect(Object.values(result.current.toasts)).toMatchObject([
-      {
-        autoDismiss: undefined,
-        content: "Hello world",
-        isVisible: false,
-        placement: "bottom-center",
-        timeout: undefined,
-        type: "primary",
-      },
-    ]);
+
+    expect(result.current.toasts).toMatchInlineSnapshot(`
+      Object {
+        "toast-1": Object {
+          "autoDismiss": undefined,
+          "content": "Hello world",
+          "id": "toast-1",
+          "isVisible": false,
+          "placement": "bottom-center",
+          "timeout": undefined,
+          "type": "primary",
+        },
+      }
+    `);
 
     // Wait for animation timeout and after that toast should be removed
     wait(
@@ -153,19 +160,6 @@ describe("ToastState", () => {
       });
     });
 
-    const sortedToasts = result.current.sortedToasts;
-    expect(sortedToasts["top-center"]).toHaveLength(1);
-    expect(sortedToasts["bottom-center"]).toHaveLength(1);
-    expect(sortedToasts["bottom-left"]).toHaveLength(2);
-    expect(sortedToasts["top-right"]).toHaveLength(1);
-
-    expect(sortedToasts["bottom-left"][0]).toMatchObject({
-      content: "Hello world 3",
-      placement: "bottom-left",
-    });
-    expect(sortedToasts["bottom-left"][1]).toMatchObject({
-      content: "Hello world 4",
-      placement: "bottom-left",
-    });
+    expect(result.current.sortedToasts).toMatchSnapshot();
   });
 });

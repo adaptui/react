@@ -1,5 +1,5 @@
 import * as React from "react";
-import { axe, render } from "reakit-test-utils";
+import { axe, render, screen } from "reakit-test-utils";
 
 import { Progress, ProgressProps, useProgressState } from "../index";
 
@@ -15,31 +15,32 @@ const ProgressComp = (props: Partial<ProgressProps>) => {
 
 describe("Progress", () => {
   it("should render correctly", () => {
-    const { baseElement } = render(<ProgressComp value={10} />);
+    const { asFragment } = render(<ProgressComp value={10} />);
 
-    expect(baseElement).toMatchInlineSnapshot(`
-      <body>
+    expect(asFragment()).toMatchInlineSnapshot(`
+      <DocumentFragment>
         <div>
-          <div>
-            <div
-              aria-label="progress"
-              aria-valuemax="100"
-              aria-valuemin="0"
-              aria-valuenow="10"
-              aria-valuetext="10"
-              data-testid="progress"
-              role="progressbar"
-            />
-          </div>
+          <div
+            aria-label="progress"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="10"
+            aria-valuetext="10"
+            data-testid="progress"
+            role="progressbar"
+          />
         </div>
-      </body>
+      </DocumentFragment>
     `);
   });
 
   it("should render isIndeterminate", () => {
-    const { getByTestId: testid } = render(<ProgressComp value={null} />);
+    render(<ProgressComp value={null} />);
 
-    expect(testid("progress")).toHaveAttribute("data-indeterminate", "");
+    expect(screen.getByTestId("progress")).toHaveAttribute(
+      "data-indeterminate",
+      "",
+    );
   });
 
   test("Progress renders with no a11y violations", async () => {

@@ -13,7 +13,7 @@ exports[`Accordion should render correctly 1`] = `
         tabindex="0"
         type="button"
       >
-        Trigger 1
+        trigger 1
       </button>
     </h3>
     <div
@@ -23,7 +23,7 @@ exports[`Accordion should render correctly 1`] = `
       role="region"
       style="display: none;"
     >
-      Panel 1
+      panel 1
     </div>
     <h3>
       <button
@@ -33,7 +33,7 @@ exports[`Accordion should render correctly 1`] = `
         tabindex="0"
         type="button"
       >
-        Trigger 2
+        trigger 2
       </button>
     </h3>
     <div
@@ -43,7 +43,7 @@ exports[`Accordion should render correctly 1`] = `
       role="region"
       style="display: none;"
     >
-      Panel 2
+      panel 2
     </div>
     <h3>
       <button
@@ -53,7 +53,7 @@ exports[`Accordion should render correctly 1`] = `
         tabindex="0"
         type="button"
       >
-        Trigger 3
+        trigger 3
       </button>
     </h3>
     <div
@@ -63,7 +63,29 @@ exports[`Accordion should render correctly 1`] = `
       role="region"
       style="display: none;"
     >
-      Panel 3
+      panel 3
+    </div>
+    <h3>
+      <button
+        aria-controls="accordion-12"
+        aria-disabled="true"
+        aria-expanded="false"
+        id="accordion-10"
+        style="pointer-events: none;"
+        tabindex="0"
+        type="button"
+      >
+        disabled
+      </button>
+    </h3>
+    <div
+      aria-labelledby="accordion-10"
+      hidden=""
+      id="accordion-12"
+      role="region"
+      style="display: none;"
+    >
+      disabled panel
     </div>
   </div>
 </DocumentFragment>
