@@ -6,9 +6,10 @@ import {
   AccordionTrigger,
   useAccordionState,
   AccordionInitialState,
+  AccordionInitialStateSingle,
 } from "renderless-components";
 
-export const App: React.FC<AccordionInitialState> = props => {
+export function App(props: AccordionInitialStateSingle) {
   const state = useAccordionState(props);
 
   // const initialProps = {
@@ -48,6 +49,6 @@ export const App: React.FC<AccordionInitialState> = props => {
       <AccordionPanel {...state}>Panel 5</AccordionPanel>
     </Accordion>
   );
-};
+}
 
 export default App;

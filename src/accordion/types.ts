@@ -40,7 +40,7 @@ export type AccordionActions = CompositeActions & {
   unregisterPanel: AccordionActions["unregisterItem"];
 };
 
-interface CommonAccordionProps {
+export interface CommonAccordionProps {
   /**
    * Whether the accodion selection should be manual.
    * @default true
@@ -53,7 +53,19 @@ interface CommonAccordionProps {
   allowToggle: boolean;
 }
 
-interface SingleProps extends CommonAccordionProps {
+export type SelectedIdPair = {
+  /**
+   * The current selected accordion's `id`.
+   */
+  selectedId?: string | null;
+  /**
+   * Initial selected accordion's `id`.
+   * @default []
+   */
+  selectedIds?: (string | null)[];
+};
+
+export interface SingleProps extends CommonAccordionProps {
   /**
    * Allow to open multiple accordion items
    * @default false
@@ -75,7 +87,7 @@ interface SingleProps extends CommonAccordionProps {
   onSelectedIdChange?: (value: string | null) => void;
 }
 
-interface MultipleProps extends CommonAccordionProps {
+export interface MultipleProps extends CommonAccordionProps {
   /**
    * Allow to open multiple accordion items
    * @default true
@@ -100,7 +112,7 @@ interface MultipleProps extends CommonAccordionProps {
 
 // State return types //
 
-interface SingleStateReturn {
+export interface SingleStateReturn {
   /**
    * Allow to open multiple accordion items
    * @default false
@@ -116,7 +128,7 @@ interface SingleStateReturn {
   setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-interface MultiStateReturn {
+export interface MultiStateReturn {
   /**
    * Allow to open multiple accordion items
    * @default true

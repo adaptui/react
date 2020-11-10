@@ -11,20 +11,15 @@ import { useForkRef } from "reakit-utils";
 import { createHook, createComponent } from "reakit-system";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
-import { AccordionStateReturn } from "./AccordionState";
+import { AccordionStateReturn, SelectedIdPair } from "./types";
 
 export type AccordionPanelOptions = DisclosureContentOptions &
   unstable_IdOptions &
   Pick<
     AccordionStateReturn,
-    | "selectedId"
-    | "selectedIds"
-    | "registerPanel"
-    | "unregisterPanel"
-    | "panels"
-    | "items"
-    | "allowMultiple"
-  > & {
+    "registerPanel" | "unregisterPanel" | "panels" | "items" | "allowMultiple"
+  > &
+  SelectedIdPair & {
     /**
      * Accordion's id
      */

@@ -1,24 +1,8 @@
 // Automatically generated
+export const ACCORDION_KEYS = [] as const;
+export const ACCORDION_PANEL_KEYS = ["accordionId"] as const;
+export const ACCORDION_TRIGGER_KEYS = [] as const;
 const ACCORDION_STATE_KEYS = [
-  "baseId",
-  "unstable_idCountRef",
-  "unstable_virtual",
-  "rtl",
-  "orientation",
-  "items",
-  "groups",
-  "currentId",
-  "loop",
-  "wrap",
-  "unstable_moves",
-  "unstable_angular",
-  "unstable_hasActiveWidget",
-  "selectedId",
-  "selectedIds",
-  "manual",
-  "allowMultiple",
-  "allowToggle",
-  "panels",
   "setBaseId",
   "registerItem",
   "unregisterItem",
@@ -42,11 +26,23 @@ const ACCORDION_STATE_KEYS = [
   "unstable_setHasActiveWidget",
   "select",
   "unSelect",
-  "setSelectedId",
-  "setSelectedIds",
   "registerPanel",
   "unregisterPanel",
+  "baseId",
+  "unstable_idCountRef",
+  "unstable_virtual",
+  "rtl",
+  "orientation",
+  "items",
+  "groups",
+  "currentId",
+  "loop",
+  "wrap",
+  "unstable_moves",
+  "unstable_angular",
+  "unstable_hasActiveWidget",
+  "manual",
+  "allowToggle",
+  "panels",
+  "allowMultiple",
 ] as const;
-export const ACCORDION_KEYS = ACCORDION_STATE_KEYS;
-export const ACCORDION_PANEL_KEYS = [...ACCORDION_KEYS, "accordionId"] as const;
-export const ACCORDION_TRIGGER_KEYS = ACCORDION_KEYS;
