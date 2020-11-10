@@ -15,81 +15,10 @@ import {
   CalendarWeekTitle,
   CalendarCellButton,
   RangeCalendarStateReturn,
+  DateRangePickerInitialState,
 } from "renderless-components";
 
-interface RangeValue<T> {
-  /** The start value of the range. */
-  start: T;
-  /** The end value of the range. */
-  end: T;
-}
-
-type DateTimeFormatOpts = Intl.DateTimeFormatOptions & {
-  timeStyle?: string;
-  dateStyle?: string;
-};
-
-type ValidationState = "valid" | "invalid";
-
-export interface AppProps {
-  /**
-   * The current value (controlled).
-   */
-  value?: RangeValue<string>;
-  /**
-   * The default value (uncontrolled).
-   */
-  defaultValue?: RangeValue<string>;
-  /**
-   *  Handler that is called when the value changes.
-   */
-  onChange?: (value: RangeValue<string>) => void;
-  /**
-   * The smallest value allowed for the input.
-   */
-  minValue?: string;
-  /**
-   * The largest value allowed for the input.
-   */
-  maxValue?: string;
-  /**
-   * Whether the input is disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Whether the input can be selected but not changed by the user.
-   *
-   * @default false
-   */
-  isReadOnly?: boolean;
-  /**
-   * Whether the element should receive focus on render.
-   *
-   * @default false
-   */
-  autoFocus?: boolean;
-  /**
-   * Whether the input should display its "valid" or "invalid" visual styling.
-   */
-  validationState?: ValidationState;
-  /**
-   * Whether user input is required on the input before form submission.
-   * Often paired with the `necessityIndicator` prop to add a visual indicator to the input.
-   */
-  isRequired?: boolean;
-  /**
-   * Placeholder Date for segments
-   */
-  placeholderDate?: string;
-  /**
-   * Format options for segments
-   */
-  formatOptions?: DateTimeFormatOpts;
-}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<DateRangePickerInitialState> = props => {
   const state = useDateRangePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,

@@ -1,13 +1,22 @@
+import * as React from "react";
 import { useCompositeState } from "reakit";
 import { ValueBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
 
-import { getSelectedValueFromDate, getSelectedDateFromValue } from "./__utils";
+import { getSelectedValueFromDate, getSelectedDateFromValue } from "./helpers";
 
 export type ColumnType = "hour" | "minute" | "meridian";
 
 export interface TimePickerColumnInitialState extends ValueBase<Date> {
+  /**
+   * Popover visible state
+   */
   visible?: boolean;
+  /**
+   * TimePicker column type
+   *
+   * @default "hour"
+   */
   columnType?: ColumnType;
 }
 
@@ -15,15 +24,15 @@ export const useTimePickerColumnState = (
   props: TimePickerColumnInitialState = {},
 ) => {
   const {
-    value: time,
     defaultValue = new Date(),
+    value,
     onChange,
     visible,
     columnType = "hour",
   } = props;
 
   const [date, setDate] = useControllableState({
-    value: time,
+    value,
     defaultValue,
     onChange,
   });
@@ -36,9 +45,12 @@ export const useTimePickerColumnState = (
     orientation: "vertical",
   });
 
-  const setSelected = (value: number) => {
-    setDate(getSelectedDateFromValue(value, date, columnType));
-  };
+  const setSelected = React.useCallback(
+    (value: number) => {
+      setDate(getSelectedDateFromValue(value, date, columnType));
+    },
+    [columnType, date, setDate],
+  );
 
   return { selected, setSelected, visible, columnType, ...composite };
 };

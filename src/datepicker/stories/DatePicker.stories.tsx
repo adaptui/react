@@ -3,13 +3,13 @@ import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
-import "./DatePicker.css";
-import { App as DatePicker } from "./DatePicker.component";
 import {
   datePickerTemplate,
   datePickerTemplateJs,
   datePickerCssTemplate,
 } from "./templates";
+import "./DatePicker.css";
+import { App as DatePicker } from "./DatePicker.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {

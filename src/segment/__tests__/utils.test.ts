@@ -1,5 +1,5 @@
 import MockDate from "mockdate";
-import { getSegmentLimits, setSegment, cycleValue } from "../__utils";
+import { getSegmentLimits, setSegment, cycleValue } from "../helpers";
 
 describe("Segment Utils", () => {
   test("getSegmentLimits", () => {

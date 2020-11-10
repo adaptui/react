@@ -25,7 +25,6 @@ export type CalendarButtonOptions = ButtonOptions &
     | "focusNextYear"
   > & {
     goto: CalendarGoto;
-    getAriaLabel?: (goto: CalendarGoto) => string;
   };
 
 export type CalendarButtonHTMLProps = ButtonHTMLProps;
@@ -48,7 +47,6 @@ export const useCalendarButton = createHook<
       focusPreviousYear,
       focusNextYear,
       goto,
-      getAriaLabel,
     } = options;
 
     const TYPES = {
@@ -71,8 +69,8 @@ export const useCalendarButton = createHook<
     };
 
     return {
+      "aria-label": TYPES[goto]?.ariaLabel,
       onClick: callAllHandlers(htmlOnClick, TYPES[goto]?.handler),
-      "aria-label": getAriaLabel?.(goto) ?? TYPES[goto]?.ariaLabel,
       ...htmlProps,
     };
   },

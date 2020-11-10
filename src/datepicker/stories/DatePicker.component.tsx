@@ -15,74 +15,10 @@ import {
   CalendarHeader,
   CalendarWeekTitle,
   CalendarStateReturn,
+  DatePickerInitialState,
 } from "renderless-components";
 
-type DateTimeFormatOpts = Intl.DateTimeFormatOptions & {
-  timeStyle?: string;
-  dateStyle?: string;
-};
-
-type ValidationState = "valid" | "invalid";
-
-export interface AppProps {
-  /**
-   * The current value (controlled).
-   */
-  value?: string;
-  /**
-   * The default value (uncontrolled).
-   */
-  defaultValue?: string;
-  /**
-   *  Handler that is called when the value changes.
-   */
-  onChange?: (value: string) => void;
-  /**
-   * The smallest value allowed for the input.
-   */
-  minValue?: string;
-  /**
-   * The largest value allowed for the input.
-   */
-  maxValue?: string;
-  /**
-   * Whether the input is disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean;
-  /**
-   * Whether the input is readonly.
-   *
-   * @default false
-   */
-  isReadonly?: boolean;
-  /**
-   * Whether the element should receive focus on render.
-   *
-   * @default false
-   */
-  autoFocus?: boolean;
-  /**
-   * Whether the input should display its "valid" or "invalid" visual styling.
-   */
-  validationState?: ValidationState;
-  /**
-   * Whether user input is required on the input before form submission.
-   * Often paired with the `necessityIndicator` prop to add a visual indicator to the input.
-   */
-  isRequired?: boolean;
-  /**
-   * Placeholder Date for segments
-   */
-  placeholderDate?: string;
-  /**
-   * Format options for segments
-   */
-  formatOptions?: DateTimeFormatOpts;
-}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<DatePickerInitialState> = props => {
   const state = useDatePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,

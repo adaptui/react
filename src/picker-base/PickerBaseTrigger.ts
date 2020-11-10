@@ -46,7 +46,7 @@ export const usePickerBaseTrigger = createHook<
 });
 
 export const PickerBaseTrigger = createComponent({
-  as: "div",
+  as: "button",
   memo: true,
   useHook: usePickerBaseTrigger,
 });

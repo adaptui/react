@@ -1,32 +1,32 @@
-import "./Segment.css";
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Segment } from "./Segment.component";
 import {
   segmentTemplate,
   segmentTemplateJs,
   segmentCssTemplate,
 } from "./templates";
+import "./Segment.css";
+import { App as Segment } from "./Segment.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Segment,
   title: "Segment",
   parameters: {
-    preview: {
-      preview: createPreviewTabs({
-        ts: segmentTemplate,
-        js: segmentTemplateJs,
-        css: segmentCssTemplate,
-      }),
-    },
+    preview: createPreviewTabs({
+      ts: segmentTemplate,
+      js: segmentTemplateJs,
+      css: segmentCssTemplate,
+    }),
   },
 } as Meta;
 
 const Base: Story = args => <Segment {...args} />;
 
-export const Default = () => (
+export const Default = Base.bind({});
+
+export const Playground = () => (
   <div className="segment_demo">
     <pre>
       year: "numeric", month: "2-digit", day: "2-digit", weekday: "long",

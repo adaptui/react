@@ -43,11 +43,7 @@ const RANGE_CALENDAR_STATE_KEYS = [
   "highlightDate",
 ] as const;
 export const CALENDAR_KEYS = RANGE_CALENDAR_STATE_KEYS;
-export const CALENDAR_BUTTON_KEYS = [
-  ...CALENDAR_KEYS,
-  "goto",
-  "getAriaLabel",
-] as const;
+export const CALENDAR_BUTTON_KEYS = [...CALENDAR_KEYS, "goto"] as const;
 export const CALENDAR_CELL_KEYS = [...CALENDAR_KEYS, "date"] as const;
 export const CALENDAR_CELL_BUTTON_KEYS = CALENDAR_CELL_KEYS;
 export const CALENDAR_GRID_KEYS = CALENDAR_KEYS;

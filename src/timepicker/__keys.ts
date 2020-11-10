@@ -109,7 +109,7 @@ const TIME_PICKER_STATE_KEYS = [
   "dialogId",
   "isDisabled",
   "isReadOnly",
-  "focus",
+  "segmentFocus",
   "time",
   "hours",
   "minutes",

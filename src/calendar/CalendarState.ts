@@ -26,19 +26,21 @@ import { unstable_useId as useId } from "reakit";
 import { useUpdateEffect } from "@chakra-ui/hooks";
 import { useDateFormatter } from "@react-aria/i18n";
 import { useControllableState } from "@chakra-ui/hooks";
-import { FocusableProps, InputBase, ValueBase } from "@react-types/shared";
+import { InputBase, ValueBase } from "@react-types/shared";
 
-import { useWeekStart } from "./useWeekStart";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
-import { useWeekDays, generateDaysInMonthArray } from "./__utils";
 import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
+import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
 export interface CalendarInitialState
   extends ValueBase<string>,
     RangeValueBase<string>,
-    InputBase,
-    FocusableProps {
+    InputBase {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
   /**
    * Id for the calendar grid
    */
@@ -55,10 +57,7 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     isDisabled = false,
     isReadOnly = false,
     autoFocus = false,
-    id,
   } = props;
-
-  const { id: calendarId } = useId({ id, baseId: "calendar" });
 
   const onChange = React.useCallback(
     (date: Date) => {
@@ -76,8 +75,6 @@ export function useCalendarState(props: CalendarInitialState = {}) {
 
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
-
-  const [isFocused, setFocused] = React.useState(autoFocus);
 
   const initialMonth = value ?? new Date();
   const [currentMonth, setCurrentMonth] = React.useState(initialMonth);
@@ -141,6 +138,8 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     }
   }
 
+  const [isFocused, setFocused] = React.useState(autoFocus);
+
   const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
 
   // Announce when the current month changes
@@ -152,6 +151,8 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     // handle an update to the current month from the Previous or Next button
     // rather than move focus, we announce the new month value
   }, [currentMonth]);
+
+  const { id: calendarId } = useId({ id: props.id, baseId: "calendar" });
 
   return {
     calendarId,

@@ -5,13 +5,10 @@ import {
   PickerBaseTrigger,
   PickerBaseContent,
   usePickerBaseState,
+  PickerBaseInitialState,
 } from "renderless-components";
 
-export interface AppProps {
-  visible?: boolean;
-}
-
-export const App = (props: AppProps) => {
+export const App: React.FC<PickerBaseInitialState> = props => {
   const state = usePickerBaseState(props);
 
   return (

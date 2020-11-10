@@ -4,12 +4,12 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, format, subWeeks } from "date-fns";
 
 import "./Calendar.css";
-import { App as Calendar } from "./Calendar.component";
 import {
   calendarTemplate,
   calendarTemplateJs,
   calendarCssTemplate,
 } from "./templates";
+import { App as Calendar } from "./Calendar.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -56,14 +56,14 @@ DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
-  defaultValue: new Date(2020, 10, 1),
+  value: new Date(2020, 10, 1),
   minValue: new Date(),
   maxValue: addWeeks(new Date(), 1),
 };
 
 export const MinMaxDefaultDate = Base.bind({});
 MinMaxDefaultDate.args = {
-  defaultValue: new Date(2020, 10, 7),
+  value: new Date(2020, 10, 7),
   minValue: subWeeks(new Date(2020, 10, 7), 1),
   maxValue: addWeeks(new Date(2020, 10, 7), 1),
 };

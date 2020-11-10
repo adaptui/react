@@ -10,9 +10,9 @@ import { useDateFormatter } from "@react-aria/i18n";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import { DateTimeFormatOpts } from "../utils/types";
-import { add, setSegment, convertValue, getSegmentLimits } from "./__utils";
+import { add, setSegment, convertValue, getSegmentLimits } from "./helpers";
 
-export interface IDateSegment {
+export interface DateSegment {
   type: Intl.DateTimeFormatPartTypes;
   text: string;
   value?: number;
@@ -45,15 +45,19 @@ const TYPE_MAPPING = {
   dayperiod: "dayPeriod",
 };
 
-export interface SegmentStateProps {
+export interface SegmentInitialState {
   /**
-   * segment value
+   * Default segment value
+   */
+  defaultValue?: Date;
+  /**
+   * Segment value
    */
   value?: Date;
   /**
-   * default segment value
+   * Callback to fire on value change
    */
-  defaultValue?: Date;
+  onChange?: (value: Date, ...args: any[]) => void;
   /**
    * Sets formmating of date based on Intl.DateFormatOptions
    *
@@ -70,17 +74,12 @@ export interface SegmentStateProps {
    */
   formatOptions?: DateTimeFormatOpts;
   /**
-   * placeholder date
+   * Placeholder date
    */
   placeholderDate?: Date;
-  /**
-   * callback to fire on value change
-   */
-  onChange?: (value: Date, ...args: any[]) => void;
 }
 
-export function useSegmentState(props: SegmentStateProps) {
-  const segmentComposite = useCompositeState({ orientation: "horizontal" });
+export function useSegmentState(props: SegmentInitialState) {
   const [validSegments, setValidSegments] = useState(
     props.value || props.defaultValue ? { ...EDITABLE_SEGMENTS } : {},
   );
@@ -141,7 +140,7 @@ export function useSegmentState(props: SegmentStateProps) {
         text: segment.value,
         ...getSegmentLimits(value, segment.type, resolvedOptions),
         isPlaceholder: !validSegments[segment.type],
-      } as IDateSegment),
+      } as DateSegment),
   );
 
   const adjustSegment = (
@@ -152,6 +151,8 @@ export function useSegmentState(props: SegmentStateProps) {
     setValidSegments({ ...validSegments });
     setValue(add(value, type, amount, resolvedOptions) as Date);
   };
+
+  const segmentComposite = useCompositeState({ orientation: "horizontal" });
 
   return {
     ...segmentComposite,

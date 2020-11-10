@@ -1,8 +1,8 @@
 jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
+import MockDate from "mockdate";
 import { cleanup } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
-import MockDate from "mockdate";
 
 import {
   Calendar,
