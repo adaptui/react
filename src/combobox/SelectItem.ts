@@ -1,13 +1,10 @@
+import * as React from "react";
+import { useLiveRef } from "reakit-utils/useLiveRef";
 import {
-  BoxOptions,
-  BoxHTMLProps,
-  useBox,
   CompositeItemOptions,
   CompositeItemHTMLProps,
   useCompositeItem,
 } from "reakit";
-import * as React from "react";
-import { useLiveRef } from "reakit-utils/useLiveRef";
 import { createHook } from "reakit-system/createHook";
 import { createComponent } from "reakit-system/createComponent";
 
@@ -19,7 +16,7 @@ import { SelectStateReturn } from "./SelectState";
 export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
   {
     name: "SelectItem",
-    compose: useBox,
+    compose: useCompositeItem,
     keys: SELECT_ITEM_KEYS,
 
     useOptions(options) {
@@ -28,11 +25,9 @@ export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
 
       const registerItem = React.useCallback(
         (item: Item) => {
-          if (options.visible) {
-            options.registerItem?.({ ...item, value });
-          }
+          options.registerItem?.({ ...item, value });
         },
-        [options.registerItem, options.visible, value],
+        [options.registerItem, value],
       );
 
       if (options.id || !options.baseId || !options.value) {
@@ -72,8 +67,7 @@ export const SelectItem = createComponent({
   useHook: useSelectItem,
 });
 
-export type SelectItemOptions = BoxOptions &
-  CompositeItemOptions &
+export type SelectItemOptions = CompositeItemOptions &
   Pick<Partial<SelectStateReturn>, "setValue" | "hide" | "visible"> &
   Pick<SelectStateReturn, "registerItem"> & {
     /**
@@ -84,6 +78,6 @@ export type SelectItemOptions = BoxOptions &
     value?: string;
   };
 
-export type SelectItemHTMLProps = BoxHTMLProps & CompositeItemHTMLProps;
+export type SelectItemHTMLProps = CompositeItemHTMLProps;
 
 export type SelectItemProps = SelectItemOptions & SelectItemHTMLProps;

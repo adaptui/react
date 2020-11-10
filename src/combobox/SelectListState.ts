@@ -19,14 +19,20 @@ import {
 export function useSelectListState(
   initialState: SealedInitialState<SelectListInitialState> = {},
 ): SelectListStateReturn {
-  const { orientation = "vertical", ...sealed } = useSealedState(initialState);
+  const {
+    currentId = null,
+    orientation = "vertical",
+    loop = true,
+    ...sealed
+  } = useSealedState(initialState);
 
   const composite = useCompositeState({
+    currentId,
     orientation,
+    loop,
     ...sealed,
     unstable_virtual: true,
   });
-  console.log("%c composite", "color: #cc0088", composite);
 
   return useSelectBaseState(composite, sealed);
 }

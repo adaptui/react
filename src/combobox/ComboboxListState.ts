@@ -29,7 +29,6 @@ export function useComboboxListState(
     ...sealed,
     unstable_virtual: true,
   });
-  console.log("%c composite", "color: #cc0088", composite.currentId);
 
   return useComboboxBaseState(composite, sealed);
 }

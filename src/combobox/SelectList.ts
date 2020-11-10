@@ -1,11 +1,10 @@
 import { useWarning } from "reakit-warning";
 import { createHook } from "reakit-system/createHook";
-import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
 import { createComponent } from "reakit-system/createComponent";
 import { useCreateElement } from "reakit-system/useCreateElement";
+import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
 
 import { SELECT_LIST_KEYS } from "./__keys";
-import { getMenuId } from "./helpers/getMenuId";
 import { SelectStateReturn } from "./SelectState";
 
 export const useSelectList = createHook<SelectListOptions, SelectListHTMLProps>(
@@ -21,7 +20,6 @@ export const useSelectList = createHook<SelectListOptions, SelectListHTMLProps>(
     useProps(options, htmlProps) {
       return {
         role: options.menuRole,
-        id: getMenuId(options.baseId),
         ...htmlProps,
       };
     },

@@ -18,7 +18,7 @@ export const useSelectOption = createHook<
   SelectOptionHTMLProps
 >({
   name: "SelectOption",
-  compose: [useCompositeItem],
+  compose: [useSelectItem],
   keys: SELECT_OPTION_KEYS,
 
   useProps(_, htmlProps) {

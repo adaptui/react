@@ -9,6 +9,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   { value: initialValue = null }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
   const valuesById = React.useRef<Record<string, string | undefined>>({});
+  const values = React.useRef<string[]>([]);
 
   const {
     items: compositeItems,
@@ -16,13 +17,11 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     unregisterItem: compositeUnregisterItem,
   } = composite;
 
-  const currentValue = React.useMemo(
-    () =>
-      composite.currentId ? valuesById.current[composite.currentId] : undefined,
-    [valuesById, composite.currentId],
-  );
-
   const [value, setValue] = React.useState(initialValue);
+  const selectedId = React.useMemo(
+    () => (value ? valuesById.current[value] : null),
+    [valuesById, value],
+  );
 
   const items = React.useMemo(() => {
     compositeItems.forEach(item => {
@@ -36,8 +35,9 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   const registerItem = React.useCallback(
     (item: Item) => {
       compositeRegisterItem(item);
-      if (item.id) {
-        valuesById.current[item.id] = item.value;
+      if (item.value && item.id) {
+        valuesById.current[item.value] = item.id;
+        values.current = [...values.current, item.value];
       }
     },
     [compositeRegisterItem],
@@ -54,10 +54,10 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   return {
     ...composite,
     value,
-    currentValue,
+    values: values.current,
+    selectedId,
     items,
     menuRole: "listbox",
-    visible: true,
     setValue,
     registerItem,
     unregisterItem,
@@ -75,7 +75,7 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
    * @example
    * const select = useSelectState();
    * select.items.forEach((item) => {
-   *   console.log(item.value);
+   *
    * });
    */
   items: Item[];
@@ -88,13 +88,13 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
    */
   value: string | null;
   /**
-   * Value of the item that is currently selected.
+   * Initial value to be selected
    */
-  currentValue?: string;
+  values: string[];
   /**
-   * Whether the suggestions popup is visible or not.
+   * Id of the item that is currently selected.
    */
-  visible: boolean;
+  selectedId?: string | null;
 };
 
 export type SelectBaseActions<

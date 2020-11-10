@@ -19,22 +19,25 @@ export function useSelectPopoverState<
     ...initialState
   }: SelectPopoverInitialState = {},
 ) {
-  // const { reset } = select;
+  const { move, reset, selectedId } = select;
   const popover = usePopoverState({ gutter, placement, ...initialState });
-  // const visible = popover.visible && inputValue.length >= minValueLength;
-  // const visible = popover.visible;
+  const visible = popover.visible;
 
-  // React.useEffect(() => {
-  //   if (!visible) {
-  //     // We need to reset select.moves
-  //     reset();
-  //   }
-  // }, [visible, reset]);
+  React.useEffect(() => {
+    if (visible && selectedId) {
+      move?.(selectedId);
+    }
+
+    if (!visible) {
+      // We need to reset select.moves
+      reset();
+    }
+  }, [visible, reset, selectedId, move]);
 
   return {
     ...select,
     ...popover,
-    // visible,
+    visible,
   };
 }
 

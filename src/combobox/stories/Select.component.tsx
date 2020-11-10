@@ -10,6 +10,7 @@ import {
 
 export const App: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8 });
+  console.log("%c select", "color: #00258c", select);
 
   return (
     <>
@@ -18,6 +19,7 @@ export const App: React.FC<SelectInitialState> = props => {
       </Select>
       <SelectPopover {...select} aria-label="Fruits">
         <SelectOption {...select} value="Apple" />
+        <SelectOption {...select} value="AppleCusturd" />
         <SelectOption {...select} value="Orange" />
         <SelectOption {...select} value="Banana" />
       </SelectPopover>
