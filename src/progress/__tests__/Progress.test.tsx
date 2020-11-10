@@ -1,5 +1,5 @@
 import * as React from "react";
-import { axe, render } from "reakit-test-utils";
+import { axe, render, screen } from "reakit-test-utils";
 
 import { Progress, ProgressProps, useProgressState } from "../index";
 
@@ -35,9 +35,12 @@ describe("Progress", () => {
   });
 
   it("should render isIndeterminate", () => {
-    const { getByTestId: testid } = render(<ProgressComp value={null} />);
+    render(<ProgressComp value={null} />);
 
-    expect(testid("progress")).toHaveAttribute("data-indeterminate", "");
+    expect(screen.getByTestId("progress")).toHaveAttribute(
+      "data-indeterminate",
+      "",
+    );
   });
 
   test("Progress renders with no a11y violations", async () => {
