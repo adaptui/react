@@ -8,7 +8,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Combobox,
-  title: "Combobox",
+  title: "Combobox/Combobox",
   parameters: {
     preview: createPreviewTabs({
       js: comboboxTemplateJs,

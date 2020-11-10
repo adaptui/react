@@ -1,0 +1,50 @@
+import { useWarning } from "reakit-warning";
+import { createHook } from "reakit-system/createHook";
+import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
+import { createComponent } from "reakit-system/createComponent";
+import { useCreateElement } from "reakit-system/useCreateElement";
+
+import { SELECT_LIST_KEYS } from "./__keys";
+import { getMenuId } from "./helpers/getMenuId";
+import { SelectStateReturn } from "./SelectState";
+
+export const useSelectList = createHook<SelectListOptions, SelectListHTMLProps>(
+  {
+    name: "SelectList",
+    compose: useComposite,
+    keys: SELECT_LIST_KEYS,
+
+    useOptions({ menuRole = "listbox", ...options }) {
+      return { menuRole, ...options };
+    },
+
+    useProps(options, htmlProps) {
+      return {
+        role: options.menuRole,
+        id: getMenuId(options.baseId),
+        ...htmlProps,
+      };
+    },
+  },
+);
+
+export const SelectList = createComponent({
+  as: "div",
+  useHook: useSelectList,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+      "See https://reakit.io/docs/select",
+    );
+    return useCreateElement(type, props, children);
+  },
+});
+
+export type SelectListOptions = CompositeOptions &
+  Pick<Partial<SelectStateReturn>, "menuRole"> &
+  Pick<SelectStateReturn, "baseId">;
+
+export type SelectListHTMLProps = CompositeHTMLProps;
+
+export type SelectListProps = SelectListOptions & SelectListHTMLProps;
