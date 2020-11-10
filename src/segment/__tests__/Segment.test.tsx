@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, render, press, screen } from "reakit-test-utils";
 
@@ -9,6 +10,8 @@ import {
   useSegmentState,
   SegmentInitialState,
 } from "..";
+
+afterEach(cleanup);
 
 const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
@@ -24,9 +27,9 @@ const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
 
 describe("Segment", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(<SegmentSpinnerComp />);
+    render(<SegmentSpinnerComp />);
 
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
   });
 
   it("should have proper keyboard navigation", () => {

@@ -1,5 +1,13 @@
 import * as React from "react";
-import { axe, render, press, click, fireEvent } from "reakit-test-utils";
+import {
+  axe,
+  press,
+  click,
+  screen,
+  render,
+  fireEvent,
+} from "reakit-test-utils";
+import { cleanup } from "@testing-library/react";
 
 import {
   NumberInput,
@@ -9,6 +17,8 @@ import {
 } from "../index";
 import { AppProps } from "../stories/NumberInput.component";
 import { repeat } from "../../utils/test-utils";
+
+afterEach(cleanup);
 
 const NumberInputComp = (props: AppProps) => {
   const state = useNumberInputState(props);
@@ -35,10 +45,9 @@ const NumberInputComp = (props: AppProps) => {
 
 describe("NumberInput", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
-    const numberInput = testId("numberinput");
+    render(<NumberInputComp defaultValue={0} />);
+
+    const numberInput = screen.getByTestId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
     press.Tab();
@@ -46,10 +55,8 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with keyboard", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} max={10} min={0} />,
-    );
-    const numberInput = testId("numberinput");
+    render(<NumberInputComp defaultValue={0} max={10} min={0} />);
+    const numberInput = screen.getByTestId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
     press.Tab();
@@ -73,13 +80,11 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with buttons", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
+    render(<NumberInputComp defaultValue={0} />);
 
-    const incBtn = testId("inc");
-    const decBtn = testId("dec");
-    const numberInput = testId("numberinput");
+    const incBtn = screen.getByTestId("inc");
+    const decBtn = screen.getByTestId("dec");
+    const numberInput = screen.getByTestId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
     press.Tab();
@@ -92,10 +97,8 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with scrollwheel", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} />,
-    );
-    const numberInput = testId("numberinput");
+    render(<NumberInputComp defaultValue={0} />);
+    const numberInput = screen.getByTestId("numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -111,13 +114,11 @@ describe("NumberInput", () => {
   });
 
   it("should behave properly with min/max/step options", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} min={10} max={50} step={10} />,
-    );
+    render(<NumberInputComp defaultValue={0} min={10} max={50} step={10} />);
 
-    const incBtn = testId("inc");
-    const decBtn = testId("dec");
-    const numberInput = testId("numberinput");
+    const incBtn = screen.getByTestId("inc");
+    const decBtn = screen.getByTestId("dec");
+    const numberInput = screen.getByTestId("numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -140,13 +141,11 @@ describe("NumberInput", () => {
   });
 
   it("should behave properly precision value", () => {
-    const { getByTestId: testId } = render(
-      <NumberInputComp defaultValue={0} step={0.65} precision={2} />,
-    );
+    render(<NumberInputComp defaultValue={0} step={0.65} precision={2} />);
 
-    const incBtn = testId("inc");
-    const decBtn = testId("dec");
-    const numberInput = testId("numberinput");
+    const incBtn = screen.getByTestId("inc");
+    const decBtn = screen.getByTestId("dec");
+    const numberInput = screen.getByTestId("numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -163,7 +162,7 @@ describe("NumberInput", () => {
 
   it("should behave properly clampValueOnBlur/keepWithinRange", () => {
     // note clampValueOnBlur/keepWithinRange is true by default
-    const { getByTestId: testId } = render(
+    render(
       <NumberInputComp
         clampValueOnBlur={true}
         keepWithinRange={true}
@@ -172,7 +171,7 @@ describe("NumberInput", () => {
         max={50}
       />,
     );
-    const numberInput = testId("numberinput");
+    const numberInput = screen.getByTestId("numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
