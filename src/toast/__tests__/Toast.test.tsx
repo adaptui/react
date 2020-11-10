@@ -1,5 +1,5 @@
 import * as React from "react";
-import { axe, render, click, act } from "reakit-test-utils";
+import { axe, render, click, act, screen } from "reakit-test-utils";
 
 import { useToast, ToastProvider } from "..";
 
@@ -129,9 +129,9 @@ describe("Toast", () => {
   });
 
   it("toast should popup to the screen after click", () => {
-    const { getByText: text, getByTestId: id } = render(<ToastComp />);
+    render(<ToastComp />);
 
-    const errorBtn = text("Error button");
+    const errorBtn = screen.getByText("Error button");
 
     expect(errorBtn).toBeInTheDocument();
 
@@ -139,16 +139,14 @@ describe("Toast", () => {
       click(errorBtn);
     });
 
-    expect(id("error-toast")).toHaveTextContent("This is error");
+    expect(screen.getByTestId("error-toast")).toHaveTextContent(
+      "This is error",
+    );
   });
 
   it("should be hideToastd after clicking close button", () => {
-    const {
-      getByText: text,
-      getByTestId: getId,
-      queryByTestId: queryId,
-    } = render(<ToastComp />);
-    const errorBtn = text("Error button");
+    render(<ToastComp />);
+    const errorBtn = screen.getByText("Error button");
 
     expect(errorBtn).toBeInTheDocument();
 
@@ -157,14 +155,16 @@ describe("Toast", () => {
       click(errorBtn);
     });
 
-    expect(getId("error-toast")).toHaveTextContent("This is error");
+    expect(screen.getByTestId("error-toast")).toHaveTextContent(
+      "This is error",
+    );
 
     // let hideToast now
     act(() => {
-      click(getId("error-close"));
+      click(screen.getByTestId("error-close"));
     });
 
-    expect(queryId("error-toast")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("error-toast")).not.toBeInTheDocument();
   });
 
   test("Toast renders with no a11y violations", async () => {
