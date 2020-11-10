@@ -145,7 +145,6 @@ describe("DateRangePicker", () => {
     );
 
     openDatePicker();
-    screen.logTestingPlaygroundURL();
 
     expect(
       screen.getByLabelText(

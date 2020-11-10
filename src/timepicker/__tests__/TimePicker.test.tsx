@@ -1,5 +1,6 @@
 import * as React from "react";
-import { axe, render, press } from "reakit-test-utils";
+import { cleanup } from "@testing-library/react";
+import { axe, render, press, screen } from "reakit-test-utils";
 
 import {
   TimePicker,
@@ -27,6 +28,8 @@ beforeAll(() => {
 afterAll(() => {
   (window.requestAnimationFrame as any).mockRestore();
 });
+
+afterEach(cleanup);
 
 const TimePickerComp: React.FC<TimePickerStateProps> = props => {
   const state = useTimePickerState(props);
@@ -76,19 +79,15 @@ const TimePickerComp: React.FC<TimePickerStateProps> = props => {
 
 describe("TimePicker", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45" />,
-    );
+    render(<TimePickerComp defaultValue="12:45" />);
 
-    expect(testId("current-time")).toHaveTextContent("12:45 PM");
+    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 PM");
   });
 
   it("should open and change time value", () => {
-    const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45" />,
-    );
+    render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = testId("timepicker-content");
+    const timepickerContent = screen.getByTestId("timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -103,15 +102,13 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(testId("current-time")).toHaveTextContent("1:45 PM");
+    expect(screen.getByTestId("current-time")).toHaveTextContent("1:45 PM");
   });
 
   it("should be able to navigate with keyboard", () => {
-    const { getByTestId: testId } = render(
-      <TimePickerComp defaultValue="12:45" />,
-    );
+    render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = testId("timepicker-content");
+    const timepickerContent = screen.getByTestId("timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -138,7 +135,7 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(testId("current-time")).toHaveTextContent("12:45 AM");
+    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 AM");
   });
 
   test("TimePicker renders with no a11y violations", async () => {
