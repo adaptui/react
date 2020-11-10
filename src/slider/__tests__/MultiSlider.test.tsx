@@ -44,11 +44,11 @@ import {
 } from "../index";
 import React from "react";
 import { VisuallyHidden } from "reakit";
-import { SliderInitialState } from "../SliderState";
 import { render, fireEvent } from "reakit-test-utils";
+import { cleanup, screen } from "@testing-library/react";
 
+import { SliderInitialState } from "../SliderState";
 import { installMouseEvent } from "../../utils/test-utils";
-import { cleanup } from "@testing-library/react";
 
 export const MultiSliderComponent = (
   props: SliderInitialState & {
@@ -187,7 +187,7 @@ describe("Slider", () => {
     const onChange = jest.fn();
     const onChangeStart = jest.fn();
     const onChangeEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <MultiSliderComponent
         onChange={onChange}
         onChangeStart={onChangeStart}
@@ -199,10 +199,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const thumb0 = testId("slider-thumb-0");
-    const thumb1 = testId("slider-thumb-1");
-    const thumb2 = testId("slider-thumb-2");
+    const sliderValue = screen.getByTestId("slider-value");
+    const thumb0 = screen.getByTestId("slider-thumb-0");
+    const thumb1 = screen.getByTestId("slider-thumb-1");
 
     expect(sliderValue).toHaveTextContent("[25,50,75]");
 
@@ -251,7 +250,7 @@ describe("Slider", () => {
     const onChange = jest.fn();
     const onChangeStart = jest.fn();
     const onChangeEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <MultiSliderComponent
         onChange={onChange}
         onChangeStart={onChangeStart}
@@ -263,9 +262,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const thumb0 = testId("slider-thumb-0");
-    const thumb1 = testId("slider-thumb-1");
+    const sliderValue = screen.getByTestId("slider-value");
+    const thumb0 = screen.getByTestId("slider-thumb-0");
+    const thumb1 = screen.getByTestId("slider-thumb-1");
 
     expect(sliderValue).toHaveTextContent("25 to 50");
 
@@ -298,7 +297,7 @@ describe("Slider", () => {
   });
 
   test("stress test with 50 thumbs", () => {
-    const { getByTestId: testId } = render(
+    render(
       <MultiSliderComponent
         defaultValues={[...new Array(50).keys()]}
         min={0}
@@ -307,13 +306,13 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
+    const sliderValue = screen.getByTestId("slider-value");
 
     expect(sliderValue).toHaveTextContent([...new Array(50).keys()].toString());
   });
 
   it("supports isDisabled", () => {
-    const { getByTestId: testId } = render(
+    render(
       <MultiSliderComponent
         isDisabled={true}
         defaultValues={[10, 50]}
@@ -323,9 +322,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderInput0 = testId("slider-input-0");
-    const sliderInput1 = testId("slider-input-1");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderInput0 = screen.getByTestId("slider-input-0");
+    const sliderInput1 = screen.getByTestId("slider-input-1");
 
     expect(sliderValue).toHaveTextContent("10 to 50");
     expect(sliderInput0).toBeDisabled();
