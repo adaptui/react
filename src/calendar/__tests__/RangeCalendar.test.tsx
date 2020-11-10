@@ -1,7 +1,7 @@
 jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
 import MockDate from "mockdate";
-import { cleanup } from "@testing-library/react";
+import { cleanup, screen } from "@testing-library/react";
 import { axe, render, press } from "reakit-test-utils";
 
 import {
@@ -100,16 +100,18 @@ describe("RangeCalendar", () => {
   });
 
   it("should have proper initial start and end ranges", () => {
-    const { getByLabelText: label, baseElement } = render(
+    const { baseElement } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2050-10-07", end: "2050-10-30" }}
       />,
     );
 
+    screen.logTestingPlaygroundURL();
+
     const start = baseElement.querySelector("[data-is-selection-start]");
     // If anyone is reading this code from future
     // Note that this will fail again on 15th october 2050.
-    const anyMiddleDate = label("Saturday, October 15, 2050");
+    const anyMiddleDate = screen.getByLabelText(/Saturday, October 15, 2050/);
     const end = baseElement.querySelector("[data-is-selection-end]");
 
     expect(start).toHaveTextContent("7");
@@ -146,7 +148,7 @@ describe("RangeCalendar", () => {
       />,
     );
 
-    expect(testId("current-year")).toHaveTextContent("October 2020");
+    expect(testId("current-year")).toHaveTextContent(/October 2020/i);
     repeat(press.Tab, 5);
 
     expect(
