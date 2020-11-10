@@ -29,21 +29,21 @@ const Demo = () => {
           });
         }}
       >
-        Error
+        Error button
       </button>
       <button
         onClick={() => {
           showToast({ type: "success", content: "This is success" });
         }}
       >
-        Success
+        Success button
       </button>
       <button
         onClick={() => {
           showToast({ type: "warning", content: "This is warning" });
         }}
       >
-        Warning
+        Warning button
       </button>
       <button
         onClick={() => {
@@ -56,7 +56,7 @@ const Demo = () => {
           });
         }}
       >
-        Custom
+        Custom button
       </button>
     </div>
   );
@@ -70,7 +70,7 @@ const ToastComp: React.FC = () => {
         error: ({ hideToast, content, id }) => {
           return (
             <div
-              data-testid="error"
+              data-testid="error-toast"
               className="toast"
               style={{ backgroundColor: "#f02c2d" }}
             >
@@ -111,16 +111,16 @@ describe("Toast", () => {
         <div>
           <div>
             <button>
-              Error
+              Error button
             </button>
             <button>
-              Success
+              Success button
             </button>
             <button>
-              Warning
+              Warning button
             </button>
             <button>
-              Custom
+              Custom button
             </button>
           </div>
         </div>
@@ -131,13 +131,15 @@ describe("Toast", () => {
   it("toast should popup to the screen after click", () => {
     const { getByText: text, getByTestId: id } = render(<ToastComp />);
 
-    expect(text("Error")).toBeInTheDocument();
+    const errorBtn = text("Error button");
+
+    expect(errorBtn).toBeInTheDocument();
 
     act(() => {
-      click(text("Error"));
+      click(errorBtn);
     });
 
-    expect(id("error")).toHaveTextContent("This is error");
+    expect(id("error-toast")).toHaveTextContent("This is error");
   });
 
   it("should be hideToastd after clicking close button", () => {
@@ -146,22 +148,23 @@ describe("Toast", () => {
       getByTestId: getId,
       queryByTestId: queryId,
     } = render(<ToastComp />);
+    const errorBtn = text("Error button");
 
-    expect(text("Error")).toBeInTheDocument();
+    expect(errorBtn).toBeInTheDocument();
 
     // add first
     act(() => {
-      click(text("Error"));
+      click(errorBtn);
     });
 
-    expect(getId("error")).toHaveTextContent("This is error");
+    expect(getId("error-toast")).toHaveTextContent("This is error");
 
     // let hideToast now
     act(() => {
       click(getId("error-close"));
     });
 
-    expect(queryId("error")).not.toBeInTheDocument();
+    expect(queryId("error-toast")).not.toBeInTheDocument();
   });
 
   test("Toast renders with no a11y violations", async () => {

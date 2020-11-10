@@ -45,12 +45,11 @@ interface ToastStateProps {
   animationTimeout?: number;
 }
 
-let COUNTER = 0;
-
 export const useToastState = ({
   defaultPlacement = "bottom-center",
   animationTimeout = 0,
 }: ToastStateProps) => {
+  const COUNTER = React.useRef(0);
   const [toasts, setToasts] = React.useState<ToastList>({});
   const sortedToasts = getPlacementSortedToasts(toasts);
 
@@ -78,8 +77,8 @@ export const useToastState = ({
       autoDismiss,
       placement = defaultPlacement,
     }: Partial<Omit<IToast, "isVisible">>) => {
-      COUNTER = COUNTER + 1;
-      const id = idProps || `toast-${COUNTER}`;
+      COUNTER.current = COUNTER.current + 1;
+      const id = idProps || `toast-${COUNTER.current}`;
 
       /*
         wait until the next frame so we can animate
