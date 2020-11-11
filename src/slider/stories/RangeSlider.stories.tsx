@@ -7,7 +7,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import "./Slider.css";
-import { App as RangeSlider } from "./RangeSlider.component";
+import { App as RangeSlider } from "./components/RangeSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {

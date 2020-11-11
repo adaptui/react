@@ -7,7 +7,7 @@ import {
   singleSliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
-import { App as SingleSlider } from "./SingleSlider.component";
+import { App as SingleSlider } from "./components/SingleSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {

@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
+import { App as SingleVerticalSlider } from "./components/SingleVerticalSlider.component";
 import { DefaultPage } from "renderless-components/pagination/stories/Pagination.stories";
 
 export default {
