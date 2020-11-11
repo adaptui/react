@@ -1,4 +1,3 @@
-import path from "path";
 import React from "react";
 import { kebabCase } from "lodash";
 
@@ -13,11 +12,7 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
-    const filename = context.parameters.fileName;
-    const componentName = path.basename(path.dirname(path.dirname(filename)));
-    const basename = path.basename(filename, ".stories.tsx");
-    const id = `${kebabCase(componentName)}--${kebabCase(basename)}`;
-    document.body.id = id;
+    document.body.id = context.id.split("--")[0];
     return <Story />;
   },
 ];
