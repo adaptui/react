@@ -4,11 +4,33 @@ import { SetState } from "reakit-utils/ts";
 
 import { Item } from "./helpers/types";
 
+export function getIdFromValue(
+  valuesById: ValuesById,
+  selectedValue: string | null | undefined,
+) {
+  if (selectedValue == null) return null;
+
+  const selectedOption = valuesById.find(
+    option => option.value === selectedValue,
+  );
+  return selectedOption ? selectedOption.id : null;
+}
+
+function getValueFromId(
+  valuesById: ValuesById,
+  currentId: CompositeState["currentId"],
+) {
+  if (currentId == null) return;
+
+  const selectedOption = valuesById.find(option => option.id === currentId);
+  return selectedOption ? selectedOption.value : undefined;
+}
+
 export function useSelectBaseState<T extends CompositeStateReturn>(
   composite: T,
   { selectedValue: initialSelectedValue = null }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
-  const valuesWithId = React.useRef<Record<string, string | undefined>>({});
+  const valuesById = React.useRef<ValuesById>([]);
   const values = React.useRef<string[]>([]);
 
   const {
@@ -21,14 +43,19 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     initialSelectedValue,
   );
   const selectedId = React.useMemo(
-    () => (selectedValue ? valuesWithId.current[selectedValue] : null),
-    [valuesWithId, selectedValue],
+    () => getIdFromValue(valuesById.current, selectedValue),
+    [valuesById, selectedValue],
+  );
+
+  const currentValue = React.useMemo(
+    () => getValueFromId(valuesById.current, composite.currentId),
+    [valuesById, composite.currentId],
   );
 
   const items = React.useMemo(() => {
     compositeItems.forEach(item => {
       if (item.id) {
-        (item as Item).value = valuesWithId.current[item.id];
+        (item as Item).value = valuesById.current[item.id];
       }
     });
     return compositeItems;
@@ -37,8 +64,11 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   const registerItem = React.useCallback(
     (item: Item) => {
       compositeRegisterItem(item);
-      if (item.value && item.id) {
-        valuesWithId.current[item.value] = item.id;
+      if (item.id && item.value) {
+        valuesById.current = [
+          ...valuesById.current,
+          { id: item.id, value: item.value },
+        ];
         values.current = [...values.current, item.value];
       }
     },
@@ -48,7 +78,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   const unregisterItem = React.useCallback(
     (id: string) => {
       compositeUnregisterItem(id);
-      delete valuesWithId.current[id];
+      delete valuesById.current[id];
     },
     [compositeUnregisterItem],
   );
@@ -57,8 +87,9 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     ...composite,
     menuRole: "listbox",
     selectedValue,
+    currentValue,
     values: values.current,
-    valuesWithId: valuesWithId.current,
+    valuesById: valuesById.current,
     selectedId,
     items,
     setSelectedValue,
@@ -66,6 +97,8 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     unregisterItem,
   };
 }
+
+export type ValuesById = { id: string; value: string }[];
 
 export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
   T,
@@ -93,11 +126,15 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
   /**
    * Initial value to be selected
    */
-  valuesWithId: Record<string, string | undefined>;
+  valuesById: ValuesById;
   /**
    * Initial value to be selected
    */
   selectedValue: string | null;
+  /**
+   * Initial value to be selected
+   */
+  currentValue: string | undefined;
   /**
    * Id of the item that is currently selected.
    */

@@ -22,7 +22,8 @@ export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
     useOptions(options) {
       const registerItem = React.useCallback(
         (item: Item) => {
-          options.registerItem?.({ ...item, value: options.value });
+          if (options.value)
+            options.registerItem?.({ ...item, value: options.value });
         },
         [options.registerItem, options.value],
       );
@@ -43,6 +44,7 @@ export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
           onClickRef.current?.(event);
           if (event.defaultPrevented) return;
           if (!options.value) return;
+
           options.setSelectedValue?.(options.value);
           options.hide?.();
         },

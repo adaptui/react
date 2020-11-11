@@ -19,7 +19,7 @@ export const App: React.FC<SelectInitialState> = props => {
       </Select>
       <SelectPopover {...select} aria-label="Fruits">
         <SelectOption {...select} value="Apple" />
-        <SelectOption {...select} disabled value="AppleCusturd" />
+        <SelectOption {...select} value="AppleCusturd" />
         <SelectOption {...select} value="Orange" />
         <SelectOption {...select} value="Banana" />
       </SelectPopover>

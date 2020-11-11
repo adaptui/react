@@ -7,6 +7,7 @@
   --combobox-border-focus: var(--color-primary-700, #1976d2);
   --listbox-background: var(--color-background-200, #fff);
   --listbox-color: var(--color-grayscale-700, #333);
+  --listbox-disabled-color: var(--color-grayscale-700, #aaa);
   --listbox-shadow-50: var(--color-shadow-50, rgba(0, 0, 0, 0.05));
   --listbox-shadow-100: var(--color-shadow-50, rgba(0, 0, 0, 0.1));
   --option-background-hover: var(--color-primary-50, #e3f2fd);
@@ -68,4 +69,8 @@ select:focus {
 
 [role="listbox"] [aria-selected="true"] {
   background-color: var(--option-background-focus);
+}
+
+[role="listbox"] [aria-disabled="true"] {
+  color: var(--listbox-disabled-color);
 }

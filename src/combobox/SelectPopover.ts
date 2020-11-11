@@ -1,16 +1,19 @@
+import * as React from "react";
+import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { createHook } from "reakit-system/createHook";
 import { createComponent } from "reakit-system/createComponent";
 import { useCreateElement } from "reakit-system/useCreateElement";
 import { PopoverOptions, PopoverHTMLProps, usePopover } from "reakit";
 
-import { SELECT_POPOVER_KEYS } from "./__keys";
 import {
   SelectListOptions,
   SelectListHTMLProps,
   useSelectList,
 } from "./SelectList";
-import { SelectPopoverStateReturn } from "./SelectPopoverState";
+import { SELECT_POPOVER_KEYS } from "./__keys";
+import { SelectStateReturn } from "./SelectState";
+import { useTypeaheadShortcut } from "./helpers/useTypeaheadShortcut";
 
 export const useSelectPopover = createHook<
   SelectPopoverOptions,
@@ -19,6 +22,18 @@ export const useSelectPopover = createHook<
   name: "SelectPopover",
   compose: [useSelectList, usePopover],
   keys: SELECT_POPOVER_KEYS,
+
+  useProps(options, { ref: htmlRef, ...htmlProps }) {
+    const ref = React.useRef<HTMLElement>(null);
+
+    useTypeaheadShortcut({ options, ref });
+
+    return {
+      ref: useForkRef(ref, htmlRef),
+      role: "listbox",
+      ...htmlProps,
+    };
+  },
 });
 
 export const SelectPopover = createComponent({
@@ -35,13 +50,8 @@ export const SelectPopover = createComponent({
 });
 
 export type SelectPopoverOptions = SelectListOptions &
-  Omit<
-    PopoverOptions,
-    | "unstable_disclosureRef"
-    | "unstable_autoFocusOnHide"
-    | "unstable_autoFocusOnShow"
-  > &
-  Pick<Partial<SelectPopoverStateReturn>, "unstable_referenceRef">;
+  PopoverOptions &
+  Pick<SelectStateReturn, "values" | "currentValue" | "valuesById">;
 
 export type SelectPopoverHTMLProps = PopoverHTMLProps & SelectListHTMLProps;
 
