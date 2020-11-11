@@ -28,16 +28,23 @@ function getValueFromId(
 
 export function useSelectBaseState<T extends CompositeStateReturn>(
   composite: T,
-  { selectedValue: initialSelectedValue = null }: SelectBaseInitialState = {},
+  {
+    selectedValue: initialSelectedValue = null,
+    values: initialValues = [],
+  }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
   const valuesById = React.useRef<ValuesById>([]);
-  const values = React.useRef<string[]>([]);
 
   const {
     items: compositeItems,
     registerItem: compositeRegisterItem,
     unregisterItem: compositeUnregisterItem,
   } = composite;
+
+  console.log("%c initialValues", "color: #0088cc", initialValues);
+  const [values, setValues] = React.useState<string[]>(initialValues);
+  const valuesRef = React.useRef<string[]>([]);
+  const isDynamic = !!values.length;
 
   const [selectedValue, setSelectedValue] = React.useState(
     initialSelectedValue,
@@ -69,7 +76,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
           ...valuesById.current,
           { id: item.id, value: item.value },
         ];
-        values.current = [...values.current, item.value];
+        valuesRef.current = [...valuesRef.current, item.value];
       }
     },
     [compositeRegisterItem],
@@ -88,7 +95,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     menuRole: "listbox",
     selectedValue,
     currentValue,
-    values: values.current,
+    values: isDynamic ? values : valuesRef.current,
     valuesById: valuesById.current,
     selectedId,
     items,
@@ -120,7 +127,8 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
    */
   items: Item[];
   /**
-   * Initial value to be selected
+   * Values that will be used to produce `matches`.
+   * @default []
    */
   values: string[];
   /**
@@ -163,7 +171,7 @@ export type SelectBaseActions<
 
 export type SelectBaseInitialState = Pick<
   Partial<SelectBaseState>,
-  "selectedValue"
+  "values" | "selectedValue"
 >;
 
 export type SelectBaseStateReturn<
