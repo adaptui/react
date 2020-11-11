@@ -9,7 +9,7 @@ import {
   dateRangePickerTemplateJs,
   dateRangePickerCssTemplate,
 } from "./templates";
-import "./DatePicker.css";
+import "./DateRangePicker.css";
 import { App as DateRangePicker } from "./DateRangePicker.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 

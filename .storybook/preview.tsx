@@ -17,10 +17,7 @@ export const decorators = [
     const componentName = path.basename(path.dirname(path.dirname(filename)));
     const basename = path.basename(filename, ".stories.tsx");
     const id = `${kebabCase(componentName)}--${kebabCase(basename)}`;
-    return (
-      <div id={id}>
-        <Story />
-      </div>
-    );
+    document.body.id = id;
+    return <Story />;
   },
 ];

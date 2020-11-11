@@ -21,6 +21,12 @@ export default {
       deps: ["reakit@latest"],
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider--slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <MultiSlider {...args} />;

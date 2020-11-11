@@ -63,6 +63,12 @@ export default {
       },
     ],
   },
+  decorators: [
+    Story => {
+      document.body.id = "toast--toast";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 export const Default = () => <ReactSpringToast />;
