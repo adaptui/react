@@ -5,6 +5,19 @@ module.exports = ({ config }) => {
     ...config.resolve.alias,
     "renderless-components": path.resolve(__dirname, "../src"),
   };
+  config.module.rules.push({
+    test: /\.css$/,
+    use: [
+      {
+        loader: require.resolve("postcss-loader"),
+        options: {
+          config: {
+            path: __dirname,
+          },
+        },
+      },
+    ],
+  });
 
   return config;
 };
