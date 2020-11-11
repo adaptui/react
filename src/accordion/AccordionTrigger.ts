@@ -11,8 +11,9 @@ import { useLiveRef } from "reakit-utils";
 import { createHook, createComponent } from "reakit-system";
 
 import { ariaAttr } from "../utils";
+import { SelectedIdPair } from "./types";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
-import { AccordionStateReturn, SelectedIdPair } from "./types";
+import { AccordionStateReturn } from "./AccordionState";
 
 export type AccordionTriggerOptions = ButtonOptions &
   CompositeItemOptions &

@@ -1,30 +1,46 @@
-import { useControllableState } from "@chakra-ui/hooks";
 import * as React from "react";
 import { useCompositeState } from "reakit";
+import { useControllableState } from "@chakra-ui/hooks";
 import {
-  AccordionStateReturn,
+  AccordionState,
+  AccordionActions,
+  AccordionReturns,
+  MultiOverloadReturn,
+  SingleOverloadReturn,
   AccordionInitialState,
-  MultiOverloadSignature,
-  SingleOverloadSignature,
   AccordionInitialStateMulti,
   AccordionInitialStateSingle,
 } from "./types";
 
-export function useAccordionState(
-  initialState: Partial<AccordionInitialStateSingle>,
-): SingleOverloadSignature;
-export function useAccordionState(
-  initialState: Partial<AccordionInitialStateMulti>,
-): MultiOverloadSignature;
+export type AccordionStateReturn = AccordionActions &
+  AccordionState &
+  AccordionReturns;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialState> = {},
+  props: Partial<AccordionInitialStateSingle>,
+): SingleOverloadReturn;
+
+export function useAccordionState(
+  props: Partial<AccordionInitialStateMulti>,
+): MultiOverloadReturn;
+
+export function useAccordionState(
+  props: Partial<AccordionInitialState>,
+): SingleOverloadReturn;
+
+export function useAccordionState(
+  props: Partial<AccordionInitialState>,
+): MultiOverloadReturn;
+
+export function useAccordionState(
+  props: Partial<AccordionInitialState>,
 ): AccordionStateReturn {
   const {
     allowToggle: allowToggleProp = false,
     manual = true,
     ...rest
   } = props;
+
   const allowToggle = props.allowMultiple
     ? props.allowMultiple
     : allowToggleProp;

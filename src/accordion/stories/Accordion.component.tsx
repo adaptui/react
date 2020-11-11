@@ -6,10 +6,9 @@ import {
   AccordionTrigger,
   useAccordionState,
   AccordionInitialState,
-  AccordionInitialStateSingle,
 } from "renderless-components";
 
-export function App(props: AccordionInitialStateSingle) {
+export function App(props: AccordionInitialState) {
   const state = useAccordionState(props);
 
   // const initialProps = {

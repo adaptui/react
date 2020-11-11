@@ -5,6 +5,7 @@ import {
 } from "reakit";
 
 export type AccordionState = CompositeState & {
+  allowMultiple: Boolean;
   /**
    * Whether the accodion selection should be manual.
    * @default true
@@ -25,19 +26,19 @@ export type AccordionActions = CompositeActions & {
   /**
    * Moves into and selects an accordion by its `id`.
    */
-  select: AccordionActions["move"];
+  select: CompositeActions["move"];
   /**
    * Moves into and unSelects an accordion by its `id` if it's already selected.
    */
-  unSelect: AccordionActions["move"];
+  unSelect: CompositeActions["move"];
   /**
    * Registers a accordion panel.
    */
-  registerPanel: AccordionActions["registerItem"];
+  registerPanel: CompositeActions["registerItem"];
   /**
    * Unregisters a accordion panel.
    */
-  unregisterPanel: AccordionActions["unregisterItem"];
+  unregisterPanel: CompositeActions["unregisterItem"];
 };
 
 export interface CommonAccordionProps {
@@ -65,7 +66,7 @@ export type SelectedIdPair = {
   selectedIds?: (string | null)[];
 };
 
-export interface SingleProps extends CommonAccordionProps {
+export interface SingleAccordionProps extends CommonAccordionProps {
   /**
    * Allow to open multiple accordion items
    * @default false
@@ -87,12 +88,12 @@ export interface SingleProps extends CommonAccordionProps {
   onSelectedIdChange?: (value: string | null) => void;
 }
 
-export interface MultipleProps extends CommonAccordionProps {
+export interface MultiAccordionProps extends CommonAccordionProps {
   /**
    * Allow to open multiple accordion items
    * @default true
    */
-  allowMultiple: true;
+  allowMultiple?: true;
   /**
    * Initial selected accordion's `id`.
    * @default []
@@ -107,12 +108,12 @@ export interface MultipleProps extends CommonAccordionProps {
   /**
    * Handler that is called when the selectedIds changes.
    */
-  onSelectedIdsChange: (value: (string | null)[]) => void;
+  onSelectedIdsChange?: (value: (string | null)[]) => void;
 }
 
 // State return types //
 
-export interface SingleStateReturn {
+export interface SingleReturn {
   /**
    * Allow to open multiple accordion items
    * @default false
@@ -128,7 +129,7 @@ export interface SingleStateReturn {
   setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export interface MultiStateReturn {
+export interface MultiReturn {
   /**
    * Allow to open multiple accordion items
    * @default true
@@ -145,18 +146,18 @@ export interface MultiStateReturn {
 }
 
 // Overload signatures for useAccordionState
-export type SingleOverloadSignature = AccordionActions &
+export type SingleOverloadReturn = AccordionActions &
   AccordionState &
-  SingleStateReturn;
-export type MultiOverloadSignature = AccordionActions &
+  SingleReturn;
+export type MultiOverloadReturn = AccordionActions &
   AccordionState &
-  MultiStateReturn;
+  MultiReturn;
 
-type AccordionProps = SingleProps | MultipleProps;
+type AccordionProps = SingleAccordionProps | MultiAccordionProps;
+export type AccordionReturns = MultiReturn | SingleReturn;
+
 export type AccordionInitialState = CompositeInitialState & AccordionProps;
-export type AccordionInitialStateSingle = CompositeInitialState & SingleProps;
-export type AccordionInitialStateMulti = CompositeInitialState & MultipleProps;
-
-export type AccordionStateReturn = AccordionActions &
-  AccordionState &
-  (MultiStateReturn | SingleStateReturn);
+export type AccordionInitialStateSingle = CompositeInitialState &
+  SingleAccordionProps;
+export type AccordionInitialStateMulti = CompositeInitialState &
+  MultiAccordionProps;
