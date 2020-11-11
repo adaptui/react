@@ -15,11 +15,11 @@ export const App: React.FC<SelectInitialState> = props => {
   return (
     <>
       <Select className="select" {...select} aria-label="Fruit">
-        {select.value || "Select a fruit"}
+        {select.selectedValue || "Select a fruit"}
       </Select>
       <SelectPopover {...select} aria-label="Fruits">
         <SelectOption {...select} value="Apple" />
-        <SelectOption {...select} value="AppleCusturd" />
+        <SelectOption {...select} disabled value="AppleCusturd" />
         <SelectOption {...select} value="Orange" />
         <SelectOption {...select} value="Banana" />
       </SelectPopover>

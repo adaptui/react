@@ -24,12 +24,6 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
   useProps(options, { onKeyDown: htmlOnKeyDown, ...htmlProps }) {
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
 
-    // Reference:
-    // https://github.com/chakra-ui/chakra-ui/blob/83eec5b140bd9a69821d8e4df3e69bff0768dcca/packages/menu/src/use-menu.ts#L228-L253
-    const onCharacterPress = useShortcut({
-      preventDefault: event => event.key !== " ",
-    });
-
     const onKeyDown = React.useCallback(
       (event: React.KeyboardEvent) => {
         onKeyDownRef.current?.(event);
@@ -39,11 +33,12 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         // and the internals to get the disclosure ref properly
         const first = () => {
           if (!options.visible) options.show?.();
-          if (!options.value) options.first && setTimeout(options.first);
+          if (!options.selectedValue)
+            options.first && setTimeout(options.first);
         };
         const last = () => {
           if (!options.visible) options.show?.();
-          if (!options.value) options.last && setTimeout(options.last);
+          if (!options.selectedValue) options.last && setTimeout(options.last);
         };
 
         const keyMap = {
@@ -54,12 +49,22 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         };
 
         const action = keyMap[event.key as keyof typeof keyMap];
-        if (action) {
-          action();
-        }
+        if (action) action();
       },
-      [options.first, options.value],
+      [
+        options.visible,
+        options.show,
+        options.last,
+        options.first,
+        options.selectedValue,
+      ],
     );
+
+    // Reference:
+    // https://github.com/chakra-ui/chakra-ui/blob/83eec5b140bd9a69821d8e4df3e69bff0768dcca/packages/menu/src/use-menu.ts#L228-L253
+    const onCharacterPress = useShortcut({
+      preventDefault: event => event.key !== " ",
+    });
 
     return {
       "aria-haspopup": options.menuRole,
@@ -70,7 +75,7 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
            * find the next item to be selected
            */
           const selectedValue = options.values.find(value =>
-            options.value?.includes(value),
+            options.selectedValue?.includes(value),
           );
 
           const nextItem = getNextItemFromSearch(
@@ -81,7 +86,7 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
           );
 
           if (nextItem) {
-            options.setValue(nextItem);
+            options.setSelectedValue(nextItem);
           }
         }),
         onKeyDown,

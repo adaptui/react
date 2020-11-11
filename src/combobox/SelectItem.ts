@@ -20,14 +20,11 @@ export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
     keys: SELECT_ITEM_KEYS,
 
     useOptions(options) {
-      const trulyDisabled = options.disabled && !options.focusable;
-      const value = trulyDisabled ? undefined : options.value;
-
       const registerItem = React.useCallback(
         (item: Item) => {
-          options.registerItem?.({ ...item, value });
+          options.registerItem?.({ ...item, value: options.value });
         },
-        [options.registerItem, value],
+        [options.registerItem, options.value],
       );
 
       if (options.id || !options.baseId || !options.value) {
@@ -46,10 +43,10 @@ export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(
           onClickRef.current?.(event);
           if (event.defaultPrevented) return;
           if (!options.value) return;
-          options.setValue?.(options.value);
+          options.setSelectedValue?.(options.value);
           options.hide?.();
         },
-        [options.hide, options.value, options.setValue],
+        [options.hide, options.value, options.setSelectedValue],
       );
 
       return {
@@ -68,7 +65,7 @@ export const SelectItem = createComponent({
 });
 
 export type SelectItemOptions = CompositeItemOptions &
-  Pick<Partial<SelectStateReturn>, "setValue" | "hide" | "visible"> &
+  Pick<Partial<SelectStateReturn>, "setSelectedValue" | "hide" | "visible"> &
   Pick<SelectStateReturn, "registerItem"> & {
     /**
      * Item's value that will be used to fill input value and filter `matches`

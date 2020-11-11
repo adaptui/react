@@ -6,9 +6,9 @@ import { Item } from "./helpers/types";
 
 export function useSelectBaseState<T extends CompositeStateReturn>(
   composite: T,
-  { value: initialValue = null }: SelectBaseInitialState = {},
+  { selectedValue: initialSelectedValue = null }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
-  const valuesById = React.useRef<Record<string, string | undefined>>({});
+  const valuesWithId = React.useRef<Record<string, string | undefined>>({});
   const values = React.useRef<string[]>([]);
 
   const {
@@ -17,16 +17,18 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     unregisterItem: compositeUnregisterItem,
   } = composite;
 
-  const [value, setValue] = React.useState(initialValue);
+  const [selectedValue, setSelectedValue] = React.useState(
+    initialSelectedValue,
+  );
   const selectedId = React.useMemo(
-    () => (value ? valuesById.current[value] : null),
-    [valuesById, value],
+    () => (selectedValue ? valuesWithId.current[selectedValue] : null),
+    [valuesWithId, selectedValue],
   );
 
   const items = React.useMemo(() => {
     compositeItems.forEach(item => {
       if (item.id) {
-        (item as Item).value = valuesById.current[item.id];
+        (item as Item).value = valuesWithId.current[item.id];
       }
     });
     return compositeItems;
@@ -36,7 +38,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     (item: Item) => {
       compositeRegisterItem(item);
       if (item.value && item.id) {
-        valuesById.current[item.value] = item.id;
+        valuesWithId.current[item.value] = item.id;
         values.current = [...values.current, item.value];
       }
     },
@@ -46,19 +48,20 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   const unregisterItem = React.useCallback(
     (id: string) => {
       compositeUnregisterItem(id);
-      delete valuesById.current[id];
+      delete valuesWithId.current[id];
     },
     [compositeUnregisterItem],
   );
 
   return {
     ...composite,
-    value,
+    menuRole: "listbox",
+    selectedValue,
     values: values.current,
+    valuesWithId: valuesWithId.current,
     selectedId,
     items,
-    menuRole: "listbox",
-    setValue,
+    setSelectedValue,
     registerItem,
     unregisterItem,
   };
@@ -68,6 +71,10 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
   T,
   "items"
 > & {
+  /**
+   * Indicates the type of the suggestions popup.
+   */
+  menuRole: "listbox" | "tree" | "grid" | "dialog";
   /**
    * Lists all the select items with their `id`, DOM `ref`, `disabled` state,
    * `value` and `groupId` if any. This state is automatically updated when
@@ -80,17 +87,17 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
    */
   items: Item[];
   /**
-   * Indicates the type of the suggestions popup.
-   */
-  menuRole: "listbox" | "tree" | "grid" | "dialog";
-  /**
-   * Initial value to be selected
-   */
-  value: string | null;
-  /**
    * Initial value to be selected
    */
   values: string[];
+  /**
+   * Initial value to be selected
+   */
+  valuesWithId: Record<string, string | undefined>;
+  /**
+   * Initial value to be selected
+   */
+  selectedValue: string | null;
   /**
    * Id of the item that is currently selected.
    */
@@ -114,10 +121,13 @@ export type SelectBaseActions<
   /**
    * Sets `values`.
    */
-  setValue: SetState<SelectBaseState["value"]>;
+  setSelectedValue: SetState<SelectBaseState["selectedValue"]>;
 };
 
-export type SelectBaseInitialState = Pick<Partial<SelectBaseState>, "value">;
+export type SelectBaseInitialState = Pick<
+  Partial<SelectBaseState>,
+  "selectedValue"
+>;
 
 export type SelectBaseStateReturn<
   T extends CompositeStateReturn
