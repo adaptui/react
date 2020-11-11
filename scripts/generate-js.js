@@ -2,15 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const globFs = require("glob-fs")();
-const transpileTs = require("./transpile-ts");
 const outdent = require("outdent");
 const { camelCase } = require("lodash");
-
-function recurse(file) {
-  // `file.pattern` is an object with a `glob` (string) property
-  file.recurse = file.pattern.glob.indexOf("**") !== -1;
-  return file;
-}
+const transpileTs = require("./transpile-ts");
 
 // Create a new folder at the specified path
 function createDirectory(path) {
@@ -32,6 +26,22 @@ function createFile(filePath, fileContent = "") {
   });
 }
 
+function walkSync(dir, filelist) {
+  const files = fs.readdirSync(dir);
+
+  filelist = filelist || [];
+
+  files.forEach(function (file) {
+    if (isDirectory(path.join(dir, file))) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    } else {
+      filelist.push(file);
+    }
+  });
+
+  return filelist;
+}
+
 const generateJsFiles = filePath => {
   const code = fs.readFileSync(path.join(process.cwd(), filePath), {
     encoding: "utf8",
@@ -39,20 +49,18 @@ const generateJsFiles = filePath => {
 
   const transpiledCode = transpileTs(code);
   const templateFilePath = filePath
-    .replace("stories", "stories/__js")
+    .replace("stories", `stories${path.sep}__js`)
     .replace(".tsx", ".jsx");
 
-  const templateDir = path.join(
-    process.cwd(),
-    templateFilePath.substring(0, templateFilePath.lastIndexOf(path.sep)),
-  );
+  const __jsPath = path.dirname(templateFilePath).split("__js")[0];
 
+  const templateDir = path.join(process.cwd(), __jsPath, "__js");
   createDirectory(templateDir);
 
-  const templatePath = path.join(process.cwd(), templateFilePath);
+  const componentName = path.basename(templateFilePath);
+  const templatePath = path.join(templateDir, componentName);
 
-  const componentName = templatePath.split(`__js${path.sep}`)[1];
-  console.log(chalk.green.bold(`CREATED: ${componentName}`), `${filePath}`);
+  console.log(chalk.green.bold(`CREATED: ${componentName}`));
 
   createFile(templatePath, transpiledCode);
 };
@@ -76,12 +84,17 @@ function getComponentFolderPairs() {
 
   const components = componentFolders.reduce((prev, curr) => {
     const folderName = path.parse(curr);
-    const allfiles = fs
-      .readdirSync(`${curr}/stories`)
-      .filter(fn => fn.match(/(\.component\.tsx|\.css)$/));
+
+    const allfiles = walkSync(`${curr}${path.sep}stories`).filter(fn =>
+      fn.match(/(\.component\.tsx|\.css)$/),
+    );
 
     return { ...prev, [folderName.base]: allfiles };
   }, {});
+
+  console.log(
+    chalk.blueBright.bold(`Component Folder Pairs Successfully Created..`),
+  );
 
   return components;
 }
@@ -118,6 +131,7 @@ function generateImportString(component, index) {
 
 function generateTemplateFile() {
   const components = getComponentFolderPairs();
+  console.log(chalk.blueBright.bold(`Generating template.ts files..`));
 
   Object.keys(components).forEach(componentName => {
     const componentPairs = components[componentName];
@@ -137,7 +151,9 @@ function generateTemplateFile() {
 
       console.log(
         chalk.red.yellow(
-          `Writing template.ts (${chalk.cyanBright(component)})`,
+          `CREATED template.ts (${chalk.cyanBright(
+            path.relative("./", templateFilePath),
+          )})`,
         ),
       );
 
@@ -148,7 +164,13 @@ function generateTemplateFile() {
   });
 }
 
-generateTemplateFile();
-
-const files = globFs.use(recurse).readdirSync("**/*.component.tsx", {});
+function globRecurse(file) {
+  // `file.pattern` is an object with a `glob` (string) property
+  file.recurse = file.pattern.glob.indexOf("**") !== -1;
+  return file;
+}
+const files = globFs.use(globRecurse).readdirSync("**/*.component.tsx", {});
+console.log(chalk.blueBright.bold(`Generating JS Files..`));
 files.forEach(filePath => generateJsFiles(filePath));
+
+generateTemplateFile();

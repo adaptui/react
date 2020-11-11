@@ -7,7 +7,7 @@ import {
   multiSliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
-import { App as MultiSlider } from "./MultiSlider.component";
+import { App as MultiSlider } from "./components/MultiSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
