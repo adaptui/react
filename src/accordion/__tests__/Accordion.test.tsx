@@ -6,9 +6,10 @@ import {
   Accordion,
   AccordionTrigger,
   useAccordionState,
+  AccordionInitialState,
 } from "../index";
 
-const AccordionComponent = (props: any) => {
+const AccordionComponent = (props: Partial<AccordionInitialState>) => {
   const state = useAccordionState(props);
 
   return (

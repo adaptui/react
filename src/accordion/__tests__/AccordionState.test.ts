@@ -1,14 +1,15 @@
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
 
-import { useAccordionState, AccordionInitialState } from "../AccordionState";
+import { useAccordionState } from "../AccordionState";
+import { AccordionInitialState } from "../types";
 
 expect.addSnapshotSerializer(jestSerializerStripFunctions);
 
 function render({
   baseId = "base",
   ...initialState
-}: AccordionInitialState = {}) {
+}: Partial<AccordionInitialState> = {}) {
   return renderHook(() => useAccordionState({ baseId, ...initialState }))
     .result;
 }
@@ -30,7 +31,6 @@ test("Accordion: initial state", () => {
       "panels": Array [],
       "rtl": false,
       "selectedId": null,
-      "selectedIds": Array [],
       "unstable_angular": false,
       "unstable_hasActiveWidget": false,
       "unstable_idCountRef": Object {

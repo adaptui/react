@@ -3,9 +3,9 @@ import { Meta } from "@storybook/react";
 
 import { CompositeState } from "reakit/ts";
 import { App as Accordion } from "./Accordion.component";
-import { AccordionInitialState } from "../AccordionState";
 import { accordionTemplate, accordionTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { AccordionInitialState } from "../types";
 
 export const Default: React.FC<Omit<
   Partial<AccordionInitialState>,

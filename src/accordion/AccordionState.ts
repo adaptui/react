@@ -10,11 +10,13 @@ import {
   AccordionInitialState,
   AccordionInitialStateMulti,
   AccordionInitialStateSingle,
+  SelectedIdPair,
 } from "./types";
 
 export type AccordionStateReturn = AccordionActions &
   AccordionState &
-  AccordionReturns;
+  AccordionReturns &
+  SelectedIdPair;
 
 export function useAccordionState(
   props: Partial<AccordionInitialStateSingle>,
@@ -128,15 +130,15 @@ export function useAccordionState(
 
   return props.allowMultiple === true
     ? {
-        allowMultiple: false,
-        selectedId,
-        setSelectedId,
-        ...common,
-      }
-    : {
         allowMultiple: true,
         selectedIds,
         setSelectedIds,
+        ...common,
+      }
+    : {
+        allowMultiple: false,
+        selectedId,
+        setSelectedId,
         ...common,
       };
 }

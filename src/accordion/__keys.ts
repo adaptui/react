@@ -42,6 +42,8 @@ const ACCORDION_STATE_KEYS = [
   "manual",
   "allowToggle",
   "panels",
+  "selectedIds",
+  "selectedId",
 ] as const;
 export const ACCORDION_KEYS = ACCORDION_STATE_KEYS;
 export const ACCORDION_PANEL_KEYS = [...ACCORDION_KEYS, "accordionId"] as const;

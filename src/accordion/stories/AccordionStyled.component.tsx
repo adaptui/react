@@ -9,7 +9,7 @@ import {
 } from "renderless-components";
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const App: React.FC<AccordionInitialState> = props => {
+export const App: React.FC<Partial<AccordionInitialState>> = props => {
   const state = useAccordionState(props);
 
   // const initialProps = {

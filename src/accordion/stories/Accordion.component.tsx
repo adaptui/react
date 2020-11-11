@@ -8,7 +8,7 @@ import {
   AccordionInitialState,
 } from "renderless-components";
 
-export function App(props: AccordionInitialState) {
+export function App(props: Partial<AccordionInitialState>) {
   const state = useAccordionState(props);
 
   // const initialProps = {
