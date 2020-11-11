@@ -64,6 +64,8 @@ export type SelectedIdPair = {
    * @default []
    */
   selectedIds?: (string | null)[];
+  setSelectedId?: React.Dispatch<React.SetStateAction<string | null>>;
+  setSelectedIds?: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 };
 
 export interface SingleAccordionProps extends CommonAccordionProps {

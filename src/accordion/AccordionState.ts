@@ -35,13 +35,16 @@ export function useAccordionState(
 ): MultiOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialState>,
+  props: Partial<AccordionInitialState> = {},
 ): AccordionStateReturn {
   const {
-    allowToggle: allowToggleProp = false,
     manual = true,
+    allowToggle: allowToggleProp = false,
+    allowMultiple = false,
     ...rest
   } = props;
+
+  console.log(allowMultiple);
 
   const allowToggle = props.allowMultiple
     ? props.allowMultiple
@@ -83,6 +86,7 @@ export function useAccordionState(
 
   const select = React.useCallback(
     (id: string | null) => {
+      console.log(id);
       composite.move(id);
 
       if (!props.allowMultiple) {
@@ -96,7 +100,15 @@ export function useAccordionState(
       }
 
       if (id === null) return;
-      setSelectedIds(prevIds => [...prevIds, id]);
+      console.log(props.allowMultiple);
+      if (props.allowMultiple === true) {
+        setSelectedIds(prevIds => {
+          if (prevIds) {
+            return [...prevIds, id];
+          }
+          return prevIds;
+        });
+      }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -5,10 +5,11 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
-  AccordionInitialState,
 } from "renderless-components";
+import { AccordionInitialState } from "../types";
 
 export function App(props: Partial<AccordionInitialState>) {
+  console.log({ props });
   const state = useAccordionState(props);
 
   // const initialProps = {
