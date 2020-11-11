@@ -16,12 +16,12 @@ describe("Utils", () => {
       new Date("Wed Oct 07 2020 18:00:00 GMT+0530 (India Standard Time)"),
     );
 
-    expect(parseDate("2020-10-07")?.toString()).toEqual(
-      "Wed Oct 07 2020 18:00:00 GMT+0530 (India Standard Time)",
+    expect(parseDate("2020-10-07")).toMatchInlineSnapshot(
+      `2020-10-07T12:30:00.000Z`,
     );
 
-    expect(parseDate("1-1-1")?.toString()).toEqual(
-      "Mon Jan 01 0001 18:00:00 GMT+0553 (India Standard Time)",
+    expect(parseDate("1-1-1")).toMatchInlineSnapshot(
+      `0001-01-01T12:06:32.000Z`,
     );
 
     expect(parseDate("Hello world")).toBeUndefined();

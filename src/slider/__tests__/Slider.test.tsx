@@ -38,7 +38,9 @@ This possibly was because of wrong jest config.
 
 import React from "react";
 import { VisuallyHidden } from "reakit";
-import { axe, render, press, fireEvent } from "reakit-test-utils";
+import { cleanup, screen } from "@testing-library/react";
+import { axe, render, fireEvent } from "reakit-test-utils";
+
 import {
   SliderTrack,
   SliderThumb,
@@ -46,9 +48,7 @@ import {
   useSliderState,
 } from "../index";
 import { SliderInitialState } from "../SliderState";
-
 import { installMouseEvent } from "../../utils/test-utils";
-import { cleanup } from "@testing-library/react";
 
 export const SliderComponent = (
   props: SliderInitialState & { origin?: number },
@@ -154,7 +154,7 @@ describe("Slider", () => {
   it("should drag and change slider value", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <SliderComponent
         onChangeStart={onStart}
         onChangeEnd={onEnd}
@@ -164,8 +164,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderThumb = testId("slider-thumb");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderThumb = screen.getByTestId("slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50");
 
@@ -191,7 +191,7 @@ describe("Slider", () => {
   it("should work with reversed input", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <SliderComponent
         reversed={true}
         onChangeStart={onStart}
@@ -202,8 +202,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderThumb = testId("slider-thumb");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderThumb = screen.getByTestId("slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50");
 
@@ -229,7 +229,7 @@ describe("Slider", () => {
   it("should have proper min/max values", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <SliderComponent
         onChangeStart={onStart}
         onChangeEnd={onEnd}
@@ -239,8 +239,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderThumb = testId("slider-thumb");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderThumb = screen.getByTestId("slider-thumb");
 
     expect(sliderValue).toHaveTextContent("65");
 
@@ -270,7 +270,7 @@ describe("Slider", () => {
   it("should have proper values when origin is set", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <SliderComponent
         onChangeStart={onStart}
         onChangeEnd={onEnd}
@@ -282,8 +282,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderThumb = testId("slider-thumb");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderThumb = screen.getByTestId("slider-thumb");
 
     expect(sliderValue).toHaveTextContent("0");
 
@@ -312,7 +312,7 @@ describe("Slider", () => {
   it("supports formatOptions", () => {
     const onStart = jest.fn();
     const onEnd = jest.fn();
-    const { getByTestId: testId } = render(
+    render(
       <SliderComponent
         formatOptions={{
           style: "unit",
@@ -328,8 +328,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = testId("slider-value");
-    const sliderThumb = testId("slider-thumb");
+    const sliderValue = screen.getByTestId("slider-value");
+    const sliderThumb = screen.getByTestId("slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50°C");
 
@@ -347,13 +347,9 @@ describe("Slider", () => {
   });
 
   it("supports disabled slider", () => {
-    const { getByTestId: testId } = render(
-      <SliderComponent isDisabled={true} />,
-    );
+    render(<SliderComponent isDisabled={true} />);
 
-    const sliderInput = testId("slider-input");
-
-    expect(sliderInput).toBeDisabled();
+    expect(screen.getByTestId("slider-input")).toBeDisabled();
   });
 
   test("Slider renders with no a11y violations", async () => {

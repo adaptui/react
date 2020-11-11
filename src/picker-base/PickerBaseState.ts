@@ -6,9 +6,19 @@ import {
 import { InputBase } from "@react-types/shared";
 
 export interface PickerBaseInitialState extends PopoverInitialState, InputBase {
+  /**
+   * Picker wrapper Id
+   */
   pickerId?: string;
+  /**
+   * Dialog Id
+   */
   dialogId?: string;
-  focus?: () => void;
+  /**
+   * Function to be called on picker mousedown
+   * for focusing first tabbable element
+   */
+  segmentFocus?: () => void;
 }
 
 export const usePickerBaseState = (props: PickerBaseInitialState = {}) => {
@@ -17,7 +27,7 @@ export const usePickerBaseState = (props: PickerBaseInitialState = {}) => {
     dialogId: dialogIdProp,
     isDisabled,
     isReadOnly,
-    focus,
+    segmentFocus,
   } = props;
 
   const { id: pickerId } = useId({ id: pickerIdProp, baseId: "picker" });
@@ -30,7 +40,7 @@ export const usePickerBaseState = (props: PickerBaseInitialState = {}) => {
     dialogId,
     isDisabled,
     isReadOnly,
-    focus,
+    segmentFocus,
     ...popover,
   };
 };

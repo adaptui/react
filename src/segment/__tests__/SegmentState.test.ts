@@ -1,8 +1,8 @@
 import { act, renderHook } from "reakit-test-utils/hooks";
 
-import { useSegmentState, SegmentStateProps } from "../SegmentState";
+import { useSegmentState, SegmentInitialState } from "../SegmentState";
 
-function render({ ...initialState }: SegmentStateProps = {}) {
+function render({ ...initialState }: SegmentInitialState = {}) {
   return renderHook(() => useSegmentState({ ...initialState })).result;
 }
 
@@ -12,44 +12,7 @@ describe("SegmentState", () => {
       defaultValue: new Date(2050, 0, 0),
     });
 
-    expect(result.current.segments).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 12,
-          "minValue": 1,
-          "text": "12",
-          "type": "month",
-          "value": 12,
-        },
-        Object {
-          "isPlaceholder": true,
-          "text": "/",
-          "type": "literal",
-        },
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 31,
-          "minValue": 1,
-          "text": "31",
-          "type": "day",
-          "value": 31,
-        },
-        Object {
-          "isPlaceholder": true,
-          "text": "/",
-          "type": "literal",
-        },
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 9999,
-          "minValue": 1,
-          "text": "2049",
-          "type": "year",
-          "value": 2049,
-        },
-      ]
-    `);
+    expect(result.current.segments).toMatchSnapshot();
   });
 
   it.each(["increment", "decrement"])(
@@ -142,53 +105,6 @@ describe("SegmentState", () => {
       },
     });
 
-    expect(result.current.segments).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "isPlaceholder": true,
-          "text": "Friday",
-          "type": "weekday",
-        },
-        Object {
-          "isPlaceholder": true,
-          "text": ", ",
-          "type": "literal",
-        },
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 12,
-          "minValue": 1,
-          "text": "12",
-          "type": "month",
-          "value": 12,
-        },
-        Object {
-          "isPlaceholder": true,
-          "text": "/",
-          "type": "literal",
-        },
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 31,
-          "minValue": 1,
-          "text": "31",
-          "type": "day",
-          "value": 31,
-        },
-        Object {
-          "isPlaceholder": true,
-          "text": "/",
-          "type": "literal",
-        },
-        Object {
-          "isPlaceholder": false,
-          "maxValue": 9999,
-          "minValue": 1,
-          "text": "2049",
-          "type": "year",
-          "value": 2049,
-        },
-      ]
-    `);
+    expect(result.current.segments).toMatchSnapshot();
   });
 });

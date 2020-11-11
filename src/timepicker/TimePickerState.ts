@@ -1,19 +1,20 @@
 import * as React from "react";
+import { ValueBase } from "@react-types/shared";
 import { useControllableState } from "@chakra-ui/hooks";
-import { ValueBase, FocusableProps } from "@react-types/shared";
 
-import { useSegmentState } from "../segment";
-import { DateTimeFormatOpts } from "../utils/types";
-import { stringifyTime, parseTime } from "./__utils";
+import { stringifyTime, parseTime } from "./helpers";
+import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface TimePickerStateProps
   extends PickerBaseInitialState,
-    FocusableProps,
-    ValueBase<string> {
-  formatOptions?: DateTimeFormatOpts;
-  placeholderDate?: Date;
+    ValueBase<string>,
+    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
+  /**
+   * Whether the element should receive focus on render.
+   */
+  autoFocus?: boolean;
 }
 
 export const useTimePickerState = (props: TimePickerStateProps = {}) => {
@@ -46,7 +47,10 @@ export const useTimePickerState = (props: TimePickerStateProps = {}) => {
     placeholderDate,
   });
 
-  const popover = usePickerBaseState({ focus: segmentState.first, ...props });
+  const popover = usePickerBaseState({
+    segmentFocus: segmentState.first,
+    ...props,
+  });
 
   const setTimeProp = (date: Date) => {
     setTime(date);

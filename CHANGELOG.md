@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-beta.0](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.6...v0.1.1-beta.0) (2020-11-09)
+
+### Docs
+
+- **toast:** 📝 toast stories hide toast fix
+  ([2f3474c](https://github.com/timelessco/renderless-components/commit/2f3474c2cb4ad0df2288cc6150408fd332ad7265))
+
+### Others
+
+- **accordion:** 🏷️ update state types
+  ([e458e36](https://github.com/timelessco/renderless-components/commit/e458e3602739a70aa31211253bb80e23af652cad))
+- added template.ts generation script
+  ([#139](https://github.com/timelessco/renderless-components/issues/139))
+  ([9538982](https://github.com/timelessco/renderless-components/commit/95389821a87353b3c62fadd61521acdcbc32c702))
+- storybook infer controls & component types improvements
+  ([#141](https://github.com/timelessco/renderless-components/issues/141))
+  ([80105f9](https://github.com/timelessco/renderless-components/commit/80105f905ac4ad1a35b7e7ad541cb9fbc5dd3d00))
+- storybook migrate segment, timepicker, select, toast
+  ([#137](https://github.com/timelessco/renderless-components/issues/137))
+  ([f6004ef](https://github.com/timelessco/renderless-components/commit/f6004efedb7ac40c804db3f06abf45723d9a668b))
+- **release:** 0.1.1-alpha.6
+  ([f28bd9a](https://github.com/timelessco/renderless-components/commit/f28bd9a1fb926cd182739f1f867032cc64148d81))
+
+### Code Refactoring
+
+- **accordion:** ♻️ use useControllable in accordion
+  ([ae21a02](https://github.com/timelessco/renderless-components/commit/ae21a02f234012057b2d98140c73b9938823562d))
+- **drawer:** ♻️ update drawer props & types
+  ([0be59ae](https://github.com/timelessco/renderless-components/commit/0be59aeb5be133798a9e57b626bee4ec1af82308))
+- **meter:** ♻️ remove sealed state & its types
+  ([b3d4d63](https://github.com/timelessco/renderless-components/commit/b3d4d637430b93f6b6840bd61d4107baf2c88e91))
+- **number-input:** ♻️ update number input state & test & stories
+  ([a96352f](https://github.com/timelessco/renderless-components/commit/a96352ff545fe9016ecc5f167de3e171e77bb776))
+- **pagination:** ♻️ add jsdoc to pagination
+  ([#138](https://github.com/timelessco/renderless-components/issues/138))
+  ([c7da17c](https://github.com/timelessco/renderless-components/commit/c7da17cfc5fc3bed26e79ab0e96ff29a5929cf45))
+- **pagination:** ♻️ update pagination state, stories & types
+  ([77bcf0e](https://github.com/timelessco/renderless-components/commit/77bcf0ef1a8cc0ada39887f71dd6871c3cc27781))
+- **pickers:** ♻️ update state, types, jsdoc, helpers & stories
+  ([aab5250](https://github.com/timelessco/renderless-components/commit/aab52500958a7f87b86389d7942a834014ab42a8))
+- **progress:** ♻️ remove sealed state
+  ([555c857](https://github.com/timelessco/renderless-components/commit/555c8575bc701a119a331cc8e1d93d570cf44616))
+- **slider:** ♻️ use controllable & update state, stories & types
+  ([413783a](https://github.com/timelessco/renderless-components/commit/413783adf0faa9c5d608daadaf952d786a47f094))
+- **state:** ♻️ update accordion & meter state props
+  ([ba8e9bf](https://github.com/timelessco/renderless-components/commit/ba8e9bf4a3610a085f78f83adcf60c90d7b371ad))
+
 ### [0.1.1-alpha.6](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.5...v0.1.1-alpha.6) (2020-11-05)
 
 ### Features

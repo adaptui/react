@@ -1,13 +1,19 @@
 import * as React from "react";
+import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press } from "reakit-test-utils";
+import { axe, render, press, screen } from "reakit-test-utils";
 
-import { Segment } from "../Segment";
-import { SegmentField } from "../SegmentField";
 import { repeat } from "../../utils/test-utils";
-import { SegmentStateProps, useSegmentState } from "../SegmentState";
+import {
+  Segment,
+  SegmentField,
+  useSegmentState,
+  SegmentInitialState,
+} from "..";
 
-const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
+afterEach(cleanup);
+
+const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
 
   return (
@@ -21,25 +27,29 @@ const SegmentSpinnerComp: React.FC<SegmentStateProps> = props => {
 
 describe("Segment", () => {
   it("should render correctly", () => {
-    const { getByTestId: testId } = render(<SegmentSpinnerComp />);
+    render(<SegmentSpinnerComp />);
 
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
   });
 
   it("should have proper keyboard navigation", () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <SegmentSpinnerComp />,
-    );
+    render(<SegmentSpinnerComp />);
 
-    const month = label("month");
-    const year = label("year");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
+    const year = screen.getByRole("spinbutton", {
+      name: /year/i,
+    });
+    const day = screen.getByRole("spinbutton", {
+      name: /day/i,
+    });
 
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
-
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
     press.Tab();
     expect(month).toHaveFocus();
     press.ArrowRight();
-    expect(label("day")).toHaveFocus();
+    expect(day).toHaveFocus();
     press.ArrowRight();
     expect(year).toHaveFocus();
     press.Home();
@@ -49,51 +59,62 @@ describe("Segment", () => {
   });
 
   it("should have proper spinbutton keyboard navigation", () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <SegmentSpinnerComp />,
-    );
+    render(<SegmentSpinnerComp />);
 
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
+
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
 
     press.Tab();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
 
     repeat(() => press.ArrowUp(), 10);
-    expect(label("month")).toHaveTextContent("11");
+    expect(month).toHaveTextContent("11");
     press.ArrowUp();
     press.ArrowUp();
-    expect(label("month")).toHaveTextContent("1");
+    expect(month).toHaveTextContent("1");
   });
 
   it("should jump to next segment on input", async () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <SegmentSpinnerComp />,
-    );
+    render(<SegmentSpinnerComp />);
 
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
+    const year = screen.getByRole("spinbutton", {
+      name: /year/i,
+    });
+    const day = screen.getByRole("spinbutton", {
+      name: /day/i,
+    });
+
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
 
     press.Tab();
-    expect(label("month")).toHaveFocus();
+    expect(month).toHaveFocus();
 
-    await userEvent.type(label("month"), "11");
-    expect(label("month")).toHaveTextContent("11");
+    await userEvent.type(month, "11");
+    expect(month).toHaveTextContent("11");
 
-    expect(label("day")).toHaveFocus();
+    expect(day).toHaveFocus();
 
-    await userEvent.type(label("day"), "31");
+    await userEvent.type(day, "31");
     // can't have value 31 will resolve to 1
-    expect(label("day")).toHaveTextContent("1");
+    expect(day).toHaveTextContent("1");
 
-    expect(label("year")).toHaveFocus();
+    expect(year).toHaveFocus();
   });
 
   it("should be able to remove delete values backspace", async () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <SegmentSpinnerComp />,
-    );
+    render(<SegmentSpinnerComp />);
 
-    const year = label("year");
-    expect(testId("segment-field")).toHaveTextContent("1/1/2020");
+    const year = screen.getByRole("spinbutton", {
+      name: /year/i,
+    });
+
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
 
     press.Tab();
     press.Enter();
@@ -110,12 +131,13 @@ describe("Segment", () => {
   });
 
   it("should be able to change dayPeriod AM/PM", async () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <SegmentSpinnerComp formatOptions={{ timeStyle: "short" }} />,
-    );
+    render(<SegmentSpinnerComp formatOptions={{ timeStyle: "short" }} />);
 
-    const dayPeriod = label("dayPeriod");
-    expect(testId("segment-field")).toHaveTextContent("12:00 AM");
+    const dayPeriod = screen.getByRole("spinbutton", {
+      name: /dayperiod/i,
+    });
+
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("12:00 AM");
 
     press.Tab();
     press.Enter();
@@ -129,11 +151,7 @@ describe("Segment", () => {
   });
 
   it("can have other date formats", () => {
-    const {
-      getByTestId: testId,
-      getByLabelText: label,
-      getByText: text,
-    } = render(
+    render(
       <SegmentSpinnerComp
         formatOptions={{
           year: "numeric",
@@ -144,22 +162,26 @@ describe("Segment", () => {
       />,
     );
 
-    const month = label("month");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
 
-    expect(testId("segment-field")).toHaveTextContent("Wednesday, 01/01/2020");
+    expect(screen.getByTestId("segment-field")).toHaveTextContent(
+      "Wednesday, 01/01/2020",
+    );
 
     press.Tab();
-    expect(text("Wednesday")).toHaveFocus();
+    expect(screen.getByText(/wednesday/i)).toHaveFocus();
 
     press.Tab();
     expect(month).toHaveFocus();
     press.ArrowUp();
     expect(month).toHaveTextContent("2");
-    expect(text("Saturday")).toBeInTheDocument();
+    expect(screen.getByText(/saturday/i)).toBeInTheDocument();
   });
 
   it("can have time style", () => {
-    const { getByTestId: testId, getByLabelText: label } = render(
+    render(
       <SegmentSpinnerComp
         formatOptions={{
           timeStyle: "short",
@@ -167,10 +189,14 @@ describe("Segment", () => {
       />,
     );
 
-    const hour = label("hour");
-    const dayPeriod = label("dayPeriod");
+    const hour = screen.getByRole("spinbutton", {
+      name: /hour/i,
+    });
+    const dayPeriod = screen.getByRole("spinbutton", {
+      name: /dayperiod/i,
+    });
 
-    expect(testId("segment-field")).toHaveTextContent("12:00 AM");
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("12:00 AM");
 
     press.Tab();
     expect(hour).toHaveFocus();
@@ -201,12 +227,12 @@ describe("Segment", () => {
       );
     };
 
-    const { getByTestId: testId, getByLabelText: label } = render(
-      <Controlled />,
-    );
+    render(<Controlled />);
 
-    const month = label("month");
-    expect(testId("segment-field")).toHaveTextContent("5/31/2020");
+    const month = screen.getByRole("spinbutton", {
+      name: /month/i,
+    });
+    expect(screen.getByTestId("segment-field")).toHaveTextContent("5/31/2020");
 
     press.Tab();
     expect(month).toHaveFocus();

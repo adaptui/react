@@ -16,42 +16,7 @@ describe("LiveAnnouncer", () => {
   it("should render correctly", () => {
     announce("Hello world", "assertive", 0);
 
-    expect(document.body).toMatchInlineSnapshot(`
-      <body>
-        <div>
-          <span
-            aria-atomic="true"
-            aria-live="assertive"
-            aria-relevant="additions"
-            data-testid="announcer-assertive"
-            style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
-          />
-          <span
-            aria-atomic="true"
-            aria-live="assertive"
-            aria-relevant="additions"
-            data-testid="announcer-assertive"
-            style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
-          >
-            Hello world
-          </span>
-          <span
-            aria-atomic="true"
-            aria-live="polite"
-            aria-relevant="additions"
-            data-testid="announcer-polite"
-            style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
-          />
-          <span
-            aria-atomic="true"
-            aria-live="polite"
-            aria-relevant="additions"
-            data-testid="announcer-polite"
-            style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
-          />
-        </div>
-      </body>
-    `);
+    expect(document.body).toMatchSnapshot();
 
     destroyAnnouncer();
 
@@ -59,6 +24,9 @@ describe("LiveAnnouncer", () => {
   });
 
   test("LiveRegionAnnouncer", () => {
+    const assertiveMessage = "Hello Assertive";
+    const politeMessage = "Hello Polite";
+
     const Announcer = () => {
       const ref = React.useRef();
 
@@ -67,14 +35,14 @@ describe("LiveAnnouncer", () => {
           <LiveRegionAnnouncer ref={ref} />
           <button
             onClick={() =>
-              (ref.current as any).announce("Hello Assertive", "assertive", 0)
+              (ref.current as any).announce(assertiveMessage, "assertive", 0)
             }
           >
             announce assertive
           </button>
           <button
             onClick={() =>
-              (ref.current as any).announce("Hello Polite", "polite", 0)
+              (ref.current as any).announce(politeMessage, "polite", 0)
             }
           >
             announce polite
@@ -89,7 +57,7 @@ describe("LiveAnnouncer", () => {
 
     fireEvent.click(text("announce assertive"));
     expect(testIdAll("announcer-assertive")[1]).toHaveTextContent(
-      "Hello Assertive",
+      assertiveMessage,
     );
 
     // Clear
@@ -98,7 +66,7 @@ describe("LiveAnnouncer", () => {
 
     // Polite
     fireEvent.click(text("announce polite"));
-    expect(testIdAll("announcer-polite")[1]).toHaveTextContent("Hello Polite");
+    expect(testIdAll("announcer-polite")[1]).toHaveTextContent(politeMessage);
 
     // Clear
     fireEvent.click(text("clear"));
