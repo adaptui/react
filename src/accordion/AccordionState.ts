@@ -19,25 +19,25 @@ export type AccordionStateReturn = AccordionActions &
   SelectedIdPair;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialStateSingle>,
+  props: AccordionInitialStateSingle,
 ): SingleOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialStateMulti>,
+  props: AccordionInitialStateMulti,
 ): MultiOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialState>,
+  props: AccordionInitialState,
 ): SingleOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialState>,
+  props: AccordionInitialState,
 ): MultiOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<AccordionInitialState> = {},
+  props: AccordionInitialState = {},
 ): AccordionStateReturn {
-  const { manual = true, allowMultiple, ...rest } = props;
+  const { manual = true, ...rest } = props;
 
   const allowToggle = props.allowMultiple
     ? props.allowMultiple

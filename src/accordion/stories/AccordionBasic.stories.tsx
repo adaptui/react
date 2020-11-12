@@ -8,7 +8,7 @@ import { accordionBasicTemplate, accordionBasicTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export const Default: React.FC<Omit<
-  Partial<AccordionInitialState>,
+  AccordionInitialState,
   keyof CompositeState
 >> = args => <Accordion {...args} />;
 
