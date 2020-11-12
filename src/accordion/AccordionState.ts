@@ -35,13 +35,6 @@ export function useAccordionState(
 ): MultiOverloadReturn;
 
 export function useAccordionState(
-  props: Partial<Omit<AccordionInitialStateSingle, "allowMultiple">>,
-): SingleOverloadReturn;
-export function useAccordionState(
-  props: Partial<Omit<AccordionInitialStateMulti, "allowMultiple">>,
-): MultiOverloadReturn;
-
-export function useAccordionState(
   props: Partial<AccordionInitialState> = {},
 ): AccordionStateReturn {
   const {
