@@ -9,7 +9,6 @@ import {
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleVerticalSlider } from "./components/SingleVerticalSlider.component";
-import { DefaultPage } from "renderless-components/pagination/stories/Pagination.stories";
 
 export default {
   component: SingleVerticalSlider,
@@ -21,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <SingleVerticalSlider {...args} />;
