@@ -2,9 +2,9 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 
 import { CompositeState } from "reakit/ts";
-import { App as Accordion } from "./Accordion.component";
 import { AccordionInitialState } from "../AccordionState";
-import { accordionTemplate, accordionTemplateJs } from "./templates";
+import { App as Accordion } from "./AccordionBasic.component";
+import { accordionBasicTemplate, accordionBasicTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export const Default: React.FC<Omit<
@@ -17,8 +17,8 @@ export default {
   title: "Accordion/Basic",
   parameters: {
     preview: createPreviewTabs({
-      js: accordionTemplateJs,
-      ts: accordionTemplate,
+      js: accordionBasicTemplateJs,
+      ts: accordionBasicTemplate,
     }),
   },
 } as Meta;

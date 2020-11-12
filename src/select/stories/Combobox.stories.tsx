@@ -36,7 +36,7 @@ export default {
   },
   decorators: [
     Story => {
-      document.body.id = "select--select";
+      document.body.id = "select";
       return <Story />;
     },
   ],

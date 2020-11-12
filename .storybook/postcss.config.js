@@ -1,7 +1,7 @@
 const path = require("path");
 const convertImports = require("postcss-import");
 const scopify = require("postcss-scopify");
-const { lowerCase } = require("lodash");
+const { kebabCase } = require("lodash");
 
 function rewriteRootRule() {
   return root => {
@@ -20,12 +20,7 @@ function addIdScope() {
   return root => {
     const filename = root.source.input.file;
     const basename = path.basename(filename, ".css");
-    const lowerCaseBasename = lowerCase(basename);
-    // Only root stories work
-    const id = `${lowerCaseBasename.split(" ").join("")}`;
-    // Grouped stories work
-    // const id = `${lowerCaseBasename.split(" ").join("-")}`;
-
+    const id = kebabCase(basename);
     return scopify(`#${id}`)(root);
   };
 }

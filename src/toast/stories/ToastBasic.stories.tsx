@@ -1,34 +1,34 @@
-import "./Toast.css";
 import React from "react";
 import { Meta } from "@storybook/react";
 
 import {
-  toastCssTemplate,
+  toastBasicCssTemplate,
+  toastBasicTemplate,
+  toastBasicTemplateJs,
   toastUtilsTemplate,
   toastUtilsTemplateJs,
-  toastCssAnimatedTemplate,
-  toastCssAnimatedTemplateJs,
 } from "./templates";
-import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
+import "./ToastBasic.css";
+import { App as Toast } from "./ToastBasic.component";
 import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
 
 const sandboxJs = CreateToastSandbox({
   type: "jsx",
-  deps: ["renderless-components@0.1.1-beta.0", "react-transition-group"],
+  deps: ["renderless-components@0.1.1-beta.0"],
 });
 const sandboxTs = CreateToastSandbox({
   type: "tsx",
-  deps: ["renderless-components@0.1.1-beta.0", "react-transition-group"],
+  deps: ["renderless-components@0.1.1-beta.0"],
 });
 
 export default {
-  component: CSSAnimatedToast,
-  title: "Toast/CSSAnimatedToast",
+  component: Toast,
+  title: "Toast/Basic",
   parameters: {
     preview: [
       {
         tab: "ReactJS",
-        template: toastCssAnimatedTemplateJs,
+        template: toastBasicTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: sandboxJs,
@@ -42,7 +42,7 @@ export default {
       },
       {
         tab: "React",
-        template: toastCssAnimatedTemplate,
+        template: toastBasicTemplate,
         language: "tsx",
         copy: true,
         codesandbox: sandboxTs,
@@ -56,19 +56,13 @@ export default {
       },
       {
         tab: "CSS",
-        template: toastCssTemplate,
+        template: toastBasicCssTemplate,
         language: "css",
         copy: true,
         codesandbox: sandboxTs,
       },
     ],
   },
-  decorators: [
-    Story => {
-      document.body.id = "toast--toast";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
-export const Default = () => <CSSAnimatedToast />;
+export const Default = () => <Toast />;

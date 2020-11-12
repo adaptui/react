@@ -9,7 +9,6 @@ import {
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
-import { DefaultPage } from "renderless-components/pagination/stories/Pagination.stories";
 
 export default {
   component: SingleVerticalSlider,
@@ -23,7 +22,7 @@ export default {
   },
   decorators: [
     Story => {
-      document.body.id = "slider--slider";
+      document.body.id = "slider";
       return <Story />;
     },
   ],

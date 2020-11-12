@@ -23,7 +23,7 @@ export default {
   },
   decorators: [
     Story => {
-      document.body.id = "slider--slider";
+      document.body.id = "slider";
       return <Story />;
     },
   ],
