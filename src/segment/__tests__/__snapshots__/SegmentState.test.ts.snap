@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SegmentState should have proper segments 1`] = `
+Array [
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 12,
+    "minValue": 1,
+    "text": "12",
+    "type": "month",
+    "value": 12,
+  },
+  Object {
+    "isPlaceholder": true,
+    "text": "/",
+    "type": "literal",
+  },
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 31,
+    "minValue": 1,
+    "text": "31",
+    "type": "day",
+    "value": 31,
+  },
+  Object {
+    "isPlaceholder": true,
+    "text": "/",
+    "type": "literal",
+  },
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 9999,
+    "minValue": 1,
+    "text": "2049",
+    "type": "year",
+    "value": 2049,
+  },
+]
+`;
+
+exports[`SegmentState should support different formatOptions 1`] = `
+Array [
+  Object {
+    "isPlaceholder": true,
+    "text": "Friday",
+    "type": "weekday",
+  },
+  Object {
+    "isPlaceholder": true,
+    "text": ", ",
+    "type": "literal",
+  },
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 12,
+    "minValue": 1,
+    "text": "12",
+    "type": "month",
+    "value": 12,
+  },
+  Object {
+    "isPlaceholder": true,
+    "text": "/",
+    "type": "literal",
+  },
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 31,
+    "minValue": 1,
+    "text": "31",
+    "type": "day",
+    "value": 31,
+  },
+  Object {
+    "isPlaceholder": true,
+    "text": "/",
+    "type": "literal",
+  },
+  Object {
+    "isPlaceholder": false,
+    "maxValue": 9999,
+    "minValue": 1,
+    "text": "2049",
+    "type": "year",
+    "value": 2049,
+  },
+]
+`;

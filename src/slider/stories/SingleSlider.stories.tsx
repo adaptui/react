@@ -7,7 +7,7 @@ import {
   singleSliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
-import { App as SingleSlider } from "./SingleSlider.component";
+import { App as SingleSlider } from "./components/SingleSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -20,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <SingleSlider {...args} />;

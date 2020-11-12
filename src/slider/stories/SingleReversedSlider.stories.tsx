@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { App as SingleReversedSlider } from "./SingleReversedSlider.component";
+import { App as SingleReversedSlider } from "./components/SingleReversedSlider.component";
 
 export default {
   component: SingleReversedSlider,
@@ -20,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <SingleReversedSlider {...args} />;

@@ -7,7 +7,7 @@ import {
   multiSliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
-import { App as MultiSlider } from "./MultiSlider.component";
+import { App as MultiSlider } from "./components/MultiSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -21,6 +21,12 @@ export default {
       deps: ["reakit@latest"],
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <MultiSlider {...args} />;

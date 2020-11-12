@@ -1,8 +1,8 @@
 jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
 import MockDate from "mockdate";
-import { cleanup } from "@testing-library/react";
-import { axe, render, press } from "reakit-test-utils";
+import { cleanup, screen } from "@testing-library/react";
+import { axe, render, press, fireEvent } from "reakit-test-utils";
 
 import {
   Calendar,
@@ -100,7 +100,7 @@ describe("RangeCalendar", () => {
   });
 
   it("should have proper initial start and end ranges", () => {
-    const { getByLabelText: label, baseElement } = render(
+    const { baseElement } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2050-10-07", end: "2050-10-30" }}
       />,
@@ -109,7 +109,7 @@ describe("RangeCalendar", () => {
     const start = baseElement.querySelector("[data-is-selection-start]");
     // If anyone is reading this code from future
     // Note that this will fail again on 15th october 2050.
-    const anyMiddleDate = label("Saturday, October 15, 2050");
+    const anyMiddleDate = screen.getByLabelText(/Saturday, October 15, 2050/);
     const end = baseElement.querySelector("[data-is-selection-end]");
 
     expect(start).toHaveTextContent("7");
@@ -140,18 +140,20 @@ describe("RangeCalendar", () => {
 
   it("should be able to select ranges with keyboard navigation", () => {
     MockDate.set(new Date(2020, 10, 7));
-    const { getByLabelText: label, getByTestId: testId, baseElement } = render(
+    const { baseElement } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
       />,
     );
 
-    expect(testId("current-year")).toHaveTextContent("October 2020");
+    expect(screen.getByTestId("current-year")).toHaveTextContent(
+      /October 2020/i,
+    );
     repeat(press.Tab, 5);
 
     expect(
-      label(
-        "Wednesday, October 7, 2020 selected (click to start selecting range)",
+      screen.getByLabelText(
+        /^Wednesday, October 7, 2020 selected \(click to start selecting range\)$/,
       ),
     ).toHaveFocus();
     press.ArrowDown(); // go to down just for some variety
@@ -168,44 +170,48 @@ describe("RangeCalendar", () => {
     repeat(press.ArrowDown, 3);
     repeat(press.ArrowLeft, 2);
     expect(
-      label("Monday, November 2, 2020 (click to finish selecting range)"),
+      screen.getByLabelText(
+        /^Monday, November 2, 2020 \(click to finish selecting range\)$/i,
+      ),
     ).toHaveFocus();
     // finish the selection
     press.Enter();
 
     // check if the selection is actually finished or not
     repeat(press.ArrowRight, 2);
-    expect(
-      label("Wednesday, November 4, 2020 (click to start selecting range)"),
-    ).toHaveFocus();
-    expect(
-      label("Wednesday, November 4, 2020 (click to start selecting range)")
-        ?.parentElement,
-    ).not.toHaveAttribute("data-is-range-selection");
+    const fourThNovember = screen.getByLabelText(
+      /^Wednesday, November 4, 2020 \(click to start selecting range\)$/i,
+    );
+    expect(fourThNovember).toHaveFocus();
+    expect(fourThNovember?.parentElement).not.toHaveAttribute(
+      "data-is-range-selection",
+    );
 
     // Verify selection ranges
     const end = baseElement.querySelector("[data-is-selection-end]");
     expect(end).toHaveTextContent("2");
 
-    testId("prev-month").click();
+    fireEvent.click(screen.getByTestId("prev-month"));
     // We need to go to previous month to see/verify the start selection
     const start = baseElement.querySelector("[data-is-selection-start]");
     expect(start).toHaveTextContent("14");
   });
 
   it("should be able to cancel selection", () => {
-    const { getByLabelText: label, getByTestId: testId } = render(
+    render(
       <RangeCalendarComp
         defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
       />,
     );
 
-    expect(testId("current-year")).toHaveTextContent("October 2019");
+    expect(screen.getByTestId("current-year")).toHaveTextContent(
+      /October 2019/i,
+    );
     repeat(press.Tab, 5);
 
     expect(
-      label(
-        "Monday, October 7, 2019 selected (click to start selecting range)",
+      screen.getByLabelText(
+        /^Monday, October 7, 2019 selected \(click to start selecting range\)$/i,
       ),
     ).toHaveFocus();
     press.ArrowDown();
@@ -215,12 +221,14 @@ describe("RangeCalendar", () => {
     press.ArrowDown();
     repeat(press.ArrowRight, 2);
     expect(
-      label("Wednesday, October 23, 2019 (click to finish selecting range)"),
+      screen.getByLabelText(
+        /^Wednesday, October 23, 2019 \(click to finish selecting range\)$/i,
+      ),
     ).toHaveFocus();
 
     press.Escape();
-    isEndSelection(label, /Wednesday, October 30, 2019/);
-    isStartSelection(label, /Monday, October 7, 2019 selected/);
+    isEndSelection(screen.getByLabelText(/Wednesday, October 30, 2019/));
+    isStartSelection(screen.getByLabelText(/Monday, October 7, 2019 selected/));
   });
 
   test("RangeCalendar renders with no a11y violations", async () => {

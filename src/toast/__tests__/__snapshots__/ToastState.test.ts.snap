@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToastState should render correctly 1`] = `
+Object {
+  "hideToast": [Function],
+  "isToastVisible": [Function],
+  "removeToast": [Function],
+  "showToast": [Function],
+  "sortedToasts": Object {
+    "bottom-center": Array [
+      Object {
+        "autoDismiss": undefined,
+        "content": "hello world",
+        "id": "toast-1",
+        "isVisible": true,
+        "placement": "bottom-center",
+        "timeout": undefined,
+        "type": "",
+      },
+      Object {
+        "autoDismiss": undefined,
+        "content": "hello world 2",
+        "id": "toast-2",
+        "isVisible": true,
+        "placement": "bottom-center",
+        "timeout": undefined,
+        "type": "",
+      },
+    ],
+    "top-right": Array [
+      Object {
+        "autoDismiss": true,
+        "content": "hello world 3",
+        "id": "toast-3",
+        "isVisible": true,
+        "placement": "top-right",
+        "timeout": 5000,
+        "type": "warning",
+      },
+    ],
+  },
+  "toasts": Object {
+    "toast-1": Object {
+      "autoDismiss": undefined,
+      "content": "hello world",
+      "id": "toast-1",
+      "isVisible": true,
+      "placement": "bottom-center",
+      "timeout": undefined,
+      "type": "",
+    },
+    "toast-2": Object {
+      "autoDismiss": undefined,
+      "content": "hello world 2",
+      "id": "toast-2",
+      "isVisible": true,
+      "placement": "bottom-center",
+      "timeout": undefined,
+      "type": "",
+    },
+    "toast-3": Object {
+      "autoDismiss": true,
+      "content": "hello world 3",
+      "id": "toast-3",
+      "isVisible": true,
+      "placement": "top-right",
+      "timeout": 5000,
+      "type": "warning",
+    },
+  },
+  "toggleToast": [Function],
+}
+`;
+
+exports[`ToastState should test getToastToRender 1`] = `
+Object {
+  "bottom-center": Array [
+    Object {
+      "autoDismiss": undefined,
+      "content": "Hello world 2",
+      "id": "toast-2",
+      "isVisible": true,
+      "placement": "bottom-center",
+      "timeout": undefined,
+      "type": "primary",
+    },
+  ],
+  "bottom-left": Array [
+    Object {
+      "autoDismiss": undefined,
+      "content": "Hello world 3",
+      "id": "toast-3",
+      "isVisible": true,
+      "placement": "bottom-left",
+      "timeout": undefined,
+      "type": "primary",
+    },
+    Object {
+      "autoDismiss": undefined,
+      "content": "Hello world 4",
+      "id": "toast-4",
+      "isVisible": true,
+      "placement": "bottom-left",
+      "timeout": undefined,
+      "type": "primary",
+    },
+  ],
+  "top-center": Array [
+    Object {
+      "autoDismiss": undefined,
+      "content": "Hello world 1",
+      "id": "toast-1",
+      "isVisible": true,
+      "placement": "top-center",
+      "timeout": undefined,
+      "type": "primary",
+    },
+  ],
+  "top-right": Array [
+    Object {
+      "autoDismiss": undefined,
+      "content": "Hello world 5",
+      "id": "toast-5",
+      "isVisible": true,
+      "placement": "top-right",
+      "timeout": undefined,
+      "type": "primary",
+    },
+  ],
+}
+`;

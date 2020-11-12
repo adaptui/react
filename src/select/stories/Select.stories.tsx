@@ -34,6 +34,12 @@ export default {
       css: selectCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "select";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const countries = [

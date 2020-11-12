@@ -7,7 +7,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import "./Slider.css";
-import { App as RangeSlider } from "./RangeSlider.component";
+import { App as RangeSlider } from "./components/RangeSlider.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -20,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <RangeSlider {...args} />;

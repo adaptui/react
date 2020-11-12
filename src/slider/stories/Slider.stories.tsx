@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./Slider.css";
-import { App as Slider } from "./Slider.component";
+import { App as Slider } from "./components/Slider.component";
 import {
   sliderTemplate,
   sliderTemplateJs,
@@ -20,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <Slider {...args} />;

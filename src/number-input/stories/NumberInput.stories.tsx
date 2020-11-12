@@ -8,8 +8,8 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "../index";
-import { numberInputTemplate, numberInputTemplateJs } from "./templates";
 import { App as NumberInput } from "./NumberInput.component";
+import { numberInputTemplate, numberInputTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
