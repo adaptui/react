@@ -29,7 +29,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.prod.json",
-    "check-types": "yarn build:types && concurrently \"tsc --noEmit --project tsconfig.prod.json\" \"yarn tsd\"",
+    "check-types": "yarn build:types && yarn tsd",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "generatejs": "node scripts/generate-js",
