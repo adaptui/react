@@ -28,12 +28,10 @@ function getValueFromId(
 
 export function useSelectBaseState<T extends CompositeStateReturn>(
   composite: T,
-  {
-    selectedValue: initialSelectedValue = null,
-    values: initialValues = [],
-  }: SelectBaseInitialState = {},
+  { selectedValue: initialSelectedValue = null }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
   const valuesById = React.useRef<ValuesById>([]);
+  const valuesRef = React.useRef<string[]>([]);
 
   const {
     items: compositeItems,
@@ -41,22 +39,17 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     unregisterItem: compositeUnregisterItem,
   } = composite;
 
-  console.log("%c initialValues", "color: #0088cc", initialValues);
-  const [values, setValues] = React.useState<string[]>(initialValues);
-  const valuesRef = React.useRef<string[]>([]);
-  const isDynamic = !!values.length;
-
   const [selectedValue, setSelectedValue] = React.useState(
     initialSelectedValue,
   );
   const selectedId = React.useMemo(
     () => getIdFromValue(valuesById.current, selectedValue),
-    [valuesById, selectedValue],
+    [valuesById.current, selectedValue],
   );
 
   const currentValue = React.useMemo(
     () => getValueFromId(valuesById.current, composite.currentId),
-    [valuesById, composite.currentId],
+    [valuesById.current, composite.currentId],
   );
 
   const items = React.useMemo(() => {
@@ -95,7 +88,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
     menuRole: "listbox",
     selectedValue,
     currentValue,
-    values: isDynamic ? values : valuesRef.current,
+    values: valuesRef.current,
     valuesById: valuesById.current,
     selectedId,
     items,
@@ -127,7 +120,7 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
    */
   items: Item[];
   /**
-   * Values that will be used to produce `matches`.
+   * Options/values provided.
    * @default []
    */
   values: string[];
@@ -171,7 +164,7 @@ export type SelectBaseActions<
 
 export type SelectBaseInitialState = Pick<
   Partial<SelectBaseState>,
-  "values" | "selectedValue"
+  "selectedValue"
 >;
 
 export type SelectBaseStateReturn<

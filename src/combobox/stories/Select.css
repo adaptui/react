@@ -39,7 +39,7 @@ select:focus {
   background-color: var(--listbox-background);
   color: var(--listbox-color);
   width: 250px;
-  height: 400px;
+  height: 300px;
   overflow-y: scroll;
   z-index: 999;
   padding: 1em;

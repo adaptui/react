@@ -29,16 +29,14 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         onKeyDownRef.current?.(event);
         if (event.defaultPrevented) return;
 
-        // setTimeout prevents scroll jump
-        // and the internals to get the disclosure ref properly
+        // setTimeout on show prevents scroll jump on ArrowUp & ArrowDown
         const first = () => {
-          if (!options.visible) options.show?.();
-          if (!options.selectedValue)
-            options.first && setTimeout(options.first);
+          if (!options.visible) options.show && setTimeout(options.show);
+          if (!options.selectedValue) options.first?.();
         };
         const last = () => {
-          if (!options.visible) options.show?.();
-          if (!options.selectedValue) options.last && setTimeout(options.last);
+          if (!options.visible) options.show && setTimeout(options.show);
+          if (!options.selectedValue) options.last?.();
         };
 
         const keyMap = {

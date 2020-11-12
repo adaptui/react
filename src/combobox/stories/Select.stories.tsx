@@ -2,12 +2,12 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
-import { App as Select } from "./Select.component";
 import {
   selectTemplate,
   selectTemplateJs,
   selectCssTemplate,
 } from "./templates";
+import { App as Select } from "./Select.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
@@ -20,6 +20,12 @@ export default {
       css: selectCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "select";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <Select {...args} />;

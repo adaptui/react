@@ -3,20 +3,20 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
-  selectDynamicTemplate,
-  selectDynamicTemplateJs,
+  selectControlledTemplate,
+  selectControlledTemplateJs,
   selectCssTemplate,
 } from "./templates";
-import { App as SelectDynamic } from "./SelectDynamic.component";
+import { App as SelectControlled } from "./SelectControlled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: SelectDynamic,
-  title: "Combobox/SelectDynamic",
+  component: SelectControlled,
+  title: "Combobox/SelectControlled",
   parameters: {
     preview: createPreviewTabs({
-      js: selectDynamicTemplateJs,
-      ts: selectDynamicTemplate,
+      js: selectControlledTemplateJs,
+      ts: selectControlledTemplate,
       css: selectCssTemplate,
     }),
   },
@@ -28,7 +28,7 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <SelectDynamic {...args} />;
+const Base: Story = args => <SelectControlled {...args} />;
 
 export const Default = Base.bind({});
 Default.args = {};

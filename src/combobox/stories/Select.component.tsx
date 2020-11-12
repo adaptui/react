@@ -9,8 +9,7 @@ import {
 } from "../index";
 
 export const App: React.FC<SelectInitialState> = props => {
-  const select = useSelectState({ gutter: 8 });
-  console.log("%c select", "color: #00258c", select);
+  const select = useSelectState({ gutter: 8, ...props });
 
   return (
     <>
