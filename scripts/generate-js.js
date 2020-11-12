@@ -35,7 +35,7 @@ function walkSync(dir, filelist) {
     if (isDirectory(path.join(dir, file))) {
       filelist = walkSync(path.join(dir, file), filelist);
     } else {
-      filelist.push(file);
+      filelist.push(path.join(dir, file));
     }
   });
 
@@ -100,8 +100,15 @@ function getComponentFolderPairs() {
 }
 
 function generateImportString(component, index) {
+  const componentPath = component
+    .split("stories")[1]
+    .replace("\\", "")
+    .replace(/\\/g, "/");
+
+  const componentName = path.basename(componentPath);
+  const jsComponentName = componentName.replace("tsx", "jsx");
   const templateVarName = camelCase(
-    component.replace(".component.tsx", "").replace(".css", ""),
+    componentName.replace(".component.tsx", "").replace(".css", ""),
   );
 
   const warningMsg =
@@ -109,20 +116,19 @@ function generateImportString(component, index) {
       ? "// Auto Generated File, Do not modify directly!! execute `yarn generatejs` to regenerate\n"
       : "";
 
-  const jsComponent = component.replace("tsx", "jsx");
   let importString = outdent`
     ${warningMsg}
     // @ts-ignore
-    export { default as ${templateVarName}Template } from "!!raw-loader!./${component}";\n
+    export { default as ${templateVarName}Template } from "!!raw-loader!./${componentPath}";\n
     // @ts-ignore
-    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponent}";\n
+    export { default as ${templateVarName}TemplateJs } from "!!raw-loader!./__js/${jsComponentName}";\n
   `;
 
-  if (component.endsWith(".css")) {
+  if (componentPath.endsWith(".css")) {
     importString = outdent`
     ${warningMsg}
     // @ts-ignore
-    export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${component}";\n
+    export { default as ${templateVarName}CssTemplate } from "!!raw-loader!./${componentPath}";\n
     `;
   }
 
