@@ -37,16 +37,11 @@ export function useAccordionState(
 export function useAccordionState(
   props: Partial<AccordionInitialState> = {},
 ): AccordionStateReturn {
-  const {
-    manual = true,
-    allowToggle: allowToggleProp = false,
-    allowMultiple,
-    ...rest
-  } = props;
+  const { manual = true, allowMultiple, ...rest } = props;
 
   const allowToggle = props.allowMultiple
     ? props.allowMultiple
-    : allowToggleProp;
+    : props.allowToggle || false;
 
   let selectedIdProp;
   let defaultSelectedId;
