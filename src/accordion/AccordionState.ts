@@ -35,33 +35,46 @@ export function useAccordionState(
 ): MultiOverloadReturn;
 
 export function useAccordionState(
+  props: Partial<Omit<AccordionInitialStateSingle, "allowMultiple">>,
+): SingleOverloadReturn;
+export function useAccordionState(
+  props: Partial<Omit<AccordionInitialStateMulti, "allowMultiple">>,
+): MultiOverloadReturn;
+
+export function useAccordionState(
   props: Partial<AccordionInitialState> = {},
 ): AccordionStateReturn {
   const {
     manual = true,
     allowToggle: allowToggleProp = false,
-    allowMultiple = false,
+    allowMultiple,
     ...rest
   } = props;
-
-  console.log(allowMultiple);
 
   const allowToggle = props.allowMultiple
     ? props.allowMultiple
     : allowToggleProp;
 
-  const selectedIdProp =
-    props.allowMultiple === false ? props.selectedId : null;
-  const defaultSelectedId =
-    props.allowMultiple === false ? props.defaultSelectedId : null;
-  const onSelectedIdChange =
-    props.allowMultiple === false ? props.onSelectedIdChange : undefined;
+  let selectedIdProp;
+  let defaultSelectedId;
+  let onSelectedIdChange;
+  if (props.allowMultiple === false || !props.allowMultiple) {
+    // @ts-ignore
+    selectedIdProp = props.selectedId;
+    // @ts-ignore
+    defaultSelectedId = props.defaultSelectedId || null;
+    // @ts-ignore
+    onSelectedIdChange = props.onSelectedIdChange;
+  }
 
-  const selectedIdsProp = props.allowMultiple === true ? props.selectedIds : [];
-  const defaultSelectedIds =
-    props.allowMultiple === true ? props.defaultSelectedIds : [];
-  const onSelectedIdsChange =
-    props.allowMultiple === true ? props.onSelectedIdsChange : undefined;
+  let selectedIdsProp;
+  let defaultSelectedIds;
+  let onSelectedIdsChange;
+  if (props.allowMultiple === true) {
+    selectedIdsProp = props.selectedIds;
+    defaultSelectedIds = props.defaultSelectedIds || [];
+    onSelectedIdsChange = props.onSelectedIdsChange;
+  }
 
   // Single toggle accordion State
   const [selectedId, setSelectedId] = useControllableState({
@@ -86,7 +99,6 @@ export function useAccordionState(
 
   const select = React.useCallback(
     (id: string | null) => {
-      console.log(id);
       composite.move(id);
 
       if (!props.allowMultiple) {
@@ -100,15 +112,7 @@ export function useAccordionState(
       }
 
       if (id === null) return;
-      console.log(props.allowMultiple);
-      if (props.allowMultiple === true) {
-        setSelectedIds(prevIds => {
-          if (prevIds) {
-            return [...prevIds, id];
-          }
-          return prevIds;
-        });
-      }
+      setSelectedIds(prevIds => [...prevIds, id]);
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
