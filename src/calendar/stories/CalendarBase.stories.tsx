@@ -3,18 +3,18 @@ import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addWeeks, format, subWeeks } from "date-fns";
 
-import "./Calendar.css";
+import "./CalendarBase.css";
 import {
-  calendarTemplate,
-  calendarTemplateJs,
-  calendarCssTemplate,
+  calendarBaseTemplate,
+  calendarBaseTemplateJs,
+  calendarBaseCssTemplate,
 } from "./templates";
-import { App as Calendar } from "./Calendar.component";
+import { App as Calendar } from "./CalendarBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Calendar,
-  title: "Calendar",
+  title: "Calendar/Base",
   argTypes: {
     value: { control: "date" },
     minValue: { control: "date" },
@@ -23,9 +23,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: calendarTemplateJs,
-      ts: calendarTemplate,
-      css: calendarCssTemplate,
+      js: calendarBaseTemplateJs,
+      ts: calendarBaseTemplate,
+      css: calendarBaseCssTemplate,
     }),
   },
 } as Meta;

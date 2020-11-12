@@ -1,34 +1,34 @@
-import "./Toast.css";
 import React from "react";
 import { Meta } from "@storybook/react";
 
+import "./ToastBasic.css";
 import {
-  toastCssTemplate,
+  toastBasicCssTemplate,
   toastUtilsTemplate,
   toastUtilsTemplateJs,
-  toastCssAnimatedTemplate,
-  toastCssAnimatedTemplateJs,
+  toastReactSpringTemplate,
+  toastReactSpringTemplateJs,
 } from "./templates";
-import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
+import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
 import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
 
 const sandboxJs = CreateToastSandbox({
   type: "jsx",
-  deps: ["renderless-components@0.1.1-beta.0", "react-transition-group"],
+  deps: ["renderless-components@0.1.1-beta.0", "react-spring"],
 });
 const sandboxTs = CreateToastSandbox({
   type: "tsx",
-  deps: ["renderless-components@0.1.1-beta.0", "react-transition-group"],
+  deps: ["renderless-components@0.1.1-beta.0", "react-spring"],
 });
 
 export default {
-  component: CSSAnimatedToast,
-  title: "Toast/CSSAnimatedToast",
+  component: ReactSpringToast,
+  title: "Toast/ReactSpring",
   parameters: {
     preview: [
       {
         tab: "ReactJS",
-        template: toastCssAnimatedTemplateJs,
+        template: toastReactSpringTemplateJs,
         language: "jsx",
         copy: true,
         codesandbox: sandboxJs,
@@ -42,7 +42,7 @@ export default {
       },
       {
         tab: "React",
-        template: toastCssAnimatedTemplate,
+        template: toastReactSpringTemplate,
         language: "tsx",
         copy: true,
         codesandbox: sandboxTs,
@@ -56,13 +56,19 @@ export default {
       },
       {
         tab: "CSS",
-        template: toastCssTemplate,
+        template: toastBasicCssTemplate,
         language: "css",
         copy: true,
         codesandbox: sandboxTs,
       },
     ],
   },
+  decorators: [
+    Story => {
+      document.body.id = "toast-basic";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
-export const Default = () => <CSSAnimatedToast />;
+export const Default = () => <ReactSpringToast />;

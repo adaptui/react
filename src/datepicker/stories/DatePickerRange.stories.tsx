@@ -5,16 +5,16 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, setDate, subWeeks } from "date-fns";
 
 import {
-  dateRangePickerTemplate,
-  dateRangePickerTemplateJs,
-  dateRangePickerCssTemplate,
+  datePickerRangeTemplate,
+  datePickerRangeTemplateJs,
+  datePickerRangeCssTemplate,
 } from "./templates";
-import "./DatePicker.css";
-import { App as DateRangePicker } from "./DateRangePicker.component";
+import "./DatePickerRange.css";
+import { App as DateRangePicker } from "./DatePickerRange.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  title: "DateRangePicker",
+  title: "DatePicker/Range",
   component: DateRangePicker,
   argTypes: {
     start: { control: "date", name: "value.start" },
@@ -24,9 +24,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: dateRangePickerTemplateJs,
-      ts: dateRangePickerTemplate,
-      css: dateRangePickerCssTemplate,
+      js: datePickerRangeTemplateJs,
+      ts: datePickerRangeTemplate,
+      css: datePickerRangeCssTemplate,
     }),
   },
 } as Meta;

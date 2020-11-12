@@ -4,17 +4,17 @@ import { useArgs } from "@storybook/client-api";
 import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
 import {
-  datePickerTemplate,
-  datePickerTemplateJs,
-  datePickerCssTemplate,
+  datePickerBaseTemplate,
+  datePickerBaseTemplateJs,
+  datePickerBaseCssTemplate,
 } from "./templates";
-import "./DatePicker.css";
-import { App as DatePicker } from "./DatePicker.component";
+import "./DatePickerBase.css";
+import { App as DatePicker } from "./DatePickerBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: DatePicker,
-  title: "DatePicker",
+  title: "DatePicker/Base",
   argTypes: {
     value: { control: "date" },
     minValue: { control: "date" },
@@ -23,9 +23,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: datePickerTemplateJs,
-      ts: datePickerTemplate,
-      css: datePickerCssTemplate,
+      js: datePickerBaseTemplateJs,
+      ts: datePickerBaseTemplate,
+      css: datePickerBaseCssTemplate,
     }),
   },
 } as Meta;

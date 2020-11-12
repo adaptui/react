@@ -20,6 +20,12 @@ export default {
       css: sliderCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <SingleReversedSlider {...args} />;
