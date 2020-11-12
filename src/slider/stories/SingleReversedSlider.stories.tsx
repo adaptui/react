@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { App as SingleReversedSlider } from "./SingleReversedSlider.component";
+import { App as SingleReversedSlider } from "./components/SingleReversedSlider.component";
 
 export default {
   component: SingleReversedSlider,

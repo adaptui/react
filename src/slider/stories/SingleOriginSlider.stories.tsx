@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { App as SingleOriginSlider } from "./SingleOriginSlider.component";
+import { App as SingleOriginSlider } from "./components/SingleOriginSlider.component";
 
 export default {
   component: SingleOriginSlider,
