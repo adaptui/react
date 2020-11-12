@@ -5,7 +5,10 @@ import {
 } from "reakit";
 
 export type AccordionState = CompositeState & {
-  allowMultiple: Boolean;
+  /**
+   * Allow to open multiple accordion items
+   */
+  allowMultiple: boolean;
   /**
    * Whether the accodion selection should be manual.
    * @default true

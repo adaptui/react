@@ -11,7 +11,6 @@ import { useLiveRef } from "reakit-utils";
 import { createHook, createComponent } from "reakit-system";
 
 import { ariaAttr } from "../utils";
-import { SelectedIdPair } from "./types";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
@@ -20,9 +19,14 @@ export type AccordionTriggerOptions = ButtonOptions &
   Pick<Partial<AccordionStateReturn>, "manual"> &
   Pick<
     AccordionStateReturn,
-    "panels" | "select" | "unSelect" | "allowMultiple" | "allowToggle"
-  > &
-  SelectedIdPair;
+    | "panels"
+    | "select"
+    | "unSelect"
+    | "allowMultiple"
+    | "allowToggle"
+    | "selectedId"
+    | "selectedIds"
+  >;
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps &
   CompositeItemHTMLProps;

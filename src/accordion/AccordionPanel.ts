@@ -10,7 +10,6 @@ import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { createHook, createComponent } from "reakit-system";
 
-import { SelectedIdPair } from "./types";
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 
@@ -18,9 +17,14 @@ export type AccordionPanelOptions = DisclosureContentOptions &
   unstable_IdOptions &
   Pick<
     AccordionStateReturn,
-    "registerPanel" | "unregisterPanel" | "panels" | "items" | "allowMultiple"
-  > &
-  SelectedIdPair & {
+    | "registerPanel"
+    | "unregisterPanel"
+    | "panels"
+    | "items"
+    | "allowMultiple"
+    | "selectedId"
+    | "selectedIds"
+  > & {
     /**
      * Accordion's id
      */
