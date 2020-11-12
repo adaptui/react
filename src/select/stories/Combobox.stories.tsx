@@ -7,6 +7,7 @@ import {
   comboboxTemplate,
   comboboxTemplateJs,
 } from "./templates";
+import "./Select.css";
 import { App as Combobox } from "./Combobox.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import {
@@ -16,7 +17,7 @@ import {
   SelectOption,
   useSelectState,
   SelectInitialState,
-} from "..";
+} from "../index";
 
 export const Default: React.FC<Omit<
   SelectInitialState,
@@ -33,6 +34,12 @@ export default {
       css: selectCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "select";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const countries = [

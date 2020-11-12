@@ -3,17 +3,17 @@ import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
-import "./RangeCalendar.css";
+import "./CalendarRange.css";
 import {
-  rangeCalendarTemplate,
-  rangeCalendarTemplateJs,
-  rangeCalendarCssTemplate,
+  calendarRangeTemplate,
+  calendarRangeTemplateJs,
+  calendarRangeCssTemplate,
 } from "./templates";
-import { App as RangeCalendar } from "./RangeCalendar.component";
+import { App as RangeCalendar } from "./CalendarRange.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  title: "RangeCalendar",
+  title: "Calendar/Range",
   component: RangeCalendar,
   argTypes: {
     start: { control: "date", name: "value.start" },
@@ -31,9 +31,9 @@ export default {
   },
   parameters: {
     preview: createPreviewTabs({
-      js: rangeCalendarTemplateJs,
-      ts: rangeCalendarTemplate,
-      css: rangeCalendarCssTemplate,
+      js: calendarRangeTemplateJs,
+      ts: calendarRangeTemplate,
+      css: calendarRangeCssTemplate,
     }),
   },
 } as Meta;
