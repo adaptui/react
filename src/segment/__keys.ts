@@ -21,9 +21,10 @@ const SEGMENT_STATE_KEYS = [
   "currentId",
   "loop",
   "wrap",
+  "shift",
   "unstable_moves",
-  "unstable_angular",
   "unstable_hasActiveWidget",
+  "unstable_includesBaseElement",
   "registerItem",
   "unregisterItem",
   "registerGroup",
@@ -42,7 +43,9 @@ const SEGMENT_STATE_KEYS = [
   "setCurrentId",
   "setLoop",
   "setWrap",
+  "setShift",
   "reset",
+  "unstable_setIncludesBaseElement",
   "unstable_setHasActiveWidget",
 ] as const;
 export const SEGMENT_KEYS = [

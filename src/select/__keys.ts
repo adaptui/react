@@ -1,5 +1,5 @@
 // Automatically generated
-const COMBOBOX_LIST_STATE_KEYS = [
+const SELECT_LIST_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "unstable_virtual",
@@ -9,21 +9,17 @@ const COMBOBOX_LIST_STATE_KEYS = [
   "currentId",
   "loop",
   "wrap",
+  "shift",
   "unstable_moves",
-  "unstable_angular",
   "unstable_hasActiveWidget",
-  "items",
+  "unstable_includesBaseElement",
   "menuRole",
-  "inputValue",
-  "minValueLength",
-  "currentValue",
+  "items",
   "values",
-  "limit",
-  "matches",
-  "list",
-  "inline",
-  "autoSelect",
-  "visible",
+  "valuesById",
+  "selectedValue",
+  "currentValue",
+  "selectedId",
   "setBaseId",
   "unregisterItem",
   "registerGroup",
@@ -42,23 +38,14 @@ const COMBOBOX_LIST_STATE_KEYS = [
   "setCurrentId",
   "setLoop",
   "setWrap",
+  "setShift",
   "reset",
+  "unstable_setIncludesBaseElement",
   "unstable_setHasActiveWidget",
   "registerItem",
-  "setInputValue",
-  "setMinValueLength",
-  "setValues",
-  "setLimit",
-  "setList",
-  "setInline",
-  "setAutoSelect",
+  "setSelectedValue",
 ] as const;
-const COMBOBOX_BASE_STATE_KEYS = COMBOBOX_LIST_STATE_KEYS;
-const COMBOBOX_LIST_GRID_STATE_KEYS = [
-  ...COMBOBOX_BASE_STATE_KEYS,
-  "columns",
-  "setColumns",
-] as const;
+const SELECT_BASE_STATE_KEYS = SELECT_LIST_STATE_KEYS;
 const SELECT_POPOVER_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
@@ -85,94 +72,12 @@ const SELECT_POPOVER_STATE_KEYS = [
   "setModal",
   "place",
 ] as const;
-const COMBOBOX_POPOVER_STATE_KEYS = SELECT_POPOVER_STATE_KEYS;
-const COMBOBOX_STATE_KEYS = [
-  ...COMBOBOX_BASE_STATE_KEYS,
-  ...COMBOBOX_POPOVER_STATE_KEYS,
-] as const;
-const COMBOBOX_GRID_STATE_KEYS = [
-  ...COMBOBOX_LIST_GRID_STATE_KEYS,
-  ...COMBOBOX_STATE_KEYS,
-] as const;
-const SELECT_LIST_STATE_KEYS = [
-  "baseId",
-  "unstable_idCountRef",
-  "unstable_virtual",
-  "rtl",
-  "orientation",
-  "groups",
-  "currentId",
-  "loop",
-  "wrap",
-  "unstable_moves",
-  "unstable_angular",
-  "unstable_hasActiveWidget",
-  "menuRole",
-  "items",
-  "values",
-  "valuesById",
-  "selectedValue",
-  "currentValue",
-  "selectedId",
-  "setBaseId",
-  "unregisterItem",
-  "registerGroup",
-  "unregisterGroup",
-  "move",
-  "next",
-  "previous",
-  "up",
-  "down",
-  "first",
-  "last",
-  "sort",
-  "unstable_setVirtual",
-  "setRTL",
-  "setOrientation",
-  "setCurrentId",
-  "setLoop",
-  "setWrap",
-  "reset",
-  "unstable_setHasActiveWidget",
-  "registerItem",
-  "setSelectedValue",
-] as const;
-const SELECT_BASE_STATE_KEYS = SELECT_LIST_STATE_KEYS;
-const SELECT_LIST_GRID_STATE_KEYS = [
-  ...SELECT_BASE_STATE_KEYS,
-  "columns",
-  "setColumns",
-] as const;
 const SELECT_STATE_KEYS = [
-  ...COMBOBOX_POPOVER_STATE_KEYS,
   ...SELECT_BASE_STATE_KEYS,
+  ...SELECT_POPOVER_STATE_KEYS,
 ] as const;
-const SELECT_GRID_STATE_KEYS = [
-  ...SELECT_LIST_GRID_STATE_KEYS,
-  ...SELECT_STATE_KEYS,
-] as const;
-export const COMBOBOX_KEYS = [
-  ...COMBOBOX_GRID_STATE_KEYS,
-  ...SELECT_GRID_STATE_KEYS,
-  "hideOnEsc",
-] as const;
-export const COMBOBOX_GRID_CELL_KEYS = [
-  ...COMBOBOX_GRID_STATE_KEYS,
-  ...SELECT_GRID_STATE_KEYS,
-] as const;
-export const COMBOBOX_GRID_ROW_KEYS = COMBOBOX_GRID_CELL_KEYS;
-export const COMBOBOX_ITEM_KEYS = [...COMBOBOX_GRID_ROW_KEYS, "value"] as const;
-export const COMBOBOX_LIST_KEYS = COMBOBOX_GRID_ROW_KEYS;
-export const COMBOBOX_OPTION_KEYS = COMBOBOX_LIST_KEYS;
-export const COMBOBOX_POPOVER_KEYS = COMBOBOX_OPTION_KEYS;
-export const SELECT_KEYS = [
-  ...COMBOBOX_POPOVER_KEYS,
-  ...COMBOBOX_KEYS,
-] as const;
-export const SELECT_ITEM_KEYS = [
-  ...COMBOBOX_POPOVER_KEYS,
-  ...COMBOBOX_ITEM_KEYS,
-] as const;
-export const SELECT_LIST_KEYS = COMBOBOX_POPOVER_KEYS;
+export const SELECT_KEYS = [...SELECT_STATE_KEYS, "hideOnEsc"] as const;
+export const SELECT_ITEM_KEYS = [...SELECT_STATE_KEYS, "value"] as const;
+export const SELECT_LIST_KEYS = SELECT_STATE_KEYS;
 export const SELECT_OPTION_KEYS = SELECT_LIST_KEYS;
 export const SELECT_POPOVER_KEYS = SELECT_OPTION_KEYS;
