@@ -76,7 +76,7 @@ function getComponentFolderPairs() {
 }
 
 function generateImportString(component, index) {
-  const componentPath = component.split("stories")[1];
+  const componentPath = component.split("stories")[1].replace(/\\/g, "/");
   const jsComponentName = componentPath.replace("tsx", "jsx");
   const componentName = path.basename(componentPath);
   const templateVarName = camelCase(
