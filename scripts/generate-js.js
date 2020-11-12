@@ -26,16 +26,16 @@ function createFile(filePath, fileContent = "") {
   });
 }
 
-function walkSync(dir, filelist) {
+function walkSync(dir, filelist = []) {
   const files = fs.readdirSync(dir);
 
-  filelist = filelist || [];
-
   files.forEach(function (file) {
-    if (isDirectory(path.join(dir, file))) {
-      filelist = walkSync(path.join(dir, file), filelist);
+    const fullPath = path.join(dir, file);
+
+    if (isDirectory(fullPath)) {
+      filelist = walkSync(fullPath, filelist);
     } else {
-      filelist.push(path.join(dir, file));
+      filelist.push(fullPath);
     }
   });
 
