@@ -20,12 +20,12 @@ export type AccordionTriggerOptions = ButtonOptions &
   Pick<
     AccordionStateReturn,
     | "panels"
-    | "selectedId"
-    | "selectedIds"
     | "select"
     | "unSelect"
     | "allowMultiple"
     | "allowToggle"
+    | "selectedId"
+    | "selectedIds"
   >;
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps &

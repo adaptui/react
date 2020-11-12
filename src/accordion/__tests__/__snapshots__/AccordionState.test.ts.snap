@@ -14,7 +14,6 @@ Object {
   "panels": Array [],
   "rtl": false,
   "selectedId": null,
-  "selectedIds": Array [],
   "unstable_angular": false,
   "unstable_hasActiveWidget": false,
   "unstable_idCountRef": Object {

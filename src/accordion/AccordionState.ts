@@ -1,117 +1,68 @@
-import {
-  useCompositeState,
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-} from "reakit";
 import * as React from "react";
+import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
+import {
+  AccordionState,
+  AccordionActions,
+  AccordionReturns,
+  MultiOverloadReturn,
+  SingleOverloadReturn,
+  AccordionInitialState,
+  AccordionInitialStateMulti,
+  AccordionInitialStateSingle,
+  SelectedIdPair,
+} from "./types";
 
-export type AccordionState = CompositeState & {
-  /**
-   * The current selected(controlled) accordion's `id`.
-   */
-  selectedId: string | null;
-  /**
-   * The current selected(controlled) accordion's `id`.
-   */
-  selectedIds: (string | null)[];
-  /**
-   * Whether the accodion selection should be manual.
-   *
-   * @default true
-   */
-  manual: boolean;
-  /**
-   * Allow to open multiple accordion items
-   *
-   * @default false
-   */
-  allowMultiple: boolean;
-  /**
-   * Allow to toggle accordion items
-   *
-   * @default false
-   */
-  allowToggle: boolean;
-  /**
-   * Lists all the panels.
-   */
-  panels: CompositeState["items"];
-};
+export type AccordionStateReturn = AccordionActions &
+  AccordionState &
+  AccordionReturns &
+  SelectedIdPair;
 
-export type AccordionActions = CompositeActions & {
-  /**
-   * Moves into and selects an accordion by its `id`.
-   */
-  select: CompositeActions["move"];
-  /**
-   * Moves into and unSelects an accordion by its `id` if it's already selected.
-   */
-  unSelect: CompositeActions["move"];
-  /**
-   * Sets `selectedId`.
-   */
-  setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
-  /**
-   * Sets `selectedIds`.
-   */
-  setSelectedIds: React.Dispatch<React.SetStateAction<(string | null)[]>>;
-  /**
-   * Registers a accordion panel.
-   */
-  registerPanel: CompositeActions["registerItem"];
-  /**
-   * Unregisters a accordion panel.
-   */
-  unregisterPanel: CompositeActions["unregisterItem"];
-};
+export function useAccordionState(
+  props: AccordionInitialStateSingle,
+): SingleOverloadReturn;
 
-export type AccordionInitialState = CompositeInitialState &
-  Pick<
-    Partial<AccordionState>,
-    "selectedId" | "selectedIds" | "manual" | "allowMultiple" | "allowToggle"
-  > & {
-    /**
-     * Set default selected id(uncontrolled)
-     *
-     * @default null
-     */
-    defaultSelectedId?: string | null;
-    /**
-     * Handler that is called when the selectedId changes.
-     */
-    onSelectedIdChange?: (value: string | null) => void;
-    /**
-     * Set default selected ids(uncontrolled)
-     *
-     * @default []
-     */
-    defaultSelectedIds?: (string | null)[];
-    /**
-     * Handler that is called when the selectedIds changes.
-     */
-    onSelectedIdsChange?: (value: (string | null)[]) => void;
-  };
+export function useAccordionState(
+  props: AccordionInitialStateMulti,
+): MultiOverloadReturn;
 
-export type AccordionStateReturn = AccordionState & AccordionActions;
+export function useAccordionState(
+  props: AccordionInitialState,
+): SingleOverloadReturn;
+
+export function useAccordionState(
+  props: AccordionInitialState,
+): MultiOverloadReturn;
 
 export function useAccordionState(
   props: AccordionInitialState = {},
 ): AccordionStateReturn {
-  const {
-    selectedId: selectedIdProp,
-    defaultSelectedId = null,
-    onSelectedIdChange,
-    selectedIds: selectedIdsProp,
-    defaultSelectedIds = [],
-    onSelectedIdsChange,
-    allowMultiple = false,
-    allowToggle: allowToggleProp = false,
-    manual = true,
-    ...rest
-  } = props;
-  const allowToggle = allowMultiple ? allowMultiple : allowToggleProp;
+  const { manual = true, ...rest } = props;
+
+  const allowToggle = props.allowMultiple
+    ? props.allowMultiple
+    : props.allowToggle || false;
+
+  let selectedIdProp;
+  let defaultSelectedId;
+  let onSelectedIdChange;
+  if (props.allowMultiple === false || !props.allowMultiple) {
+    // @ts-ignore
+    selectedIdProp = props.selectedId;
+    // @ts-ignore
+    defaultSelectedId = props.defaultSelectedId || null;
+    // @ts-ignore
+    onSelectedIdChange = props.onSelectedIdChange;
+  }
+
+  let selectedIdsProp;
+  let defaultSelectedIds;
+  let onSelectedIdsChange;
+  if (props.allowMultiple === true) {
+    selectedIdsProp = props.selectedIds;
+    defaultSelectedIds = props.defaultSelectedIds || [];
+    onSelectedIdsChange = props.onSelectedIdsChange;
+  }
 
   // Single toggle accordion State
   const [selectedId, setSelectedId] = useControllableState({
@@ -138,7 +89,7 @@ export function useAccordionState(
     (id: string | null) => {
       composite.move(id);
 
-      if (!allowMultiple) {
+      if (!props.allowMultiple) {
         if (allowToggle && id === selectedId) {
           setSelectedId(null);
           return;
@@ -153,12 +104,12 @@ export function useAccordionState(
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [allowMultiple, allowToggle, composite.move, selectedId],
+    [props.allowMultiple, allowToggle, composite.move, selectedId],
   );
 
   const unSelect = React.useCallback(
     (id: string | null) => {
-      if (!allowMultiple && id === null) return;
+      if (!props.allowMultiple && id === null) return;
 
       composite.move(id);
       setSelectedIds(prevIds => prevIds?.filter(pId => pId !== id));
@@ -170,14 +121,9 @@ export function useAccordionState(
 
   const panels = useCompositeState();
 
-  return {
+  const common = {
     manual,
-    allowMultiple,
     allowToggle,
-    selectedId,
-    setSelectedId,
-    selectedIds,
-    setSelectedIds,
     select,
     unSelect,
     panels: panels.items,
@@ -185,4 +131,18 @@ export function useAccordionState(
     unregisterPanel: panels.unregisterItem,
     ...composite,
   };
+
+  return props.allowMultiple === true
+    ? {
+        allowMultiple: true,
+        selectedIds,
+        setSelectedIds,
+        ...common,
+      }
+    : {
+        allowMultiple: false,
+        selectedId,
+        setSelectedId,
+        ...common,
+      };
 }
