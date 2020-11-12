@@ -1,158 +1,34 @@
-import React from "react";
-import { useSealedState, SealedInitialState } from "reakit-utils";
 import {
-  useCompositeState,
-  CompositeActions,
-  CompositeState,
-  CompositeInitialState,
-  CompositeStateReturn,
-} from "reakit/Composite";
+  SealedInitialState,
+  useSealedState,
+} from "reakit-utils/useSealedState";
+
 import {
-  usePopoverState,
-  PopoverStateReturn,
-  PopoverState,
-  PopoverActions,
-  PopoverInitialState,
-} from "reakit/Popover";
+  SelectListState,
+  SelectListActions,
+  SelectListInitialState,
+  useSelectListState,
+} from "./SelectListState";
+import {
+  SelectPopoverState,
+  SelectPopoverActions,
+  SelectPopoverInitialState,
+  useSelectPopoverState,
+} from "./SelectPopoverState";
 
-type Value = {
-  value: string;
-  id: string;
-};
-
-export type SelectState = CompositeState &
-  PopoverState & {
-    allowMultiselect?: boolean;
-    selected: string[];
-    isPlaceholder: boolean;
-    inputValue: string;
-    isCombobox: boolean;
-    values: Value[];
-  };
-
-export type SelectActions = CompositeActions &
-  PopoverActions & {
-    setInputValue: React.Dispatch<React.SetStateAction<string>>;
-    removeSelected: (value: string) => void;
-    setSelected: (value: string, shouldRemainOpen?: boolean) => void;
-  };
-
-export type SelectInitialState = CompositeInitialState &
-  PopoverInitialState & {
-    /**
-     * default selected item
-     *
-     * @default undefined
-     */
-    selected?: string;
-    /**
-     * If `true` enables multiple selections
-     *
-     * @default false
-     */
-    allowMultiselect?: boolean;
-    /**
-     * If `true` arrow key navigation loops back
-     *
-     * @default false
-     */
-    loop?: boolean;
-    /**
-     * If `true` enables the select to work with SelectInput
-     * which acts as combobox
-     *
-     * @default false
-     */
-    isCombobox?: boolean;
-  };
-
-export type SelectStateReturn = CompositeStateReturn &
-  PopoverStateReturn &
-  SelectState &
-  SelectActions;
-
-export const useSelectState = (
+export function useSelectState(
   initialState: SealedInitialState<SelectInitialState> = {},
-): SelectStateReturn => {
-  const {
-    selected: initialValue,
-    allowMultiselect,
-    loop = true,
-    isCombobox = false,
-    placement = "bottom-start",
-    ...sealed
-  } = useSealedState(initialState);
+): SelectStateReturn {
+  const sealed = useSealedState(initialState);
+  const select = useSelectListState(sealed);
+  return useSelectPopoverState(select, sealed);
+}
 
-  const composite = useCompositeState({
-    ...sealed,
-    loop,
-    unstable_virtual: true,
-  });
-  const popover = usePopoverState({
-    ...sealed,
-    placement,
-    unstable_offset: [0, 10],
-  });
+export type SelectState = SelectPopoverState & SelectListState;
 
-  const [values, setValues] = React.useState<Value[]>([]);
-  const [isPlaceholder, setIsPlaceholder] = React.useState<boolean>(false);
-  const [inputValue, setInputValue] = React.useState<string>("");
-  const [selectedValue, setSelectedValue] = React.useState<string[]>(() => {
-    if (initialValue) {
-      return [initialValue];
-    }
-    return [];
-  });
+export type SelectActions = SelectPopoverActions & SelectListActions;
 
-  const removeSelected = (value: string) => {
-    setSelectedValue(selectedValue.filter(item => item !== value));
-  };
+export type SelectInitialState = SelectPopoverInitialState &
+  SelectListInitialState;
 
-  const { hide } = popover;
-
-  const setSelected = React.useCallback(
-    (value: string, shouldRemainOpen?: boolean) => {
-      if (allowMultiselect) {
-        selectedValue.includes(value)
-          ? setSelectedValue(selectedValue.filter(item => item !== value))
-          : setSelectedValue([...selectedValue, value]);
-
-        setInputValue("");
-      } else {
-        setSelectedValue([value]);
-        setInputValue("");
-        !shouldRemainOpen && hide();
-      }
-    },
-    [allowMultiselect, hide, selectedValue],
-  );
-
-  React.useLayoutEffect(() => {
-    setIsPlaceholder(selectedValue.length < 1);
-  }, [selectedValue]);
-
-  React.useEffect(() => {
-    if (composite.items.length > 0) {
-      const _values = composite.items.map(item => ({
-        value: item.ref.current?.dataset.value ?? "",
-        id: item.id ?? "",
-      }));
-
-      setValues(_values);
-    }
-  }, [composite.items]);
-
-  return {
-    ...composite,
-    ...popover,
-    isPlaceholder,
-    isCombobox,
-    allowMultiselect,
-    selected: selectedValue,
-    setSelected,
-    removeSelected,
-    inputValue,
-    setInputValue,
-    values,
-  };
-};
+export type SelectStateReturn = SelectState & SelectActions;

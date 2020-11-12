@@ -7,11 +7,8 @@ import {
 import * as React from "react";
 
 import { SelectListStateReturn } from "./SelectListState";
-import { SelectListGridStateReturn } from "./SelectListGridState";
 
-export function useSelectPopoverState<
-  T extends SelectListStateReturn | SelectListGridStateReturn
->(
+export function useSelectPopoverState<T extends SelectListStateReturn>(
   select: T,
   {
     gutter = 0,

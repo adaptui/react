@@ -12,7 +12,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectFetch,
-  title: "Combobox/SelectFetch",
+  title: "Select/SelectFetch",
   parameters: {
     preview: createPreviewTabs({
       js: selectFetchTemplateJs,

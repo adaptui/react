@@ -12,8 +12,8 @@ import {
   useSelectList,
 } from "./SelectList";
 import { SELECT_POPOVER_KEYS } from "./__keys";
+import { useTypeaheadShortcut } from "./helpers";
 import { SelectStateReturn } from "./SelectState";
-import { useTypeaheadShortcut } from "./helpers/useTypeaheadShortcut";
 
 export const useSelectPopover = createHook<
   SelectPopoverOptions,

@@ -1,16 +1,16 @@
-import * as React from "react";
-import { useLiveRef } from "reakit-utils/useLiveRef";
 import {
   CompositeItemOptions,
   CompositeItemHTMLProps,
   useCompositeItem,
 } from "reakit";
+import * as React from "react";
+import { useLiveRef } from "reakit-utils/useLiveRef";
 import { createHook } from "reakit-system/createHook";
 import { createComponent } from "reakit-system/createComponent";
 
+import { getItemId } from "./helpers";
 import { Item } from "./helpers/types";
 import { SELECT_ITEM_KEYS } from "./__keys";
-import { getItemId } from "./helpers/getItemId";
 import { SelectStateReturn } from "./SelectState";
 
 export const useSelectItem = createHook<SelectItemOptions, SelectItemHTMLProps>(

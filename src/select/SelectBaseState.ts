@@ -1,6 +1,6 @@
 import * as React from "react";
-import { CompositeStateReturn, CompositeState, CompositeActions } from "reakit";
 import { SetState } from "reakit-utils/ts";
+import { CompositeStateReturn, CompositeState, CompositeActions } from "reakit";
 
 import { Item } from "./helpers/types";
 
@@ -28,10 +28,14 @@ function getValueFromId(
 
 export function useSelectBaseState<T extends CompositeStateReturn>(
   composite: T,
-  { selectedValue: initialSelectedValue = null }: SelectBaseInitialState = {},
+  {
+    selectedValue: initialSelectedValue = null,
+    values: initialValues = [],
+  }: SelectBaseInitialState = {},
 ): SelectBaseStateReturn<T> {
   const valuesById = React.useRef<ValuesById>([]);
-  const valuesRef = React.useRef<string[]>([]);
+
+  const valuesRef = React.useRef<string[]>(initialValues);
 
   const {
     items: compositeItems,
@@ -69,7 +73,8 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
           ...valuesById.current,
           { id: item.id, value: item.value },
         ];
-        valuesRef.current = [...valuesRef.current, item.value];
+        if (!initialValues.length)
+          valuesRef.current = [...valuesRef.current, item.value];
       }
     },
     [compositeRegisterItem],
@@ -121,7 +126,6 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
   items: Item[];
   /**
    * Options/values provided.
-   * @default []
    */
   values: string[];
   /**
@@ -164,7 +168,7 @@ export type SelectBaseActions<
 
 export type SelectBaseInitialState = Pick<
   Partial<SelectBaseState>,
-  "selectedValue"
+  "values" | "selectedValue"
 >;
 
 export type SelectBaseStateReturn<

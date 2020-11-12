@@ -3,20 +3,20 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
-  selectCustomTemplate,
-  selectCustomTemplateJs,
+  selectWindowsTemplate,
+  selectWindowsTemplateJs,
   selectCssTemplate,
 } from "./templates";
-import { App as SelectCustom } from "./SelectCustom.component";
+import { App as SelectWindows } from "./SelectWindows.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: SelectCustom,
-  title: "Combobox/SelectCustom",
+  component: SelectWindows,
+  title: "Select/SelectWindows",
   parameters: {
     preview: createPreviewTabs({
-      js: selectCustomTemplateJs,
-      ts: selectCustomTemplate,
+      js: selectWindowsTemplateJs,
+      ts: selectWindowsTemplate,
       css: selectCssTemplate,
     }),
   },
@@ -28,7 +28,7 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <SelectCustom {...args} />;
+const Base: Story = args => <SelectWindows {...args} />;
 
 export const Default = Base.bind({});
 Default.args = {};
