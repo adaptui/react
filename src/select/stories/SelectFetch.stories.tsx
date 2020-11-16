@@ -3,20 +3,20 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
-  selectTemplate,
-  selectTemplateJs,
+  selectFetchTemplate,
+  selectFetchTemplateJs,
   selectCssTemplate,
 } from "./templates";
-import { App as Select } from "./Select.component";
+import { App as SelectFetch } from "./SelectFetch.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: Select,
-  title: "Select/Basic",
+  component: SelectFetch,
+  title: "Select/SelectFetch",
   parameters: {
     preview: createPreviewTabs({
-      js: selectTemplateJs,
-      ts: selectTemplate,
+      js: selectFetchTemplateJs,
+      ts: selectFetchTemplate,
       css: selectCssTemplate,
     }),
   },
@@ -28,7 +28,7 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <Select {...args} />;
+const Base: Story = args => <SelectFetch {...args} />;
 
 export const Default = Base.bind({});
 Default.args = {};

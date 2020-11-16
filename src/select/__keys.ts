@@ -1,20 +1,26 @@
 // Automatically generated
-const SELECT_STATE_KEYS = [
+const SELECT_LIST_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
-  "setBaseId",
   "unstable_virtual",
   "rtl",
   "orientation",
-  "items",
   "groups",
   "currentId",
   "loop",
   "wrap",
+  "shift",
   "unstable_moves",
-  "unstable_angular",
   "unstable_hasActiveWidget",
-  "registerItem",
+  "unstable_includesBaseElement",
+  "menuRole",
+  "items",
+  "values",
+  "valuesById",
+  "selectedValue",
+  "currentValue",
+  "selectedId",
+  "setBaseId",
   "unregisterItem",
   "registerGroup",
   "unregisterGroup",
@@ -32,20 +38,22 @@ const SELECT_STATE_KEYS = [
   "setCurrentId",
   "setLoop",
   "setWrap",
+  "setShift",
   "reset",
+  "unstable_setIncludesBaseElement",
   "unstable_setHasActiveWidget",
+  "registerItem",
+  "setSelectedValue",
+] as const;
+const SELECT_BASE_STATE_KEYS = SELECT_LIST_STATE_KEYS;
+const SELECT_POPOVER_STATE_KEYS = [
+  "baseId",
+  "unstable_idCountRef",
   "visible",
   "animated",
   "animating",
-  "show",
-  "hide",
-  "toggle",
-  "setVisible",
-  "setAnimated",
-  "stopAnimation",
   "modal",
   "unstable_disclosureRef",
-  "setModal",
   "unstable_referenceRef",
   "unstable_popoverRef",
   "unstable_arrowRef",
@@ -54,19 +62,22 @@ const SELECT_STATE_KEYS = [
   "unstable_originalPlacement",
   "unstable_update",
   "placement",
+  "setBaseId",
+  "show",
+  "hide",
+  "toggle",
+  "setVisible",
+  "setAnimated",
+  "stopAnimation",
+  "setModal",
   "place",
-  "allowMultiselect",
-  "selected",
-  "isPlaceholder",
-  "inputValue",
-  "isCombobox",
-  "values",
-  "setInputValue",
-  "removeSelected",
-  "setSelected",
 ] as const;
-export const SELECT_KEYS = [...SELECT_STATE_KEYS, "onChange"] as const;
-export const SELECT_INPUT_KEYS = SELECT_STATE_KEYS;
-export const SELECT_MENU_KEYS = SELECT_INPUT_KEYS;
-export const SELECT_ITEM_KEYS = [...SELECT_MENU_KEYS, "value"] as const;
-export const SELECT_TRIGGER_KEYS = SELECT_MENU_KEYS;
+const SELECT_STATE_KEYS = [
+  ...SELECT_BASE_STATE_KEYS,
+  ...SELECT_POPOVER_STATE_KEYS,
+] as const;
+export const SELECT_KEYS = [...SELECT_STATE_KEYS, "hideOnEsc"] as const;
+export const SELECT_ITEM_KEYS = [...SELECT_STATE_KEYS, "value"] as const;
+export const SELECT_LIST_KEYS = SELECT_STATE_KEYS;
+export const SELECT_OPTION_KEYS = SELECT_LIST_KEYS;
+export const SELECT_POPOVER_KEYS = SELECT_OPTION_KEYS;

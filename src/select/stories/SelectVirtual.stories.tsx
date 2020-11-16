@@ -3,20 +3,20 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
-  selectTemplate,
-  selectTemplateJs,
+  selectVirtualTemplate,
+  selectVirtualTemplateJs,
   selectCssTemplate,
 } from "./templates";
-import { App as Select } from "./Select.component";
+import { App as SelectVirtual } from "./SelectVirtual.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: Select,
-  title: "Select/Basic",
+  component: SelectVirtual,
+  title: "Select/SelectVirtual",
   parameters: {
     preview: createPreviewTabs({
-      js: selectTemplateJs,
-      ts: selectTemplate,
+      js: selectVirtualTemplateJs,
+      ts: selectVirtualTemplate,
       css: selectCssTemplate,
     }),
   },
@@ -28,7 +28,7 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <Select {...args} />;
+const Base: Story = args => <SelectVirtual {...args} />;
 
-export const Default = Base.bind({});
-Default.args = {};
+// export const Default = Base.bind({});
+// Default.args = {};

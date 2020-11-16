@@ -122,4 +122,8 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
 export const cx = (...classNames: any[]) =>
   classNames.filter(Boolean).join(" ");
 
+export function kebabCase(string: string) {
+  return string.toLowerCase().replace(/[^a-z0-9]/g, "-");
+}
+
 export * from "./date";

@@ -7,6 +7,7 @@ import {
   SelectPopover,
   SelectOption,
 } from "../index";
+import { fruits } from "./fruits";
 
 export const App: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });
@@ -17,10 +18,11 @@ export const App: React.FC<SelectInitialState> = props => {
         {select.selectedValue || "Select a fruit"}
       </Select>
       <SelectPopover {...select} aria-label="Fruits">
-        <SelectOption {...select} value="Apple" />
-        <SelectOption {...select} value="AppleCusturd" />
-        <SelectOption {...select} value="Orange" />
-        <SelectOption {...select} value="Banana" />
+        {fruits.length
+          ? fruits.map(value => (
+              <SelectOption {...select} key={value} value={value} />
+            ))
+          : "No results found"}
       </SelectPopover>
     </>
   );
