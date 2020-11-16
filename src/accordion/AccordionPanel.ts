@@ -17,13 +17,13 @@ export type AccordionPanelOptions = DisclosureContentOptions &
   unstable_IdOptions &
   Pick<
     AccordionStateReturn,
-    | "selectedId"
-    | "selectedIds"
     | "registerPanel"
     | "unregisterPanel"
     | "panels"
     | "items"
     | "allowMultiple"
+    | "selectedId"
+    | "selectedIds"
   > & {
     /**
      * Accordion's id

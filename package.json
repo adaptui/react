@@ -29,7 +29,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.prod.json",
-    "check-types": "tsc --noEmit --project tsconfig.prod.json",
+    "check-types": "yarn build:types && yarn tsd",
     "commit": "gacp",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "generatejs": "node scripts/generate-js",
@@ -43,7 +43,8 @@
     "release:tags": "git push --follow-tags origin master",
     "storybook": "yarn generatejs && start-storybook -p 6006 --no-dll",
     "storybook-build": "yarn generatejs && build-storybook --no-dll",
-    "test": "jest --config ./jest.config.ts --no-cache"
+    "test": "jest --config ./jest.config.ts --no-cache",
+    "tsd": "tsd"
   },
   "dependencies": {
     "@chakra-ui/counter": "1.0.0-rc.7",
@@ -138,6 +139,7 @@
     "ts-jest": "26.4.3",
     "ts-morph": "8.1.2",
     "ts-node": "^9.0.0",
+    "tsd": "^0.13.1",
     "typescript": "4.0.5"
   },
   "peerDependencies": {
@@ -146,5 +148,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "tsd": {
+    "directory": "@types-tests"
   }
 }

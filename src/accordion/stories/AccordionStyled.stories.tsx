@@ -8,7 +8,7 @@ import {
   accordionStyledCssTemplate,
 } from "./templates";
 import "./AccordionStyled.css";
-import { AccordionInitialState } from "../AccordionState";
+import { AccordionInitialState } from "../types";
 import { App as Accordion } from "./AccordionStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 

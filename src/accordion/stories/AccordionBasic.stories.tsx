@@ -2,13 +2,13 @@ import * as React from "react";
 import { Meta } from "@storybook/react";
 
 import { CompositeState } from "reakit/ts";
-import { AccordionInitialState } from "../AccordionState";
+import { AccordionInitialState } from "../types";
 import { App as Accordion } from "./AccordionBasic.component";
 import { accordionBasicTemplate, accordionBasicTemplateJs } from "./templates";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export const Default: React.FC<Omit<
-  Partial<AccordionInitialState>,
+  AccordionInitialState,
   keyof CompositeState
 >> = args => <Accordion {...args} />;
 
