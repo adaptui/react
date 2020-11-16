@@ -38,13 +38,6 @@ export function useToast() {
   return context;
 }
 
-// export const [ToastContextProvider, useToast] = createContext<IToastContext>({
-//   name: "useToast",
-//   errorMessage:
-//     "",
-//   strict: true,
-// });
-
 export type ToastTypes = Record<
   string,
   React.FC<

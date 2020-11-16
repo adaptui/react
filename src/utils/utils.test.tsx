@@ -1,6 +1,5 @@
 import React from "react";
 import MockDate from "mockdate";
-import { render } from "reakit-test-utils";
 
 import {
   parseDate,
@@ -8,7 +7,7 @@ import {
   parseRangeDate,
   isInvalidDateRange,
 } from "./date";
-import { clampValue, createContext, valueToPercent, getOptimumValue } from ".";
+import { clampValue, valueToPercent, getOptimumValue } from ".";
 
 describe("Utils", () => {
   test("parseDate", () => {
@@ -116,53 +115,6 @@ beforeAll(() => {
 
 afterAll(() => {
   console.error = oldLog;
-});
-
-describe("createContext", () => {
-  it("should create a context", () => {
-    const [Provider, useContext, Context] = createContext({
-      errorMessage: "context is undefined",
-      name: "Test",
-    });
-
-    const ExampleContext: React.FC = () => {
-      const { count } = useContext() as any;
-
-      return <p data-testid="val">{count}</p>;
-    };
-
-    const { getByTestId } = render(
-      <Provider value={{ count: 1 }}>
-        <ExampleContext />
-      </Provider>,
-    );
-
-    expect(getByTestId("val")).toHaveTextContent("1");
-  });
-
-  it("should throw error if Provider not wrapped", () => {
-    const [Provider, useContext, Context] = createContext({
-      errorMessage: "context is undefined",
-      name: "Test",
-    });
-
-    const ExampleContext: React.FC = () => {
-      const { count } = useContext() as any;
-      return <p data-testid="val">{count}</p>;
-    };
-
-    const spy = jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
-
-    render(
-      <ErrorBoundary>
-        <ExampleContext />
-      </ErrorBoundary>,
-    );
-
-    expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalled();
-
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
 });
 
 class ErrorBoundary extends React.Component<any, { hasError: boolean }> {
