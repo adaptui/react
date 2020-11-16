@@ -2,12 +2,7 @@ import {
   SealedInitialState,
   useSealedState,
 } from "reakit-utils/useSealedState";
-import {
-  useCompositeState,
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-} from "reakit";
+import { useCompositeState, CompositeInitialState } from "reakit";
 
 import {
   SelectBaseState,
@@ -37,9 +32,9 @@ export function useSelectListState(
   return useSelectBaseState(composite, sealed);
 }
 
-export type SelectListState = SelectBaseState<CompositeState>;
+export type SelectListState = SelectBaseState;
 
-export type SelectListActions = SelectBaseActions<CompositeActions>;
+export type SelectListActions = SelectBaseActions;
 
 export type SelectListInitialState = Omit<
   CompositeInitialState,
