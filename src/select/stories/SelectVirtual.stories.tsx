@@ -30,5 +30,5 @@ export default {
 
 const Base: Story = args => <SelectVirtual {...args} />;
 
-export const Default = Base.bind({});
-Default.args = {};
+// export const Default = Base.bind({});
+// Default.args = {};

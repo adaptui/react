@@ -8,8 +8,8 @@ import * as React from "react";
 
 import { SelectListStateReturn } from "./SelectListState";
 
-export function useSelectPopoverState<T extends SelectListStateReturn>(
-  select: T,
+export function useSelectPopoverState(
+  select: SelectListStateReturn,
   {
     gutter = 0,
     placement = "bottom-start",
