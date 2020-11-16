@@ -6,12 +6,12 @@ import { getNextItemFromSearch } from "@chakra-ui/utils";
 import { SelectStateReturn } from "../SelectState";
 import { getIdFromValue } from "../SelectBaseState";
 
-type TypeAheadShortcutOptions = Pick<
+type TypeAheadShortcutOption = Pick<
   SelectStateReturn,
   "values" | "currentValue" | "valuesById" | "move"
 >;
 interface useTypeaheadShortcutProps {
-  options: TypeAheadShortcutOptions;
+  options: TypeAheadShortcutOption;
   ref: React.RefObject<HTMLElement>;
   timeout?: number;
 }
@@ -53,7 +53,7 @@ export function useTypeaheadShortcut({
   }, [onCharacterPress]);
 }
 
-const handleCharacterPress = (options: TypeAheadShortcutOptions) => (
+const handleCharacterPress = (options: TypeAheadShortcutOption) => (
   character: string,
 ) => {
   const selectedValue = options.values.find(value =>
