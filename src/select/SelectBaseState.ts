@@ -26,13 +26,13 @@ function getValueFromId(
   return selectedOption ? selectedOption.value : undefined;
 }
 
-export function useSelectBaseState<T extends CompositeStateReturn>(
-  composite: T,
+export function useSelectBaseState(
+  composite: CompositeStateReturn,
   {
     selectedValue: initialSelectedValue = null,
     values: initialValues = [],
   }: SelectBaseInitialState = {},
-): SelectBaseStateReturn<T> {
+): SelectBaseStateReturn {
   const valuesById = React.useRef<ValuesById>([]);
 
   const valuesRef = React.useRef<string[]>(initialValues);
@@ -105,10 +105,7 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
 
 export type ValuesById = { id: string; value: string }[];
 
-export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
-  T,
-  "items"
-> & {
+export type SelectBaseState = Omit<CompositeState, "items"> & {
   /**
    * Indicates the type of the suggestions popup.
    */
@@ -146,9 +143,7 @@ export type SelectBaseState<T extends CompositeState = CompositeState> = Omit<
   selectedId?: string | null;
 };
 
-export type SelectBaseActions<
-  T extends CompositeActions = CompositeActions
-> = Omit<T, "registerItem"> & {
+export type SelectBaseActions = Omit<CompositeActions, "registerItem"> & {
   /**
    * Registers a select item.
    * @example
@@ -171,6 +166,4 @@ export type SelectBaseInitialState = Pick<
   "values" | "selectedValue"
 >;
 
-export type SelectBaseStateReturn<
-  T extends CompositeStateReturn
-> = SelectBaseState<T> & SelectBaseActions<T>;
+export type SelectBaseStateReturn = SelectBaseState & SelectBaseActions;
