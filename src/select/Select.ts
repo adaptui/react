@@ -24,6 +24,12 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
   useProps(options, { onKeyDown: htmlOnKeyDown, ...htmlProps }) {
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
 
+    // Reference:
+    // https://github.com/chakra-ui/chakra-ui/blob/83eec5b140bd9a69821d8e4df3e69bff0768dcca/packages/menu/src/use-menu.ts#L228-L253
+    const onCharacterPress = useShortcut({
+      preventDefault: event => event.key !== " ",
+    });
+
     const onKeyDown = React.useCallback(
       (event: React.KeyboardEvent) => {
         onKeyDownRef.current?.(event);
@@ -47,47 +53,24 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         };
 
         const action = keyMap[event.key as keyof typeof keyMap];
-        if (action) action();
+        action?.();
       },
       [
         options.visible,
         options.show,
         options.last,
         options.first,
+        options.values,
         options.selectedValue,
+        options.setSelectedValue,
       ],
     );
-
-    // Reference:
-    // https://github.com/chakra-ui/chakra-ui/blob/83eec5b140bd9a69821d8e4df3e69bff0768dcca/packages/menu/src/use-menu.ts#L228-L253
-    const onCharacterPress = useShortcut({
-      preventDefault: event => event.key !== " ",
-    });
 
     return {
       "aria-haspopup": options.menuRole,
       onKeyDown: callAllHandlers(
-        onCharacterPress(character => {
-          /**
-           * Typeahead: Based on current character pressed,
-           * find the next item to be selected
-           */
-          const selectedValue = options.values.find(value =>
-            options.selectedValue?.includes(value),
-          );
-
-          const nextItem = getNextItemFromSearch(
-            options.values,
-            character,
-            item => item ?? "",
-            selectedValue,
-          );
-
-          if (nextItem) {
-            options.setSelectedValue(nextItem);
-          }
-        }),
         onKeyDown,
+        onCharacterPress(handleCharacterPress(options)),
       ),
       ...htmlProps,
     };
@@ -99,6 +82,27 @@ export const Select = createComponent({
   memo: true,
   useHook: useSelect,
 });
+
+const handleCharacterPress = (options: SelectOptions) => (
+  character: string,
+) => {
+  /**
+   * Typeahead: Based on current character pressed,
+   * find the next item to be selected
+   */
+  const selectedValue = options.values.find(value =>
+    options.selectedValue?.includes(value),
+  );
+
+  const nextItem = getNextItemFromSearch(
+    options.values,
+    character,
+    item => item ?? "",
+    selectedValue,
+  );
+
+  if (nextItem) options.setSelectedValue(nextItem);
+};
 
 export type SelectOptions = PopoverDisclosureOptions &
   SelectStateReturn & {

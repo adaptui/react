@@ -57,9 +57,9 @@ export function useSelectBaseState<T extends CompositeStateReturn>(
   );
 
   const items = React.useMemo(() => {
-    compositeItems.forEach(item => {
+    compositeItems.forEach((item: Item) => {
       if (item.id) {
-        (item as Item).value = valuesById.current[item.id];
+        item.value = valuesById.current[item.id];
       }
     });
     return compositeItems;

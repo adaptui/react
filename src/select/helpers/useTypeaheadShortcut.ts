@@ -3,11 +3,15 @@ import { closest } from "reakit-utils";
 import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
 
-import { SelectPopoverOptions } from "../SelectPopover";
+import { SelectStateReturn } from "../SelectState";
 import { getIdFromValue } from "../SelectBaseState";
 
+type TypeAheadShortcutOptions = Pick<
+  SelectStateReturn,
+  "values" | "currentValue" | "valuesById" | "move"
+>;
 interface useTypeaheadShortcutProps {
-  options: SelectPopoverOptions;
+  options: TypeAheadShortcutOptions;
   ref: React.RefObject<HTMLElement>;
   timeout?: number;
 }
@@ -22,22 +26,6 @@ export function useTypeaheadShortcut({
   const onCharacterPress = useShortcut({
     preventDefault: event => event.key !== " ",
     timeout,
-  });
-
-  const onTypeahead = onCharacterPress(character => {
-    const selectedValue = options.values.find(value =>
-      options.currentValue?.includes(value),
-    );
-
-    const nextItem = getNextItemFromSearch(
-      options.values,
-      character,
-      item => item ?? "",
-      selectedValue,
-    );
-
-    const nextId = getIdFromValue(options.valuesById, nextItem);
-    options.move?.(nextId);
   });
 
   React.useEffect(() => {
@@ -55,12 +43,32 @@ export function useTypeaheadShortcut({
       if (!targetIsDialog && !targetIsOption) return;
 
       // @ts-ignore
-      onTypeahead(event);
+      onCharacterPress(handleCharacterPress(options))(event);
     };
 
     // https://github.com/facebook/react/issues/11387#issuecomment-524113945
     element.addEventListener("keydown", onKeyDown);
     return () => element.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onTypeahead]);
+  }, [onCharacterPress]);
 }
+
+const handleCharacterPress = (options: TypeAheadShortcutOptions) => (
+  character: string,
+) => {
+  const selectedValue = options.values.find(value =>
+    options.currentValue?.includes(value),
+  );
+
+  const nextItem = getNextItemFromSearch(
+    options.values,
+    character,
+    item => item ?? "",
+    selectedValue,
+  );
+
+  if (nextItem) {
+    const nextId = getIdFromValue(options.valuesById, nextItem);
+    options.move?.(nextId);
+  }
+};

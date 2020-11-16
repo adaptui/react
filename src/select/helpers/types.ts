@@ -1,12 +1,9 @@
-export type Group = {
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-};
+import {
+  Item as ReakitItem,
+  Group as ReakitGroup,
+} from "reakit/ts/Composite/__utils/types";
 
-export type Item = {
-  id: string | null;
-  ref: React.RefObject<HTMLElement>;
-  groupId?: Group["id"];
-  disabled?: boolean;
+export type Group = ReakitGroup;
+export type Item = ReakitItem & {
   value?: string;
 };
