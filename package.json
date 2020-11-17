@@ -56,7 +56,8 @@
     "@react-aria/utils": "3.4.0",
     "date-fns": "2.16.1",
     "reakit-system": "0.15.0",
-    "reakit-utils": "0.15.0"
+    "reakit-utils": "0.15.0",
+    "reakit-warning": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
