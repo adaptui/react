@@ -6,7 +6,7 @@ import {
   Select,
   SelectPopover,
   SelectOption,
-} from "../index";
+} from "renderless-components";
 
 type User = { value: string; label: string };
 
