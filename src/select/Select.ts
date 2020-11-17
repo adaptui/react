@@ -35,13 +35,13 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         onKeyDownRef.current?.(event);
         if (event.defaultPrevented) return;
 
-        // window.setTimeout on show prevents scroll jump on ArrowUp & ArrowDown
+        // setTimeout on show prevents scroll jump on ArrowUp & ArrowDown
         const first = () => {
-          if (!options.visible) options.show && window.setTimeout(options.show);
+          if (!options.visible) options.show && setTimeout(options.show);
           if (!options.selectedValue) options.first?.();
         };
         const last = () => {
-          if (!options.visible) options.show && window.setTimeout(options.show);
+          if (!options.visible) options.show && setTimeout(options.show);
           if (!options.selectedValue) options.last?.();
         };
 
