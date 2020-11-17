@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-beta.1](https://github.com/timelessco/renderless-components/compare/v0.1.1-beta.0...v0.1.1-beta.1) (2020-11-16)
+
+### Features
+
+- accordion types improvements
+  ([#143](https://github.com/timelessco/renderless-components/issues/143))
+  ([7e45f06](https://github.com/timelessco/renderless-components/commit/7e45f069a2a9ee6de095b6bbb2c46bf232694dab))
+
+### Bug Fixes
+
+- **toast:** 🐛 useToast is not a function
+  ([2b35a42](https://github.com/timelessco/renderless-components/commit/2b35a4239ccdd4720d4edff3ffce3dfd99abdadf))
+
+### Tests
+
+- refactored all tests
+  ([#146](https://github.com/timelessco/renderless-components/issues/146))
+  ([e61a507](https://github.com/timelessco/renderless-components/commit/e61a50794caf2696c24314e648d0013cb57f798c))
+
+### Docs
+
+- **story:** ✨ isolate story styles with post css
+  ([#149](https://github.com/timelessco/renderless-components/issues/149))
+  ([d66712c](https://github.com/timelessco/renderless-components/commit/d66712caad314443db2796df1bb78222507d5f14))
+- **update:** 📝 beta as deps in stories
+  ([c79dc71](https://github.com/timelessco/renderless-components/commit/c79dc71be6e91c8db0efa0ef0d6b451439e45e8f))
+
+### Others
+
+- reorganize slider components & improved js generation script
+  ([#148](https://github.com/timelessco/renderless-components/issues/148))
+  ([9e9ef1d](https://github.com/timelessco/renderless-components/commit/9e9ef1d4a04c6210f53797488581c1aa64550011)),
+  closes [#150](https://github.com/timelessco/renderless-components/issues/150)
+- **release:** 0.1.1-beta.0
+  ([0820b0a](https://github.com/timelessco/renderless-components/commit/0820b0ab80f05f63264ce2fe3d383fbb997bebca))
+
 ### [0.1.1-beta.0](https://github.com/timelessco/renderless-components/compare/v0.1.1-alpha.6...v0.1.1-beta.0) (2020-11-09)
 
 ### Docs

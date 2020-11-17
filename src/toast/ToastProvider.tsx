@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { canUseDOM } from "reakit-utils";
-
-import { ToastController } from "./ToastController";
-import { isFunction, createContext } from "../utils";
-import { IToast, useToastState, ToastStateReturn } from "./ToastState";
 import { objectKeys } from "@chakra-ui/utils";
+
+import { isFunction } from "../utils";
+import { ToastController } from "./ToastController";
+import { IToast, useToastState, ToastStateReturn } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -24,12 +24,19 @@ interface IToastContext extends ToastStateReturn {
   toastTypes: ToastTypes;
 }
 
-export const [ToastContextProvider, useToast] = createContext<IToastContext>({
-  name: "useToast",
-  errorMessage:
-    "The `useToasts` hook must be called from a descendent of the `ToastProvider`.",
-  strict: true,
-});
+const ToastContext = React.createContext<IToastContext | undefined>(undefined);
+export const ToastContextProvider = ToastContext.Provider;
+export function useToast() {
+  const context = React.useContext(ToastContext);
+
+  if (!context) {
+    throw new Error(
+      "The `useToasts` hook must be called from a descendent of the `ToastProvider`.",
+    );
+  }
+
+  return context;
+}
 
 export type ToastTypes = Record<
   string,
