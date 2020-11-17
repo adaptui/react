@@ -52,6 +52,7 @@ const SelectComp: React.FC<SelectCompProps> = props => {
 
   React.useEffect(() => {
     if (!isUndefined(value)) select.setSelectedValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select.setSelectedValue, value]);
 
   React.useEffect(() => {

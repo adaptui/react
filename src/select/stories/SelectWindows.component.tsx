@@ -54,6 +54,7 @@ export const App: React.FC<SelectInitialState> = props => {
       const action = keyMap[event.key as keyof typeof keyMap];
       if (action) action();
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       select.values,
       select.visible,
