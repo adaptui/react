@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+### [0.1.1-beta.3](https://github.com/timelessco/renderless-components/compare/v0.1.1-beta.2...v0.1.1-beta.3) (2020-11-17)
+
+### Bug Fixes
+
+- **toast:** 🐛 useToast is not a function
+  ([2b35a42](https://github.com/timelessco/renderless-components/commit/2b35a4239ccdd4720d4edff3ffce3dfd99abdadf))
+
+### Build System
+
+- **reakit:** 📌 make reakit as a peer deps
+  ([64f5bee](https://github.com/timelessco/renderless-components/commit/64f5bee61887f1d56226229776da8b74ca22d3e6))
+
+### Code Refactoring
+
+- **utils:** ♻️ remove createContext utils & its test
+  ([797aefa](https://github.com/timelessco/renderless-components/commit/797aefaf6050372af6e4e230ae9fb05be8707f0e))
+- **uuid:** ➖ remove uuid from deps
+  ([b205d1c](https://github.com/timelessco/renderless-components/commit/b205d1c9aa9f1cf8382b8ff0a0322429eb5a3462))
+
+### Others
+
+- **reakitwarning:** ➕ add reakit warning to the prod deps
+  ([013feee](https://github.com/timelessco/renderless-components/commit/013feeede303944dc51ba2a4aff6d10d944bfbdf))
+- **release:** 0.1.1-beta.1
+  ([5512921](https://github.com/timelessco/renderless-components/commit/551292113dfe16f613027150f9c53143041a0c1d))
+- **release:** 0.1.1-beta.2
+  ([9fb7534](https://github.com/timelessco/renderless-components/commit/9fb7534a27ac74491304032513e74fa31b4a3ca1))
+- **toast:** 📌 pin the storybook deps to the latest beta
+  ([3fc971c](https://github.com/timelessco/renderless-components/commit/3fc971c827314d6c7b84bbbc0b6c9b5f9b9b2e0b))
+
 ### [0.1.1-beta.2](https://github.com/timelessco/renderless-components/compare/v0.1.1-beta.1...v0.1.1-beta.2) (2020-11-17)
 
 ### Bug Fixes
