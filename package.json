@@ -90,7 +90,6 @@
     "@types/react-dom": "16.9.9",
     "@types/react-transition-group": "4.4.0",
     "@types/testing-library__jest-dom": "5.9.5",
-    "@types/uuid": "8.3.0",
     "@typescript-eslint/eslint-plugin": "4.6.0",
     "@typescript-eslint/parser": "4.6.0",
     "babel-eslint": "10.1.0",
