@@ -1,6 +1,6 @@
 import * as React from "react";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press, screen } from "reakit-test-utils";
+import { axe, render, press, screen, fireEvent } from "reakit-test-utils";
 import {
   Select,
   SelectOption,
@@ -117,6 +117,100 @@ describe("Select", () => {
     press.Enter();
     expect(popover).not.toBeVisible();
     expect(popoverButton).toHaveTextContent(/orange/i);
+  });
+
+  test("typeahead should work properly when popover is not open", () => {
+    render(<SelectComponent />);
+
+    const popover = screen.getByTestId("popover");
+    const popoverButton = screen.getByRole("button", {
+      name: /fruit/i,
+    });
+
+    expect(popover).not.toBeVisible();
+    expect(popoverButton).toHaveTextContent(/select a fruit/i);
+
+    press.Tab();
+    fireEvent.keyDown(popoverButton, { key: "a" });
+    expect(popoverButton).toHaveTextContent(/apple/i);
+    jest.runAllTimers();
+    fireEvent.keyDown(popoverButton, { key: "a" });
+    expect(popoverButton).toHaveTextContent(/applecusturd/i);
+    jest.runAllTimers();
+    fireEvent.keyDown(popoverButton, { key: "o" });
+    expect(popoverButton).toHaveTextContent(/orange/i);
+    jest.runAllTimers();
+    fireEvent.keyDown(popoverButton, { key: "b" });
+    expect(popoverButton).toHaveTextContent(/banana/i);
+  });
+
+  test("typeahead should work properly when popover is open", () => {
+    render(<SelectComponent />);
+
+    const popover = screen.getByTestId("popover");
+    const popoverButton = screen.getByRole("button", {
+      name: /fruit/i,
+    });
+
+    userEvent.click(popoverButton);
+    expect(popoverButton).toHaveTextContent(/select a fruit/i);
+    expect(popover).toBeVisible();
+
+    const orange = screen.getByRole("option", {
+      name: /orange/i,
+    });
+    const apple = screen.getByRole("option", {
+      name: /apple$/i,
+    });
+    const applecusturd = screen.getByRole("option", {
+      name: /applecusturd/i,
+    });
+    const banana = screen.getByRole("option", {
+      name: /banana/i,
+    });
+
+    fireEvent.keyDown(popover, { key: "o" });
+    expect(orange).toHaveFocus();
+    jest.runAllTimers();
+
+    fireEvent.keyDown(popover, { key: "a" });
+    expect(apple).toHaveFocus();
+    jest.runAllTimers();
+
+    fireEvent.keyDown(popover, { key: "a" });
+    expect(applecusturd).toHaveFocus();
+    jest.runAllTimers();
+
+    fireEvent.keyDown(popover, { key: "b" });
+    expect(banana).toHaveFocus();
+  });
+
+  test("open popover with arrowdown & select orange with typeahead", () => {
+    render(<SelectComponent />);
+
+    const popover = screen.getByTestId("popover");
+    const popoverButton = screen.getByRole("button", {
+      name: /fruit/i,
+    });
+
+    press.Tab();
+    press.ArrowDown();
+    jest.runAllTimers();
+
+    expect(popoverButton).toHaveTextContent(/select a fruit/i);
+    expect(popover).toBeVisible();
+
+    const orange = screen.getByRole("option", {
+      name: /orange/i,
+    });
+
+    fireEvent.keyDown(popover, { key: "o" });
+    expect(orange).toHaveFocus();
+    jest.runAllTimers();
+
+    press.Enter();
+    expect(popoverButton).toHaveTextContent(/orange/i);
+    expect(popover).not.toBeVisible();
   });
 
   test("Select renders with no a11y violations", async () => {
