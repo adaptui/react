@@ -75,7 +75,7 @@ describe("Select", () => {
     expect(popoverButton).toHaveFocus();
 
     press.ArrowDown();
-    // had micro-task queue operations because
+    // had to run micro-task queue operations because
     // Select ArrowDown uses setTimeout to open the popover in order to prevent scroll jump
     // see `onKeyDown` function of `Select.ts`
     jest.runAllTimers();
@@ -131,15 +131,19 @@ describe("Select", () => {
     expect(popoverButton).toHaveTextContent(/select a fruit/i);
 
     press.Tab();
+
     fireEvent.keyDown(popoverButton, { key: "a" });
     expect(popoverButton).toHaveTextContent(/apple/i);
     jest.runAllTimers();
+
     fireEvent.keyDown(popoverButton, { key: "a" });
     expect(popoverButton).toHaveTextContent(/applecusturd/i);
     jest.runAllTimers();
+
     fireEvent.keyDown(popoverButton, { key: "o" });
     expect(popoverButton).toHaveTextContent(/orange/i);
     jest.runAllTimers();
+
     fireEvent.keyDown(popoverButton, { key: "b" });
     expect(popoverButton).toHaveTextContent(/banana/i);
   });

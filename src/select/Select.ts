@@ -87,7 +87,6 @@ export const Select = createComponent({
 const handleCharacterPress = (options: SelectOptions) => (
   character: string,
 ) => {
-  console.log(character);
   /**
    * Typeahead: Based on current character pressed,
    * find the next item to be selected
