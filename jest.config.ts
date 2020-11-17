@@ -12,6 +12,8 @@ export default {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/src/__mocks__/styleMock.js",
+    "^@shared(.*)$": "<rootDir>/shared$1",
+    "^renderless-components$": "<rootDir>/src",
   },
   coveragePathIgnorePatterns: [
     "node_modules",
