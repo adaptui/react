@@ -11,7 +11,6 @@ System.
   <a href="https://npmjs.org/package/renderless-components"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/renderless-components.svg"></a>
   <a href="https://github.com/timelessco/renderless-components/actions"><img alt="Build Status" src="https://github.com/timelessco/renderless-components/workflows/Test/badge.svg?event=push&branch=master" /></a>
   <a href="https://app.netlify.com/sites/renderless-components/deploys"><img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/42b9b82f-b8e7-441e-a6c3-9f301addd7ff/deploy-status" /></a><br/>
-  <a href="https://codecov.io/gh/timelessco/renderless-components"><img src="https://codecov.io/gh/timelessco/renderless-components/branch/master/graph/badge.svg" /></a>
   <a href="https://github.com/timelessco/renderless-components/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
 </p>
 
