@@ -55,7 +55,6 @@
     "@react-aria/interactions": "^3.3.0",
     "@react-aria/utils": "3.4.0",
     "date-fns": "2.16.1",
-    "reakit": "1.3.0",
     "reakit-system": "0.15.0",
     "reakit-utils": "0.15.0",
     "uuid": "8.3.1"
@@ -131,6 +130,7 @@
     "react-test-renderer": "16.14.0",
     "react-transition-group": "4.4.1",
     "react-virtual": "^2.3.1",
+    "reakit": "1.3.0",
     "reakit-test-utils": "0.14.5",
     "rimraf": "3.0.2",
     "sort-package-json": "1.46.1",
@@ -144,7 +144,8 @@
   },
   "peerDependencies": {
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "reakit": "^1.3.0"
   },
   "publishConfig": {
     "access": "public"
