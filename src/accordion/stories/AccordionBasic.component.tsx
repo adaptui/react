@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
   useAccordionState,
 } from "renderless-components";
-import { AccordionInitialState } from "../types";
 
 export function App(props: any) {
   const state = useAccordionState(props);

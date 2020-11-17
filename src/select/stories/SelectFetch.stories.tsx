@@ -3,9 +3,9 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
+  selectCssTemplate,
   selectFetchTemplate,
   selectFetchTemplateJs,
-  selectCssTemplate,
 } from "./templates";
 import { App as SelectFetch } from "./SelectFetch.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";

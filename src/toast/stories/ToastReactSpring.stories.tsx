@@ -3,65 +3,27 @@ import { Meta } from "@storybook/react";
 
 import "./ToastBasic.css";
 import {
+  utilsTemplate,
+  utilsTemplateJs,
   toastBasicCssTemplate,
-  toastUtilsTemplate,
-  toastUtilsTemplateJs,
   toastReactSpringTemplate,
   toastReactSpringTemplateJs,
 } from "./templates";
 import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
-import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
-
-const sandboxJs = CreateToastSandbox({
-  type: "jsx",
-  deps: ["renderless-components@0.1.1-beta.1", "react-spring"],
-});
-const sandboxTs = CreateToastSandbox({
-  type: "tsx",
-  deps: ["renderless-components@0.1.1-beta.1", "react-spring"],
-});
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: ReactSpringToast,
   title: "Toast/ReactSpring",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: toastReactSpringTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: sandboxJs,
-      },
-      {
-        tab: "Utils.jsx",
-        template: toastUtilsTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: sandboxJs,
-      },
-      {
-        tab: "React",
-        template: toastReactSpringTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-      {
-        tab: "Utils.tsx",
-        template: toastUtilsTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-      {
-        tab: "CSS",
-        template: toastBasicCssTemplate,
-        language: "css",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: toastReactSpringTemplateJs,
+      jsUtils: utilsTemplateJs,
+      ts: toastReactSpringTemplate,
+      tsUtils: utilsTemplate,
+      css: toastBasicCssTemplate,
+      deps: ["react-spring"],
+    }),
   },
   decorators: [
     Story => {

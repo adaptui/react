@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import {
-  SelectInitialState,
-  useSelectState,
   Select,
-  SelectPopover,
   SelectOption,
-} from "../index";
+  SelectPopover,
+  useSelectState,
+  SelectInitialState,
+} from "renderless-components";
 
 export const App: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });

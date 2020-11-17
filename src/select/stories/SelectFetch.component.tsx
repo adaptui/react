@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import {
-  SelectInitialState,
-  useSelectState,
   Select,
-  SelectPopover,
   SelectOption,
-} from "../index";
+  SelectPopover,
+  useSelectState,
+  SelectInitialState,
+} from "renderless-components";
 
 type User = { value: string; label: string };
 

@@ -3,9 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
+  utilsTemplate,
+  utilsTemplateJs,
+  selectCssTemplate,
   selectWindowsTemplate,
   selectWindowsTemplateJs,
-  selectCssTemplate,
 } from "./templates";
 import { App as SelectWindows } from "./SelectWindows.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -16,7 +18,9 @@ export default {
   parameters: {
     preview: createPreviewTabs({
       js: selectWindowsTemplateJs,
+      jsUtils: utilsTemplateJs,
       ts: selectWindowsTemplate,
+      tsUtils: utilsTemplate,
       css: selectCssTemplate,
     }),
   },
