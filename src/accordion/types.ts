@@ -1,8 +1,11 @@
+import { Dispatch, SetStateAction } from "react";
 import {
   CompositeState,
   CompositeActions,
   CompositeInitialState,
 } from "reakit";
+
+export type StringOrNull = string | null;
 
 export type AccordionState = CompositeState & {
   /**
@@ -44,7 +47,7 @@ export type AccordionActions = CompositeActions & {
   unregisterPanel: CompositeActions["unregisterItem"];
 };
 
-export interface CommonAccordionProps {
+export type CommonAccordionProps = {
   /**
    * Whether the accodion selection should be manual.
    * @default true
@@ -55,23 +58,16 @@ export interface CommonAccordionProps {
    * @default false
    */
   allowToggle: boolean;
-}
-
-export type SelectedIdPair = {
-  /**
-   * The current selected accordion's `id`.
-   */
-  selectedId?: string | null;
-  /**
-   * Initial selected accordion's `id`.
-   * @default []
-   */
-  selectedIds?: (string | null)[];
-  setSelectedId?: React.Dispatch<React.SetStateAction<string | null>>;
-  setSelectedIds?: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 };
 
-export interface SingleAccordionProps extends CommonAccordionProps {
+export type SelectedIdPair = {
+  selectedId?: StringOrNull;
+  selectedIds?: StringOrNull[];
+  setSelectedId?: Dispatch<SetStateAction<StringOrNull>>;
+  setSelectedIds?: Dispatch<SetStateAction<StringOrNull[]>>;
+};
+
+export type SingleAccordionProps = CommonAccordionProps & {
   /**
    * Allow to open multiple accordion items
    * @default false
@@ -80,20 +76,20 @@ export interface SingleAccordionProps extends CommonAccordionProps {
   /**
    * The current selected accordion's `id`.
    */
-  selectedId?: string | null;
+  selectedId?: StringOrNull;
   /**
    * Set default selected id(uncontrolled)
    *
    * @default null
    */
-  defaultSelectedId?: string | null;
+  defaultSelectedId?: StringOrNull;
   /**
    * Handler that is called when the selectedId changes.
    */
-  onSelectedIdChange?: (value: string | null) => void;
-}
+  onSelectedIdChange?: (value: StringOrNull) => void;
+};
 
-export interface MultiAccordionProps extends CommonAccordionProps {
+export type MultiAccordionProps = CommonAccordionProps & {
   /**
    * Allow to open multiple accordion items
    * @default true
@@ -103,60 +99,55 @@ export interface MultiAccordionProps extends CommonAccordionProps {
    * Initial selected accordion's `id`.
    * @default []
    */
-  selectedIds?: (string | null)[];
+  selectedIds?: StringOrNull[];
   /**
    * Set default selected ids(uncontrolled)
    *
    * @default []
    */
-  defaultSelectedIds?: (string | null)[];
+  defaultSelectedIds?: StringOrNull[];
   /**
    * Handler that is called when the selectedIds changes.
    */
-  onSelectedIdsChange?: (value: (string | null)[]) => void;
-}
+  onSelectedIdsChange?: (value: StringOrNull[]) => void;
+};
 
 // State return types //
 
-export interface SingleReturn {
+export type SingleReturn = {
   /**
    * Allow to open multiple accordion items
-   * @default false
    */
   allowMultiple: false;
   /**
    * The current selected accordion's `id`.
    */
-  selectedId: string | null | undefined;
+  selectedId: SelectedIdPair["selectedId"] | undefined;
   /**
    * Sets `selectedId`.
    */
-  setSelectedId: React.Dispatch<React.SetStateAction<string | null>>;
-}
+  setSelectedId: NonNullable<SelectedIdPair["setSelectedId"]>;
+};
 
-export interface MultiReturn {
+export type MultiReturn = {
   /**
    * Allow to open multiple accordion items
-   * @default true
    */
   allowMultiple: true;
   /**
    * The current selected accordion's `id`.
    */
-  selectedIds: (string | null)[] | undefined;
+  selectedIds: SelectedIdPair["selectedIds"] | undefined;
   /**
    * Sets `selectedIds`.
    */
-  setSelectedIds: React.Dispatch<React.SetStateAction<(string | null)[]>>;
-}
+  setSelectedIds: NonNullable<SelectedIdPair["setSelectedIds"]>;
+};
 
 // Overload signatures for useAccordionState
-export type SingleOverloadReturn = AccordionActions &
-  AccordionState &
-  SingleReturn;
-export type MultiOverloadReturn = AccordionActions &
-  AccordionState &
-  MultiReturn;
+type AccordionStateActions = AccordionActions & AccordionState;
+export type SingleOverloadReturn = AccordionStateActions & SingleReturn;
+export type MultiOverloadReturn = AccordionStateActions & MultiReturn;
 
 type AccordionProps = SingleAccordionProps | MultiAccordionProps;
 export type AccordionReturns = MultiReturn | SingleReturn;
