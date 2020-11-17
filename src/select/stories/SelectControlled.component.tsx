@@ -1,14 +1,13 @@
 import * as React from "react";
-import { isUndefined } from "@chakra-ui/utils";
 
 import {
-  SelectInitialState,
-  useSelectState,
   Select,
-  SelectPopover,
   SelectOption,
+  SelectPopover,
+  useSelectState,
+  SelectInitialState,
 } from "renderless-components";
-import { fruits } from "./fruits";
+import { fruits } from "./Utils.component";
 
 export const App: React.FC = () => {
   const [fruit, setFruit] = React.useState<string | null>(null);
@@ -51,7 +50,7 @@ const SelectComp: React.FC<SelectCompProps> = props => {
   });
 
   React.useEffect(() => {
-    if (!isUndefined(value)) select.setSelectedValue(value);
+    if (value !== undefined) select.setSelectedValue(value);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select.setSelectedValue, value]);
 

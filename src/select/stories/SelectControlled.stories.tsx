@@ -3,9 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
+  utilsTemplate,
+  utilsTemplateJs,
+  selectCssTemplate,
   selectControlledTemplate,
   selectControlledTemplateJs,
-  selectCssTemplate,
 } from "./templates";
 import { App as SelectControlled } from "./SelectControlled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -16,7 +18,9 @@ export default {
   parameters: {
     preview: createPreviewTabs({
       js: selectControlledTemplateJs,
+      jsUtils: utilsTemplateJs,
       ts: selectControlledTemplate,
+      tsUtils: utilsTemplate,
       css: selectCssTemplate,
     }),
   },

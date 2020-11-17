@@ -2,6 +2,7 @@ import * as React from "react";
 import { useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
 import {
+  SelectedIdPair,
   AccordionState,
   AccordionActions,
   AccordionReturns,
@@ -10,7 +11,6 @@ import {
   AccordionInitialState,
   AccordionInitialStateMulti,
   AccordionInitialStateSingle,
-  SelectedIdPair,
 } from "./types";
 
 export type AccordionStateReturn = AccordionActions &

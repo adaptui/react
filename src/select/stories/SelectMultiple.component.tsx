@@ -7,7 +7,7 @@ import {
   useSelectState,
   SelectInitialState,
 } from "renderless-components";
-import { fruits } from "./fruits";
+import { fruits } from "./Utils.component";
 
 export const App: React.FC<SelectInitialState> = props => {
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
