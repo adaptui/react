@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import { SetState } from "reakit-utils/ts";
 import { CompositeStateReturn, CompositeState, CompositeActions } from "reakit";

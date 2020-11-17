@@ -55,6 +55,7 @@ export const useSelect = createHook<SelectOptions, SelectHTMLProps>({
         const action = keyMap[event.key as keyof typeof keyMap];
         action?.();
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [
         options.visible,
         options.show,
