@@ -3,9 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
+  utilsTemplate,
+  utilsTemplateJs,
+  selectCssTemplate,
   selectDynamicTemplate,
   selectDynamicTemplateJs,
-  selectCssTemplate,
 } from "./templates";
 import { App as SelectDynamic } from "./SelectDynamic.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -16,7 +18,9 @@ export default {
   parameters: {
     preview: createPreviewTabs({
       js: selectDynamicTemplateJs,
+      jsUtils: utilsTemplateJs,
       ts: selectDynamicTemplate,
+      tsUtils: utilsTemplate,
       css: selectCssTemplate,
     }),
   },

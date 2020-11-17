@@ -1,13 +1,13 @@
 import * as React from "react";
-import { isUndefined } from "@chakra-ui/utils";
 
 import {
-  SelectInitialState,
-  useSelectState,
   Select,
-  SelectPopover,
   SelectOption,
+  SelectPopover,
+  useSelectState,
+  SelectInitialState,
 } from "renderless-components";
+import { fruits } from "./Utils.component";
 
 export const App: React.FC = () => {
   const [fruit, setFruit] = React.useState<string | null>(null);
@@ -50,7 +50,8 @@ const SelectComp: React.FC<SelectCompProps> = props => {
   });
 
   React.useEffect(() => {
-    if (!isUndefined(value)) select.setSelectedValue(value);
+    if (value !== undefined) select.setSelectedValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select.setSelectedValue, value]);
 
   React.useEffect(() => {
@@ -74,75 +75,3 @@ const SelectComp: React.FC<SelectCompProps> = props => {
 };
 
 export default App;
-
-const fruits = [
-  "Acerola",
-  "Apple",
-  "Apricots",
-  "Avocado",
-  "Banana",
-  "Blackberries",
-  "Blackcurrant",
-  "Blueberries",
-  "Breadfruit",
-  "Cantaloupe",
-  "Carambola",
-  "Cherimoya",
-  "Cherries",
-  "Clementine",
-  "Coconut Meat",
-  "Cranberries",
-  "Custard-Apple",
-  "Date Fruit",
-  "Durian",
-  "Elderberries",
-  "Feijoa",
-  "Figs",
-  "Gooseberries",
-  "Grapefruit",
-  "Grapes",
-  "Guava",
-  "Honeydew Melon",
-  "Jackfruit",
-  "Java-Plum",
-  "Jujube Fruit",
-  "Kiwifruit",
-  "Kumquat",
-  "Lemon",
-  "Lime",
-  "Longan",
-  "Loquat",
-  "Lychee",
-  "Mandarin",
-  "Mango",
-  "Mangosteen",
-  "Mulberries",
-  "Nectarine",
-  "Olives",
-  "Orange",
-  "Papaya",
-  "Passion Fruit",
-  "Peaches",
-  "Pear",
-  "Persimmon",
-  "Pitaya",
-  "Pineapple",
-  "Pitanga",
-  "Plantain",
-  "Plums",
-  "Pomegranate",
-  "Prickly Pear",
-  "Prunes",
-  "Pummelo",
-  "Quince",
-  "Raspberries",
-  "Rhubarb",
-  "Rose-Apple",
-  "Sapodilla",
-  "Soursop",
-  "Strawberries",
-  "Sugar-Apple",
-  "Tamarind",
-  "Tangerine",
-  "Watermelon",
-];

@@ -3,9 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import "./Select.css";
 import {
+  selectCssTemplate,
+  utilsTemplate,
+  utilsTemplateJs,
   selectMultipleTemplate,
   selectMultipleTemplateJs,
-  selectCssTemplate,
 } from "./templates";
 import { App as SelectMultiple } from "./SelectMultiple.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -16,7 +18,9 @@ export default {
   parameters: {
     preview: createPreviewTabs({
       js: selectMultipleTemplateJs,
+      jsUtils: utilsTemplateJs,
       ts: selectMultipleTemplate,
+      tsUtils: utilsTemplate,
       css: selectCssTemplate,
     }),
   },

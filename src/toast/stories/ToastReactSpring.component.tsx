@@ -1,7 +1,8 @@
 import React from "react";
 import { animated, useTransition } from "react-spring";
+
+import { Variants, Placements } from "./Utils.component";
 import { ToastProvider, TToastWrapper } from "renderless-components";
-import { Variants, Placements } from "./ToastUtils.component";
 
 const SpringAnimationWrapper: TToastWrapper = ({
   placement,

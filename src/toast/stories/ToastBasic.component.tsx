@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastProvider } from "renderless-components";
 
-import { Variants, Placements } from "./ToastUtils.component";
+import { Variants, Placements } from "./Utils.component";
 
 export const App: React.FC = () => {
   return (

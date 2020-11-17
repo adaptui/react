@@ -3,73 +3,27 @@ import { Meta } from "@storybook/react";
 
 import "./ToastBasic.css";
 import {
+  utilsTemplate,
+  utilsTemplateJs,
   toastBasicCssTemplate,
-  toastUtilsTemplate,
-  toastUtilsTemplateJs,
   toastCssAnimatedTemplate,
   toastCssAnimatedTemplateJs,
 } from "./templates";
 import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
-import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
-
-const sandboxJs = CreateToastSandbox({
-  type: "jsx",
-  deps: [
-    "renderless-components@0.1.1-beta.3",
-    "reakit",
-    "react-transition-group",
-  ],
-});
-const sandboxTs = CreateToastSandbox({
-  type: "tsx",
-  deps: [
-    "renderless-components@0.1.1-beta.3",
-    "reakit",
-    "react-transition-group",
-  ],
-});
+import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: CSSAnimatedToast,
   title: "Toast/CSSAnimated",
   parameters: {
-    preview: [
-      {
-        tab: "ReactJS",
-        template: toastCssAnimatedTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: sandboxJs,
-      },
-      {
-        tab: "Utils.jsx",
-        template: toastUtilsTemplateJs,
-        language: "jsx",
-        copy: true,
-        codesandbox: sandboxJs,
-      },
-      {
-        tab: "React",
-        template: toastCssAnimatedTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-      {
-        tab: "Utils.tsx",
-        template: toastUtilsTemplate,
-        language: "tsx",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-      {
-        tab: "CSS",
-        template: toastBasicCssTemplate,
-        language: "css",
-        copy: true,
-        codesandbox: sandboxTs,
-      },
-    ],
+    preview: createPreviewTabs({
+      js: toastCssAnimatedTemplateJs,
+      jsUtils: utilsTemplateJs,
+      ts: toastCssAnimatedTemplate,
+      tsUtils: utilsTemplate,
+      css: toastBasicCssTemplate,
+      deps: ["react-transition-group"],
+    }),
   },
   decorators: [
     Story => {
