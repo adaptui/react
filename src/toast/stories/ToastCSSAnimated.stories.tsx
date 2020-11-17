@@ -14,11 +14,19 @@ import { CreateToastSandbox } from "../../../scripts/create-preview-tabs";
 
 const sandboxJs = CreateToastSandbox({
   type: "jsx",
-  deps: ["renderless-components@0.1.1-beta.1", "react-transition-group"],
+  deps: [
+    "renderless-components@0.1.1-beta.3",
+    "reakit",
+    "react-transition-group",
+  ],
 });
 const sandboxTs = CreateToastSandbox({
   type: "tsx",
-  deps: ["renderless-components@0.1.1-beta.1", "react-transition-group"],
+  deps: [
+    "renderless-components@0.1.1-beta.3",
+    "reakit",
+    "react-transition-group",
+  ],
 });
 
 export default {

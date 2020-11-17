@@ -1,9 +1,15 @@
 {
   "name": "renderless-components",
   "version": "0.1.1-beta.3",
-  "description": "Renderless Components",
+  "description": "Renderless Components for building accessible components with any UI",
   "keywords": [
-    "renderless-component"
+    "renderless-component",
+    "reakit",
+    "a11y",
+    "react",
+    "ui",
+    "toolkit",
+    "components"
   ],
   "homepage": "https://github.com/timelessco/renderless-components#readme",
   "bugs": {

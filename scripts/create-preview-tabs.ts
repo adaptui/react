@@ -13,7 +13,7 @@ interface Props {
 
 export function createPreviewTabs(props: Props) {
   const { js, ts, css, deps: extraDeps = [] } = props;
-  const deps = ["renderless-components@0.1.1-beta.1", ...extraDeps];
+  const deps = ["renderless-components@0.1.1-beta.3", "reakit", ...extraDeps];
   const tabs = [];
 
   if (js) {
