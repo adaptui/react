@@ -19,14 +19,13 @@ System.
 
 ## Features
 
-- Easy to compose
-- WAI-ARIA compatible
-- Keyboard accessible
-- Single HTML tag components
-- React Hooks everywhere
-- Easy to style using any framework
+- Accessible :wheelchair:
+- Composable :toolbox:
+- WAI-ARIA Compatible :spiral_notepad:
+- React Hooks Based :anchor:
+- Easy To Customize, Style & Extend :nail_care:
 
-## Installation
+## :rocket: Installation
 
 ```sh
 # npm
