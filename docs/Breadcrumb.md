@@ -4,7 +4,18 @@ Accessible `Breadcrumb` component that provides the required aria attributes for
 it's links. It follows the
 [WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb).
 
-### Usage
+### Accessibilty
+
+- `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
+- `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page
+  is loaded.
+- `BreadcrumbLink` extends the accessibility features of [Link](#Link).
+
+### Composition
+
+- `BreadcrumbLink` uses [Link](#Link).
+
+### Example
 
 ```js
 import * as React from "react";
@@ -45,14 +56,3 @@ export const App = props => {
 
 export default App;
 ```
-
-### Accessibilty
-
-- `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
-- `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page
-  is loaded.
-- `BreadcrumbLink` extends the accessibility features of [Link](#Link).
-
-### Composition
-
-- `BreadcrumbLink` uses [Link](#Link).

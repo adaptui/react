@@ -10,18 +10,6 @@ const { createDirectory, createFile, walkSync } = require("./fsUtils");
 
 const CODE_EXAMPLE_FLAG = /\<\!\-\- IMPORT_EXAMPLE (.*) \-\-\>/m;
 
-const createPreviewTabs = require("./create-preview-tabs");
-const {
-  accordionBasicTemplate,
-  accordionBasicTemplateJs,
-} = require("../src/accordion/stories/templates");
-console.log(
-  createPreviewTabs({
-    js: accordionBasicTemplateJs,
-    ts: accordionBasicTemplate,
-  }),
-);
-
 const docsFolder = path.resolve(process.cwd(), "docs");
 const docsTemplatesFolder = path.resolve(process.cwd(), "docs-templates");
 createDirectory(docsFolder);

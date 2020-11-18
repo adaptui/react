@@ -3,14 +3,6 @@
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
-### Usage
-
-```js
-
-<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
-
-```
-
 ### Accessibility
 
 - `Accordion` extends the accessibility features of
@@ -36,3 +28,11 @@ Accessible Accordion component. It follows the
   [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite).
 - `AccordionPanel` uses
   [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
+
+### Example
+
+```js
+
+<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
+
+```
