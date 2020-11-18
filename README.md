@@ -1,6 +1,6 @@
 <h1 align="center">Renderless Components</h1>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
@@ -105,6 +105,7 @@ Thanks goes to these wonderful people
 <table>
   <tr>
     <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars0.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/timelessco/renderless-components/commits?author=navin-moorthy" title="Code">💻</a></td>
+    <td align="center"><a href="http://anuraghazra.github.io/"><img src="https://avatars3.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/timelessco/renderless-components/commits?author=anuraghazra" title="Code">💻</a></td>
   </tr>
 </table>
 
