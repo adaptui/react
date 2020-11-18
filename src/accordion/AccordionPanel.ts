@@ -61,7 +61,6 @@ export const useAccordionPanel = createHook<
 
     return {
       ref: useForkRef(ref, htmlRef),
-      role: "region",
       "aria-labelledby": accordionId,
       ...htmlProps,
     };
@@ -77,6 +76,7 @@ export const useAccordionPanel = createHook<
 
 export const AccordionPanel = createComponent({
   as: "div",
+  memo: true,
   useHook: useAccordionPanel,
 });
 

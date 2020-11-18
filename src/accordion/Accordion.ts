@@ -30,6 +30,6 @@ export const useAccordion = createHook<AccordionOptions, AccordionHTMLProps>({
 
 export const Accordion = createComponent({
   as: "div",
-  useHook: useAccordion,
   memo: true,
+  useHook: useAccordion,
 });
