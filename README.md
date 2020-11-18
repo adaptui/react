@@ -90,10 +90,6 @@ below documentation to learn more.
 - Time Picker
 - Toast
 
-## License
-
-MIT © [Timeless](https://timeless.co/)
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people
@@ -118,3 +114,7 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
+
+## License
+
+MIT © [Timeless](https://timeless.co/)
