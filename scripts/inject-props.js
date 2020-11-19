@@ -21,10 +21,9 @@ const {
 } = require("./utils");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
-const docsTemplatesFolder = path.resolve(process.cwd(), "docs-templates");
 const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
-const readmeTemplates = walkSync(docsTemplatesFolder);
+const readmeTemplates = walkSync(docsFolder);
 
 readmeTemplates.forEach(readme => {
   const mdContent = fs.readFileSync(readme, { encoding: "utf-8" });

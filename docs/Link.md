@@ -28,7 +28,13 @@ different compositions. It follows the
 ### Example
 
 ```js
+import * as React from "react";
 
-<!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
+import { Link } from "renderless-components";
 
+export const App = props => {
+  return <Link {...props}>Reakit</Link>;
+};
+
+export default App;
 ```
