@@ -3,7 +3,7 @@ const path = require("path");
 const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
-const ast = require("@textlint/markdown-to-ast");
+const prettier = require("prettier");
 
 const { walkSync, createFile } = require("./fsUtils");
 const injectMdContent = require("./inject-md-content");
@@ -95,7 +95,10 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
 
       createFile(
         path.join(docsFolder, path.basename(readmeTemplatePath)),
-        markdown,
+        prettier.format(markdown, {
+          parser: "markdown",
+          plugins: [markdownParser],
+        }),
       );
 
       console.log(
@@ -107,6 +110,7 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
         ),
       );
     } catch (e) {
+      console.log(e);
       // do nothing
     }
   }
