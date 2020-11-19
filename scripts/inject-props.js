@@ -2,12 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const outdent = require("outdent");
-const inject = require("md-node-inject");
 const { Project, ts } = require("ts-morph");
-const toMarkdown = require("ast-to-markdown");
 const ast = require("@textlint/markdown-to-ast");
 
 const { walkSync, createFile } = require("./fsUtils");
+const injectMdContent = require("./inject-md-content");
 
 const {
   getProps,
@@ -90,8 +89,12 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
 
     const propTypesMarkdown = getPropTypesMarkdown(types);
     try {
-      const merged = inject("Props", tree, ast.parse(propTypesMarkdown));
-      const markdown = toMarkdown(merged).trimLeft();
+      const markdown = injectMdContent(
+        mdContents,
+        PROPS_INJECT_FLAG,
+        () => propTypesMarkdown,
+      );
+
       createFile(
         path.join(docsFolder, path.basename(readmeTemplatePath)),
         markdown,

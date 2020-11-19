@@ -161,3 +161,11 @@ Accessible `Calendar` component.
 - **`weekDays`** <code>{ title: string; abbr: string; }[]</code>
 
 </details>
+
+### Example
+
+```js
+
+<!-- IMPORT_EXAMPLE src/calendar/stories/__js/Calendar.component.jsx -->
+
+```

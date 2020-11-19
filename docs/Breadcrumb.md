@@ -21,3 +21,22 @@ it's links. It follows the
 ### `Breadcrumbs`
 
 No props to show
+
+### Accessibilty
+
+- `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
+- `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page
+  is loaded.
+- `BreadcrumbLink` extends the accessibility features of [Link](#Link).
+
+### Composition
+
+- `BreadcrumbLink` uses [Link](#Link).
+
+### Example
+
+```js
+
+<!-- IMPORT_EXAMPLE src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx -->
+
+```
