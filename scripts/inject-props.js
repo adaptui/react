@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const chalk = require("chalk");
 const inject = require("md-node-inject");
 const { Project, ts } = require("ts-morph");
 const toMarkdown = require("ast-to-markdown");
@@ -7,79 +8,93 @@ const ast = require("@textlint/markdown-to-ast");
 
 const { walkSync, createFile, isDirectory } = require("./fsUtils");
 
-const docsTemplatesFolder = path.resolve(process.cwd(), "docs-templates");
 const docsFolder = path.resolve(process.cwd(), "docs");
+const docsTemplatesFolder = path.resolve(process.cwd(), "docs-templates");
+const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
-injectPropTypes(process.cwd());
+const readmeTemplates = walkSync(docsTemplatesFolder);
+
+readmeTemplates.forEach(readme => {
+  const mdContent = fs.readFileSync(readme, { encoding: "utf-8" });
+
+  mdContent.split("\n").map(line => {
+    const lineMatch = line.match(PROPS_INJECT_FLAG);
+    if (lineMatch) {
+      injectPropTypes(
+        path.join(process.cwd(), lineMatch[1]),
+        path.join(readme),
+      );
+    }
+  });
+});
 
 /**
  * Inject prop types tables into README.md files
  * @param {string} rootPath
  */
-function injectPropTypes(rootPath) {
-  const readmePaths = walkSync(docsTemplatesFolder);
+function injectPropTypes(rootPath, readmeTemplatePath) {
   const stateTypes = [];
-  const created = [];
 
   const project = new Project({
-    tsConfigFilePath: path.join(rootPath, "tsconfig.json"),
+    tsConfigFilePath: path.join(process.cwd(), "tsconfig.json"),
     addFilesFromTsConfig: false,
   });
 
-  readmePaths.forEach(readmePath => {
-    const mdContents = fs.readFileSync(readmePath, { encoding: "utf-8" });
+  const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
 
-    if (/#\s?Props/.test(mdContents)) {
-      const dir = path.dirname(readmePath);
-      const tree = ast.parse(mdContents);
-      const publicPaths = Object.values(
-        getPublicFiles(path.join(process.cwd(), "src")),
-      );
-      const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
-      project.resolveSourceFileDependencies();
-      const types = {};
+  if (/#\s?Props/.test(mdContents)) {
+    const tree = ast.parse(mdContents);
+    const publicPaths = Object.values(getPublicFiles(rootPath));
+    const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
+    project.resolveSourceFileDependencies();
+    const types = {};
 
-      sortSourceFiles(sourceFiles).forEach(sourceFile => {
-        sourceFile.forEachChild(node => {
-          if (isStateReturnDeclaration(node)) {
-            const propTypes = createPropTypeObjects(rootPath, node);
-            stateTypes.push(...propTypes.map(prop => prop.name));
+    sortSourceFiles(sourceFiles).forEach(sourceFile => {
+      sourceFile.forEachChild(node => {
+        if (isStateReturnDeclaration(node)) {
+          const propTypes = createPropTypeObjects(rootPath, node);
+          stateTypes.push(...propTypes.map(prop => prop.name));
+        }
+        if (isPropsDeclaration(node)) {
+          const moduleName = getModuleName(node);
+          const propTypes = createPropTypeObjects(rootPath, node);
+
+          if (isInitialStateDeclaration(node)) {
+            types[moduleName] = propTypes;
+          } else {
+            const propTypesWithoutState = propTypes.filter(
+              prop => !stateTypes.includes(prop.name),
+            );
+            const propTypesReturnedByState = propTypes.filter(prop =>
+              stateTypes.includes(prop.name),
+            );
+            types[moduleName] = propTypesWithoutState;
+            types[moduleName].stateProps = propTypesReturnedByState;
           }
-          if (isPropsDeclaration(node)) {
-            const moduleName = getModuleName(node);
-            const propTypes = createPropTypeObjects(rootPath, node);
-
-            if (isInitialStateDeclaration(node)) {
-              types[moduleName] = propTypes;
-            } else {
-              const propTypesWithoutState = propTypes.filter(
-                prop => !stateTypes.includes(prop.name),
-              );
-              const propTypesReturnedByState = propTypes.filter(prop =>
-                stateTypes.includes(prop.name),
-              );
-              types[moduleName] = propTypesWithoutState;
-              types[moduleName].stateProps = propTypesReturnedByState;
-            }
-          }
-        });
+        }
       });
+    });
 
-      console.log(stateTypes, types);
-      const propTypesMarkdown = getPropTypesMarkdown(types);
-      try {
-        const merged = inject("Props", tree, ast.parse(propTypesMarkdown));
-        const markdown = toMarkdown(merged).trimLeft();
-        createFile(path.join(docsFolder, path.basename(readmePath)), markdown);
-        created.push(chalk.bold(chalk.green(path.basename(dir))));
-      } catch (e) {
-        // do nothing
-      }
+    const propTypesMarkdown = getPropTypesMarkdown(types);
+    try {
+      const merged = inject("Props", tree, ast.parse(propTypesMarkdown));
+      const markdown = toMarkdown(merged).trimLeft();
+      createFile(
+        path.join(docsFolder, path.basename(readmeTemplatePath)),
+        markdown,
+      );
+
+      console.log(
+        chalk.bold(
+          chalk.green(
+            "Injected prop types in",
+            path.basename(readmeTemplatePath),
+          ),
+        ),
+      );
+    } catch (e) {
+      // do nothing
     }
-  });
-
-  if (created.length) {
-    log(["", `Injected prop types`, `${created.join(", ")}`].join("\n"));
   }
 }
 
@@ -87,16 +102,14 @@ function injectPropTypes(rootPath) {
  * @param {import("ts-morph").SourceFile[]} sourceFiles
  */
 function sortSourceFiles(sourceFiles) {
-  return sourceFiles
-    .sort((a, b) => {
-      const aName = a.getBaseNameWithoutExtension();
-      const bName = b.getBaseNameWithoutExtension();
-      if (/State/.test(aName)) return -1;
-      if (/State/.test(bName) || aName > bName) return 1;
-      if (aName < bName) return -1;
-      return 0;
-    })
-    .filter(f => /State/.test(f.getBaseNameWithoutExtension()));
+  return sourceFiles.sort((a, b) => {
+    const aName = a.getBaseNameWithoutExtension();
+    const bName = b.getBaseNameWithoutExtension();
+    if (/State/.test(aName)) return -1;
+    if (/State/.test(bName) || aName > bName) return 1;
+    if (aName < bName) return -1;
+    return 0;
+  });
 }
 
 /**
@@ -241,14 +254,6 @@ function getTagNames(prop) {
 }
 
 /**
- * @param {import("ts-morph").Node<Node>} node
- * @param {boolean} includePrivate
- */
-function getPropsNames(node, includePrivate) {
-  return getProps(node, includePrivate).map(prop => prop.getEscapedName());
-}
-
-/**
  * @param {string} rootPath
  * @param {import("ts-morph").Symbol} prop
  */
@@ -283,7 +288,8 @@ function getDeclaration(symbol) {
  * @param {import("ts-morph").Symbol} symbol
  */
 function getJsDocs(symbol) {
-  console.log(symbol);
+  if (!getDeclaration(symbol).getJsDocs) return;
+
   const jsDocs = getDeclaration(symbol).getJsDocs();
   return jsDocs[jsDocs.length - 1];
 }

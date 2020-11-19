@@ -6,6 +6,8 @@ it's links. It follows the
 
 # Props
 
+<!-- INJECT_PROPS src/breadcrumbs -->
+
 ### Accessibilty
 
 - `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.

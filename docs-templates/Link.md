@@ -6,6 +6,8 @@ different compositions. It follows the
 
 # Props
 
+<!-- INJECT_PROPS src/link -->
+
 ### Accessibilty
 
 - `Link` has role `link`.

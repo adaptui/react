@@ -158,15 +158,5 @@ export type MultiOverloadReturn = AccordionActions &
   AccordionState &
   MultiReturn;
 
-type AccordionProps = SingleAccordionProps | MultiAccordionProps;
+export type AccordionPropsUnion = SingleAccordionProps | MultiAccordionProps;
 export type AccordionReturns = MultiReturn | SingleReturn;
-
-export type AccordionInitialState = Partial<
-  CompositeInitialState & AccordionProps
->;
-export type AccordionInitialStateSingle = Partial<
-  CompositeInitialState & SingleAccordionProps
->;
-export type AccordionInitialStateMulti = Partial<
-  CompositeInitialState & MultiAccordionProps
->;

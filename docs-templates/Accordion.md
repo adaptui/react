@@ -5,6 +5,8 @@ Accessible Accordion component. It follows the
 
 # Props
 
+<!-- INJECT_PROPS src/accordion -->
+
 ### Accessibility
 
 - `Accordion` extends the accessibility features of
