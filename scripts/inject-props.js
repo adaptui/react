@@ -196,12 +196,23 @@ function getPropTypesRow(prop) {
   const symbol = /unstable_/.test(prop.name)
     ? ' <span title="Experimental">⚠️</span>'
     : "";
-  const name = `**\`${prop.name}\`**${symbol}`;
+  const name = `**\`${prop.name}\`**${symbol} `;
 
   return outdent`
     - ${name}
     ${prop.type}
     ${prop.description.split("\n\n").join("\n\n  ")}
+  `;
+}
+
+function getSummaryDetails(stateProps) {
+  return outdent`
+    <details><summary>${stateProps.length} state props</summary>
+    > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
+    
+    ${stateProps.map(getPropTypesRow).join("\n")}
+    
+    </details>
   `;
 }
 
@@ -214,22 +225,18 @@ function getPropTypesMarkdown(types) {
       const props = types[title];
       const rows = props.map(getPropTypesRow).join("\n");
       const stateProps = props.stateProps || [];
-      const hiddenRows = stateProps.length
-        ? `
-<details><summary>${stateProps.length} state props</summary>
-> These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
-${stateProps.map(getPropTypesRow).join("\n")}
-</details>`
-        : "";
+      const hiddenRows = stateProps.length ? getSummaryDetails(stateProps) : "";
 
-      return `
-### \`${title}\`
-${rows || (hiddenRows ? "" : "No props to show")}
-${hiddenRows}`;
+      return outdent`
+        ### \`${title}\`
+        ${rows || (hiddenRows ? "" : "No props to show")}
+        ${hiddenRows}
+      `;
     })
     .join("\n\n");
 
-  return `
-<!-- Automatically generated -->
-${content}`;
+  return outdent`
+    <!-- Automatically generated -->
+    ${content}
+  `;
 }
