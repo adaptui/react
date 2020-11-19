@@ -163,6 +163,7 @@ function getDeclaration(symbol) {
  * @param {import("ts-morph").Symbol} symbol
  */
 function getJsDocs(symbol) {
+  if (!getDeclaration(symbol).getJsDocs) return;
   const jsDocs = getDeclaration(symbol).getJsDocs();
   return jsDocs[jsDocs.length - 1];
 }
@@ -375,7 +376,7 @@ module.exports = {
   getDeclaration,
   isOptionsDeclaration,
   isStateReturnDeclaration,
-  getTagNames,
   sortSourceFiles,
   getPublicFiles,
+  getJsDocs,
 };

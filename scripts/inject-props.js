@@ -11,6 +11,7 @@ const { walkSync, createFile } = require("./fsUtils");
 
 const {
   getProps,
+  getJsDocs,
   getPublicFiles,
   getModuleName,
   getEscapedName,
@@ -160,16 +161,6 @@ function isInitialStateDeclaration(node) {
   return (
     kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName)
   );
-}
-
-/**
- * @param {import("ts-morph").Symbol} symbol
- */
-function getJsDocs(symbol) {
-  if (!getDeclaration(symbol).getJsDocs) return;
-
-  const jsDocs = getDeclaration(symbol).getJsDocs();
-  return jsDocs[jsDocs.length - 1];
 }
 
 /**
