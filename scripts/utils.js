@@ -367,6 +367,7 @@ function makeKeys(rootPath) {
 }
 
 module.exports = {
+  getPackage,
   hasTSConfig,
   makeKeys,
 };

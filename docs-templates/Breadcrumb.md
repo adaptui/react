@@ -4,6 +4,8 @@ Accessible `Breadcrumb` component that provides the required aria attributes for
 it's links. It follows the
 [WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb).
 
+# Props
+
 ### Accessibilty
 
 - `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
