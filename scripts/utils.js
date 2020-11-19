@@ -1,14 +1,13 @@
 // Taken from: https://github.com/reakit/reakit/blob/6f6d1ad9177156cafa4adf9c987a43c79a1bbb90/scripts/build/utils.js
+const prettier = require("prettier");
 const { join, dirname, basename } = require("path");
 const { toUpper, snakeCase, isEqual } = require("lodash");
-const prettier = require("prettier");
 const {
-  readdirSync,
-  writeFileSync,
   lstatSync,
   existsSync,
+  readdirSync,
+  writeFileSync,
 } = require("fs-extra");
-const { Project } = require("ts-morph");
 const chalk = require("chalk");
 
 function log(...args) {
@@ -370,4 +369,13 @@ module.exports = {
   getPackage,
   hasTSConfig,
   makeKeys,
+  getProps,
+  getEscapedName,
+  getModuleName,
+  getDeclaration,
+  isOptionsDeclaration,
+  isStateReturnDeclaration,
+  getTagNames,
+  sortSourceFiles,
+  getPublicFiles,
 };

@@ -1,12 +1,24 @@
 const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
+const outdent = require("outdent");
 const inject = require("md-node-inject");
 const { Project, ts } = require("ts-morph");
 const toMarkdown = require("ast-to-markdown");
 const ast = require("@textlint/markdown-to-ast");
 
-const { walkSync, createFile, isDirectory } = require("./fsUtils");
+const { walkSync, createFile } = require("./fsUtils");
+
+const {
+  getProps,
+  getPublicFiles,
+  getModuleName,
+  getEscapedName,
+  getDeclaration,
+  sortSourceFiles,
+  isOptionsDeclaration,
+  isStateReturnDeclaration,
+} = require("./utils");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
 const docsTemplatesFolder = path.resolve(process.cwd(), "docs-templates");
@@ -99,109 +111,6 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
 }
 
 /**
- * @param {import("ts-morph").SourceFile[]} sourceFiles
- */
-function sortSourceFiles(sourceFiles) {
-  return sourceFiles.sort((a, b) => {
-    const aName = a.getBaseNameWithoutExtension();
-    const bName = b.getBaseNameWithoutExtension();
-    if (/State/.test(aName)) return -1;
-    if (/State/.test(bName) || aName > bName) return 1;
-    if (aName < bName) return -1;
-    return 0;
-  });
-}
-
-/**
- * Filters out files starting with __
- * Includes directories and TS/JS files.
- * @param {string} rootPath
- * @param {string} filename
- */
-function isPublicModule(rootPath, filename) {
-  const isPrivate = /^__/.test(filename);
-  if (isPrivate) {
-    return false;
-  }
-  if (isDirectory(path.join(rootPath, filename))) {
-    return true;
-  }
-  return /\.(j|t)sx?$/.test(filename);
-}
-
-/**
- * @param {string} path
- */
-function removeExt(path) {
-  return path.replace(/\.[^.]+$/, "");
-}
-
-/**
- * Ensure that paths are consistent across Windows and non-Windows platforms.
- * @param {string} filePath
- */
-function normalizePath(filePath) {
-  return filePath.replace(/\\/g, "/");
-}
-
-/**
- * Returns { index: "path/to/index", moduleName: "path/to/moduleName" }
- * @param {string} rootPath
- * @param {string} prefix
- */
-function getPublicFiles(rootPath, prefix = "") {
-  return fs
-    .readdirSync(rootPath)
-    .filter(filename => isPublicModule(rootPath, filename))
-    .filter(filename => !rootPath.match(/stories/))
-    .sort() // Ensure consistent order across platforms
-    .reduce((acc, filename) => {
-      const filePath = path.join(rootPath, filename);
-      const childFiles =
-        isDirectory(filePath) &&
-        getPublicFiles(filePath, path.join(prefix, filename));
-      return {
-        ...(childFiles || {
-          [removeExt(
-            normalizePath(path.join(prefix, filename)),
-          )]: normalizePath(filePath),
-        }),
-        ...acc,
-      };
-    }, {});
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
-function getModuleName(node) {
-  return getEscapedName(node)
-    .replace("unstable_", "")
-    .replace(/^(.+)InitialState$/, "use$1State")
-    .replace(/^(.+)StateReturn$/, "$1State")
-    .replace("Options", "");
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
-function getEscapedName(node) {
-  const symbol = node.getSymbol();
-  return symbol && symbol.getEscapedName();
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
-function isStateReturnDeclaration(node) {
-  const kindName = node.getKindName();
-  const escapedName = getEscapedName(node);
-  return (
-    kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName)
-  );
-}
-
-/**
  * @param {string} rootPath
  * @param {import("ts-morph").Node<Node>} node
  */
@@ -231,29 +140,6 @@ function getPropType(rootPath, prop) {
 }
 
 /**
- * @param {import("ts-morph").Node<Node>} node
- * @param {boolean} includePrivate
- */
-function getProps(node, includePrivate) {
-  const props = node.getType().getProperties();
-  if (includePrivate) {
-    return props;
-  }
-  return props.filter(prop => !getTagNames(prop).includes("JSDocPrivateTag"));
-}
-
-/**
- * @param {import("ts-morph").Symbol} prop
- * @returns {string[]}
- */
-function getTagNames(prop) {
-  const jsDocs = getJsDocs(prop);
-  if (!jsDocs) return [];
-  // Object.getOwnPropertyNames(Object.getPrototypeOf(jsDocs));
-  return jsDocs.getTags().map(tag => tag.getKindName());
-}
-
-/**
  * @param {string} rootPath
  * @param {import("ts-morph").Symbol} prop
  */
@@ -279,14 +165,6 @@ function isInitialStateDeclaration(node) {
 /**
  * @param {import("ts-morph").Symbol} symbol
  */
-function getDeclaration(symbol) {
-  const declarations = symbol.getDeclarations();
-  return declarations[0];
-}
-
-/**
- * @param {import("ts-morph").Symbol} symbol
- */
 function getJsDocs(symbol) {
   if (!getDeclaration(symbol).getJsDocs) return;
 
@@ -307,15 +185,6 @@ function getComment(symbol) {
 /**
  * @param {import("ts-morph").Node<Node>} node
  */
-function isOptionsDeclaration(node) {
-  const kindName = node.getKindName();
-  const escapedName = getEscapedName(node);
-  return kindName === "TypeAliasDeclaration" && /.+Options$/.test(escapedName);
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
 function isPropsDeclaration(node) {
   return isOptionsDeclaration(node) || isInitialStateDeclaration(node);
 }
@@ -329,10 +198,11 @@ function getPropTypesRow(prop) {
     : "";
   const name = `**\`${prop.name}\`**${symbol}`;
 
-  return `- ${name}
-  ${prop.type}
-  ${prop.description.split("\n\n").join("\n\n  ")}
-`;
+  return outdent`
+    - ${name}
+    ${prop.type}
+    ${prop.description.split("\n\n").join("\n\n  ")}
+  `;
 }
 
 /**
