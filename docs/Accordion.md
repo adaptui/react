@@ -9,6 +9,11 @@ Accessible Accordion component. It follows the
 
 ### `useAccordionState`
 
+- **`allowMultiple`** <code>false | undefined</code> Allow to open multiple
+  accordion items
+- **`manual`** <code>boolean</code> Whether the accodion selection should be
+  manual.
+- **`allowToggle`** <code>boolean</code> Allow to toggle accordion items
 - **`baseId`** <code>string</code> ID that will serve as a base for all the
   items IDs.
 - **`unstable_virtual`** <span title="Experimental">⚠️</span>
@@ -77,11 +82,6 @@ Accessible Accordion component. It follows the
 - **`shift`** <code>boolean</code> **Has effect only on two-dimensional
   composites**. If enabled, moving up or down when there's no next item or the
   next item is disabled will shift to the item right before it.
-- **`allowMultiple`** <code>false | undefined</code> Allow to open multiple
-  accordion items
-- **`manual`** <code>boolean</code> Whether the accodion selection should be
-  manual.
-- **`allowToggle`** <code>boolean</code> Allow to toggle accordion items
 
 ### `Accordion`
 

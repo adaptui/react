@@ -1,26 +1,26 @@
 import * as React from "react";
-import { CompositeInitialState, useCompositeState } from "reakit";
 import { useControllableState } from "@chakra-ui/hooks";
+import { CompositeInitialState, useCompositeState } from "reakit";
 import {
   AccordionState,
+  SelectedIdPair,
   AccordionActions,
   AccordionReturns,
   MultiOverloadReturn,
   SingleOverloadReturn,
-  SelectedIdPair,
   AccordionPropsUnion,
   MultiAccordionProps,
   SingleAccordionProps,
 } from "./types";
 
 export type AccordionInitialState = Partial<
-  CompositeInitialState & AccordionPropsUnion
+  AccordionPropsUnion & CompositeInitialState
 >;
 export type AccordionInitialStateSingle = Partial<
-  CompositeInitialState & SingleAccordionProps
+  SingleAccordionProps & CompositeInitialState
 >;
 export type AccordionInitialStateMulti = Partial<
-  CompositeInitialState & MultiAccordionProps
+  MultiAccordionProps & CompositeInitialState
 >;
 
 export type AccordionStateReturn = AccordionActions &

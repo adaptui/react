@@ -54,7 +54,6 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
   const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
 
   if (/#\s?Props/.test(mdContents)) {
-    const tree = ast.parse(mdContents);
     const publicPaths = Object.values(getPublicFiles(rootPath));
     const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
     project.resolveSourceFileDependencies();
@@ -135,7 +134,7 @@ function getPropType(rootPath, prop) {
     text.replace(/[\u00A0-\u9999<>&"]/gim, i => `&#${i.charCodeAt(0)};`);
 
   if (type.length > 50) {
-    return `<code title="${encode(type)}">${encode(
+    return outdent`<code title="${encode(type)}">${encode(
       type.substring(0, 47),
     )}...</code>`;
   }
