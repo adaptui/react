@@ -3,7 +3,9 @@ const path = require("path");
 const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
-const prettier = require("prettier");
+const prettier = require("prettier/standalone");
+const markdownParser = require("prettier/parser-markdown");
+const prettierConfig = require("../.prettierrc.json");
 
 const { walkSync, createFile } = require("./fsUtils");
 const injectMdContent = require("./inject-md-content");
@@ -98,6 +100,7 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
         prettier.format(markdown, {
           parser: "markdown",
           plugins: [markdownParser],
+          ...prettierConfig,
         }),
       );
 
