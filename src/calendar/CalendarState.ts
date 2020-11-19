@@ -33,21 +33,65 @@ import { announce } from "../utils/LiveAnnouncer";
 import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
-export interface CalendarInitialState
-  extends ValueBase<string>,
-    RangeValueBase<string>,
-    InputBase {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-  /**
-   * Id for the calendar grid
-   */
-  id?: string;
-}
+export type CalendarState = {
+  calendarId: string | undefined;
+  dateValue: Date;
+  minDate: Date | undefined;
+  maxDate: Date | undefined;
+  month: number;
+  year: number;
+  weekStart: number;
+  weekDays: {
+    title: string;
+    abbr: string;
+  }[];
+  daysInMonth: Date[][];
+  isDisabled: boolean;
+  isFocused: boolean;
+  isReadOnly: boolean;
+  currentMonth: Date;
+  focusedDate: Date;
+  isRangeCalendar: boolean;
+};
 
-export function useCalendarState(props: CalendarInitialState = {}) {
+export type CalendarActions = {
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentMonth: React.Dispatch<React.SetStateAction<Date>>;
+  setFocusedDate: React.Dispatch<React.SetStateAction<Date>>;
+  setDateValue: (value: Date) => void;
+  focusCell: (value: Date) => void;
+  focusNextDay: () => void;
+  focusPreviousDay: () => void;
+  focusNextWeek: () => void;
+  focusPreviousWeek: () => void;
+  focusNextMonth: () => void;
+  focusPreviousMonth: () => void;
+  focusStartOfMonth: () => void;
+  focusEndOfMonth: () => void;
+  focusNextYear: () => void;
+  focusPreviousYear: () => void;
+  selectFocusedDate: () => void;
+  selectDate: (value: Date) => void;
+};
+
+export type CalendarInitialState = ValueBase<string> &
+  RangeValueBase<string> &
+  InputBase & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+    /**
+     * Id for the calendar grid
+     */
+    id?: string;
+  };
+
+export type CalendarStateReturn = CalendarState & CalendarActions;
+
+export function useCalendarState(
+  props: CalendarInitialState = {},
+): CalendarStateReturn {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
@@ -213,5 +257,3 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     isRangeCalendar: false,
   };
 }
-
-export type CalendarStateReturn = ReturnType<typeof useCalendarState>;

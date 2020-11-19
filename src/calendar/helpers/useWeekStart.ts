@@ -7,7 +7,7 @@ import { useLocale } from "@react-aria/i18n";
 
 // Data from https://github.com/unicode-cldr/cldr-core/blob/master/supplemental/weekData.json
 // Locales starting on Sunday have been removed for compression.
-const data = {
+const data: Record<string, number> = {
   "001": 1,
   AD: 1,
   AE: 6,
@@ -107,7 +107,7 @@ export function useWeekStart() {
   return data[region] || 0;
 }
 
-function useRegion() {
+function useRegion(): string {
   const { locale } = useLocale();
 
   // If the Intl.Locale API is available, use it to get the region for the locale.
