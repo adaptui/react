@@ -3,9 +3,6 @@ const path = require("path");
 const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
-const prettier = require("prettier/standalone");
-const markdownParser = require("prettier/parser-markdown");
-const prettierConfig = require("../.prettierrc.json");
 
 const injectMdContent = require("./inject-md-content");
 const { walkSync, createFile } = require("./fsUtils");
@@ -83,14 +80,7 @@ function injectComposition(compose, readmeTemplatePath) {
       () => compositionMarkdown,
     );
 
-    createFile(
-      path.join(docsFolder, moduleName),
-      prettier.format(markdown, {
-        parser: "markdown",
-        plugins: [markdownParser],
-        ...prettierConfig,
-      }),
-    );
+    createFile(path.join(docsFolder, moduleName), markdown);
 
     console.log(
       chalk.bold(
