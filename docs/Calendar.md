@@ -192,6 +192,8 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ### Example
 
+#### Base Calendar
+
 ```js
 import React from "react";
 
@@ -309,6 +311,8 @@ const DoubleChevronRight = props => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 ```
+
+#### Range Calendar
 
 ```js
 import React from "react";

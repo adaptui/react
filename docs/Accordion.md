@@ -3,7 +3,7 @@
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
-[Open On CodeSandbox](https://codesandbox.io/s/9qc1x)
+[Open On CodeSandbox](https://codesandbox.io/s/jqx0w)
 
 # Props
 

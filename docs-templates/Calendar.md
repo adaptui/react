@@ -12,9 +12,13 @@ Accessible `Calendar` component.
 
 ### Example
 
+#### Base Calendar
+
 ```js
 <!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarBase.component.jsx -->
 ```
+
+#### Range Calendar
 
 ```js
 <!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarRange.component.jsx -->
