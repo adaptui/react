@@ -6,8 +6,6 @@ Accessible Accordion component. It follows the
 <!-- CODESANDBOX
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
 css: src/accordion/stories/AccordionStyled.css
-deps:
-  - reakit
 -->
 
 # Props

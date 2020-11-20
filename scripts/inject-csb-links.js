@@ -18,13 +18,15 @@ const resolveVersion = userModule => {
 
 const getCSBLink = (files, extraDeps) => {
   const deps = {
+    reakit: "latest",
     "renderless-components": "0.1.1-beta.3",
     react: "^16.8.0",
     "react-dom": "^16.8.0",
     "react-scripts": "^3.4.3",
-    ...extraDeps.reduce((curr, next) => {
-      return { ...curr, ...resolveVersion(next) };
-    }, {}),
+    ...(extraDeps &&
+      extraDeps.reduce((curr, next) => {
+        return { ...curr, ...resolveVersion(next) };
+      }, {})),
   };
 
   const parameters = getParameters({
