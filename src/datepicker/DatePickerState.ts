@@ -5,13 +5,18 @@
  */
 
 import * as React from "react";
-import { useControllableState } from "@chakra-ui/hooks";
+import {} from "@chakra-ui/hooks";
 import { Validation, ValueBase, ValidationState } from "@react-types/shared";
 
+import {
+  parseDate,
+  stringifyDate,
+  isInvalidDateRange,
+  useControllableState,
+} from "../utils";
 import { useCalendarState } from "../calendar";
 import { RangeValueBase } from "../utils/types";
 import { SegmentInitialState, useSegmentState } from "../segment";
-import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
 export interface DatePickerInitialState
@@ -50,7 +55,6 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
     value: parseDate(initialDate),
     defaultValue: parseDate(defaultValueProp) || new Date(),
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const minValue = parseDate(minValueProp);

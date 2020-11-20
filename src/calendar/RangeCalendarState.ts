@@ -5,14 +5,13 @@
  */
 import * as React from "react";
 import { format, isSameDay } from "date-fns";
-import { useControllableState } from "@chakra-ui/hooks";
 import { InputBase, ValueBase, RangeValue } from "@react-types/shared";
 
 import { makeRange } from "./helpers";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
-import { parseRangeDate, stringifyDate } from "../utils";
+import { parseRangeDate, stringifyDate, useControllableState } from "../utils";
 
 export interface RangeCalendarInitialState
   extends ValueBase<RangeValue<string>>,
@@ -50,7 +49,6 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
     value: parseRangeDate(initialDate),
     defaultValue: parseRangeDate(defaultValueProp),
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const dateRange = value != null ? value : null;

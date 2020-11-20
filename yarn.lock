@@ -1126,28 +1126,28 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@chakra-ui/counter@1.0.0-rc.7":
-  version "1.0.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/counter/-/counter-1.0.0-rc.7.tgz#a7a590061772b2e3b4c103883c544c121e8df39e"
-  integrity sha512-KHUDODa8Bp1MFBFjM1Gdo1oqCmJq0w+BXglSjzB6O5Z0QxB9Y2gEmjGm0FHIiF1/XT2RVcO/iW/qiu3ZyQM77Q==
+"@chakra-ui/counter@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/counter/-/counter-1.0.0.tgz#b6e2370ee0e7c0ef15bf2d32a218a3783431b684"
+  integrity sha512-nVrA2ZvSJS5PuCy54Y6lNOjXuPxNdJcINEVUgXQafHSI6GsJAtnYgwa1LmYL41pPJgjwj6Q6QwSCUNJjnsg5AQ==
   dependencies:
-    "@chakra-ui/hooks" "1.0.0-rc.7"
-    "@chakra-ui/utils" "1.0.0-rc.7"
+    "@chakra-ui/hooks" "1.0.0"
+    "@chakra-ui/utils" "1.0.0"
 
-"@chakra-ui/hooks@1.0.0-rc.7":
-  version "1.0.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/hooks/-/hooks-1.0.0-rc.7.tgz#1236e2199abeb3beef32897466ccb63c6ac442e7"
-  integrity sha512-7zOI3eHe2+TB6RpUGzm0AZo0WyopKP6aSfjRox3N6tku4F5KWGmWjGpalSYp4TsGkKM8YBrp5la89YckQVMoXQ==
+"@chakra-ui/hooks@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/hooks/-/hooks-1.0.0.tgz#058343eb587626ca60949addf3c64ad3318a8e17"
+  integrity sha512-V03U33t4jps9ZgdEYsJls9VuT5V6KzSIXLkdfxMERUT3W3mnh/WQPBIlx10Rrkbw8zfa8+kSSl/g2YMoAle0Qg==
   dependencies:
-    "@chakra-ui/utils" "1.0.0-rc.7"
+    "@chakra-ui/utils" "1.0.0"
     "@reach/auto-id" "0.11.0"
     compute-scroll-into-view "1.0.14"
     copy-to-clipboard "3.3.1"
 
-"@chakra-ui/utils@1.0.0-rc.7":
-  version "1.0.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.0.0-rc.7.tgz#5321fa7e7dfce323b9ec3590040b9254c02f7230"
-  integrity sha512-5syANaa9SeNIAhj5kGlc7YznXMCO5TVQPsuiAnwMgIrk7Pgq8Rtr46nDTyXGV+FTdsj5P7lZjwE19U+CNJAifQ==
+"@chakra-ui/utils@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/utils/-/utils-1.0.0.tgz#d3e693ed069c164034777ccca80d62fb16f1207e"
+  integrity sha512-1PZodfSDlbv9fwwJKaOyfCs+MRHqCiSGzSUab6+wQmm1MQQ0LQsBTDBz6d6NJ8ytalTsk8LzZmCSghN0P62a1w==
   dependencies:
     "@types/lodash.mergewith" "4.6.6"
     "@types/object-assign" "4.0.30"
@@ -1846,10 +1846,10 @@
     "@react-aria/utils" "^3.3.0"
     "@react-types/shared" "^3.2.1"
 
-"@react-aria/interactions@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.3.0.tgz#76ce163dba7432d6c2691d3e9ca21bf5f4b40bcf"
-  integrity sha512-SDFl/aJZ21UTXUfneKa622wGQq9lxBsHBZYVEiGrrKGrfkSAx+2mhOfxX9ep9kebLSvAHgRDL9Hvi01V0oYN2Q==
+"@react-aria/interactions@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.3.1.tgz#5eb575122f1244426386dbb603b7bd0efabe75dd"
+  integrity sha512-9/P4pt4HvpA0RXG+qWSqVhptbQ1nmOAU47krJFLPZF5gAJRfQP4h/lLqK3vcIL2/Zr7TUpdcX8WtzDXo3qsMjA==
   dependencies:
     "@babel/runtime" "^7.6.2"
     "@react-aria/utils" "^3.4.0"
