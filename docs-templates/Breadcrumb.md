@@ -17,7 +17,7 @@ it's links. It follows the
 
 ### Composition
 
-- `BreadcrumbLink` uses [Link](#Link).
+<!-- INJECT_COMPOSITION src/breadcrumbs -->
 
 ### Example
 

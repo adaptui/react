@@ -196,6 +196,16 @@ Accessible `Calendar` component.
 
 </details>
 
+# Composition
+
+- Calendar uses [useBox](https://reakit.io/docs/box)
+- CalendarButton uses [useButton](https://reakit.io/docs/button)
+- CalendarCell uses [useBox](https://reakit.io/docs/box)
+- CalendarCellButton uses [useButton](https://reakit.io/docs/button)
+- CalendarGrid uses [useBox](https://reakit.io/docs/box)
+- CalendarHeader uses [useBox](https://reakit.io/docs/box)
+- CalendarWeekTitle uses [useBox](https://reakit.io/docs/box)
+
 ### Example
 
 ```js

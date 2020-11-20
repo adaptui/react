@@ -283,12 +283,11 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ### Composition
 
-- `Accordion` uses
-  [Composite](https://github.com/reakit/reakit/blob/master/docs/composite).
-- `AccordionTrigger` uses
-  [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite).
-- `AccordionPanel` uses
-  [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
+- Accordion uses [useComposite](https://reakit.io/docs/composite)
+- AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
+  [useDisclosureContent](https://reakit.io/docs/disclosure)
+- AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
+  [useCompositeItem](https://reakit.io/docs/composite)
 
 ### Example
 

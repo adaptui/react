@@ -22,8 +22,7 @@ different compositions. It follows the
 
 ### Composition
 
-- `Link` uses
-  [Clickable](https://github.com/reakit/reakit/blob/master/docs/clickable)
+- Link uses [useClickable](https://reakit.io/docs/clickable)
 
 ### Example
 

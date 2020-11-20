@@ -6,6 +6,10 @@ Accessible `Calendar` component.
 
 <!-- INJECT_PROPS src/calendar -->
 
+# Composition
+
+<!-- INJECT_COMPOSITION src/calendar -->
+
 ### Example
 
 ```js

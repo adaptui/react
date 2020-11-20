@@ -14,8 +14,7 @@ different compositions. It follows the
 
 ### Composition
 
-- `Link` uses
-  [Clickable](https://github.com/reakit/reakit/blob/master/docs/clickable)
+<!-- INJECT_COMPOSITION src/link -->
 
 ### Example
 

@@ -26,12 +26,7 @@ Accessible Accordion component. It follows the
 
 ### Composition
 
-- `Accordion` uses
-  [Composite](https://github.com/reakit/reakit/blob/master/docs/composite).
-- `AccordionTrigger` uses
-  [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite).
-- `AccordionPanel` uses
-  [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
+<!-- INJECT_COMPOSITION src/accordion -->
 
 ### Example
 
