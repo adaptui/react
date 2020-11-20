@@ -31,7 +31,5 @@ Accessible Accordion component. It follows the
 ### Example
 
 ```js
-
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
-
 ```

@@ -30,19 +30,22 @@ readmeTemplates.forEach(readme => {
   mdContent.split("\n").map(line => {
     const lineMatch = line.match(PROPS_INJECT_FLAG);
     if (lineMatch) {
-      injectPropTypes(
-        path.join(process.cwd(), lineMatch[1]),
-        path.join(readme),
-      );
+      run(path.join(process.cwd(), lineMatch[1]), path.join(readme));
     }
   });
 });
+
+function run(rootPath, readmeTemplatePath) {
+  const types = getPropTypes(rootPath);
+
+  injectPropTypes(types, readmeTemplatePath);
+}
 
 /**
  * Inject prop types tables into README.md files
  * @param {string} rootPath
  */
-function injectPropTypes(rootPath, readmeTemplatePath) {
+function getPropTypes(rootPath) {
   const stateTypes = [];
 
   const project = new Project({
@@ -50,66 +53,53 @@ function injectPropTypes(rootPath, readmeTemplatePath) {
     addFilesFromTsConfig: false,
   });
 
-  const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
+  const publicPaths = Object.values(getPublicFiles(rootPath));
+  const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
+  project.resolveSourceFileDependencies();
+  const types = {};
 
-  if (/#\s?Props/.test(mdContents)) {
-    const publicPaths = Object.values(getPublicFiles(rootPath));
-    const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
-    project.resolveSourceFileDependencies();
-    const types = {};
+  sortSourceFiles(sourceFiles).forEach(sourceFile => {
+    sourceFile.forEachChild(node => {
+      if (isStateReturnDeclaration(node)) {
+        const propTypes = createPropTypeObjects(rootPath, node);
+        stateTypes.push(...propTypes.map(prop => prop.name));
+      }
+      if (isPropsDeclaration(node)) {
+        const moduleName = getModuleName(node);
+        const propTypes = createPropTypeObjects(rootPath, node);
 
-    sortSourceFiles(sourceFiles).forEach(sourceFile => {
-      sourceFile.forEachChild(node => {
-        if (isStateReturnDeclaration(node)) {
-          const propTypes = createPropTypeObjects(rootPath, node);
-          stateTypes.push(...propTypes.map(prop => prop.name));
+        if (isInitialStateDeclaration(node)) {
+          types[moduleName] = propTypes;
+        } else {
+          const propTypesWithoutState = propTypes.filter(
+            prop => !stateTypes.includes(prop.name),
+          );
+          const propTypesReturnedByState = propTypes.filter(prop =>
+            stateTypes.includes(prop.name),
+          );
+          types[moduleName] = propTypesWithoutState;
+          types[moduleName].stateProps = propTypesReturnedByState;
         }
-        if (isPropsDeclaration(node)) {
-          const moduleName = getModuleName(node);
-          const propTypes = createPropTypeObjects(rootPath, node);
-
-          if (isInitialStateDeclaration(node)) {
-            types[moduleName] = propTypes;
-          } else {
-            const propTypesWithoutState = propTypes.filter(
-              prop => !stateTypes.includes(prop.name),
-            );
-            const propTypesReturnedByState = propTypes.filter(prop =>
-              stateTypes.includes(prop.name),
-            );
-            types[moduleName] = propTypesWithoutState;
-            types[moduleName].stateProps = propTypesReturnedByState;
-          }
-        }
-      });
+      }
     });
+  });
 
-    const propTypesMarkdown = getPropTypesMarkdown(types);
-    try {
-      const markdown = injectMdContent(
-        mdContents,
-        PROPS_INJECT_FLAG,
-        () => propTypesMarkdown,
-      );
+  return types;
+}
 
-      createFile(
-        path.join(docsFolder, path.basename(readmeTemplatePath)),
-        markdown,
-      );
+function injectPropTypes(types, readmeTemplatePath) {
+  const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
+  const basename = path.basename(readmeTemplatePath);
+  const propTypesMarkdown = getPropTypesMarkdown(types);
+  const markdown = injectMdContent(
+    mdContents,
+    PROPS_INJECT_FLAG,
+    () => propTypesMarkdown,
+  );
 
-      console.log(
-        chalk.bold(
-          chalk.green(
-            "Injected prop types in",
-            path.basename(readmeTemplatePath),
-          ),
-        ),
-      );
-    } catch (e) {
-      console.log(e);
-      // do nothing
-    }
-  }
+  createFile(path.join(docsFolder, basename), markdown);
+
+  console.log(chalk.green("Injected prop types in", basename));
 }
 
 /**

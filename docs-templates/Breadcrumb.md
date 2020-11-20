@@ -22,7 +22,5 @@ it's links. It follows the
 ### Example
 
 ```js
-
 <!-- IMPORT_EXAMPLE src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx -->
-
 ```

@@ -19,7 +19,5 @@ different compositions. It follows the
 ### Example
 
 ```js
-
 <!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
-
 ```

@@ -7,6 +7,7 @@ const { Project, ts } = require("ts-morph");
 const injectMdContent = require("./inject-md-content");
 const { walkSync, createFile } = require("./fsUtils");
 const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./utils");
+const ora = require("ora");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
 // const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
@@ -20,7 +21,6 @@ readmeTemplates.forEach(readme => {
   mdContent.split("\n").map(line => {
     const lineMatch = line.match(COMPOSE_INJECT_FLAG);
     if (lineMatch) {
-      console.log(path.join(process.cwd(), lineMatch[1]));
       run(path.join(process.cwd(), lineMatch[1]), path.join(readme));
     }
   });
@@ -28,7 +28,6 @@ readmeTemplates.forEach(readme => {
 
 function run(rootPath, readmeTemplatePath) {
   const compose = getComposition(rootPath);
-  console.log(compose);
 
   injectComposition(compose, readmeTemplatePath);
 }
@@ -73,27 +72,15 @@ function injectComposition(compose, readmeTemplatePath) {
   const moduleName = path.basename(readmeTemplatePath);
 
   const compositionMarkdown = getMarkdown(compose);
-  try {
-    const markdown = injectMdContent(
-      mdContents,
-      COMPOSE_INJECT_FLAG,
-      () => compositionMarkdown,
-    );
+  const markdown = injectMdContent(
+    mdContents,
+    COMPOSE_INJECT_FLAG,
+    () => compositionMarkdown,
+  );
 
-    createFile(path.join(docsFolder, moduleName), markdown);
+  createFile(path.join(docsFolder, moduleName), markdown);
 
-    console.log(
-      chalk.bold(
-        chalk.green(
-          "Injected composition in",
-          path.basename(readmeTemplatePath),
-        ),
-      ),
-    );
-  } catch (e) {
-    console.log(e);
-    // do nothing
-  }
+  console.log(chalk.green("Injected composition in", moduleName));
 }
 
 function getMarkdown(compose) {
