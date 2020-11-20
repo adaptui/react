@@ -23,7 +23,9 @@ export function installMouseEvent() {
   beforeAll(() => {
     const oldMouseEvent = MouseEvent;
     // @ts-ignore
-    global.MouseEvent = class FakeMouseEvent extends MouseEvent {
+    global.MouseEvent = class FakeMouseEvent extends (
+      MouseEvent
+    ) {
       _init: { pageX: number; pageY: number };
       constructor(name: any, init: any) {
         super(name, init);
@@ -48,7 +50,9 @@ export function installMouseEvent() {
 export function installPointerEvent() {
   beforeAll(() => {
     // @ts-ignore
-    global.PointerEvent = class FakePointerEvent extends MouseEvent {
+    global.PointerEvent = class FakePointerEvent extends (
+      MouseEvent
+    ) {
       _init: {
         pageX: number;
         pageY: number;
