@@ -2,6 +2,12 @@
 
 Accessible `Calendar` component.
 
+<!-- CODESANDBOX
+link_title: Calendar - Open On Sandbox
+js: src/calendar/stories/__js/CalendarBase.component.jsx
+css: src/calendar/stories/CalendarBase.css
+-->
+
 # Props
 
 <!-- INJECT_PROPS src/calendar -->

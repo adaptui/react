@@ -2,6 +2,8 @@
 
 Accessible `Calendar` component.
 
+[Open On CodeSandbox](https://codesandbox.io/s/pmtcs)
+
 # Props
 
 <!-- Automatically generated -->

@@ -58,6 +58,7 @@ const getCSBLink = (files, extraDeps) => {
   return url;
 };
 
+// TODO: Support multiple sandbox links
 const CODESANDBOX_FLAG = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/m;
 const docsFolder = path.resolve(process.cwd(), "docs");
 // const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
