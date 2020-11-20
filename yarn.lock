@@ -4128,6 +4128,13 @@ axios@^0.18.1:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
+axios@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.0.tgz#26df088803a2350dff2c27f96fef99fe49442aca"
+  integrity sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==
+  dependencies:
+    follow-redirects "^1.10.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -5429,7 +5436,7 @@ codesandbox-import-utils@^2.2.1:
     istextorbinary "^2.2.1"
     lz-string "^1.4.4"
 
-codesandbox@^2.1.10:
+codesandbox@^2.1.10, codesandbox@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/codesandbox/-/codesandbox-2.2.1.tgz#c09b26cf6844f3dff4718fac832beee493f6c2ff"
   integrity sha512-TOQVhLFlUYazflpnRyVO966sO4Avr2IyfUZn+TYad5WNM1v2WCkAS8ApC4+XNfXC11LGchxwG5MVnVfFlCWlbQ==
@@ -7916,6 +7923,11 @@ follow-redirects@1.5.10:
   integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
   dependencies:
     debug "=3.1.0"
+
+follow-redirects@^1.10.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
+  integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
 
 for-in@^0.1.3:
   version "0.1.8"
