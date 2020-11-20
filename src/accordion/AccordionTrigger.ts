@@ -1,10 +1,10 @@
 import {
-  useCompositeItem,
-  CompositeItemOptions,
-  CompositeItemHTMLProps,
   useButton,
   ButtonOptions,
   ButtonHTMLProps,
+  useCompositeItem,
+  CompositeItemOptions,
+  CompositeItemHTMLProps,
 } from "reakit";
 import * as React from "react";
 import { useLiveRef } from "reakit-utils";
@@ -13,26 +13,7 @@ import { createHook, createComponent } from "reakit-system";
 import { ariaAttr } from "../utils";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
-
-export type AccordionTriggerOptions = ButtonOptions &
-  CompositeItemOptions &
-  Pick<Partial<AccordionStateReturn>, "manual"> &
-  Pick<
-    AccordionStateReturn,
-    | "panels"
-    | "select"
-    | "unSelect"
-    | "allowMultiple"
-    | "allowToggle"
-    | "selectedId"
-    | "selectedIds"
-  >;
-
-export type AccordionTriggerHTMLProps = ButtonHTMLProps &
-  CompositeItemHTMLProps;
-
-export type AccordionTriggerProps = AccordionTriggerOptions &
-  AccordionTriggerHTMLProps;
+import { isAccordionSelected, useAccordionPanelId } from "./helpers";
 
 export const useAccordionTrigger = createHook<
   AccordionTriggerOptions,
@@ -162,19 +143,22 @@ export const AccordionTrigger = createComponent({
   useHook: useAccordionTrigger,
 });
 
-function isAccordionSelected(options: AccordionTriggerOptions) {
-  const { id, allowMultiple, selectedId, selectedIds } = options;
-  if (!id) return;
+export type AccordionTriggerOptions = ButtonOptions &
+  CompositeItemOptions &
+  Pick<Partial<AccordionStateReturn>, "manual"> &
+  Pick<
+    AccordionStateReturn,
+    | "panels"
+    | "select"
+    | "unSelect"
+    | "allowMultiple"
+    | "allowToggle"
+    | "selectedId"
+    | "selectedIds"
+  >;
 
-  if (!allowMultiple) return selectedId === id;
-  return selectedIds?.includes(id);
-}
+export type AccordionTriggerHTMLProps = ButtonHTMLProps &
+  CompositeItemHTMLProps;
 
-function useAccordionPanelId(options: AccordionTriggerOptions) {
-  const { panels, id } = options;
-
-  return React.useMemo(
-    () => panels?.find(panel => panel.groupId === id)?.id || undefined,
-    [panels, id],
-  );
-}
+export type AccordionTriggerProps = AccordionTriggerOptions &
+  AccordionTriggerHTMLProps;
