@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
+const axios = require("axios");
 const chalk = require("chalk");
 const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
@@ -71,7 +72,7 @@ const readFile = url => {
 
 const readmes = walkSync(docsFolder);
 
-readmes.forEach(readmePath => {
+readmes.forEach(async readmePath => {
   let readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
   const fileName = path.basename(readmePath);
 
@@ -91,9 +92,13 @@ readmes.forEach(readmePath => {
       parsed.deps && parsed.deps,
     );
 
+    // fetching the sandbox_id, otherwise the URL would be longer
+    let response = await axios.get(`${csbLink}&json=1`);
+    const sandboxLink = `https://codesandbox.io/s/${response.data.sandbox_id}`;
+
     readme = readme.replace(
       CODESANDBOX_FLAG,
-      `[Open On CodeSandbox](${csbLink})`,
+      `[Open On CodeSandbox](${sandboxLink})`,
     );
 
     console.log(

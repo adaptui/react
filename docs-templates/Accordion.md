@@ -3,6 +3,13 @@
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
+<!-- CODESANDBOX
+js: src/accordion/stories/__js/AccordionBasic.component.jsx
+css: src/accordion/stories/AccordionStyled.css
+deps:
+  - reakit
+-->
+
 # Props
 
 <!-- INJECT_PROPS src/accordion -->
@@ -33,10 +40,3 @@ Accessible Accordion component. It follows the
 ```js
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
 ```
-
-<!-- CODESANDBOX
-js: src/accordion/stories/__js/AccordionBasic.component.jsx
-css: src/accordion/stories/AccordionStyled.css
-deps:
-  - reakit
--->
