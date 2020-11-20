@@ -1,10 +1,11 @@
-import {
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-} from "reakit";
+import { CompositeState, CompositeActions } from "reakit";
 
 export type AccordionState = CompositeState & {
+  /**
+   * Allow to toggle accordion items
+   * @default false
+   */
+  allowToggle: boolean;
   /**
    * Allow to open multiple accordion items
    */
@@ -14,11 +15,6 @@ export type AccordionState = CompositeState & {
    * @default true
    */
   manual: boolean;
-  /**
-   * Allow to toggle accordion items
-   * @default false
-   */
-  allowToggle: boolean;
   /**
    * Lists all the panels.
    */

@@ -134,11 +134,11 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`groups`** <code>Group[]</code> Lists all the composite groups with their
   `id` and DOM `ref`. This state is automatically updated when `registerGroup`
   and `unregisterGroup` are called.
-- **`move`** <code>(id: string | null) =&#62; void</code> Moves focus to a given
-  item ID.
 - **`items`** <code>Item[]</code> Lists all the composite items with their `id`,
   DOM `ref`, `disabled` state and `groupId` if any. This state is automatically
   updated when `registerItem` and `unregisterItem` are called.
+- **`move`** <code>(id: string | null) =&#62; void</code> Moves focus to a given
+  item ID.
 - **`setCurrentId`**
   <code title="(value: SetStateAction&#60;string | null | undefined&#62;) =&#62; void">(value:
   SetStateAction&#60;string | null | undefine...</code> Sets `currentId`. This
@@ -152,6 +152,7 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ### `AccordionPanel`
 
+- **`accordionId`** <code>string | undefined</code> Accordion's id
 - **`visible`** <code>boolean</code> Whether it's visible or not.
 - **`animating`** <code>boolean</code> Whether it's animating or not.
 - **`animated`** <code>number | boolean</code> If `true`, `animating` will be
@@ -162,7 +163,6 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`stopAnimation`** <code>() =&#62; void</code> Stops animation. It's called
   automatically if there's a CSS transition.
 - **`id`** <code>string | undefined</code> Same as the HTML attribute.
-- **`accordionId`** <code>string | undefined</code> Accordion's id
 <details><summary>8 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
@@ -224,13 +224,13 @@ form elements. In this case, only `aria-disabled` will be set.
     navigate out of it using arrow keys.
   - If `currentId` is initially set to `null`, the base composite element itself
     will have focus and users will be able to navigate to it using arrow keys.
+- **`items`** <code>Item[]</code> Lists all the composite items with their `id`,
+  DOM `ref`, `disabled` state and `groupId` if any. This state is automatically
+  updated when `registerItem` and `unregisterItem` are called.
 - **`registerItem`** <code>(item: Item) =&#62; void</code> Registers a composite
   item.
 - **`unregisterItem`** <code>(id: string) =&#62; void</code> Unregisters a
   composite item.
-- **`items`** <code>Item[]</code> Lists all the composite items with their `id`,
-  DOM `ref`, `disabled` state and `groupId` if any. This state is automatically
-  updated when `registerItem` and `unregisterItem` are called.
 - **`setCurrentId`**
   <code title="(value: SetStateAction&#60;string | null | undefined&#62;) =&#62; void">(value:
   SetStateAction&#60;string | null | undefine...</code> Sets `currentId`. This
