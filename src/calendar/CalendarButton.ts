@@ -10,28 +10,6 @@ import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { CALENDAR_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarGoto =
-  | "nextMonth"
-  | "previousMonth"
-  | "nextYear"
-  | "previousYear";
-
-export type CalendarButtonOptions = ButtonOptions &
-  Pick<
-    CalendarStateReturn,
-    | "focusNextMonth"
-    | "focusPreviousMonth"
-    | "focusPreviousYear"
-    | "focusNextYear"
-  > & {
-    goto: CalendarGoto;
-  };
-
-export type CalendarButtonHTMLProps = ButtonHTMLProps;
-
-export type CalendarButtonProps = CalendarButtonOptions &
-  CalendarButtonHTMLProps;
-
 export const useCalendarButton = createHook<
   CalendarButtonOptions,
   CalendarButtonHTMLProps
@@ -81,3 +59,25 @@ export const CalendarButton = createComponent({
   memo: true,
   useHook: useCalendarButton,
 });
+
+export type CalendarButtonOptions = {
+  goto: CalendarGoto;
+} & Pick<
+  CalendarStateReturn,
+  | "focusNextMonth"
+  | "focusPreviousMonth"
+  | "focusPreviousYear"
+  | "focusNextYear"
+> &
+  ButtonOptions;
+
+export type CalendarButtonHTMLProps = ButtonHTMLProps;
+
+export type CalendarButtonProps = CalendarButtonOptions &
+  CalendarButtonHTMLProps;
+
+export type CalendarGoto =
+  | "nextMonth"
+  | "previousMonth"
+  | "nextYear"
+  | "previousYear";

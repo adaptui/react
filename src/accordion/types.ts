@@ -63,7 +63,13 @@ export type SelectedIdPair = {
    * @default []
    */
   selectedIds?: (string | null)[];
+  /**
+   * Sets `selectedId`.
+   */
   setSelectedId?: React.Dispatch<React.SetStateAction<string | null>>;
+  /**
+   * Sets `selectedIds`.
+   */
   setSelectedIds?: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 };
 
