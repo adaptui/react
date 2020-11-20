@@ -1,15 +1,15 @@
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { CALENDAR_WEEK_TITLE_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarWeekTitleOptions = BoxOptions &
+export type CalendarWeekTitleOptions = RoleOptions &
   Pick<CalendarStateReturn, "weekDays"> & {
     dayIndex: number;
   };
 
-export type CalendarWeekTitleHTMLProps = BoxHTMLProps;
+export type CalendarWeekTitleHTMLProps = RoleHTMLProps;
 
 export type CalendarWeekTitleProps = CalendarWeekTitleOptions &
   CalendarWeekTitleHTMLProps;
@@ -19,7 +19,7 @@ export const useCalendarWeekTitle = createHook<
   CalendarWeekTitleHTMLProps
 >({
   name: "CalendarWeekTitle",
-  compose: useBox,
+  compose: useRole,
   keys: CALENDAR_WEEK_TITLE_KEYS,
 
   useProps({ dayIndex, weekDays }, htmlProps) {

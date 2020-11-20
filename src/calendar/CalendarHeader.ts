@@ -1,17 +1,17 @@
 import { useDateFormatter } from "@react-aria/i18n";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { DateTimeFormatOpts } from "../utils/types";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarHeaderOptions = BoxOptions &
+export type CalendarHeaderOptions = RoleOptions &
   Pick<CalendarStateReturn, "calendarId" | "currentMonth"> & {
     format?: DateTimeFormatOpts;
   };
 
-export type CalendarHeaderHTMLProps = BoxHTMLProps;
+export type CalendarHeaderHTMLProps = RoleHTMLProps;
 
 export type CalendarHeaderProps = CalendarHeaderOptions &
   CalendarHeaderHTMLProps;
@@ -21,7 +21,7 @@ export const useCalendarHeader = createHook<
   CalendarHeaderHTMLProps
 >({
   name: "CalendarHeader",
-  compose: useBox,
+  compose: useRole,
   keys: CALENDAR_HEADER_KEYS,
 
   useProps(

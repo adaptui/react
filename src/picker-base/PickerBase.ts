@@ -1,14 +1,14 @@
 import * as React from "react";
 import { createOnKeyDown } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { PICKER_BASE_KEYS } from "./__keys";
 import { isTouch, ariaAttr } from "../utils";
 import { PickerBaseStateReturn } from "./PickerBaseState";
 
-export type PickerBaseOptions = BoxOptions &
+export type PickerBaseOptions = RoleOptions &
   Pick<
     PickerBaseStateReturn,
     | "visible"
@@ -20,14 +20,14 @@ export type PickerBaseOptions = BoxOptions &
     | "segmentFocus"
   >;
 
-export type PickerBaseHTMLProps = BoxHTMLProps;
+export type PickerBaseHTMLProps = RoleHTMLProps;
 
 export type PickerBaseProps = PickerBaseOptions & PickerBaseHTMLProps;
 
 export const usePickerBase = createHook<PickerBaseOptions, PickerBaseHTMLProps>(
   {
     name: "PickerBase",
-    compose: useBox,
+    compose: useRole,
     keys: PICKER_BASE_KEYS,
 
     useProps(

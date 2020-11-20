@@ -6,7 +6,7 @@
 import { chain } from "@react-aria/utils";
 import { KeyboardEvent, useRef } from "react";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 
@@ -15,7 +15,7 @@ import { CALENDAR_GRID_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
-export type CalendarGridOptions = BoxOptions &
+export type CalendarGridOptions = RoleOptions &
   Pick<
     CalendarStateReturn,
     | "calendarId"
@@ -37,7 +37,7 @@ export type CalendarGridOptions = BoxOptions &
   > &
   Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
 
-export type CalendarGridHTMLProps = BoxHTMLProps;
+export type CalendarGridHTMLProps = RoleHTMLProps;
 
 export type CalendarGridProps = CalendarGridOptions & CalendarGridHTMLProps;
 
@@ -46,7 +46,7 @@ export const useCalendarGrid = createHook<
   CalendarGridHTMLProps
 >({
   name: "CalendarGrid",
-  compose: useBox,
+  compose: useRole,
   keys: CALENDAR_GRID_KEYS,
 
   useProps(
