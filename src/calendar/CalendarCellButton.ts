@@ -16,29 +16,6 @@ import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
-export type CalendarCellButtonOptions = ButtonOptions &
-  Pick<
-    CalendarStateReturn,
-    | "focusedDate"
-    | "selectDate"
-    | "setFocusedDate"
-    | "isDisabled"
-    | "month"
-    | "minDate"
-    | "maxDate"
-    | "dateValue"
-    | "isFocused"
-    | "isRangeCalendar"
-  > &
-  Partial<Pick<RangeCalendarStateReturn, "anchorDate">> & {
-    date: Date;
-  };
-
-export type CalendarCellButtonHTMLProps = ButtonHTMLProps;
-
-export type CalendarCellButtonProps = CalendarCellButtonOptions &
-  CalendarCellButtonHTMLProps;
-
 export const useCalendarCellButton = createHook<
   CalendarCellButtonOptions,
   CalendarCellButtonHTMLProps
@@ -162,3 +139,26 @@ export const CalendarCellButton = createComponent({
   memo: true,
   useHook: useCalendarCellButton,
 });
+
+export type CalendarCellButtonOptions = {
+  date: Date;
+} & Pick<
+  CalendarStateReturn,
+  | "focusedDate"
+  | "selectDate"
+  | "setFocusedDate"
+  | "isDisabled"
+  | "month"
+  | "minDate"
+  | "maxDate"
+  | "dateValue"
+  | "isFocused"
+  | "isRangeCalendar"
+> &
+  Partial<Pick<RangeCalendarStateReturn, "anchorDate">> &
+  ButtonOptions;
+
+export type CalendarCellButtonHTMLProps = ButtonHTMLProps;
+
+export type CalendarCellButtonProps = CalendarCellButtonOptions &
+  CalendarCellButtonHTMLProps;

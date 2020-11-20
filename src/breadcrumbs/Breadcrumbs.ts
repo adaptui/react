@@ -1,12 +1,6 @@
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
-export type BreadcrumbsOptions = BoxOptions;
-
-export type BreadcrumbsHTMLProps = BoxHTMLProps;
-
-export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;
-
 export const useBreadcrumbs = createHook<
   BreadcrumbsOptions,
   BreadcrumbsHTMLProps
@@ -24,3 +18,9 @@ export const Breadcrumbs = createComponent({
   memo: true,
   useHook: useBreadcrumbs,
 });
+
+export type BreadcrumbsOptions = BoxOptions;
+
+export type BreadcrumbsHTMLProps = BoxHTMLProps;
+
+export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;
