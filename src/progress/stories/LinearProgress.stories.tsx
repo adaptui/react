@@ -12,7 +12,7 @@ export default {
     preview: createPreviewTabs({
       js: linearProgressTemplateJs,
       ts: linearProgressTemplate,
-      deps: ["reakit@latest", "emotion@latest"],
+      deps: ["reakit@latest", "@emotion/css@latest"],
     }),
   },
 } as Meta;

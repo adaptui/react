@@ -1,9 +1,9 @@
 import React from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 
 import {
   Drawer,
-  TPlacement,
+  Placement,
   useDrawerState,
   DrawerBackdrop,
   DrawerCloseButton,
@@ -13,14 +13,14 @@ import {
 export const App = () => {
   const dialog = useDrawerState({ animated: true });
   const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const [placement, setPlacement] = React.useState<TPlacement>("left");
+  const [placement, setPlacement] = React.useState<Placement>("left");
 
   return (
     <div>
       <DrawerDisclosure {...dialog}>Open Drawer</DrawerDisclosure>
       <select
         defaultValue={placement}
-        onBlur={e => setPlacement(e.target.value as TPlacement)}
+        onBlur={e => setPlacement(e.target.value as Placement)}
       >
         <option value="top">Top</option>
         <option value="bottom">Bottom</option>

@@ -15,7 +15,7 @@ export default {
     preview: createPreviewTabs({
       js: circularProgressTemplateJs,
       ts: circularProgressTemplate,
-      deps: ["reakit@latest", "emotion@latest"],
+      deps: ["reakit@latest", "@emotion/css@latest"],
     }),
   },
 } as Meta;
