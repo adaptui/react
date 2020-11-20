@@ -14,6 +14,7 @@ exports[`Select should render correctly 1`] = `
       Select a fruit
     </button>
     <div
+      aria-activedescendant="select-apple"
       aria-label="Fruits"
       data-dialog="true"
       data-testid="popover"
@@ -24,6 +25,7 @@ exports[`Select should render correctly 1`] = `
       tabindex="0"
     >
       <div
+        aria-selected="true"
         id="select-apple"
         role="option"
         tabindex="-1"

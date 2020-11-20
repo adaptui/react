@@ -98,14 +98,14 @@ describe("Select", () => {
   });
 
   it("should behave properly with default selected", () => {
-    render(<SelectComponent selectedValue={"orange"} />);
+    render(<SelectComponent selectedValue="Orange" />);
 
     const popover = screen.getByTestId("popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
 
-    expect(popoverButton).toHaveTextContent(/orange/i);
+    expect(popoverButton).toHaveTextContent(/Orange/i);
     expect(popover).not.toBeVisible();
 
     press.Tab();
@@ -113,10 +113,9 @@ describe("Select", () => {
     jest.runAllTimers();
     expect(popover).toBeVisible();
 
-    press.Tab();
     press.Enter();
     expect(popover).not.toBeVisible();
-    expect(popoverButton).toHaveTextContent(/orange/i);
+    expect(popoverButton).toHaveTextContent(/Orange/i);
   });
 
   test("typeahead should work properly when popover is not open", () => {
