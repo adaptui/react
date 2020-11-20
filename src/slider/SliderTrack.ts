@@ -2,7 +2,7 @@ import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { useLocale } from "@react-aria/i18n";
 import { useMove } from "@react-aria/interactions";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { mergeProps, useGlobalListeners } from "@react-aria/utils";
 
@@ -10,7 +10,7 @@ import { clamp } from "../utils";
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderTrackOptions = BoxOptions &
+export type SliderTrackOptions = RoleOptions &
   Pick<
     SliderStateReturn,
     | "orientation"
@@ -28,7 +28,7 @@ export type SliderTrackOptions = BoxOptions &
     | "setFocusedThumb"
   >;
 
-export type SliderTrackHTMLProps = BoxHTMLProps;
+export type SliderTrackHTMLProps = RoleHTMLProps;
 
 export type SliderTrackProps = SliderTrackOptions & SliderTrackHTMLProps;
 
@@ -37,7 +37,7 @@ export const useSliderTrack = createHook<
   SliderTrackHTMLProps
 >({
   name: "SliderTrack",
-  compose: useBox,
+  compose: useRole,
   keys: SLIDER_TRACK_KEYS,
 
   useProps(options, { ref: htmlRef, ...htmlProps }) {

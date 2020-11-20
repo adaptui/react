@@ -6,14 +6,14 @@ import {
 import * as React from "react";
 import { useLocale } from "@react-aria/i18n";
 import { useMove } from "@react-aria/interactions";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 
 import { clamp } from "../utils";
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
-export type SliderThumbOptions = BoxOptions &
+export type SliderThumbOptions = RoleOptions &
   Pick<
     SliderStateReturn,
     | "inputs"
@@ -33,7 +33,7 @@ export type SliderThumbOptions = BoxOptions &
     index: number;
   };
 
-export type SliderThumbHTMLProps = BoxHTMLProps;
+export type SliderThumbHTMLProps = RoleHTMLProps;
 
 export type SliderThumbProps = SliderThumbOptions & SliderThumbHTMLProps;
 
@@ -42,7 +42,7 @@ export const useSliderThumb = createHook<
   SliderThumbHTMLProps
 >({
   name: "SliderThumb",
-  compose: useBox,
+  compose: useRole,
   keys: SLIDER_THUMB_KEYS,
 
   useProps(options, htmlProps) {

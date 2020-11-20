@@ -5,23 +5,23 @@
  * to work with Reakit System
  */
 import { useWarning } from "reakit-warning";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createHook, createComponent, useCreateElement } from "reakit-system";
 
 import { PROGRESS_KEYS } from "./__keys";
 import { dataAttr, isNull } from "../utils";
 import { ProgressStateReturn } from "./ProgressState";
 
-export type ProgressOptions = BoxOptions &
+export type ProgressOptions = RoleOptions &
   Pick<ProgressStateReturn, "isIndeterminate" | "value" | "max" | "min">;
 
-export type ProgressHTMLProps = BoxHTMLProps;
+export type ProgressHTMLProps = RoleHTMLProps;
 
 export type ProgressProps = ProgressOptions & ProgressHTMLProps;
 
 export const useProgress = createHook<ProgressOptions, ProgressHTMLProps>({
   name: "Progress",
-  compose: useBox,
+  compose: useRole,
   keys: PROGRESS_KEYS,
 
   useProps(options, htmlProps) {
