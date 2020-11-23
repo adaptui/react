@@ -5,7 +5,7 @@ const axios = require("axios");
 const chalk = require("chalk");
 const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
-const { walkSync, createFile } = require("./fsUtils");
+const { walkSync, createFile } = require("./fs-utils");
 
 const resolveVersion = userModule => {
   const packageDendencies = {};

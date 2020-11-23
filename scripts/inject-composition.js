@@ -5,7 +5,7 @@ const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
 
 const injectMdContent = require("./inject-md-content");
-const { walkSync, createFile } = require("./fsUtils");
+const { walkSync, createFile } = require("./fs-utils");
 const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./utils");
 
 const docsFolder = path.resolve(process.cwd(), "docs");

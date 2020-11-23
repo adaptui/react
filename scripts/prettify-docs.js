@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const prettier = require("prettier/standalone");
 const markdownParser = require("prettier/parser-markdown");
 
-const { walkSync, createFile } = require("./fsUtils");
+const { walkSync, createFile } = require("./fs-utils");
 const prettierConfig = require("../.prettierrc.json");
 
 const docsFolder = path.resolve(process.cwd(), "docs");

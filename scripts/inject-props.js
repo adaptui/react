@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
 
-const { walkSync, createFile } = require("./fsUtils");
+const { walkSync, createFile } = require("./fs-utils");
 const injectMdContent = require("./inject-md-content");
 
 const {

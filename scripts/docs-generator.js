@@ -7,7 +7,7 @@ const parserBabel = require("prettier/parser-babel");
 const prettierConfig = require("../.prettierrc.json");
 
 const injectMdContent = require("./inject-md-content");
-const { createDirectory, createFile, walkSync } = require("./fsUtils");
+const { createDirectory, createFile, walkSync } = require("./fs-utils");
 
 const CODE_EXAMPLE_FLAG = /\<\!\-\- IMPORT_EXAMPLE (.*) \-\-\>/m;
 
