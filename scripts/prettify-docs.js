@@ -14,7 +14,7 @@ readmes.forEach(readme => {
   const mdContent = fs.readFileSync(readme, { encoding: "utf-8" });
   const basename = path.basename(readme);
 
-  console.log(chalk.blue("prettify:"), chalk.blueBright(basename));
+  console.log(chalk.blue("Prettify:"), chalk.blueBright(basename));
   createFile(
     path.join(docsFolder, basename),
     prettier.format(mdContent, {

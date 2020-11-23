@@ -38,9 +38,9 @@ const readmeTemplates = walkSync(docsTemplatesFolder);
 readmeTemplates.forEach(template => {
   const readme = buildReadme(fs.readFileSync(template, "utf-8"));
   const fileName = path.basename(template);
-  console.log(
-    chalk.red.yellow(`Generating doc`, chalk.red.greenBright(fileName)),
-  );
 
   createFile(path.join(docsFolder, fileName), readme);
+  console.log(
+    chalk.red.yellow(`Injected Example:`, chalk.red.greenBright(fileName)),
+  );
 });

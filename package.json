@@ -42,7 +42,7 @@
     "docsgen": "yarn docsgen:examples && yarn docsgen:csblinks && yarn docsgen:compose && yarn docsgen:props && yarn docsgen:prettify",
     "docsgen:compose": "node scripts/inject-composition",
     "docsgen:csblinks": "node scripts/inject-csb-links",
-    "docsgen:examples": "node scripts/docs-generator",
+    "docsgen:examples": "node scripts/inject-examples",
     "docsgen:prettify": "node scripts/prettify-docs",
     "docsgen:props": "node scripts/inject-props",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",

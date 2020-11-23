@@ -114,7 +114,7 @@ walkSync(docsFolder).forEach(readmePath => {
 
       console.log(
         chalk.red.yellow(
-          `Generating Sandbox Link:`,
+          `Injected Sandbox Link:`,
           chalk.red.greenBright(fileName),
         ),
       );

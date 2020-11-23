@@ -79,7 +79,12 @@ function injectComposition(compose, readmeTemplatePath) {
 
   createFile(path.join(docsFolder, moduleName), markdown);
 
-  console.log(chalk.green("Injected composition in", moduleName));
+  console.log(
+    chalk.red.yellow(
+      `Injected Composition:`,
+      chalk.red.greenBright(moduleName),
+    ),
+  );
 }
 
 function getMarkdown(compose) {

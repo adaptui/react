@@ -98,8 +98,9 @@ function injectPropTypes(types, readmeTemplatePath) {
   );
 
   createFile(path.join(docsFolder, basename), markdown);
-
-  console.log(chalk.green("Injected prop types in", basename));
+  console.log(
+    chalk.red.yellow(`Injected Prop Types:`, chalk.red.greenBright(basename)),
+  );
 }
 
 /**
