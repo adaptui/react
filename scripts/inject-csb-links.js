@@ -86,6 +86,8 @@ readmes.forEach(async readmePath => {
       .replace("<!-- CODESANDBOX", "")
       .replace("-->", "");
     const parsed = yaml.parse(ymlString);
+    const linkTitle = parsed.link_title || "Open On CodeSandbox";
+
     const csbLink = getCSBLink(
       {
         js: readFile(parsed.js),
@@ -96,13 +98,10 @@ readmes.forEach(async readmePath => {
     );
 
     // fetching the sandbox_id, otherwise the URL would be longer
-    let response = await axios.get(`${csbLink}&json=1`);
+    const response = await axios.get(`${csbLink}&json=1`);
     const sandboxLink = `https://codesandbox.io/s/${response.data.sandbox_id}`;
 
-    readme = readme.replace(
-      CODESANDBOX_FLAG,
-      `[Open On CodeSandbox](${sandboxLink})`,
-    );
+    readme = readme.replace(CODESANDBOX_FLAG, `[${linkTitle}](${sandboxLink})`);
 
     console.log(
       chalk.red.yellow(

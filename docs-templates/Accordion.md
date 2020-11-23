@@ -4,6 +4,7 @@ Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
 <!-- CODESANDBOX
+link_title: Accordion Example Live Demo
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
 css: src/accordion/stories/AccordionStyled.css
 -->

@@ -7,7 +7,6 @@ const { Project, ts } = require("ts-morph");
 const injectMdContent = require("./inject-md-content");
 const { walkSync, createFile } = require("./fsUtils");
 const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./utils");
-const ora = require("ora");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
 // const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");

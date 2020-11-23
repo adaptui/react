@@ -2,7 +2,7 @@
 
 Accessible `Calendar` component.
 
-[Open On CodeSandbox](https://codesandbox.io/s/pmtcs)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/pmtcs)
 
 # Props
 
