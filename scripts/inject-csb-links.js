@@ -12,7 +12,7 @@ const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
 const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
-const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
+// const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
 
 const resolveVersion = userModule => {
   const packageDendencies = {};
@@ -90,19 +90,12 @@ const readFile = url => {
   }
 };
 
-walkSync(docsTemplateFolder).forEach(readmePath => {
+walkSync(docsFolder).forEach(readmePath => {
   let readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
   const fileName = path.basename(readmePath);
 
   const regexMatched = readme.match(CODESANDBOX_GLOBAL_FLAG);
   if (!regexMatched) return;
-
-  console.log(
-    chalk.red.yellow(
-      `Generating Sandbox Link:`,
-      chalk.red.greenBright(fileName),
-    ),
-  );
 
   regexMatched.forEach(async match => {
     try {
@@ -119,6 +112,12 @@ walkSync(docsTemplateFolder).forEach(readmePath => {
         `[${linkTitle}](${sandboxLink})`,
       );
 
+      console.log(
+        chalk.red.yellow(
+          `Generating Sandbox Link:`,
+          chalk.red.greenBright(fileName),
+        ),
+      );
       createFile(path.join(docsFolder, fileName), readme);
     } catch (e) {
       console.log(e);
