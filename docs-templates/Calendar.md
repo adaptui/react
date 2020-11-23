@@ -8,6 +8,12 @@ js: src/calendar/stories/__js/CalendarBase.component.jsx
 css: src/calendar/stories/CalendarBase.css
 -->
 
+<!-- CODESANDBOX
+link_title: RangeCalendar - Open On Sandbox
+js: src/calendar/stories/__js/CalendarRange.component.jsx
+css: src/calendar/stories/CalendarRange.css
+-->
+
 # Props
 
 <!-- INJECT_PROPS src/calendar -->

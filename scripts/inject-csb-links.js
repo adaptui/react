@@ -53,13 +53,10 @@ const getCSBLink = (files, extraDeps) => {
     },
   });
 
-  const url = `https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}`;
-
-  return url;
+  return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}`;
 };
 
-// TODO: Support multiple sandbox links
-const CODESANDBOX_FLAG = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/m;
+const CODESANDBOX_FLAG = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
 const docsFolder = path.resolve(process.cwd(), "docs");
 // const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
 
@@ -81,6 +78,7 @@ readmes.forEach(async readmePath => {
 
   const regexMatched = readme.match(CODESANDBOX_FLAG);
   if (!regexMatched) return;
+
   try {
     const ymlString = regexMatched[0]
       .replace("<!-- CODESANDBOX", "")
