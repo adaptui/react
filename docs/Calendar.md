@@ -2,7 +2,7 @@
 
 Accessible `Calendar` component.
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/pmtcs)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/khdp2)
 
 [Calendar - Open On Sandbox](https://codesandbox.io/s/pmtcs)
 
@@ -199,239 +199,17 @@ form elements. In this case, only `aria-disabled` will be set.
 #### Base Calendar
 
 ```js
-import React from "react";
-
-import {
-  useCalendarState,
-  Calendar as CalendarWrapper,
-  CalendarButton,
-  CalendarCell,
-  CalendarCellButton,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarWeekTitle,
-} from "renderless-components";
-
-export const App = props => {
-  const state = useCalendarState(props);
-
-  return (
-    <CalendarWrapper {...state} className="calendar">
-      <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
-
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </CalendarWrapper>
-  );
-};
-
-export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
+<!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarBase.component.jsx -->
 ```
 
 #### Range Calendar
 
 ```js
-import React from "react";
+<!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarRange.component.jsx -->
+```
 
-import {
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarCellButton,
-  CalendarWeekTitle,
-  useRangeCalendarState,
-} from "renderless-components";
+Range Calendar
 
-export const App = props => {
-  const state = useRangeCalendarState(props);
-
-  return (
-    <Calendar {...state} className="calendar-range">
-      <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
-
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </Calendar>
-  );
-};
-
-export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
+```js
+<!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarRange.component.jsx -->
 ```

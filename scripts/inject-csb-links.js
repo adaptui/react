@@ -7,6 +7,13 @@ const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
 const { walkSync, createFile } = require("./fs-utils");
 
+const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
+const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
+const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");
+
+const docsFolder = path.resolve(process.cwd(), "docs");
+const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
+
 const resolveVersion = userModule => {
   const packageDendencies = {};
   const result = /^(@*[^@]+)@*([^@/]+)*$/g.exec(userModule);
@@ -16,7 +23,7 @@ const resolveVersion = userModule => {
   return packageDendencies;
 };
 
-const getCSBLink = (files, extraDeps) => {
+const getSandboxDefineLink = (files, extraDeps) => {
   const deps = {
     reakit: "latest",
     "renderless-components": "0.1.1-beta.3",
@@ -56,9 +63,22 @@ const getCSBLink = (files, extraDeps) => {
   return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}`;
 };
 
-const CODESANDBOX_FLAG = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
-const docsFolder = path.resolve(process.cwd(), "docs");
-// const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
+const getSandboxShortURL = async parsed => {
+  const defineLink = getSandboxDefineLink(
+    {
+      js: readFile(parsed.js),
+      css: readFile(parsed.css),
+      utils: readFile(parsed.utils),
+    },
+    parsed.deps && parsed.deps,
+  );
+
+  // fetching the sandbox_id, otherwise the URL would be longer
+  const response = await axios.get(`${defineLink}&json=1`);
+  const sandboxLink = `https://codesandbox.io/s/${response.data.sandbox_id}`;
+
+  return sandboxLink;
+};
 
 const readFile = url => {
   try {
@@ -70,45 +90,38 @@ const readFile = url => {
   }
 };
 
-const readmes = walkSync(docsFolder);
-
-readmes.forEach(async readmePath => {
+walkSync(docsTemplateFolder).forEach(readmePath => {
   let readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
   const fileName = path.basename(readmePath);
 
-  const regexMatched = readme.match(CODESANDBOX_FLAG);
+  const regexMatched = readme.match(CODESANDBOX_GLOBAL_FLAG);
   if (!regexMatched) return;
 
-  try {
-    const ymlString = regexMatched[0]
-      .replace("<!-- CODESANDBOX", "")
-      .replace("-->", "");
-    const parsed = yaml.parse(ymlString);
-    const linkTitle = parsed.link_title || "Open On CodeSandbox";
+  console.log(
+    chalk.red.yellow(
+      `Generating Sandbox Link:`,
+      chalk.red.greenBright(fileName),
+    ),
+  );
 
-    const csbLink = getCSBLink(
-      {
-        js: readFile(parsed.js),
-        css: readFile(parsed.css),
-        utils: readFile(parsed.utils),
-      },
-      parsed.deps && parsed.deps,
-    );
+  regexMatched.forEach(async match => {
+    try {
+      const ymlString = match
+        .replace("<!-- CODESANDBOX", "")
+        .replace("-->", "");
+      const parsed = yaml.parse(ymlString);
+      const linkTitle = parsed.link_title || "Open On CodeSandbox";
 
-    // fetching the sandbox_id, otherwise the URL would be longer
-    const response = await axios.get(`${csbLink}&json=1`);
-    const sandboxLink = `https://codesandbox.io/s/${response.data.sandbox_id}`;
+      const sandboxLink = await getSandboxShortURL(parsed);
 
-    readme = readme.replace(CODESANDBOX_FLAG, `[${linkTitle}](${sandboxLink})`);
+      readme = readme.replace(
+        CODESANDBOX_REPLACE_FLAG,
+        `[${linkTitle}](${sandboxLink})`,
+      );
 
-    console.log(
-      chalk.red.yellow(
-        `Generating Sandbox Link:`,
-        chalk.red.greenBright(fileName),
-      ),
-    );
-    createFile(path.join(docsFolder, fileName), readme);
-  } catch (e) {
-    console.log(e);
-  }
+      createFile(path.join(docsFolder, fileName), readme);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 });
