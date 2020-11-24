@@ -47,6 +47,7 @@ function walkSync(dir, filelist = []) {
 
 module.exports = {
   walkSync,
+  isDirectory,
   createFile,
   createDirectory,
   getDirectories,

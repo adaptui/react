@@ -74,12 +74,12 @@ below documentation to learn more.
 
 ## Components
 
-- [Accordion](#accordion)
-- Breadcrumbs
-- Calendar
+- [Accordion](./docs/Accordion.md)
+- [Breadcrumbs](./docs/Breadcrumb.md)
+- [Calendar](./docs/Calendar.md)
 - Date Picker
 - Drawer
-- Link
+- [Link](./docs/Link.md)
 - Meter
 - Number Input
 - Pagination

@@ -14,21 +14,6 @@ import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
-export type CalendarCellOptions = BoxOptions &
-  Pick<
-    CalendarStateReturn,
-    "dateValue" | "isDisabled" | "currentMonth" | "isRangeCalendar"
-  > &
-  Partial<
-    Pick<RangeCalendarStateReturn, "highlightDate" | "highlightedRange">
-  > & {
-    date: Date;
-  };
-
-export type CalendarCellHTMLProps = BoxHTMLProps;
-
-export type CalendarCellProps = CalendarCellOptions & CalendarCellHTMLProps;
-
 export const useCalendarCell = createHook<
   CalendarCellOptions,
   CalendarCellHTMLProps
@@ -97,3 +82,18 @@ const getCalendarCellProps = (options: CalendarCellOptions) => {
     "aria-selected": ariaAttr(isSelected),
   };
 };
+
+export type CalendarCellOptions = {
+  date: Date;
+} & Pick<
+  CalendarStateReturn,
+  "dateValue" | "isDisabled" | "currentMonth" | "isRangeCalendar"
+> &
+  Partial<
+    Pick<RangeCalendarStateReturn, "highlightDate" | "highlightedRange">
+  > &
+  BoxOptions;
+
+export type CalendarCellHTMLProps = BoxHTMLProps;
+
+export type CalendarCellProps = CalendarCellOptions & CalendarCellHTMLProps;

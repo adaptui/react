@@ -10,7 +10,7 @@ const {
   createFile,
   getDirectories,
   createDirectory,
-} = require("./fsUtils");
+} = require("./fs-utils");
 const transpileTs = require("./transpile-ts");
 
 // -> get all the component folders [accordion, breadcrumb...]
