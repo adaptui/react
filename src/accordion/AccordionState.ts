@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useCompositeState } from "reakit";
-import { useControllableState } from "@chakra-ui/hooks";
+
 import {
   SelectedIdPair,
   AccordionState,
@@ -12,6 +12,7 @@ import {
   AccordionInitialStateMulti,
   AccordionInitialStateSingle,
 } from "./types";
+import { useControllableState } from "../utils";
 
 export type AccordionStateReturn = AccordionActions &
   AccordionState &
@@ -69,7 +70,6 @@ export function useAccordionState(
     defaultValue: defaultSelectedId,
     value: selectedIdProp,
     onChange: onSelectedIdChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   // Multiple toggle accordion State
@@ -77,7 +77,6 @@ export function useAccordionState(
     defaultValue: defaultSelectedIds,
     value: selectedIdsProp,
     onChange: onSelectedIdsChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const composite = useCompositeState({
@@ -104,7 +103,14 @@ export function useAccordionState(
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [props.allowMultiple, allowToggle, composite.move, selectedId],
+    [
+      props.allowMultiple,
+      allowToggle,
+      composite.move,
+      selectedId,
+      setSelectedId,
+      setSelectedIds,
+    ],
   );
 
   const unSelect = React.useCallback(
@@ -116,7 +122,7 @@ export function useAccordionState(
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [composite.move],
+    [composite.move, setSelectedIds, props.allowMultiple],
   );
 
   const panels = useCompositeState();

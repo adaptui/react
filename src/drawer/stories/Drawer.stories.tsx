@@ -12,7 +12,7 @@ export default {
     preview: createPreviewTabs({
       js: drawerTemplateJs,
       ts: drawerTemplate,
-      deps: ["emotion@latest"],
+      deps: ["@emotion/css@latest"],
     }),
   },
 } as Meta;

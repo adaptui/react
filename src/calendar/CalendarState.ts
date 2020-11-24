@@ -25,12 +25,16 @@ import * as React from "react";
 import { unstable_useId as useId } from "reakit";
 import { useUpdateEffect } from "@chakra-ui/hooks";
 import { useDateFormatter } from "@react-aria/i18n";
-import { useControllableState } from "@chakra-ui/hooks";
 import { InputBase, ValueBase } from "@react-types/shared";
 
+import {
+  parseDate,
+  stringifyDate,
+  isInvalidDateRange,
+  useControllableState,
+} from "../utils";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
-import { isInvalidDateRange, parseDate, stringifyDate } from "../utils";
 import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
 export interface CalendarInitialState
@@ -70,7 +74,6 @@ export function useCalendarState(props: CalendarInitialState = {}) {
     value: parseDate(initialDate),
     defaultValue: parseDate(defaultValueProp),
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const minValue = parseDate(minValueProp);

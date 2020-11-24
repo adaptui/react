@@ -7,8 +7,8 @@
 import { useMemo, useState } from "react";
 import { useCompositeState } from "reakit";
 import { useDateFormatter } from "@react-aria/i18n";
-import { useControllableState } from "@chakra-ui/hooks";
 
+import { useControllableState } from "../utils";
 import { DateTimeFormatOpts } from "../utils/types";
 import { add, setSegment, convertValue, getSegmentLimits } from "./helpers";
 

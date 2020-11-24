@@ -1,5 +1,4 @@
 const path = require("path");
-const convertImports = require("postcss-import");
 const scopify = require("postcss-scopify");
 const { kebabCase } = require("lodash");
 
@@ -27,5 +26,5 @@ function addIdScope() {
 
 module.exports = {
   exec: true,
-  plugins: [convertImports(), rewriteRootRule(), addIdScope()],
+  plugins: [rewriteRootRule(), addIdScope()],
 };
