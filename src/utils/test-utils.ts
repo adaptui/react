@@ -23,6 +23,7 @@ export function installMouseEvent() {
   beforeAll(() => {
     const oldMouseEvent = MouseEvent;
     // @ts-ignore
+    // prettier-ignore
     global.MouseEvent = class FakeMouseEvent extends (
       MouseEvent
     ) {
@@ -50,9 +51,8 @@ export function installMouseEvent() {
 export function installPointerEvent() {
   beforeAll(() => {
     // @ts-ignore
-    global.PointerEvent = class FakePointerEvent extends (
-      MouseEvent
-    ) {
+    // prettier-ignore
+    global.PointerEvent = class FakePointerEvent extends MouseEvent {
       _init: {
         pageX: number;
         pageY: number;
