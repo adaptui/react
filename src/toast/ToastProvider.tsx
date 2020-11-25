@@ -5,7 +5,7 @@ import { objectKeys } from "@chakra-ui/utils";
 
 import { isFunction } from "../utils";
 import { ToastController } from "./ToastController";
-import { IToast, useToastState, ToastStateReturn } from "./ToastState";
+import { Toast, useToastState, ToastStateReturn } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
 const PLACEMENTS = {
@@ -20,12 +20,15 @@ const PLACEMENTS = {
 // let's infer the union types from the placement values instead of hardcoding them
 export type Placements = keyof typeof PLACEMENTS;
 
-interface IToastContext extends ToastStateReturn {
+interface ToastContextState extends ToastStateReturn {
   toastTypes: ToastTypes;
 }
 
-const ToastContext = React.createContext<IToastContext | undefined>(undefined);
+const ToastContext = React.createContext<ToastContextState | undefined>(
+  undefined,
+);
 export const ToastContextProvider = ToastContext.Provider;
+
 export function useToast() {
   const context = React.useContext(ToastContext);
 
@@ -41,15 +44,15 @@ export function useToast() {
 export type ToastTypes = Record<
   string,
   React.FC<
-    Pick<IToast, "content" | "id" | "isVisible"> & {
+    Pick<Toast, "content" | "id" | "isVisible"> & {
       hideToast: ToastStateReturn["hideToast"];
     }
   >
 >;
 
-export type TToastWrapper = (props: any) => React.ReactElement<any>;
+export type ToastWrapper = (props: any) => React.ReactElement<any>;
 
-type IToastProvider = {
+type ToastProviderProps = {
   /**
    * Specify types of toast in an object
    */
@@ -79,10 +82,10 @@ type IToastProvider = {
   /**
    * Wrapper function to enhance the behaviour of ToastController
    */
-  toastWrapper?: TToastWrapper;
+  toastWrapper?: ToastWrapper;
 };
 
-export const ToastProvider: React.FC<IToastProvider> = ({
+export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
   toastTypes,
   placement: providerPlacement = "bottom-center",
