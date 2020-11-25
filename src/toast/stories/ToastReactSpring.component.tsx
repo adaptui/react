@@ -2,9 +2,9 @@ import React from "react";
 import { animated, useTransition } from "react-spring";
 
 import { Variants, Placements } from "./Utils.component";
-import { ToastProvider, TToastWrapper } from "renderless-components";
+import { ToastProvider, ToastWrapper } from "renderless-components";
 
-const SpringAnimationWrapper: TToastWrapper = ({
+const SpringAnimationWrapper: ToastWrapper = ({
   placement,
   isVisible,
   children,
