@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useToast, Placements as IPlacements } from "renderless-components";
+import { useToast } from "renderless-components";
 
 const randomType = (): string => {
   return ["error", "warning", "success"].splice(Math.random() * 3, 1)[0];
@@ -63,7 +63,7 @@ export const Placements: React.FC = () => {
     "bottom-left",
     "bottom-right",
     "bottom-center",
-  ];
+  ] as const;
 
   return (
     <div>
@@ -75,7 +75,7 @@ export const Placements: React.FC = () => {
               showToast({
                 type: randomType(),
                 content: `This is ${placement}`,
-                placement: placement as IPlacements,
+                placement,
               });
             }}
           >
