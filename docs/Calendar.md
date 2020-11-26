@@ -435,3 +435,10 @@ const DoubleChevronRight = props => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 ```
+
+ight = props => ( <DoubleChevronLeft style={{ transform: "rotate(180deg)" }}
+{...props} /> );
+
+```
+
+```
