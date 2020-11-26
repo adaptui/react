@@ -37,40 +37,9 @@ yarn add renderless-components reakit
 
 > Make sure `react react-dom` is installed.
 
-## Usage
+## Getting started
 
-```jsx
-import React from "react";
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
-} from "renderless-components";
-
-function App() {
-  const state = useAccordionState();
-
-  return (
-    <Accordion {...state}>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
-    </Accordion>
-  );
-}
-
-ReactDOM.render(<App />, document.getElementById("root"));
-```
-
-Play with this on
-[CodeSandbox](https://codesandbox.io/s/renderless-accordion-seywy) and read the
-below documentation to learn more.
+Check out our [getting started docs](/docs/getting-started.md)
 
 ## Components
 
