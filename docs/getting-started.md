@@ -56,12 +56,12 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 ## Component Docs
 
-- [Accordion](./docs/Accordion.md)
-- [Breadcrumbs](./docs/Breadcrumb.md)
-- [Calendar](./docs/Calendar.md)
+- [Accordion](docs/Accordion.md)
+- [Breadcrumbs](docs/Breadcrumb.md)
+- [Calendar](docs/Calendar.md)
 - Date Picker
 - Drawer
-- [Link](./docs/Link.md)
+- [Link](docs/Link.md)
 - Meter
 - Number Input
 - Pagination

@@ -27,10 +27,10 @@ Template for docs which is used for automatically gene
 
 ### Generated Content.
 
-We have some code and docs generation scripts which we have in our workflow
-which you should be aware of for reducing any confusion.
+We have code and docs generation scripts in our workflow which you should be
+aware of for reducing any confusion.
 
-We generated
+We generate:
 
 - keys for reakit components in [\_\_keys.ts](/src/accordion/__keys.ts) file for
   each component.
