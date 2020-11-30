@@ -7,13 +7,14 @@ Accessible Accordion component. It follows the
 link_title: Accordion Example Live Demo
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
 css: src/accordion/stories/AccordionStyled.css
+deps: [emotion]
 -->
 
-# Props
+## Props
 
 <!-- INJECT_PROPS src/accordion -->
 
-### Accessibility
+## Accessibility
 
 - `Accordion` extends the accessibility features of
   [Composite](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
@@ -30,11 +31,11 @@ css: src/accordion/stories/AccordionStyled.css
 - `AccordionPanel` extends the accessibility features of
   [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
 
-### Composition
+## Composition
 
 <!-- INJECT_COMPOSITION src/accordion -->
 
-### Example
+## Example
 
 ```js
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->

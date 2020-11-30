@@ -4,19 +4,19 @@ Accessible `Link` component that provides the required aria role when used under
 different compositions. It follows the
 [WAI-ARIA Link Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#link).
 
-# Props
+## Props
 
 <!-- INJECT_PROPS src/link -->
 
-### Accessibilty
+## Accessibilty
 
 - `Link` has role `link`.
 
-### Composition
+## Composition
 
 <!-- INJECT_COMPOSITION src/link -->
 
-### Example
+## Example
 
 ```js
 <!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->

@@ -2,11 +2,11 @@
 
 Accessible `DatePicker` component.
 
-[DatePicker - Open On Sandbox](https://codesandbox.io/s/ixpqy)
+[DatePicker - Open On Sandbox](https://codesandbox.io/s/4j912)
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/wlu79)
+[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cq9ql)
 
-# Props
+## Props
 
 <!-- Automatically generated -->
 
@@ -178,7 +178,7 @@ form elements. In this case, only `aria-disabled` will be set.
 
 </details>
 
-# Composition
+## Composition
 
 - DatePicker uses [usePickerBase](undefined)
 - DatePickerContent uses [usePickerBaseContent](undefined)
@@ -186,9 +186,9 @@ form elements. In this case, only `aria-disabled` will be set.
 - DatePickerSegmentField uses [useSegmentField](undefined)
 - DatePickerTrigger uses [usePickerBaseTrigger](undefined)
 
-### Example
+## Example
 
-#### DatePicker
+### DatePicker
 
 ```js
 import * as React from "react";
@@ -351,7 +351,7 @@ const DoubleChevronRight = props => (
 );
 ```
 
-#### Range Date Picker
+### Range Date Picker
 
 ```js
 import React from "react";
@@ -532,4 +532,11 @@ const ChevronRight = props => (
 const DoubleChevronRight = props => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
+```
+
+ChevronRight = props => ( <DoubleChevronLeft
+style={{ transform: "rotate(180deg)" }} {...props} /> );
+
+```
+
 ```

@@ -3,9 +3,9 @@
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
-[Accordion Example Live Demo](https://codesandbox.io/s/9qc1x)
+[Accordion Example Live Demo](https://codesandbox.io/s/h7wdn)
 
-# Props
+## Props
 
 <!-- Automatically generated -->
 
@@ -266,7 +266,7 @@ form elements. In this case, only `aria-disabled` will be set.
 
 </details>
 
-### Accessibility
+## Accessibility
 
 - `Accordion` extends the accessibility features of
   [Composite](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
@@ -283,7 +283,7 @@ form elements. In this case, only `aria-disabled` will be set.
 - `AccordionPanel` extends the accessibility features of
   [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
 
-### Composition
+## Composition
 
 - Accordion uses [useComposite](https://reakit.io/docs/composite)
 - AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
@@ -291,7 +291,7 @@ form elements. In this case, only `aria-disabled` will be set.
 - AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
   [useCompositeItem](https://reakit.io/docs/composite)
 
-### Example
+## Example
 
 ```js
 import * as React from "react";
