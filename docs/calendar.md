@@ -2,11 +2,11 @@
 
 Accessible `Calendar` component.
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/pmtcs)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/qte2l)
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/khdp2)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
 
-# Props
+## Props
 
 <!-- Automatically generated -->
 
@@ -184,7 +184,7 @@ form elements. In this case, only `aria-disabled` will be set.
 
 </details>
 
-# Composition
+## Composition
 
 - Calendar uses [useBox](https://reakit.io/docs/box)
 - CalendarButton uses [useButton](https://reakit.io/docs/button)
@@ -194,9 +194,9 @@ form elements. In this case, only `aria-disabled` will be set.
 - CalendarHeader uses [useBox](https://reakit.io/docs/box)
 - CalendarWeekTitle uses [useBox](https://reakit.io/docs/box)
 
-### Example
+## Example
 
-#### Base Calendar
+### Base Calendar
 
 ```js
 import React from "react";
@@ -316,7 +316,7 @@ const DoubleChevronRight = props => (
 );
 ```
 
-#### Range Calendar
+### Range Calendar
 
 ```js
 import React from "react";

@@ -4,7 +4,7 @@ Accessible `Link` component that provides the required aria role when used under
 different compositions. It follows the
 [WAI-ARIA Link Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#link).
 
-# Props
+## Props
 
 <!-- Automatically generated -->
 
@@ -16,15 +16,15 @@ different compositions. It follows the
   form elements. In this case, only `aria-disabled` will be set.
 - **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
 
-### Accessibilty
+## Accessibilty
 
 - `Link` has role `link`.
 
-### Composition
+## Composition
 
 - Link uses [useClickable](https://reakit.io/docs/clickable)
 
-### Example
+## Example
 
 ```js
 import * as React from "react";

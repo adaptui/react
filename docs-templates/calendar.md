@@ -14,23 +14,23 @@ js: src/calendar/stories/__js/CalendarRange.component.jsx
 css: src/calendar/stories/CalendarRange.css
 -->
 
-# Props
+## Props
 
 <!-- INJECT_PROPS src/calendar -->
 
-# Composition
+## Composition
 
 <!-- INJECT_COMPOSITION src/calendar -->
 
-### Example
+## Example
 
-#### Base Calendar
+### Base Calendar
 
 ```js
 <!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarBase.component.jsx -->
 ```
 
-#### Range Calendar
+### Range Calendar
 
 ```js
 <!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarRange.component.jsx -->

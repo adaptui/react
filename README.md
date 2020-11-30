@@ -37,57 +37,28 @@ yarn add renderless-components reakit
 
 > Make sure `react react-dom` is installed.
 
-## Usage
+## Getting started
 
-```jsx
-import React from "react";
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
-} from "renderless-components";
+Check out our [getting started docs](/docs/getting-started.md)
 
-function App() {
-  const state = useAccordionState();
+## Component Docs
 
-  return (
-    <Accordion {...state}>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
-    </Accordion>
-  );
-}
-
-ReactDOM.render(<App />, document.getElementById("root"));
-```
-
-Play with this on
-[CodeSandbox](https://codesandbox.io/s/renderless-accordion-seywy) and read the
-below documentation to learn more.
-
-## Components
-
-- [Accordion](./docs/Accordion.md)
-- [Breadcrumbs](./docs/Breadcrumb.md)
-- [Calendar](./docs/Calendar.md)
-- Date Picker
-- Drawer
-- [Link](./docs/Link.md)
-- Meter
-- Number Input
-- Pagination
-- Progress
-- Select
-- Slider
-- Time Picker
-- Toast
+- [Accordion](docs/accordion.md)
+- [Breadcrumbs](docs/breadcrumb.md)
+- [Calendar](docs/calendar.md)
+- [Date Picker](docs/datepicker.md)
+- [Drawer](docs/drawer.md)
+- [Link](docs/Link.md)
+- [Meter](docs/meter.md)
+- [Number Input](docs/number-input.md)
+- [Pagination](docs/pagination.md)
+- [Picker Base](docs/picker-base.md)
+- [Progress](docs/progress.md)
+- [Segment](docs/segment.md)
+- [Select](docs/select.md)
+- [Slider](docs/slider.md)
+- [Time Picker](docs/timepicker.md)
+- [Toast](docs/toast.md)
 
 ## Contributors ✨
 
