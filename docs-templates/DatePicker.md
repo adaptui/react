@@ -14,24 +14,24 @@ js: src/datepicker/stories/__js/DateRangePicker.component.jsx
 css: src/datepicker/stories/DatePickerRange.css
 -->
 
-# Props
+## Props
 
 <!-- INJECT_PROPS src/datepicker -->
 
-# Composition
+## Composition
 
 <!-- INJECT_COMPOSITION src/datepicker -->
 
-### Example
+## Example
 
-#### DatePicker
+### DatePicker
 
 ```js
-<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePicker.component.jsx -->
+<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePickerBase.component.jsx -->
 ```
 
-#### Range Date Picker
+### Range Date Picker
 
 ```js
-<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DateRangePicker.component.jsx -->
+<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePickerRange.component.jsx -->
 ```
