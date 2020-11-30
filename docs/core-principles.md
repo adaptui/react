@@ -1,6 +1,6 @@
 # Core Principles
 
-Renderless components follows
+Renderless components follows all the
 [basic concepts from reakit](https://reakit.io/docs/basic-concepts/) to make it
 more consisten overall and also composable at the same time, understanding these
 concepts are essential to work with components.
@@ -21,8 +21,7 @@ larger components.
 ## Stylable
 
 Components are crafted in a way that are 100% stylable with any styling
-solutions available which makes them great for working as a foundation for any
-Design Systems.
+solutions available which makes them a great foundation for any Design Systems.
 
 ## Extensible
 

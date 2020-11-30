@@ -41,22 +41,24 @@ yarn add renderless-components reakit
 
 Check out our [getting started docs](/docs/getting-started.md)
 
-## Components
+## Component Docs
 
-- [Accordion](./docs/Accordion.md)
-- [Breadcrumbs](./docs/Breadcrumb.md)
-- [Calendar](./docs/Calendar.md)
-- Date Picker
-- Drawer
-- [Link](./docs/Link.md)
-- Meter
-- Number Input
-- Pagination
-- Progress
-- Select
-- Slider
-- Time Picker
-- Toast
+- [Accordion](docs/accordion.md)
+- [Breadcrumbs](docs/breadcrumb.md)
+- [Calendar](docs/calendar.md)
+- [Date Picker](docs/datepicker.md)
+- [Drawer](docs/drawer.md)
+- [Link](docs/Link.md)
+- [Meter](docs/meter.md)
+- [Number Input](docs/number-input.md)
+- [Pagination](docs/pagination.md)
+- [Picker Base](docs/picker-base.md)
+- [Progress](docs/progress.md)
+- [Segment](docs/segment.md)
+- [Select](docs/select.md)
+- [Slider](docs/slider.md)
+- [Time Picker](docs/timepicker.md)
+- [Toast](docs/toast.md)
 
 ## Contributors ✨
 

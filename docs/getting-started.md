@@ -56,20 +56,22 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 ## Component Docs
 
-- [Accordion](docs/Accordion.md)
-- [Breadcrumbs](docs/Breadcrumb.md)
-- [Calendar](docs/Calendar.md)
-- Date Picker
-- Drawer
-- [Link](docs/Link.md)
-- Meter
-- Number Input
-- Pagination
-- Progress
-- Select
-- Slider
-- Time Picker
-- Toast
+- [Accordion](accordion.md)
+- [Breadcrumbs](breadcrumb.md)
+- [Calendar](calendar.md)
+- [Date Picker](datepicker.md)
+- [Drawer](drawer.md)
+- [Link](Link.md)
+- [Meter](meter.md)
+- [Number Input](number-input.md)
+- [Pagination](pagination.md)
+- [Picker Base](picker-base.md)
+- [Progress](progress.md)
+- [Segment](segment.md)
+- [Select](select.md)
+- [Slider](slider.md)
+- [Time Picker](timepicker.md)
+- [Toast](toast.md)
 
 <p align="right">
 <a href="./core-principles.md">Next | Core Principles →</a>

@@ -1,11 +1,11 @@
 # Codebase Overview
 
-_Procedd if you are interested in contributing to renderless-component's
+_Proceed if you are interested in contributing to renderless-component's
 codebase_
 
 Let's get a basic overview of our codebase and how our code is stuctured.
 
-Our codebase consists of few important folders
+Our codebase consists of few important folders,
 
 #### [/src](/src)
 
@@ -21,11 +21,11 @@ Storybook examples
 
 #### [/docs-templates](/docs-templates)
 
-Template for docs which is used for automatically gene
+Template for docs which is used for automatically generated content
 
 ---
 
-### Generated Content.
+## Generated Content.
 
 We have code and docs generation scripts in our workflow which you should be
 aware of for reducing any confusion.
@@ -37,55 +37,59 @@ We generate:
 
   Command: `yarn keys`
 
-- Transpile typescript examples to javascript to provide both examples in
+- javascript examples from Typescript examples to provide both examples in
   storybook.
 
   Command: `yarn generatejs`
 
-- Documentation generation, we auto generate proptypes, composition, and inject
-  examples in docs with special scripts.
+- proptypes, composition, csb links and inject examples in the docs with special
+  scripts.
 
   Command: `yarn docsgen`
 
-### Docs generation guide
+## Docs generation guide
 
-For our component API documentation we auto generate them by parsing the
-typescript code and extracting information about them.
+For our component API documentation, we auto generate them by parsing the
+typescript code and extracting information from them.
 
 We have [docs-templates](/docs-templates) which holds the templates for the
 docs.
 
 See example for [accordion](/docs-templates/Accordion.md)
 
-#### Props
+### Props
 
-We can use **&lt;!-- INJECT_PROPS src/accordion -->** markdown comment with this
-`INJECT_PROPS` syntax and it will inject the prop types in that place
+- `INJECT_PROPS` syntax will inject the prop types in its place
+- Usage: `<!-- INJECT_PROPS src/accordion -->` as markdown comment.
 
-#### Composition
+### Composition
 
-Composition docs are auto generated Same as before can use
+- `INJECT_COMPOSITION` will inject the composition in the specified component
+- Usage: `<!-- INJECT_COMPOSITION src/accordion -->` as markdown comment.
 
-**&lt;!-- INJECT_COMPOSITION src/accordion -->** and it will inject the
-composition for the specified component
+### Examples
 
-#### Examples
+- `IMPORT_EXAMPLE` will inject the examples from the components as code.
+- Usage: `<!-- IMPORT_EXAMPLE src/accordion/AccordionBasic.jsx -->` as markdown
+  comment.
 
-For the specified component Example injection
-`<!-- IMPORT_EXAMPLE src/accordion/AccordionBasic.jsx -->` will inject the
-example code.
-
-#### Sandbox links
+### Sandbox links
 
 And finally Sandbox links are also dynamically generated! We can just add this
-yaml like markdown comment and it will replace the comment with dynamic sandbox
+yaml as markdown comment and it will replace the comment with dynamic sandbox
 link
 
-```md
-[Open On CodeSandbox](https://codesandbox.io/s/9qc1x)
-```
+- `CODESANDBOX` with the links to the files will generate the csb links.
+- Usage:
+  ```md
+  <!-- CODESANDBOX
+  link_title: Accordion Example Live Demo
+  js: src/accordion/stories/__js/AccordionBasic.component.jsx
+  css: src/accordion/stories/AccordionStyled.css
+  -->
+  ```
 
-### NPM Scripts
+## NPM Scripts
 
 - `storybook` - opens storybook
 - `storybook-build` - builds storybook
@@ -95,3 +99,24 @@ link
 - `keys` - generates keys for components
 - `docsgen` - generates docs for components
 - `generatejs` - transpiles ts examples to js
+- `commit` - to commit with [gacp](https://github.com/vivaxy/gacp)
+- `lint` - to lint the `src` with [ESLint](https://eslint.org/)
+
+## Component Docs
+
+- [Accordion](accordion.md)
+- [Breadcrumbs](breadcrumb.md)
+- [Calendar](calendar.md)
+- [Date Picker](datepicker.md)
+- [Drawer](drawer.md)
+- [Link](Link.md)
+- [Meter](meter.md)
+- [Number Input](number-input.md)
+- [Pagination](pagination.md)
+- [Picker Base](picker-base.md)
+- [Progress](progress.md)
+- [Segment](segment.md)
+- [Select](select.md)
+- [Slider](slider.md)
+- [Time Picker](timepicker.md)
+- [Toast](toast.md)
