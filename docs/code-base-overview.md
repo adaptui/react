@@ -1,7 +1,7 @@
 # Codebase Overview
 
-_If you are not interested in renderless-component's codebase you can ignore
-this documentation_
+_Procedd if you are interested in contributing to renderless-component's
+codebase_
 
 Let's get a basic overview of our codebase and how our code is stuctured.
 
