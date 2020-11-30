@@ -2,9 +2,13 @@
 
 Accessible `DatePicker` component.
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cq9ql)
-
 [DatePicker - Open On Sandbox](https://codesandbox.io/s/4j912)
+
+<!-- CODESANDBOX
+link_title: RangeDatePicker - Open On Sandbox
+js: src/datepicker/stories/__js/DateRangePicker.component.jsx
+css: src/datepicker/stories/DatePickerRange.css
+-->
 
 ## Props
 
@@ -533,9 +537,6 @@ const DoubleChevronRight = props => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 ```
-
-oubleChevronRight = props => ( <DoubleChevronLeft
-style={{ transform: "rotate(180deg)" }} {...props} /> );
 
 ```
 

@@ -4,9 +4,6 @@ const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
 
-const { walkSync, createFile } = require("./fs-utils");
-const injectMdContent = require("./inject-md-content");
-
 const {
   getProps,
   getJsDocs,
@@ -17,29 +14,25 @@ const {
   sortSourceFiles,
   isOptionsDeclaration,
   isStateReturnDeclaration,
-} = require("./utils");
+} = require("./index");
+const injectMdContent = require("./inject-md-content");
+const { walkSync, createFile } = require("./fs-utils");
 
-const docsFolder = path.resolve(process.cwd(), "docs");
 const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
-const readmeTemplates = walkSync(docsFolder);
+const injectProps = docsTemplate => {
+  return injectMdContent(
+    docsTemplate,
+    PROPS_INJECT_FLAG,
+    (line, regexMatched) => {
+      const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
 
-readmeTemplates.forEach(readme => {
-  const mdContent = fs.readFileSync(readme, { encoding: "utf-8" });
+      return getPropTypesMarkdown(types);
+    },
+  );
+};
 
-  mdContent.split("\n").map(line => {
-    const lineMatch = line.match(PROPS_INJECT_FLAG);
-    if (lineMatch) {
-      run(path.join(process.cwd(), lineMatch[1]), path.join(readme));
-    }
-  });
-});
-
-function run(rootPath, readmeTemplatePath) {
-  const types = getPropTypes(rootPath);
-
-  injectPropTypes(types, readmeTemplatePath);
-}
+module.exports = injectProps;
 
 /**
  * Inject prop types tables into README.md files
@@ -85,22 +78,6 @@ function getPropTypes(rootPath) {
   });
 
   return types;
-}
-
-function injectPropTypes(types, readmeTemplatePath) {
-  const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
-  const basename = path.basename(readmeTemplatePath);
-  const propTypesMarkdown = getPropTypesMarkdown(types);
-  const markdown = injectMdContent(
-    mdContents,
-    PROPS_INJECT_FLAG,
-    () => propTypesMarkdown,
-  );
-
-  createFile(path.join(docsFolder, basename), markdown);
-  console.log(
-    chalk.red.yellow(`Injected Prop Types:`, chalk.red.greenBright(basename)),
-  );
 }
 
 /**
@@ -192,9 +169,9 @@ function getSummaryDetails(stateProps) {
   return outdent`
     <details><summary>${stateProps.length} state props</summary>
     > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
-    
+
     ${stateProps.map(getPropTypesRow).join("\n")}
-    
+
     </details>
   `;
 }

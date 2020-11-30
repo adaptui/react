@@ -4,7 +4,11 @@ Accessible `Calendar` component.
 
 [Calendar - Open On Sandbox](https://codesandbox.io/s/qte2l)
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
+<!-- CODESANDBOX
+link_title: RangeCalendar - Open On Sandbox
+js: src/calendar/stories/__js/CalendarRange.component.jsx
+css: src/calendar/stories/CalendarRange.css
+-->
 
 ## Props
 
@@ -435,9 +439,6 @@ const DoubleChevronRight = props => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 ```
-
-ight = props => ( <DoubleChevronLeft style={{ transform: "rotate(180deg)" }}
-{...props} /> );
 
 ```
 

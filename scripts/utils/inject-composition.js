@@ -1,35 +1,27 @@
 const fs = require("fs");
 const path = require("path");
-const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
 
 const injectMdContent = require("./inject-md-content");
-const { walkSync, createFile } = require("./fs-utils");
-const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./utils");
+const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./index");
 
-const docsFolder = path.resolve(process.cwd(), "docs");
-// const docsTemplateFolder = path.resolve(process.cwd(), "docs-templates");
 const COMPOSE_INJECT_FLAG = /\<\!\-\- INJECT_COMPOSITION (.*) \-\-\>/m;
 
-const readmeTemplates = walkSync(docsFolder);
+const injectComposition = docsTemplate => {
+  return injectMdContent(
+    docsTemplate,
+    COMPOSE_INJECT_FLAG,
+    (line, regexMatched) => {
+      const composites = getComposition(
+        path.join(process.cwd(), regexMatched[1]),
+      );
+      return getMarkdown(composites);
+    },
+  );
+};
 
-readmeTemplates.forEach(readme => {
-  const mdContent = fs.readFileSync(readme, { encoding: "utf-8" });
-
-  mdContent.split("\n").map(line => {
-    const lineMatch = line.match(COMPOSE_INJECT_FLAG);
-    if (lineMatch) {
-      run(path.join(process.cwd(), lineMatch[1]), path.join(readme));
-    }
-  });
-});
-
-function run(rootPath, readmeTemplatePath) {
-  const compose = getComposition(rootPath);
-
-  injectComposition(compose, readmeTemplatePath);
-}
+module.exports = injectComposition;
 
 function getComposition(rootPath) {
   const project = new Project({
@@ -64,27 +56,6 @@ function getComposition(rootPath) {
   });
 
   return compose;
-}
-
-function injectComposition(compose, readmeTemplatePath) {
-  const mdContents = fs.readFileSync(readmeTemplatePath, { encoding: "utf-8" });
-  const moduleName = path.basename(readmeTemplatePath);
-
-  const compositionMarkdown = getMarkdown(compose);
-  const markdown = injectMdContent(
-    mdContents,
-    COMPOSE_INJECT_FLAG,
-    () => compositionMarkdown,
-  );
-
-  createFile(path.join(docsFolder, moduleName), markdown);
-
-  console.log(
-    chalk.red.yellow(
-      `Injected Composition:`,
-      chalk.red.greenBright(moduleName),
-    ),
-  );
 }
 
 function getMarkdown(compose) {

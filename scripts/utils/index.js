@@ -1,7 +1,4 @@
 // Taken from: https://github.com/reakit/reakit/blob/6f6d1ad9177156cafa4adf9c987a43c79a1bbb90/scripts/build/utils.js
-const prettier = require("prettier");
-const { join, dirname, basename } = require("path");
-const { toUpper, snakeCase, isEqual } = require("lodash");
 const {
   lstatSync,
   existsSync,
@@ -9,6 +6,10 @@ const {
   writeFileSync,
 } = require("fs-extra");
 const chalk = require("chalk");
+const prettier = require("prettier");
+const { join, dirname, basename } = require("path");
+const { toUpper, snakeCase, isEqual } = require("lodash");
+const { Project } = require("ts-morph");
 
 function log(...args) {
   console.log(...args);
