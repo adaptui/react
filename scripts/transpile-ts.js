@@ -1,6 +1,7 @@
 const ts = require("typescript");
 const prettier = require("prettier/standalone");
 const parserBabel = require("prettier/parser-babel");
+
 const prettierConfig = require("../.prettierrc.json");
 
 module.exports = function transformTs(file) {
