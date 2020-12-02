@@ -2,7 +2,7 @@
 
 Accessible `Meter` component.
 
-[Meter - Open On Sandbox](https://codesandbox.io/s/vyipe)
+[Meter - Open On Sandbox](https://codesandbox.io/s/n9f9q)
 
 ## Props
 
@@ -12,21 +12,21 @@ Accessible `Meter` component.
 
 - **`value`** <code>number</code> The `value` of the meter indicator.
 
-If `undefined`/`not valid` the meter bar will be equal to `min`
+  If `undefined`/`not valid` the meter bar will be equal to `min`
 
 - **`min`** <code>number</code> The minimum value of the meter
 - **`max`** <code>number</code> The maximum value of the meter
 - **`low`** <code>number</code> The higher limit of min range.
 
-Defaults to `min`.
+  Defaults to `min`.
 
 - **`optimum`** <code>number</code> The lower limit of max range.
 
-Defaults to `median of low & high`.
+  Defaults to `median of low & high`.
 
 - **`high`** <code>number</code> The lower limit of max range.
 
-Defaults to `max`.
+  Defaults to `max`.
 
 ### `Meter`
 
@@ -35,7 +35,7 @@ Defaults to `max`.
 
 - **`value`** <code>number</code> The `value` of the meter indicator.
 
-If `undefined`/`not valid` the meter bar will be equal to `min`
+  If `undefined`/`not valid` the meter bar will be equal to `min`
 
 - **`min`** <code>number</code> The minimum value of the meter
 - **`max`** <code>number</code> The maximum value of the meter
@@ -46,13 +46,13 @@ If `undefined`/`not valid` the meter bar will be equal to `min`
 
 ## Composition
 
-- Meter uses [useBox](https://reakit.io/docs/box)
+- Meter uses [useRole](https://reakit.io/docs/role)
 
 ## Example
 
 ```js
 import * as React from "react";
-import { css, keyframes } from "@emotion/css";
+import { css, keyframes } from "emotion";
 
 import { Meter, useMeterState } from "renderless-components";
 

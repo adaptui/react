@@ -2,7 +2,7 @@
 
 Accessible `Select` component.
 
-[Select - Open On Sandbox](https://codesandbox.io/s/tcnxl)
+[Select - Open On Sandbox](https://codesandbox.io/s/hrtki)
 
 ## Props
 
@@ -715,11 +715,12 @@ if `modal` is `false`.
 
 ## Composition
 
-- Select uses [usePopoverDisclosure](undefined)
+- Select uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
 - SelectItem uses [useCompositeItem](https://reakit.io/docs/composite)
 - SelectList uses [useComposite](https://reakit.io/docs/composite)
-- SelectOption uses [useSelectItem](undefined)
-- SelectPopover uses [useSelectList](undefined) and [usePopover](undefined)
+- SelectOption uses [useSelectItem](./select.md)
+- SelectPopover uses [useSelectList](./select.md) and
+  [usePopover](https://reakit.io/docs/popover/)
 
 ## Example
 

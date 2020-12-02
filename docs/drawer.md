@@ -2,7 +2,7 @@
 
 Accessible `Drawer` component.
 
-[Drawer - Open On Sandbox](https://codesandbox.io/s/96zk3)
+[Drawer - Open On Sandbox](https://codesandbox.io/s/c13ec)
 
 ## Props
 
@@ -62,14 +62,14 @@ Accessible `Drawer` component.
 
 ## Composition
 
-- Drawer uses [useDialog](undefined)
-- DrawerCloseButton uses [useDialogDisclosure](undefined)
+- Drawer uses [useDialog](https://reakit.io/docs/dialog/)
+- DrawerCloseButton uses [useDialogDisclosure](https://reakit.io/docs/dialog/)
 
 ## Example
 
 ```js
 import React from "react";
-import { css } from "@emotion/css";
+import { css } from "emotion";
 
 import {
   Drawer,

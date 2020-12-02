@@ -2,7 +2,7 @@
 
 Accessible `NumberInput` component.
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/siflz)
+[NumberInput - Open On Sandbox](https://codesandbox.io/s/ybuxv)
 
 ## Props
 
@@ -13,15 +13,16 @@ Accessible `NumberInput` component.
 - **`value`** <code>string | number</code> The value of the counter. Should be
   less than `max` and greater than `min`
 
-If no value, initial value is set to `""`
+  If no value, initial value is set to `""`
 
 - **`keepWithinRange`** <code>boolean</code> This controls the value update
   behavior in general.
 
-- If `true` and you use the stepper or up/down arrow keys, the value will not
-  exceed the `max` or go lower than `min`
+  - If `true` and you use the stepper or up/down arrow keys, the value will not
+    exceed the `max` or go lower than `min`
 
-- If `false`, the value will be allowed to go out of range.
+  - If `false`, the value will be allowed to go out of range.
+
 - **`min`** <code>number</code> The minimum value of the counter
 - **`max`** <code>number</code> The maximum value of the counter
 - **`step`** <code>number</code> The step used to increment or decrement the
@@ -29,7 +30,8 @@ If no value, initial value is set to `""`
 - **`precision`** <code>number</code> The number of decimal points used to round
   the value
 
-If no precision, initial value is from the decimal places from value/step - `0`
+  If no precision, initial value is from the decimal places from value/step -
+  `0`
 
 - **`defaultValue`** <code>string | number | undefined</code> The initial value
   of the counter. Should be less than `max` and greater than `min`
@@ -59,14 +61,15 @@ value will change based on mouse wheel
 - **`keepWithinRange`** <code>boolean</code> This controls the value update
   behavior in general.
 
-- If `true` and you use the stepper or up/down arrow keys, the value will not
-  exceed the `max` or go lower than `min`
+  - If `true` and you use the stepper or up/down arrow keys, the value will not
+    exceed the `max` or go lower than `min`
 
-- If `false`, the value will be allowed to go out of range.
+  - If `false`, the value will be allowed to go out of range.
+
 - **`value`** <code>string | number</code> The value of the counter. Should be
   less than `max` and greater than `min`
 
-If no value, initial value is set to `""`
+  If no value, initial value is set to `""`
 
 - **`min`** <code>number</code> The minimum value of the counter
 - **`max`** <code>number</code> The maximum value of the counter
@@ -100,10 +103,11 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`keepWithinRange`** <code>boolean</code> This controls the value update
   behavior in general.
 
-- If `true` and you use the stepper or up/down arrow keys, the value will not
-  exceed the `max` or go lower than `min`
+  - If `true` and you use the stepper or up/down arrow keys, the value will not
+    exceed the `max` or go lower than `min`
 
-- If `false`, the value will be allowed to go out of range.
+  - If `false`, the value will be allowed to go out of range.
+
 - **`isAtMin`** <code>boolean</code> Truw, if value is equal to min.
 - **`focusInput`** <code>() =&#62; void</code> Focus input if focus input on
   value change is `true`
@@ -126,10 +130,11 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`keepWithinRange`** <code>boolean</code> This controls the value update
   behavior in general.
 
-- If `true` and you use the stepper or up/down arrow keys, the value will not
-  exceed the `max` or go lower than `min`
+  - If `true` and you use the stepper or up/down arrow keys, the value will not
+    exceed the `max` or go lower than `min`
 
-- If `false`, the value will be allowed to go out of range.
+  - If `false`, the value will be allowed to go out of range.
+
 - **`isAtMax`** <code>boolean</code> True, if value is equal to max.
 - **`focusInput`** <code>() =&#62; void</code> Focus input if focus input on
   value change is `true`
@@ -142,7 +147,7 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ## Composition
 
-- NumberInput uses [useInput](undefined)
+- NumberInput uses [useInput](https://reakit.io/docs/input/)
 - NumberInputDecrementButton uses [useButton](https://reakit.io/docs/button)
 - NumberInputIncrementButton uses [useButton](https://reakit.io/docs/button)
 

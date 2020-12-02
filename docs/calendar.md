@@ -2,9 +2,9 @@
 
 Accessible `Calendar` component.
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/khdp2)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/pmtcs)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/qte2l)
 
 ## Props
 
@@ -186,13 +186,13 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ## Composition
 
-- Calendar uses [useBox](https://reakit.io/docs/box)
+- Calendar uses [useRole](https://reakit.io/docs/role)
 - CalendarButton uses [useButton](https://reakit.io/docs/button)
-- CalendarCell uses [useBox](https://reakit.io/docs/box)
+- CalendarCell uses [useRole](https://reakit.io/docs/role)
 - CalendarCellButton uses [useButton](https://reakit.io/docs/button)
-- CalendarGrid uses [useBox](https://reakit.io/docs/box)
-- CalendarHeader uses [useBox](https://reakit.io/docs/box)
-- CalendarWeekTitle uses [useBox](https://reakit.io/docs/box)
+- CalendarGrid uses [useRole](https://reakit.io/docs/role)
+- CalendarHeader uses [useRole](https://reakit.io/docs/role)
+- CalendarWeekTitle uses [useRole](https://reakit.io/docs/role)
 
 ## Example
 

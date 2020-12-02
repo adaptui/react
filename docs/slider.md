@@ -2,7 +2,7 @@
 
 Accessible `Slider` component.
 
-[Slider - Open On Sandbox](https://codesandbox.io/s/d0mp9)
+[Slider - Open On Sandbox](https://codesandbox.io/s/s20jt)
 
 ## Props
 
@@ -12,7 +12,7 @@ Accessible `Slider` component.
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-If `undefined`/`not valid` the slider bar will be the optimum of min & max
+  If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`min`** <code>number</code> The minimum value of the slider
 - **`max`** <code>number</code> The maximum value of the slider
@@ -111,7 +111,7 @@ If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-If `undefined`/`not valid` the slider bar will be the optimum of min & max
+  If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
 - **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>
@@ -143,9 +143,9 @@ If `undefined`/`not valid` the slider bar will be the optimum of min & max
 ## Composition
 
 - SliderInput uses [unstable_useId](https://reakit.io/docs/id) and
-  [useInput](undefined)
-- SliderThumb uses [useBox](https://reakit.io/docs/box)
-- SliderTrack uses [useBox](https://reakit.io/docs/box)
+  [useInput](https://reakit.io/docs/input/)
+- SliderThumb uses [useRole](https://reakit.io/docs/role)
+- SliderTrack uses [useRole](https://reakit.io/docs/role)
 
 ## Example
 

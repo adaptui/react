@@ -2,7 +2,7 @@
 
 Accessible `PickerBase` component.
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/neryg)
+[PickerBase - Open On Sandbox](https://codesandbox.io/s/rsuxm)
 
 ## Props
 
@@ -96,9 +96,9 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ## Composition
 
-- PickerBase uses [useBox](https://reakit.io/docs/box)
-- PickerBaseContent uses [usePopover](undefined)
-- PickerBaseTrigger uses [usePopoverDisclosure](undefined)
+- PickerBase uses [useRole](https://reakit.io/docs/role)
+- PickerBaseContent uses [usePopover](https://reakit.io/docs/popover/)
+- PickerBaseTrigger uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
 
 ## Example
 

@@ -2,7 +2,7 @@
 
 Accessible `Pagination` component.
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/ugo4e)
+[Pagination - Open On Sandbox](https://codesandbox.io/s/jp1fn)
 
 ## Props
 
@@ -71,7 +71,7 @@ Accessible `Pagination` component.
 
 ## Composition
 
-- Pagination uses [useBox](https://reakit.io/docs/box)
+- Pagination uses [useRole](https://reakit.io/docs/role)
 - PaginationButton uses [useButton](https://reakit.io/docs/button)
 
 ## Example

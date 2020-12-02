@@ -2,7 +2,7 @@
 
 Accessible `TimePicker` component.
 
-[TimePicker - Open On Sandbox](https://codesandbox.io/s/mdhu9)
+[TimePicker - Open On Sandbox](https://codesandbox.io/s/5k3uo)
 
 ## Props
 
@@ -724,14 +724,14 @@ form elements. In this case, only `aria-disabled` will be set.
 
 ## Composition
 
-- TimePicker uses [usePickerBase](undefined)
+- TimePicker uses [usePickerBase](./picker-base.md)
 - TimePickerColumn uses [useComposite](https://reakit.io/docs/composite)
 - TimePickerColumnValue uses [useButton](https://reakit.io/docs/button) and
   [useCompositeItem](https://reakit.io/docs/composite)
-- TimePickerContent uses [usePickerBaseContent](undefined)
-- TimePickerSegment uses [useSegment](undefined)
-- TimePickerSegmentField uses [useSegmentField](undefined)
-- TimePickerTrigger uses [usePickerBaseTrigger](undefined)
+- TimePickerContent uses [usePickerBaseContent](./picker-base.md)
+- TimePickerSegment uses [useSegment](./segment.md)
+- TimePickerSegmentField uses [useSegmentField](./segment.md)
+- TimePickerTrigger uses [usePickerBaseTrigger](./picker-base.md)
 
 ## Example
 

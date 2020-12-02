@@ -32,7 +32,7 @@ No props to show
 ## Composition
 
 - BreadcrumbLink uses [useLink](./link.md)
-- Breadcrumbs uses [useBox](https://reakit.io/docs/box)
+- Breadcrumbs uses [useRole](https://reakit.io/docs/role)
 
 ## Example
 

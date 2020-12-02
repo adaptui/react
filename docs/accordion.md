@@ -3,7 +3,7 @@
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
-[Accordion Example Live Demo](https://codesandbox.io/s/qvgg2)
+[Accordion Example Live Demo](https://codesandbox.io/s/h7wdn)
 
 ## Props
 
@@ -11,11 +11,11 @@ Accessible Accordion component. It follows the
 
 ### `useAccordionState`
 
-- **`allowMultiple`** <code>false | undefined</code> Allow to open multiple
-  accordion items
 - **`manual`** <code>boolean</code> Whether the accodion selection should be
   manual.
 - **`allowToggle`** <code>boolean</code> Allow to toggle accordion items
+- **`allowMultiple`** <code>false | undefined</code> Allow to open multiple
+  accordion items
 - **`baseId`** <code>string</code> ID that will serve as a base for all the
   items IDs.
 - **`unstable_virtual`** <span title="Experimental">⚠️</span>
@@ -139,7 +139,7 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`items`** <code>Item[]</code> Lists all the composite items with their `id`,
   DOM `ref`, `disabled` state and `groupId` if any. This state is automatically
   updated when `registerItem` and `unregisterItem` are called.
-- **`move`** <code>(id: string | null) =&#62; void</code> Moves focus to a given
+- **`move`** <code>(id: StringOrNull) =&#62; void</code> Moves focus to a given
   item ID.
 - **`setCurrentId`**
   <code title="(value: SetStateAction&#60;string | null | undefined&#62;) =&#62; void">(value:
@@ -174,8 +174,8 @@ form elements. In this case, only `aria-disabled` will be set.
   items
 - **`selectedId`** <code>string | null | undefined</code> The current selected
   accordion's `id`.
-- **`selectedIds`** <code>(string | null)[] | undefined</code> The current
-  selected accordion's `id`.
+- **`selectedIds`** <code>StringOrNull[] | undefined</code> The current selected
+  accordion's `id`.
 - **`items`** <code>Item[]</code> Lists all the composite items with their `id`,
   DOM `ref`, `disabled` state and `groupId` if any. This state is automatically
   updated when `registerItem` and `unregisterItem` are called.
@@ -251,17 +251,17 @@ form elements. In this case, only `aria-disabled` will be set.
   Moves focus to the item below.
 - **`manual`** <code>boolean</code> Whether the accodion selection should be
   manual.
+- **`allowToggle`** <code>boolean</code> Allow to toggle accordion items
 - **`allowMultiple`** <code>boolean</code> Allow to open multiple accordion
   items
 - **`selectedId`** <code>string | null | undefined</code> The current selected
   accordion's `id`.
-- **`allowToggle`** <code>boolean</code> Allow to toggle accordion items
-- **`selectedIds`** <code>(string | null)[] | undefined</code> The current
-  selected accordion's `id`.
+- **`selectedIds`** <code>StringOrNull[] | undefined</code> The current selected
+  accordion's `id`.
 - **`panels`** <code>Item[]</code> Lists all the panels.
-- **`select`** <code>(id: string | null) =&#62; void</code> Moves into and
+- **`select`** <code>(id: StringOrNull) =&#62; void</code> Moves into and
   selects an accordion by its `id`.
-- **`unSelect`** <code>(id: string | null) =&#62; void</code> Moves into and
+- **`unSelect`** <code>(id: StringOrNull) =&#62; void</code> Moves into and
   unSelects an accordion by its `id` if it's already selected.
 
 </details>
