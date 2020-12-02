@@ -1,7 +1,4 @@
 <h1 align="center">Renderless Components</h1>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center">
   Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://reakit.io/">Reakit</a>
