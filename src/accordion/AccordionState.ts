@@ -1,23 +1,18 @@
 import * as React from "react";
-import { useCompositeState } from "reakit";
+import { CompositeInitialState, useCompositeState } from "reakit";
 
 import {
   SelectedIdPair,
   AccordionState,
   AccordionActions,
   AccordionReturns,
+  AccordionPropsUnion,
   MultiOverloadReturn,
+  MultiAccordionProps,
   SingleOverloadReturn,
-  AccordionInitialState,
-  AccordionInitialStateMulti,
-  AccordionInitialStateSingle,
+  SingleAccordionProps,
 } from "./types";
 import { useControllableState } from "../utils";
-
-export type AccordionStateReturn = AccordionActions &
-  AccordionState &
-  AccordionReturns &
-  SelectedIdPair;
 
 export function useAccordionState(
   props: AccordionInitialStateSingle,
@@ -152,3 +147,18 @@ export function useAccordionState(
         ...common,
       };
 }
+
+export type AccordionInitialState = Partial<
+  AccordionPropsUnion & CompositeInitialState
+>;
+export type AccordionInitialStateSingle = Partial<
+  SingleAccordionProps & CompositeInitialState
+>;
+export type AccordionInitialStateMulti = Partial<
+  MultiAccordionProps & CompositeInitialState
+>;
+
+export type AccordionStateReturn = AccordionState &
+  AccordionActions &
+  AccordionReturns &
+  SelectedIdPair;

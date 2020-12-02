@@ -1,11 +1,5 @@
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-
-export type BreadcrumbsOptions = RoleOptions;
-
-export type BreadcrumbsHTMLProps = RoleHTMLProps;
-
-export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
 export const useBreadcrumbs = createHook<
   BreadcrumbsOptions,
@@ -24,3 +18,9 @@ export const Breadcrumbs = createComponent({
   memo: true,
   useHook: useBreadcrumbs,
 });
+
+export type BreadcrumbsOptions = RoleOptions;
+
+export type BreadcrumbsHTMLProps = RoleHTMLProps;
+
+export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;

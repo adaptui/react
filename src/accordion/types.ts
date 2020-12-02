@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction } from "react";
-import {
-  CompositeState,
-  CompositeActions,
-  CompositeInitialState,
-} from "reakit";
+import { CompositeState, CompositeActions } from "reakit";
 
 export type StringOrNull = string | null;
 
 export type AccordionState = CompositeState & {
+  /**
+   * Allow to toggle accordion items
+   * @default false
+   */
+  allowToggle: boolean;
   /**
    * Allow to open multiple accordion items
    */
@@ -17,11 +17,6 @@ export type AccordionState = CompositeState & {
    * @default true
    */
   manual: boolean;
-  /**
-   * Allow to toggle accordion items
-   * @default false
-   */
-  allowToggle: boolean;
   /**
    * Lists all the panels.
    */
@@ -61,10 +56,23 @@ export type CommonAccordionProps = {
 };
 
 export type SelectedIdPair = {
-  selectedId?: StringOrNull;
-  selectedIds?: StringOrNull[];
-  setSelectedId?: Dispatch<SetStateAction<StringOrNull>>;
-  setSelectedIds?: Dispatch<SetStateAction<StringOrNull[]>>;
+  /**
+   * The current selected accordion's `id`.
+   */
+  selectedId?: string | null;
+  /**
+   * Initial selected accordion's `id`.
+   * @default []
+   */
+  selectedIds?: (string | null)[];
+  /**
+   * Sets `selectedId`.
+   */
+  setSelectedId?: React.Dispatch<React.SetStateAction<string | null>>;
+  /**
+   * Sets `selectedIds`.
+   */
+  setSelectedIds?: React.Dispatch<React.SetStateAction<(string | null)[]>>;
 };
 
 export type SingleAccordionProps = CommonAccordionProps & {
@@ -149,15 +157,5 @@ type AccordionStateActions = AccordionActions & AccordionState;
 export type SingleOverloadReturn = AccordionStateActions & SingleReturn;
 export type MultiOverloadReturn = AccordionStateActions & MultiReturn;
 
-type AccordionProps = SingleAccordionProps | MultiAccordionProps;
+export type AccordionPropsUnion = SingleAccordionProps | MultiAccordionProps;
 export type AccordionReturns = MultiReturn | SingleReturn;
-
-export type AccordionInitialState = Partial<
-  CompositeInitialState & AccordionProps
->;
-export type AccordionInitialStateSingle = Partial<
-  CompositeInitialState & SingleAccordionProps
->;
-export type AccordionInitialStateMulti = Partial<
-  CompositeInitialState & MultiAccordionProps
->;

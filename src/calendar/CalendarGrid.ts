@@ -15,32 +15,6 @@ import { CALENDAR_GRID_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
 
-export type CalendarGridOptions = RoleOptions &
-  Pick<
-    CalendarStateReturn,
-    | "calendarId"
-    | "isReadOnly"
-    | "isDisabled"
-    | "setFocused"
-    | "selectFocusedDate"
-    | "focusPreviousYear"
-    | "focusPreviousMonth"
-    | "focusNextYear"
-    | "focusNextMonth"
-    | "focusEndOfMonth"
-    | "focusStartOfMonth"
-    | "focusNextDay"
-    | "focusPreviousDay"
-    | "focusNextWeek"
-    | "focusPreviousWeek"
-    | "isRangeCalendar"
-  > &
-  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
-
-export type CalendarGridHTMLProps = RoleHTMLProps;
-
-export type CalendarGridProps = CalendarGridOptions & CalendarGridHTMLProps;
-
 export const useCalendarGrid = createHook<
   CalendarGridOptions,
   CalendarGridHTMLProps
@@ -145,3 +119,29 @@ export const CalendarGrid = createComponent({
   memo: true,
   useHook: useCalendarGrid,
 });
+
+export type CalendarGridOptions = RoleOptions &
+  Pick<
+    CalendarStateReturn,
+    | "calendarId"
+    | "isReadOnly"
+    | "isDisabled"
+    | "setFocused"
+    | "selectFocusedDate"
+    | "focusPreviousYear"
+    | "focusPreviousMonth"
+    | "focusNextYear"
+    | "focusNextMonth"
+    | "focusEndOfMonth"
+    | "focusStartOfMonth"
+    | "focusNextDay"
+    | "focusPreviousDay"
+    | "focusNextWeek"
+    | "focusPreviousWeek"
+    | "isRangeCalendar"
+  > &
+  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
+
+export type CalendarGridHTMLProps = RoleHTMLProps;
+
+export type CalendarGridProps = CalendarGridOptions & CalendarGridHTMLProps;

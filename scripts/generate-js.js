@@ -4,56 +4,20 @@ const chalk = require("chalk");
 const globFs = require("glob-fs")();
 const outdent = require("outdent");
 const { camelCase, startCase } = require("lodash");
+
+const {
+  walkSync,
+  createFile,
+  getDirectories,
+  createDirectory,
+} = require("./utils/fs-utils");
 const transpileTs = require("./transpile-ts");
-
-// Create a new folder at the specified path
-function createDirectory(path) {
-  try {
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path, { recursive: true });
-    }
-  } catch (err) {
-    console.error(`[createDirectory]: Failed to create director at ${path}`);
-  }
-}
-
-function createFile(filePath, fileContent = "") {
-  fs.writeFile(filePath, fileContent, error => {
-    if (error) {
-      console.log(`Failed to create ${filePath}`, chalk.red.bold("ERROR"));
-      throw error;
-    }
-  });
-}
-
-function walkSync(dir, filelist = []) {
-  const files = fs.readdirSync(dir);
-
-  files.forEach(function (file) {
-    const fullPath = path.join(dir, file);
-
-    if (isDirectory(fullPath)) {
-      filelist = walkSync(fullPath, filelist);
-    } else {
-      filelist.push(fullPath);
-    }
-  });
-
-  return filelist;
-}
 
 // -> get all the component folders [accordion, breadcrumb...]
 // -> find all the .components inside the folders
 // -> create object with component pairs
 // { accordion: [Accordion.component.tsx, AccordionStyled.component.tsx] }
 // -> loop through them and create template.ts file
-const isDirectory = source => fs.lstatSync(source).isDirectory();
-const getDirectories = source =>
-  fs
-    .readdirSync(source)
-    .map(name => path.join(source, name))
-    .filter(isDirectory);
-
 function getComponentFolderPairs() {
   const componentFolders = getDirectories(
     path.resolve(__dirname, "../src"),

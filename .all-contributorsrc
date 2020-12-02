@@ -1,0 +1,42 @@
+{
+  "projectName": "renderless-components",
+  "projectOwner": "timelessco",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "navin-moorthy",
+      "name": "Navin Moorthy",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/39694575?v=4",
+      "profile": "https://navinmoorthy.me/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "anuraghazra",
+      "name": "Anurag Hazra",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35374649?v=4",
+      "profile": "http://anuraghazra.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sandeepprabhakaran",
+      "name": "Sandeep Prabhakaran",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6380293?v=4",
+      "profile": "http://timeless.co/",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

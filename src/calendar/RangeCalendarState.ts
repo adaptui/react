@@ -11,23 +11,12 @@ import { makeRange } from "./helpers";
 import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
+import { CalendarActions, CalendarState } from "./CalendarState";
 import { parseRangeDate, stringifyDate, useControllableState } from "../utils";
 
-export interface RangeCalendarInitialState
-  extends ValueBase<RangeValue<string>>,
-    RangeValueBase<string>,
-    InputBase {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-  /**
-   * Id for the calendar grid
-   */
-  id?: string;
-}
-
-export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
+export function useRangeCalendarState(
+  props: RangeCalendarInitialState = {},
+): RangeCalendarStateReturn {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
@@ -116,4 +105,33 @@ export function useRangeCalendarState(props: RangeCalendarInitialState = {}) {
   };
 }
 
-export type RangeCalendarStateReturn = ReturnType<typeof useRangeCalendarState>;
+export type RangeCalendarState = CalendarState & {
+  dateRangeValue: RangeValue<Date> | null;
+  anchorDate: Date | null;
+  highlightedRange: RangeValue<Date> | null;
+  isRangeCalendar: boolean;
+};
+
+export type RangeCalendarActions = CalendarActions & {
+  setDateRangeValue: React.Dispatch<React.SetStateAction<RangeValue<Date>>>;
+  setAnchorDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectDate: (date: Date) => void;
+  selectFocusedDate: () => void;
+  highlightDate: (date: Date) => void;
+};
+
+export type RangeCalendarInitialState = ValueBase<RangeValue<string>> &
+  RangeValueBase<string> &
+  InputBase & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+    /**
+     * Id for the calendar grid
+     */
+    id?: string;
+  };
+
+export type RangeCalendarStateReturn = RangeCalendarState &
+  RangeCalendarActions;

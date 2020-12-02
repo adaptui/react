@@ -3,12 +3,6 @@ import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
 
 import { ACCORDION_KEYS } from "./__keys";
 
-export type AccordionOptions = CompositeOptions;
-
-export type AccordionHTMLProps = CompositeHTMLProps;
-
-export type AccordionProps = AccordionOptions & AccordionHTMLProps;
-
 export const useAccordion = createHook<AccordionOptions, AccordionHTMLProps>({
   name: "Accordion",
   compose: useComposite,
@@ -30,6 +24,12 @@ export const useAccordion = createHook<AccordionOptions, AccordionHTMLProps>({
 
 export const Accordion = createComponent({
   as: "div",
-  useHook: useAccordion,
   memo: true,
+  useHook: useAccordion,
 });
+
+export type AccordionOptions = CompositeOptions;
+
+export type AccordionHTMLProps = CompositeHTMLProps;
+
+export type AccordionProps = AccordionOptions & AccordionHTMLProps;

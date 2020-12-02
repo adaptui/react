@@ -1,10 +1,10 @@
 import {
-  DisclosureContentOptions,
-  DisclosureContentHTMLProps,
-  useDisclosureContent,
   unstable_useId,
   unstable_IdOptions,
   unstable_IdHTMLProps,
+  useDisclosureContent,
+  DisclosureContentOptions,
+  DisclosureContentHTMLProps,
 } from "reakit";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
@@ -12,30 +12,7 @@ import { createHook, createComponent } from "reakit-system";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
-
-export type AccordionPanelOptions = DisclosureContentOptions &
-  unstable_IdOptions &
-  Pick<
-    AccordionStateReturn,
-    | "registerPanel"
-    | "unregisterPanel"
-    | "panels"
-    | "items"
-    | "allowMultiple"
-    | "selectedId"
-    | "selectedIds"
-  > & {
-    /**
-     * Accordion's id
-     */
-    accordionId?: string;
-  };
-
-export type AccordionPanelHTMLProps = DisclosureContentHTMLProps &
-  unstable_IdHTMLProps;
-
-export type AccordionPanelProps = AccordionPanelOptions &
-  AccordionPanelHTMLProps;
+import { getAccordionId, isPanelVisible } from "./helpers";
 
 export const useAccordionPanel = createHook<
   AccordionPanelOptions,
@@ -61,7 +38,6 @@ export const useAccordionPanel = createHook<
 
     return {
       ref: useForkRef(ref, htmlRef),
-      role: "region",
       "aria-labelledby": accordionId,
       ...htmlProps,
     };
@@ -77,61 +53,30 @@ export const useAccordionPanel = createHook<
 
 export const AccordionPanel = createComponent({
   as: "div",
+  memo: true,
   useHook: useAccordionPanel,
 });
 
-/**
- * When <AccordionPanel> is used without accordionId:
- *
- *  - First render: getAccordionId will return undefined because options.panels
- * doesn't contain the current panel yet (registerPanel wasn't called yet).
- * Thus registerPanel will be called without groupId (accordionId).
- *
- *  - Second render: options.panels already contains the current panel (because
- * registerPanel was called in the previous render). This means that we'll be
- * able to get the related accordionId with the accordion panel index. Basically,
- * we filter out all the accordions and panels that have already matched. In this
- * phase, registerPanel will be called again with the proper groupId (accordionId).
- *
- *  - In the third render, panel.groupId will be already defined, so we just
- * return it. registerPanel is not called.
- */
-function getAccordionId(options: AccordionPanelOptions) {
-  const { panels, id, items } = options;
-  const panel = panels?.find(p => p.id === id);
-  const accordionId = options.accordionId || panel?.groupId;
-  if (accordionId || !panel || !panels || !items) {
-    return accordionId;
-  }
+export type AccordionPanelOptions = {
+  /**
+   * Accordion's id
+   */
+  accordionId?: string;
+} & DisclosureContentOptions &
+  unstable_IdOptions &
+  Pick<
+    AccordionStateReturn,
+    | "registerPanel"
+    | "unregisterPanel"
+    | "panels"
+    | "items"
+    | "allowMultiple"
+    | "selectedId"
+    | "selectedIds"
+  >;
 
-  const panelIndex = getPanelIndex(panels, panel);
-  const accordionsWithoutPanel = getAccordionsWithoutPanel(items, panels);
-  return accordionsWithoutPanel[panelIndex]?.id || undefined;
-}
+export type AccordionPanelHTMLProps = DisclosureContentHTMLProps &
+  unstable_IdHTMLProps;
 
-function getPanelIndex(
-  panels: AccordionPanelOptions["panels"],
-  panel: typeof panels[number],
-) {
-  const panelsWithoutAccordionId = panels.filter(p => !p.groupId);
-  return panelsWithoutAccordionId.indexOf(panel);
-}
-
-function getAccordionsWithoutPanel(
-  accordions: AccordionPanelOptions["items"],
-  panels: AccordionPanelOptions["panels"],
-) {
-  const panelsAccordionIds = panels.map(panel => panel.groupId).filter(Boolean);
-
-  return accordions.filter(
-    item => panelsAccordionIds.indexOf(item.id || undefined) === -1,
-  );
-}
-
-function isPanelVisible(options: AccordionPanelOptions) {
-  const { allowMultiple, selectedId, selectedIds } = options;
-  const accordionId = getAccordionId(options);
-
-  if (!allowMultiple) return accordionId ? selectedId === accordionId : false;
-  return accordionId ? selectedIds?.includes(accordionId) : false;
-}
+export type AccordionPanelProps = AccordionPanelOptions &
+  AccordionPanelHTMLProps;

@@ -6,16 +6,6 @@ import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { DateTimeFormatOpts } from "../utils/types";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarHeaderOptions = RoleOptions &
-  Pick<CalendarStateReturn, "calendarId" | "currentMonth"> & {
-    format?: DateTimeFormatOpts;
-  };
-
-export type CalendarHeaderHTMLProps = RoleHTMLProps;
-
-export type CalendarHeaderProps = CalendarHeaderOptions &
-  CalendarHeaderHTMLProps;
-
 export const useCalendarHeader = createHook<
   CalendarHeaderOptions,
   CalendarHeaderHTMLProps
@@ -42,3 +32,13 @@ export const CalendarHeader = createComponent({
   memo: true,
   useHook: useCalendarHeader,
 });
+
+export type CalendarHeaderOptions = RoleOptions &
+  Pick<CalendarStateReturn, "calendarId" | "currentMonth"> & {
+    format?: DateTimeFormatOpts;
+  };
+
+export type CalendarHeaderHTMLProps = RoleHTMLProps;
+
+export type CalendarHeaderProps = CalendarHeaderOptions &
+  CalendarHeaderHTMLProps;

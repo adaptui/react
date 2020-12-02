@@ -37,21 +37,9 @@ import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
-export interface CalendarInitialState
-  extends ValueBase<string>,
-    RangeValueBase<string>,
-    InputBase {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-  /**
-   * Id for the calendar grid
-   */
-  id?: string;
-}
-
-export function useCalendarState(props: CalendarInitialState = {}) {
+export function useCalendarState(
+  props: CalendarInitialState = {},
+): CalendarStateReturn {
   const {
     value: initialDate,
     defaultValue: defaultValueProp,
@@ -217,4 +205,154 @@ export function useCalendarState(props: CalendarInitialState = {}) {
   };
 }
 
-export type CalendarStateReturn = ReturnType<typeof useCalendarState>;
+export type CalendarState = {
+  /**
+   * Id for the Calendar Header
+   */
+  calendarId: string | undefined;
+  /**
+   * Selected Date value
+   */
+  dateValue: Date;
+  /**
+   * Minimum allowed Date value
+   */
+  minDate: Date | undefined;
+  /**
+   * Maximum allowed Date value
+   */
+  maxDate: Date | undefined;
+  /**
+   * Month of the current date value
+   */
+  month: number;
+  /**
+   * Year of the current date value
+   */
+  year: number;
+  /**
+   * Start of the week for the current date value
+   */
+  weekStart: number;
+  /**
+   * Generated week days for CalendarWeekTitle based on weekStart
+   */
+  weekDays: {
+    title: string;
+    abbr: string;
+  }[];
+  /**
+   * Generated days in the current month
+   */
+  daysInMonth: Date[][];
+  /**
+   * `true` if the calendar is disabled
+   */
+  isDisabled: boolean;
+  /**
+   * `true` if the calendar is focused
+   */
+  isFocused: boolean;
+  /**
+   * `true` if the calendar is only readonly
+   */
+  isReadOnly: boolean;
+  /**
+   * Month of the current Date
+   */
+  currentMonth: Date;
+  /**
+   * Date value that is currently focused
+   */
+  focusedDate: Date;
+  /**
+   * `true` if the calendar is used as RangeCalendar
+   */
+  isRangeCalendar: boolean;
+};
+
+export type CalendarActions = {
+  /**
+   * Sets `isFocused`
+   */
+  setFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  /**
+   * Sets `currentMonth`
+   */
+  setCurrentMonth: React.Dispatch<React.SetStateAction<Date>>;
+  /**
+   *  Sets `focusedDate`
+   */
+  setFocusedDate: React.Dispatch<React.SetStateAction<Date>>;
+  /**
+   * Sets `dateValue`
+   */
+  setDateValue: (value: Date) => void;
+  /**
+   * Focus the cell of the specified date
+   */
+  focusCell: (value: Date) => void;
+  /**
+   * Focus the cell next to the current date
+   */
+  focusNextDay: () => void;
+  /**
+   * Focus the cell prev to the current date
+   */
+  focusPreviousDay: () => void;
+  /**
+   * Focus the cell one week next to the current date
+   */
+  focusNextWeek: () => void;
+  /**
+   * Focus the cell one week prev to the current date
+   */
+  focusPreviousWeek: () => void;
+  /**
+   * Focus the cell one month next to the current date
+   */
+  focusNextMonth: () => void;
+  /**
+   * Focus the cell one month prev to the current date
+   */
+  focusPreviousMonth: () => void;
+  /**
+   * Focus the cell of the first day of the month
+   */
+  focusStartOfMonth: () => void;
+  /**
+   * Focus the cell of the last day of the month
+   */
+  focusEndOfMonth: () => void;
+  /**
+   * Focus the cell of the date one year from the current date
+   */
+  focusNextYear: () => void;
+  /**
+   * Focus the cell of the date one year before the current date
+   */
+  focusPreviousYear: () => void;
+  /**
+   * Selects the `focusedDate`
+   */
+  selectFocusedDate: () => void;
+  /**
+   * sets `dateValue`
+   */
+  selectDate: (value: Date) => void;
+};
+
+export type CalendarInitialState = ValueBase<string> &
+  RangeValueBase<string> &
+  InputBase & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+    /**
+     * Id for the calendar grid
+     */
+    id?: string;
+  };
+
+export type CalendarStateReturn = CalendarState & CalendarActions;

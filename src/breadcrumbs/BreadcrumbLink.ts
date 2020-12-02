@@ -3,18 +3,6 @@ import { createComponent, createHook } from "reakit-system";
 import { BREADCRUMB_LINK_KEYS } from "./__keys";
 import { LinkHTMLProps, LinkOptions, useLink } from "../link";
 
-export type BreadcrumbLinkOptions = LinkOptions & {
-  /**
-   * If true, sets `aria-current: "page"`
-   */
-  isCurrent?: boolean;
-};
-
-export type BreadcrumbLinkHTMLProps = LinkHTMLProps;
-
-export type BreadcrumbLinkProps = BreadcrumbLinkOptions &
-  BreadcrumbLinkHTMLProps;
-
 export const useBreadcrumbLink = createHook<
   BreadcrumbLinkOptions,
   BreadcrumbLinkHTMLProps
@@ -33,3 +21,15 @@ export const BreadcrumbLink = createComponent({
   memo: true,
   useHook: useBreadcrumbLink,
 });
+
+export type BreadcrumbLinkOptions = {
+  /**
+   * If true, sets `aria-current: "page"`
+   */
+  isCurrent?: boolean;
+} & LinkOptions;
+
+export type BreadcrumbLinkHTMLProps = LinkHTMLProps;
+
+export type BreadcrumbLinkProps = BreadcrumbLinkOptions &
+  BreadcrumbLinkHTMLProps;
