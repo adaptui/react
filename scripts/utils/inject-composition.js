@@ -6,19 +6,14 @@ const { Project, ts } = require("ts-morph");
 const injectMdContent = require("./inject-md-content");
 const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./index");
 
-const COMPOSE_INJECT_FLAG = /\<\!\-\- INJECT_COMPOSITION (.*) \-\-\>/m;
+const COMPOSE_INJECT_FLAG = /\<\!\-\- INJECT_COMPOSITION \-\-\>/m;
 
-const injectComposition = docsTemplate => {
-  return injectMdContent(
-    docsTemplate,
-    COMPOSE_INJECT_FLAG,
-    (line, regexMatched) => {
-      const composites = getComposition(
-        path.join(process.cwd(), regexMatched[1]),
-      );
-      return getMarkdown(composites);
-    },
-  );
+const injectComposition = (docsTemplate, source) => {
+  return injectMdContent(docsTemplate, COMPOSE_INJECT_FLAG, () => {
+    const composites = getComposition(path.join(process.cwd(), source));
+
+    return getMarkdown(composites);
+  });
 };
 
 module.exports = injectComposition;

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
+const matter = require("gray-matter");
 
 const mdPrettify = require("../utils/md-prettify");
 const injectProps = require("../utils/inject-props");
@@ -8,24 +9,31 @@ const { walkSync, createFile } = require("../utils/fs-utils");
 const injectExamples = require("../utils/inject-examples");
 const injectCsbLinks = require("../utils/inject-csb-links");
 const injectComposition = require("../utils/inject-composition");
-
 const docsFolder = path.resolve(process.cwd(), "docs");
 
-const injections = templateFilePath => {
+const injections = async templateFilePath => {
   const fileName = path.basename(templateFilePath);
+  const source = path.join("src", path.basename(templateFilePath, ".md"));
   const template = fs.readFileSync(templateFilePath, "utf-8");
-  const injectedExamplesTemplate = injectExamples(template);
+  const frontMatter = matter(template).data;
+  const injectedExamplesTemplate = injectExamples(template, frontMatter);
   const injectedCompositionTemplate = injectComposition(
     injectedExamplesTemplate,
+    source,
   );
-  const injectedPropsTemplate = injectProps(injectedCompositionTemplate);
+  const injectedPropsTemplate = injectProps(
+    injectedCompositionTemplate,
+    source,
+  );
+  const injectedCsbLinksTemplate = await injectCsbLinks(template, frontMatter);
 
-  // createFile(path.join(docsFolder, fileName), mdPrettify(injectedPropsTemplate));
-  // console.log(
-  //   chalk.red.yellow(`Docs generated:`, chalk.red.greenBright(fileName)),
-  // );
-
-  injectCsbLinks(fileName, docsFolder, mdPrettify(injectedPropsTemplate));
+  createFile(
+    path.join(docsFolder, fileName),
+    mdPrettify(injectedCsbLinksTemplate),
+  );
+  console.log(
+    chalk.red.yellow(`Docs generated:`, chalk.red.greenBright(fileName)),
+  );
 };
 
 if (process.argv[2]) {

@@ -1,18 +1,30 @@
+---
+example: src/accordion/stories/__js/AccordionBasic.component.jsx
+codesandbox:
+  {
+    link_title: Accordion Styled Example Live Demo,
+    js: "src/accordion/stories/__js/AccordionStyled.component.jsx",
+    css: "src/accordion/stories/AccordionStyled.css",
+  }
+codesandbox1:
+  {
+    link_title: Accordion Basic Example Live Demo,
+    js: "src/accordion/stories/__js/AccordionBasic.component.jsx",
+  }
+---
+
 ## Accordion
 
 Accessible Accordion component. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
 
-<!-- CODESANDBOX
-link_title: Accordion Example Live Demo
-js: src/accordion/stories/__js/AccordionBasic.component.jsx
-css: src/accordion/stories/AccordionStyled.css
-deps: [emotion]
--->
+<!-- INJECT_CODESANDBOX -->
+
+<!-- INJECT_CODESANDBOX 1 -->
 
 ## Props
 
-<!-- INJECT_PROPS src/accordion -->
+<!-- INJECT_PROPS -->
 
 ## Accessibility
 
@@ -33,10 +45,8 @@ deps: [emotion]
 
 ## Composition
 
-<!-- INJECT_COMPOSITION src/accordion -->
+<!-- INJECT_COMPOSITION -->
 
 ## Example
 
-```js
-<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
-```
+<!-- IMPORT_EXAMPLE -->

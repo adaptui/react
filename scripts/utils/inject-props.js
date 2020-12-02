@@ -18,18 +18,14 @@ const {
 const injectMdContent = require("./inject-md-content");
 const { walkSync, createFile } = require("./fs-utils");
 
-const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
+const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS \-\-\>/m;
 
-const injectProps = docsTemplate => {
-  return injectMdContent(
-    docsTemplate,
-    PROPS_INJECT_FLAG,
-    (line, regexMatched) => {
-      const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
+const injectProps = (docsTemplate, source) => {
+  return injectMdContent(docsTemplate, PROPS_INJECT_FLAG, () => {
+    const types = getPropTypes(path.join(process.cwd(), source));
 
-      return getPropTypesMarkdown(types);
-    },
-  );
+    return getPropTypesMarkdown(types);
+  });
 };
 
 module.exports = injectProps;

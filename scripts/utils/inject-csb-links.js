@@ -1,47 +1,40 @@
 const fs = require("fs");
 const path = require("path");
-const yaml = require("yaml");
 const axios = require("axios");
 const chalk = require("chalk");
 const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
 
-const { createFile } = require("./fs-utils");
+const injectMdContent = require("./inject-md-content");
 
-const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
-const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
-const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");
+const CODESANDBOX_REGEX = /\<\!\-\- INJECT_CODESANDBOX ?(.*) \-\-\>/m;
 
-const injectCsbLinks = (fileName, docsFolder, docsTemplate) => {
-  const regexMatched = docsTemplate.match(CODESANDBOX_GLOBAL_FLAG);
-  if (!regexMatched) return docsTemplate;
+const injectCsbLinks = async (docsTemplate, frontMatter) => {
+  const lines = docsTemplate.split("\n");
 
-  regexMatched.forEach(async match => {
+  const linePromises = lines.map(async line => {
     try {
-      const ymlString = match
-        .replace("<!-- CODESANDBOX", "")
-        .replace("-->", "");
-      const parsed = yaml.parse(ymlString);
-      const linkTitle = parsed.link_title || "Open On CodeSandbox";
+      const match = line.match(CODESANDBOX_REGEX);
+      if (match) {
+        let type = "codesandbox";
+        if (match[1]) {
+          type = `codesandbox${match[1]}`;
+        }
 
-      const sandboxLink = await getSandboxShortURL(parsed);
+        const parsed = frontMatter[type];
+        const linkTitle = parsed.link_title || "Open On CodeSandbox";
+        const sandboxLink = await getSandboxShortURL(parsed);
+        return `[${linkTitle}](${sandboxLink})`;
+      }
 
-      readme = docsTemplate.replace(
-        CODESANDBOX_REPLACE_FLAG,
-        `[${linkTitle}](${sandboxLink})`,
-      );
-
-      console.log(
-        chalk.red.yellow(
-          `Injected Sandbox Link:`,
-          chalk.red.greenBright(fileName),
-        ),
-      );
-      createFile(path.join(docsFolder, fileName), readme);
+      return line;
     } catch (e) {
       console.log(e);
     }
   });
+
+  const template = await Promise.all(linePromises);
+  return template.join("\n");
 };
 
 module.exports = injectCsbLinks;
