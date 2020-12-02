@@ -6,7 +6,7 @@
 import { chain } from "@react-aria/utils";
 import { KeyboardEvent, useRef } from "react";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 
@@ -20,7 +20,7 @@ export const useCalendarGrid = createHook<
   CalendarGridHTMLProps
 >({
   name: "CalendarGrid",
-  compose: useBox,
+  compose: useRole,
   keys: CALENDAR_GRID_KEYS,
 
   useProps(
@@ -120,28 +120,28 @@ export const CalendarGrid = createComponent({
   useHook: useCalendarGrid,
 });
 
-export type CalendarGridOptions = Pick<
-  CalendarStateReturn,
-  | "calendarId"
-  | "isReadOnly"
-  | "isDisabled"
-  | "setFocused"
-  | "selectFocusedDate"
-  | "focusPreviousYear"
-  | "focusPreviousMonth"
-  | "focusNextYear"
-  | "focusNextMonth"
-  | "focusEndOfMonth"
-  | "focusStartOfMonth"
-  | "focusNextDay"
-  | "focusPreviousDay"
-  | "focusNextWeek"
-  | "focusPreviousWeek"
-  | "isRangeCalendar"
-> &
-  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">> &
-  BoxOptions;
+export type CalendarGridOptions = RoleOptions &
+  Pick<
+    CalendarStateReturn,
+    | "calendarId"
+    | "isReadOnly"
+    | "isDisabled"
+    | "setFocused"
+    | "selectFocusedDate"
+    | "focusPreviousYear"
+    | "focusPreviousMonth"
+    | "focusNextYear"
+    | "focusNextMonth"
+    | "focusEndOfMonth"
+    | "focusStartOfMonth"
+    | "focusNextDay"
+    | "focusPreviousDay"
+    | "focusNextWeek"
+    | "focusPreviousWeek"
+    | "isRangeCalendar"
+  > &
+  Partial<Pick<RangeCalendarStateReturn, "setAnchorDate">>;
 
-export type CalendarGridHTMLProps = BoxHTMLProps;
+export type CalendarGridHTMLProps = RoleHTMLProps;
 
 export type CalendarGridProps = CalendarGridOptions & CalendarGridHTMLProps;

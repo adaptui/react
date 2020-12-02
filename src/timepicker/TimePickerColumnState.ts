@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useCompositeState } from "reakit";
 import { ValueBase } from "@react-types/shared";
-import { useControllableState } from "@chakra-ui/hooks";
 
+import { useControllableState } from "../utils";
 import { getSelectedValueFromDate, getSelectedDateFromValue } from "./helpers";
 
 export type ColumnType = "hour" | "minute" | "meridian";

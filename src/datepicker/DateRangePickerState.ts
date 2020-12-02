@@ -8,11 +8,9 @@ import {
   Validation,
   ValueBase,
   RangeValue,
-  FocusableProps,
   ValidationState,
 } from "@react-types/shared";
 import * as React from "react";
-import { useControllableState } from "@chakra-ui/hooks";
 import { useCompositeState, unstable_useId as useId } from "reakit";
 
 import {
@@ -20,6 +18,7 @@ import {
   stringifyDate,
   parseRangeDate,
   isInvalidDateRange,
+  useControllableState,
 } from "../utils";
 import { makeRange } from "../calendar/helpers";
 import { RangeValueBase } from "../utils/types";
@@ -76,7 +75,6 @@ export const useDateRangePickerState = (
         end: stringifyDate(new Date()),
       }),
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const minValue = parseDate(minValueProp);

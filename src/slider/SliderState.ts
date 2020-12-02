@@ -2,10 +2,8 @@ import * as React from "react";
 import { useCompositeState } from "reakit";
 import { useNumberFormatter } from "@react-aria/i18n";
 import { Item } from "reakit/ts/Composite/__utils/types";
-import { SealedInitialState, useSealedState } from "reakit-utils";
 
-import { getOptimumValue, clamp } from "../utils";
-import { useControllableState } from "@chakra-ui/hooks";
+import { getOptimumValue, clamp, useControllableState } from "../utils";
 
 export interface SliderState {
   /**
@@ -182,7 +180,6 @@ export function useSliderState(
     value: valuesProp,
     defaultValue: defaultValues || [getOptimumValue(min, max)],
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
   const values = bulkClamp(rawValues, min, max);
 

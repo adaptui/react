@@ -3,7 +3,8 @@
  * Based on the logic from [usePagination Hook](https://github.com/mui-org/material-ui/blob/master/packages/material-ui-lab/src/Pagination/usePagination.js)
  */
 import React from "react";
-import { useControllableState } from "@chakra-ui/hooks";
+
+import { useControllableState } from "../utils";
 
 export type PaginationState = {
   /**
@@ -100,7 +101,6 @@ export const usePaginationState = (
     value: currentPageProp,
     defaultValue: defaultPage,
     onChange,
-    shouldUpdate: (prev, next) => prev !== next,
   });
 
   const startPages = range(1, Math.min(boundaryCount, count));

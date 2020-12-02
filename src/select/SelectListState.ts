@@ -14,15 +14,11 @@ import {
 export function useSelectListState(
   initialState: SealedInitialState<SelectListInitialState> = {},
 ): SelectListStateReturn {
-  const {
-    currentId = null,
-    orientation = "vertical",
-    loop = true,
-    ...sealed
-  } = useSealedState(initialState);
+  const { orientation = "vertical", loop = true, ...sealed } = useSealedState(
+    initialState,
+  );
 
   const composite = useCompositeState({
-    currentId,
     orientation,
     loop,
     ...sealed,

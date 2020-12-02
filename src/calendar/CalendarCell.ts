@@ -5,7 +5,7 @@
  */
 import { useCallback } from "react";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
 import { getDaysInMonth, isSameDay, isWeekend } from "date-fns";
 
@@ -19,7 +19,7 @@ export const useCalendarCell = createHook<
   CalendarCellHTMLProps
 >({
   name: "CalendarCell",
-  compose: useBox,
+  compose: useRole,
   keys: CALENDAR_CELL_KEYS,
 
   useProps(options, { onMouseEnter: htmlOnMouseEnter, ...htmlProps }) {
@@ -83,17 +83,17 @@ const getCalendarCellProps = (options: CalendarCellOptions) => {
   };
 };
 
-export type CalendarCellOptions = {
-  date: Date;
-} & Pick<
-  CalendarStateReturn,
-  "dateValue" | "isDisabled" | "currentMonth" | "isRangeCalendar"
-> &
+export type CalendarCellOptions = RoleOptions &
+  Pick<
+    CalendarStateReturn,
+    "dateValue" | "isDisabled" | "currentMonth" | "isRangeCalendar"
+  > &
   Partial<
     Pick<RangeCalendarStateReturn, "highlightDate" | "highlightedRange">
-  > &
-  BoxOptions;
+  > & {
+    date: Date;
+  };
 
-export type CalendarCellHTMLProps = BoxHTMLProps;
+export type CalendarCellHTMLProps = RoleHTMLProps;
 
 export type CalendarCellProps = CalendarCellOptions & CalendarCellHTMLProps;

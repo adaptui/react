@@ -1,20 +1,20 @@
 import { useWarning } from "reakit-warning";
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createHook, createComponent, useCreateElement } from "reakit-system";
 
 import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";
 
-export type MeterOptions = BoxOptions &
+export type MeterOptions = RoleOptions &
   Pick<MeterStateReturn, "value" | "max" | "min" | "percent">;
 
-export type MeterHTMLProps = BoxHTMLProps;
+export type MeterHTMLProps = RoleHTMLProps;
 
 export type MeterProps = MeterOptions & MeterHTMLProps;
 
 const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   name: "Meter",
-  compose: useBox,
+  compose: useRole,
   keys: METER_KEYS,
 
   useProps(options, htmlProps) {

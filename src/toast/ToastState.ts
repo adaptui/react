@@ -4,7 +4,7 @@ import { Placements } from "./ToastProvider";
 
 type StringOrElement = string | React.ReactNode;
 
-export interface IToast {
+export interface Toast {
   /**
    * Unique id for the toast
    */
@@ -37,8 +37,8 @@ export interface IToast {
   isVisible?: boolean;
 }
 
-export type ToastList = Record<string, IToast>;
-export type SortedToastList = Record<Placements, IToast[]>;
+export type ToastList = Record<string, Toast>;
+export type SortedToastList = Record<Placements, Toast[]>;
 
 interface ToastStateProps {
   defaultPlacement?: Placements;
@@ -76,7 +76,7 @@ export const useToastState = ({
       timeout,
       autoDismiss,
       placement = defaultPlacement,
-    }: Partial<Omit<IToast, "isVisible">>) => {
+    }: Partial<Omit<Toast, "isVisible">>) => {
       COUNTER.current = COUNTER.current + 1;
       const id = idProps || `toast-${COUNTER.current}`;
 

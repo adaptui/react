@@ -1,12 +1,12 @@
-import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
 export const useBreadcrumbs = createHook<
   BreadcrumbsOptions,
   BreadcrumbsHTMLProps
 >({
   name: "Breadcrumb",
-  compose: useBox,
+  compose: useRole,
 
   useProps(_, htmlProps) {
     return { "aria-label": "Breadcrumb", ...htmlProps };
@@ -19,8 +19,8 @@ export const Breadcrumbs = createComponent({
   useHook: useBreadcrumbs,
 });
 
-export type BreadcrumbsOptions = BoxOptions;
+export type BreadcrumbsOptions = RoleOptions;
 
-export type BreadcrumbsHTMLProps = BoxHTMLProps;
+export type BreadcrumbsHTMLProps = RoleHTMLProps;
 
 export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;

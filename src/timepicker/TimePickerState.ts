@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ValueBase } from "@react-types/shared";
-import { useControllableState } from "@chakra-ui/hooks";
 
+import { useControllableState } from "../utils";
 import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";

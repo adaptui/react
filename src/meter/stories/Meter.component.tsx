@@ -1,5 +1,5 @@
 import * as React from "react";
-import { css, keyframes } from "emotion";
+import { css, keyframes } from "@emotion/css";
 
 import {
   Meter,

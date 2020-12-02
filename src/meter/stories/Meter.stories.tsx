@@ -12,7 +12,7 @@ export default {
     preview: createPreviewTabs({
       js: meterTemplateJs,
       ts: meterTemplate,
-      deps: ["emotion@latest"],
+      deps: ["@emotion/css@latest"],
     }),
   },
 } as Meta;

@@ -21,14 +21,10 @@ export function useSelectPopoverState(
   const visible = popover.visible;
 
   React.useEffect(() => {
-    if (visible && selectedId) {
-      move?.(selectedId);
-    }
+    if (visible && selectedId) move?.(selectedId);
 
-    if (!visible) {
-      // We need to reset select.moves
-      reset();
-    }
+    // We need to reset select.moves
+    if (!visible) reset();
   }, [visible, reset, selectedId, move]);
 
   return {
