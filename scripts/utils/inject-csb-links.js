@@ -2,21 +2,18 @@ const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
 const axios = require("axios");
-const chalk = require("chalk");
 const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
-
-const { createFile } = require("./fs-utils");
 
 const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
 const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
 const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");
 
-const injectCsbLinks = (fileName, docsFolder, docsTemplate) => {
+const injectCsbLinks = async docsTemplate => {
   const regexMatched = docsTemplate.match(CODESANDBOX_GLOBAL_FLAG);
   if (!regexMatched) return docsTemplate;
 
-  regexMatched.forEach(async match => {
+  const promises = regexMatched.map(async match => {
     try {
       const ymlString = match
         .replace("<!-- CODESANDBOX", "")
@@ -26,22 +23,18 @@ const injectCsbLinks = (fileName, docsFolder, docsTemplate) => {
 
       const sandboxLink = await getSandboxShortURL(parsed);
 
-      readme = docsTemplate.replace(
+      docsTemplate = docsTemplate.replace(
         CODESANDBOX_REPLACE_FLAG,
         `[${linkTitle}](${sandboxLink})`,
       );
-
-      console.log(
-        chalk.red.yellow(
-          `Injected Sandbox Link:`,
-          chalk.red.greenBright(fileName),
-        ),
-      );
-      createFile(path.join(docsFolder, fileName), readme);
     } catch (e) {
       console.log(e);
     }
   });
+
+  await Promise.all(promises);
+
+  return docsTemplate;
 };
 
 module.exports = injectCsbLinks;

@@ -2,7 +2,7 @@
 
 Accessible `TimePicker` component.
 
-[TimePicker - Open On Sandbox](https://codesandbox.io/s/5k3uo)
+[TimePicker - Open On Sandbox](https://codesandbox.io/s/mdhu9)
 
 ## Props
 

@@ -2,7 +2,7 @@
 
 Accessible `Slider` component.
 
-[Slider - Open On Sandbox](https://codesandbox.io/s/s20jt)
+[Slider - Open On Sandbox](https://codesandbox.io/s/d0mp9)
 
 ## Props
 
@@ -12,7 +12,7 @@ Accessible `Slider` component.
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-  If `undefined`/`not valid` the slider bar will be the optimum of min & max
+If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`min`** <code>number</code> The minimum value of the slider
 - **`max`** <code>number</code> The maximum value of the slider
@@ -111,7 +111,7 @@ Accessible `Slider` component.
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-  If `undefined`/`not valid` the slider bar will be the optimum of min & max
+If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
 - **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>

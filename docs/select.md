@@ -2,7 +2,7 @@
 
 Accessible `Select` component.
 
-[Select - Open On Sandbox](https://codesandbox.io/s/hrtki)
+[Select - Open On Sandbox](https://codesandbox.io/s/tcnxl)
 
 ## Props
 
