@@ -14,18 +14,26 @@ const docsFolder = path.resolve(process.cwd(), "docs");
 const injections = async templateFilePath => {
   const fileName = path.basename(templateFilePath);
   const template = fs.readFileSync(templateFilePath, "utf-8");
+  const logProgress = (msg, fileName) => {
+    console.log(chalk.red.yellow(`${msg}:`, chalk.red.greenBright(fileName)));
+  };
+
   const injectedExamplesTemplate = injectExamples(template);
+  logProgress(`Injected examples`, fileName);
+
   const injectedCompositionTemplate = injectComposition(
     injectedExamplesTemplate,
   );
+  logProgress(`Injected composition`, fileName);
+
   const injectedPropsTemplate = injectProps(injectedCompositionTemplate);
+  logProgress(`Injected props`, fileName);
 
   const finalReadme = await injectCsbLinks(injectedPropsTemplate);
+  logProgress(`Injected sandbox`, fileName);
 
   createFile(path.join(docsFolder, fileName), mdPrettify(finalReadme));
-  console.log(
-    chalk.red.yellow(`Docs generated:`, chalk.red.greenBright(fileName)),
-  );
+  logProgress(`Docs generated`, fileName);
 };
 
 if (process.argv[2]) {

@@ -17,12 +17,13 @@ const injectExamples = docsTemplate => {
       const importString = regexMatched[1];
       const importPath = path.resolve(process.cwd(), importString);
 
-      let code = fs.readFileSync(importPath, { encoding: "utf-8" });
-      return prettier.format(strip(code), {
+      const code = fs.readFileSync(importPath, { encoding: "utf-8" });
+      const prettifiedCode = prettier.format(strip(code), {
         parser: "babel",
         plugins: [parserBabel],
         ...prettierConfig,
       });
+      return prettifiedCode.replace(/\n.*$/, "");
     },
   );
 };
