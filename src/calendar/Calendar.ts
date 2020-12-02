@@ -9,13 +9,6 @@ import { createComponent, createHook } from "reakit-system";
 import { CALENDAR_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarOptions = BoxOptions &
-  Pick<CalendarStateReturn, "calendarId">;
-
-export type CalendarHTMLProps = BoxHTMLProps;
-
-export type CalendarProps = CalendarOptions & CalendarHTMLProps;
-
 export const useCalendar = createHook<CalendarOptions, CalendarHTMLProps>({
   name: "Calendar",
   compose: useBox,
@@ -35,3 +28,10 @@ export const Calendar = createComponent({
   memo: true,
   useHook: useCalendar,
 });
+
+export type CalendarOptions = Pick<CalendarStateReturn, "calendarId"> &
+  BoxOptions;
+
+export type CalendarHTMLProps = BoxHTMLProps;
+
+export type CalendarProps = CalendarOptions & CalendarHTMLProps;

@@ -4,16 +4,6 @@ import { createComponent, createHook } from "reakit-system";
 import { CALENDAR_WEEK_TITLE_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 
-export type CalendarWeekTitleOptions = BoxOptions &
-  Pick<CalendarStateReturn, "weekDays"> & {
-    dayIndex: number;
-  };
-
-export type CalendarWeekTitleHTMLProps = BoxHTMLProps;
-
-export type CalendarWeekTitleProps = CalendarWeekTitleOptions &
-  CalendarWeekTitleHTMLProps;
-
 export const useCalendarWeekTitle = createHook<
   CalendarWeekTitleOptions,
   CalendarWeekTitleHTMLProps
@@ -35,3 +25,13 @@ export const CalendarWeekTitle = createComponent({
   memo: true,
   useHook: useCalendarWeekTitle,
 });
+
+export type CalendarWeekTitleOptions = {
+  dayIndex: number;
+} & Pick<CalendarStateReturn, "weekDays"> &
+  BoxOptions;
+
+export type CalendarWeekTitleHTMLProps = BoxHTMLProps;
+
+export type CalendarWeekTitleProps = CalendarWeekTitleOptions &
+  CalendarWeekTitleHTMLProps;
