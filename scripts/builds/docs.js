@@ -11,21 +11,29 @@ const injectComposition = require("../utils/inject-composition");
 
 const docsFolder = path.resolve(process.cwd(), "docs");
 
-const injections = templateFilePath => {
+const injections = async templateFilePath => {
   const fileName = path.basename(templateFilePath);
   const template = fs.readFileSync(templateFilePath, "utf-8");
+  const logProgress = (msg, fileName) => {
+    console.log(chalk.red.yellow(`${msg}:`, chalk.red.greenBright(fileName)));
+  };
+
   const injectedExamplesTemplate = injectExamples(template);
+  logProgress(`Injected examples`, fileName);
+
   const injectedCompositionTemplate = injectComposition(
     injectedExamplesTemplate,
   );
+  logProgress(`Injected composition`, fileName);
+
   const injectedPropsTemplate = injectProps(injectedCompositionTemplate);
+  logProgress(`Injected props`, fileName);
 
-  // createFile(path.join(docsFolder, fileName), mdPrettify(injectedPropsTemplate));
-  // console.log(
-  //   chalk.red.yellow(`Docs generated:`, chalk.red.greenBright(fileName)),
-  // );
+  const finalReadme = await injectCsbLinks(injectedPropsTemplate);
+  logProgress(`Injected sandbox`, fileName);
 
-  injectCsbLinks(fileName, docsFolder, mdPrettify(injectedPropsTemplate));
+  createFile(path.join(docsFolder, fileName), mdPrettify(finalReadme));
+  logProgress(`Docs generated`, fileName);
 };
 
 if (process.argv[2]) {

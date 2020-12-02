@@ -2,7 +2,7 @@
 
 Accessible `Pagination` component.
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/jp1fn)
+[Pagination - Open On Sandbox](https://codesandbox.io/s/ugo4e)
 
 ## Props
 

@@ -2,7 +2,7 @@
 
 Accessible `Segment` component.
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/pddby)
+[Segment - Open On Sandbox](https://codesandbox.io/s/xiccb)
 
 ## Props
 

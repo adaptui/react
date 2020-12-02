@@ -12,7 +12,7 @@ Accessible `Progress` component.
 
 - **`value`** <code>number | null</code> The `value` of the progress indicator.
 
-  If `null` the progress bar will be in `indeterminate` state
+If `null` the progress bar will be in `indeterminate` state
 
 - **`min`** <code>number</code> The minimum value of the progress
 - **`max`** <code>number</code> The maximum value of the
@@ -24,7 +24,7 @@ Accessible `Progress` component.
 
 - **`value`** <code>number | null</code> The `value` of the progress indicator.
 
-  If `null` the progress bar will be in `indeterminate` state
+If `null` the progress bar will be in `indeterminate` state
 
 - **`min`** <code>number</code> The minimum value of the progress
 - **`max`** <code>number</code> The maximum value of the
@@ -41,7 +41,7 @@ Accessible `Progress` component.
 ```js
 import * as React from "react";
 import { Button } from "reakit";
-import { css, keyframes } from "emotion";
+import { css, keyframes } from "@emotion/css";
 
 import { cx, isNull, Progress, useProgressState } from "renderless-components";
 

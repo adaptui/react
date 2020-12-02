@@ -2,7 +2,7 @@
 
 Accessible `PickerBase` component.
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/rsuxm)
+[PickerBase - Open On Sandbox](https://codesandbox.io/s/neryg)
 
 ## Props
 

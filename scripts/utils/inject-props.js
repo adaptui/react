@@ -1,6 +1,4 @@
-const fs = require("fs");
 const path = require("path");
-const chalk = require("chalk");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
 
@@ -16,7 +14,6 @@ const {
   isStateReturnDeclaration,
 } = require("./index");
 const injectMdContent = require("./inject-md-content");
-const { walkSync, createFile } = require("./fs-utils");
 
 const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
