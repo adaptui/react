@@ -2,9 +2,17 @@
 
 Accessible `DatePicker` component.
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cq9ql)
+<!-- CODESANDBOX
+link_title: DatePicker - Open On Sandbox
+js: src/datepicker/stories/__js/DatePicker.component.jsx
+css: src/datepicker/stories/DatePickerBase.css
+-->
 
-[DatePicker - Open On Sandbox](https://codesandbox.io/s/4j912)
+<!-- CODESANDBOX
+link_title: RangeDatePicker - Open On Sandbox
+js: src/datepicker/stories/__js/DateRangePicker.component.jsx
+css: src/datepicker/stories/DatePickerRange.css
+-->
 
 ## Props
 

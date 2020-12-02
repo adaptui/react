@@ -2,9 +2,9 @@
 
 Accessible `Calendar` component.
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
-
 [Calendar - Open On Sandbox](https://codesandbox.io/s/qte2l)
+
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
 
 ## Props
 

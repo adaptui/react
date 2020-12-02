@@ -2,7 +2,11 @@
 
 Accessible `Meter` component.
 
-[Meter - Open On Sandbox](https://codesandbox.io/s/n9f9q)
+<!-- CODESANDBOX
+link_title: Meter - Open On Sandbox
+js: src/meter/stories/__js/Meter.component.jsx
+deps: [@emotion/css]
+-->
 
 ## Props
 
@@ -52,7 +56,7 @@ Accessible `Meter` component.
 
 ```js
 import * as React from "react";
-import { css, keyframes } from "emotion";
+import { css, keyframes } from "@emotion/css";
 
 import { Meter, useMeterState } from "renderless-components";
 

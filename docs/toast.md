@@ -2,9 +2,9 @@
 
 Accessible `Toast` component.
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/fkpd6)
+[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/5ybs5)
 
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/dwkcp)
+[Toast - Open On Sandbox](https://codesandbox.io/s/m3ems)
 
 ## Example
 

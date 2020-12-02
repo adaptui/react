@@ -6,8 +6,13 @@ Accessible Accordion component. It follows the
 <!-- CODESANDBOX
 link_title: Accordion Example Live Demo
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
+-->
+
+<!-- CODESANDBOX
+link_title: Accordion Styled Example Live Demo
+js: src/accordion/stories/__js/AccordionStyled.component.jsx
 css: src/accordion/stories/AccordionStyled.css
-deps: [emotion]
+deps: [@emotion/css]
 -->
 
 ## Props
@@ -39,4 +44,10 @@ deps: [emotion]
 
 ```js
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
+```
+
+### Styled
+
+```js
+<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionStyled.component.jsx -->
 ```

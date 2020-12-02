@@ -2,7 +2,10 @@
 
 Accessible `NumberInput` component.
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/ybuxv)
+<!-- CODESANDBOX
+link_title: NumberInput - Open On Sandbox
+js: src/number-input/stories/__js/NumberInput.component.jsx
+-->
 
 ## Props
 

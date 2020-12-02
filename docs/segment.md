@@ -2,7 +2,10 @@
 
 Accessible `Segment` component.
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/pddby)
+<!-- CODESANDBOX
+link_title: Segment - Open On Sandbox
+js: src/segment/stories/__js/Segment.component.jsx
+-->
 
 ## Props
 

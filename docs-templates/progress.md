@@ -5,7 +5,7 @@ Accessible `Progress` component.
 <!-- CODESANDBOX
 link_title: Progress - Open On Sandbox
 js: src/progress/stories/__js/Progress.component.jsx
-deps: [emotion]
+deps: [@emotion/css]
 -->
 
 ## Props

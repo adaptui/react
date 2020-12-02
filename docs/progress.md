@@ -2,7 +2,11 @@
 
 Accessible `Progress` component.
 
-[Progress - Open On Sandbox](https://codesandbox.io/s/42dwp)
+<!-- CODESANDBOX
+link_title: Progress - Open On Sandbox
+js: src/progress/stories/__js/Progress.component.jsx
+deps: [@emotion/css]
+-->
 
 ## Props
 
@@ -41,7 +45,7 @@ Accessible `Progress` component.
 ```js
 import * as React from "react";
 import { Button } from "reakit";
-import { css, keyframes } from "emotion";
+import { css, keyframes } from "@emotion/css";
 
 import { cx, isNull, Progress, useProgressState } from "renderless-components";
 

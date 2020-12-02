@@ -2,7 +2,10 @@
 
 Accessible `Pagination` component.
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/jp1fn)
+<!-- CODESANDBOX
+link_title: Pagination - Open On Sandbox
+js: src/pagination/stories/__js/Pagination.component.jsx
+-->
 
 ## Props
 

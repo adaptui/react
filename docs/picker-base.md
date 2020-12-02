@@ -2,7 +2,10 @@
 
 Accessible `PickerBase` component.
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/rsuxm)
+<!-- CODESANDBOX
+link_title: PickerBase - Open On Sandbox
+js: src/picker-base/stories/__js/PickerBase.component.jsx
+-->
 
 ## Props
 

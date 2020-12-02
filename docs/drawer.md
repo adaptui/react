@@ -2,7 +2,10 @@
 
 Accessible `Drawer` component.
 
-[Drawer - Open On Sandbox](https://codesandbox.io/s/c13ec)
+<!-- CODESANDBOX
+link_title: Drawer - Open On Sandbox
+js: src/drawer/stories/__js/Drawer.component.jsx
+-->
 
 ## Props
 
@@ -69,7 +72,7 @@ Accessible `Drawer` component.
 
 ```js
 import React from "react";
-import { css } from "emotion";
+import { css } from "@emotion/css";
 
 import {
   Drawer,
