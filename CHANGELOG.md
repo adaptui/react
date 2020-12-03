@@ -4,6 +4,71 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [0.2.0](https://github.com/timelessco/renderless-components/compare/v0.1.1-beta.3...v0.2.0) (2020-12-03)
+
+### Bug Fixes
+
+- **select:** 🐛 focus the popover on loop from both ends
+  ([#159](https://github.com/timelessco/renderless-components/issues/159))
+  ([3eafebd](https://github.com/timelessco/renderless-components/commit/3eafebd9b038d9cb2f537f01442ccc989222c877))
+- **toast:** 🐛 useToast is not a function
+  ([#151](https://github.com/timelessco/renderless-components/issues/151)) Issue
+  ([#145](https://github.com/timelessco/renderless-components/issues/145))
+  ([bf476e2](https://github.com/timelessco/renderless-components/commit/bf476e25e56bdc5ebe07502b2886bf8206bbf82b))
+
+### Build System
+
+- **reakit:** 📌 make reakit as a peer deps
+  ([#152](https://github.com/timelessco/renderless-components/issues/152))
+  ([b89e19a](https://github.com/timelessco/renderless-components/commit/b89e19a23fd75792a9adf7bb16723e24c6bf5e7c))
+
+### Tests
+
+- **select:** added select tests
+  ([#154](https://github.com/timelessco/renderless-components/issues/154))
+  ([783e946](https://github.com/timelessco/renderless-components/commit/783e946b868066d1fc8206cc22dd877fb61afdf4))
+
+### Code Refactoring
+
+- **role:** ♻️ replace Box with Role from reakit
+  ([#165](https://github.com/timelessco/renderless-components/issues/165))
+  ([93946cc](https://github.com/timelessco/renderless-components/commit/93946cc9fa0562f3b10839439ca024fce733cf4a))
+
+### Docs
+
+- **readme:** 📝 remove contributors tag
+  ([1592b68](https://github.com/timelessco/renderless-components/commit/1592b6830b8b478bd6dc3809caf547df034bef6a))
+- **readme:** 📝 update Link's doc link
+  ([e034d1b](https://github.com/timelessco/renderless-components/commit/e034d1bf463a6122d959388c080057457b71d029))
+- **readme:** 📝 update readme and component docs
+  ([#155](https://github.com/timelessco/renderless-components/issues/155))
+  ([1ac4ce6](https://github.com/timelessco/renderless-components/commit/1ac4ce67f6c472a9942575ca0bf1d386c3324e6d)),
+  closes [#157](https://github.com/timelessco/renderless-components/issues/157)
+  [#160](https://github.com/timelessco/renderless-components/issues/160)
+  [#153](https://github.com/timelessco/renderless-components/issues/153)
+  [#154](https://github.com/timelessco/renderless-components/issues/154)
+  [#163](https://github.com/timelessco/renderless-components/issues/163)
+  [#166](https://github.com/timelessco/renderless-components/issues/166)
+  [#170](https://github.com/timelessco/renderless-components/issues/170)
+  [#171](https://github.com/timelessco/renderless-components/issues/171)
+  [#172](https://github.com/timelessco/renderless-components/issues/172)
+
+### Others
+
+- **npm:** 📦 rename pkg to scoped one
+  ([735e690](https://github.com/timelessco/renderless-components/commit/735e6902f1974650c9285abf20e54b6400bfcf3f))
+- **toast:** renamed types to normal convention
+  ([#169](https://github.com/timelessco/renderless-components/issues/169))
+  ([f962002](https://github.com/timelessco/renderless-components/commit/f962002f3184f57694958cf006a5f7f2254eea5d))
+- update minor & patch deps
+  ([#164](https://github.com/timelessco/renderless-components/issues/164))
+  ([3c6613d](https://github.com/timelessco/renderless-components/commit/3c6613d26b42a0594e9b848436ca80e7f95a8e3a))
+- **accordion:** refactored & cleaned up accordion types
+  ([#153](https://github.com/timelessco/renderless-components/issues/153))
+  ([47b47c9](https://github.com/timelessco/renderless-components/commit/47b47c95cdc5f06a969c4276f9d6ce62ca90776b))
+- **select:** added exhaustive-deps ignore comments
+  ([a8acc78](https://github.com/timelessco/renderless-components/commit/a8acc78bc211d43a21926b54d78e6b1046a4ed15))
+
 ### [0.1.1-beta.3](https://github.com/timelessco/renderless-components/compare/v0.1.1-beta.2...v0.1.1-beta.3) (2020-11-17)
 
 ### Bug Fixes
