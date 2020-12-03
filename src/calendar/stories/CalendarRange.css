@@ -1,5 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
 .calendar-range {
-  margin-top: 1em;
   max-width: 320px;
   position: relative;
 }
@@ -78,7 +81,6 @@
   width: 320px;
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: 1em;
   background-color: #fbfbff;
   border-spacing: 0;
 }
@@ -86,6 +88,10 @@
 .calendar-range .dates th,
 .calendar-range .dates td {
   text-align: center;
+}
+
+.calendar-range .dates th abbr {
+  text-decoration: none;
 }
 
 .calendar-range .dates tr {

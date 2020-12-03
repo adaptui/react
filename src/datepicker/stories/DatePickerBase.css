@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .datepicker__trigger {
   display: flex;
   padding: 5px;
   margin-left: 10px;
   background-color: #f8f8f8;
+  border: none;
 }
 
 .datepicker__trigger svg {
@@ -128,13 +133,16 @@
   width: 320px;
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: 1em;
   background-color: #fbfbff;
 }
 
 .calendar .dates th,
 .calendar .dates td {
   text-align: center;
+}
+
+.calendar .dates th abbr {
+  text-decoration: none;
 }
 
 .calendar .dates tr {

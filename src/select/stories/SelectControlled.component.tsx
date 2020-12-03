@@ -19,6 +19,7 @@ export const App: React.FC = () => {
       <h2>Controlled</h2>
       <SelectComp values={fruits} value={fruit} onChange={setFruit} />
       <br />
+      <br />
       <SelectComp values={fruits} value={fruit} onChange={setFruit} />
     </div>
   );
