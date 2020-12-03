@@ -54,7 +54,7 @@ export const App = props => {
 export default App;
 ```
 
-[Select - Open On Sandbox](https://codesandbox.io/s/mfpy7)
+[Select - Open On Sandbox](https://codesandbox.io/s/zszcn)
 
 ## Props
 

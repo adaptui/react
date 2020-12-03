@@ -53,6 +53,6 @@ export const App = () => {
 export default App;
 ```
 
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/i0emy)
+[Toast - Open On Sandbox](https://codesandbox.io/s/2fbm9)
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/l2i1y)
+[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/8vkcv)
