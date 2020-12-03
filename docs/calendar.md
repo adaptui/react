@@ -39,7 +39,7 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarWeekTitle,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = useCalendarState(props);
@@ -159,7 +159,7 @@ import {
   CalendarCellButton,
   CalendarWeekTitle,
   useRangeCalendarState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = useRangeCalendarState(props);
@@ -265,9 +265,9 @@ const DoubleChevronRight = props => (
 );
 ```
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/86dqv)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/qutws)
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/qte2l)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/g035s)
 
 ## Composition
 

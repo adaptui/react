@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
+import { Breadcrumbs, BreadcrumbLink } from "@renderlesskit/react";
 
 export const App: React.FC = props => {
   return (

@@ -22,7 +22,7 @@ import {
   Pagination,
   PaginationButton,
   usePaginationState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = usePaginationState({ count: 10, ...props });
@@ -77,7 +77,7 @@ export const App = props => {
 export default App;
 ```
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/c7ttm)
+[Pagination - Open On Sandbox](https://codesandbox.io/s/cwuhv)
 
 ## Accessibility Requirement
 

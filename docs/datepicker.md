@@ -39,7 +39,7 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarWeekTitle,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = useDatePickerState({
@@ -202,7 +202,7 @@ import {
   CalendarButton,
   CalendarWeekTitle,
   CalendarCellButton,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = useDateRangePickerState({
@@ -366,9 +366,9 @@ const DoubleChevronRight = props => (
 );
 ```
 
-[DatePicker - Open On Sandbox](https://codesandbox.io/s/snelw)
+[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/7r8jv)
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cqgs2)
+[DatePicker - Open On Sandbox](https://codesandbox.io/s/x7w6p)
 
 ## Composition
 

@@ -24,7 +24,7 @@ import {
   DrawerBackdrop,
   DrawerCloseButton,
   DrawerDisclosure,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = () => {
   const dialog = useDrawerState({ animated: true });
@@ -95,7 +95,7 @@ const cssTransforms = {
 };
 ```
 
-[Drawer - Open On Sandbox](https://codesandbox.io/s/hj8ns)
+[Drawer - Open On Sandbox](https://codesandbox.io/s/ostxr)
 
 ## Composition
 

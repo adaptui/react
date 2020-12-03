@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Link } from "renderless-components";
+import { Link } from "@renderlesskit/react";
 
 export interface AppProps {
   /**

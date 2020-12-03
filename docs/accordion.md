@@ -29,7 +29,7 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export function App(props) {
   const state = useAccordionState(props);
@@ -65,9 +65,9 @@ export function App(props) {
 export default App;
 ```
 
-[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/7l87v)
+[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/scil2)
 
-[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/w4vcr)
+[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/lonmk)
 
 ## Accessibility Requirements
 

@@ -9,7 +9,7 @@ import {
   ProgressState,
   useProgressState,
   ProgressInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export interface AppProps extends ProgressInitialState {
   withLabel?: boolean;

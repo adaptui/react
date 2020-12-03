@@ -93,7 +93,7 @@ export function useCalendarState(
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
     if (isInvalidDateRange(date, minValue, maxValue)) {
-      // Fixes https://github.com/timelessco/renderless-components/issues/116
+      // Fixes https://github.com/timelessco/renderlesskit-react/issues/116
       // Issue causing the focusNextMonth & focusPrevMonth to not work because
       // of adding one month to the current date which becomes invalid above.
       if (minValue && maxValue) {

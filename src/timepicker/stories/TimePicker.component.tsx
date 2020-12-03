@@ -9,7 +9,7 @@ import {
   TimePickerColumnValue,
   TimePickerSegmentField,
   TimePickerStateProps,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 const CalendarIcon = () => (
   <svg viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img">

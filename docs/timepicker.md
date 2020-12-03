@@ -31,7 +31,7 @@ import {
   useTimePickerState,
   TimePickerColumnValue,
   TimePickerSegmentField,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 const CalendarIcon = () => (
   <svg viewBox="0 0 36 36" focusable="false" aria-hidden="true" role="img">
@@ -116,7 +116,7 @@ export const App = props => {
 export default App;
 ```
 
-[TimePicker - Open On Sandbox](https://codesandbox.io/s/5k3uo)
+[TimePicker - Open On Sandbox](https://codesandbox.io/s/jph5c)
 
 ## Composition
 

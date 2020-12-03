@@ -5,7 +5,7 @@ import {
   SegmentField,
   useSegmentState,
   SegmentInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);

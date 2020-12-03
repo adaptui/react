@@ -23,7 +23,7 @@ import {
   PickerBaseTrigger,
   PickerBaseContent,
   usePickerBaseState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const state = usePickerBaseState(props);
@@ -41,7 +41,7 @@ export const App = props => {
 export default App;
 ```
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/bfbp9)
+[PickerBase - Open On Sandbox](https://codesandbox.io/s/h7pxf)
 
 ## Composition
 

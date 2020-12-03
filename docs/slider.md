@@ -30,7 +30,7 @@ import {
   SliderThumb,
   SliderInput,
   useSliderState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = args => {
   const { label, isReversed, origin: originProp, ...rest } = args;
@@ -144,7 +144,7 @@ export const App = args => {
 export default App;
 ```
 
-[Slider - Open On Sandbox](https://codesandbox.io/s/s20jt)
+[Slider - Open On Sandbox](https://codesandbox.io/s/eng7z)
 
 ## Accessibility Requirement
 

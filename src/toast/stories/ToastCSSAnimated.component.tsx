@@ -2,7 +2,7 @@ import React from "react";
 import { CSSTransition } from "react-transition-group";
 
 import { Variants, Placements } from "./Utils.component";
-import { ToastProvider, ToastWrapper } from "renderless-components";
+import { ToastProvider, ToastWrapper } from "@renderlesskit/react";
 
 const CSSTransitionAnimationWrapper: ToastWrapper = ({
   isVisible,

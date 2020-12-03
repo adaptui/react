@@ -18,7 +18,7 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 ```js
 import React from "react";
 
-import { Segment, SegmentField, useSegmentState } from "renderless-components";
+import { Segment, SegmentField, useSegmentState } from "@renderlesskit/react";
 
 export const App = props => {
   const state = useSegmentState(props);
@@ -42,7 +42,7 @@ export const App = props => {
 export default App;
 ```
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/rb7uv)
+[Segment - Open On Sandbox](https://codesandbox.io/s/3wjgt)
 
 ## Composition
 

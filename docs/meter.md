@@ -20,7 +20,7 @@ that varies within a defined range. It follows the
 import * as React from "react";
 import { css, keyframes } from "@emotion/css";
 
-import { Meter, useMeterState } from "renderless-components";
+import { Meter, useMeterState } from "@renderlesskit/react";
 
 export const App = props => {
   const {
@@ -110,7 +110,7 @@ function meterBarStyle(meter, props) {
 }
 ```
 
-[Meter - Open On Sandbox](https://codesandbox.io/s/ypo8h)
+[Meter - Open On Sandbox](https://codesandbox.io/s/8mxwv)
 
 ## Accessibility Requirement
 

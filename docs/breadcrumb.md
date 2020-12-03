@@ -20,7 +20,7 @@ for its
 ```js
 import * as React from "react";
 
-import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
+import { Breadcrumbs, BreadcrumbLink } from "@renderlesskit/react";
 
 export const App = props => {
   return (
@@ -57,7 +57,7 @@ export const App = props => {
 export default App;
 ```
 
-[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/vdmiv)
+[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/t3ygx)
 
 ## Accessibility Requirement
 

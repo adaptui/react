@@ -19,7 +19,7 @@ and
 ```js
 import * as React from "react";
 
-import { Link } from "renderless-components";
+import { Link } from "@renderlesskit/react";
 
 export const App = props => {
   return <Link {...props}>Reakit</Link>;
@@ -28,7 +28,7 @@ export const App = props => {
 export default App;
 ```
 
-[Link - Open on Sandbox](https://codesandbox.io/s/5zhtt)
+[Link - Open on Sandbox](https://codesandbox.io/s/5gwlm)
 
 ## Composition
 

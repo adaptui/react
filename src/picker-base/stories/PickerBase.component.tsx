@@ -6,7 +6,7 @@ import {
   PickerBaseContent,
   usePickerBaseState,
   PickerBaseInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<PickerBaseInitialState> = props => {
   const state = usePickerBaseState(props);

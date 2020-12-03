@@ -31,7 +31,7 @@ import {
   SelectOption,
   SelectPopover,
   useSelectState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App = props => {
   const select = useSelectState({ gutter: 8, ...props });
@@ -54,7 +54,7 @@ export const App = props => {
 export default App;
 ```
 
-[Select - Open On Sandbox](https://codesandbox.io/s/hrtki)
+[Select - Open On Sandbox](https://codesandbox.io/s/mfpy7)
 
 ## Props
 

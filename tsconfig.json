@@ -23,8 +23,8 @@
     "declaration": true,
     "declarationDir": "dist/types",
     "paths": {
-      "renderless-components": ["src"],
-      "renderless-components/*": ["src/*"]
+      "@renderlesskit/react": ["src"],
+      "@renderlesskit/react/*": ["src/*"]
     }
   }
 }

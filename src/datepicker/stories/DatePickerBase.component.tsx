@@ -16,7 +16,7 @@ import {
   CalendarWeekTitle,
   CalendarStateReturn,
   DatePickerInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<DatePickerInitialState> = props => {
   const state = useDatePickerState({

@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
   useAccordionState,
   AccordionInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
 export const App: React.FC<AccordionInitialState> = props => {

@@ -10,7 +10,7 @@ the
 
 ```js
 import React from "react";
-import { ToastProvider } from "renderless-components";
+import { ToastProvider } from "@renderlesskit/react";
 
 import { Variants, Placements } from "./Utils.component";
 
@@ -53,6 +53,6 @@ export const App = () => {
 export default App;
 ```
 
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/5ybs5)
+[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/i0emy)
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/m3ems)
+[Toast - Open On Sandbox](https://codesandbox.io/s/l2i1y)

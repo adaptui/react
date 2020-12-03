@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastProvider } from "renderless-components";
+import { ToastProvider } from "@renderlesskit/react";
 
 import { Variants, Placements } from "./Utils.component";
 

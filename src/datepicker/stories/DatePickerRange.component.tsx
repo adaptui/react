@@ -16,7 +16,7 @@ import {
   CalendarCellButton,
   RangeCalendarStateReturn,
   DateRangePickerInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<DateRangePickerInitialState> = props => {
   const state = useDateRangePickerState({

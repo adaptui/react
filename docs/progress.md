@@ -20,7 +20,7 @@ import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
 
-import { cx, isNull, Progress, useProgressState } from "renderless-components";
+import { cx, isNull, Progress, useProgressState } from "@renderlesskit/react";
 
 export const App = props => {
   const {
@@ -150,9 +150,9 @@ const indeterminateStyles = css({
 });
 ```
 
-[Progress Linear- Open On Sandbox](https://codesandbox.io/s/9mmng)
+[Progress Circular - Open On Sandbox](https://codesandbox.io/s/e3eun)
 
-[Progress Circular - Open On Sandbox](https://codesandbox.io/s/lszhp)
+[Progress Linear- Open On Sandbox](https://codesandbox.io/s/0p2yo)
 
 ## Accessibility Requirement
 

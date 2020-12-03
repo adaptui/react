@@ -10,7 +10,7 @@ import {
   CalendarWeekTitle,
   useRangeCalendarState,
   RangeCalendarInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);

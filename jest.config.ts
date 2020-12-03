@@ -13,7 +13,7 @@ export default {
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/src/__mocks__/styleMock.js",
     "^@shared(.*)$": "<rootDir>/shared$1",
-    "^renderless-components$": "<rootDir>/src",
+    "^@renderlesskit/react$": "<rootDir>/src",
   },
   coveragePathIgnorePatterns: [
     "node_modules",

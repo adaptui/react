@@ -6,7 +6,7 @@ import {
   usePaginationState,
   PaginationInitialState,
   TGoto,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 export const App: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });

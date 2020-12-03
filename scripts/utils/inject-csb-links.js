@@ -59,7 +59,7 @@ const getSandboxShortURL = async parsed => {
 const getSandboxDefineLink = (files, extraDeps) => {
   const deps = {
     reakit: "latest",
-    "renderless-components": "0.1.1-beta.3",
+    "@renderlesskit/react": "latest",
     react: "^16.8.0",
     "react-dom": "^16.8.0",
     "react-scripts": "^3.4.3",

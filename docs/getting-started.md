@@ -8,10 +8,10 @@ customizable from low level to build your own UI & Design System powered by
 
 ```sh
 # npm
-npm install renderless-components reakit
+npm install @renderlesskit/react reakit
 
 # Yarn
-yarn add renderless-components reakit
+yarn add @renderlesskit/react reakit
 ```
 
 > Make sure `react react-dom` is installed.
@@ -32,7 +32,7 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 function App() {
   const state = useAccordionState();

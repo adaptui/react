@@ -6,7 +6,7 @@ import {
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 type User = { value: string; label: string };
 

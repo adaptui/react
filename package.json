@@ -1,23 +1,26 @@
 {
   "name": "@renderlesskit/react",
   "version": "0.2.0",
-  "description": "Renderless Components for building accessible components with any UI",
+  "description": "Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by Reakit",
   "keywords": [
-    "renderless-component",
-    "reakit",
+    "renderless",
+    "headless",
     "a11y",
-    "react",
     "ui",
     "toolkit",
-    "components"
+    "reakit",
+    "react",
+    "components",
+    "nostyle",
+    "composable"
   ],
-  "homepage": "https://github.com/timelessco/renderless-components#readme",
+  "homepage": "https://github.com/timelessco/renderlesskit-react#readme",
   "bugs": {
-    "url": "https://github.com/timelessco/renderless-components/issues"
+    "url": "https://github.com/timelessco/renderlesskit-react/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timelessco/renderless-components.git"
+    "url": "git+https://github.com/timelessco/renderlesskit-react.git"
   },
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",

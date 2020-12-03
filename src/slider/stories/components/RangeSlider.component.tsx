@@ -7,7 +7,7 @@ import {
   SliderInput,
   useSliderState,
   SliderInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 
 interface AppProps extends SliderInitialState {
   /**

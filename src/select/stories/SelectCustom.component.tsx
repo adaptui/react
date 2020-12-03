@@ -6,7 +6,7 @@ import {
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "renderless-components";
+} from "@renderlesskit/react";
 import { fruits } from "./Utils.component";
 
 export const App: React.FC<SelectInitialState> = props => {
