@@ -1,15 +1,59 @@
-## NumberInput
+# NumberInput
 
 Accessible `NumberInput` component.
 
-<!-- CODESANDBOX
-link_title: NumberInput - Open On Sandbox
-js: src/number-input/stories/__js/NumberInput.component.jsx
--->
+## Table of Contents
+
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useNumberinputState`](#usenumberinputstate)
+  - [`NumberInput`](#numberinput)
+  - [`NumberInputDecrementButton`](#numberinputdecrementbutton)
+  - [`NumberInputIncrementButton`](#numberinputincrementbutton)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  NumberInput,
+  useNumberInputState,
+  NumberInputDecrementButton,
+  NumberInputIncrementButton,
+} from "renderless-components";
+
+export const App = props => {
+  const state = useNumberInputState(props);
+  const { clampValueOnBlur, allowMouseWheel } = props;
+
+  return (
+    <label htmlFor="number-input">
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInput
+        id="number-input"
+        clampValueOnBlur={clampValueOnBlur}
+        allowMouseWheel={allowMouseWheel}
+        {...state}
+      />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </label>
+  );
+};
+
+export default App;
+```
+
+[NumberInput - Open On Sandbox](https://codesandbox.io/s/jn8rl)
+
+## Composition
+
+- NumberInput uses [useInput](https://reakit.io/docs/input/)
+- NumberInputDecrementButton uses [useButton](https://reakit.io/docs/button)
+- NumberInputIncrementButton uses [useButton](https://reakit.io/docs/button)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `useNumberinputState`
 
@@ -147,42 +191,3 @@ form elements. In this case, only `aria-disabled` will be set.
   incrementing or decrementing
 
 </details>
-
-## Composition
-
-- NumberInput uses [useInput](https://reakit.io/docs/input/)
-- NumberInputDecrementButton uses [useButton](https://reakit.io/docs/button)
-- NumberInputIncrementButton uses [useButton](https://reakit.io/docs/button)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  NumberInput,
-  useNumberInputState,
-  NumberInputDecrementButton,
-  NumberInputIncrementButton,
-} from "renderless-components";
-
-export const App = props => {
-  const state = useNumberInputState(props);
-  const { clampValueOnBlur, allowMouseWheel } = props;
-
-  return (
-    <label htmlFor="number-input">
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInput
-        id="number-input"
-        clampValueOnBlur={clampValueOnBlur}
-        allowMouseWheel={allowMouseWheel}
-        {...state}
-      />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-    </label>
-  );
-};
-
-export default App;
-```

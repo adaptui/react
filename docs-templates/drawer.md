@@ -1,22 +1,20 @@
-## Drawer
+# Drawer
 
-Accessible `Drawer` component.
+`Drawer` component was built on top of [Dialog](https://reakit.io/docs/dialog/)
+component to provide the drawer ability from four ends. It follows the
+[Dialog Accessibility](https://reakit.io/docs/dialog/#accessibility) features.
+
+<!-- INJECT_TOC -->
+
+## Usage
+
+<!-- IMPORT_EXAMPLE src/drawer/stories/__js/Drawer.component.jsx -->
 
 <!-- CODESANDBOX
 link_title: Drawer - Open On Sandbox
 js: src/drawer/stories/__js/Drawer.component.jsx
 -->
 
-## Props
-
-<!-- INJECT_PROPS src/drawer -->
-
-## Composition
-
 <!-- INJECT_COMPOSITION src/drawer -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/drawer/stories/__js/Drawer.component.jsx -->
-```
+<!-- INJECT_PROPS src/drawer -->

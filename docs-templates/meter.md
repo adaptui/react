@@ -1,6 +1,12 @@
-## Meter
+# Meter
 
 Accessible `Meter` component.
+
+<!-- INJECT_TOC -->
+
+## Usage
+
+<!-- IMPORT_EXAMPLE src/meter/stories/__js/Meter.component.jsx -->
 
 <!-- CODESANDBOX
 link_title: Meter - Open On Sandbox
@@ -8,16 +14,6 @@ js: src/meter/stories/__js/Meter.component.jsx
 deps: ['@emotion/css']
 -->
 
-## Props
-
-<!-- INJECT_PROPS src/meter -->
-
-## Composition
-
 <!-- INJECT_COMPOSITION src/meter -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/meter/stories/__js/Meter.component.jsx -->
-```
+<!-- INJECT_PROPS src/meter -->

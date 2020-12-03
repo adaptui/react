@@ -1,46 +1,16 @@
-## Progress
+# Progress
 
 Accessible `Progress` component.
 
-<!-- CODESANDBOX
-link_title: Progress - Open On Sandbox
-js: src/progress/stories/__js/Progress.component.jsx
-deps: ['@emotion/css']
--->
+## Table of Contents
 
-## Props
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useProgressState`](#useprogressstate)
+  - [`Progress`](#progress)
 
-<!-- Automatically generated -->
-
-### `useProgressState`
-
-- **`value`** <code>number | null</code> The `value` of the progress indicator.
-
-  If `null` the progress bar will be in `indeterminate` state
-
-- **`min`** <code>number</code> The minimum value of the progress
-- **`max`** <code>number</code> The maximum value of the
-
-### `Progress`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-- **`value`** <code>number | null</code> The `value` of the progress indicator.
-
-  If `null` the progress bar will be in `indeterminate` state
-
-- **`min`** <code>number</code> The minimum value of the progress
-- **`max`** <code>number</code> The maximum value of the
-- **`isIndeterminate`** <code>boolean</code> Set isInterminate state
-
-</details>
-
-## Composition
-
-- Progress uses [useRole](https://reakit.io/docs/role)
-
-## Example
+## Usage
 
 ```js
 import * as React from "react";
@@ -176,3 +146,37 @@ const indeterminateStyles = css({
   animation: `${progressAnim} 1s ease infinite normal none running`,
 });
 ```
+
+[Progress Linear- Open On Sandbox](https://codesandbox.io/s/9mmng)
+
+[Progress Circular - Open On Sandbox](https://codesandbox.io/s/lszhp)
+
+## Composition
+
+- Progress uses [useRole](https://reakit.io/docs/role)
+
+## Props
+
+### `useProgressState`
+
+- **`value`** <code>number | null</code> The `value` of the progress indicator.
+
+  If `null` the progress bar will be in `indeterminate` state
+
+- **`min`** <code>number</code> The minimum value of the progress
+- **`max`** <code>number</code> The maximum value of the
+
+### `Progress`
+
+<details><summary>4 state props</summary>
+> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+
+- **`value`** <code>number | null</code> The `value` of the progress indicator.
+
+  If `null` the progress bar will be in `indeterminate` state
+
+- **`min`** <code>number</code> The minimum value of the progress
+- **`max`** <code>number</code> The maximum value of the
+- **`isIndeterminate`** <code>boolean</code> Set isInterminate state
+
+</details>

@@ -1,12 +1,8 @@
-## Toast
+# Toast
 
 Accessible `Toast` component.
 
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/5ybs5)
-
-[Toast - Open On Sandbox](https://codesandbox.io/s/m3ems)
-
-## Example
+## Usage
 
 ```js
 import React from "react";
@@ -52,3 +48,7 @@ export const App = () => {
 
 export default App;
 ```
+
+[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/5ybs5)
+
+[Toast - Open On Sandbox](https://codesandbox.io/s/m3ems)

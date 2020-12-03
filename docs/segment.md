@@ -1,15 +1,52 @@
-## Segment
+# Segment
 
 Accessible `Segment` component.
 
-<!-- CODESANDBOX
-link_title: Segment - Open On Sandbox
-js: src/segment/stories/__js/Segment.component.jsx
--->
+## Table of Contents
+
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`Segment`](#segment)
+  - [`SegmentField`](#segmentfield)
+
+## Usage
+
+```js
+import React from "react";
+
+import { Segment, SegmentField, useSegmentState } from "renderless-components";
+
+export const App = props => {
+  const state = useSegmentState(props);
+
+  return (
+    <div>
+      <SegmentField {...state} className="segment__field">
+        {state.segments.map((segment, i) => (
+          <Segment
+            key={i}
+            segment={segment}
+            className="segment__field--item"
+            {...state}
+          />
+        ))}
+      </SegmentField>
+    </div>
+  );
+};
+
+export default App;
+```
+
+[Segment - Open On Sandbox](https://codesandbox.io/s/rb7uv)
+
+## Composition
+
+- Segment uses [useCompositeItem](https://reakit.io/docs/composite)
+- SegmentField uses [useComposite](https://reakit.io/docs/composite)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `Segment`
 
@@ -167,37 +204,3 @@ form elements. In this case, only `aria-disabled` will be set.
   item ID.
 
 </details>
-
-## Composition
-
-- Segment uses [useCompositeItem](https://reakit.io/docs/composite)
-- SegmentField uses [useComposite](https://reakit.io/docs/composite)
-
-## Example
-
-```js
-import React from "react";
-
-import { Segment, SegmentField, useSegmentState } from "renderless-components";
-
-export const App = props => {
-  const state = useSegmentState(props);
-
-  return (
-    <div>
-      <SegmentField {...state} className="segment__field">
-        {state.segments.map((segment, i) => (
-          <Segment
-            key={i}
-            segment={segment}
-            className="segment__field--item"
-            {...state}
-          />
-        ))}
-      </SegmentField>
-    </div>
-  );
-};
-
-export default App;
-```

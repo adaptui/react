@@ -1,25 +1,23 @@
 # Accordion
 
-Accordion component expands/collapses to show more information on clicking the
+`Accordion` component expands/collapses to show more information on clicking the
 trigger button. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion)
 for
 [keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction)
 &
-[accessibiltiy features](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
+[accessibiltiy properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
 
 ## Table of Contents
 
-- [Accordion](#accordion)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [Accessibility Requirements](#accessibility-requirements)
-  - [Composition](#composition)
-  - [Props](#props)
-    - [`useAccordionState`](#useaccordionstate)
-    - [`Accordion`](#accordion-1)
-    - [`AccordionPanel`](#accordionpanel)
-    - [`AccordionTrigger`](#accordiontrigger)
+- [Usage](#usage)
+- [Accessibility Requirements](#accessibility-requirements)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useAccordionState`](#useaccordionstate)
+  - [`Accordion`](#accordion)
+  - [`AccordionPanel`](#accordionpanel)
+  - [`AccordionTrigger`](#accordiontrigger)
 
 ## Usage
 

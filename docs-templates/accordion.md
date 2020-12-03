@@ -6,7 +6,7 @@ trigger button. It follows the
 for
 [keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction)
 &
-[accessibiltiy features](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
+[accessibiltiy properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
 
 <!-- INJECT_TOC -->
 

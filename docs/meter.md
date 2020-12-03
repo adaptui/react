@@ -1,58 +1,16 @@
-## Meter
+# Meter
 
 Accessible `Meter` component.
 
-<!-- CODESANDBOX
-link_title: Meter - Open On Sandbox
-js: src/meter/stories/__js/Meter.component.jsx
-deps: ['@emotion/css']
--->
+## Table of Contents
 
-## Props
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useMeterState`](#usemeterstate)
+  - [`Meter`](#meter)
 
-<!-- Automatically generated -->
-
-### `useMeterState`
-
-- **`value`** <code>number</code> The `value` of the meter indicator.
-
-  If `undefined`/`not valid` the meter bar will be equal to `min`
-
-- **`min`** <code>number</code> The minimum value of the meter
-- **`max`** <code>number</code> The maximum value of the meter
-- **`low`** <code>number</code> The higher limit of min range.
-
-  Defaults to `min`.
-
-- **`optimum`** <code>number</code> The lower limit of max range.
-
-  Defaults to `median of low & high`.
-
-- **`high`** <code>number</code> The lower limit of max range.
-
-  Defaults to `max`.
-
-### `Meter`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-- **`value`** <code>number</code> The `value` of the meter indicator.
-
-  If `undefined`/`not valid` the meter bar will be equal to `min`
-
-- **`min`** <code>number</code> The minimum value of the meter
-- **`max`** <code>number</code> The maximum value of the meter
-- **`percent`** <code>number</code> Percentage of the value progressed with
-  respect to min & max
-
-</details>
-
-## Composition
-
-- Meter uses [useRole](https://reakit.io/docs/role)
-
-## Example
+## Usage
 
 ```js
 import * as React from "react";
@@ -147,3 +105,47 @@ function meterBarStyle(meter, props) {
   });
 }
 ```
+
+[Meter - Open On Sandbox](https://codesandbox.io/s/ypo8h)
+
+## Composition
+
+- Meter uses [useRole](https://reakit.io/docs/role)
+
+## Props
+
+### `useMeterState`
+
+- **`value`** <code>number</code> The `value` of the meter indicator.
+
+  If `undefined`/`not valid` the meter bar will be equal to `min`
+
+- **`min`** <code>number</code> The minimum value of the meter
+- **`max`** <code>number</code> The maximum value of the meter
+- **`low`** <code>number</code> The higher limit of min range.
+
+  Defaults to `min`.
+
+- **`optimum`** <code>number</code> The lower limit of max range.
+
+  Defaults to `median of low & high`.
+
+- **`high`** <code>number</code> The lower limit of max range.
+
+  Defaults to `max`.
+
+### `Meter`
+
+<details><summary>4 state props</summary>
+> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+
+- **`value`** <code>number</code> The `value` of the meter indicator.
+
+  If `undefined`/`not valid` the meter bar will be equal to `min`
+
+- **`min`** <code>number</code> The minimum value of the meter
+- **`max`** <code>number</code> The maximum value of the meter
+- **`percent`** <code>number</code> Percentage of the value progressed with
+  respect to min & max
+
+</details>

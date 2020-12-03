@@ -1,23 +1,25 @@
-## Progress
+# Progress
 
 Accessible `Progress` component.
 
+<!-- INJECT_TOC -->
+
+## Usage
+
+<!-- IMPORT_EXAMPLE src/progress/stories/__js/LinearProgress.component.jsx -->
+
 <!-- CODESANDBOX
-link_title: Progress - Open On Sandbox
-js: src/progress/stories/__js/Progress.component.jsx
+link_title: Progress Linear- Open On Sandbox
+js: src/progress/stories/__js/LinearProgress.component.jsx
 deps: ['@emotion/css']
 -->
 
-## Props
-
-<!-- INJECT_PROPS src/progress -->
-
-## Composition
+<!-- CODESANDBOX
+link_title: Progress Circular - Open On Sandbox
+js: src/progress/stories/__js/CircularProgress.component.jsx
+deps: ['@emotion/css']
+-->
 
 <!-- INJECT_COMPOSITION src/progress -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/progress/stories/__js/LinearProgress.component.jsx -->
-```
+<!-- INJECT_PROPS src/progress -->

@@ -97,7 +97,7 @@ link
 - `test` - runs tests
 - `tsd` - runs tests for typescript type check
 - `keys` - generates keys for components
-- `docsgen` - generates docs for components
+- `docs` - generates docs for components
 - `generatejs` - transpiles ts examples to js
 - `commit` - to commit with [gacp](https://github.com/vivaxy/gacp)
 - `lint` - to lint the `src` with [ESLint](https://eslint.org/)
