@@ -3,18 +3,17 @@
 <p align="center">
   Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://reakit.io/">Reakit</a>
 System.
-<a href="https://renderless-components.netlify.app/"><strong>Explore all components »</strong></a>
+<a href="https://renderlesskit-react.vercel.app/"><strong>Explore all components »</strong></a>
 </p>
 
 <p align="center">
   <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM version" src="https://img.shields.io/npm/v/@renderlesskit/react.svg" /></a>
   <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/@renderlesskit/react.svg"></a>
-  <a href="https://github.com/timelessco/renderlesskit-react/actions"><img alt="Build Status" src="https://github.com/timelessco/renderlesskit-react/workflows/Test/badge.svg?event=push&branch=master" /></a>
-  <a href="https://app.netlify.com/sites/renderlesskit-react/deploys"><img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/42b9b82f-b8e7-441e-a6c3-9f301addd7ff/deploy-status" /></a><br/>
+  <a href="https://github.com/timelessco/renderlesskit-react/actions"><img alt="Build Status" src="https://github.com/timelessco/renderlesskit-react/workflows/Test/badge.svg?event=push&branch=master" /></a><br/>
   <a href="https://github.com/timelessco/renderlesskit-react/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
 </p>
 
-## Features
+## :rocket: Features
 
 - Accessible :wheelchair:
 - Composable :toolbox:
@@ -22,7 +21,7 @@ System.
 - React Hooks Based :anchor:
 - Easy To Customize, Style & Extend :nail_care:
 
-## :rocket: Installation
+## ⚓ Installation
 
 ```sh
 # npm
@@ -34,11 +33,11 @@ yarn add @renderlesskit/react reakit
 
 > Make sure `react react-dom` is installed.
 
-## Getting started
+## :beginner: Getting started
 
 Check out our [getting started docs](/docs/getting-started.md)
 
-## Component Docs
+## 📑 Component Docs
 
 - [Accordion](docs/accordion.md)
 - [Breadcrumbs](docs/breadcrumb.md)
@@ -57,7 +56,7 @@ Check out our [getting started docs](/docs/getting-started.md)
 - [Time Picker](docs/timepicker.md)
 - [Toast](docs/toast.md)
 
-## Contributors ✨
+## ✨ Contributors
 
 Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -82,6 +81,6 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## License
+## 📋 License
 
 MIT © [Timeless](https://timeless.co/)
