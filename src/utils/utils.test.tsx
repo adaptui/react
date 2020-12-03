@@ -37,9 +37,7 @@ describe("Utils", () => {
   });
 
   test("parseRangeDate", () => {
-    expect(
-      parseRangeDate({ start: "1999-5-15", end: "2020-8-12" }),
-    ).toStrictEqual({
+    expect(parseRangeDate({ start: "1999-5-15", end: "2020-8-12" })).toEqual({
       start: parseDate("1999-5-15"),
       end: parseDate("2020-8-12"),
     });
