@@ -1,12 +1,94 @@
-## Pagination
+# Pagination
 
-Accessible `Pagination` component.
+`Pagination` component provides all the accessibility features for the page
+navigation.
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/jp1fn)
+## Table of Contents
+
+- [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
+- [Composition](#composition)
+- [Props](#props)
+  - [`usePaginationState`](#usepaginationstate)
+  - [`Pagination`](#pagination)
+  - [`PaginationButton`](#paginationbutton)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  Pagination,
+  PaginationButton,
+  usePaginationState,
+} from "renderless-components";
+
+export const App = props => {
+  const state = usePaginationState({ count: 10, ...props });
+
+  return (
+    <Pagination {...state} aria-label="Pagination">
+      <ul style={{ display: "flex", listStyle: "none" }}>
+        <li>
+          <PaginationButton goto="firstPage" {...state}>
+            First
+          </PaginationButton>
+        </li>
+        <li>
+          <PaginationButton goto="prevPage" {...state}>
+            Previous
+          </PaginationButton>
+        </li>
+        {state.pages.map(page => {
+          if (page === "start-ellipsis" || page === "end-ellipsis") {
+            return <li key={page}>...</li>;
+          }
+
+          return (
+            <li key={page}>
+              <PaginationButton
+                goto={page}
+                style={{
+                  fontWeight: state.currentPage === page ? "bold" : undefined,
+                }}
+                {...state}
+              >
+                {page}
+              </PaginationButton>
+            </li>
+          );
+        })}
+        <li>
+          <PaginationButton goto="nextPage" {...state}>
+            Next
+          </PaginationButton>
+        </li>
+        <li>
+          <PaginationButton goto="lastPage" {...state}>
+            Last
+          </PaginationButton>
+        </li>
+      </ul>
+    </Pagination>
+  );
+};
+
+export default App;
+```
+
+[Pagination - Open On Sandbox](https://codesandbox.io/s/c7ttm)
+
+## Accessibility Requirement
+
+- `Pagination` should have `aria-label` or `aria-labelledby` attribute.
+
+## Composition
+
+- Pagination uses [useRole](https://reakit.io/docs/role)
+- PaginationButton uses [useButton](https://reakit.io/docs/button)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `usePaginationState`
 
@@ -68,72 +150,3 @@ Accessible `Pagination` component.
   page
 
 </details>
-
-## Composition
-
-- Pagination uses [useRole](https://reakit.io/docs/role)
-- PaginationButton uses [useButton](https://reakit.io/docs/button)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  Pagination,
-  PaginationButton,
-  usePaginationState,
-} from "renderless-components";
-
-export const App = props => {
-  const state = usePaginationState({ count: 10, ...props });
-
-  return (
-    <Pagination {...state}>
-      <ul style={{ display: "flex", listStyle: "none" }}>
-        <li>
-          <PaginationButton goto="firstPage" {...state}>
-            First
-          </PaginationButton>
-        </li>
-        <li>
-          <PaginationButton goto="prevPage" {...state}>
-            Previous
-          </PaginationButton>
-        </li>
-        {state.pages.map(page => {
-          if (page === "start-ellipsis" || page === "end-ellipsis") {
-            return <li key={page}>...</li>;
-          }
-
-          return (
-            <li key={page}>
-              <PaginationButton
-                goto={page}
-                style={{
-                  fontWeight: state.currentPage === page ? "bold" : undefined,
-                }}
-                {...state}
-              >
-                {page}
-              </PaginationButton>
-            </li>
-          );
-        })}
-        <li>
-          <PaginationButton goto="nextPage" {...state}>
-            Next
-          </PaginationButton>
-        </li>
-        <li>
-          <PaginationButton goto="lastPage" {...state}>
-            Last
-          </PaginationButton>
-        </li>
-      </ul>
-    </Pagination>
-  );
-};
-
-export default App;
-```

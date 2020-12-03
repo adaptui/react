@@ -1,12 +1,12 @@
-## Toast
+# Toast
 
-Accessible `Toast` component.
+`Toast` component provides a way to add notifications to the app with complete
+freedom of styling them. It follows
+[WAI-ARIA Alert Patter](https://www.w3.org/TR/wai-aria-practices-1.2/#alert) for
+the
+[accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-0)
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/fkpd6)
-
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/dwkcp)
-
-## Example
+## Usage
 
 ```js
 import React from "react";
@@ -52,3 +52,7 @@ export const App = () => {
 
 export default App;
 ```
+
+[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/5ybs5)
+
+[Toast - Open On Sandbox](https://codesandbox.io/s/m3ems)

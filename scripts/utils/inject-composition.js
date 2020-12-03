@@ -104,5 +104,8 @@ function getMarkdown(compose) {
     `;
   });
 
-  return content.join("\n");
+  return outdent`
+  ## Composition
+
+  ${content.join("\n")}`;
 }

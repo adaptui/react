@@ -23,7 +23,7 @@ const injectExamples = docsTemplate => {
         plugins: [parserBabel],
         ...prettierConfig,
       });
-      return prettifiedCode.replace(/\n.*$/, "");
+      return ["```js", "\n", prettifiedCode, "```"].join("");
     },
   );
 };

@@ -1,5 +1,6 @@
-import { createComponent, createHook } from "reakit-system";
+import { useWarning } from "reakit-warning";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 export const useBreadcrumbs = createHook<
   BreadcrumbsOptions,
@@ -7,16 +8,19 @@ export const useBreadcrumbs = createHook<
 >({
   name: "Breadcrumb",
   compose: useRole,
-
-  useProps(_, htmlProps) {
-    return { "aria-label": "Breadcrumb", ...htmlProps };
-  },
 });
 
 export const Breadcrumbs = createComponent({
   as: "nav",
   memo: true,
   useHook: useBreadcrumbs,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });
 
 export type BreadcrumbsOptions = RoleOptions;

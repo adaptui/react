@@ -1,40 +1,21 @@
-## Breadcrumb
+# Breadcrumb
 
-Accessible `Breadcrumb` component that provides the required aria attributes for
-it's links. It follows the
-[WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb).
+`Breadcrumb` component is used for the page navigation and it provides the
+required aria attributes for it's links. It follows the
+[WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb)
+for its
+[accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-2).
 
-## Props
+## Table of Contents
 
-<!-- Automatically generated -->
+- [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
+- [Composition](#composition)
+- [Props](#props)
+  - [`BreadcrumbLink`](#breadcrumblink)
+  - [`Breadcrumbs`](#breadcrumbs)
 
-### `BreadcrumbLink`
-
-- **`isCurrent`** <code>boolean | undefined</code> If true, sets
-  `aria-current: "page"`
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-  form elements. In this case, only `aria-disabled` will be set.
-- **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
-
-### `Breadcrumbs`
-
-No props to show
-
-## Accessibilty
-
-- `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
-- `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page
-  is loaded.
-- `BreadcrumbLink` extends the accessibility features of [Link](#Link).
-
-## Composition
-
-- BreadcrumbLink uses [useLink](./link.md)
-- Breadcrumbs uses [useRole](https://reakit.io/docs/role)
-
-## Example
+## Usage
 
 ```js
 import * as React from "react";
@@ -43,7 +24,7 @@ import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
 
 export const App = props => {
   return (
-    <Breadcrumbs className="breadcrumb">
+    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -75,3 +56,32 @@ export const App = props => {
 
 export default App;
 ```
+
+[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/vdmiv)
+
+## Accessibility Requirement
+
+- `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
+- `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page
+  is loaded.
+
+## Composition
+
+- BreadcrumbLink uses [useLink](./link.md)
+- Breadcrumbs uses [useRole](https://reakit.io/docs/role)
+
+## Props
+
+### `BreadcrumbLink`
+
+- **`isCurrent`** <code>boolean | undefined</code> If true, sets
+  `aria-current: "page"`
+- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
+- **`focusable`** <code>boolean | undefined</code> When an element is
+  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
+  form elements. In this case, only `aria-disabled` will be set.
+- **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
+
+### `Breadcrumbs`
+
+No props to show

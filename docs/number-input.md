@@ -1,12 +1,70 @@
-## NumberInput
+# NumberInput
 
-Accessible `NumberInput` component.
+`NumberInput` component is a form element used to select a number while
+following the keyboard interactions & accessibility properties like the
+[Native Number Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number).
+It follows
+[WAI-ARIA Spin Button Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#spinbutton)
+for the accessibility features.
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/ybuxv)
+## Table of Contents
+
+- [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useNumberinputState`](#usenumberinputstate)
+  - [`NumberInput`](#numberinput)
+  - [`NumberInputDecrementButton`](#numberinputdecrementbutton)
+  - [`NumberInputIncrementButton`](#numberinputincrementbutton)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  NumberInput,
+  useNumberInputState,
+  NumberInputDecrementButton,
+  NumberInputIncrementButton,
+} from "renderless-components";
+
+export const App = props => {
+  const state = useNumberInputState(props);
+  const { clampValueOnBlur, allowMouseWheel } = props;
+
+  return (
+    <label htmlFor="number-input" id="numberinput-label">
+      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
+      <NumberInput
+        id="number-input"
+        aria-labelledby="numberinput-label"
+        clampValueOnBlur={clampValueOnBlur}
+        allowMouseWheel={allowMouseWheel}
+        {...state}
+      />
+      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
+    </label>
+  );
+};
+
+export default App;
+```
+
+[NumberInput - Open On Sandbox](https://codesandbox.io/s/b8pez)
+
+## Accessibility Requirement
+
+- `NumberInput` should have `aria-label` or `aria-labelledby` attribute.
+
+## Composition
+
+- NumberInput uses [useInput](https://reakit.io/docs/input/)
+- NumberInputDecrementButton uses [useButton](https://reakit.io/docs/button)
+- NumberInputIncrementButton uses [useButton](https://reakit.io/docs/button)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `useNumberinputState`
 
@@ -144,42 +202,3 @@ form elements. In this case, only `aria-disabled` will be set.
   incrementing or decrementing
 
 </details>
-
-## Composition
-
-- NumberInput uses [useInput](https://reakit.io/docs/input/)
-- NumberInputDecrementButton uses [useButton](https://reakit.io/docs/button)
-- NumberInputIncrementButton uses [useButton](https://reakit.io/docs/button)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  NumberInput,
-  useNumberInputState,
-  NumberInputDecrementButton,
-  NumberInputIncrementButton,
-} from "renderless-components";
-
-export const App = props => {
-  const state = useNumberInputState(props);
-  const { clampValueOnBlur, allowMouseWheel } = props;
-
-  return (
-    <label htmlFor="number-input">
-      <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInput
-        id="number-input"
-        clampValueOnBlur={clampValueOnBlur}
-        allowMouseWheel={allowMouseWheel}
-        {...state}
-      />
-      <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
-    </label>
-  );
-};
-
-export default App;
-```

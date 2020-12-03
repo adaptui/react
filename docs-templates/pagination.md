@@ -1,22 +1,23 @@
-## Pagination
+# Pagination
 
-Accessible `Pagination` component.
+`Pagination` component provides all the accessibility features for the page
+navigation.
+
+<!-- INJECT_TOC -->
+
+## Usage
+
+<!-- IMPORT_EXAMPLE src/pagination/stories/__js/Pagination.component.jsx -->
 
 <!-- CODESANDBOX
 link_title: Pagination - Open On Sandbox
 js: src/pagination/stories/__js/Pagination.component.jsx
 -->
 
-## Props
+## Accessibility Requirement
 
-<!-- INJECT_PROPS src/pagination -->
-
-## Composition
+- `Pagination` should have `aria-label` or `aria-labelledby` attribute.
 
 <!-- INJECT_COMPOSITION src/pagination -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/pagination/stories/__js/Pagination.component.jsx -->
-```
+<!-- INJECT_PROPS src/pagination -->

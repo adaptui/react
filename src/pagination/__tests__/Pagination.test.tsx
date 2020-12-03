@@ -14,7 +14,7 @@ const PaginationComp: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
-    <Pagination {...state}>
+    <Pagination {...state} aria-label="Pagination">
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
           <PaginationButton goto="firstPage" {...state}>

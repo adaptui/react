@@ -1,23 +1,23 @@
-## Link
+# Link
 
 Accessible `Link` component that provides the required aria role when used under
 different compositions. It follows the
-[WAI-ARIA Link Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#link).
+[WAI-ARIA Link Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#link) for
+[keyboard interactions](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction-10)
+and
+[accessibilty properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-11)
 
-## Props
+<!-- INJECT_TOC -->
 
-<!-- INJECT_PROPS src/link -->
+## Usage
 
-## Accessibilty
+<!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
 
-- `Link` has role `link`.
-
-## Composition
+<!-- CODESANDBOX
+link_title: Link - Open on Sandbox
+js: src/link/stories/__js/Link.component.jsx
+-->
 
 <!-- INJECT_COMPOSITION src/link -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
-```
+<!-- INJECT_PROPS src/link -->

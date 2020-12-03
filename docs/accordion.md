@@ -1,13 +1,88 @@
-## Accordion
+# Accordion
 
-Accessible Accordion component. It follows the
-[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
+`Accordion` component expands/collapses to show more information on clicking the
+trigger button. It follows the
+[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion)
+for
+[keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction)
+&
+[accessibiltiy properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
 
-[Accordion Example Live Demo](https://codesandbox.io/s/h7wdn)
+## Table of Contents
+
+- [Usage](#usage)
+- [Accessibility Requirements](#accessibility-requirements)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useAccordionState`](#useaccordionstate)
+  - [`Accordion`](#accordion)
+  - [`AccordionPanel`](#accordionpanel)
+  - [`AccordionTrigger`](#accordiontrigger)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  Accordion,
+  AccordionPanel,
+  AccordionTrigger,
+  useAccordionState,
+} from "renderless-components";
+
+export function App(props) {
+  const state = useAccordionState(props);
+
+  return (
+    <Accordion {...state}>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 1</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 2</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state} id="accordion3">
+          Trigger 3
+        </AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 3</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 4</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 5</AccordionPanel>
+    </Accordion>
+  );
+}
+
+export default App;
+```
+
+[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/7l87v)
+
+[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/w4vcr)
+
+## Accessibility Requirements
+
+- Each `AccordionTrigger` should be wrapped in an element with role `heading`
+  with proper aria-level.
+
+## Composition
+
+- Accordion uses [useComposite](https://reakit.io/docs/composite)
+- AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
+  [useDisclosureContent](https://reakit.io/docs/disclosure)
+- AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
+  [useCompositeItem](https://reakit.io/docs/composite)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `useAccordionState`
 
@@ -265,74 +340,3 @@ form elements. In this case, only `aria-disabled` will be set.
   unSelects an accordion by its `id` if it's already selected.
 
 </details>
-
-## Accessibility
-
-- `Accordion` extends the accessibility features of
-  [Composite](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionTrigger` has role `button`.
-- `AccordionTrigger` has `aria-controls` referring to its associated
-  `AccordionPanel`.
-- `AccordionTrigger` has `aria-expanded` set to `true` when it's associated
-  `AccordionPanel` is expanded.
-- Each `AccordionTrigger` should be wrapped in an element with role `heading`.
-- `AccordionTrigger` extends the accessibility features of
-  [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionPanel` has `aria-labelledby` referring to its associated
-  `AccordionTrigger`.
-- `AccordionPanel` extends the accessibility features of
-  [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
-
-## Composition
-
-- Accordion uses [useComposite](https://reakit.io/docs/composite)
-- AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
-  [useDisclosureContent](https://reakit.io/docs/disclosure)
-- AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
-  [useCompositeItem](https://reakit.io/docs/composite)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
-} from "renderless-components";
-
-export function App(props) {
-  const state = useAccordionState(props);
-
-  return (
-    <Accordion {...state}>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state} id="accordion3">
-          Trigger 3
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 4</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 5</AccordionPanel>
-    </Accordion>
-  );
-}
-
-export default App;
-```

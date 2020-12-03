@@ -1,12 +1,62 @@
-## Select
+# Select
 
-Accessible `Select` component.
+`Select` component follows all the accessibility features of
+[WAI-ARIA Combobox Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#listbox-popup-keyboard-interaction)
+for the Listbox navigation except that it follows
+[WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure)
+for the show/hide.
+
+## Table of Contents
+
+- [Usage](#usage)
+- [Props](#props)
+  - [`useSelectBaseState`](#useselectbasestate)
+  - [`useSelectListState`](#useselectliststate)
+  - [`useSelectPopoverState`](#useselectpopoverstate)
+  - [`useSelectState`](#useselectstate)
+  - [`Select`](#select)
+  - [`SelectItem`](#selectitem)
+  - [`SelectList`](#selectlist)
+  - [`SelectOption`](#selectoption)
+  - [`SelectPopover`](#selectpopover)
+- [Composition](#composition)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  Select,
+  SelectOption,
+  SelectPopover,
+  useSelectState,
+} from "renderless-components";
+
+export const App = props => {
+  const select = useSelectState({ gutter: 8, ...props });
+
+  return (
+    <>
+      <Select className="select" {...select} aria-label="Fruit">
+        {select.selectedValue || "Select a fruit"}
+      </Select>
+      <SelectPopover {...select} aria-label="Fruits">
+        <SelectOption {...select} value="Apple" />
+        <SelectOption {...select} value="AppleCusturd" />
+        <SelectOption {...select} value="Orange" />
+        <SelectOption {...select} value="Banana" />
+      </SelectPopover>
+    </>
+  );
+};
+
+export default App;
+```
 
 [Select - Open On Sandbox](https://codesandbox.io/s/hrtki)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `useSelectBaseState`
 
@@ -721,36 +771,3 @@ if `modal` is `false`.
 - SelectOption uses [useSelectItem](./select.md)
 - SelectPopover uses [useSelectList](./select.md) and
   [usePopover](https://reakit.io/docs/popover/)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  Select,
-  SelectOption,
-  SelectPopover,
-  useSelectState,
-} from "renderless-components";
-
-export const App = props => {
-  const select = useSelectState({ gutter: 8, ...props });
-
-  return (
-    <>
-      <Select className="select" {...select} aria-label="Fruit">
-        {select.selectedValue || "Select a fruit"}
-      </Select>
-      <SelectPopover {...select} aria-label="Fruits">
-        <SelectOption {...select} value="Apple" />
-        <SelectOption {...select} value="AppleCusturd" />
-        <SelectOption {...select} value="Orange" />
-        <SelectOption {...select} value="Banana" />
-      </SelectPopover>
-    </>
-  );
-};
-
-export default App;
-```

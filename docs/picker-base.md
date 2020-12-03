@@ -1,12 +1,55 @@
-## PickerBase
+# PickerBase
 
-Accessible `PickerBase` component.
+`PickerBase` component provides easier way to plug them into the
+[DatePicker](./datepicker.md) & [TimePicker](./timepicker.md). It follows
+[WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure)
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/rsuxm)
+## Table of Contents
+
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`PickerBase`](#pickerbase)
+  - [`PickerBaseContent`](#pickerbasecontent)
+  - [`PickerBaseTrigger`](#pickerbasetrigger)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  PickerBase,
+  PickerBaseTrigger,
+  PickerBaseContent,
+  usePickerBaseState,
+} from "renderless-components";
+
+export const App = props => {
+  const state = usePickerBaseState(props);
+
+  return (
+    <>
+      <PickerBase {...state}>
+        <PickerBaseTrigger {...state}>open</PickerBaseTrigger>
+      </PickerBase>
+      <PickerBaseContent {...state}>Content</PickerBaseContent>
+    </>
+  );
+};
+
+export default App;
+```
+
+[PickerBase - Open On Sandbox](https://codesandbox.io/s/bfbp9)
+
+## Composition
+
+- PickerBase uses [useRole](https://reakit.io/docs/role)
+- PickerBaseContent uses [usePopover](https://reakit.io/docs/popover/)
+- PickerBaseTrigger uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `PickerBase`
 
@@ -93,37 +136,3 @@ form elements. In this case, only `aria-disabled` will be set.
 - **`isReadOnly`** <code>boolean | undefined</code>
 
 </details>
-
-## Composition
-
-- PickerBase uses [useRole](https://reakit.io/docs/role)
-- PickerBaseContent uses [usePopover](https://reakit.io/docs/popover/)
-- PickerBaseTrigger uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  PickerBase,
-  PickerBaseTrigger,
-  PickerBaseContent,
-  usePickerBaseState,
-} from "renderless-components";
-
-export const App = props => {
-  const state = usePickerBaseState(props);
-
-  return (
-    <>
-      <PickerBase {...state}>
-        <PickerBaseTrigger {...state}>open</PickerBaseTrigger>
-      </PickerBase>
-      <PickerBaseContent {...state}>Content</PickerBaseContent>
-    </>
-  );
-};
-
-export default App;
-```

@@ -13,10 +13,9 @@ import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
-export const Default: React.FC<Omit<
-  Partial<AccordionInitialState>,
-  keyof CompositeState
->> = args => <Accordion {...args} />;
+export const Default: React.FC<
+  Omit<Partial<AccordionInitialState>, keyof CompositeState>
+> = args => <Accordion {...args} />;
 
 export default {
   component: Default,

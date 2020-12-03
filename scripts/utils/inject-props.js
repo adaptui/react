@@ -193,7 +193,8 @@ function getPropTypesMarkdown(types) {
     .join("\n\n");
 
   return outdent`
-    <!-- Automatically generated -->
+    ## Props
+
     ${content}
   `;
 }
