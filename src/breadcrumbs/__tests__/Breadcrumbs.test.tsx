@@ -5,7 +5,7 @@ import { Breadcrumbs, BreadcrumbLink } from "../index";
 
 const BreadcrumbComp = () => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs aria-label="Breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">

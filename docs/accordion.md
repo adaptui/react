@@ -10,14 +10,16 @@ for
 
 ## Table of Contents
 
-- [Usage](#usage)
-- [Accessibility Requirements](#accessibility-requirements)
-- [Composition](#composition)
-- [Props](#props)
-  - [`useAccordionState`](#useaccordionstate)
-  - [`Accordion`](#accordion)
-  - [`AccordionPanel`](#accordionpanel)
-  - [`AccordionTrigger`](#accordiontrigger)
+- [Accordion](#accordion)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Accessibility Requirements](#accessibility-requirements)
+  - [Composition](#composition)
+  - [Props](#props)
+    - [`useAccordionState`](#useaccordionstate)
+    - [`Accordion`](#accordion-1)
+    - [`AccordionPanel`](#accordionpanel)
+    - [`AccordionTrigger`](#accordiontrigger)
 
 ## Usage
 
@@ -65,9 +67,9 @@ export function App(props) {
 export default App;
 ```
 
-[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/7l87v)
-
 [Accordion Basic - Open on Sandbox](https://codesandbox.io/s/w4vcr)
+
+[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/7l87v)
 
 ## Accessibility Requirements
 

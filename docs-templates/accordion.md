@@ -1,6 +1,6 @@
 # Accordion
 
-Accordion component expands/collapses to show more information on clicking the
+`Accordion` component expands/collapses to show more information on clicking the
 trigger button. It follows the
 [WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion)
 for

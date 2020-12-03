@@ -4,7 +4,7 @@ import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
 
 export const App: React.FC = props => {
   return (
-    <Breadcrumbs className="breadcrumb">
+    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
