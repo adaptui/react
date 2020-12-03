@@ -1,23 +1,88 @@
-## Accordion
+# Accordion
 
-Accessible Accordion component. It follows the
-[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
+Accordion component expands/collapses to show more information on clicking the
+trigger button. It follows the
+[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion)
+for
+[keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction)
+&
+[accessibiltiy features](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
 
-<!-- CODESANDBOX
-link_title: Accordion Example Live Demo
-js: src/accordion/stories/__js/AccordionBasic.component.jsx
--->
+## Table of Contents
 
-<!-- CODESANDBOX
-link_title: Accordion Styled Example Live Demo
-js: src/accordion/stories/__js/AccordionStyled.component.jsx
-css: src/accordion/stories/AccordionStyled.css
-deps: [@emotion/css]
--->
+- [Usage](#usage)
+- [Accessibility Requirements](#accessibility-requirements)
+- [Composition](#composition)
+- [Props](#props)
+  - [`useAccordionState`](#useaccordionstate)
+  - [`Accordion`](#accordion)
+  - [`AccordionPanel`](#accordionpanel)
+  - [`AccordionTrigger`](#accordiontrigger)
+
+## Usage
+
+```js
+import * as React from "react";
+
+import {
+  Accordion,
+  AccordionPanel,
+  AccordionTrigger,
+  useAccordionState,
+} from "renderless-components";
+
+export function App(props) {
+  const state = useAccordionState(props);
+
+  return (
+    <Accordion {...state}>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 1</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 2</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state} id="accordion3">
+          Trigger 3
+        </AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 3</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 4</AccordionPanel>
+      <h2>
+        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
+      </h2>
+      <AccordionPanel {...state}>Panel 5</AccordionPanel>
+    </Accordion>
+  );
+}
+
+export default App;
+```
+
+[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/7l87v)
+
+[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/w4vcr)
+
+## Accessibility Requirements
+
+- Each `AccordionTrigger` should be wrapped in an element with role `heading`
+  with proper aria-level.
+
+## Composition
+
+- Accordion uses [useComposite](https://reakit.io/docs/composite)
+- AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
+  [useDisclosureContent](https://reakit.io/docs/disclosure)
+- AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
+  [useCompositeItem](https://reakit.io/docs/composite)
 
 ## Props
-
-<!-- Automatically generated -->
 
 ### `useAccordionState`
 
@@ -275,222 +340,3 @@ form elements. In this case, only `aria-disabled` will be set.
   unSelects an accordion by its `id` if it's already selected.
 
 </details>
-
-## Accessibility
-
-- `Accordion` extends the accessibility features of
-  [Composite](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionTrigger` has role `button`.
-- `AccordionTrigger` has `aria-controls` referring to its associated
-  `AccordionPanel`.
-- `AccordionTrigger` has `aria-expanded` set to `true` when it's associated
-  `AccordionPanel` is expanded.
-- Each `AccordionTrigger` should be wrapped in an element with role `heading`.
-- `AccordionTrigger` extends the accessibility features of
-  [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionPanel` has `aria-labelledby` referring to its associated
-  `AccordionTrigger`.
-- `AccordionPanel` extends the accessibility features of
-  [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
-
-## Composition
-
-- Accordion uses [useComposite](https://reakit.io/docs/composite)
-- AccordionPanel uses [unstable_useId](https://reakit.io/docs/id) and
-  [useDisclosureContent](https://reakit.io/docs/disclosure)
-- AccordionTrigger uses [useButton](https://reakit.io/docs/button) and
-  [useCompositeItem](https://reakit.io/docs/composite)
-
-## Example
-
-```js
-import * as React from "react";
-
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
-} from "renderless-components";
-
-export function App(props) {
-  const state = useAccordionState(props);
-
-  return (
-    <Accordion {...state}>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state} id="accordion3">
-          Trigger 3
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 3</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 4</AccordionPanel>
-      <h2>
-        <AccordionTrigger {...state}>Trigger 5</AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state}>Panel 5</AccordionPanel>
-    </Accordion>
-  );
-}
-
-export default App;
-```
-
-### Styled
-
-```js
-import * as React from "react";
-
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
-} from "renderless-components";
-
-export const App = props => {
-  const state = useAccordionState(props);
-
-  return (
-    <Accordion {...state} id="accordionGroup" className="accordion">
-      <h2>
-        <AccordionTrigger {...state} className="accordion-trigger">
-          <span className="accordion-title">
-            Personal Information
-            <span className="accordion-icon"></span>
-          </span>
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state} className="accordion-panel">
-        <div>
-          <fieldset>
-            <p>
-              <label htmlFor="cufc1">
-                Name
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input
-                type="text"
-                name="Name"
-                id="cufc1"
-                className="required"
-                aria-required="true"
-              />
-            </p>
-            <p>
-              <label htmlFor="cufc2">
-                Email
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="text" name="Email" id="cufc2" aria-required="true" />
-            </p>
-            <p>
-              <label htmlFor="cufc3">Phone:</label>
-              <input type="text" name="Phone" id="cufc3" />
-            </p>
-            <p>
-              <label htmlFor="cufc4">Extension:</label>
-              <input type="text" name="Ext" id="cufc4" />
-            </p>
-            <p>
-              <label htmlFor="cufc5">Country:</label>
-              <input type="text" name="Country" id="cufc5" />
-            </p>
-            <p>
-              <label htmlFor="cufc6">City/Province:</label>
-              <input type="text" name="City_Province" id="cufc6" />
-            </p>
-          </fieldset>
-        </div>
-      </AccordionPanel>
-
-      <h2>
-        <AccordionTrigger
-          {...state}
-          className="accordion-trigger"
-          id="accordion2"
-        >
-          <span className="accordion-title">
-            Billing Address
-            <span className="accordion-icon"></span>
-          </span>
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state} className="accordion-panel">
-        <div>
-          <fieldset>
-            <p>
-              <label htmlFor="b-add1">Address 1:</label>
-              <input type="text" name="b-add1" id="b-add1" />
-            </p>
-            <p>
-              <label htmlFor="b-add2">Address 2:</label>
-              <input type="text" name="b-add2" id="b-add2" />
-            </p>
-            <p>
-              <label htmlFor="b-city">City:</label>
-              <input type="text" name="b-city" id="b-city" />
-            </p>
-            <p>
-              <label htmlFor="b-state">State:</label>
-              <input type="text" name="b-state" id="b-state" />
-            </p>
-            <p>
-              <label htmlFor="b-zip">Zip Code:</label>
-              <input type="text" name="b-zip" id="b-zip" />
-            </p>
-          </fieldset>
-        </div>
-      </AccordionPanel>
-
-      <h2>
-        <AccordionTrigger {...state} className="accordion-trigger">
-          <span className="accordion-title">
-            Shipping Address
-            <span className="accordion-icon"></span>
-          </span>
-        </AccordionTrigger>
-      </h2>
-      <AccordionPanel {...state} className="accordion-panel">
-        <div>
-          <fieldset>
-            <p>
-              <label htmlFor="m-add1">Address 1:</label>
-              <input type="text" name="m-add1" id="m-add1" />
-            </p>
-            <p>
-              <label htmlFor="m-add2">Address 2:</label>
-              <input type="text" name="m-add2" id="m-add2" />
-            </p>
-            <p>
-              <label htmlFor="m-city">City:</label>
-              <input type="text" name="m-city" id="m-city" />
-            </p>
-            <p>
-              <label htmlFor="m-state">State:</label>
-              <input type="text" name="m-state" id="m-state" />
-            </p>
-            <p>
-              <label htmlFor="m-zip">Zip Code:</label>
-              <input type="text" name="m-zip" id="m-zip" />
-            </p>
-          </fieldset>
-        </div>
-      </AccordionPanel>
-    </Accordion>
-  );
-};
-
-export default App;
-```

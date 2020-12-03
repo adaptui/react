@@ -1,53 +1,35 @@
-## Accordion
+# Accordion
 
-Accessible Accordion component. It follows the
-[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion).
+Accordion component expands/collapses to show more information on clicking the
+trigger button. It follows the
+[WAI-ARIA Accordion Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#accordion)
+for
+[keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.2/#keyboard-interaction)
+&
+[accessibiltiy features](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties).
+
+<!-- INJECT_TOC -->
+
+## Usage
+
+<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Accordion Example Live Demo
+link_title: Accordion Styled - Open on Sandbox
+js: src/accordion/stories/__js/AccordionStyled.component.jsx
+css: src/accordion/stories/AccordionStyled.css
+-->
+
+<!-- CODESANDBOX
+link_title: Accordion Basic - Open on Sandbox
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
 -->
 
-<!-- CODESANDBOX
-link_title: Accordion Styled Example Live Demo
-js: src/accordion/stories/__js/AccordionStyled.component.jsx
-css: src/accordion/stories/AccordionStyled.css
-deps: [@emotion/css]
--->
+## Accessibility Requirements
 
-## Props
-
-<!-- INJECT_PROPS src/accordion -->
-
-## Accessibility
-
-- `Accordion` extends the accessibility features of
-  [Composite](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionTrigger` has role `button`.
-- `AccordionTrigger` has `aria-controls` referring to its associated
-  `AccordionPanel`.
-- `AccordionTrigger` has `aria-expanded` set to `true` when it's associated
-  `AccordionPanel` is expanded.
-- Each `AccordionTrigger` should be wrapped in an element with role `heading`.
-- `AccordionTrigger` extends the accessibility features of
-  [CompositeItem](https://github.com/reakit/reakit/blob/master/docs/composite/#accessibility).
-- `AccordionPanel` has `aria-labelledby` referring to its associated
-  `AccordionTrigger`.
-- `AccordionPanel` extends the accessibility features of
-  [DisclosureContent](https://github.com/reakit/reakit/blob/master/docs/disclosure).
-
-## Composition
+- Each `AccordionTrigger` should be wrapped in an element with role `heading`
+  with proper aria-level.
 
 <!-- INJECT_COMPOSITION src/accordion -->
 
-## Example
-
-```js
-<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
-```
-
-### Styled
-
-```js
-<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionStyled.component.jsx -->
-```
+<!-- INJECT_PROPS src/accordion -->

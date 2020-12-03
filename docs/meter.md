@@ -5,7 +5,7 @@ Accessible `Meter` component.
 <!-- CODESANDBOX
 link_title: Meter - Open On Sandbox
 js: src/meter/stories/__js/Meter.component.jsx
-deps: [@emotion/css]
+deps: ['@emotion/css']
 -->
 
 ## Props

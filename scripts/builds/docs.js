@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 
+const injectToc = require("../utils/inject-toc");
 const mdPrettify = require("../utils/md-prettify");
 const injectProps = require("../utils/inject-props");
 const { walkSync, createFile } = require("../utils/fs-utils");
@@ -29,7 +30,10 @@ const injections = async templateFilePath => {
   const injectedPropsTemplate = injectProps(injectedCompositionTemplate);
   logProgress(`Injected props`, fileName);
 
-  const finalReadme = await injectCsbLinks(injectedPropsTemplate);
+  const injectedTocTemplate = injectToc(injectedPropsTemplate);
+  logProgress(`Injected table of contents`, fileName);
+
+  const finalReadme = await injectCsbLinks(injectedTocTemplate);
   logProgress(`Injected sandbox`, fileName);
 
   createFile(path.join(docsFolder, fileName), mdPrettify(finalReadme));

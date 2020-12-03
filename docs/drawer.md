@@ -2,10 +2,7 @@
 
 Accessible `Drawer` component.
 
-<!-- CODESANDBOX
-link_title: Drawer - Open On Sandbox
-js: src/drawer/stories/__js/Drawer.component.jsx
--->
+[Drawer - Open On Sandbox](https://codesandbox.io/s/hj8ns)
 
 ## Props
 

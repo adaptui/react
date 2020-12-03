@@ -82,8 +82,8 @@ const getSandboxDefineLink = (files, extraDeps) => {
           ReactDOM.render(<App />, rootElement);
         `,
       },
-      "src/App.js": files.js ? { content: files.js } : "",
-      "src/styles.css": files.css ? { content: files.css } : "",
+      "src/App.js": { content: files.js || "" },
+      "src/styles.css": { content: files.css || "" },
       "src/Utils.component.js": files.utils && {
         content: files.utils,
       },
