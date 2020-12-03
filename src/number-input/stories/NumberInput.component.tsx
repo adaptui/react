@@ -42,10 +42,11 @@ export const App: React.FC<AppProps> = props => {
   // const state = useNumberInputState(initialProps);
 
   return (
-    <label htmlFor="number-input">
+    <label htmlFor="number-input" id="numberinput-label">
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
       <NumberInput
         id="number-input"
+        aria-labelledby="numberinput-label"
         clampValueOnBlur={clampValueOnBlur}
         allowMouseWheel={allowMouseWheel}
         {...state}

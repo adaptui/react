@@ -1,7 +1,7 @@
 # Breadcrumb
 
-`Breadcrumb` component provides the required aria attributes for it's links. It
-follows the
+`Breadcrumb` component is used for the page navigation and it provides the
+required aria attributes for it's links. It follows the
 [WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb)
 for its
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-2).
@@ -18,7 +18,7 @@ js: src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx
 css: src/breadcrumbs/stories/Breadcrumbs.css
 -->
 
-## Accessibilty
+## Accessibility Requirement
 
 - `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
 - `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page

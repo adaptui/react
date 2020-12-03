@@ -1,6 +1,9 @@
 # TimePicker
 
-Accessible `TimePicker` component.
+`TimePicker` component provides a way to select a time while giving the freedom
+to style. It follows the
+[Native Input Time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
+for the keyboard navigation & accessibility features.
 
 <!-- INJECT_TOC -->
 

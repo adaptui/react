@@ -1,7 +1,8 @@
 # Calendar
 
-`Calendar` component provides a way to manipuldate data of Date easily like the
-native calendar. It follows the
+`Calendar` component provides a way to select a date or a range of dates while
+allowing you to style them however. All the date, month & year calculations are
+done internally to provide the ease of use. It follows the
 [Grid Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#grid) for the
 keyboard navigaiton & focus management.
 

@@ -1,6 +1,10 @@
 # Select
 
-Accessible `Select` component.
+`Select` component follows all the accessibility features of
+[WAI-ARIA Combobox Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#listbox-popup-keyboard-interaction)
+for the Listbox navigation except that it follows
+[WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure)
+for the show/hide.
 
 <!-- INJECT_TOC -->
 

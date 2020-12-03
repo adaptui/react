@@ -32,6 +32,7 @@ const NumberInputComp = (props: AppProps) => {
       <NumberInput
         id="numberinput"
         data-testid="numberinput"
+        aria-label="Number Input"
         clampValueOnBlur={clampValueOnBlur}
         allowMouseWheel={allowMouseWheel}
         {...state}

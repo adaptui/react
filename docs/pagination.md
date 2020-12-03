@@ -1,10 +1,12 @@
 # Pagination
 
-Accessible `Pagination` component.
+`Pagination` component provides all the accessibility features for the page
+navigation.
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
   - [`usePaginationState`](#usepaginationstate)
@@ -26,7 +28,7 @@ export const App = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
-    <Pagination {...state}>
+    <Pagination {...state} aria-label="Pagination">
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
           <PaginationButton goto="firstPage" {...state}>
@@ -75,7 +77,11 @@ export const App = props => {
 export default App;
 ```
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/dc5ju)
+[Pagination - Open On Sandbox](https://codesandbox.io/s/c7ttm)
+
+## Accessibility Requirement
+
+- `Pagination` should have `aria-label` or `aria-labelledby` attribute.
 
 ## Composition
 

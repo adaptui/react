@@ -1,10 +1,13 @@
 # Progress
 
-Accessible `Progress` component.
+`Progress` component provides a graphical status for tasks that take some amount
+of time to load. It follows
+[WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
   - [`useProgressState`](#useprogressstate)
@@ -150,6 +153,12 @@ const indeterminateStyles = css({
 [Progress Linear- Open On Sandbox](https://codesandbox.io/s/9mmng)
 
 [Progress Circular - Open On Sandbox](https://codesandbox.io/s/lszhp)
+
+## Accessibility Requirement
+
+- If the `Progress` is describing the loading progress of a particular region of
+  a page, you should use `aria-describedby` to point to the status, and set the
+  `aria-busy `attribute to `true` on the region until it is finished loading.
 
 ## Composition
 

@@ -1,6 +1,8 @@
 # PickerBase
 
-Accessible `PickerBase` component.
+`PickerBase` component provides easier way to plug them into the
+[DatePicker](./datepicker.md) & [TimePicker](./timepicker.md). It follows
+[WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#disclosure)
 
 <!-- INJECT_TOC -->
 

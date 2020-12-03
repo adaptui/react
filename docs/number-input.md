@@ -1,10 +1,16 @@
 # NumberInput
 
-Accessible `NumberInput` component.
+`NumberInput` component is a form element used to select a number while
+following the keyboard interactions & accessibility properties like the
+[Native Number Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number).
+It follows
+[WAI-ARIA Spin Button Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#spinbutton)
+for the accessibility features.
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
   - [`useNumberinputState`](#usenumberinputstate)
@@ -29,10 +35,11 @@ export const App = props => {
   const { clampValueOnBlur, allowMouseWheel } = props;
 
   return (
-    <label htmlFor="number-input">
+    <label htmlFor="number-input" id="numberinput-label">
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
       <NumberInput
         id="number-input"
+        aria-labelledby="numberinput-label"
         clampValueOnBlur={clampValueOnBlur}
         allowMouseWheel={allowMouseWheel}
         {...state}
@@ -45,7 +52,11 @@ export const App = props => {
 export default App;
 ```
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/jn8rl)
+[NumberInput - Open On Sandbox](https://codesandbox.io/s/b8pez)
+
+## Accessibility Requirement
+
+- `NumberInput` should have `aria-label` or `aria-labelledby` attribute.
 
 ## Composition
 

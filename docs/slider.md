@@ -1,10 +1,17 @@
 # Slider
 
-Accessible `Slider` component.
+`Slider` component is a form element used to select a number by sliding through
+the given range with complete freedom of styling. It follows
+[WAI-ARIA Slider Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#slider)
+for the
+[keyboard navigation](https://www.w3.org/TR/wai-aria-practices-1.2/#slider_kbd_interaction)
+&
+[accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#slider_roles_states_props)
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
   - [`useSliderState`](#usesliderstate)
@@ -138,6 +145,10 @@ export default App;
 ```
 
 [Slider - Open On Sandbox](https://codesandbox.io/s/s20jt)
+
+## Accessibility Requirement
+
+- `SliderInput` should have `aria-label` or `aria-labelledby` attribute.
 
 ## Composition
 

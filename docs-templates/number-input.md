@@ -1,6 +1,11 @@
 # NumberInput
 
-Accessible `NumberInput` component.
+`NumberInput` component is a form element used to select a number while
+following the keyboard interactions & accessibility properties like the
+[Native Number Input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number).
+It follows
+[WAI-ARIA Spin Button Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#spinbutton)
+for the accessibility features.
 
 <!-- INJECT_TOC -->
 
@@ -12,6 +17,10 @@ Accessible `NumberInput` component.
 link_title: NumberInput - Open On Sandbox
 js: src/number-input/stories/__js/NumberInput.component.jsx
 -->
+
+## Accessibility Requirement
+
+- `NumberInput` should have `aria-label` or `aria-labelledby` attribute.
 
 <!-- INJECT_COMPOSITION src/number-input -->
 

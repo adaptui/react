@@ -1,7 +1,7 @@
 # Breadcrumb
 
-`Breadcrumb` component provides the required aria attributes for it's links. It
-follows the
+`Breadcrumb` component is used for the page navigation and it provides the
+required aria attributes for it's links. It follows the
 [WAI-ARIA Breadcrumb Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#breadcrumb)
 for its
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-2).
@@ -9,7 +9,7 @@ for its
 ## Table of Contents
 
 - [Usage](#usage)
-- [Accessibilty](#accessibilty)
+- [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
   - [`BreadcrumbLink`](#breadcrumblink)
@@ -24,7 +24,7 @@ import { Breadcrumbs, BreadcrumbLink } from "renderless-components";
 
 export const App = props => {
   return (
-    <Breadcrumbs className="breadcrumb">
+    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -57,9 +57,9 @@ export const App = props => {
 export default App;
 ```
 
-[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/ixpe7)
+[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/vdmiv)
 
-## Accessibilty
+## Accessibility Requirement
 
 - `Breadcrumbs` should have `aria-label` or `aria-labelledby` attribute.
 - `BreadcrumbLink` should have `aria-current` set to `page` if the currenct page

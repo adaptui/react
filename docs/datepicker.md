@@ -1,7 +1,7 @@
 # DatePicker
 
-`DatePicker` component provides a way to pick a date or range of dates with the
-help of [Calendar](./calendar.md) component. It follows the
+`DatePicker` component provides a way to select a date or a range of dates with
+the help of [Calendar](./calendar.md) component. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features.
 
@@ -366,9 +366,9 @@ const DoubleChevronRight = props => (
 );
 ```
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cqgs2)
-
 [DatePicker - Open On Sandbox](https://codesandbox.io/s/snelw)
+
+[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/cqgs2)
 
 ## Composition
 

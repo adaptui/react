@@ -1,6 +1,7 @@
 # Pagination
 
-Accessible `Pagination` component.
+`Pagination` component provides all the accessibility features for the page
+navigation.
 
 <!-- INJECT_TOC -->
 
@@ -12,6 +13,10 @@ Accessible `Pagination` component.
 link_title: Pagination - Open On Sandbox
 js: src/pagination/stories/__js/Pagination.component.jsx
 -->
+
+## Accessibility Requirement
+
+- `Pagination` should have `aria-label` or `aria-labelledby` attribute.
 
 <!-- INJECT_COMPOSITION src/pagination -->
 

@@ -6,13 +6,14 @@ import {
 } from "@chakra-ui/utils";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
+import { useWarning } from "reakit-warning";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 import {
-  isFloatingPointNumericCharacter,
-  isValidNumericKeyboardEvent,
   getStepFactor,
+  isValidNumericKeyboardEvent,
+  isFloatingPointNumericCharacter,
 } from "./helpers";
 import { ariaAttr } from "../utils";
 import { NUMBER_INPUT_KEYS } from "./__keys";
@@ -253,4 +254,11 @@ export const NumberInput = createComponent({
   as: "input",
   memo: true,
   useHook: useNumberInput,
+  useCreateElement: (type, props, children) => {
+    useWarning(
+      !props["aria-label"] && !props["aria-labelledby"],
+      "You should provide either `aria-label` or `aria-labelledby` props.",
+    );
+    return useCreateElement(type, props, children);
+  },
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
 import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
