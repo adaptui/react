@@ -1,5 +1,5 @@
 {
-  "name": "renderless-components",
+  "name": "@renderlesskit/react",
   "version": "0.1.1-beta.3",
   "description": "Renderless Components for building accessible components with any UI",
   "keywords": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/timelessco/renderless-components.git"
+    "url": "git+https://github.com/timelessco/renderless-components.git"
   },
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
@@ -26,6 +26,9 @@
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
+  "directories": {
+    "doc": "docs"
+  },
   "files": [
     "dist"
   ],
@@ -130,6 +133,7 @@
     "lint-staged": "10.5.1",
     "lodash": "4.17.20",
     "markdown-to-ast": "^6.0.3",
+    "markdown-toc": "^1.2.0",
     "md-node-inject": "^1.0.1",
     "mockdate": "^3.0.2",
     "outdent": "^0.7.1",
