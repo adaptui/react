@@ -1,14 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import "./ToastBasic.css";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastBasicCssTemplate,
+  toastStyledCssTemplate,
   toastReactSpringTemplate,
   toastReactSpringTemplateJs,
 } from "./templates";
+import "./ToastStyled.css";
 import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -21,13 +21,13 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastReactSpringTemplate,
       tsUtils: utilsTemplate,
-      css: toastBasicCssTemplate,
+      css: toastStyledCssTemplate,
       deps: ["react-spring"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-basic";
+      document.body.id = "toast-styled";
       return <Story />;
     },
   ],
