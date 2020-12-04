@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import "./ToastBasic.css";
+import "./Toast.css";
 import {
   utilsTemplate,
   utilsTemplateJs,
