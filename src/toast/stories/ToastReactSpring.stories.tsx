@@ -5,7 +5,7 @@ import "./ToastBasic.css";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastBasicCssTemplate,
+  toastCssTemplate,
   toastReactSpringTemplate,
   toastReactSpringTemplateJs,
 } from "./templates";
@@ -21,7 +21,7 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastReactSpringTemplate,
       tsUtils: utilsTemplate,
-      css: toastBasicCssTemplate,
+      css: toastCssTemplate,
       deps: ["react-spring"],
     }),
   },

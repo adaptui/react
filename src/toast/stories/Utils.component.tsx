@@ -2,7 +2,7 @@ import React from "react";
 
 import { useToast } from "@renderlesskit/react";
 
-const randomType = (): string => {
+const randomType = () => {
   return ["error", "warning", "success"].splice(Math.random() * 3, 1)[0];
 };
 

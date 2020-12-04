@@ -5,7 +5,7 @@ import "./ToastBasic.css";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastBasicCssTemplate,
+  toastCssTemplate,
   toastCssAnimatedTemplate,
   toastCssAnimatedTemplateJs,
 } from "./templates";
@@ -21,7 +21,7 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastCssAnimatedTemplate,
       tsUtils: utilsTemplate,
-      css: toastBasicCssTemplate,
+      css: toastCssTemplate,
       deps: ["react-transition-group"],
     }),
   },

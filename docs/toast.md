@@ -76,6 +76,8 @@ const ToastTriggers = () => {
 };
 ```
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/utvc2)
+[Toast Basic - Open On Sandbox](https://codesandbox.io/s/yf6i7)
 
 [Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/i0emy)
+
+[Toast React Spring - Open On Sandbox](https://codesandbox.io/s/2uhsj)
