@@ -1,18 +1,23 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Meter } from "./Meter.component";
-import { meterTemplate, meterTemplateJs } from "./templates";
+import {
+  meterBasicTemplate,
+  meterBasicTemplateJs,
+  meterBasicCssTemplate,
+} from "./templates";
+import "./MeterBasic.css";
+import { App as Meter } from "./MeterBasic.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Meter,
-  title: "Meter",
+  title: "Meter/Basic",
   parameters: {
     preview: createPreviewTabs({
-      js: meterTemplateJs,
-      ts: meterTemplate,
-      deps: ["@emotion/css@latest"],
+      js: meterBasicTemplateJs,
+      ts: meterBasicTemplate,
+      css: meterBasicCssTemplate,
     }),
   },
 } as Meta;
@@ -27,19 +32,6 @@ Playground.args = {
   low: 0,
   high: 10,
   optimum: 5,
-};
-
-export const WithLabel = Base.bind({});
-WithLabel.args = { ...Playground.args, withLabel: true };
-
-export const WithStripe = Base.bind({});
-WithStripe.args = { ...Playground.args, withStripe: true };
-
-export const WithStripeAnimation = Base.bind({});
-WithStripeAnimation.args = {
-  ...Playground.args,
-  withStripe: true,
-  withStripeAnimation: true,
 };
 
 // Examples from https://css-tricks.com/html5-meter-element/
