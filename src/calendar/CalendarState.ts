@@ -25,7 +25,7 @@ import * as React from "react";
 import { unstable_useId as useId } from "reakit";
 import { useUpdateEffect } from "@chakra-ui/hooks";
 import { useDateFormatter } from "@react-aria/i18n";
-import { InputBase, ValueBase } from "@react-types/shared";
+import { InputBase } from "@react-types/shared";
 
 import {
   parseDate,
@@ -33,7 +33,6 @@ import {
   isInvalidDateRange,
   useControllableState,
 } from "../utils";
-import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
@@ -342,8 +341,24 @@ export type CalendarActions = {
   selectDate: (value: Date) => void;
 };
 
-export type CalendarInitialState = ValueBase<string> &
-  RangeValueBase<string> &
+type ValueBase = {
+  /** The current value (controlled). */
+  value?: string;
+  /** The default value (uncontrolled). */
+  defaultValue?: string;
+  /** Handler that is called when the value changes. */
+  onChange?: (value: string) => void;
+};
+
+type RangeValueMinMax = {
+  /** The smallest value allowed. */
+  minValue?: string;
+  /** The largest value allowed. */
+  maxValue?: string;
+};
+
+export type CalendarInitialState = ValueBase &
+  RangeValueMinMax &
   InputBase & {
     /**
      * Whether the element should receive focus on render.

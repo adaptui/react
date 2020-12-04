@@ -5,10 +5,9 @@
  */
 import * as React from "react";
 import { format, isSameDay } from "date-fns";
-import { InputBase, ValueBase, RangeValue } from "@react-types/shared";
+import { InputBase, RangeValue } from "@react-types/shared";
 
 import { makeRange } from "./helpers";
-import { RangeValueBase } from "../utils/types";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
 import { CalendarActions, CalendarState } from "./CalendarState";
@@ -120,8 +119,31 @@ export type RangeCalendarActions = CalendarActions & {
   highlightDate: (date: Date) => void;
 };
 
-export type RangeCalendarInitialState = ValueBase<RangeValue<string>> &
-  RangeValueBase<string> &
+type Range = {
+  /** The start value of the range. */
+  start: string;
+  /** The end value of the range. */
+  end: string;
+};
+
+type RangeValueBase = {
+  /** The current value (controlled). */
+  value?: Range;
+  /** The default value (uncontrolled). */
+  defaultValue?: Range;
+  /** Handler that is called when the value changes. */
+  onChange?: (value: Range) => void;
+};
+
+type RangeValueMinMax = {
+  /** The smallest value allowed. */
+  minValue?: string;
+  /** The largest value allowed. */
+  maxValue?: string;
+};
+
+export type RangeCalendarInitialState = RangeValueBase &
+  RangeValueMinMax &
   InputBase & {
     /**
      * Whether the element should receive focus on render.

@@ -8,6 +8,8 @@ import {
   datePickerRangeTemplate,
   datePickerRangeTemplateJs,
   datePickerRangeCssTemplate,
+  utilsTemplateJs,
+  utilsTemplate,
 } from "./templates";
 import "./DatePickerRange.css";
 import { App as DateRangePicker } from "./DatePickerRange.component";
@@ -27,6 +29,8 @@ export default {
       js: datePickerRangeTemplateJs,
       ts: datePickerRangeTemplate,
       css: datePickerRangeCssTemplate,
+      jsUtils: utilsTemplateJs,
+      tsUtils: utilsTemplate,
     }),
   },
 } as Meta;

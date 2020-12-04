@@ -41,6 +41,13 @@ import {
   CalendarWeekTitle,
 } from "@renderlesskit/react";
 
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "./Utils.component";
+
 export const App = props => {
   const state = useCalendarState(props);
 
@@ -97,177 +104,46 @@ export const App = props => {
 };
 
 export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
 ```
 
 ### Range Calendar
 
-```js
-import React from "react";
+Converting a normal calendar to a range calendar is as easy as just swaping out
+the hook to range calendar hook.
 
-import {
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarCellButton,
-  CalendarWeekTitle,
-  useRangeCalendarState,
-} from "@renderlesskit/react";
+You'll need to import the `useRangeCalendarState` hook from the
+`@renderlesskit/react` first
 
-export const App = props => {
-  const state = useRangeCalendarState(props);
-
-  return (
-    <Calendar {...state} className="calendar-range">
-      <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
-
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </Calendar>
-  );
-};
-
-export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
+```diff
+- const state = useCalendarState(props);
++ const state = useRangeCalendarState(props);
 ```
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/u3w1h)
+Also we can customize and style the ranges with CSS attribute selectors
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/hy4ow)
+```css
+[data-is-range-selection] > span {
+  /* styles for any cells between start-end (inclusive) */
+}
+[data-is-selection-start] > span {
+  /* styles for first selected range cell */
+}
+[data-is-selection-end] > span {
+  /* styles for end selected range cell */
+}
+
+/* only applied if cell date is first or last of the month*/
+[data-is-range-start] > span {
+  /**/
+}
+[data-is-range-end] > span {
+  /**/
+}
+```
+
+[Calendar - Open On Sandbox](https://codesandbox.io/s/lf1ol)
+
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/o4s64)
 
 ## Composition
 
@@ -283,13 +159,13 @@ const DoubleChevronRight = props => (
 
 ### `useCalendarState`
 
-- **`value`** <code>T | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>T | undefined</code> The default value
+- **`value`** <code>string | undefined</code> The current value (controlled).
+- **`defaultValue`** <code>string | undefined</code> The default value
   (uncontrolled).
-- **`onChange`** <code>((value: T) =&#62; void) | undefined</code> Handler that
-  is called when the value changes.
-- **`minValue`** <code>T | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>T | undefined</code> The largest value allowed.
+- **`onChange`** <code>((value: string) =&#62; void) | undefined</code> Handler
+  that is called when the value changes.
+- **`minValue`** <code>string | undefined</code> The smallest value allowed.
+- **`maxValue`** <code>string | undefined</code> The largest value allowed.
 - **`isDisabled`** <code>boolean | undefined</code> Whether the input is
   disabled.
 - **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be
@@ -300,13 +176,13 @@ const DoubleChevronRight = props => (
 
 ### `useRangeCalendarState`
 
-- **`value`** <code>T | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>T | undefined</code> The default value
+- **`value`** <code>Range | undefined</code> The current value (controlled).
+- **`defaultValue`** <code>Range | undefined</code> The default value
   (uncontrolled).
-- **`onChange`** <code>((value: T) =&#62; void) | undefined</code> Handler that
-  is called when the value changes.
-- **`minValue`** <code>T | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>T | undefined</code> The largest value allowed.
+- **`onChange`** <code>((value: Range) =&#62; void) | undefined</code> Handler
+  that is called when the value changes.
+- **`minValue`** <code>string | undefined</code> The smallest value allowed.
+- **`maxValue`** <code>string | undefined</code> The largest value allowed.
 - **`isDisabled`** <code>boolean | undefined</code> Whether the input is
   disabled.
 - **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be
