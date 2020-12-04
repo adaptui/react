@@ -15,14 +15,14 @@ for
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Accordion Styled - Open on Sandbox
-js: src/accordion/stories/__js/AccordionStyled.component.jsx
-css: src/accordion/stories/AccordionStyled.css
+link_title: Accordion Basic - Open on Sandbox
+js: src/accordion/stories/__js/AccordionBasic.component.jsx
 -->
 
 <!-- CODESANDBOX
-link_title: Accordion Basic - Open on Sandbox
-js: src/accordion/stories/__js/AccordionBasic.component.jsx
+link_title: Accordion Styled - Open on Sandbox
+js: src/accordion/stories/__js/AccordionStyled.component.jsx
+css: src/accordion/stories/AccordionStyled.css
 -->
 
 ## Accessibility Requirements

@@ -19,15 +19,15 @@ keyboard navigaiton & focus management.
 <!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarRange.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: RangeCalendar - Open On Sandbox
-js: src/calendar/stories/__js/CalendarRange.component.jsx
-css: src/calendar/stories/CalendarRange.css
--->
-
-<!-- CODESANDBOX
 link_title: Calendar - Open On Sandbox
 js: src/calendar/stories/__js/CalendarBase.component.jsx
 css: src/calendar/stories/CalendarBase.css
+-->
+
+<!-- CODESANDBOX
+link_title: RangeCalendar - Open On Sandbox
+js: src/calendar/stories/__js/CalendarRange.component.jsx
+css: src/calendar/stories/CalendarRange.css
 -->
 
 <!-- INJECT_COMPOSITION src/calendar -->

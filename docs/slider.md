@@ -144,7 +144,7 @@ export const App = args => {
 export default App;
 ```
 
-[Slider - Open On Sandbox](https://codesandbox.io/s/mp22z)
+[Slider - Open On Sandbox](https://codesandbox.io/s/eng7z)
 
 ## Accessibility Requirement
 
@@ -163,7 +163,7 @@ export default App;
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-If `undefined`/`not valid` the slider bar will be the optimum of min & max
+  If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`min`** <code>number</code> The minimum value of the slider
 - **`max`** <code>number</code> The maximum value of the slider
@@ -262,7 +262,7 @@ If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`values`** <code>number[]</code> The `value` of the slider indicator.
 
-If `undefined`/`not valid` the slider bar will be the optimum of min & max
+  If `undefined`/`not valid` the slider bar will be the optimum of min & max
 
 - **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
 - **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>

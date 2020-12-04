@@ -9,6 +9,7 @@ for the show/hide.
 ## Table of Contents
 
 - [Usage](#usage)
+- [Composition](#composition)
 - [Props](#props)
   - [`useSelectBaseState`](#useselectbasestate)
   - [`useSelectListState`](#useselectliststate)
@@ -19,7 +20,6 @@ for the show/hide.
   - [`SelectList`](#selectlist)
   - [`SelectOption`](#selectoption)
   - [`SelectPopover`](#selectpopover)
-- [Composition](#composition)
 
 ## Usage
 
@@ -54,7 +54,16 @@ export const App = props => {
 export default App;
 ```
 
-[Select - Open On Sandbox](https://codesandbox.io/s/zszcn)
+[Select - Open On Sandbox](https://codesandbox.io/s/rq2qc)
+
+## Composition
+
+- Select uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
+- SelectItem uses [useCompositeItem](https://reakit.io/docs/composite)
+- SelectList uses [useComposite](https://reakit.io/docs/composite)
+- SelectOption uses [useSelectItem](./select.md)
+- SelectPopover uses [useSelectList](./select.md) and
+  [usePopover](https://reakit.io/docs/popover/)
 
 ## Props
 
@@ -762,12 +771,3 @@ if `modal` is `false`.
   selected
 
 </details>
-
-## Composition
-
-- Select uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
-- SelectItem uses [useCompositeItem](https://reakit.io/docs/composite)
-- SelectList uses [useComposite](https://reakit.io/docs/composite)
-- SelectOption uses [useSelectItem](./select.md)
-- SelectPopover uses [useSelectList](./select.md) and
-  [usePopover](https://reakit.io/docs/popover/)

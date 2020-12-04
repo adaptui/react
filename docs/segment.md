@@ -42,7 +42,7 @@ export const App = props => {
 export default App;
 ```
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/629us)
+[Segment - Open On Sandbox](https://codesandbox.io/s/3wjgt)
 
 ## Composition
 

@@ -150,9 +150,9 @@ const indeterminateStyles = css({
 });
 ```
 
-[Progress Circular - Open On Sandbox](https://codesandbox.io/s/n1nyq)
+[Progress Linear- Open On Sandbox](https://codesandbox.io/s/0p2yo)
 
-[Progress Linear- Open On Sandbox](https://codesandbox.io/s/veo6j)
+[Progress Circular - Open On Sandbox](https://codesandbox.io/s/e3eun)
 
 ## Accessibility Requirement
 
@@ -170,7 +170,7 @@ const indeterminateStyles = css({
 
 - **`value`** <code>number | null</code> The `value` of the progress indicator.
 
-If `null` the progress bar will be in `indeterminate` state
+  If `null` the progress bar will be in `indeterminate` state
 
 - **`min`** <code>number</code> The minimum value of the progress
 - **`max`** <code>number</code> The maximum value of the
@@ -182,7 +182,7 @@ If `null` the progress bar will be in `indeterminate` state
 
 - **`value`** <code>number | null</code> The `value` of the progress indicator.
 
-If `null` the progress bar will be in `indeterminate` state
+  If `null` the progress bar will be in `indeterminate` state
 
 - **`min`** <code>number</code> The minimum value of the progress
 - **`max`** <code>number</code> The maximum value of the

@@ -265,9 +265,9 @@ const DoubleChevronRight = props => (
 );
 ```
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/myy3o)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/u3w1h)
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/nr4o9)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/hy4ow)
 
 ## Composition
 

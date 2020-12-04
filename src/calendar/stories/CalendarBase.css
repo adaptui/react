@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .calendar {
   max-width: 320px;
   position: relative;
@@ -77,13 +81,16 @@
   width: 320px;
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: 1em;
   background-color: #fbfbff;
 }
 
 .calendar .dates th,
 .calendar .dates td {
   text-align: center;
+}
+
+.calendar .dates th abbr {
+  text-decoration: none;
 }
 
 .calendar .dates tr {

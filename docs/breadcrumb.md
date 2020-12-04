@@ -57,7 +57,7 @@ export const App = props => {
 export default App;
 ```
 
-[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/we32g)
+[Breadcrumbs Basic - Open on Sandbox](https://codesandbox.io/s/t3ygx)
 
 ## Accessibility Requirement
 

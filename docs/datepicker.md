@@ -366,9 +366,9 @@ const DoubleChevronRight = props => (
 );
 ```
 
-[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/94npf)
+[DatePicker - Open On Sandbox](https://codesandbox.io/s/l56y1)
 
-[DatePicker - Open On Sandbox](https://codesandbox.io/s/dkrqk)
+[RangeDatePicker - Open On Sandbox](https://codesandbox.io/s/8oyx5)
 
 ## Composition
 

@@ -80,7 +80,7 @@ return {
     files: {
         "src/App.js": previews["ReactJS"][0],
         "src/styles.css": previews["CSS"] ? previews["CSS"][0] : "",
-        "src/Utils.component.js": previews["UtilsJS"] ? previews["UtilsJS"][0] : "",
+        ...(previews["UtilsJS"] ? {"src/Utils.component.js": previews["UtilsJS"][0]} : {}),
     },
     userDependencies: ${joinStrs(dependencies)},
 };`) as CodeSandboxTemplate;
@@ -93,7 +93,7 @@ return {
     files: {
         "src/App.tsx": previews["React"][0],
         "src/styles.css": previews["CSS"] ? previews["CSS"][0] : "",
-        "src/Utils.component.tsx": previews["Utils"] ? previews["Utils"][0] : "",
+        ...(previews["Utils"] ? {"src/Utils.component.tsx": previews["Utils"][0]} : {}),
     },
     userDependencies: ${joinStrs(dependencies)},
 };`) as CodeSandboxTemplate;

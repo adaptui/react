@@ -42,6 +42,8 @@ export const ControllableState = () => {
         step="1"
         value={value}
       />
+      <br />
+      <br />
       <Base
         value={value}
         onChange={setValue}

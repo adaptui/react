@@ -3,6 +3,7 @@
   padding: 5px;
   margin-left: 10px;
   background-color: #f8f8f8;
+  border: none;
 }
 
 .timepicker__trigger svg {
