@@ -108,83 +108,37 @@ export default App;
 
 ### Range Calendar
 
-```js
-import React from "react";
+Converting a normal calendar to a range calendar is as easy as just swaping out
+the hook to range calendar hook.
 
-import {
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarCellButton,
-  CalendarWeekTitle,
-  useRangeCalendarState,
-} from "@renderlesskit/react";
+You'll need to import the `useRangeCalendarState` hook from the
+`@renderlesskit/react` first
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "./Utils.component";
+```diff
+- const state = useCalendarState(props);
++ const state = useRangeCalendarState(props);
+```
 
-export const App = props => {
-  const state = useRangeCalendarState(props);
+Also we can customize and style the ranges with CSS attribute selectors
 
-  return (
-    <Calendar {...state} className="calendar-range">
-      <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
+```css
+[data-is-range-selection] > span {
+  /* styles for any cells between start-end */
+}
+[data-is-selection-start] > span {
+  /* styles for first selected range cell */
+}
+[data-is-selection-end] > span {
+  /* styles for end selected range cell */
+}
 
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </Calendar>
-  );
-};
-
-export default App;
+/* only applied if cell date is first or last of the month*/
+[data-is-range-start] > span {
+  /**/
+}
+[data-is-range-end] > span {
+  /**/
+}
 ```
 
 [Calendar - Open On Sandbox](https://codesandbox.io/s/lf1ol)
