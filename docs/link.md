@@ -28,7 +28,7 @@ export const App = props => {
 export default App;
 ```
 
-[Link - Open on Sandbox](https://codesandbox.io/s/5gwlm)
+[Link - Open on Sandbox](https://codesandbox.io/s/seki2)
 
 ## Composition
 

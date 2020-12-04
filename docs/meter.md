@@ -110,7 +110,7 @@ function meterBarStyle(meter, props) {
 }
 ```
 
-[Meter - Open On Sandbox](https://codesandbox.io/s/8mxwv)
+[Meter - Open On Sandbox](https://codesandbox.io/s/6b6s7)
 
 ## Accessibility Requirement
 
@@ -131,21 +131,21 @@ function meterBarStyle(meter, props) {
 
 - **`value`** <code>number</code> The `value` of the meter indicator.
 
-  If `undefined`/`not valid` the meter bar will be equal to `min`
+If `undefined`/`not valid` the meter bar will be equal to `min`
 
 - **`min`** <code>number</code> The minimum value of the meter
 - **`max`** <code>number</code> The maximum value of the meter
 - **`low`** <code>number</code> The higher limit of min range.
 
-  Defaults to `min`.
+Defaults to `min`.
 
 - **`optimum`** <code>number</code> The lower limit of max range.
 
-  Defaults to `median of low & high`.
+Defaults to `median of low & high`.
 
 - **`high`** <code>number</code> The lower limit of max range.
 
-  Defaults to `max`.
+Defaults to `max`.
 
 ### `Meter`
 
@@ -154,7 +154,7 @@ function meterBarStyle(meter, props) {
 
 - **`value`** <code>number</code> The `value` of the meter indicator.
 
-  If `undefined`/`not valid` the meter bar will be equal to `min`
+If `undefined`/`not valid` the meter bar will be equal to `min`
 
 - **`min`** <code>number</code> The minimum value of the meter
 - **`max`** <code>number</code> The maximum value of the meter

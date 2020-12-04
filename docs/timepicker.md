@@ -116,7 +116,7 @@ export const App = props => {
 export default App;
 ```
 
-[TimePicker - Open On Sandbox](https://codesandbox.io/s/jph5c)
+[TimePicker - Open On Sandbox](https://codesandbox.io/s/vymtn)
 
 ## Composition
 

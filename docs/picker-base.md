@@ -41,7 +41,7 @@ export const App = props => {
 export default App;
 ```
 
-[PickerBase - Open On Sandbox](https://codesandbox.io/s/h7pxf)
+[PickerBase - Open On Sandbox](https://codesandbox.io/s/ocnie)
 
 ## Composition
 
