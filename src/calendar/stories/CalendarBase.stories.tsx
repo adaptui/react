@@ -8,6 +8,8 @@ import {
   calendarBaseTemplate,
   calendarBaseTemplateJs,
   calendarBaseCssTemplate,
+  utilsTemplateJs,
+  utilsTemplate,
 } from "./templates";
 import { App as Calendar } from "./CalendarBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -26,6 +28,8 @@ export default {
       js: calendarBaseTemplateJs,
       ts: calendarBaseTemplate,
       css: calendarBaseCssTemplate,
+      jsUtils: utilsTemplateJs,
+      tsUtils: utilsTemplate,
     }),
   },
 } as Meta;

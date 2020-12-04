@@ -7,6 +7,8 @@ import {
   datePickerBaseTemplate,
   datePickerBaseTemplateJs,
   datePickerBaseCssTemplate,
+  utilsTemplate,
+  utilsTemplateJs,
 } from "./templates";
 import "./DatePickerBase.css";
 import { App as DatePicker } from "./DatePickerBase.component";
@@ -26,6 +28,8 @@ export default {
       js: datePickerBaseTemplateJs,
       ts: datePickerBaseTemplate,
       css: datePickerBaseCssTemplate,
+      jsUtils: utilsTemplateJs,
+      tsUtils: utilsTemplate,
     }),
   },
 } as Meta;

@@ -41,6 +41,13 @@ import {
   CalendarWeekTitle,
 } from "@renderlesskit/react";
 
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "./Utils.component";
+
 export const App = props => {
   const state = useCalendarState(props);
 
@@ -97,52 +104,6 @@ export const App = props => {
 };
 
 export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
 ```
 
 ### Range Calendar
@@ -160,6 +121,13 @@ import {
   CalendarWeekTitle,
   useRangeCalendarState,
 } from "@renderlesskit/react";
+
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "./Utils.component";
 
 export const App = props => {
   const state = useRangeCalendarState(props);
@@ -217,57 +185,11 @@ export const App = props => {
 };
 
 export default App;
-
-const DoubleChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = props => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = props => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = props => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
 ```
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/u3w1h)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/lf1ol)
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/hy4ow)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/o4s64)
 
 ## Composition
 

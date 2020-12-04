@@ -12,6 +12,13 @@ import {
   CalendarInitialState,
 } from "@renderlesskit/react";
 
+import {
+  ChevronLeft,
+  ChevronRight,
+  DoubleChevronLeft,
+  DoubleChevronRight,
+} from "./Utils.component";
+
 export const App: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
 
@@ -68,49 +75,3 @@ export const App: React.FC<CalendarInitialState> = props => {
 };
 
 export default App;
-
-const DoubleChevronLeft = (props: any) => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronLeft = (props: any) => {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-      />
-    </svg>
-  );
-};
-
-const ChevronRight = (props: any) => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);
-
-const DoubleChevronRight = (props: any) => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
-);

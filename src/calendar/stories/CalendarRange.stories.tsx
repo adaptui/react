@@ -8,6 +8,8 @@ import {
   calendarRangeTemplate,
   calendarRangeTemplateJs,
   calendarRangeCssTemplate,
+  utilsTemplateJs,
+  utilsTemplate,
 } from "./templates";
 import { App as RangeCalendar } from "./CalendarRange.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -34,6 +36,8 @@ export default {
       js: calendarRangeTemplateJs,
       ts: calendarRangeTemplate,
       css: calendarRangeCssTemplate,
+      jsUtils: utilsTemplateJs,
+      tsUtils: utilsTemplate,
     }),
   },
 } as Meta;
