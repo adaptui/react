@@ -16,15 +16,22 @@ js: src/toast/stories/__js/ToastBasic.component.jsx
 -->
 
 <!-- CODESANDBOX
+link_title: Toast Styled - Open On Sandbox
+js: src/toast/stories/__js/ToastStyled.component.jsx
+utils: src/toast/stories/__js/Utils.component.jsx
+css: src/toast/stories/ToastStyled.css
+-->
+
+<!-- CODESANDBOX
 link_title: Toast CSS Animated - Open On Sandbox
 js: src/toast/stories/__js/ToastCSSAnimated.component.jsx
 utils: src/toast/stories/__js/Utils.component.jsx
-css: src/toast/stories/Toast.css
+css: src/toast/stories/ToastStyled.css
 -->
 
 <!-- CODESANDBOX
 link_title: Toast React Spring - Open On Sandbox
 js: src/toast/stories/__js/ToastReactSpring.component.jsx
 utils: src/toast/stories/__js/Utils.component.jsx
-css: src/toast/stories/Toast.css
+css: src/toast/stories/ToastStyled.css
 -->

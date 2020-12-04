@@ -4,11 +4,11 @@ import { Meta } from "@storybook/react";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastCssTemplate,
+  toastStyledCssTemplate,
   toastStyledTemplate,
   toastStyledTemplateJs,
 } from "./templates";
-import "./Toast.css";
+import "./ToastStyled.css";
 import { App as Toast } from "./ToastStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -21,7 +21,7 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastStyledTemplate,
       tsUtils: utilsTemplate,
-      css: toastCssTemplate,
+      css: toastStyledCssTemplate,
     }),
   },
 } as Meta;

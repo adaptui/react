@@ -1,14 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import "./Toast.css";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastCssTemplate,
+  toastStyledCssTemplate,
   toastCssAnimatedTemplate,
   toastCssAnimatedTemplateJs,
 } from "./templates";
+import "./ToastStyled.css";
 import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -21,13 +21,13 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastCssAnimatedTemplate,
       tsUtils: utilsTemplate,
-      css: toastCssTemplate,
+      css: toastStyledCssTemplate,
       deps: ["react-transition-group"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-basic";
+      document.body.id = "toast-styled";
       return <Story />;
     },
   ],

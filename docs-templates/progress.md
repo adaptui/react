@@ -8,7 +8,13 @@ of time to load. It follows
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/progress/stories/__js/LinearProgress.component.jsx -->
+<!-- IMPORT_EXAMPLE src/progress/stories/__js/ProgressBasic.component.jsx -->
+
+<!-- CODESANDBOX
+link_title: Progress Basic- Open On Sandbox
+js: src/progress/stories/__js/ProgressBasic.component.jsx
+css: src/progress/stories/ProgressBasic.css
+-->
 
 <!-- CODESANDBOX
 link_title: Progress Linear- Open On Sandbox
