@@ -18,6 +18,6 @@ js: src/select/stories/__js/Select.component.jsx
 css: src/select/stories/Select.css
 -->
 
-<!-- INJECT_PROPS src/select -->
-
 <!-- INJECT_COMPOSITION src/select -->
+
+<!-- INJECT_PROPS src/select -->
