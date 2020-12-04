@@ -150,9 +150,9 @@ const indeterminateStyles = css({
 });
 ```
 
-[Progress Circular - Open On Sandbox](https://codesandbox.io/s/e3eun)
-
 [Progress Linear- Open On Sandbox](https://codesandbox.io/s/0p2yo)
+
+[Progress Circular - Open On Sandbox](https://codesandbox.io/s/e3eun)
 
 ## Accessibility Requirement
 

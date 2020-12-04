@@ -11,14 +11,14 @@ of time to load. It follows
 <!-- IMPORT_EXAMPLE src/progress/stories/__js/LinearProgress.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Progress Circular - Open On Sandbox
-js: src/progress/stories/__js/CircularProgress.component.jsx
+link_title: Progress Linear- Open On Sandbox
+js: src/progress/stories/__js/LinearProgress.component.jsx
 deps: ['@emotion/css']
 -->
 
 <!-- CODESANDBOX
-link_title: Progress Linear- Open On Sandbox
-js: src/progress/stories/__js/LinearProgress.component.jsx
+link_title: Progress Circular - Open On Sandbox
+js: src/progress/stories/__js/CircularProgress.component.jsx
 deps: ['@emotion/css']
 -->
 

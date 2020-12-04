@@ -9,10 +9,9 @@ the
 ## Usage
 
 ```js
-import React from "react";
-import { ToastProvider } from "@renderlesskit/react";
+import * as React from "react";
 
-import { Variants, Placements } from "./Utils.component";
+import { ToastProvider, useToast } from "@renderlesskit/react";
 
 export const App = () => {
   return (
@@ -20,39 +19,63 @@ export const App = () => {
       autoDismiss={true}
       placement="bottom-center"
       toastTypes={{
-        error: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
         success: ({ hideToast, content, id }) => {
           return (
             <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
+              <span style={{ padding: "0.5rem", color: "white" }}>
+                {content}
+              </span>
+              <button onClick={() => hideToast(id)}>x</button>
             </div>
           );
         },
-        warning: ({ hideToast, content, id }) => {
+        error: ({ hideToast, content, id }) => {
           return (
-            <div className="toast" style={{ backgroundColor: "#ef5013" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
+            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
+              <span style={{ padding: "0.5rem", color: "white" }}>
+                {content}
+              </span>
+              <button onClick={() => hideToast(id)}>x</button>
             </div>
           );
         },
       }}
     >
-      <Variants />
-      <br />
-      <Placements />
+      <ToastTriggers />
     </ToastProvider>
   );
 };
 
 export default App;
+
+const ToastTriggers = () => {
+  const { showToast } = useToast();
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          showToast({ type: "success", content: "Success" });
+        }}
+      >
+        Notify Success
+      </button>
+      <button
+        onClick={() => {
+          showToast({
+            type: "error",
+            content: "Error",
+            placement: "top-right",
+          });
+        }}
+      >
+        Notify Failure
+      </button>
+    </>
+  );
+};
 ```
 
-[Toast - Open On Sandbox](https://codesandbox.io/s/l2i1y)
+[Toast - Open On Sandbox](https://codesandbox.io/s/utvc2)
 
 [Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/i0emy)

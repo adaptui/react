@@ -22,17 +22,19 @@ const injectCsbLinks = async docsTemplate => {
       const linkTitle = parsed.link_title || "Open On CodeSandbox";
 
       const sandboxLink = await getSandboxShortURL(parsed);
-
-      docsTemplate = docsTemplate.replace(
-        CODESANDBOX_REPLACE_FLAG,
-        `[${linkTitle}](${sandboxLink})`,
-      );
+      return { sandboxLink, linkTitle };
     } catch (e) {
       console.log(e);
     }
   });
 
-  await Promise.all(promises);
+  const result = await Promise.allSettled(promises);
+  result.forEach(({ value: { sandboxLink, linkTitle } }) => {
+    docsTemplate = docsTemplate.replace(
+      CODESANDBOX_REPLACE_FLAG,
+      `[${linkTitle}](${sandboxLink})`,
+    );
+  });
 
   return docsTemplate;
 };
