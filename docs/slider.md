@@ -33,35 +33,15 @@ import {
 } from "@renderlesskit/react";
 
 export const App = args => {
-  const { label, isReversed, origin: originProp, ...rest } = args;
-  const origin = originProp ?? args.min ?? 0;
+  const { label, ...rest } = args;
 
-  const state = useSliderState({ reversed: isReversed, ...rest });
+  const state = useSliderState(rest);
   const {
     values,
     getValuePercent,
     getThumbValueLabel,
     getThumbPercent,
   } = state;
-
-  const isVertical = args.orientation === "vertical";
-  const isRange = values.length === 2;
-  const isMulti = values.length > 2;
-
-  const labelValue = !isRange
-    ? getThumbValueLabel(0)
-    : `${state.getThumbValueLabel(0)} to ${state.getThumbValueLabel(1)}`;
-  const trackWidth = !isRange
-    ? `${
-        (getValuePercent(Math.max(values[0], origin)) -
-          getValuePercent(Math.min(values[0], origin))) *
-        100
-      }%`
-    : `${(state.getThumbPercent(1) - state.getThumbPercent(0)) * 100}%`;
-  const trackLeft = !isRange
-    ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
-    : `${getThumbPercent(0) * 100}%`;
-  const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
 
   return (
     <div
@@ -73,69 +53,35 @@ export const App = args => {
         <label className="label" id="styled-slider">
           {`${args.label ? args.label : "Styled"} Slider`}
         </label>
-        <div className="value">
-          {!isMulti ? labelValue : JSON.stringify(state.values)}
-        </div>
+        <div className="value">{getThumbValueLabel(0)}</div>
       </div>
 
-      <div className={`slider ${isVertical ? "vertical" : ""}`}>
+      <div className="slider">
         <SliderTrack {...state} className="slider-track-container">
           <div className="slider-track" />
-          {!isMulti ? (
-            <div
-              className="slider-filled-track"
-              style={{
-                width: !isVertical ? trackWidth : "",
-                height: isVertical ? trackWidth : "",
-                left: !isReversed && !isVertical && trackLeft ? trackLeft : "",
-                right: isReversed ? trackRight : "",
-                bottom:
-                  isVertical && isRange ? `${getThumbPercent(0) * 100}%` : "",
-              }}
-            />
-          ) : null}
+          <div
+            className="slider-filled-track"
+            style={{ width: `${getValuePercent(values[0]) * 100}%` }}
+          />
         </SliderTrack>
-
-        {[...new Array(values.length).keys()].map(index => {
-          return (
-            <div
-              className="slider-thumb"
-              key={`thumb-${index}`}
-              style={{
-                right: isReversed
-                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                  : "",
-                left:
-                  !isReversed && !isVertical
-                    ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                    : "",
-                bottom: isVertical
-                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                  : "",
-              }}
-            >
-              <SliderThumb
+        <div
+          className="slider-thumb"
+          style={{ left: `calc(${getThumbPercent(0) * 100}% - 7px)` }}
+        >
+          <SliderThumb {...state} index={0} className="slider-thumb-handle">
+            <VisuallyHidden>
+              <SliderInput
+                index={0}
+                aria-label={`Thumb-${0}`}
+                aria-labelledby="styled-slider"
                 {...state}
-                index={index}
-                className="slider-thumb-handle"
-              >
-                <VisuallyHidden>
-                  <SliderInput
-                    index={index}
-                    aria-label={`Thumb-${index}`}
-                    aria-labelledby="styled-slider"
-                    {...state}
-                  />
-                </VisuallyHidden>
-              </SliderThumb>
-              {args.showTip && (
-                <div className="slider-thumb-tip">
-                  {getThumbValueLabel(index)}
-                </div>
-              )}
-            </div>
-          );
-        })}
+              />
+            </VisuallyHidden>
+          </SliderThumb>
+          {args.showTip && (
+            <div className="slider-thumb-tip">{getThumbValueLabel(0)}</div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -144,7 +90,17 @@ export const App = args => {
 export default App;
 ```
 
-[Slider - Open On Sandbox](https://codesandbox.io/s/eng7z)
+[Single Slider - Open On Sandbox](https://codesandbox.io/s/1oixd)
+
+[Single Origin Slider - Open On Sandbox](https://codesandbox.io/s/mkdgw)
+
+[Single Reversed Slider - Open On Sandbox](https://codesandbox.io/s/f6hfw)
+
+[Single Vertical Slider - Open On Sandbox](https://codesandbox.io/s/usf1j)
+
+[Range Slider - Open On Sandbox](https://codesandbox.io/s/94sn8)
+
+[Multi Slider - Open On Sandbox](https://codesandbox.io/s/4vqux)
 
 ## Accessibility Requirement
 

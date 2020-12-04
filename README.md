@@ -56,9 +56,9 @@ Check out our [getting started docs](/docs/getting-started.md)
 - [Time Picker](docs/timepicker.md)
 - [Toast](docs/toast.md)
 
-> **Note:** As the 0.#.# version number suggests we are still very much work in
-> progress, so semantic versioning will not be followed until a v1 release.
-> Expect breaking changes to occur on minor version jumps.
+> **Note:** As the 0.#.# version number suggests that we are still very much
+> work in progress, so semantic versioning will not be followed until a v1
+> release. Expect breaking changes to occur on minor version jumps.
 
 ## ✨ Contributors
 
