@@ -50,7 +50,13 @@ export type ToastTypes = Record<
   >
 >;
 
-export type ToastWrapper = (props: any) => React.ReactElement<any>;
+type ToastWrapper = (
+  props: React.PropsWithChildren<{
+    id: string;
+    placement: Placements;
+    isVisible?: boolean;
+  }>,
+) => any;
 
 type ToastProviderProps = {
   /**
