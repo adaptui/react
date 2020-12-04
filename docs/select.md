@@ -56,6 +56,18 @@ export default App;
 
 [Select - Open On Sandbox](https://codesandbox.io/s/rq2qc)
 
+[Dynamic Select - Open On Sandbox](https://codesandbox.io/s/34ihp)
+
+[Multiple Select - Open On Sandbox](https://codesandbox.io/s/dybrt)
+
+[Fetch Select - Open On Sandbox](https://codesandbox.io/s/eg10b)
+
+[Windows Select - Open On Sandbox](https://codesandbox.io/s/g7257)
+
+[Custom Select - Open On Sandbox](https://codesandbox.io/s/f2sbj)
+
+[Controlled Select - Open On Sandbox](https://codesandbox.io/s/yc1tx)
+
 ## Composition
 
 - Select uses [usePopoverDisclosure](https://reakit.io/docs/popover/)
