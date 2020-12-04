@@ -123,7 +123,7 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ```css
 [data-is-range-selection] > span {
-  /* styles for any cells between start-end */
+  /* styles for any cells between start-end (inclusive) */
 }
 [data-is-selection-start] > span {
   /* styles for first selected range cell */
@@ -159,13 +159,13 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `useCalendarState`
 
-- **`value`** <code>T | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>T | undefined</code> The default value
+- **`value`** <code>string | undefined</code> The current value (controlled).
+- **`defaultValue`** <code>string | undefined</code> The default value
   (uncontrolled).
-- **`onChange`** <code>((value: T) =&#62; void) | undefined</code> Handler that
-  is called when the value changes.
-- **`minValue`** <code>T | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>T | undefined</code> The largest value allowed.
+- **`onChange`** <code>((value: string) =&#62; void) | undefined</code> Handler
+  that is called when the value changes.
+- **`minValue`** <code>string | undefined</code> The smallest value allowed.
+- **`maxValue`** <code>string | undefined</code> The largest value allowed.
 - **`isDisabled`** <code>boolean | undefined</code> Whether the input is
   disabled.
 - **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be
@@ -176,13 +176,13 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `useRangeCalendarState`
 
-- **`value`** <code>T | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>T | undefined</code> The default value
+- **`value`** <code>Range | undefined</code> The current value (controlled).
+- **`defaultValue`** <code>Range | undefined</code> The default value
   (uncontrolled).
-- **`onChange`** <code>((value: T) =&#62; void) | undefined</code> Handler that
-  is called when the value changes.
-- **`minValue`** <code>T | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>T | undefined</code> The largest value allowed.
+- **`onChange`** <code>((value: Range) =&#62; void) | undefined</code> Handler
+  that is called when the value changes.
+- **`minValue`** <code>string | undefined</code> The smallest value allowed.
+- **`maxValue`** <code>string | undefined</code> The largest value allowed.
 - **`isDisabled`** <code>boolean | undefined</code> Whether the input is
   disabled.
 - **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be

@@ -31,7 +31,7 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ```css
 [data-is-range-selection] > span {
-  /* styles for any cells between start-end */
+  /* styles for any cells between start-end (inclusive) */
 }
 [data-is-selection-start] > span {
   /* styles for first selected range cell */
