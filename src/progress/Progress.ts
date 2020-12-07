@@ -47,6 +47,7 @@ export const Progress = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
+      "see https://www.w3.org/TR/wai-aria-1.1/#progressbar",
     );
     return useCreateElement(type, props, children);
   },

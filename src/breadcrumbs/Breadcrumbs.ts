@@ -18,6 +18,7 @@ export const Breadcrumbs = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
+      "See https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-2",
     );
     return useCreateElement(type, props, children);
   },
