@@ -90,17 +90,17 @@ export const App = args => {
 export default App;
 ```
 
-[Single Slider - Open On Sandbox](https://codesandbox.io/s/1oixd)
+[Single Slider - Open On Sandbox](https://codesandbox.io/s/y9flc)
 
-[Single Origin Slider - Open On Sandbox](https://codesandbox.io/s/mkdgw)
+[Single Origin Slider - Open On Sandbox](https://codesandbox.io/s/gx8g9)
 
-[Single Reversed Slider - Open On Sandbox](https://codesandbox.io/s/f6hfw)
+[Single Reversed Slider - Open On Sandbox](https://codesandbox.io/s/imb5z)
 
-[Single Vertical Slider - Open On Sandbox](https://codesandbox.io/s/usf1j)
+[Single Vertical Slider - Open On Sandbox](https://codesandbox.io/s/cucsm)
 
-[Range Slider - Open On Sandbox](https://codesandbox.io/s/94sn8)
+[Range Slider - Open On Sandbox](https://codesandbox.io/s/hqgi1)
 
-[Multi Slider - Open On Sandbox](https://codesandbox.io/s/4vqux)
+[Multi Slider - Open On Sandbox](https://codesandbox.io/s/megin)
 
 ## Accessibility Requirement
 
@@ -117,97 +117,87 @@ export default App;
 
 ### `useSliderState`
 
-- **`values`** <code>number[]</code> The `value` of the slider indicator.
+| Name         | type                  | Description                          |
+| :----------- | :-------------------- | :----------------------------------- |
+| **`values`** | <code>number[]</code> | The `value` of the slider indicator. |
 
-  If `undefined`/`not valid` the slider bar will be the optimum of min & max
-
-- **`min`** <code>number</code> The minimum value of the slider
-- **`max`** <code>number</code> The maximum value of the slider
-- **`step`** <code>number</code> The step in which increments/decrements have to
-  be made
-- **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
-- **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>
-  Orientation of the slider
-- **`reversed`** <code>boolean</code> Direction of the slider
-- **`defaultValues`** <code>number[] | undefined</code> The `defaultValue` of
-  the slider indicator.
-- **`onChange`** <code>((value: number[]) =&#62; void) | undefined</code>
-  Handler that is called when the value changes.
-- **`onChangeEnd`** <code>((value: number[]) =&#62; void) | undefined</code> Get
-  the value when dragging is started
-- **`onChangeStart`** <code>((value: number[]) =&#62; void) | undefined</code>
-  Get the value when dragging is stopped
-- **`formatOptions`** <code>NumberFormatOptions | undefined</code> Get the
-  formated value based on number format options
+If `undefined`/`not valid` the slider bar will be the optimum of min & max | |
+**`min`** | <code>number</code> | The minimum value of the slider | | **`max`**
+| <code>number</code> | The maximum value of the slider | | **`step`** |
+<code>number</code> | The step in which increments/decrements have to be made |
+| **`isDisabled`** | <code>boolean</code> | If `true`, the slider will be
+disabled | | **`orientation`** | <code>&#34;horizontal&#34; \|
+&#34;vertical&#34;</code> | Orientation of the slider | | **`reversed`** |
+<code>boolean</code> | Direction of the slider | | **`defaultValues`** |
+<code>number[] \| undefined</code> | The `defaultValue` of the slider indicator.
+| | **`onChange`** | <code>((value: number[]) =&#62; void) \| undefined</code> |
+Handler that is called when the value changes. | | **`onChangeEnd`** |
+<code>((value: number[]) =&#62; void) \| undefined</code> | Get the value when
+dragging is started | | **`onChangeStart`** | <code>((value: number[]) =&#62;
+void) \| undefined</code> | Get the value when dragging is stopped | |
+**`formatOptions`** | <code>NumberFormatOptions \| undefined</code> | Get the
+formated value based on number format options |
 
 ### `SliderInput`
 
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-  form elements. In this case, only `aria-disabled` will be set.
-- **`baseId`** <code>string</code> ID that will serve as a base for all the
-  items IDs.
-- **`id`** <code>string | undefined</code> Same as the HTML attribute.
-- **`index`** <code>number</code>
+| Name            | type                              | Description                                                                                                                                                  |
+| :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`baseId`**    | <code>string</code>               | ID that will serve as a base for all the items IDs.                                                                                                          |
+| **`id`**        | <code>string \| undefined</code>  | Same as the HTML attribute.                                                                                                                                  |
+| **`index`**     | <code>number</code>               |                                                                                                                                                              |
 
 <details><summary>10 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`step`** <code>number</code> The step in which increments/decrements have to
-  be made
-- **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
-- **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>
-  Orientation of the slider
-- **`getThumbMinValue`** <code>(index: number) =&#62; number</code> Returns the
-  min values for the index
-- **`getThumbMaxValue`** <code>(index: number) =&#62; number</code> Returns the
-  max values for the index
-- **`getThumbValueLabel`** <code>(index: number) =&#62; string</code> Returns
-  the formatted thumb value based on it's index
-- **`registerInput`** <code>(item: Item) =&#62; void</code> Register the inputs
-  on mount
-- **`unregisterInput`** <code>(id: string) =&#62; void</code> Unregister the
-  inputs on mount
-- **`setFocusedThumb`** <code>(index: number | undefined) =&#62; void</code> Set
-  currently Focused Thumb
-- **`setThumbValue`** <code>(index: number, value: number) =&#62; void</code>
-  Sets value for thumb. The actually value set will be clamped and rounded
-  according to min/max/step
+| **`step`** | <code>number</code> | The step in which increments/decrements
+have to be made | | **`isDisabled`** | <code>boolean</code> | If `true`, the
+slider will be disabled | | **`orientation`** | <code>&#34;horizontal&#34; \|
+&#34;vertical&#34;</code> | Orientation of the slider | | **`getThumbMinValue`**
+| <code>(index: number) =&#62; number</code> | Returns the min values for the
+index | | **`getThumbMaxValue`** | <code>(index: number) =&#62; number</code> |
+Returns the max values for the index | | **`getThumbValueLabel`** |
+<code>(index: number) =&#62; string</code> | Returns the formatted thumb value
+based on it's index | | **`registerInput`** | <code>(item: Item) =&#62;
+void</code> | Register the inputs on mount | | **`unregisterInput`** |
+<code>(id: string) =&#62; void</code> | Unregister the inputs on mount | |
+**`setFocusedThumb`** | <code>(index: number \| undefined) =&#62; void</code> |
+Set currently Focused Thumb | | **`setThumbValue`** | <code>(index: number,
+value: number) =&#62; void</code> | Sets value for thumb. The actually value set
+will be clamped and rounded according to min/max/step |
 
 </details>
 
 ### `SliderThumb`
 
-- **`index`** <code>number</code>
+| Name        | type                | Description |
+| :---------- | :------------------ | :---------- |
+| **`index`** | <code>number</code> |             |
 
 <details><summary>13 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`step`** <code>number</code> The step in which increments/decrements have to
-  be made
-- **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
-- **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>
-  Orientation of the slider
-- **`reversed`** <code>boolean</code> Direction of the slider
-- **`trackRef`** <code>RefObject&#60;HTMLElement | null&#62;</code> The track
-  slider element.
-- **`focusedThumb`** <code>number | undefined</code> Currently focused thumb
-- **`getThumbValue`** <code>(index: number) =&#62; number</code> Get Thumb value
-  based on its index
-- **`getThumbPercent`** <code>(index: number) =&#62; number</code> Returns the
-  value offset as a percentage from 0 to 1.
-- **`inputs`** <code>Item[]</code> Get all the inputs in the DOM
-- **`setThumbValue`** <code>(index: number, value: number) =&#62; void</code>
-  Sets value for thumb. The actually value set will be clamped and rounded
-  according to min/max/step
-- **`setThumbEditable`** <code>(index: number, editable: boolean) =&#62;
-  void</code> Set true if the thumb registered is editable
-- **`setThumbDragging`** <code>(index: number, dragging: boolean) =&#62;
-  void</code> set dragging true if the thumb registered is being currently
-  dragged
-- **`setThumbPercent`** <code>(index: number, percent: number) =&#62;
-  void</code> Sets value for thumb by percent offset (between 0 and 1)
+| **`step`** | <code>number</code> | The step in which increments/decrements
+have to be made | | **`isDisabled`** | <code>boolean</code> | If `true`, the
+slider will be disabled | | **`orientation`** | <code>&#34;horizontal&#34; \|
+&#34;vertical&#34;</code> | Orientation of the slider | | **`reversed`** |
+<code>boolean</code> | Direction of the slider | | **`trackRef`** |
+<code>RefObject&#60;HTMLElement \| null&#62;</code> | The track slider element.
+| | **`focusedThumb`** | <code>number \| undefined</code> | Currently focused
+thumb | | **`getThumbValue`** | <code>(index: number) =&#62; number</code> | Get
+Thumb value based on its index | | **`getThumbPercent`** | <code>(index: number)
+=&#62; number</code> | Returns the value offset as a percentage from 0 to 1. | |
+**`inputs`** | <code>Item[]</code> | Get all the inputs in the DOM | |
+**`setThumbValue`** | <code>(index: number, value: number) =&#62; void</code> |
+Sets value for thumb. The actually value set will be clamped and rounded
+according to min/max/step | | **`setThumbEditable`** | <code>(index: number,
+editable: boolean) =&#62; void</code> | Set true if the thumb registered is
+editable | | **`setThumbDragging`** | <code>(index: number, dragging: boolean)
+=&#62; void</code> | set dragging true if the thumb registered is being
+currently dragged | | **`setThumbPercent`** | <code>(index: number, percent:
+number) =&#62; void</code> | Sets value for thumb by percent offset (between 0
+and 1) |
 
 </details>
 
@@ -216,33 +206,27 @@ export default App;
 <details><summary>13 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`values`** <code>number[]</code> The `value` of the slider indicator.
+| **`values`** | <code>number[]</code> | The `value` of the slider indicator.
 
-  If `undefined`/`not valid` the slider bar will be the optimum of min & max
-
-- **`isDisabled`** <code>boolean</code> If `true`, the slider will be disabled
-- **`orientation`** <code>&#34;horizontal&#34; | &#34;vertical&#34;</code>
-  Orientation of the slider
-- **`reversed`** <code>boolean</code> Direction of the slider
-- **`trackRef`** <code>RefObject&#60;HTMLElement | null&#62;</code> The track
-  slider element.
-- **`getThumbPercent`** <code>(index: number) =&#62; number</code> Returns the
-  value offset as a percentage from 0 to 1.
-- **`getPercentValue`** <code>(percent: number) =&#62; number</code> Converts a
-  percent along track (between 0 and 1) to the corresponding value
-- **`isThumbEditable`** <code>(index: number) =&#62; boolean</code> Get
-  editableThumb based on the index
-- **`isThumbDragging`** <code>(index: number) =&#62; boolean</code> Whether a
-  specific index is being dragged
-- **`setFocusedThumb`** <code>(index: number | undefined) =&#62; void</code> Set
-  currently Focused Thumb
-- **`setThumbValue`** <code>(index: number, value: number) =&#62; void</code>
-  Sets value for thumb. The actually value set will be clamped and rounded
-  according to min/max/step
-- **`setThumbDragging`** <code>(index: number, dragging: boolean) =&#62;
-  void</code> set dragging true if the thumb registered is being currently
-  dragged
-- **`setThumbPercent`** <code>(index: number, percent: number) =&#62;
-  void</code> Sets value for thumb by percent offset (between 0 and 1)
+If `undefined`/`not valid` the slider bar will be the optimum of min & max | |
+**`isDisabled`** | <code>boolean</code> | If `true`, the slider will be disabled
+| | **`orientation`** | <code>&#34;horizontal&#34; \| &#34;vertical&#34;</code>
+| Orientation of the slider | | **`reversed`** | <code>boolean</code> |
+Direction of the slider | | **`trackRef`** | <code>RefObject&#60;HTMLElement \|
+null&#62;</code> | The track slider element. | | **`getThumbPercent`** |
+<code>(index: number) =&#62; number</code> | Returns the value offset as a
+percentage from 0 to 1. | | **`getPercentValue`** | <code>(percent: number)
+=&#62; number</code> | Converts a percent along track (between 0 and 1) to the
+corresponding value | | **`isThumbEditable`** | <code>(index: number) =&#62;
+boolean</code> | Get editableThumb based on the index | | **`isThumbDragging`**
+| <code>(index: number) =&#62; boolean</code> | Whether a specific index is
+being dragged | | **`setFocusedThumb`** | <code>(index: number \| undefined)
+=&#62; void</code> | Set currently Focused Thumb | | **`setThumbValue`** |
+<code>(index: number, value: number) =&#62; void</code> | Sets value for thumb.
+The actually value set will be clamped and rounded according to min/max/step | |
+**`setThumbDragging`** | <code>(index: number, dragging: boolean) =&#62;
+void</code> | set dragging true if the thumb registered is being currently
+dragged | | **`setThumbPercent`** | <code>(index: number, percent: number)
+=&#62; void</code> | Sets value for thumb by percent offset (between 0 and 1) |
 
 </details>

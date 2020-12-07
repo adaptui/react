@@ -154,11 +154,10 @@ function getPropTypesRow(prop) {
     ? ' <span title="Experimental">⚠️</span>'
     : "";
   const name = `**\`${prop.name}\`**${symbol} `;
+  const desc = prop.description.replace(/\n/g, "");
 
   return outdent`
-    - ${name}
-    ${prop.type}
-    ${prop.description.split("\n\n").join("\n\n  ")}
+    | ${name} | ${prop.type.replace("|", "\\|")} | ${desc} |
   `;
 }
 
@@ -184,9 +183,21 @@ function getPropTypesMarkdown(types) {
       const stateProps = props.stateProps || [];
       const hiddenRows = stateProps.length ? getSummaryDetails(stateProps) : "";
 
+      const tableHeader = outdent`
+        | Name  | type | Description |
+        | :--- |:---|:---|
+      `;
+
+      const table = outdent`
+        ${tableHeader}
+        ${rows}
+      `;
+
       return outdent`
         ### \`${title}\`
-        ${rows || (hiddenRows ? "" : "No props to show")}
+
+        ${rows.length < 1 ? (hiddenRows ? "" : "No props to show") : table}
+        
         ${hiddenRows}
       `;
     })

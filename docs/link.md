@@ -9,10 +9,12 @@ and
 
 ## Table of Contents
 
-- [Usage](#usage)
-- [Composition](#composition)
-- [Props](#props)
-  - [`Link`](#link)
+- [Link](#link)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Composition](#composition)
+  - [Props](#props)
+    - [`Link`](#link-1)
 
 ## Usage
 
@@ -28,7 +30,7 @@ export const App = props => {
 export default App;
 ```
 
-[Link - Open on Sandbox](https://codesandbox.io/s/5gwlm)
+[Link - Open on Sandbox](https://codesandbox.io/s/seki2)
 
 ## Composition
 
@@ -38,8 +40,8 @@ export default App;
 
 ### `Link`
 
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-  form elements. In this case, only `aria-disabled` will be set.
-- **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
+| Name             | type                              | Description                                                                                                                                                  |
+| :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`isExternal`** | <code>boolean \| undefined</code> | Opens the link in a new tab                                                                                                                                  |
