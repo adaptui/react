@@ -26,5 +26,11 @@ function addIdScope() {
 
 module.exports = {
   exec: true,
-  plugins: [rewriteRootRule(), addIdScope()],
+  plugins: [
+    require("postcss-import"),
+    require("tailwindcss"),
+    require("autoprefixer"),
+    rewriteRootRule(),
+    addIdScope(),
+  ],
 };

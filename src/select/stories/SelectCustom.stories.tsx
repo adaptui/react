@@ -14,7 +14,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectCustom,
-  title: "Select/SelectCustom",
+  title: "Select/Custom",
   parameters: {
     preview: createPreviewTabs({
       js: selectCustomTemplateJs,

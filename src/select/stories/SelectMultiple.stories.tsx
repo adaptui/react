@@ -14,7 +14,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectMultiple,
-  title: "Select/SelectMultiple",
+  title: "Select/Multiple",
   parameters: {
     preview: createPreviewTabs({
       js: selectMultipleTemplateJs,
