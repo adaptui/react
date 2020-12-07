@@ -106,7 +106,7 @@ const cssTransforms = {
 
 ### `Drawer`
 
-| Name                                                                | type                                                     | Description                                                                                                                                                                                                                                                           |
+| Name                                                                | Type                                                     | Description                                                                                                                                                                                                                                                           |
 | :------------------------------------------------------------------ | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------- | --- |
 | **`baseId`**                                                        | <code>string</code>                                      | ID that will serve as a base for all the items IDs.                                                                                                                                                                                                                   |
 | **`visible`**                                                       | <code>boolean</code>                                     | Whether it's visible or not.                                                                                                                                                                                                                                          |
@@ -125,7 +125,7 @@ const cssTransforms = {
 
 ### `DrawerCloseButton`
 
-| Name            | type                              | Description                                                                                                                                                  |
+| Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |

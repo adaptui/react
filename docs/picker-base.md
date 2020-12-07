@@ -56,19 +56,21 @@ export default App;
 <details><summary>7 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`visible`** | <code>boolean</code> | Whether it's visible or not. | |
-**`pickerId`** | <code>string \| undefined</code> | | | **`dialogId`** |
-<code>string \| undefined</code> | | | **`isDisabled`** | <code>boolean \|
-undefined</code> | | | **`isReadOnly`** | <code>boolean \| undefined</code> | |
-| **`segmentFocus`** | <code>(() =&#62; void) \| undefined</code> | | |
-**`show`** | <code>() =&#62; void</code> | Changes the `visible` state to `true`
-|
+| Name               | Type                                       | Description                           |
+| :----------------- | :----------------------------------------- | :------------------------------------ |
+| **`visible`**      | <code>boolean</code>                       | Whether it's visible or not.          |
+| **`pickerId`**     | <code>string \| undefined</code>           |                                       |
+| **`dialogId`**     | <code>string \| undefined</code>           |                                       |
+| **`isDisabled`**   | <code>boolean \| undefined</code>          |                                       |
+| **`isReadOnly`**   | <code>boolean \| undefined</code>          |                                       |
+| **`segmentFocus`** | <code>(() =&#62; void) \| undefined</code> |                                       |
+| **`show`**         | <code>() =&#62; void</code>                | Changes the `visible` state to `true` |
 
 </details>
 
 ### `PickerBaseContent`
 
-| Name                                                                | type                                                     | Description                                                                                                                                                                                                                  |
+| Name                                                                | Type                                                     | Description                                                                                                                                                                                                                  |
 | :------------------------------------------------------------------ | :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`hideOnEsc`**                                                     | <code>boolean \| undefined</code>                        | When enabled, user can hide the dialog by pressing `Escape`.                                                                                                                                                                 |
 | **`hideOnClickOutside`**                                            | <code>boolean \| undefined</code>                        | When enabled, user can hide the dialog by clicking outside it.                                                                                                                                                               |
@@ -80,27 +82,22 @@ undefined</code> | | | **`isReadOnly`** | <code>boolean \| undefined</code> | |
 <details><summary>8 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`baseId`** | <code>string</code> | ID that will serve as a base for all the
-items IDs. | | **`visible`** | <code>boolean</code> | Whether it's visible or
-not. | | **`animated`** | <code>number \| boolean</code> | If `true`,
-`animating` will be set to `true` when `visible` is updated.It'll wait for
-`stopAnimation` to be called or a CSS transition ends.If `animated` is set to a
-`number`, `stopAnimation` will be called onlyafter the same number of
-milliseconds have passed. | | **`animating`** | <code>boolean</code> | Whether
-it's animating or not. | | **`stopAnimation`** | <code>() =&#62; void</code> |
-Stops animation. It's called automatically if there's a CSS transition. | |
-**`modal`** | <code>boolean</code> | Toggles Dialog's `modal` state. -
-Non-modal: `preventBodyScroll` doesn't work and focus is free. - Modal:
-`preventBodyScroll` is automatically enabled, focus istrapped within the dialog
-and the dialog is rendered within a `Portal`by default. | | **`hide`** |
-<code>() =&#62; void</code> | Changes the `visible` state to `false` | |
-**`dialogId`** | <code>string \| undefined</code> | |
+| Name                | Type                             | Description                                                                                                                                                                                                                                                           |
+| :------------------ | :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`baseId`**        | <code>string</code>              | ID that will serve as a base for all the items IDs.                                                                                                                                                                                                                   |
+| **`visible`**       | <code>boolean</code>             | Whether it's visible or not.                                                                                                                                                                                                                                          |
+| **`animated`**      | <code>number \| boolean</code>   | If `true`, `animating` will be set to `true` when `visible` is updated.It'll wait for `stopAnimation` to be called or a CSS transition ends.If `animated` is set to a `number`, `stopAnimation` will be called onlyafter the same number of milliseconds have passed. |
+| **`animating`**     | <code>boolean</code>             | Whether it's animating or not.                                                                                                                                                                                                                                        |
+| **`stopAnimation`** | <code>() =&#62; void</code>      | Stops animation. It's called automatically if there's a CSS transition.                                                                                                                                                                                               |
+| **`modal`**         | <code>boolean</code>             | Toggles Dialog's `modal` state. - Non-modal: `preventBodyScroll` doesn't work and focus is free. - Modal: `preventBodyScroll` is automatically enabled, focus istrapped within the dialog and the dialog is rendered within a `Portal`by default.                     |
+| **`hide`**          | <code>() =&#62; void</code>      | Changes the `visible` state to `false`                                                                                                                                                                                                                                |
+| **`dialogId`**      | <code>string \| undefined</code> |                                                                                                                                                                                                                                                                       |
 
 </details>
 
 ### `PickerBaseTrigger`
 
-| Name            | type                              | Description                                                                                                                                                  |
+| Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
@@ -108,13 +105,13 @@ and the dialog is rendered within a `Portal`by default. | | **`hide`** |
 <details><summary>6 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`visible`** | <code>boolean</code> | Whether it's visible or not. | |
-**`baseId`** | <code>string</code> | ID that will serve as a base for all the
-items IDs. | | **`toggle`** | <code>() =&#62; void</code> | Toggles the
-`visible` state | | **`unstable_referenceRef`**
-<span title="Experimental">⚠️</span> | <code>RefObject&#60;HTMLElement \|
-null&#62;</code> | The reference element. | | **`isDisabled`** | <code>boolean
-\| undefined</code> | | | **`isReadOnly`** | <code>boolean \| undefined</code> |
-|
+| Name                                                             | Type                                                | Description                                         |
+| :--------------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
+| **`visible`**                                                    | <code>boolean</code>                                | Whether it's visible or not.                        |
+| **`baseId`**                                                     | <code>string</code>                                 | ID that will serve as a base for all the items IDs. |
+| **`toggle`**                                                     | <code>() =&#62; void</code>                         | Toggles the `visible` state                         |
+| **`unstable_referenceRef`** <span title="Experimental">⚠️</span> | <code>RefObject&#60;HTMLElement \| null&#62;</code> | The reference element.                              |
+| **`isDisabled`**                                                 | <code>boolean \| undefined</code>                   |                                                     |
+| **`isReadOnly`**                                                 | <code>boolean \| undefined</code>                   |                                                     |
 
 </details>

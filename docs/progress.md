@@ -60,7 +60,7 @@ export default App;
 
 ### `useProgressState`
 
-| Name        | type                        | Description                            |
+| Name        | Type                        | Description                            |
 | :---------- | :-------------------------- | :------------------------------------- |
 | **`value`** | <code>number \| null</code> | The `value` of the progress indicator. |
 
@@ -73,8 +73,9 @@ If `null` the progress bar will be in `indeterminate` state | | **`min`** |
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`value`** | <code>number \| null</code> | The `value` of the progress
-indicator.
+| Name        | Type                        | Description                            |
+| :---------- | :-------------------------- | :------------------------------------- |
+| **`value`** | <code>number \| null</code> | The `value` of the progress indicator. |
 
 If `null` the progress bar will be in `indeterminate` state | | **`min`** |
 <code>number</code> | The minimum value of the progress | | **`max`** |

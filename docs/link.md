@@ -9,12 +9,10 @@ and
 
 ## Table of Contents
 
-- [Link](#link)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [Composition](#composition)
-  - [Props](#props)
-    - [`Link`](#link-1)
+- [Usage](#usage)
+- [Composition](#composition)
+- [Props](#props)
+  - [`Link`](#link)
 
 ## Usage
 
@@ -40,7 +38,7 @@ export default App;
 
 ### `Link`
 
-| Name             | type                              | Description                                                                                                                                                  |
+| Name             | Type                              | Description                                                                                                                                                  |
 | :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |

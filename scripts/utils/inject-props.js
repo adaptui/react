@@ -161,11 +161,17 @@ function getPropTypesRow(prop) {
   `;
 }
 
+const tableHeader = outdent`
+| Name  | Type | Description |
+| :--- |:---|:---|
+`;
+
 function getSummaryDetails(stateProps) {
   return outdent`
     <details><summary>${stateProps.length} state props</summary>
     > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
 
+    ${tableHeader}
     ${stateProps.map(getPropTypesRow).join("\n")}
 
     </details>
@@ -182,11 +188,6 @@ function getPropTypesMarkdown(types) {
       const rows = props.map(getPropTypesRow).join("\n");
       const stateProps = props.stateProps || [];
       const hiddenRows = stateProps.length ? getSummaryDetails(stateProps) : "";
-
-      const tableHeader = outdent`
-        | Name  | type | Description |
-        | :--- |:---|:---|
-      `;
 
       const table = outdent`
         ${tableHeader}

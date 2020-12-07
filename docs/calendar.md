@@ -159,7 +159,7 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `useCalendarState`
 
-| Name               | type                                                    | Description                                                    |
+| Name               | Type                                                    | Description                                                    |
 | :----------------- | :------------------------------------------------------ | :------------------------------------------------------------- |
 | **`value`**        | <code>string \| undefined</code>                        | The current value (controlled).                                |
 | **`defaultValue`** | <code>string \| undefined</code>                        | The default value (uncontrolled).                              |
@@ -173,7 +173,7 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `useRangeCalendarState`
 
-| Name               | type                                                   | Description                                                    |
+| Name               | Type                                                   | Description                                                    |
 | :----------------- | :----------------------------------------------------- | :------------------------------------------------------------- |
 | **`value`**        | <code>Range \| undefined</code>                        | The current value (controlled).                                |
 | **`defaultValue`** | <code>Range \| undefined</code>                        | The default value (uncontrolled).                              |
@@ -190,14 +190,15 @@ Also we can customize and style the ranges with CSS attribute selectors
 <details><summary>1 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar
-Header |
+| Name             | Type                             | Description                |
+| :--------------- | :------------------------------- | :------------------------- |
+| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar Header |
 
 </details>
 
 ### `CalendarButton`
 
-| Name            | type                                                        | Description                                                                                                                                                  |
+| Name            | Type                                                        | Description                                                                                                                                                  |
 | :-------------- | :---------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ----------------------- | ------------------ | ---------------- | --- |
 | **`goto`**      | <code title="&#34;nextMonth&#34; \| &#34;previousMonth&#34; | &#34;nextYear&#34;                                                                                                                                           | &#34;previousYear&#34;">&#34;nextMonth&#34; | &#34;previousMonth&#34; | &#34;nextYear&#34; | &#34;p...</code> |     |
 | **`disabled`**  | <code>boolean \| undefined</code>                           | Same as the HTML attribute.                                                                                                                                  |
@@ -206,36 +207,38 @@ Header |
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`focusNextMonth`** | <code>() =&#62; void</code> | Focus the cell one month
-next to the current date | | **`focusPreviousMonth`** | <code>() =&#62;
-void</code> | Focus the cell one month prev to the current date | |
-**`focusPreviousYear`** | <code>() =&#62; void</code> | Focus the cell of the
-date one year before the current date | | **`focusNextYear`** | <code>() =&#62;
-void</code> | Focus the cell of the date one year from the current date |
+| Name                     | Type                        | Description                                                 |
+| :----------------------- | :-------------------------- | :---------------------------------------------------------- |
+| **`focusNextMonth`**     | <code>() =&#62; void</code> | Focus the cell one month next to the current date           |
+| **`focusPreviousMonth`** | <code>() =&#62; void</code> | Focus the cell one month prev to the current date           |
+| **`focusPreviousYear`**  | <code>() =&#62; void</code> | Focus the cell of the date one year before the current date |
+| **`focusNextYear`**      | <code>() =&#62; void</code> | Focus the cell of the date one year from the current date   |
 
 </details>
 
 ### `CalendarCell`
 
-| Name       | type              | Description |
+| Name       | Type              | Description |
 | :--------- | :---------------- | :---------- |
 | **`date`** | <code>Date</code> |             |
 
 <details><summary>6 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`dateValue`** | <code>Date</code> | Selected Date value | | **`isDisabled`**
-| <code>boolean</code> | `true` if the calendar is disabled | |
-**`currentMonth`** | <code>Date</code> | Month of the current Date | |
-**`isRangeCalendar`** | <code>boolean</code> | `true` if the calendar is used as
-RangeCalendar | | **`highlightDate`** | <code>(date: Date) =&#62; void</code> |
-| | **`highlightedRange`** | <code>RangeValue&#60;Date&#62; \| null</code> | |
+| Name                   | Type                                          | Description                                     |
+| :--------------------- | :-------------------------------------------- | :---------------------------------------------- |
+| **`dateValue`**        | <code>Date</code>                             | Selected Date value                             |
+| **`isDisabled`**       | <code>boolean</code>                          | `true` if the calendar is disabled              |
+| **`currentMonth`**     | <code>Date</code>                             | Month of the current Date                       |
+| **`isRangeCalendar`**  | <code>boolean</code>                          | `true` if the calendar is used as RangeCalendar |
+| **`highlightDate`**    | <code>(date: Date) =&#62; void</code>         |                                                 |
+| **`highlightedRange`** | <code>RangeValue&#60;Date&#62; \| null</code> |                                                 |
 
 </details>
 
 ### `CalendarCellButton`
 
-| Name            | type                              | Description                                                                                                                                                  |
+| Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
@@ -244,18 +247,19 @@ RangeCalendar | | **`highlightDate`** | <code>(date: Date) =&#62; void</code> |
 <details><summary>11 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`dateValue`** | <code>Date</code> | Selected Date value | | **`isDisabled`**
-| <code>boolean</code> | `true` if the calendar is disabled | |
-**`isRangeCalendar`** | <code>boolean</code> | `true` if the calendar is used as
-RangeCalendar | | **`focusedDate`** | <code>Date</code> | Date value that is
-currently focused | | **`selectDate`** | <code>(value: Date) =&#62; void</code>
-| sets `dateValue` | | **`setFocusedDate`** | <code>(value:
-SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate` | |
-**`month`** | <code>number</code> | Month of the current date value | |
-**`minDate`** | <code>Date \| undefined</code> | Minimum allowed Date value | |
-**`maxDate`** | <code>Date \| undefined</code> | Maximum allowed Date value | |
-**`isFocused`** | <code>boolean</code> | `true` if the calendar is focused | |
-**`anchorDate`** | <code>Date \| null</code> | |
+| Name                  | Type                                                           | Description                                     |
+| :-------------------- | :------------------------------------------------------------- | :---------------------------------------------- |
+| **`dateValue`**       | <code>Date</code>                                              | Selected Date value                             |
+| **`isDisabled`**      | <code>boolean</code>                                           | `true` if the calendar is disabled              |
+| **`isRangeCalendar`** | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar |
+| **`focusedDate`**     | <code>Date</code>                                              | Date value that is currently focused            |
+| **`selectDate`**      | <code>(value: Date) =&#62; void</code>                         | sets `dateValue`                                |
+| **`setFocusedDate`**  | <code>(value: SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate`                              |
+| **`month`**           | <code>number</code>                                            | Month of the current date value                 |
+| **`minDate`**         | <code>Date \| undefined</code>                                 | Minimum allowed Date value                      |
+| **`maxDate`**         | <code>Date \| undefined</code>                                 | Maximum allowed Date value                      |
+| **`isFocused`**       | <code>boolean</code>                                           | `true` if the calendar is focused               |
+| **`anchorDate`**      | <code>Date \| null</code>                                      |                                                 |
 
 </details>
 
@@ -264,56 +268,55 @@ SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate` | |
 <details><summary>17 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar
-Header | | **`focusNextMonth`** | <code>() =&#62; void</code> | Focus the cell
-one month next to the current date | | **`focusPreviousMonth`** | <code>()
-=&#62; void</code> | Focus the cell one month prev to the current date | |
-**`focusPreviousYear`** | <code>() =&#62; void</code> | Focus the cell of the
-date one year before the current date | | **`focusNextYear`** | <code>() =&#62;
-void</code> | Focus the cell of the date one year from the current date | |
-**`isDisabled`** | <code>boolean</code> | `true` if the calendar is disabled | |
-**`isRangeCalendar`** | <code>boolean</code> | `true` if the calendar is used as
-RangeCalendar | | **`isReadOnly`** | <code>boolean</code> | `true` if the
-calendar is only readonly | | **`setFocused`** | <code>(value:
-SetStateAction&#60;boolean&#62;) =&#62; void</code> | Sets `isFocused` | |
-**`selectFocusedDate`** | <code>() =&#62; void</code> | Selects the
-`focusedDate` | | **`focusEndOfMonth`** | <code>() =&#62; void</code> | Focus
-the cell of the last day of the month | | **`focusStartOfMonth`** | <code>()
-=&#62; void</code> | Focus the cell of the first day of the month | |
-**`focusNextDay`** | <code>() =&#62; void</code> | Focus the cell next to the
-current date | | **`focusPreviousDay`** | <code>() =&#62; void</code> | Focus
-the cell prev to the current date | | **`focusNextWeek`** | <code>() =&#62;
-void</code> | Focus the cell one week next to the current date | |
-**`focusPreviousWeek`** | <code>() =&#62; void</code> | Focus the cell one week
-prev to the current date | | **`setAnchorDate`** | <code>(value:
-SetStateAction&#60;Date \| null&#62;) =&#62; void</code> | |
+| Name                     | Type                                                                   | Description                                                 |
+| :----------------------- | :--------------------------------------------------------------------- | :---------------------------------------------------------- |
+| **`calendarId`**         | <code>string \| undefined</code>                                       | Id for the Calendar Header                                  |
+| **`focusNextMonth`**     | <code>() =&#62; void</code>                                            | Focus the cell one month next to the current date           |
+| **`focusPreviousMonth`** | <code>() =&#62; void</code>                                            | Focus the cell one month prev to the current date           |
+| **`focusPreviousYear`**  | <code>() =&#62; void</code>                                            | Focus the cell of the date one year before the current date |
+| **`focusNextYear`**      | <code>() =&#62; void</code>                                            | Focus the cell of the date one year from the current date   |
+| **`isDisabled`**         | <code>boolean</code>                                                   | `true` if the calendar is disabled                          |
+| **`isRangeCalendar`**    | <code>boolean</code>                                                   | `true` if the calendar is used as RangeCalendar             |
+| **`isReadOnly`**         | <code>boolean</code>                                                   | `true` if the calendar is only readonly                     |
+| **`setFocused`**         | <code>(value: SetStateAction&#60;boolean&#62;) =&#62; void</code>      | Sets `isFocused`                                            |
+| **`selectFocusedDate`**  | <code>() =&#62; void</code>                                            | Selects the `focusedDate`                                   |
+| **`focusEndOfMonth`**    | <code>() =&#62; void</code>                                            | Focus the cell of the last day of the month                 |
+| **`focusStartOfMonth`**  | <code>() =&#62; void</code>                                            | Focus the cell of the first day of the month                |
+| **`focusNextDay`**       | <code>() =&#62; void</code>                                            | Focus the cell next to the current date                     |
+| **`focusPreviousDay`**   | <code>() =&#62; void</code>                                            | Focus the cell prev to the current date                     |
+| **`focusNextWeek`**      | <code>() =&#62; void</code>                                            | Focus the cell one week next to the current date            |
+| **`focusPreviousWeek`**  | <code>() =&#62; void</code>                                            | Focus the cell one week prev to the current date            |
+| **`setAnchorDate`**      | <code>(value: SetStateAction&#60;Date \| null&#62;) =&#62; void</code> |                                                             |
 
 </details>
 
 ### `CalendarHeader`
 
-| Name         | type                                         | Description |
+| Name         | Type                                         | Description |
 | :----------- | :------------------------------------------- | :---------- |
 | **`format`** | <code>DateTimeFormatOpts \| undefined</code> |             |
 
 <details><summary>2 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar
-Header | | **`currentMonth`** | <code>Date</code> | Month of the current Date |
+| Name               | Type                             | Description                |
+| :----------------- | :------------------------------- | :------------------------- |
+| **`calendarId`**   | <code>string \| undefined</code> | Id for the Calendar Header |
+| **`currentMonth`** | <code>Date</code>                | Month of the current Date  |
 
 </details>
 
 ### `CalendarWeekTitle`
 
-| Name           | type                | Description |
+| Name           | Type                | Description |
 | :------------- | :------------------ | :---------- |
 | **`dayIndex`** | <code>number</code> |             |
 
 <details><summary>1 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`weekDays`** | <code>{ title: string; abbr: string; }[]</code> | Generated
-week days for CalendarWeekTitle based on weekStart |
+| Name           | Type                                            | Description                                                  |
+| :------------- | :---------------------------------------------- | :----------------------------------------------------------- |
+| **`weekDays`** | <code>{ title: string; abbr: string; }[]</code> | Generated week days for CalendarWeekTitle based on weekStart |
 
 </details>

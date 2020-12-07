@@ -74,7 +74,7 @@ export default App;
 
 ### `BreadcrumbLink`
 
-| Name             | type                              | Description                                                                                                                                                  |
+| Name             | Type                              | Description                                                                                                                                                  |
 | :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`isCurrent`**  | <code>boolean \| undefined</code> | If true, sets `aria-current: "page"`                                                                                                                         |
 | **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |

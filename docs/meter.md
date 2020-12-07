@@ -70,7 +70,7 @@ const background = {
 
 ### `useMeterState`
 
-| Name        | type                | Description                         |
+| Name        | Type                | Description                         |
 | :---------- | :------------------ | :---------------------------------- |
 | **`value`** | <code>number</code> | The `value` of the meter indicator. |
 
@@ -92,7 +92,9 @@ Defaults to `max`. |
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`value`** | <code>number</code> | The `value` of the meter indicator.
+| Name        | Type                | Description                         |
+| :---------- | :------------------ | :---------------------------------- |
+| **`value`** | <code>number</code> | The `value` of the meter indicator. |
 
 If `undefined`/`not valid` the meter bar will be equal to `min` | | **`min`** |
 <code>number</code> | The minimum value of the meter | | **`max`** |

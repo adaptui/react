@@ -68,7 +68,7 @@ export default App;
 
 ### `useNumberinputState`
 
-| Name        | type                          | Description                                                                |
+| Name        | Type                          | Description                                                                |
 | :---------- | :---------------------------- | :------------------------------------------------------------------------- |
 | **`value`** | <code>string \| number</code> | The value of the counter. Should be less than `max` and greater than `min` |
 
@@ -97,7 +97,7 @@ the stepper |
 
 ### `NumberInput`
 
-| Name                   | type                              | Description                                                                                                                                                  |
+| Name                   | Type                              | Description                                                                                                                                                  |
 | :--------------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**         | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`**        | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
@@ -112,8 +112,9 @@ the stepper |
 <details><summary>12 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`keepWithinRange`** | <code>boolean</code> | This controls the value update
-behavior in general.
+| Name                  | Type                 | Description                                         |
+| :-------------------- | :------------------- | :-------------------------------------------------- |
+| **`keepWithinRange`** | <code>boolean</code> | This controls the value update behavior in general. |
 
 - If `true` and you use the stepper or up/down arrow keys, the value will not
   exceed the `max` or go lower than `min`
@@ -141,7 +142,7 @@ step. |
 
 ### `NumberInputDecrementButton`
 
-| Name            | type                              | Description                                                                                                                                                  |
+| Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
@@ -149,8 +150,9 @@ step. |
 <details><summary>5 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`keepWithinRange`** | <code>boolean</code> | This controls the value update
-behavior in general.
+| Name                  | Type                 | Description                                         |
+| :-------------------- | :------------------- | :-------------------------------------------------- |
+| **`keepWithinRange`** | <code>boolean</code> | This controls the value update behavior in general. |
 
 - If `true` and you use the stepper or up/down arrow keys, the value will not
   exceed the `max` or go lower than `min`
@@ -166,7 +168,7 @@ behavior in general.
 
 ### `NumberInputIncrementButton`
 
-| Name            | type                              | Description                                                                                                                                                  |
+| Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
@@ -174,8 +176,9 @@ behavior in general.
 <details><summary>5 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| **`keepWithinRange`** | <code>boolean</code> | This controls the value update
-behavior in general.
+| Name                  | Type                 | Description                                         |
+| :-------------------- | :------------------- | :-------------------------------------------------- |
+| **`keepWithinRange`** | <code>boolean</code> | This controls the value update behavior in general. |
 
 - If `true` and you use the stepper or up/down arrow keys, the value will not
   exceed the `max` or go lower than `min`
