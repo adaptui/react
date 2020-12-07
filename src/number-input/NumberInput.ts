@@ -258,7 +258,7 @@ export const NumberInput = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
-      "see https://www.w3.org/TR/wai-aria-1.1/#spinbutton",
+      "See https://www.w3.org/TR/wai-aria-1.1/#spinbutton",
     );
     return useCreateElement(type, props, children);
   },
