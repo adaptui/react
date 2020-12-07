@@ -46,6 +46,7 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "docs": "node scripts/builds/docs.js",
+    "docstest": "node scripts/builds/docstest.js",
     "format": "prettier --write \"./**/*.{js,ts,css,less,json,md,html,yml,yaml,pcss,jsx,tsx}\"",
     "generatejs": "node scripts/generate-js",
     "keys": "node scripts/builds/keys",
