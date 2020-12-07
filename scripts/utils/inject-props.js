@@ -154,7 +154,7 @@ function getPropTypesRow(prop) {
     ? ' <span title="Experimental">⚠️</span>'
     : "";
   const name = `**\`${prop.name}\`**${symbol} `;
-  const desc = prop.description.replace(/\n/g, "");
+  const desc = prop.description.replace(/\r?\n|\r/g, "");
 
   return outdent`
     | ${name} | ${prop.type.replace("|", "\\|")} | ${desc} |
