@@ -157,7 +157,7 @@ function getPropTypesRow(prop) {
   const desc = prop.description.replace(/\r?\n|\r/g, "");
 
   return outdent`
-    | ${name} | ${prop.type.replace("|", "\\|")} | ${desc} |
+    | ${name} | ${prop.type.replace(/\|/g, "\\|")} | ${desc} |
   `;
 }
 
