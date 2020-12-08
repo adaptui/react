@@ -10,6 +10,7 @@ import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { createComponent, createHook } from "reakit-system";
 
+import { dataAttr } from "../utils";
 import { SEGMENT_KEYS } from "./__keys";
 import { DateSegment, SegmentStateReturn } from "./SegmentState";
 import { useSpinButton, isNumeric, parseNumber } from "./helpers";
@@ -211,8 +212,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       // A separator, e.g. punctuation
       case "literal":
         return {
-          role: "presentation",
-          "data-placeholder": false,
+          "data-placeholder": dataAttr(false),
           children: segment.text,
           ...htmlProps,
         };
@@ -222,7 +222,6 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       case "timeZoneName":
       case "era":
         return {
-          role: "presentation",
           "data-placeholder": true,
           children: segment.text,
           ...htmlProps,
@@ -234,7 +233,6 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
           id,
           "aria-label": segment.type,
           "aria-labelledby": `${id}`,
-          tabIndex: options.isDisabled ? undefined : 0,
           onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
           onFocus: callAllHandlers(htmlOnFocus, onFocus),
           onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),

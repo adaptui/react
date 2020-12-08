@@ -14,7 +14,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectControlled,
-  title: "Select/SelectControlled",
+  title: "Select/Controlled",
   parameters: {
     preview: createPreviewTabs({
       js: selectControlledTemplateJs,

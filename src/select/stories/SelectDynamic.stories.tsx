@@ -14,7 +14,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectDynamic,
-  title: "Select/SelectDynamic",
+  title: "Select/Dynamic",
   parameters: {
     preview: createPreviewTabs({
       js: selectDynamicTemplateJs,

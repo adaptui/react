@@ -14,7 +14,7 @@ import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: SelectWindows,
-  title: "Select/SelectWindows",
+  title: "Select/Windows",
   parameters: {
     preview: createPreviewTabs({
       js: selectWindowsTemplateJs,
