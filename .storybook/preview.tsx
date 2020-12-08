@@ -1,6 +1,8 @@
 import React from "react";
 import { kebabCase } from "lodash";
 
+import "./global.css";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
