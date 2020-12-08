@@ -7,17 +7,16 @@ import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export interface TimePickerStateProps
-  extends PickerBaseInitialState,
-    ValueBase<string>,
-    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-}
+export type TimePickerInitialState = PickerBaseInitialState &
+  ValueBase<string> &
+  Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+  };
 
-export const useTimePickerState = (props: TimePickerStateProps = {}) => {
+export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   const {
     value: initialValue,
     defaultValue: defaultValueProp = stringifyTime(new Date()),

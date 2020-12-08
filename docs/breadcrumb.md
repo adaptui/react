@@ -74,13 +74,12 @@ export default App;
 
 ### `BreadcrumbLink`
 
-- **`isCurrent`** <code>boolean | undefined</code> If true, sets
-  `aria-current: "page"`
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-  form elements. In this case, only `aria-disabled` will be set.
-- **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
+| Name             | Type                              | Description                                                                                                                                                  |
+| :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`isCurrent`**  | <code>boolean \| undefined</code> | If true, sets `aria-current: "page"`                                                                                                                         |
+| **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`isExternal`** | <code>boolean \| undefined</code> | Opens the link in a new tab                                                                                                                                  |
 
 ### `Breadcrumbs`
 

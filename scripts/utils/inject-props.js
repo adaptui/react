@@ -135,6 +135,8 @@ function isInitialStateDeclaration(node) {
  */
 function getComment(symbol) {
   const jsDocs = getJsDocs(symbol);
+  console.log("%c jsDocs", "color: #731d6d", jsDocs);
+
   if (!jsDocs) return "";
   return jsDocs.getDescription().trim();
 }
@@ -154,19 +156,24 @@ function getPropTypesRow(prop) {
     ? ' <span title="Experimental">⚠️</span>'
     : "";
   const name = `**\`${prop.name}\`**${symbol} `;
+  const desc = prop.description.replace(/\r?\n|\r/g, "");
 
   return outdent`
-    - ${name}
-    ${prop.type}
-    ${prop.description.split("\n\n").join("\n\n  ")}
+    | ${name} | ${prop.type.replace(/\|/g, "\\|")} | ${desc} |
   `;
 }
+
+const tableHeader = outdent`
+| Name  | Type | Description |
+| :--- |:---|:---|
+`;
 
 function getSummaryDetails(stateProps) {
   return outdent`
     <details><summary>${stateProps.length} state props</summary>
     > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
 
+    ${tableHeader}
     ${stateProps.map(getPropTypesRow).join("\n")}
 
     </details>
@@ -184,9 +191,16 @@ function getPropTypesMarkdown(types) {
       const stateProps = props.stateProps || [];
       const hiddenRows = stateProps.length ? getSummaryDetails(stateProps) : "";
 
+      const table = outdent`
+        ${tableHeader}
+        ${rows}
+      `;
+
       return outdent`
         ### \`${title}\`
-        ${rows || (hiddenRows ? "" : "No props to show")}
+
+        ${rows.length < 1 ? (hiddenRows ? "" : "No props to show") : table}
+
         ${hiddenRows}
       `;
     })

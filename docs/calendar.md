@@ -141,9 +141,9 @@ Also we can customize and style the ranges with CSS attribute selectors
 }
 ```
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/lf1ol)
+[Calendar - Open On Sandbox](https://codesandbox.io/s/z5377)
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/o4s64)
+[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/lxxfg)
 
 ## Composition
 
@@ -159,113 +159,107 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `useCalendarState`
 
-- **`value`** <code>string | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>string | undefined</code> The default value
-  (uncontrolled).
-- **`onChange`** <code>((value: string) =&#62; void) | undefined</code> Handler
-  that is called when the value changes.
-- **`minValue`** <code>string | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>string | undefined</code> The largest value allowed.
-- **`isDisabled`** <code>boolean | undefined</code> Whether the input is
-  disabled.
-- **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be
-  selected but not changed by the user.
-- **`autoFocus`** <code>boolean | undefined</code> Whether the element should
-  receive focus on render.
-- **`id`** <code>string | undefined</code> Id for the calendar grid
+| Name               | Type                                                    | Description                                                    |
+| :----------------- | :------------------------------------------------------ | :------------------------------------------------------------- |
+| **`value`**        | <code>string \| undefined</code>                        | The current value (controlled).                                |
+| **`defaultValue`** | <code>string \| undefined</code>                        | The default value (uncontrolled).                              |
+| **`onChange`**     | <code>((value: string) =&#62; void) \| undefined</code> | Handler that is called when the value changes.                 |
+| **`minValue`**     | <code>string \| undefined</code>                        | The smallest value allowed.                                    |
+| **`maxValue`**     | <code>string \| undefined</code>                        | The largest value allowed.                                     |
+| **`isDisabled`**   | <code>boolean \| undefined</code>                       | Whether the input is disabled.                                 |
+| **`isReadOnly`**   | <code>boolean \| undefined</code>                       | Whether the input can be selected but not changed by the user. |
+| **`autoFocus`**    | <code>boolean \| undefined</code>                       | Whether the element should receive focus on render.            |
+| **`id`**           | <code>string \| undefined</code>                        | Id for the calendar grid                                       |
 
 ### `useRangeCalendarState`
 
-- **`value`** <code>Range | undefined</code> The current value (controlled).
-- **`defaultValue`** <code>Range | undefined</code> The default value
-  (uncontrolled).
-- **`onChange`** <code>((value: Range) =&#62; void) | undefined</code> Handler
-  that is called when the value changes.
-- **`minValue`** <code>string | undefined</code> The smallest value allowed.
-- **`maxValue`** <code>string | undefined</code> The largest value allowed.
-- **`isDisabled`** <code>boolean | undefined</code> Whether the input is
-  disabled.
-- **`isReadOnly`** <code>boolean | undefined</code> Whether the input can be
-  selected but not changed by the user.
-- **`autoFocus`** <code>boolean | undefined</code> Whether the element should
-  receive focus on render.
-- **`id`** <code>string | undefined</code> Id for the calendar grid
+| Name               | Type                                                   | Description                                                    |
+| :----------------- | :----------------------------------------------------- | :------------------------------------------------------------- |
+| **`value`**        | <code>Range \| undefined</code>                        | The current value (controlled).                                |
+| **`defaultValue`** | <code>Range \| undefined</code>                        | The default value (uncontrolled).                              |
+| **`onChange`**     | <code>((value: Range) =&#62; void) \| undefined</code> | Handler that is called when the value changes.                 |
+| **`minValue`**     | <code>string \| undefined</code>                       | The smallest value allowed.                                    |
+| **`maxValue`**     | <code>string \| undefined</code>                       | The largest value allowed.                                     |
+| **`isDisabled`**   | <code>boolean \| undefined</code>                      | Whether the input is disabled.                                 |
+| **`isReadOnly`**   | <code>boolean \| undefined</code>                      | Whether the input can be selected but not changed by the user. |
+| **`autoFocus`**    | <code>boolean \| undefined</code>                      | Whether the element should receive focus on render.            |
+| **`id`**           | <code>string \| undefined</code>                       | Id for the calendar grid                                       |
 
 ### `Calendar`
 
 <details><summary>1 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`calendarId`** <code>string | undefined</code> Id for the Calendar Header
+| Name             | Type                             | Description                |
+| :--------------- | :------------------------------- | :------------------------- |
+| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar Header |
 
 </details>
 
 ### `CalendarButton`
 
-- **`goto`**
-  <code title="&#34;nextMonth&#34; | &#34;previousMonth&#34; | &#34;nextYear&#34; | &#34;previousYear&#34;">&#34;nextMonth&#34;
-  | &#34;previousMonth&#34; | &#34;nextYear&#34; | &#34;p...</code>
+| Name            | Type                                                                                                                                                                                                  | Description                                                                                                                                                  |
+| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`goto`**      | <code title="&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;previousYear&#34;">&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;p...</code> |                                                                                                                                                              |
+| **`disabled`**  | <code>boolean \| undefined</code>                                                                                                                                                                     | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`** | <code>boolean \| undefined</code>                                                                                                                                                                     | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
 
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-`disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-form elements. In this case, only `aria-disabled` will be set.
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`focusNextMonth`** <code>() =&#62; void</code> Focus the cell one month next
-  to the current date
-- **`focusPreviousMonth`** <code>() =&#62; void</code> Focus the cell one month
-  prev to the current date
-- **`focusPreviousYear`** <code>() =&#62; void</code> Focus the cell of the date
-  one year before the current date
-- **`focusNextYear`** <code>() =&#62; void</code> Focus the cell of the date one
-  year from the current date
+| Name                     | Type                        | Description                                                 |
+| :----------------------- | :-------------------------- | :---------------------------------------------------------- |
+| **`focusNextMonth`**     | <code>() =&#62; void</code> | Focus the cell one month next to the current date           |
+| **`focusPreviousMonth`** | <code>() =&#62; void</code> | Focus the cell one month prev to the current date           |
+| **`focusPreviousYear`**  | <code>() =&#62; void</code> | Focus the cell of the date one year before the current date |
+| **`focusNextYear`**      | <code>() =&#62; void</code> | Focus the cell of the date one year from the current date   |
 
 </details>
 
 ### `CalendarCell`
 
-- **`date`** <code>Date</code>
+| Name       | Type              | Description |
+| :--------- | :---------------- | :---------- |
+| **`date`** | <code>Date</code> |             |
 
 <details><summary>6 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`dateValue`** <code>Date</code> Selected Date value
-- **`isDisabled`** <code>boolean</code> `true` if the calendar is disabled
-- **`currentMonth`** <code>Date</code> Month of the current Date
-- **`isRangeCalendar`** <code>boolean</code> `true` if the calendar is used as
-  RangeCalendar
-- **`highlightDate`** <code>(date: Date) =&#62; void</code>
-
-- **`highlightedRange`** <code>RangeValue&#60;Date&#62; | null</code>
+| Name                   | Type                                          | Description                                     |
+| :--------------------- | :-------------------------------------------- | :---------------------------------------------- |
+| **`dateValue`**        | <code>Date</code>                             | Selected Date value                             |
+| **`isDisabled`**       | <code>boolean</code>                          | `true` if the calendar is disabled              |
+| **`currentMonth`**     | <code>Date</code>                             | Month of the current Date                       |
+| **`isRangeCalendar`**  | <code>boolean</code>                          | `true` if the calendar is used as RangeCalendar |
+| **`highlightDate`**    | <code>(date: Date) =&#62; void</code>         |                                                 |
+| **`highlightedRange`** | <code>RangeValue&#60;Date&#62; \| null</code> |                                                 |
 
 </details>
 
 ### `CalendarCellButton`
 
-- **`date`** <code>Date</code>
+| Name            | Type                              | Description                                                                                                                                                  |
+| :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
+| **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
 
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-`disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-form elements. In this case, only `aria-disabled` will be set.
 <details><summary>11 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`dateValue`** <code>Date</code> Selected Date value
-- **`isDisabled`** <code>boolean</code> `true` if the calendar is disabled
-- **`isRangeCalendar`** <code>boolean</code> `true` if the calendar is used as
-  RangeCalendar
-- **`focusedDate`** <code>Date</code> Date value that is currently focused
-- **`selectDate`** <code>(value: Date) =&#62; void</code> sets `dateValue`
-- **`setFocusedDate`** <code>(value: SetStateAction&#60;Date&#62;) =&#62;
-  void</code> Sets `focusedDate`
-- **`month`** <code>number</code> Month of the current date value
-- **`minDate`** <code>Date | undefined</code> Minimum allowed Date value
-- **`maxDate`** <code>Date | undefined</code> Maximum allowed Date value
-- **`isFocused`** <code>boolean</code> `true` if the calendar is focused
-- **`anchorDate`** <code>Date | null</code>
+| Name                  | Type                                                           | Description                                     |
+| :-------------------- | :------------------------------------------------------------- | :---------------------------------------------- |
+| **`dateValue`**       | <code>Date</code>                                              | Selected Date value                             |
+| **`isDisabled`**      | <code>boolean</code>                                           | `true` if the calendar is disabled              |
+| **`isRangeCalendar`** | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar |
+| **`focusedDate`**     | <code>Date</code>                                              | Date value that is currently focused            |
+| **`selectDate`**      | <code>(value: Date) =&#62; void</code>                         | sets `dateValue`                                |
+| **`setFocusedDate`**  | <code>(value: SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate`                              |
+| **`month`**           | <code>number</code>                                            | Month of the current date value                 |
+| **`minDate`**         | <code>Date \| undefined</code>                                 | Minimum allowed Date value                      |
+| **`maxDate`**         | <code>Date \| undefined</code>                                 | Maximum allowed Date value                      |
+| **`isFocused`**       | <code>boolean</code>                                           | `true` if the calendar is focused               |
+| **`anchorDate`**      | <code>Date \| null</code>                                      |                                                 |
 
 </details>
 
@@ -274,59 +268,55 @@ form elements. In this case, only `aria-disabled` will be set.
 <details><summary>17 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`calendarId`** <code>string | undefined</code> Id for the Calendar Header
-- **`focusNextMonth`** <code>() =&#62; void</code> Focus the cell one month next
-  to the current date
-- **`focusPreviousMonth`** <code>() =&#62; void</code> Focus the cell one month
-  prev to the current date
-- **`focusPreviousYear`** <code>() =&#62; void</code> Focus the cell of the date
-  one year before the current date
-- **`focusNextYear`** <code>() =&#62; void</code> Focus the cell of the date one
-  year from the current date
-- **`isDisabled`** <code>boolean</code> `true` if the calendar is disabled
-- **`isRangeCalendar`** <code>boolean</code> `true` if the calendar is used as
-  RangeCalendar
-- **`isReadOnly`** <code>boolean</code> `true` if the calendar is only readonly
-- **`setFocused`** <code>(value: SetStateAction&#60;boolean&#62;) =&#62;
-  void</code> Sets `isFocused`
-- **`selectFocusedDate`** <code>() =&#62; void</code> Selects the `focusedDate`
-- **`focusEndOfMonth`** <code>() =&#62; void</code> Focus the cell of the last
-  day of the month
-- **`focusStartOfMonth`** <code>() =&#62; void</code> Focus the cell of the
-  first day of the month
-- **`focusNextDay`** <code>() =&#62; void</code> Focus the cell next to the
-  current date
-- **`focusPreviousDay`** <code>() =&#62; void</code> Focus the cell prev to the
-  current date
-- **`focusNextWeek`** <code>() =&#62; void</code> Focus the cell one week next
-  to the current date
-- **`focusPreviousWeek`** <code>() =&#62; void</code> Focus the cell one week
-  prev to the current date
-- **`setAnchorDate`** <code>(value: SetStateAction&#60;Date | null&#62;) =&#62;
-  void</code>
+| Name                     | Type                                                                   | Description                                                 |
+| :----------------------- | :--------------------------------------------------------------------- | :---------------------------------------------------------- |
+| **`calendarId`**         | <code>string \| undefined</code>                                       | Id for the Calendar Header                                  |
+| **`focusNextMonth`**     | <code>() =&#62; void</code>                                            | Focus the cell one month next to the current date           |
+| **`focusPreviousMonth`** | <code>() =&#62; void</code>                                            | Focus the cell one month prev to the current date           |
+| **`focusPreviousYear`**  | <code>() =&#62; void</code>                                            | Focus the cell of the date one year before the current date |
+| **`focusNextYear`**      | <code>() =&#62; void</code>                                            | Focus the cell of the date one year from the current date   |
+| **`isDisabled`**         | <code>boolean</code>                                                   | `true` if the calendar is disabled                          |
+| **`isRangeCalendar`**    | <code>boolean</code>                                                   | `true` if the calendar is used as RangeCalendar             |
+| **`isReadOnly`**         | <code>boolean</code>                                                   | `true` if the calendar is only readonly                     |
+| **`setFocused`**         | <code>(value: SetStateAction&#60;boolean&#62;) =&#62; void</code>      | Sets `isFocused`                                            |
+| **`selectFocusedDate`**  | <code>() =&#62; void</code>                                            | Selects the `focusedDate`                                   |
+| **`focusEndOfMonth`**    | <code>() =&#62; void</code>                                            | Focus the cell of the last day of the month                 |
+| **`focusStartOfMonth`**  | <code>() =&#62; void</code>                                            | Focus the cell of the first day of the month                |
+| **`focusNextDay`**       | <code>() =&#62; void</code>                                            | Focus the cell next to the current date                     |
+| **`focusPreviousDay`**   | <code>() =&#62; void</code>                                            | Focus the cell prev to the current date                     |
+| **`focusNextWeek`**      | <code>() =&#62; void</code>                                            | Focus the cell one week next to the current date            |
+| **`focusPreviousWeek`**  | <code>() =&#62; void</code>                                            | Focus the cell one week prev to the current date            |
+| **`setAnchorDate`**      | <code>(value: SetStateAction&#60;Date \| null&#62;) =&#62; void</code> |                                                             |
 
 </details>
 
 ### `CalendarHeader`
 
-- **`format`** <code>DateTimeFormatOpts | undefined</code>
+| Name         | Type                                         | Description |
+| :----------- | :------------------------------------------- | :---------- |
+| **`format`** | <code>DateTimeFormatOpts \| undefined</code> |             |
 
 <details><summary>2 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`calendarId`** <code>string | undefined</code> Id for the Calendar Header
-- **`currentMonth`** <code>Date</code> Month of the current Date
+| Name               | Type                             | Description                |
+| :----------------- | :------------------------------- | :------------------------- |
+| **`calendarId`**   | <code>string \| undefined</code> | Id for the Calendar Header |
+| **`currentMonth`** | <code>Date</code>                | Month of the current Date  |
 
 </details>
 
 ### `CalendarWeekTitle`
 
-- **`dayIndex`** <code>number</code>
+| Name           | Type                | Description |
+| :------------- | :------------------ | :---------- |
+| **`dayIndex`** | <code>number</code> |             |
 
 <details><summary>1 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`weekDays`** <code>{ title: string; abbr: string; }[]</code> Generated week
-  days for CalendarWeekTitle based on weekStart
+| Name           | Type                                            | Description                                                  |
+| :------------- | :---------------------------------------------- | :----------------------------------------------------------- |
+| **`weekDays`** | <code>{ title: string; abbr: string; }[]</code> | Generated week days for CalendarWeekTitle based on weekStart |
 
 </details>

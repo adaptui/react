@@ -18,17 +18,16 @@ import { RangeValueBase } from "../utils/types";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export interface DatePickerInitialState
-  extends ValueBase<string>,
-    RangeValueBase<string>,
-    Validation,
-    PickerBaseInitialState,
-    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-}
+export type DatePickerInitialState = ValueBase<string> &
+  RangeValueBase<string> &
+  Validation &
+  PickerBaseInitialState &
+  Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+  };
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const {

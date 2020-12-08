@@ -38,8 +38,8 @@ export default App;
 
 ### `Link`
 
-- **`disabled`** <code>boolean | undefined</code> Same as the HTML attribute.
-- **`focusable`** <code>boolean | undefined</code> When an element is
-  `disabled`, it may still be `focusable`. It works similarly to `readOnly` on
-  form elements. In this case, only `aria-disabled` will be set.
-- **`isExternal`** <code>boolean | undefined</code> Opens the link in a new tab
+| Name             | Type                              | Description                                                                                                                                                  |
+| :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
+| **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`isExternal`** | <code>boolean \| undefined</code> | Opens the link in a new tab                                                                                                                                  |

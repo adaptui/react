@@ -60,24 +60,22 @@ export default App;
 
 ### `useProgressState`
 
-- **`value`** <code>number | null</code> The `value` of the progress indicator.
-
-  If `null` the progress bar will be in `indeterminate` state
-
-- **`min`** <code>number</code> The minimum value of the progress
-- **`max`** <code>number</code> The maximum value of the
+| Name        | Type                        | Description                                                                                       |
+| :---------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
+| **`value`** | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
+| **`min`**   | <code>number</code>         | The minimum value of the progress                                                                 |
+| **`max`**   | <code>number</code>         | The maximum value of the                                                                          |
 
 ### `Progress`
 
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`value`** <code>number | null</code> The `value` of the progress indicator.
-
-  If `null` the progress bar will be in `indeterminate` state
-
-- **`min`** <code>number</code> The minimum value of the progress
-- **`max`** <code>number</code> The maximum value of the
-- **`isIndeterminate`** <code>boolean</code> Set isInterminate state
+| Name                  | Type                        | Description                                                                                       |
+| :-------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
+| **`value`**           | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
+| **`min`**             | <code>number</code>         | The minimum value of the progress                                                                 |
+| **`max`**             | <code>number</code>         | The maximum value of the                                                                          |
+| **`isIndeterminate`** | <code>boolean</code>        | Set isInterminate state                                                                           |
 
 </details>

@@ -70,36 +70,25 @@ const background = {
 
 ### `useMeterState`
 
-- **`value`** <code>number</code> The `value` of the meter indicator.
-
-  If `undefined`/`not valid` the meter bar will be equal to `min`
-
-- **`min`** <code>number</code> The minimum value of the meter
-- **`max`** <code>number</code> The maximum value of the meter
-- **`low`** <code>number</code> The higher limit of min range.
-
-  Defaults to `min`.
-
-- **`optimum`** <code>number</code> The lower limit of max range.
-
-  Defaults to `median of low & high`.
-
-- **`high`** <code>number</code> The lower limit of max range.
-
-  Defaults to `max`.
+| Name          | Type                | Description                                                                                        |
+| :------------ | :------------------ | :------------------------------------------------------------------------------------------------- |
+| **`value`**   | <code>number</code> | The `value` of the meter indicator.If `undefined`/`not valid` the meter bar will be equal to `min` |
+| **`min`**     | <code>number</code> | The minimum value of the meter                                                                     |
+| **`max`**     | <code>number</code> | The maximum value of the meter                                                                     |
+| **`low`**     | <code>number</code> | The higher limit of min range.Defaults to `min`.                                                   |
+| **`optimum`** | <code>number</code> | The lower limit of max range.Defaults to `median of low & high`.                                   |
+| **`high`**    | <code>number</code> | The lower limit of max range.Defaults to `max`.                                                    |
 
 ### `Meter`
 
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-- **`value`** <code>number</code> The `value` of the meter indicator.
-
-  If `undefined`/`not valid` the meter bar will be equal to `min`
-
-- **`min`** <code>number</code> The minimum value of the meter
-- **`max`** <code>number</code> The maximum value of the meter
-- **`percent`** <code>number</code> Percentage of the value progressed with
-  respect to min & max
+| Name          | Type                | Description                                                                                        |
+| :------------ | :------------------ | :------------------------------------------------------------------------------------------------- |
+| **`value`**   | <code>number</code> | The `value` of the meter indicator.If `undefined`/`not valid` the meter bar will be equal to `min` |
+| **`min`**     | <code>number</code> | The minimum value of the meter                                                                     |
+| **`max`**     | <code>number</code> | The maximum value of the meter                                                                     |
+| **`percent`** | <code>number</code> | Percentage of the value progressed with respect to min & max                                       |
 
 </details>

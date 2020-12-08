@@ -45,7 +45,7 @@ const TYPE_MAPPING = {
   dayperiod: "dayPeriod",
 };
 
-export interface SegmentInitialState {
+export type SegmentInitialState = {
   /**
    * Default segment value
    */
@@ -77,7 +77,7 @@ export interface SegmentInitialState {
    * Placeholder date
    */
   placeholderDate?: Date;
-}
+};
 
 export function useSegmentState(props: SegmentInitialState) {
   const [validSegments, setValidSegments] = useState(
