@@ -15,6 +15,12 @@ export default {
       ts: selectStyledTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "tailwind";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <Select {...args} />;

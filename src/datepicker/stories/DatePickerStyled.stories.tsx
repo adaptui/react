@@ -14,6 +14,12 @@ export default {
     maxValue: { control: "date" },
     defaultValue: { control: "date", defaultValue: new Date() },
   },
+  decorators: [
+    Story => {
+      document.body.id = "tailwind";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 const Base: Story = args => <DatePicker {...args} />;
