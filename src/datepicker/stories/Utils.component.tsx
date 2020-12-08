@@ -10,6 +10,7 @@ export const CalendarIcon = () => (
 export const DoubleChevronLeft = (props: any) => {
   return (
     <svg
+      style={{ width: 16 }}
       {...props}
       fill="none"
       stroke="currentColor"
@@ -19,8 +20,8 @@ export const DoubleChevronLeft = (props: any) => {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 19l-7-7 7-7"
+        strokeWidth={2}
+        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
       />
     </svg>
   );
@@ -29,26 +30,30 @@ export const DoubleChevronLeft = (props: any) => {
 export const ChevronLeft = (props: any) => {
   return (
     <svg
+      style={{ width: 16 }}
       {...props}
+      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
-        d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+        strokeWidth={2}
+        d="M15 19l-7-7 7-7"
       />
     </svg>
   );
 };
 
 export const ChevronRight = (props: any) => (
-  <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
+  <ChevronLeft style={{ transform: "rotate(180deg)", width: 16 }} {...props} />
 );
 
 export const DoubleChevronRight = (props: any) => (
-  <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
+  <DoubleChevronLeft
+    style={{ transform: "rotate(180deg)", width: 16 }}
+    {...props}
+  />
 );
