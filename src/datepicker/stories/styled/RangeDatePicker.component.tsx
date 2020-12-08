@@ -20,7 +20,7 @@ export const RangeDatePicker: React.FC<DateRangePickerInitialState> = props => {
   return (
     <>
       <DatePickerWrapper
-        className="datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300"
+        className="styled-datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300"
         {...state}
       >
         <div className="flex gap-4 justify-between p-2 pr-4 pl-4 rounded-md">

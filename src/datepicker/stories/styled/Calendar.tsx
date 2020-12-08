@@ -21,7 +21,7 @@ export const Calendar: React.FC<CalendarStateReturn> = state => {
   return (
     <CalendarWrapper
       {...state}
-      className="calendar p-3 rounded-md bg-white shadow-lg w-max"
+      className="styled-datepicker calendar p-3 rounded-md bg-white shadow-lg w-max"
     >
       <div className="flex justify-between">
         <CalendarButton
