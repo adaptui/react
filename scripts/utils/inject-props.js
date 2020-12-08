@@ -135,6 +135,8 @@ function isInitialStateDeclaration(node) {
  */
 function getComment(symbol) {
   const jsDocs = getJsDocs(symbol);
+  console.log("%c jsDocs", "color: #731d6d", jsDocs);
+
   if (!jsDocs) return "";
   return jsDocs.getDescription().trim();
 }
@@ -198,7 +200,7 @@ function getPropTypesMarkdown(types) {
         ### \`${title}\`
 
         ${rows.length < 1 ? (hiddenRows ? "" : "No props to show") : table}
-        
+
         ${hiddenRows}
       `;
     })

@@ -26,17 +26,16 @@ import { useRangeCalendarState } from "../calendar";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
-export interface DateRangePickerInitialState
-  extends ValueBase<RangeValue<string>>,
-    RangeValueBase<string>,
-    Validation,
-    PickerBaseInitialState,
-    Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> {
-  /**
-   * Whether the element should receive focus on render.
-   */
-  autoFocus?: boolean;
-}
+export type DateRangePickerInitialState = ValueBase<RangeValue<string>> &
+  RangeValueBase<string> &
+  Validation &
+  PickerBaseInitialState &
+  Pick<Partial<SegmentInitialState>, "formatOptions" | "placeholderDate"> & {
+    /**
+     * Whether the element should receive focus on render.
+     */
+    autoFocus?: boolean;
+  };
 
 export const useDateRangePickerState = (
   props: DateRangePickerInitialState = {},

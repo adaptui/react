@@ -10,6 +10,7 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 - [Usage](#usage)
 - [Composition](#composition)
 - [Props](#props)
+  - [`useSegmentState`](#usesegmentstate)
   - [`Segment`](#segment)
   - [`SegmentField`](#segmentfield)
 
@@ -42,7 +43,7 @@ export const App = props => {
 export default App;
 ```
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/629us)
+[Segment - Open On Sandbox](https://codesandbox.io/s/3wjgt)
 
 ## Composition
 
@@ -50,6 +51,16 @@ export default App;
 - SegmentField uses [useComposite](https://reakit.io/docs/composite)
 
 ## Props
+
+### `useSegmentState`
+
+| Name                  | Type                                                                                                                                  | Description                                                                                                                                                 |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`defaultValue`**    | <code>Date \| undefined</code>                                                                                                        | Default segment value                                                                                                                                       |
+| **`value`**           | <code>Date \| undefined</code>                                                                                                        | Segment value                                                                                                                                               |
+| **`onChange`**        | <code title="((value: Date, ...args: any[]) =&#62; void) \| undefined">((value: Date, ...args: any[]) =&#62; void) \| undef...</code> | Callback to fire on value change                                                                                                                            |
+| **`formatOptions`**   | <code>DateTimeFormatOpts \| undefined</code>                                                                                          | Sets formmating of date based on Intl.DateFormatOptionshttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat |
+| **`placeholderDate`** | <code>Date \| undefined</code>                                                                                                        | Placeholder date                                                                                                                                            |
 
 ### `Segment`
 

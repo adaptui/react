@@ -77,7 +77,7 @@ export const App = props => {
 export default App;
 ```
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/p92pq)
+[Pagination - Open On Sandbox](https://codesandbox.io/s/cwuhv)
 
 ## Accessibility Requirement
 

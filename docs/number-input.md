@@ -52,7 +52,7 @@ export const App = props => {
 export default App;
 ```
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/0twyb)
+[NumberInput - Open On Sandbox](https://codesandbox.io/s/j0wly)
 
 ## Accessibility Requirement
 

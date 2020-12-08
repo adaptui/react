@@ -65,9 +65,9 @@ export function App(props) {
 export default App;
 ```
 
-[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/dso90)
+[Accordion Basic - Open on Sandbox](https://codesandbox.io/s/scil2)
 
-[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/69twh)
+[Accordion Styled - Open on Sandbox](https://codesandbox.io/s/lonmk)
 
 ## Accessibility Requirements
 

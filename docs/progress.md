@@ -40,11 +40,11 @@ export const App = props => {
 export default App;
 ```
 
-[Progress Basic- Open On Sandbox](https://codesandbox.io/s/se4fy)
+[Progress Basic- Open On Sandbox](https://codesandbox.io/s/cov1f)
 
-[Progress Linear- Open On Sandbox](https://codesandbox.io/s/veo6j)
+[Progress Linear- Open On Sandbox](https://codesandbox.io/s/0p2yo)
 
-[Progress Circular - Open On Sandbox](https://codesandbox.io/s/n1nyq)
+[Progress Circular - Open On Sandbox](https://codesandbox.io/s/e3eun)
 
 ## Accessibility Requirement
 
