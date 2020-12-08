@@ -9,6 +9,7 @@ import {
 
 export const App: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
+  console.log("%c state.segments", "color: #1d5673", state.segments);
 
   return (
     <div>

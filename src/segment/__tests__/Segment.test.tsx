@@ -3,13 +3,13 @@ import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, render, press, screen } from "reakit-test-utils";
 
-import { repeat } from "../../utils/test-utils";
 import {
   Segment,
   SegmentField,
   useSegmentState,
   SegmentInitialState,
-} from "..";
+} from "../index";
+import { repeat } from "../../utils/test-utils";
 
 afterEach(cleanup);
 
