@@ -42,12 +42,18 @@ export function useAccordionState(
   let selectedIdProp;
   let defaultSelectedId;
   let onSelectedIdChange;
-  if (props.allowMultiple === false || !props.allowMultiple) {
-    // @ts-ignore
+
+  // @see https://github.com/microsoft/TypeScript/issues/12184
+  // @see https://stackoverflow.com/a/61181442/10629172
+  function isUndefinedDiscrimination(
+    props: AccordionInitialStateSingle | AccordionInitialStateMulti,
+  ): props is AccordionInitialStateSingle {
+    return props.allowMultiple === false || props.allowMultiple === undefined;
+  }
+
+  if (isUndefinedDiscrimination(props)) {
     selectedIdProp = props.selectedId;
-    // @ts-ignore
     defaultSelectedId = props.defaultSelectedId || null;
-    // @ts-ignore
     onSelectedIdChange = props.onSelectedIdChange;
   }
 
