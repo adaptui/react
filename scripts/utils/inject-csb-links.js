@@ -19,7 +19,7 @@ const injectCsbLinks = async docsTemplate => {
         .replace("<!-- CODESANDBOX", "")
         .replace("-->", "");
       const parsed = yaml.parse(ymlString);
-      const linkTitle = parsed.link_title || "Open On CodeSandbox";
+      const linkTitle = parsed.link_title.split(" ").join("%20");
 
       const sandboxLink = await getSandboxShortURL(parsed);
       return { sandboxLink, linkTitle };
@@ -32,7 +32,7 @@ const injectCsbLinks = async docsTemplate => {
   result.forEach(({ value: { sandboxLink, linkTitle } }) => {
     docsTemplate = docsTemplate.replace(
       CODESANDBOX_REPLACE_FLAG,
-      `[${linkTitle}](${sandboxLink})`,
+      `[![Edit CodeSandbox](https://img.shields.io/badge/${linkTitle}-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](${sandboxLink})`,
     );
   });
 

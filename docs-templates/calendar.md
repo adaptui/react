@@ -50,13 +50,13 @@ Also we can customize and style the ranges with CSS attribute selectors
 ```
 
 <!-- CODESANDBOX
-link_title: Calendar - Open On Sandbox
+link_title: Calendar
 js: src/calendar/stories/__js/CalendarBase.component.jsx
 css: src/calendar/stories/CalendarBase.css
 -->
 
 <!-- CODESANDBOX
-link_title: RangeCalendar - Open On Sandbox
+link_title: RangeCalendar
 js: src/calendar/stories/__js/CalendarRange.component.jsx
 css: src/calendar/stories/CalendarRange.css
 -->

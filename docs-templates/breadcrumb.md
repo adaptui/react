@@ -13,7 +13,7 @@ for its
 <!-- IMPORT_EXAMPLE src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Breadcrumbs Basic - Open on Sandbox
+link_title: Breadcrumbs Basic
 js: src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx
 css: src/breadcrumbs/stories/Breadcrumbs.css
 -->

@@ -135,7 +135,6 @@ function isInitialStateDeclaration(node) {
  */
 function getComment(symbol) {
   const jsDocs = getJsDocs(symbol);
-  console.log("%c jsDocs", "color: #731d6d", jsDocs);
 
   if (!jsDocs) return "";
   return jsDocs.getDescription().trim();

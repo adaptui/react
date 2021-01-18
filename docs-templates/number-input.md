@@ -14,7 +14,7 @@ for the accessibility features.
 <!-- IMPORT_EXAMPLE src/number-input/stories/__js/NumberInput.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: NumberInput - Open On Sandbox
+link_title: NumberInput
 js: src/number-input/stories/__js/NumberInput.component.jsx
 -->
 

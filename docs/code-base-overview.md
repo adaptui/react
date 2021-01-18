@@ -83,7 +83,7 @@ link
 - Usage:
   ```md
   <!-- CODESANDBOX
-  link_title: Accordion Example Live Demo
+  link_title: Accordion Example
   js: src/accordion/stories/__js/AccordionBasic.component.jsx
   css: src/accordion/stories/AccordionStyled.css
   -->

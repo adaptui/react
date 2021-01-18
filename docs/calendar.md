@@ -141,9 +141,9 @@ Also we can customize and style the ranges with CSS attribute selectors
 }
 ```
 
-[Calendar - Open On Sandbox](https://codesandbox.io/s/z5377)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z5377)
 
-[RangeCalendar - Open On Sandbox](https://codesandbox.io/s/lxxfg)
+[![Edit CodeSandbox](https://img.shields.io/badge/RangeCalendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/lxxfg)
 
 ## Composition
 

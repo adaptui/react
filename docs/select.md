@@ -54,19 +54,19 @@ export const App = props => {
 export default App;
 ```
 
-[Select - Open On Sandbox](https://codesandbox.io/s/rq2qc)
+[![Edit CodeSandbox](https://img.shields.io/badge/Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rq2qc)
 
-[Dynamic Select - Open On Sandbox](https://codesandbox.io/s/34ihp)
+[![Edit CodeSandbox](https://img.shields.io/badge/Dynamic%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/34ihp)
 
-[Multiple Select - Open On Sandbox](https://codesandbox.io/s/dybrt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multiple%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/dybrt)
 
-[Fetch Select - Open On Sandbox](https://codesandbox.io/s/eg10b)
+[![Edit CodeSandbox](https://img.shields.io/badge/Fetch%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/eg10b)
 
-[Windows Select - Open On Sandbox](https://codesandbox.io/s/g7257)
+[![Edit CodeSandbox](https://img.shields.io/badge/Windows%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/g7257)
 
-[Custom Select - Open On Sandbox](https://codesandbox.io/s/f2sbj)
+[![Edit CodeSandbox](https://img.shields.io/badge/Custom%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/f2sbj)
 
-[Controlled Select - Open On Sandbox](https://codesandbox.io/s/yc1tx)
+[![Edit CodeSandbox](https://img.shields.io/badge/Controlled%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yc1tx)
 
 ## Composition
 

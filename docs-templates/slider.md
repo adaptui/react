@@ -15,37 +15,37 @@ for the
 <!-- IMPORT_EXAMPLE src/slider/stories/__js/components/SingleSlider.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Single Slider - Open On Sandbox
+link_title: Single Slider
 js: src/slider/stories/__js/components/SingleSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->
 
 <!-- CODESANDBOX
-link_title: Single Origin Slider - Open On Sandbox
+link_title: Single Origin Slider
 js: src/slider/stories/__js/components/SingleOriginSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->
 
 <!-- CODESANDBOX
-link_title: Single Reversed Slider - Open On Sandbox
+link_title: Single Reversed Slider
 js: src/slider/stories/__js/components/SingleReversedSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->
 
 <!-- CODESANDBOX
-link_title: Single Vertical Slider - Open On Sandbox
+link_title: Single Vertical Slider
 js: src/slider/stories/__js/components/SingleVerticalSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->
 
 <!-- CODESANDBOX
-link_title: Range Slider - Open On Sandbox
+link_title: Range Slider
 js: src/slider/stories/__js/components/RangeSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->
 
 <!-- CODESANDBOX
-link_title: Multi Slider - Open On Sandbox
+link_title: Multi Slider
 js: src/slider/stories/__js/components/MultiSlider.component.jsx
 css: src/slider/stories/Slider.css
 -->

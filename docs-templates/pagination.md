@@ -10,7 +10,7 @@ navigation.
 <!-- IMPORT_EXAMPLE src/pagination/stories/__js/Pagination.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Pagination - Open On Sandbox
+link_title: Pagination
 js: src/pagination/stories/__js/Pagination.component.jsx
 -->
 

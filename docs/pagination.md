@@ -77,7 +77,7 @@ export const App = props => {
 export default App;
 ```
 
-[Pagination - Open On Sandbox](https://codesandbox.io/s/cwuhv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/cwuhv)
 
 ## Accessibility Requirement
 

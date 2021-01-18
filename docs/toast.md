@@ -101,10 +101,10 @@ We also have to add the `animationTimeout` inorder to specify a delay before
 removing the toast from the state, this would ensure the CSS or any other
 animations has the chance to finish without being interrupted.
 
-[Toast Basic - Open On Sandbox](https://codesandbox.io/s/yf6i7)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yf6i7)
 
-[Toast Styled - Open On Sandbox](https://codesandbox.io/s/1297l)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1297l)
 
-[Toast CSS Animated - Open On Sandbox](https://codesandbox.io/s/i0emy)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/i0emy)
 
-[Toast React Spring - Open On Sandbox](https://codesandbox.io/s/2uhsj)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2uhsj)
