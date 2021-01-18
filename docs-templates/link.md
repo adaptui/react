@@ -14,7 +14,7 @@ and
 <!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Link - Open on Sandbox
+link_title: Link
 js: src/link/stories/__js/Link.component.jsx
 -->
 

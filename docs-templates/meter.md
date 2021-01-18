@@ -12,13 +12,13 @@ that varies within a defined range. It follows the
 <!-- IMPORT_EXAMPLE src/meter/stories/__js/MeterBasic.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Meter Basic- Open On Sandbox
+link_title: Meter Basic
 js: src/meter/stories/__js/MeterBasic.component.jsx
 css: src/meter/stories/MeterBasic.css
 -->
 
 <!-- CODESANDBOX
-link_title: Meter Styled - Open On Sandbox
+link_title: Meter Styled
 js: src/meter/stories/__js/MeterStyled.component.jsx
 deps: ['@emotion/css']
 -->

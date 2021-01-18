@@ -15,12 +15,12 @@ for
 <!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Accordion Basic - Open on Sandbox
+link_title: Accordion Basic
 js: src/accordion/stories/__js/AccordionBasic.component.jsx
 -->
 
 <!-- CODESANDBOX
-link_title: Accordion Styled - Open on Sandbox
+link_title: Accordion Styled
 js: src/accordion/stories/__js/AccordionStyled.component.jsx
 css: src/accordion/stories/AccordionStyled.css
 -->

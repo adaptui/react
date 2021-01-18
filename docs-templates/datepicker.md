@@ -18,13 +18,13 @@ for the keyboard navigation & accessibility features.
 <!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePickerRange.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: DatePicker - Open On Sandbox
+link_title: DatePicker
 js: src/datepicker/stories/__js/DatePicker.component.jsx
 css: src/datepicker/stories/DatePickerBase.css
 -->
 
 <!-- CODESANDBOX
-link_title: RangeDatePicker - Open On Sandbox
+link_title: RangeDatePicker
 js: src/datepicker/stories/__js/DateRangePicker.component.jsx
 css: src/datepicker/stories/DatePickerRange.css
 -->

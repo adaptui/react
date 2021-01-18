@@ -13,47 +13,47 @@ for the show/hide.
 <!-- IMPORT_EXAMPLE src/select/stories/__js/Select.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Select - Open On Sandbox
+link_title: Select
 js: src/select/stories/__js/Select.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Dynamic Select - Open On Sandbox
+link_title: Dynamic Select
 js: src/select/stories/__js/SelectDynamic.component.jsx
 utils: src/select/stories/__js/Utils.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Multiple Select - Open On Sandbox
+link_title: Multiple Select
 js: src/select/stories/__js/SelectMultiple.component.jsx
 utils: src/select/stories/__js/Utils.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Fetch Select - Open On Sandbox
+link_title: Fetch Select
 js: src/select/stories/__js/SelectFetch.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Windows Select - Open On Sandbox
+link_title: Windows Select
 js: src/select/stories/__js/SelectWindows.component.jsx
 utils: src/select/stories/__js/Utils.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Custom Select - Open On Sandbox
+link_title: Custom Select
 js: src/select/stories/__js/SelectCustom.component.jsx
 utils: src/select/stories/__js/Utils.component.jsx
 css: src/select/stories/Select.css
 -->
 
 <!-- CODESANDBOX
-link_title: Controlled Select - Open On Sandbox
+link_title: Controlled Select
 js: src/select/stories/__js/SelectControlled.component.jsx
 utils: src/select/stories/__js/Utils.component.jsx
 css: src/select/stories/Select.css

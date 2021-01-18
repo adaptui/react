@@ -95,7 +95,7 @@ const cssTransforms = {
 };
 ```
 
-[Drawer - Open On Sandbox](https://codesandbox.io/s/ostxr)
+[![Edit CodeSandbox](https://img.shields.io/badge/Drawer-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ostxr)
 
 ## Composition
 

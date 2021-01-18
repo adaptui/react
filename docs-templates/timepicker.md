@@ -12,7 +12,7 @@ for the keyboard navigation & accessibility features.
 <!-- IMPORT_EXAMPLE src/timepicker/stories/__js/TimePicker.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: TimePicker - Open On Sandbox
+link_title: TimePicker
 js: src/timepicker/stories/__js/TimePicker.component.jsx
 css: src/timepicker/stories/TimePicker.css
 -->

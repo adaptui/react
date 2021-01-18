@@ -11,7 +11,7 @@ component to provide the drawer ability from four ends. It follows the
 <!-- IMPORT_EXAMPLE src/drawer/stories/__js/Drawer.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Drawer - Open On Sandbox
+link_title: Drawer
 js: src/drawer/stories/__js/Drawer.component.jsx
 -->
 

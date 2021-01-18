@@ -12,7 +12,7 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 <!-- IMPORT_EXAMPLE src/segment/stories/__js/Segment.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: Segment - Open On Sandbox
+link_title: Segment
 js: src/segment/stories/__js/Segment.component.jsx
 -->
 

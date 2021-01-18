@@ -43,7 +43,7 @@ export const App = props => {
 export default App;
 ```
 
-[Segment - Open On Sandbox](https://codesandbox.io/s/3wjgt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Segment-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3wjgt)
 
 ## Composition
 

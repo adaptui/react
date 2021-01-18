@@ -52,7 +52,7 @@ export const App = props => {
 export default App;
 ```
 
-[NumberInput - Open On Sandbox](https://codesandbox.io/s/j0wly)
+[![Edit CodeSandbox](https://img.shields.io/badge/NumberInput-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/j0wly)
 
 ## Accessibility Requirement
 

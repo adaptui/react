@@ -11,7 +11,7 @@
 <!-- IMPORT_EXAMPLE src/picker-base/stories/__js/PickerBase.component.jsx -->
 
 <!-- CODESANDBOX
-link_title: PickerBase - Open On Sandbox
+link_title: PickerBase
 js: src/picker-base/stories/__js/PickerBase.component.jsx
 -->
 

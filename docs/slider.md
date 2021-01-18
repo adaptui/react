@@ -90,17 +90,17 @@ export const App = args => {
 export default App;
 ```
 
-[Single Slider - Open On Sandbox](https://codesandbox.io/s/1oixd)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1oixd)
 
-[Single Origin Slider - Open On Sandbox](https://codesandbox.io/s/mkdgw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mkdgw)
 
-[Single Reversed Slider - Open On Sandbox](https://codesandbox.io/s/f6hfw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/f6hfw)
 
-[Single Vertical Slider - Open On Sandbox](https://codesandbox.io/s/usf1j)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/usf1j)
 
-[Range Slider - Open On Sandbox](https://codesandbox.io/s/94sn8)
+[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/94sn8)
 
-[Multi Slider - Open On Sandbox](https://codesandbox.io/s/4vqux)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multi%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4vqux)
 
 ## Accessibility Requirement
 
