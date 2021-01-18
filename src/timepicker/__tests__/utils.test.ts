@@ -7,8 +7,8 @@ import MockDate from "mockdate";
 
 describe("TimePicker Utils", () => {
   test("parseTime", () => {
-    expect(parseTime("12:40")?.toLocaleTimeString()).toBe("12:40:00 PM");
-    expect(parseTime("23:01")?.toLocaleTimeString()).toBe("11:01:00 PM");
+    expect(parseTime("12:40")?.toLocaleTimeString()).toBe("12:40:00");
+    expect(parseTime("23:01")?.toLocaleTimeString()).toBe("23:01:00");
     expect(parseTime("1:1")?.toLocaleTimeString()).toBeUndefined();
   });
 
