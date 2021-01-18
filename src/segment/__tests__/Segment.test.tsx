@@ -1,4 +1,5 @@
 import * as React from "react";
+import MockDate from "mockdate";
 import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, render, press, screen } from "reakit-test-utils";
@@ -11,6 +12,9 @@ import {
 } from "../index";
 import { repeat } from "../../utils/test-utils";
 
+beforeAll(() => {
+  MockDate.set(new Date("1/1/2020"));
+});
 afterEach(cleanup);
 
 const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
