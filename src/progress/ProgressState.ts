@@ -36,33 +36,27 @@ export interface ProgressState {
   percent: number | null;
 }
 
-export interface ProgressAction {
-  /**
-   * Update the value of the progress indicator
-   */
-  setValue: React.Dispatch<React.SetStateAction<number | null>>;
-}
-
 export type ProgressInitialState = Pick<
   Partial<ProgressState>,
   "value" | "min" | "max"
 >;
 
-export type ProgressStateReturn = ProgressState & ProgressAction;
+export type ProgressStateReturn = ProgressState;
 
 export function useProgressState(
   props: ProgressInitialState = {},
 ): ProgressStateReturn {
-  const { value: defaultValue = 0, min = 0, max = 100 } = props;
-  const [value, setValue] = React.useState(clampValue(defaultValue, min, max));
-  const percent = isNull(value) ? null : valueToPercent(value, min, max);
+  const { value = 0, min = 0, max = 100 } = props;
+  const clampedValue = clampValue(value, min, max);
+  const percent = isNull(clampedValue)
+    ? null
+    : valueToPercent(clampedValue, min, max);
 
   return {
-    value,
-    setValue,
+    value: clampedValue,
     min,
     max,
-    isIndeterminate: isNull(value),
+    isIndeterminate: isNull(clampedValue),
     percent,
   };
 }
