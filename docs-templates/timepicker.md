@@ -15,6 +15,7 @@ for the keyboard navigation & accessibility features.
 link_title: TimePicker
 js: src/timepicker/stories/__js/TimePicker.component.jsx
 css: src/timepicker/stories/TimePicker.css
+utils: src/timepicker/stories/__js/Utils.component.jsx
 -->
 
 <!-- INJECT_COMPOSITION src/timepicker -->

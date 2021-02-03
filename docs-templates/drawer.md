@@ -13,6 +13,7 @@ component to provide the drawer ability from four ends. It follows the
 <!-- CODESANDBOX
 link_title: Drawer
 js: src/drawer/stories/__js/Drawer.component.jsx
+deps: ["@emotion/css"]
 -->
 
 <!-- INJECT_COMPOSITION src/drawer -->

@@ -113,7 +113,7 @@ export const App = props => {
 export default App;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/v6nh4)
+[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vqzej)
 
 ## Composition
 
