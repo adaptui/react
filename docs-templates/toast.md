@@ -52,6 +52,7 @@ link_title: Toast CSS Animated
 js: src/toast/stories/__js/ToastCSSAnimated.component.jsx
 utils: src/toast/stories/__js/Utils.component.jsx
 css: src/toast/stories/ToastStyled.css
+deps: ["react-transition-group"]
 -->
 
 <!-- CODESANDBOX
@@ -59,4 +60,5 @@ link_title: Toast React Spring
 js: src/toast/stories/__js/ToastReactSpring.component.jsx
 utils: src/toast/stories/__js/Utils.component.jsx
 css: src/toast/stories/ToastStyled.css
+deps: ["react-spring"]
 -->

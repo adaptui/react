@@ -19,14 +19,16 @@ for the keyboard navigation & accessibility features.
 
 <!-- CODESANDBOX
 link_title: DatePicker
-js: src/datepicker/stories/__js/DatePicker.component.jsx
+js: src/datepicker/stories/__js/DatePickerBase.component.jsx
 css: src/datepicker/stories/DatePickerBase.css
+utils: src/datepicker/stories/__js/Utils.component.jsx
 -->
 
 <!-- CODESANDBOX
 link_title: RangeDatePicker
-js: src/datepicker/stories/__js/DateRangePicker.component.jsx
+js: src/datepicker/stories/__js/DatePickerRange.component.jsx
 css: src/datepicker/stories/DatePickerRange.css
+utils: src/datepicker/stories/__js/Utils.component.jsx
 -->
 
 <!-- INJECT_COMPOSITION src/datepicker -->

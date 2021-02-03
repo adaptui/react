@@ -53,12 +53,14 @@ Also we can customize and style the ranges with CSS attribute selectors
 link_title: Calendar
 js: src/calendar/stories/__js/CalendarBase.component.jsx
 css: src/calendar/stories/CalendarBase.css
+utils: src/calendar/stories/__js/Utils.component.jsx
 -->
 
 <!-- CODESANDBOX
 link_title: RangeCalendar
 js: src/calendar/stories/__js/CalendarRange.component.jsx
 css: src/calendar/stories/CalendarRange.css
+utils: src/calendar/stories/__js/Utils.component.jsx
 -->
 
 <!-- INJECT_COMPOSITION src/calendar -->
