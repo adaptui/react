@@ -76,6 +76,6 @@ export default App;
 | **`value`**           | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
 | **`min`**             | <code>number</code>         | The minimum value of the progress                                                                 |
 | **`max`**             | <code>number</code>         | The maximum value of the                                                                          |
-| **`isIndeterminate`** | <code>boolean</code>        | Set isInterminate state                                                                           |
+| **`isIndeterminate`** | <code>boolean</code>        | `true` if `value` is `null`                                                                       |
 
 </details>
