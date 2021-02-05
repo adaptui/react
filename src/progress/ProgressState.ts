@@ -27,7 +27,7 @@ export interface ProgressState {
    */
   max: number;
   /**
-   * Set isInterminate state
+   * `true` if `value` is `null`
    */
   isIndeterminate: boolean;
   /**

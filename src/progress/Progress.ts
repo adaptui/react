@@ -13,7 +13,10 @@ import { dataAttr, isNull } from "../utils";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressOptions = RoleOptions &
-  Pick<ProgressStateReturn, "isIndeterminate" | "value" | "max" | "min">;
+  Pick<
+    Partial<ProgressStateReturn>,
+    "isIndeterminate" | "value" | "max" | "min"
+  >;
 
 export type ProgressHTMLProps = RoleHTMLProps;
 
@@ -47,7 +50,7 @@ export const Progress = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://www.w3.org/TR/wai-aria-1.1/#progressbar",
+      "See https://www.w3.org/TR/wai-aria-1.2/#progressbar",
     );
     return useCreateElement(type, props, children);
   },
