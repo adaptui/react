@@ -55,6 +55,7 @@ type ToastWrapper = (
     id: string;
     placement: Placements;
     isVisible?: boolean;
+    index: number;
   }>,
 ) => any;
 
@@ -118,13 +119,14 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
           ...PLACEMENTS[placement],
         }}
       >
-        {toastsList.map(toast => {
+        {toastsList.map((toast, index) => {
           const { id, type, content, timeout, autoDismiss, isVisible } = toast;
 
           return (
             <ToastWrapperComponent
               key={id}
               id={id}
+              index={index}
               isVisible={isVisible}
               placement={placement}
             >
