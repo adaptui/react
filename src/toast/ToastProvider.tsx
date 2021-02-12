@@ -18,9 +18,9 @@ const PLACEMENTS = {
 };
 
 // let's infer the union types from the placement values instead of hardcoding them
-export type Placements = keyof typeof PLACEMENTS;
+export type ToastPlacements = keyof typeof PLACEMENTS;
 
-interface ToastContextState extends ToastStateReturn {
+export interface ToastContextState extends ToastStateReturn {
   toastTypes: ToastTypes;
 }
 
@@ -50,16 +50,16 @@ export type ToastTypes = Record<
   >
 >;
 
-type ToastWrapper = (
+export type ToastWrapper = (
   props: React.PropsWithChildren<{
     id: string;
-    placement: Placements;
+    placement: ToastPlacements;
     isVisible?: boolean;
     index: number;
   }>,
 ) => any;
 
-type ToastProviderProps = {
+export type ToastProviderProps = {
   /**
    * Specify types of toast in an object
    */
@@ -69,7 +69,7 @@ type ToastProviderProps = {
    *
    * @default "bottom-center"
    */
-  placement?: Placements;
+  placement?: ToastPlacements;
   /**
    * If True the toast will automatically dismiss after the specified duration
    */

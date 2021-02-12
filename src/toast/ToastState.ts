@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Placements } from "./ToastProvider";
+import { ToastPlacements } from "./ToastProvider";
 
 type StringOrElement = string | React.ReactNode;
 
@@ -22,7 +22,7 @@ export interface Toast {
    *
    * @default "bottom-center"
    */
-  placement: Placements;
+  placement: ToastPlacements;
   /**
    * Timeout after the toast will be removed automatically if autoDismiss is true
    */
@@ -38,10 +38,10 @@ export interface Toast {
 }
 
 export type ToastList = Record<string, Toast>;
-export type SortedToastList = Record<Placements, Toast[]>;
+export type SortedToastList = Record<ToastPlacements, Toast[]>;
 
 interface ToastStateProps {
-  defaultPlacement?: Placements;
+  defaultPlacement?: ToastPlacements;
   animationTimeout?: number;
 }
 
