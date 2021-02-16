@@ -44,7 +44,8 @@ export function useToast() {
 export type ToastTypes = Record<
   string,
   React.FC<
-    Pick<Toast, "content" | "id" | "isVisible"> & {
+    Pick<Toast, "id" | "isVisible"> & {
+      content: any;
       hideToast: ToastStateReturn["hideToast"];
     }
   >

@@ -2,8 +2,6 @@ import React from "react";
 
 import { ToastPlacements } from "./ToastProvider";
 
-type StringOrElement = string | React.ReactNode;
-
 export interface Toast {
   /**
    * Unique id for the toast
@@ -16,7 +14,7 @@ export interface Toast {
   /**
    * Content inside the toast
    */
-  content?: StringOrElement;
+  content?: any;
   /**
    * Sets the placement of the toast
    *
