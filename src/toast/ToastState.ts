@@ -135,6 +135,12 @@ export const useToastState = ({
     [toasts],
   );
 
+  const removeAllToasts = () => {
+    Object.values(toasts).forEach(toast => {
+      removeToast(toast.id);
+    });
+  };
+
   return {
     toasts,
     sortedToasts,
@@ -142,6 +148,7 @@ export const useToastState = ({
     hideToast,
     toggleToast,
     removeToast,
+    removeAllToasts,
     isToastVisible,
   };
 };
