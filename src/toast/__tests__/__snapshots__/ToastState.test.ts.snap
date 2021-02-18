@@ -4,6 +4,7 @@ exports[`ToastState should render correctly 1`] = `
 Object {
   "hideToast": [Function],
   "isToastVisible": [Function],
+  "removeAllToasts": [Function],
   "removeToast": [Function],
   "showToast": [Function],
   "sortedToasts": Object {

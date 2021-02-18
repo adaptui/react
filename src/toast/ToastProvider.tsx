@@ -91,6 +91,18 @@ export type ToastProviderProps = {
    * Wrapper function to enhance the behaviour of ToastController
    */
   toastWrapper?: ToastWrapper;
+  /**
+   * Toast container class name
+   *
+   * @default "toast__container"
+   */
+  className?: string;
+  /**
+   * Toast class name
+   *
+   * @default "toast"
+   */
+  toastClassName?: string;
 };
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
@@ -101,6 +113,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   toastWrapper: ToastWrapperComponent = ({ children }) => children,
   autoDismiss: providerAutoDismiss,
   autoCloseTimeout: providerTimeout = DEFAULT_TIMEOUT,
+  className = "toast__container",
+  toastClassName = "toast",
 }) => {
   const state = useToastState({
     defaultPlacement: providerPlacement,
@@ -114,7 +128,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     return (
       <div
         key={placement}
-        className={`toast__container toast__container--${placement}`}
+        className={`${className} ${className}--${placement}`}
         style={{
           position: "fixed",
           ...PLACEMENTS[placement],
@@ -133,6 +147,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
             >
               <ToastController
                 id={id}
+                className={toastClassName}
                 onRequestRemove={hideToast}
                 duration={timeout ?? providerTimeout}
                 autoDismiss={autoDismiss ?? providerAutoDismiss}

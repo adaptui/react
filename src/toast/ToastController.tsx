@@ -26,6 +26,12 @@ interface ToastControllerProps {
    * Callback to fire when toast is flagged as removed
    */
   onRequestRemove: (id: string) => void;
+  /**
+   * Toast class name
+   *
+   * @default "toast"
+   */
+  className?: string;
 }
 
 export const ToastController: React.FC<ToastControllerProps> = ({
@@ -34,6 +40,7 @@ export const ToastController: React.FC<ToastControllerProps> = ({
   autoDismiss,
   onRequestRemove,
   dragThreshold = 100,
+  className = "toast",
   children,
 }) => {
   const [delay, setDelay] = React.useState<number | null>(duration);
@@ -104,7 +111,7 @@ export const ToastController: React.FC<ToastControllerProps> = ({
     onTouchEnd: dragEnd,
     onTouchMove: drag,
     role: "alert",
-    className: "toast",
+    className,
     style: {
       transform: `translateX(${posX}px)`,
       ...(active && { transition: "none" }),
