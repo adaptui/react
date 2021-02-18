@@ -8,17 +8,43 @@ import { ToastController } from "./ToastController";
 import { Toast, useToastState, ToastStateReturn } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
-const PLACEMENTS = {
-  "top-left": { top: 0, left: 0 },
-  "top-center": { top: 0, left: "50%", transform: "translateX(-50%)" },
-  "top-right": { top: 0, right: 0 },
-  "bottom-left": { bottom: 0, left: 0 },
-  "bottom-center": { bottom: 0, left: "50%", transform: "translateX(-50%)" },
-  "bottom-right": { bottom: 0, right: 0 },
+const DEFAULT_PLACEMENTS: Record<string, React.CSSProperties> = {
+  "top-left": {
+    position: "fixed",
+    top: 0,
+    left: 0,
+  },
+  "top-center": {
+    position: "fixed",
+    top: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
+  "top-right": {
+    position: "fixed",
+    top: 0,
+    right: 0,
+  },
+  "bottom-left": {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+  },
+  "bottom-center": {
+    position: "fixed",
+    bottom: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
+  "bottom-right": {
+    position: "fixed",
+    bottom: 0,
+    right: 0,
+  },
 };
 
 // let's infer the union types from the placement values instead of hardcoding them
-export type ToastPlacements = keyof typeof PLACEMENTS;
+export type ToastPlacements = keyof typeof DEFAULT_PLACEMENTS;
 
 export interface ToastContextState extends ToastStateReturn {
   toastTypes: ToastTypes;
@@ -103,6 +129,12 @@ export type ToastProviderProps = {
    * @default "toast"
    */
   toastClassName?: string;
+  /**
+   * placement styles for container
+   *
+   * @default DEFAULT_PLACEMENTS
+   */
+  placementStyles?: Record<ToastPlacements, React.CSSProperties>;
 };
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
@@ -115,6 +147,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   autoCloseTimeout: providerTimeout = DEFAULT_TIMEOUT,
   className = "toast__container",
   toastClassName = "toast",
+  placementStyles = DEFAULT_PLACEMENTS,
 }) => {
   const state = useToastState({
     defaultPlacement: providerPlacement,
@@ -130,8 +163,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
         key={placement}
         className={`${className} ${className}--${placement}`}
         style={{
-          position: "fixed",
-          ...PLACEMENTS[placement],
+          ...(placementStyles[placement] || {}),
         }}
       >
         {toastsList.map((toast, index) => {
