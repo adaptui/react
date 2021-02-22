@@ -73,6 +73,7 @@ export type ToastTypes = Record<
       index: number;
       toastsLength?: number;
       content: any;
+      placement: ToastPlacements;
       hideToast: ToastStateReturn["hideToast"];
     }
   >
@@ -170,11 +171,12 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
               autoDismiss={autoDismiss ?? providerAutoDismiss}
             >
               {isFunction(content)
-                ? content({ index, id, isVisible, hideToast })
+                ? content({ index, id, isVisible, hideToast, placement })
                 : toastTypes[type]?.({
                     index,
                     id,
                     content,
+                    placement,
                     toastsLength,
                     isVisible,
                     hideToast,

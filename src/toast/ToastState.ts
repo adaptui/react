@@ -155,15 +155,8 @@ function getPlacementSortedToasts(toasts: ToastList) {
   for (const key in toasts) {
     const toast = toasts[key];
     const { placement } = toast;
-    const isTop = placement.includes("top");
-
     sortedToasts[placement] || (sortedToasts[placement] = []);
-
-    if (isTop) {
-      sortedToasts[placement].unshift(toast);
-    } else {
-      sortedToasts[placement].push(toast);
-    }
+    sortedToasts[placement].push(toast);
   }
 
   return sortedToasts as SortedToastList;
