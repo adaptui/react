@@ -78,30 +78,24 @@ export const useToastState = ({
       COUNTER.current = COUNTER.current + 1;
       const id = idProps || `toast-${COUNTER.current}`;
 
-      /*
-        wait until the next frame so we can animate
-        wierd bug while using CSSTrasition
-        works fine without RAF & double render when using react spring.
-        maybe because of this:- https://youtu.be/mmq-KVeO-uU?t=842
-       */
-      requestAnimationFrame(() => {
-        setToasts(toasts => ({
-          ...toasts,
-          [id]: {
-            type,
-            id,
-            content,
-            timeout,
-            placement,
-            autoDismiss,
-            isVisible: false,
-          },
-        }));
+      setToasts(toasts => ({
+        ...toasts,
+        [id]: {
+          type,
+          id,
+          content,
+          timeout,
+          placement,
+          autoDismiss,
+          isVisible: false,
+        },
+      }));
 
-        // causes rerender in order to trigger
-        // the animation after mount in CSSTrasition
+      // causes rerender in order to trigger
+      // the animation after mount in CSSTrasition
+      window.setTimeout(() => {
         toggleToast({ id, isVisible: true });
-      });
+      }, 0);
     },
     [defaultPlacement, toggleToast],
   );

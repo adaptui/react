@@ -4,7 +4,6 @@ import { canUseDOM } from "reakit-utils";
 import { objectKeys } from "@chakra-ui/utils";
 
 import { isFunction } from "../utils";
-import { ToastController } from "./ToastController";
 import { Toast, useToastState, ToastStateReturn } from "./ToastState";
 
 const DEFAULT_TIMEOUT = 5000;
@@ -71,18 +70,29 @@ export type ToastTypes = Record<
   string,
   React.FC<
     Pick<Toast, "id" | "isVisible"> & {
+      index: number;
+      toastsLength?: number;
       content: any;
       hideToast: ToastStateReturn["hideToast"];
     }
   >
 >;
 
+export type ToastContainer = (
+  props: React.PropsWithChildren<{
+    placement: ToastPlacements;
+  }>,
+) => any;
+
 export type ToastWrapper = (
   props: React.PropsWithChildren<{
-    id: string;
+    index: number;
     placement: ToastPlacements;
     isVisible?: boolean;
-    index: number;
+    timeout?: number;
+    autoDismiss?: boolean;
+    toastId?: string;
+    toastsLength?: number;
   }>,
 ) => any;
 
@@ -116,25 +126,11 @@ export type ToastProviderProps = {
   /**
    * Wrapper function to enhance the behaviour of ToastController
    */
+  toastContainer?: ToastContainer;
+  /**
+   * Wrapper function to enhance the behaviour of ToastController
+   */
   toastWrapper?: ToastWrapper;
-  /**
-   * Toast container class name
-   *
-   * @default "toast__container"
-   */
-  className?: string;
-  /**
-   * Toast class name
-   *
-   * @default "toast"
-   */
-  toastClassName?: string;
-  /**
-   * placement styles for container
-   *
-   * @default DEFAULT_PLACEMENTS
-   */
-  placementStyles?: Record<ToastPlacements, React.CSSProperties>;
 };
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
@@ -142,12 +138,10 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   toastTypes,
   placement: providerPlacement = "bottom-center",
   animationTimeout,
+  toastContainer: ToastContainerComponent = ({ children }) => children,
   toastWrapper: ToastWrapperComponent = ({ children }) => children,
   autoDismiss: providerAutoDismiss,
   autoCloseTimeout: providerTimeout = DEFAULT_TIMEOUT,
-  className = "toast__container",
-  toastClassName = "toast",
-  placementStyles = DEFAULT_PLACEMENTS,
 }) => {
   const state = useToastState({
     defaultPlacement: providerPlacement,
@@ -157,46 +151,38 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
 
   const Toasts = objectKeys(sortedToasts).map(placement => {
     const toastsList = sortedToasts[placement];
+    const toastsLength = toastsList.length;
 
     return (
-      <div
-        key={placement}
-        className={`${className} ${className}--${placement}`}
-        style={{
-          ...(placementStyles[placement] || {}),
-        }}
-      >
+      <ToastContainerComponent key={placement} placement={placement}>
         {toastsList.map((toast, index) => {
           const { id, type, content, timeout, autoDismiss, isVisible } = toast;
 
           return (
             <ToastWrapperComponent
-              key={id}
-              id={id}
+              key={`${placement}-${id}`}
+              toastId={id}
               index={index}
               isVisible={isVisible}
               placement={placement}
+              toastsLength={toastsLength}
+              timeout={timeout ?? providerTimeout}
+              autoDismiss={autoDismiss ?? providerAutoDismiss}
             >
-              <ToastController
-                id={id}
-                className={toastClassName}
-                onRequestRemove={hideToast}
-                duration={timeout ?? providerTimeout}
-                autoDismiss={autoDismiss ?? providerAutoDismiss}
-              >
-                {isFunction(content)
-                  ? content({ id, isVisible, hideToast })
-                  : toastTypes[type]?.({
-                      id,
-                      content,
-                      isVisible,
-                      hideToast,
-                    }) || content}
-              </ToastController>
+              {isFunction(content)
+                ? content({ index, id, isVisible, hideToast })
+                : toastTypes[type]?.({
+                    index,
+                    id,
+                    content,
+                    toastsLength,
+                    isVisible,
+                    hideToast,
+                  }) || content}
             </ToastWrapperComponent>
           );
         })}
-      </div>
+      </ToastContainerComponent>
     );
   });
 
