@@ -19,7 +19,7 @@ function addIdScope() {
   return root => {
     const filename = root.source.input.file;
 
-    const isTailwind = path.basename(path.dirname(filename)) === "tailwind";
+    const isTailwind = path.basename(filename) === "tailwind";
     if (isTailwind) return scopify("#tailwind")(root);
 
     const basename = path.basename(filename, ".css");

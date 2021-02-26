@@ -1,8 +1,6 @@
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer components {
   .styled-datepicker .calendar__cell {
@@ -10,7 +8,7 @@
     width: 32px;
     max-height: 32px;
     max-width: 32px;
-    @apply text-center rounded-lg text-sm;
+    @apply text-sm text-center rounded-lg;
   }
   .styled-datepicker .calendar__cell[data-is-range-selection] {
     @apply bg-blue-100 rounded-none text-gray-800 !important;
@@ -33,7 +31,7 @@
     @apply text-red-600;
   }
   .styled-datepicker.calendar [aria-selected="true"] {
-    @apply bg-blue-400 text-white;
+    @apply text-white bg-blue-400;
   }
   .styled-datepicker.calendar [aria-disabled="true"] {
     @apply text-gray-500;

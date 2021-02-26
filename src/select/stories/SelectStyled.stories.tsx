@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "../../../tailwind/index.css";
 import { App as Select } from "./SelectStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 import { selectStyledTemplate, selectStyledTemplateJs } from "./templates";

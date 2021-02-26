@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "../../../tailwind/index.css";
 import { DatePicker } from "./styled/DatePicker.component";
 import { RangeDatePicker } from "./styled/RangeDatePicker.component";
 
