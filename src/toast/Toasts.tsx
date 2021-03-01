@@ -1,12 +1,10 @@
 import * as React from "react";
 
-import { useToastStore } from "./index";
-import { useToasters } from "./Toasters";
-import { ActionType } from "./ToastState";
+import { useToastStore, useToasters } from "./index";
 
 export const useToasts = () => {
-  const { toasts, dispatch } = useToastStore();
-  const { removeToast } = useToasters();
+  const { toasts } = useToastStore();
+  const { updateToast, removeToast, dismissToast } = useToasters();
 
   React.useEffect(() => {
     const now = Date.now();
@@ -36,27 +34,31 @@ export const useToasts = () => {
   }, [toasts, removeToast]);
 
   function startPause(toastId: string) {
-    dispatch({
-      type: ActionType.UPDATE_TOAST,
-      toast: { id: toastId, pausedAt: Date.now() },
-    });
+    const index = toasts.findIndex(toast => toast.id === toastId);
+    const toast = toasts[index];
+    if (toast.duration === Infinity) {
+      return;
+    }
+
+    updateToast(toastId, { pausedAt: Date.now() });
   }
 
   function endPause(toastId: string) {
     const index = toasts.findIndex(toast => toast.id === toastId);
     const toast = toasts[index];
+
+    if (toast.duration === Infinity) {
+      return;
+    }
+
     const now = Date.now();
     const diff = now - (toast.pausedAt || 0);
 
-    dispatch({
-      type: ActionType.UPDATE_TOAST,
-      toast: {
-        id: toastId,
-        pausedAt: undefined,
-        pauseDuration: toast.pauseDuration + diff,
-      },
+    updateToast(toastId, {
+      pausedAt: undefined,
+      pauseDuration: toast.pauseDuration + diff,
     });
   }
 
-  return { toasts, startPause, endPause };
+  return { toasts, startPause, endPause, removeToast, dismissToast };
 };

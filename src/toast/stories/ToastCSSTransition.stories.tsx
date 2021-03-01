@@ -5,25 +5,32 @@ import {
   utilsTemplate,
   utilsTemplateJs,
   toastStyledCssTemplate,
-  toastStyledTemplate,
-  toastStyledTemplateJs,
+  toastCssTransitionTemplate,
+  toastCssTransitionTemplateJs,
 } from "./templates";
 import "./ToastStyled.css";
-import { App as Toast } from "./ToastStyled.component";
+import { App as Toast } from "./ToastCSSTransition.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Toast,
-  title: "Toast/Styled",
+  title: "Toast/CSSTransition",
   parameters: {
     preview: createPreviewTabs({
-      js: toastStyledTemplateJs,
+      js: toastCssTransitionTemplateJs,
       jsUtils: utilsTemplateJs,
-      ts: toastStyledTemplate,
+      ts: toastCssTransitionTemplate,
       tsUtils: utilsTemplate,
       css: toastStyledCssTemplate,
     }),
   },
+  decorators: [
+    Story => {
+      document.body.id = "tailwind";
+      document.body.classList.add("center");
+      return <Story />;
+    },
+  ],
 } as Meta;
 
 export const Default = () => <Toast />;

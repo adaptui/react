@@ -3,6 +3,25 @@
 @tailwind utilities;
 
 @layer components {
+  /* Toast Styles */
+  #tailwind .alert-enter {
+    opacity: 0;
+  }
+
+  #tailwind .alert-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+  }
+
+  #tailwind .alert-exit {
+    opacity: 1;
+  }
+
+  #tailwind .alert-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+
   .styled-datepicker .calendar__cell {
     height: 32px;
     width: 32px;
@@ -30,12 +49,15 @@
   .styled-datepicker.calendar [data-weekend] {
     @apply text-red-600;
   }
+
   .styled-datepicker.calendar [aria-selected="true"] {
     @apply text-white bg-blue-400;
   }
+
   .styled-datepicker.calendar [aria-disabled="true"] {
     @apply text-gray-500;
   }
+
   .styled-datepicker.calendar span {
     outline: none;
   }

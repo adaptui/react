@@ -9,11 +9,11 @@ import {
   toastCssAnimatedTemplateJs,
 } from "./templates";
 import "./ToastStyled.css";
-import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
+import { App as Toast } from "./ToastCSSAnimated.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: CSSAnimatedToast,
+  component: Toast,
   title: "Toast/CSSAnimated",
   parameters: {
     preview: createPreviewTabs({
@@ -22,15 +22,15 @@ export default {
       ts: toastCssAnimatedTemplate,
       tsUtils: utilsTemplate,
       css: toastStyledCssTemplate,
-      deps: ["react-transition-group"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-styled";
+      document.body.id = "tailwind";
+      document.body.classList.add("center");
       return <Story />;
     },
   ],
 } as Meta;
 
-export const Default = () => <CSSAnimatedToast />;
+export const Default = () => <Toast />;

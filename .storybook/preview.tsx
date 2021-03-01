@@ -1,7 +1,7 @@
 import React from "react";
 import { kebabCase } from "lodash";
 
-import "../src/new-toast/stories/tailwind.css";
+import "../src/toast/stories/tailwind.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

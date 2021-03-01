@@ -1,35 +1,21 @@
 import * as React from "react";
+import { objectKeys } from "@chakra-ui/utils";
 
-import { ToastProvider, useToast } from "@renderlesskit/react";
+import {
+  Alert,
+  ToastContainer,
+  TriggerButton,
+  getRandomContent,
+  getRandomType,
+  getPlacementSortedToasts,
+  getRandomPlacement,
+} from "./Utils.component";
+import { ToastProvider, useToasts, useToasters } from "../index";
 
-export const App: React.FC = () => {
+export const App = () => {
   return (
-    <ToastProvider
-      autoDismiss={true}
-      placement="bottom-center"
-      toastTypes={{
-        success: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              <span style={{ padding: "0.5rem", color: "white" }}>
-                {content}
-              </span>
-              <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-        error: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              <span style={{ padding: "0.5rem", color: "white" }}>
-                {content}
-              </span>
-              <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-      }}
-    >
+    <ToastProvider>
+      <Notifications />
       <ToastTriggers />
     </ToastProvider>
   );
@@ -37,29 +23,215 @@ export const App: React.FC = () => {
 
 export default App;
 
-const ToastTriggers = () => {
-  const { showToast } = useToast();
+const Notifications = () => {
+  const { toasts, startPause, endPause, removeToast } = useToasts();
+
+  const sortedToasts = getPlacementSortedToasts(toasts);
 
   return (
     <>
-      <button
-        onClick={() => {
-          showToast({ type: "success", content: "Success" });
-        }}
-      >
-        Notify Success
-      </button>
-      <button
-        onClick={() => {
-          showToast({
-            type: "error",
-            content: "Error",
-            placement: "top-right",
-          });
-        }}
-      >
-        Notify Failure
-      </button>
+      {objectKeys(sortedToasts).map(placement => {
+        const toastsList = sortedToasts[placement];
+
+        return (
+          <ToastContainer key={placement} placement={placement}>
+            {toastsList.map(toast => {
+              return (
+                <Alert
+                  key={toast.id}
+                  toast={toast}
+                  hideToast={removeToast}
+                  onMouseEnter={() => startPause(toast.id)}
+                  onMouseLeave={() => endPause(toast.id)}
+                />
+              );
+            })}
+          </ToastContainer>
+        );
+      })}
     </>
   );
 };
+
+function ToastTriggers() {
+  const { addToast, removeToast } = useToasters();
+
+  return (
+    <div className="space-y-2">
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), { ...getRandomPlacement() })
+          }
+        >
+          Add Info Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: "success",
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add success Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: "error",
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add error Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: "warning",
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add warning Toast
+        </TriggerButton>
+        <TriggerButton onClick={() => removeToast()}>
+          Remove All Toast
+        </TriggerButton>
+      </div>
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "top-left",
+            })
+          }
+        >
+          Add Top Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "top-center",
+            })
+          }
+        >
+          Add Top Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "top-right",
+            })
+          }
+        >
+          Add Top Right Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "bottom-left",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "bottom-center",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              placement: "bottom-right",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Right Toast
+        </TriggerButton>
+      </div>
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+              duration: 1000,
+            })
+          }
+        >
+          Add 1s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+              duration: 2000,
+            })
+          }
+        >
+          Add 2s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+              duration: 3000,
+            })
+          }
+        >
+          Add 3s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+              duration: 4000,
+            })
+          }
+        >
+          Add 4s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add 5s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(getRandomContent(), {
+              type: getRandomType(),
+              ...getRandomPlacement(),
+              duration: Infinity,
+            })
+          }
+        >
+          Add Non Dismissable Toast
+        </TriggerButton>
+      </div>
+    </div>
+  );
+}

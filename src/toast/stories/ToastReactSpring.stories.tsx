@@ -9,11 +9,11 @@ import {
   toastReactSpringTemplateJs,
 } from "./templates";
 import "./ToastStyled.css";
-import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
+import { App as Toast } from "./ToastReactSpring.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: ReactSpringToast,
+  component: Toast,
   title: "Toast/ReactSpring",
   parameters: {
     preview: createPreviewTabs({
@@ -22,15 +22,15 @@ export default {
       ts: toastReactSpringTemplate,
       tsUtils: utilsTemplate,
       css: toastStyledCssTemplate,
-      deps: ["react-spring"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-styled";
+      document.body.id = "tailwind";
+      document.body.classList.add("center");
       return <Story />;
     },
   ],
 } as Meta;
 
-export const Default = () => <ReactSpringToast />;
+export const Default = () => <Toast />;
