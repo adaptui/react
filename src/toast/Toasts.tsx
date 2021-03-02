@@ -30,7 +30,7 @@ export const useToasts = () => {
     };
   }, [toasts, dismissToast]);
 
-  function startPause(toastId: string) {
+  function pauseTimer(toastId: string) {
     const toast = getToast(toasts, toastId);
 
     if (!toast.autoDismiss) return;
@@ -38,7 +38,7 @@ export const useToasts = () => {
     updateToast(toastId, { pausedAt: Date.now() });
   }
 
-  function endPause(toastId: string) {
+  function resumeTimer(toastId: string) {
     const toast = getToast(toasts, toastId);
 
     if (!toast.autoDismiss) return;
@@ -54,8 +54,8 @@ export const useToasts = () => {
 
   return {
     toasts,
-    startPause,
-    endPause,
+    pauseTimer,
+    resumeTimer,
     removeToast,
     dismissToast,
     updateToast,

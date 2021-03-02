@@ -25,7 +25,7 @@ export const App = () => {
 export default App;
 
 export const Notifications = () => {
-  const { toasts, startPause, endPause, dismissToast } = useToasts();
+  const { toasts, pauseTimer, resumeTimer, dismissToast } = useToasts();
   const sortedToasts = getPlacementSortedToasts(toasts);
 
   return (
@@ -41,8 +41,8 @@ export const Notifications = () => {
                   <Alert
                     toast={toast}
                     hideToast={dismissToast}
-                    onMouseEnter={() => startPause(toast.id)}
-                    onMouseLeave={() => endPause(toast.id)}
+                    onMouseEnter={() => pauseTimer(toast.id)}
+                    onMouseLeave={() => resumeTimer(toast.id)}
                   >
                     <AlertIndicator toast={toast} />
                   </Alert>
