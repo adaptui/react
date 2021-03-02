@@ -7,7 +7,7 @@ export const genId = (() => {
   };
 })();
 
-export const getToast = (toasts: Toast[], toastId: string): Toast => {
+export const getToast = (toasts: Toast[], toastId: string) => {
   const index = toasts.findIndex(toast => toast.id === toastId);
   return toasts[index];
 };

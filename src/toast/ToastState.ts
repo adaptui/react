@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import { DefaultToastOptions } from "./index";
-
 interface Toast {
   id: string;
   visible: boolean;
