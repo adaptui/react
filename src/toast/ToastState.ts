@@ -18,7 +18,6 @@ const TOAST_LIMIT = 20;
 export enum ActionType {
   ADD_TOAST,
   UPDATE_TOAST,
-  UPDATE_ALL_TOAST,
   UPSERT_TOAST,
   DISMISS_TOAST,
   REMOVE_TOAST,
@@ -35,10 +34,6 @@ export type Action<T> =
     }
   | {
       type: ActionType.UPDATE_TOAST;
-      toast: Partial<T>;
-    }
-  | {
-      type: ActionType.UPDATE_ALL_TOAST;
       toast: Partial<T>;
     }
   | {
@@ -69,12 +64,6 @@ const reducer = <T extends Toast>(
         toasts: state.toasts.map(t =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t,
         ),
-      };
-
-    case ActionType.UPDATE_ALL_TOAST:
-      return {
-        ...state,
-        toasts: state.toasts.map(t => ({ ...t, ...action.toast })),
       };
 
     case ActionType.UPSERT_TOAST:
@@ -113,19 +102,12 @@ const reducer = <T extends Toast>(
 
 const initialState = { toasts: [] };
 
-export const useToastState = <T extends Toast>(
-  toastOptions: DefaultToastOptions = {},
-): StateReturnType<T> => {
+export const useToastState = <T extends Toast>(): StateReturnType<T> => {
   const [state, dispatch] = React.useReducer<
     React.Reducer<State<T>, Action<T>>
   >(reducer, initialState);
 
-  const mergedToasts = state.toasts.map(t => ({
-    ...toastOptions,
-    ...t,
-  }));
-
-  return { toasts: mergedToasts, dispatch };
+  return { toasts: state.toasts, dispatch };
 };
 
 export interface StateReturnType<T> {

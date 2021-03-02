@@ -4,12 +4,13 @@ export * from "./ToastProvider";
 export * from "./Toasters";
 export * from "./helpers";
 export type {
-  Renderable,
-  ValueFunction,
-  ValueOrFunction,
-  Content,
   Toast,
+  Content,
+  Renderable,
   ToastOptions,
-  DefaultToastOptions,
+  ValueFunction,
   ToastPlacement,
+  ValueOrFunction,
+  CreateToastOptions,
+  DefaultToastOptions,
 } from "./ToastTypes";

@@ -3,20 +3,19 @@ import { objectKeys } from "@chakra-ui/utils";
 
 import {
   Alert,
-  ToastContainer,
-  TriggerButton,
-  getRandomContent,
-  getRandomType,
-  getPlacementSortedToasts,
-  getRandomPlacement,
   ToastWrapper,
+  TriggerButton,
+  getRandomType,
   AlertIndicator,
+  ToastContainer,
+  getRandomContent,
+  getPlacementSortedToasts,
 } from "./Utils.component";
 import { ToastProvider, useToasts, useToasters } from "../index";
 
 export const App = () => {
   return (
-    <ToastProvider>
+    <ToastProvider animationDuration={300}>
       <Notifications />
       <ToastTriggers />
     </ToastProvider>
@@ -27,7 +26,6 @@ export default App;
 
 export const Notifications = () => {
   const { toasts, startPause, endPause, dismissToast } = useToasts();
-
   const sortedToasts = getPlacementSortedToasts(toasts);
 
   return (
@@ -67,66 +65,66 @@ export function ToastTriggers() {
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
-            duration: 1000,
+            placement: "top-left",
+            dismissDuration: 1000,
           })
         }
       >
-        Add 1s duration Toast
+        Add 1s duration Top Left Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
-            duration: 2000,
+            placement: "top-center",
+            dismissDuration: 2000,
           })
         }
       >
-        Add 2s duration Toast
+        Add 2s duration Top Center Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
-            duration: 3000,
+            placement: "top-right",
+            dismissDuration: 3000,
           })
         }
       >
-        Add 3s duration Toast
+        Add 3s duration Top Right Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
-            duration: 4000,
+            placement: "bottom-left",
+            dismissDuration: 4000,
           })
         }
       >
-        Add 4s duration Toast
+        Add 4s duration Top Left Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
+            placement: "bottom-center",
           })
         }
       >
-        Add 5s duration Toast
+        Add 5s duration Bottom Center Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
-            duration: Infinity,
+            placement: "bottom-right",
+            autoDismiss: false,
           })
         }
       >
-        Add Non Dismissable Toast
+        Add Non Dismissable Bottom Right Toast
       </TriggerButton>
     </div>
   );

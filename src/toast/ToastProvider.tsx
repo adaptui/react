@@ -3,12 +3,15 @@ import { createContext } from "@chakra-ui/utils";
 
 import {
   Toast,
+  ToastOptions,
   useToastState,
   StateReturnType,
   DefaultToastOptions,
 } from "./index";
 
-export interface ToastStore extends StateReturnType<Toast> {}
+export interface ToastStore extends StateReturnType<Toast> {
+  defaultOptions: DefaultToastOptions;
+}
 
 const [ToastStoreProvider, useToastStore] = createContext<ToastStore>({
   strict: false,
@@ -20,14 +23,17 @@ export { useToastStore };
 
 const defaultOptions: DefaultToastOptions = {
   type: "info",
-  placement: "bottom-right",
-  duration: 5000,
+  placement: "bottom-center",
+  autoDismiss: true,
+  dismissDuration: 3000,
+  animationDuration: 0,
   reverseOrder: false,
 };
 
-export const ToastProvider: React.FC<DefaultToastOptions> = props => {
+export const ToastProvider: React.FC<ToastOptions> = props => {
   const { children, ...rest } = props;
-  const store = useToastState<Toast>({ ...defaultOptions, ...rest });
+  const store = useToastState<Toast>();
+  const context = { ...store, defaultOptions: { ...defaultOptions, ...rest } };
 
-  return <ToastStoreProvider value={store}>{children}</ToastStoreProvider>;
+  return <ToastStoreProvider value={context}>{children}</ToastStoreProvider>;
 };

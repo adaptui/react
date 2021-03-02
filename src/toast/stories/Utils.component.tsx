@@ -10,7 +10,7 @@ export function getPlacementSortedToasts(toasts: Toast[]) {
 
   for (const key in toasts) {
     const toast = toasts[key];
-    const { placement = "bottom-right" } = toast;
+    const { placement } = toast;
     sortedToasts[placement] || (sortedToasts[placement] = []);
     sortedToasts[placement].push(toast);
   }
@@ -41,7 +41,7 @@ const placememtStyles = {
 };
 
 export const ToastContainer: React.FC<Pick<Toast, "placement">> = props => {
-  const { placement = "bottom-right", ...rest } = props;
+  const { placement, ...rest } = props;
 
   return (
     <div
@@ -82,7 +82,7 @@ export const ToastWrapper: React.FC<{ toast: Toast }> = props => {
         transition: "all 0.3s ease",
         transform: toast.visible
           ? "translate3d(0,0,0)"
-          : getTranslate(toast.placement || "bottom-right"),
+          : getTranslate(toast.placement),
         opacity: toast.visible ? 1 : 0,
       }}
     >
@@ -95,13 +95,13 @@ export const ToastWrapper: React.FC<{ toast: Toast }> = props => {
 export const Alert: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     toast: Toast;
-    hideToast: (toastId?: string | undefined) => void;
+    hideToast: (toastId: string) => void;
   }
 > = props => {
   const { toast, hideToast, children, ...rest } = props;
 
   return (
-    <AlertWrapper type={toast.type || "info"} {...rest}>
+    <AlertWrapper type={toast.type} {...rest}>
       {children}
       <AlertContent>{toast.content}</AlertContent>
       <CloseButton toast={toast} hideToast={hideToast} />
@@ -161,7 +161,7 @@ export const AlertIndicator: React.FC<{ toast: Toast }> = props => {
   return (
     <div
       style={{
-        backgroundColor: typeStyles[toast.type || "info"].indicator,
+        backgroundColor: typeStyles[toast.type].indicator,
         borderTopLeftRadius: "4px",
         borderBottomLeftRadius: "4px",
         color: "rgb(227, 252, 239)",
@@ -178,13 +178,13 @@ export const AlertIndicator: React.FC<{ toast: Toast }> = props => {
     >
       <div
         style={{
-          animation: `shrink ${toast.duration}ms linear`,
+          animation: `shrink ${toast.dismissDuration}ms linear`,
           animationPlayState: toast.pausedAt ? "paused" : "running",
           backgroundColor: "rgba(0,0,0,0.1)",
           bottom: 0,
           height: 0,
           left: 0,
-          opacity: toast.duration !== Infinity ? 1 : 0,
+          opacity: toast.autoDismiss ? 1 : 0,
           position: "absolute",
           width: "100%",
         }}
@@ -201,9 +201,10 @@ export const AlertContent: React.FC<{}> = props => {
 
 export const CloseButton: React.FC<{
   toast: Toast;
-  hideToast: (toastId?: string | undefined) => void;
+  hideToast: (toastId: string) => void;
 }> = props => {
   const { toast, hideToast, ...rest } = props;
+
   return (
     <button
       style={{

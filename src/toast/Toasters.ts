@@ -1,29 +1,44 @@
-import { getToast } from "./helpers";
 import {
   genId,
   Toast,
   Content,
   ActionType,
-  ToastOptions,
   useToastStore,
+  CreateToastOptions,
 } from "./index";
 
-export type ToastHandler = (content: Content, options?: ToastOptions) => string;
+export type ToastHandler = (
+  content: Content,
+  options?: CreateToastOptions,
+) => string;
 
-export const createToast = (content: Content, opts?: ToastOptions): Toast => ({
-  createdAt: Date.now(),
-  visible: false,
-  pauseDuration: 0,
-  content,
-  ...opts,
-  id: opts?.id || genId(),
-});
+export type CreateToastHandler = (
+  content: Content,
+  options?: CreateToastOptions,
+) => Toast;
+
+export const useCreateToast = (): CreateToastHandler => {
+  const { defaultOptions } = useToastStore();
+
+  return (content, opts) => ({
+    createdAt: Date.now(),
+    visible: false,
+    pausedAt: null,
+    pauseDuration: 0,
+    content,
+    ...defaultOptions,
+    ...opts,
+    id: opts?.id || genId(),
+  });
+};
 
 export const useAddToast = (): ToastHandler => {
   const { dispatch } = useToastStore();
+  const createToast = useCreateToast();
 
   return (content, options) => {
     const toast = createToast(content, options);
+
     dispatch({
       type: ActionType.ADD_TOAST,
       toast: { ...toast, visible: true },
@@ -35,9 +50,11 @@ export const useAddToast = (): ToastHandler => {
 
 export const useShowToast = (): ToastHandler => {
   const { dispatch } = useToastStore();
+  const createToast = useCreateToast();
 
   return (content, options) => {
     const toast = createToast(content, options);
+
     dispatch({ type: ActionType.ADD_TOAST, toast });
 
     setTimeout(() => {
@@ -46,6 +63,19 @@ export const useShowToast = (): ToastHandler => {
         toast: { ...toast, visible: true },
       });
     }, 0);
+
+    return toast.id;
+  };
+};
+
+export const useUpsertToast = (): ToastHandler => {
+  const { dispatch } = useToastStore();
+  const createToast = useCreateToast();
+
+  return (content, options) => {
+    const toast = createToast(content, options);
+
+    dispatch({ type: ActionType.UPSERT_TOAST, toast });
 
     return toast.id;
   };
@@ -62,43 +92,25 @@ export const useUpdateToast = () => {
   };
 };
 
-export const useUpsertToast = (): ToastHandler => {
-  const { dispatch } = useToastStore();
-
-  return (content, options) => {
-    const toast = createToast(content, options);
-    dispatch({ type: ActionType.UPSERT_TOAST, toast });
-
-    return toast.id;
-  };
-};
-
 export const useDismissToast = () => {
-  const { toasts, dispatch } = useToastStore();
+  const { dispatch, defaultOptions } = useToastStore();
 
   return (toastId?: string) => {
-    let duration: number;
-    if (!toastId) {
-      duration = 0;
-    } else {
-      const toast = getToast(toasts, toastId);
-      duration = toast.duration || 0;
-    }
+    const unmountDuration = defaultOptions.animationDuration;
 
     dispatch({ type: ActionType.DISMISS_TOAST, toastId });
 
     setTimeout(() => {
       dispatch({ type: ActionType.REMOVE_TOAST, toastId });
-    }, duration);
+    }, unmountDuration);
   };
 };
 
 export const useRemoveToast = () => {
   const { dispatch } = useToastStore();
 
-  return (toastId?: string) => {
+  return (toastId?: string) =>
     dispatch({ type: ActionType.REMOVE_TOAST, toastId });
-  };
 };
 
 // Toast Triggers
@@ -113,8 +125,8 @@ export const useToasters = () => {
   return {
     addToast,
     showToast,
-    updateToast,
     upsertToast,
+    updateToast,
     dismissToast,
     removeToast,
   };

@@ -4,18 +4,18 @@ import { CSSTransition } from "react-transition-group";
 
 import {
   Alert,
-  ToastContainer,
   TriggerButton,
-  getRandomContent,
   getRandomType,
+  ToastContainer,
+  AlertIndicator,
+  getRandomContent,
   getPlacementSortedToasts,
-  getRandomPlacement,
 } from "./Utils.component";
 import { ToastProvider, useToasts, useToasters } from "../index";
 
 export const App = () => {
   return (
-    <ToastProvider duration={5000}>
+    <ToastProvider animationDuration={300}>
       <Notifications />
       <ToastTriggers />
     </ToastProvider>
@@ -41,7 +41,7 @@ export const Notifications = () => {
                   key={toast.id}
                   in={toast.visible}
                   classNames="alert"
-                  timeout={10000}
+                  timeout={300}
                   mountOnEnter
                 >
                   <Alert
@@ -49,7 +49,9 @@ export const Notifications = () => {
                     hideToast={dismissToast}
                     onMouseEnter={() => startPause(toast.id)}
                     onMouseLeave={() => endPause(toast.id)}
-                  ></Alert>
+                  >
+                    <AlertIndicator toast={toast} />
+                  </Alert>
                 </CSSTransition>
               );
             })}
@@ -64,16 +66,69 @@ export function ToastTriggers() {
   const { showToast } = useToasters();
 
   return (
-    <div>
+    <div className="space-x-2">
       <TriggerButton
         onClick={() =>
           showToast(getRandomContent(), {
             type: getRandomType(),
-            ...getRandomPlacement(),
+            placement: "top-left",
           })
         }
       >
-        Add CSS Transition Toast
+        Add Top Left Toast
+      </TriggerButton>
+      <TriggerButton
+        onClick={() =>
+          showToast(getRandomContent(), {
+            type: getRandomType(),
+            placement: "top-center",
+          })
+        }
+      >
+        Add Top Center Toast
+      </TriggerButton>
+      <TriggerButton
+        onClick={() =>
+          showToast(getRandomContent(), {
+            type: getRandomType(),
+            placement: "top-right",
+          })
+        }
+      >
+        Add Top Right Toast
+      </TriggerButton>
+      <TriggerButton
+        onClick={() =>
+          showToast(getRandomContent(), {
+            type: getRandomType(),
+            placement: "bottom-left",
+            reverseOrder: true,
+          })
+        }
+      >
+        Add Bottom Left Toast
+      </TriggerButton>
+      <TriggerButton
+        onClick={() =>
+          showToast(getRandomContent(), {
+            type: getRandomType(),
+            placement: "bottom-center",
+            reverseOrder: true,
+          })
+        }
+      >
+        Add Bottom Center Toast
+      </TriggerButton>
+      <TriggerButton
+        onClick={() =>
+          showToast(getRandomContent(), {
+            type: getRandomType(),
+            placement: "bottom-right",
+            reverseOrder: true,
+          })
+        }
+      >
+        Add Bottom Right Toast
       </TriggerButton>
     </div>
   );

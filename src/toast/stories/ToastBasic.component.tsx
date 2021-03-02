@@ -3,12 +3,13 @@ import { objectKeys } from "@chakra-ui/utils";
 
 import {
   Alert,
-  ToastContainer,
   TriggerButton,
-  getRandomContent,
   getRandomType,
-  getPlacementSortedToasts,
+  ToastContainer,
+  AlertIndicator,
+  getRandomContent,
   getRandomPlacement,
+  getPlacementSortedToasts,
 } from "./Utils.component";
 import { ToastProvider, useToasts, useToasters } from "../index";
 
@@ -25,7 +26,6 @@ export default App;
 
 const Notifications = () => {
   const { toasts, startPause, endPause, removeToast } = useToasts();
-
   const sortedToasts = getPlacementSortedToasts(toasts);
 
   return (
@@ -43,7 +43,9 @@ const Notifications = () => {
                   hideToast={removeToast}
                   onMouseEnter={() => startPause(toast.id)}
                   onMouseLeave={() => endPause(toast.id)}
-                />
+                >
+                  <AlertIndicator toast={toast} />
+                </Alert>
               );
             })}
           </ToastContainer>
@@ -171,7 +173,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
-              duration: 1000,
+              dismissDuration: 1000,
             })
           }
         >
@@ -182,7 +184,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
-              duration: 2000,
+              dismissDuration: 2000,
             })
           }
         >
@@ -193,7 +195,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
-              duration: 3000,
+              dismissDuration: 3000,
             })
           }
         >
@@ -204,7 +206,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
-              duration: 4000,
+              dismissDuration: 4000,
             })
           }
         >
@@ -215,6 +217,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
+              dismissDuration: 5000,
             })
           }
         >
@@ -225,7 +228,7 @@ function ToastTriggers() {
             addToast(getRandomContent(), {
               type: getRandomType(),
               ...getRandomPlacement(),
-              duration: Infinity,
+              autoDismiss: false,
             })
           }
         >

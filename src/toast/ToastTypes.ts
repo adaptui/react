@@ -22,15 +22,28 @@ export interface Toast {
   visible: boolean;
   pauseDuration: number;
   content: Content;
-  pausedAt?: number;
-  type?: ToastTypes;
-  placement?: ToastPlacement;
-  duration?: number;
-  reverseOrder?: boolean;
+  reverseOrder: boolean;
+  pausedAt: number | null;
+  type: ToastTypes;
+  placement: ToastPlacement;
+  autoDismiss: boolean;
+  dismissDuration: number;
+  animationDuration: number;
 }
 
-export type ToastOptions = Partial<
-  Pick<Toast, "id" | "duration" | "type" | "placement" | "reverseOrder">
+type ConfigurableToastOptions = Pick<
+  Toast,
+  | "id"
+  | "autoDismiss"
+  | "dismissDuration"
+  | "type"
+  | "placement"
+  | "reverseOrder"
+  | "animationDuration"
 >;
 
-export type DefaultToastOptions = Omit<ToastOptions, "id">;
+export type CreateToastOptions = Partial<ConfigurableToastOptions>;
+
+export type DefaultToastOptions = Omit<ConfigurableToastOptions, "id">;
+
+export type ToastOptions = Partial<DefaultToastOptions>;
