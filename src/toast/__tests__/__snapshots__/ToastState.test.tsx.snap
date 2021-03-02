@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToastState reducer should add a new toast in reverse order 1`] = `
+Object {
+  "toasts": Array [
+    Object {
+      "animationDuration": 0,
+      "autoDismiss": false,
+      "content": "Hello world",
+      "createdAt": 1614683631209,
+      "dismissDuration": Infinity,
+      "id": "a",
+      "pauseDuration": 0,
+      "pausedAt": null,
+      "placement": "bottom-center",
+      "reverseOrder": false,
+      "type": "info",
+      "visible": false,
+    },
+    Object {
+      "animationDuration": 0,
+      "autoDismiss": false,
+      "content": "Hello world",
+      "createdAt": 1614683631209,
+      "dismissDuration": Infinity,
+      "id": "b",
+      "pauseDuration": 0,
+      "pausedAt": null,
+      "placement": "bottom-center",
+      "reverseOrder": false,
+      "type": "info",
+      "visible": false,
+    },
+    Object {
+      "animationDuration": 0,
+      "autoDismiss": false,
+      "content": "Helo world",
+      "createdAt": 1614683631209,
+      "dismissDuration": Infinity,
+      "id": "2",
+      "pauseDuration": 0,
+      "pausedAt": null,
+      "placement": "bottom-center",
+      "reverseOrder": true,
+      "type": "info",
+      "visible": false,
+    },
+  ],
+}
+`;

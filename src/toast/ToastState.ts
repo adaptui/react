@@ -43,7 +43,7 @@ export type Action<T> =
       toastId?: string;
     };
 
-const reducer = <T extends Toast>(
+export const toastReducer = <T extends Toast>(
   state: State<T>,
   action: Action<T>,
 ): State<T> => {
@@ -67,8 +67,8 @@ const reducer = <T extends Toast>(
     case ActionType.UPSERT_TOAST:
       const { toast } = action;
       return state.toasts.find(t => t.id === toast.id)
-        ? reducer(state, { type: ActionType.UPDATE_TOAST, toast })
-        : reducer(state, { type: ActionType.ADD_TOAST, toast });
+        ? toastReducer(state, { type: ActionType.UPDATE_TOAST, toast })
+        : toastReducer(state, { type: ActionType.ADD_TOAST, toast });
 
     case ActionType.DISMISS_TOAST:
       return {
@@ -103,7 +103,7 @@ const initialState = { toasts: [] };
 export const useToastState = <T extends Toast>(): StateReturnType<T> => {
   const [state, dispatch] = React.useReducer<
     React.Reducer<State<T>, Action<T>>
-  >(reducer, initialState);
+  >(toastReducer, initialState);
 
   return { toasts: state.toasts, dispatch };
 };
