@@ -4,11 +4,11 @@ import { Meta } from "@storybook/react";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastStyledCssTemplate,
+  toastCssTemplate,
   toastCssTransitionTemplate,
   toastCssTransitionTemplateJs,
 } from "./templates";
-import "./ToastStyled.css";
+import "./Toast.css";
 import { App as Toast } from "./ToastCSSTransition.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -21,14 +21,24 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastCssTransitionTemplate,
       tsUtils: utilsTemplate,
-      css: toastStyledCssTemplate,
+      css: toastCssTemplate,
+      deps: ["react-transition-group", "@chakra-ui/utils"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "tailwind";
-      document.body.classList.add("center");
-      return <Story />;
+      document.body.id = "toast";
+      return (
+        <div
+          style={{
+            height: "90vh",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <Story />
+        </div>
+      );
     },
   ],
 } as Meta;

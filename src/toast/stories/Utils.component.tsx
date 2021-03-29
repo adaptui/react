@@ -1,33 +1,193 @@
 import * as React from "react";
-import type { MutableRefObject } from "react";
+import { Dict, isFunction, objectKeys } from "@chakra-ui/utils";
 
-import { Toast, ToastPlacement } from "../index";
+import {
+  TimerToast,
+  createToastStore,
+  DefaultToastOptions,
+  useToastTimer,
+} from "@renderlesskit/react";
 
-export type SortedToastList = Record<ToastPlacement, Toast[]>;
-
-export function getPlacementSortedToasts(toasts: Toast[]) {
-  const sortedToasts = {};
-
-  for (const key in toasts) {
-    const toast = toasts[key];
-    const { placement } = toast;
-    sortedToasts[placement] || (sortedToasts[placement] = []);
-    sortedToasts[placement].push(toast);
-  }
-
-  return sortedToasts as SortedToastList;
+export interface Toast extends TimerToast {
+  content?: Content;
+  placement: ToastPlacement;
 }
 
+export type Renderable = JSX.Element | string | number | null;
+
+export type ValueFunction<Value, Arg> = (arg: Arg) => Value;
+
+export type ValueOrFunction<Value, Arg> = Value | ValueFunction<Value, Arg>;
+
+export type ContentType = {
+  toast: Toast;
+  handlers: useToastsReturnType;
+};
+
+export type Content = ValueOrFunction<Renderable, ContentType> | Dict;
+
+export type ToastPlacement =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+
+/* =========================================================================
+  Toast Provider
+  ========================================================================== */
+const defaultOptions: DefaultToastOptions<Toast> = {
+  animationDuration: 300,
+  pausedAt: null,
+  pauseDuration: 0,
+  placement: "bottom-center",
+  autoDismiss: false,
+  dismissDuration: 3000,
+};
+
+const [
+  ToastProvider,
+  useToastStore,
+  useCreateToast,
+  useToastHandlers,
+] = createToastStore<Toast, Content>(defaultOptions);
+
+export { ToastProvider, useToastStore, useCreateToast, useToastHandlers };
+
+/* =========================================================================
+  ToastBarHelpers
+  ========================================================================== */
+export const useToasts = () => {
+  const { toasts } = useToastStore();
+  const { updateToast, removeToast, ...restHanlders } = useToastHandlers();
+  const visibleToasts = toasts.filter(t => t.visible);
+  const sortedToasts = getPlacementSortedToasts(toasts);
+  const timerHandlers = useToastTimer(visibleToasts, updateToast, removeToast);
+
+  return {
+    toasts: sortedToasts,
+    ...timerHandlers,
+    removeToast,
+    ...restHanlders,
+  };
+};
+
+export type useToastsReturnType = ReturnType<typeof useToasts>;
+
+/* =========================================================================
+  Components - Trigger
+  ========================================================================== */
 export const TriggerButton: React.FC<
   React.HTMLAttributes<HTMLButtonElement>
 > = props => {
-  const { className, ...rest } = props;
+  const { style, ...rest } = props;
 
   return (
     <button
-      className={`inline-flex items-center justify-center w-auto h-10 px-4 text-sm font-medium text-white align-middle transition-all bg-gray-800 rounded-lg appearance-none select-none whitespace-nowrap min-w-10 ${className}`}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "auto",
+        height: "1rem",
+        minWidth: "1rem",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        paddingRight: "0.5rem",
+        paddingLeft: "0.5rem",
+        fontSize: "14px",
+        lineHeight: "20px",
+        fontWeight: 500,
+        boxShadow: "none",
+        border: "none",
+        color: "white",
+        verticalAlign: "middle",
+        transition: "all 0.3s ease",
+        background: "black",
+        borderRadius: "6px",
+        appearance: "none",
+        whiteSpace: "nowrap",
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
+        ...style,
+      }}
       {...rest}
     />
+  );
+};
+
+const contents = [
+  "Amet soufflé carrot cake tootsie roll jelly-o chocolate cake.",
+  "Chocolate bar gummies sweet roll macaroon powder sweet tart croissant.",
+  "Pastry ice cream bear claw cupcake topping caramels jelly beans chocolate cheesecake.",
+  "Candy canes pastry cake tart powder.",
+  "Tootsie roll bear claw sesame snaps candy cheesecake caramels cookie.",
+  "Lemon drops donut marzipan gummi bears cotton candy cotton candy jelly-o carrot cake.",
+  "Lemon drops pastry apple pie biscuit tart tootsie roll.",
+  "Brownie icing chupa chups cake cookie halvah gummi bears halvah.",
+  "Sesame snaps donut gingerbread marshmallow topping powder.",
+  "Biscuit chocolate cheesecake pudding candy canes tart halvah sweet.",
+  "Sugar plum cake candy carrot cake.",
+  "Ice cream marzipan liquorice candy canes sesame snaps danish soufflé lollipop candy canes.",
+  "Lemon drops cotton candy pudding.",
+  "Pie cake soufflé cupcake jujubes sugar plum.",
+  "Liquorice lollipop oat cake.",
+];
+const types = ["info", "success", "warning", "error"];
+const placements = [
+  { placement: "top-left", reverseOrder: false },
+  { placement: "top-center", reverseOrder: false },
+  { placement: "top-right", reverseOrder: false },
+  { placement: "bottom-left", reverseOrder: true },
+  { placement: "bottom-center", reverseOrder: true },
+  { placement: "bottom-right", reverseOrder: true },
+];
+
+export function getRandomItems(items: any) {
+  const index = Math.floor(Math.random() * items.length);
+  return items[index];
+}
+
+export function getRandomContent() {
+  return getRandomItems(contents);
+}
+
+export function getRandomType() {
+  return getRandomItems(types);
+}
+
+export function getRandomPlacement() {
+  return getRandomItems(placements);
+}
+
+/* =========================================================================
+  Components - Alert
+  ========================================================================== */
+
+export const ToastBar = () => {
+  const handlers = useToasts();
+  const { toasts } = handlers;
+
+  return (
+    <>
+      {objectKeys(toasts).map(placement => {
+        const toastsList = toasts[placement];
+
+        return (
+          <ToastContainer key={placement} placement={placement}>
+            {toastsList.map(toast => {
+              const { content } = toast;
+              return (
+                <React.Fragment key={toast.id}>
+                  {isFunction(content) ? content({ toast, handlers }) : content}
+                </React.Fragment>
+              );
+            })}
+          </ToastContainer>
+        );
+      })}
+    </>
   );
 };
 
@@ -92,18 +252,21 @@ export const ToastWrapper: React.FC<{ toast: Toast }> = props => {
 };
 
 // Styles from https://jossmac.github.io/react-toast-notifications/
+export type AlertType = "info" | "success" | "error" | "warning";
 export const Alert: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     toast: Toast;
     hideToast: (toastId: string) => void;
+    type?: AlertType;
+    content: any;
   }
 > = props => {
-  const { toast, hideToast, children, ...rest } = props;
+  const { toast, type = "info", content, hideToast, children, ...rest } = props;
 
   return (
-    <AlertWrapper type={toast.type} {...rest}>
+    <AlertWrapper type={type} {...rest}>
       {children}
-      <AlertContent>{toast.content}</AlertContent>
+      <AlertContent>{content}</AlertContent>
       <CloseButton toast={toast} hideToast={hideToast} />
     </AlertWrapper>
   );
@@ -133,7 +296,7 @@ const typeStyles = {
 };
 
 export const AlertWrapper: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & { type: string }
+  React.HTMLAttributes<HTMLDivElement> & { type: AlertType }
 > = props => {
   const { type, ...rest } = props;
 
@@ -155,13 +318,16 @@ export const AlertWrapper: React.FC<
   );
 };
 
-export const AlertIndicator: React.FC<{ toast: Toast }> = props => {
-  const { toast, ...rest } = props;
+export const AlertIndicator: React.FC<{
+  toast: Toast;
+  type?: AlertType;
+}> = props => {
+  const { toast, type = "info", ...rest } = props;
 
   return (
     <div
       style={{
-        backgroundColor: typeStyles[toast.type].indicator,
+        backgroundColor: typeStyles[type].indicator,
         borderTopLeftRadius: "4px",
         borderBottomLeftRadius: "4px",
         color: "rgb(227, 252, 239)",
@@ -206,18 +372,20 @@ export const CloseButton: React.FC<{
   const { toast, hideToast, ...rest } = props;
 
   return (
-    <button
+    <TriggerButton
       style={{
         cursor: "pointer",
         flexShrink: 0,
-        padding: "8px",
+        background: "transparent",
+        color: "black",
+        alignSelf: "center",
       }}
       onClick={() => hideToast(toast.id)}
       {...rest}
     >
       <CloseIcon />
       <div className="sr-only">Close</div>
-    </button>
+    </TriggerButton>
   );
 };
 
@@ -243,62 +411,14 @@ export const CloseIcon: React.FC<{}> = props => {
   );
 };
 
-const contents = [
-  "Amet soufflé carrot cake tootsie roll jelly-o chocolate cake.",
-  "Chocolate bar gummies sweet roll macaroon powder sweet tart croissant.",
-  "Pastry ice cream bear claw cupcake topping caramels jelly beans chocolate cheesecake.",
-  "Candy canes pastry cake tart powder.",
-  "Tootsie roll bear claw sesame snaps candy cheesecake caramels cookie.",
-  "Lemon drops donut marzipan gummi bears cotton candy cotton candy jelly-o carrot cake.",
-  "Lemon drops pastry apple pie biscuit tart tootsie roll.",
-  "Brownie icing chupa chups cake cookie halvah gummi bears halvah.",
-  "Sesame snaps donut gingerbread marshmallow topping powder.",
-  "Biscuit chocolate cheesecake pudding candy canes tart halvah sweet.",
-  "Sugar plum cake candy carrot cake.",
-  "Ice cream marzipan liquorice candy canes sesame snaps danish soufflé lollipop candy canes.",
-  "Lemon drops cotton candy pudding.",
-  "Pie cake soufflé cupcake jujubes sugar plum.",
-  "Liquorice lollipop oat cake.",
-];
-const types = ["info", "success", "warning", "error"];
-const placements = [
-  { placement: "top-left", reverseOrder: false },
-  { placement: "top-center", reverseOrder: false },
-  { placement: "top-right", reverseOrder: false },
-  { placement: "bottom-left", reverseOrder: true },
-  { placement: "bottom-center", reverseOrder: true },
-  { placement: "bottom-right", reverseOrder: true },
-];
+/* =========================================================================
+  Helpers
+  ========================================================================== */
+export type SortedToastList = Record<ToastPlacement, Toast[]>;
 
-export function getRandomItems(items: any) {
-  const index = Math.floor(Math.random() * items.length);
-  return items[index];
-}
-
-export function getRandomContent() {
-  return getRandomItems(contents);
-}
-
-export function getRandomType() {
-  return getRandomItems(types);
-}
-
-export function getRandomPlacement() {
-  return getRandomItems(placements);
-}
-
-/**
- * a type-safe version of the `usePrevious` hook described here:
- * @see {@link https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state}
- */
-export function usePrevious<T>(
-  value: T,
-): MutableRefObject<T | undefined>["current"] {
-  const ref = React.useRef<T>();
-
-  React.useEffect(() => {
-    ref.current = value;
-  }, [value]);
-
-  return ref.current;
-}
+export const getPlacementSortedToasts = (toasts: Toast[]) =>
+  toasts.reduce((acc, curr) => {
+    if (!acc[curr.placement]) acc[curr.placement] = [];
+    acc[curr.placement].push(curr);
+    return acc;
+  }, {} as SortedToastList);

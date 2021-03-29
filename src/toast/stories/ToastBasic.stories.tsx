@@ -6,8 +6,9 @@ import {
   utilsTemplateJs,
   toastBasicTemplate,
   toastBasicTemplateJs,
-  toastStyledCssTemplate,
+  toastCssTemplate,
 } from "./templates";
+import "./Toast.css";
 import { App as Toast } from "./ToastBasic.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
@@ -20,14 +21,24 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastBasicTemplate,
       tsUtils: utilsTemplate,
-      css: toastStyledCssTemplate,
+      css: toastCssTemplate,
+      deps: ["@chakra-ui/utils"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "tailwind";
-      document.body.classList.add("center");
-      return <Story />;
+      document.body.id = "toast";
+      return (
+        <div
+          style={{
+            height: "90vh",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <Story />
+        </div>
+      );
     },
   ],
 } as Meta;

@@ -1,0 +1,50 @@
+/* Toast Styles */
+.alert-enter {
+  opacity: 0;
+}
+
+.alert-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.alert-exit {
+  opacity: 1;
+}
+
+.alert-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+@keyframes shrink {
+  from {
+    height: 100%;
+  }
+
+  to {
+    height: 0%;
+  }
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

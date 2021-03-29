@@ -18,7 +18,6 @@ export default {
       js: multiSliderTemplateJs,
       ts: multiSliderTemplate,
       css: sliderCssTemplate,
-      deps: ["reakit@latest"],
     }),
   },
   decorators: [

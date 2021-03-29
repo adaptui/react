@@ -1,22 +1,23 @@
 import * as React from "react";
-import { objectKeys } from "@chakra-ui/utils";
 
 import {
   Alert,
+  ToastBar,
+  AlertType,
+  ContentType,
   ToastWrapper,
   TriggerButton,
+  ToastProvider,
   getRandomType,
   AlertIndicator,
-  ToastContainer,
   getRandomContent,
-  getPlacementSortedToasts,
+  useToastHandlers,
 } from "./Utils.component";
-import { ToastProvider, useToasts, useToasters } from "../index";
 
 export const App = () => {
   return (
     <ToastProvider animationDuration={300}>
-      <Notifications />
+      <ToastBar />
       <ToastTriggers />
     </ToastProvider>
   );
@@ -24,48 +25,38 @@ export const App = () => {
 
 export default App;
 
-export const Notifications = () => {
-  const { toasts, pauseTimer, resumeTimer, dismissToast } = useToasts();
-  const sortedToasts = getPlacementSortedToasts(toasts);
+const alert = (content: any, type?: AlertType) => ({
+  toast,
+  handlers,
+}: ContentType) => {
+  const { pauseTimer, resumeTimer, dismissToast } = handlers;
 
   return (
-    <>
-      {objectKeys(sortedToasts).map(placement => {
-        const toastsList = sortedToasts[placement];
-
-        return (
-          <ToastContainer key={placement} placement={placement}>
-            {toastsList.map(toast => {
-              return (
-                <ToastWrapper key={toast.id} toast={toast}>
-                  <Alert
-                    toast={toast}
-                    hideToast={dismissToast}
-                    onMouseEnter={() => pauseTimer(toast.id)}
-                    onMouseLeave={() => resumeTimer(toast.id)}
-                  >
-                    <AlertIndicator toast={toast} />
-                  </Alert>
-                </ToastWrapper>
-              );
-            })}
-          </ToastContainer>
-        );
-      })}
-    </>
+    <ToastWrapper toast={toast}>
+      <Alert
+        toast={toast}
+        type={type}
+        hideToast={dismissToast}
+        content={content}
+        onMouseEnter={() => pauseTimer(toast.id)}
+        onMouseLeave={() => resumeTimer(toast.id)}
+      >
+        <AlertIndicator toast={toast} type={type} />
+      </Alert>
+    </ToastWrapper>
   );
 };
 
 export function ToastTriggers() {
-  const { showToast } = useToasters();
+  const { showToast } = useToastHandlers();
 
   return (
     <div className="space-x-2">
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-left",
+            autoDismiss: true,
             dismissDuration: 1000,
           })
         }
@@ -74,9 +65,9 @@ export function ToastTriggers() {
       </TriggerButton>
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-center",
+            autoDismiss: true,
             dismissDuration: 2000,
           })
         }
@@ -85,9 +76,9 @@ export function ToastTriggers() {
       </TriggerButton>
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-right",
+            autoDismiss: true,
             dismissDuration: 3000,
           })
         }
@@ -96,9 +87,9 @@ export function ToastTriggers() {
       </TriggerButton>
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-left",
+            autoDismiss: true,
             dismissDuration: 4000,
           })
         }
@@ -107,9 +98,10 @@ export function ToastTriggers() {
       </TriggerButton>
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-center",
+            autoDismiss: true,
+            dismissDuration: 5000,
           })
         }
       >
@@ -117,8 +109,7 @@ export function ToastTriggers() {
       </TriggerButton>
       <TriggerButton
         onClick={() =>
-          showToast(getRandomContent(), {
-            type: getRandomType(),
+          showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-right",
             autoDismiss: false,
           })

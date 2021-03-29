@@ -1,60 +1,24 @@
 import * as React from "react";
 
-interface Toast {
-  id: string;
-  visible: boolean;
-  pauseDuration: number;
-  reverseOrder?: boolean;
-}
-
-export interface State<T> {
-  toasts: T[];
-}
+import { Action, ActionType, DefaultToast, State } from "./ToastTypes";
 
 const TOAST_LIMIT = 20;
 
-export enum ActionType {
-  ADD_TOAST,
-  UPDATE_TOAST,
-  UPSERT_TOAST,
-  DISMISS_TOAST,
-  REMOVE_TOAST,
-}
-
-export type Action<T> =
-  | {
-      type: ActionType.ADD_TOAST;
-      toast: T;
-    }
-  | {
-      type: ActionType.UPSERT_TOAST;
-      toast: T;
-    }
-  | {
-      type: ActionType.UPDATE_TOAST;
-      toast: Partial<T>;
-    }
-  | {
-      type: ActionType.DISMISS_TOAST;
-      toastId?: string;
-    }
-  | {
-      type: ActionType.REMOVE_TOAST;
-      toastId?: string;
-    };
-
-const reducer = <T extends Toast>(
+const reducer = <T extends DefaultToast>(
   state: State<T>,
   action: Action<T>,
 ): State<T> => {
   switch (action.type) {
-    case ActionType.ADD_TOAST:
+    case ActionType.ADD_TOAST: {
+      const maxToasts = action.maxToasts || TOAST_LIMIT;
+
       return {
         ...state,
         toasts: action.toast.reverseOrder
-          ? [...state.toasts, action.toast].slice(0, TOAST_LIMIT)
-          : [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+          ? [...state.toasts, action.toast].slice(-maxToasts)
+          : [action.toast, ...state.toasts].slice(-maxToasts),
       };
+    }
 
     case ActionType.UPDATE_TOAST:
       return {
@@ -62,6 +26,20 @@ const reducer = <T extends Toast>(
         toasts: state.toasts.map(t =>
           t.id === action.toast.id ? { ...t, ...action.toast } : t,
         ),
+      };
+
+    case ActionType.UPDATE_FIELD_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t =>
+          t[action.field] === action.fieldValue ? { ...t, ...action.toast } : t,
+        ),
+      };
+
+    case ActionType.UPDATE_ALL_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t => ({ ...t, ...action.toast })),
       };
 
     case ActionType.UPSERT_TOAST:
@@ -100,7 +78,7 @@ const reducer = <T extends Toast>(
 
 const initialState = { toasts: [] };
 
-export const useToastState = <T extends Toast>(): StateReturnType<T> => {
+export const useToastState = <T extends DefaultToast>(): StateReturnType<T> => {
   const [state, dispatch] = React.useReducer<
     React.Reducer<State<T>, Action<T>>
   >(reducer, initialState);
