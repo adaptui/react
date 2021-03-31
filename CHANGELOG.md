@@ -4,6 +4,89 @@ All notable changes to this project will be documented in this file. See
 [standard-version](https://github.com/conventional-changelog/standard-version)
 for commit guidelines.
 
+## [0.3.0](https://github.com/timelessco/renderlesskit-react/compare/v0.2.0...v0.3.0) (2021-03-31)
+
+### Bug Fixes
+
+- **accordion:** undefined discriminated union typeguard
+  ([#187](https://github.com/timelessco/renderlesskit-react/issues/187))
+  ([b234e3a](https://github.com/timelessco/renderlesskit-react/commit/b234e3acdcf1d95833a95789c977de3f529282e8))
+- **progress:** 🐛 remove value state
+  ([b84d759](https://github.com/timelessco/renderlesskit-react/commit/b84d759528bb77721a87e16b73fc34e792ad9ad6))
+
+### Tests
+
+- **number-input:** ✅ rename **test** to **tests**
+  ([#184](https://github.com/timelessco/renderlesskit-react/issues/184))
+  ([61271ce](https://github.com/timelessco/renderlesskit-react/commit/61271cece3f43cdfa1ab6a2c32de76bb67a5f88b))
+
+### Build System
+
+- **badge:** 👷 add badges to csb links
+  ([#189](https://github.com/timelessco/renderlesskit-react/issues/189))
+  ([063eec1](https://github.com/timelessco/renderlesskit-react/commit/063eec150022286cebea039d395b6e6f0bc015b5))
+
+### Others
+
+- **deps:** ⬆️ update project & dev deps
+  ([30752c1](https://github.com/timelessco/renderlesskit-react/commit/30752c1c227dd42d72388dffe71459b61e7cb08b))
+- bump test packages & fixed tests
+  ([#188](https://github.com/timelessco/renderlesskit-react/issues/188))
+  ([e1742a5](https://github.com/timelessco/renderlesskit-react/commit/e1742a5fd3ddde80fef8552ebc176e9707384223))
+- updated component aria-label warning reference links
+  ([#182](https://github.com/timelessco/renderlesskit-react/issues/182))
+  ([ee55c21](https://github.com/timelessco/renderlesskit-react/commit/ee55c2171793a8de3491404d69b0694d29a4ebd6))
+- **deps:** ⬆️ update project & dev deps
+  ([b5242b6](https://github.com/timelessco/renderlesskit-react/commit/b5242b6a04c888ccea6e2f5e6f512db0a462a0ea))
+- **npm:** 📦 rename pkg to scoped one
+  ([735e690](https://github.com/timelessco/renderlesskit-react/commit/735e6902f1974650c9285abf20e54b6400bfcf3f))
+- **release:** 0.2.0
+  ([513242c](https://github.com/timelessco/renderlesskit-react/commit/513242c07acb70ff2dccecbd880494729362b734))
+- **toast:** improved toastWrapper types
+  ([#180](https://github.com/timelessco/renderlesskit-react/issues/180))
+  ([fccc3de](https://github.com/timelessco/renderlesskit-react/commit/fccc3de54413caa5d5aa9596ac6d2f2124d1a96a))
+- simplify examples, extract duplicate code
+  ([#178](https://github.com/timelessco/renderlesskit-react/issues/178))
+  ([0cfb7f8](https://github.com/timelessco/renderlesskit-react/commit/0cfb7f89e836d56594bc2e321e17d5aaa3c9c885))
+- **deps:** ⬆️ update react to 17
+  ([#179](https://github.com/timelessco/renderlesskit-react/issues/179))
+  ([dd476b2](https://github.com/timelessco/renderlesskit-react/commit/dd476b24da860271ebab4c4a8ca21492283ba362))
+- **migration:** 🚚 rename repo to renderlesskit-react & reflect new npm pkg
+  ([d0e8317](https://github.com/timelessco/renderlesskit-react/commit/d0e8317fcb538e6b791854ac0a098c33a1c76fdb))
+
+### Docs
+
+- **component:** 📝 fix yaml bug and finish component docs
+  ([#174](https://github.com/timelessco/renderlesskit-react/issues/174))
+  ([bb7b448](https://github.com/timelessco/renderlesskit-react/commit/bb7b44804e0a598c55e16c9218dcd352a19d8cd2))
+- **csb:** 📝 fix all the failing csb links
+  ([#195](https://github.com/timelessco/renderlesskit-react/issues/195))
+  ([e73f28c](https://github.com/timelessco/renderlesskit-react/commit/e73f28c3805b7878a6f074e4f8c821612bce9cbd))
+- **tailwind:** 📝 add tailwind support & add examples
+  ([#186](https://github.com/timelessco/renderlesskit-react/issues/186))
+  ([8f5cbba](https://github.com/timelessco/renderlesskit-react/commit/8f5cbba8b8cf422fac533b0bd1be27ecf1034dfa))
+- changed props list to props table
+  ([#185](https://github.com/timelessco/renderlesskit-react/issues/185))
+  ([cb437f4](https://github.com/timelessco/renderlesskit-react/commit/cb437f41d8aa813fabad86ad6fb7106421829677))
+- **example:** 📝 simplify examples for docs
+  ([#177](https://github.com/timelessco/renderlesskit-react/issues/177))
+  ([7f94bfa](https://github.com/timelessco/renderlesskit-react/commit/7f94bfa1b5dfcd5debe4aab67c594ff3f497c12f))
+- **readme:** 📝 update readme & check new deployment
+  ([#175](https://github.com/timelessco/renderlesskit-react/issues/175))
+  ([00bd295](https://github.com/timelessco/renderlesskit-react/commit/00bd2953e6dcaa8dc16b27c752671684cb95291a))
+- **toast:** improved toast docs
+  ([#181](https://github.com/timelessco/renderlesskit-react/issues/181))
+  ([4b34d8f](https://github.com/timelessco/renderlesskit-react/commit/4b34d8fdceb8a0f1a9fa6b9c85066f0c18daccc4))
+- ensure sandbox link injection order
+  ([#176](https://github.com/timelessco/renderlesskit-react/issues/176))
+  ([3383fed](https://github.com/timelessco/renderlesskit-react/commit/3383fed7ba016fc211b17083749fe0b7b7bedacf))
+
+### Code Refactoring
+
+- **toast:** ♻️ add new toast state & examples
+  ([#199](https://github.com/timelessco/renderlesskit-react/issues/199))
+  ([e62928f](https://github.com/timelessco/renderlesskit-react/commit/e62928f3a4d1ba40e89e0d5ee925c93cb6bc2ab2))
+
 ## [0.2.0](https://github.com/timelessco/renderlesskit-react/compare/v0.1.1-beta.3...v0.2.0) (2020-12-03)
 
 ### Bug Fixes
