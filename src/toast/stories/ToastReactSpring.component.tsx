@@ -1,17 +1,128 @@
-import React from "react";
+import * as React from "react";
 import { animated, useTransition } from "react-spring";
 
-import { Variants, Placements } from "./Utils.component";
-import { ToastProvider, ToastWrapper } from "@renderlesskit/react";
+import {
+  Toast,
+  Alert,
+  ToastBar,
+  AlertType,
+  ContentType,
+  ToastProvider,
+  TriggerButton,
+  getRandomType,
+  AlertIndicator,
+  getRandomContent,
+  useToastHandlers,
+} from "./Utils.component";
 
-const SpringAnimationWrapper: ToastWrapper = ({
-  placement,
-  isVisible,
-  children,
-}) => {
+export const App = () => {
+  return (
+    <ToastProvider animationDuration={500}>
+      <ToastBar />
+      <ToastTriggers />
+    </ToastProvider>
+  );
+};
+
+export default App;
+
+const alert = (content: any, type?: AlertType) => ({
+  toast,
+  handlers,
+}: ContentType) => {
+  const { pauseTimer, resumeTimer, dismissToast } = handlers;
+
+  return (
+    <SpringAnimationWrapper toast={toast}>
+      <Alert
+        toast={toast}
+        type={type}
+        hideToast={dismissToast}
+        content={content}
+        onMouseEnter={() => pauseTimer(toast.id)}
+        onMouseLeave={() => resumeTimer(toast.id)}
+      >
+        <AlertIndicator toast={toast} type={type} />
+      </Alert>
+    </SpringAnimationWrapper>
+  );
+};
+
+export function ToastTriggers() {
+  const { showToast } = useToastHandlers();
+
+  return (
+    <div>
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-left",
+            })
+          }
+        >
+          Add Top Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-center",
+            })
+          }
+        >
+          Add Top Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-right",
+            })
+          }
+        >
+          Add Top Right Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-left",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-center",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            showToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-right",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Right Toast
+        </TriggerButton>
+      </div>
+    </div>
+  );
+}
+
+const SpringAnimationWrapper: React.FC<{ toast: Toast }> = props => {
+  const {
+    toast: { placement = "bottom-right", visible },
+    children,
+  } = props;
   const translate = getTransform(placement, 50);
-
-  const transitions = useTransition(isVisible, null, {
+  const transitions = useTransition(visible, null, {
     from: { opacity: 0, maxHeight: 0, transform: translate.from },
     enter: {
       opacity: 1,
@@ -32,44 +143,6 @@ const SpringAnimationWrapper: ToastWrapper = ({
           ),
       )}
     </>
-  );
-};
-
-export const App: React.FC = () => {
-  return (
-    <ToastProvider
-      autoDismiss={true}
-      placement="bottom-center"
-      animationTimeout={500}
-      toastWrapper={SpringAnimationWrapper}
-      toastTypes={{
-        error: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-        success: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-        warning: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#ef5013" }}>
-              {content} <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-      }}
-    >
-      <Variants />
-      <br />
-      <Placements />
-    </ToastProvider>
   );
 };
 
@@ -101,5 +174,3 @@ export const getTransform = (placement: string, pixels: number) => {
 
   return pos;
 };
-
-export default App;

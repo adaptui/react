@@ -1,171 +1,92 @@
-import React from "react";
+import * as React from "react";
 
-import { Placements } from "./ToastProvider";
+import { Action, ActionType, DefaultToast, State } from "./ToastTypes";
 
-type StringOrElement = string | React.ReactNode;
+const TOAST_LIMIT = 20;
 
-export interface Toast {
-  /**
-   * Unique id for the toast
-   */
-  id: string;
-  /**
-   * Type of toast
-   */
-  type: string;
-  /**
-   * Content inside the toast
-   */
-  content?: StringOrElement;
-  /**
-   * Sets the placement of the toast
-   *
-   * @default "bottom-center"
-   */
-  placement: Placements;
-  /**
-   * Timeout after the toast will be removed automatically if autoDismiss is true
-   */
-  timeout?: number;
-  /**
-   * If True the toast will automatically dismiss after the specified duration
-   */
-  autoDismiss?: boolean;
-  /**
-   * Sets toast initial visibility
-   */
-  isVisible?: boolean;
-}
+const reducer = <T extends DefaultToast>(
+  state: State<T>,
+  action: Action<T>,
+): State<T> => {
+  switch (action.type) {
+    case ActionType.ADD_TOAST: {
+      const maxToasts = action.maxToasts || TOAST_LIMIT;
 
-export type ToastList = Record<string, Toast>;
-export type SortedToastList = Record<Placements, Toast[]>;
+      return {
+        ...state,
+        toasts: action.toast.reverseOrder
+          ? [...state.toasts, action.toast].slice(-maxToasts)
+          : [action.toast, ...state.toasts].slice(-maxToasts),
+      };
+    }
 
-interface ToastStateProps {
-  defaultPlacement?: Placements;
-  animationTimeout?: number;
-}
+    case ActionType.UPDATE_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t,
+        ),
+      };
 
-export const useToastState = ({
-  defaultPlacement = "bottom-center",
-  animationTimeout = 0,
-}: ToastStateProps) => {
-  const COUNTER = React.useRef(0);
-  const [toasts, setToasts] = React.useState<ToastList>({});
-  const sortedToasts = getPlacementSortedToasts(toasts);
+    case ActionType.UPDATE_FIELD_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t =>
+          t[action.field] === action.fieldValue ? { ...t, ...action.toast } : t,
+        ),
+      };
 
-  // toggle can be used to just hide/show the toast instead of removing it.
-  // used for animations, since we don't want to unmount the component directly
-  const toggleToast = React.useCallback(
-    ({ id, isVisible }: { id: string; isVisible: boolean }) => {
-      setToasts(queue => ({
-        ...queue,
-        [id]: {
-          ...queue[id],
-          isVisible,
-        },
-      }));
-    },
-    [],
-  );
+    case ActionType.UPDATE_ALL_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t => ({ ...t, ...action.toast })),
+      };
 
-  const showToast = React.useCallback(
-    ({
-      id: idProps,
-      type = "",
-      content,
-      timeout,
-      autoDismiss,
-      placement = defaultPlacement,
-    }: Partial<Omit<Toast, "isVisible">>) => {
-      COUNTER.current = COUNTER.current + 1;
-      const id = idProps || `toast-${COUNTER.current}`;
+    case ActionType.UPSERT_TOAST:
+      const { toast } = action;
+      return state.toasts.find(t => t.id === toast.id)
+        ? reducer(state, { type: ActionType.UPDATE_TOAST, toast })
+        : reducer(state, { type: ActionType.ADD_TOAST, toast });
 
-      /*
-        wait until the next frame so we can animate
-        wierd bug while using CSSTrasition
-        works fine without RAF & double render when using react spring.
-        maybe because of this:- https://youtu.be/mmq-KVeO-uU?t=842
-       */
-      requestAnimationFrame(() => {
-        setToasts(toasts => ({
-          ...toasts,
-          [id]: {
-            type,
-            id,
-            content,
-            timeout,
-            placement,
-            autoDismiss,
-            isVisible: false,
-          },
-        }));
+    case ActionType.DISMISS_TOAST:
+      return {
+        ...state,
+        toasts: state.toasts.map(t =>
+          t.id === action.toastId || action.toastId === undefined
+            ? {
+                ...t,
+                visible: false,
+              }
+            : t,
+        ),
+      };
 
-        // causes rerender in order to trigger
-        // the animation after mount in CSSTrasition
-        toggleToast({ id, isVisible: true });
-      });
-    },
-    [defaultPlacement, toggleToast],
-  );
+    case ActionType.REMOVE_TOAST:
+      if (action.toastId === undefined) {
+        return {
+          ...state,
+          toasts: [],
+        };
+      }
 
-  const removeToast = React.useCallback((id: string) => {
-    // need to use callback based setState otherwise
-    // the remove function would take the queue as dependency
-    // and cause render when changed which would effectively
-    // cause the animations to behave strangly.
-    setToasts(queue => {
-      const newQueue = { ...queue };
-      delete newQueue[id];
-
-      return newQueue;
-    });
-  }, []);
-
-  const hideToast = React.useCallback(
-    (id: string) => {
-      toggleToast({ id, isVisible: false });
-
-      window.setTimeout(() => {
-        removeToast(id);
-      }, animationTimeout);
-    },
-    [toggleToast, animationTimeout, removeToast],
-  );
-
-  const isToastVisible = React.useCallback(
-    (id: string) => Boolean(toasts[id]),
-    [toasts],
-  );
-
-  return {
-    toasts,
-    sortedToasts,
-    showToast,
-    hideToast,
-    toggleToast,
-    removeToast,
-    isToastVisible,
-  };
+      return {
+        ...state,
+        toasts: state.toasts.filter(t => t.id !== action.toastId),
+      };
+  }
 };
 
-export type ToastStateReturn = ReturnType<typeof useToastState>;
+const initialState = { toasts: [] };
 
-function getPlacementSortedToasts(toasts: ToastList) {
-  const sortedToasts = {};
+export const useToastState = <T extends DefaultToast>(): StateReturnType<T> => {
+  const [state, dispatch] = React.useReducer<
+    React.Reducer<State<T>, Action<T>>
+  >(reducer, initialState);
 
-  for (const key in toasts) {
-    const toast = toasts[key];
-    const { placement } = toast;
-    const isTop = placement.includes("top");
+  return { toasts: state.toasts, dispatch };
+};
 
-    sortedToasts[placement] || (sortedToasts[placement] = []);
-
-    if (isTop) {
-      sortedToasts[placement].unshift(toast);
-    } else {
-      sortedToasts[placement].push(toast);
-    }
-  }
-
-  return sortedToasts as SortedToastList;
+export interface StateReturnType<T> {
+  toasts: T[];
+  dispatch: React.Dispatch<Action<T>>;
 }

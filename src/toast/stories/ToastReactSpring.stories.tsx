@@ -4,16 +4,16 @@ import { Meta } from "@storybook/react";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastStyledCssTemplate,
+  toastCssTemplate,
   toastReactSpringTemplate,
   toastReactSpringTemplateJs,
 } from "./templates";
-import "./ToastStyled.css";
-import { App as ReactSpringToast } from "./ToastCSSAnimated.component";
+import "./Toast.css";
+import { App as Toast } from "./ToastReactSpring.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: ReactSpringToast,
+  component: Toast,
   title: "Toast/ReactSpring",
   parameters: {
     preview: createPreviewTabs({
@@ -21,16 +21,26 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastReactSpringTemplate,
       tsUtils: utilsTemplate,
-      css: toastStyledCssTemplate,
-      deps: ["react-spring"],
+      css: toastCssTemplate,
+      deps: ["react-spring", "@chakra-ui/utils"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-styled";
-      return <Story />;
+      document.body.id = "toast";
+      return (
+        <div
+          style={{
+            height: "90vh",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <Story />
+        </div>
+      );
     },
   ],
 } as Meta;
 
-export const Default = () => <ReactSpringToast />;
+export const Default = () => <Toast />;

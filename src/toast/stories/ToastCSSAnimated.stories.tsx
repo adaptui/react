@@ -4,16 +4,16 @@ import { Meta } from "@storybook/react";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastStyledCssTemplate,
+  toastCssTemplate,
   toastCssAnimatedTemplate,
   toastCssAnimatedTemplateJs,
 } from "./templates";
-import "./ToastStyled.css";
-import { App as CSSAnimatedToast } from "./ToastCSSAnimated.component";
+import "./Toast.css";
+import { App as Toast } from "./ToastCSSAnimated.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
-  component: CSSAnimatedToast,
+  component: Toast,
   title: "Toast/CSSAnimated",
   parameters: {
     preview: createPreviewTabs({
@@ -21,16 +21,26 @@ export default {
       jsUtils: utilsTemplateJs,
       ts: toastCssAnimatedTemplate,
       tsUtils: utilsTemplate,
-      css: toastStyledCssTemplate,
-      deps: ["react-transition-group"],
+      css: toastCssTemplate,
+      deps: ["@chakra-ui/utils"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast-styled";
-      return <Story />;
+      document.body.id = "toast";
+      return (
+        <div
+          style={{
+            height: "90vh",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <Story />
+        </div>
+      );
     },
   ],
 } as Meta;
 
-export const Default = () => <CSSAnimatedToast />;
+export const Default = () => <Toast />;

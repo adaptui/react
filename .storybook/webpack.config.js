@@ -7,6 +7,9 @@ module.exports = ({ config }) => {
   };
   config.module.rules.push({
     test: /\.css$/,
+    exclude: /node_modules/,
+    include: path.resolve(process.cwd(), "src"),
+
     use: [
       {
         loader: require.resolve("postcss-loader"),

@@ -1,18 +1,19 @@
 import * as React from "react";
+import { CSSTransition } from "react-transition-group";
 
 import {
   Alert,
   ToastBar,
   AlertType,
   ContentType,
-  ToastWrapper,
-  TriggerButton,
   ToastProvider,
+  TriggerButton,
   getRandomType,
   AlertIndicator,
   getRandomContent,
   useToastHandlers,
 } from "./Utils.component";
+import {} from "../index";
 
 export const App = () => {
   return (
@@ -32,7 +33,12 @@ const alert = (content: any, type?: AlertType) => ({
   const { pauseTimer, resumeTimer, dismissToast } = handlers;
 
   return (
-    <ToastWrapper toast={toast}>
+    <CSSTransition
+      in={toast.visible}
+      classNames="alert"
+      timeout={300}
+      mountOnEnter
+    >
       <Alert
         toast={toast}
         type={type}
@@ -43,7 +49,7 @@ const alert = (content: any, type?: AlertType) => ({
       >
         <AlertIndicator toast={toast} type={type} />
       </Alert>
-    </ToastWrapper>
+    </CSSTransition>
   );
 };
 
@@ -56,66 +62,58 @@ export function ToastTriggers() {
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-left",
-            autoDismiss: true,
-            dismissDuration: 1000,
           })
         }
       >
-        Add 1s duration Top Left Toast
+        Add Top Left Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-center",
-            autoDismiss: true,
-            dismissDuration: 2000,
           })
         }
       >
-        Add 2s duration Top Center Toast
+        Add Top Center Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "top-right",
-            autoDismiss: true,
-            dismissDuration: 3000,
           })
         }
       >
-        Add 3s duration Top Right Toast
+        Add Top Right Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-left",
-            autoDismiss: true,
-            dismissDuration: 4000,
+            reverseOrder: true,
           })
         }
       >
-        Add 4s duration Top Left Toast
+        Add Bottom Left Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-center",
-            autoDismiss: true,
-            dismissDuration: 5000,
+            reverseOrder: true,
           })
         }
       >
-        Add 5s duration Bottom Center Toast
+        Add Bottom Center Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
           showToast(alert(getRandomContent(), getRandomType()), {
             placement: "bottom-right",
-            autoDismiss: false,
+            reverseOrder: true,
           })
         }
       >
-        Add Non Dismissable Bottom Right Toast
+        Add Bottom Right Toast
       </TriggerButton>
     </div>
   );

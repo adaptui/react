@@ -4,25 +4,25 @@ import { Meta } from "@storybook/react";
 import {
   utilsTemplate,
   utilsTemplateJs,
-  toastBasicTemplate,
-  toastBasicTemplateJs,
   toastCssTemplate,
+  toastCssTransitionTemplate,
+  toastCssTransitionTemplateJs,
 } from "./templates";
 import "./Toast.css";
-import { App as Toast } from "./ToastBasic.component";
+import { App as Toast } from "./ToastCSSTransition.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Toast,
-  title: "Toast/Basic",
+  title: "Toast/CSSTransition",
   parameters: {
     preview: createPreviewTabs({
-      js: toastBasicTemplateJs,
+      js: toastCssTransitionTemplateJs,
       jsUtils: utilsTemplateJs,
-      ts: toastBasicTemplate,
+      ts: toastCssTransitionTemplate,
       tsUtils: utilsTemplate,
       css: toastCssTemplate,
-      deps: ["@chakra-ui/utils"],
+      deps: ["react-transition-group", "@chakra-ui/utils"],
     }),
   },
   decorators: [
