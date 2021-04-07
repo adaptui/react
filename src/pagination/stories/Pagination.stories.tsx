@@ -9,6 +9,7 @@ export default {
   component: Pagination,
   title: "Pagination",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: paginationTemplateJs,
       ts: paginationTemplate,

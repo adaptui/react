@@ -16,6 +16,7 @@ export default {
   component: Toast,
   title: "Toast/ReactSpring",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: toastReactSpringTemplateJs,
       jsUtils: utilsTemplateJs,

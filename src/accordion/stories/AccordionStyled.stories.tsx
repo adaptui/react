@@ -1,4 +1,3 @@
-import "./AccordionStyled.css";
 import * as React from "react";
 import { Meta } from "@storybook/react";
 import { CompositeState } from "reakit";
@@ -8,7 +7,7 @@ import {
   accordionStyledTemplateJs,
   accordionStyledCssTemplate,
 } from "./templates";
-
+import "./AccordionStyled.css";
 import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionStyled.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
@@ -21,6 +20,7 @@ export default {
   component: Default,
   title: "Accordion/Styled",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: accordionStyledTemplateJs,
       ts: accordionStyledTemplate,

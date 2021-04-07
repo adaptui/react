@@ -15,6 +15,7 @@ export default {
   component: Default,
   title: "Accordion/Basic",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: accordionBasicTemplateJs,
       ts: accordionBasicTemplate,

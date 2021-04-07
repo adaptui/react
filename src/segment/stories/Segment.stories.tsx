@@ -14,6 +14,7 @@ export default {
   component: Segment,
   title: "Segment",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       ts: segmentTemplate,
       js: segmentTemplateJs,

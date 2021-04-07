@@ -9,6 +9,7 @@ export default {
   component: Link,
   title: "Link",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: linkTemplateJs,
       ts: linkTemplate,

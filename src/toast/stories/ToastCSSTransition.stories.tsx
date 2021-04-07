@@ -16,6 +16,7 @@ export default {
   component: Toast,
   title: "Toast/CSSTransition",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: toastCssTransitionTemplateJs,
       jsUtils: utilsTemplateJs,

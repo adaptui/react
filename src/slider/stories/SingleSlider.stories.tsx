@@ -14,6 +14,7 @@ export default {
   component: SingleSlider,
   title: "Slider/Single",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: singleSliderTemplateJs,
       ts: singleSliderTemplate,

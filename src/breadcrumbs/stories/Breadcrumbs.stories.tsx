@@ -14,6 +14,7 @@ export default {
   component: Breadcrumbs,
   title: "Breadcrumbs",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: breadcrumbsTemplateJs,
       ts: breadcrumbsTemplate,

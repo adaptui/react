@@ -16,6 +16,7 @@ export default {
   component: NumberInput,
   title: "NumberInput",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: numberInputTemplateJs,
       ts: numberInputTemplate,
@@ -87,22 +88,14 @@ MouseWheelScrollFalse.args = {
   allowMouseWheel: false,
 };
 
-const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
-  const state = useNumberInputState({ value });
-  const { value: stateValue, setValue: setStateValue } = state;
-
-  React.useEffect(() => {
-    onChange?.(stateValue);
-  }, [onChange, stateValue]);
-
-  React.useEffect(() => {
-    setStateValue(value);
-  }, [setStateValue, value]);
+const NumberComponent: React.FC<any> = props => {
+  const { value, onChange, ...rest } = props.field;
+  const state = useNumberInputState({ value, onChange });
 
   return (
     <>
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInputComp name={name} {...state} />
+      <NumberInputComp {...state} {...rest} />
       <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
     </>
   );
@@ -111,7 +104,7 @@ const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
 export const ReactHookForm = () => {
   const { control, handleSubmit } = useForm<{
     num: number;
-  }>({ defaultValues: { num: 20 } });
+  }>();
 
   return (
     <form
@@ -123,6 +116,7 @@ export const ReactHookForm = () => {
         <Controller
           name="num"
           control={control}
+          defaultValue={20}
           render={NumberComponent as any}
         />
       </div>

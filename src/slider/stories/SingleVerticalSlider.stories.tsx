@@ -14,6 +14,7 @@ export default {
   component: SingleVerticalSlider,
   title: "Slider/SingleVertical",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: singleVerticalSliderTemplateJs,
       ts: singleVerticalSliderTemplate,

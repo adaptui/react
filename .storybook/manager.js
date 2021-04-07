@@ -10,5 +10,7 @@ addons.setConfig({
   isToolshown: true,
   theme: undefined,
   initialActive: "sidebar",
-  showRoots: false,
+  sidebar: {
+    showRoots: false,
+  },
 });

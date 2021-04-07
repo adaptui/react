@@ -14,6 +14,7 @@ export default {
   component: Meter,
   title: "Meter/Basic",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: meterBasicTemplateJs,
       ts: meterBasicTemplate,

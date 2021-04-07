@@ -9,6 +9,7 @@ export default {
   title: "Drawer",
   component: Drawer,
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: drawerTemplateJs,
       ts: drawerTemplate,

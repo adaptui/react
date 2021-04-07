@@ -14,6 +14,7 @@ export default {
   component: MultiSlider,
   title: "Slider/Multi",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: multiSliderTemplateJs,
       ts: multiSliderTemplate,

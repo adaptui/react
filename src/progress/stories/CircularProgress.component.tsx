@@ -21,7 +21,7 @@ export interface AppProps extends ProgressInitialState {
 export const App: React.FC<AppProps> = props => {
   const { withLabel = false, children, ...rest } = props;
   const [value, setValue] = React.useState<number | null>(0);
-  const state = useProgressState({ value, ...rest });
+  const state = useProgressState({ ...rest, value });
   const { percent, isIndeterminate } = state;
 
   React.useEffect(() => {

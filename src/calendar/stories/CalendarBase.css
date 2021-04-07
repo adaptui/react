@@ -143,6 +143,7 @@
 .calendar [aria-disabled="true"] {
   color: #959595;
 }
+
 .calendar [data-weekend] {
   color: #fa3131;
 }

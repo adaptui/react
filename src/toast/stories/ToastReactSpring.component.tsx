@@ -1,5 +1,5 @@
 import * as React from "react";
-import { animated, useTransition } from "react-spring";
+import { a, useTransition } from "react-spring";
 
 import {
   Toast,
@@ -122,7 +122,7 @@ const SpringAnimationWrapper: React.FC<{ toast: Toast }> = props => {
     children,
   } = props;
   const translate = getTransform(placement, 50);
-  const transitions = useTransition(visible, null, {
+  const transition = useTransition(visible, {
     from: { opacity: 0, maxHeight: 0, transform: translate.from },
     enter: {
       opacity: 1,
@@ -134,14 +134,10 @@ const SpringAnimationWrapper: React.FC<{ toast: Toast }> = props => {
 
   return (
     <>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.div style={props} key={key}>
-              {children}
-            </animated.div>
-          ),
-      )}
+      {transition((style, item) => {
+        if (!item) return null;
+        return <a.div style={style}>{children}</a.div>;
+      })}
     </>
   );
 };
