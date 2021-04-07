@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./src/**/stories/*.stories.@(ts|tsx)"],
+  purge: ["./src/**/*"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},

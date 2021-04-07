@@ -22,26 +22,26 @@ export const DatePicker: React.FC<DatePickerInitialState> = props => {
   return (
     <>
       <DatePickerWrapper
-        className="styled-datepicker bg-white w-max rounded-md shadow-sm relative inline-block border border-gray-300"
+        className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max"
         {...state}
       >
-        <div className="flex gap-4 justify-between p-2 pr-4 pl-4 rounded-md">
+        <div className="flex justify-between p-2 pl-4 pr-4 space-x-4 rounded-md">
           <DatePickerSegmentField
             {...state}
-            className="flex justify-between gap-1"
+            className="flex justify-between space-x-1"
           >
             {state.segments.map((segment, i) => (
               <DatePickerSegment
                 key={i}
                 segment={segment}
                 {...state}
-                className="focus:text-blue-500 focus:outline-none font-mono"
+                className="font-mono focus:text-blue-500 focus:outline-none"
               />
             ))}
           </DatePickerSegmentField>
 
           <DatePickerTrigger
-            className="text-gray-700 focus:outline-none focus:text-blue-500 relative inline-block"
+            className="relative inline-block text-gray-700 focus:outline-none focus:text-blue-500"
             {...state}
           >
             <CalendarIcon />
