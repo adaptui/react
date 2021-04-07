@@ -8,12 +8,13 @@ import * as React from "react";
 import { mergeProps } from "@react-aria/utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
+import { useSpinButton } from "@react-aria/spinbutton";
 import { createComponent, createHook } from "reakit-system";
 
 import { dataAttr } from "../utils";
 import { SEGMENT_KEYS } from "./__keys";
 import { DateSegment, SegmentStateReturn } from "./SegmentState";
-import { useSpinButton, isNumeric, parseNumber } from "./helpers";
+import { isNumeric, parseNumber } from "./helpers";
 
 export type SegmentOptions = CompositeItemOptions &
   Pick<

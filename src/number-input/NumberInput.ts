@@ -1,13 +1,9 @@
-import {
-  callAllHandlers,
-  EventKeyMap,
-  normalizeEventKey,
-  StringOrNumber,
-} from "@chakra-ui/utils";
 import * as React from "react";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
+import { callAllHandlers, StringOrNumber } from "@chakra-ui/utils";
+import { EventKeyMap, normalizeEventKey } from "@chakra-ui/react-utils";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 import {
