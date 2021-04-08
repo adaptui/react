@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   axe,
   press,
@@ -7,6 +6,7 @@ import {
   render,
   fireEvent,
 } from "reakit-test-utils";
+import * as React from "react";
 import { cleanup } from "@testing-library/react";
 
 import {
@@ -15,8 +15,8 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "../index";
-import { AppProps } from "../stories/NumberInput.component";
 import { repeat } from "../../utils/test-utils";
+import { AppProps } from "../stories/NumberInput.component";
 
 beforeEach(() => {
   jest

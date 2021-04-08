@@ -240,6 +240,7 @@ export const useNumberInput = createHook<
       pattern: "[0-9]*(.[0-9]+)?",
       autoComplete: "off",
       autoCorrect: "off",
+      spellCheck: false,
       disabled,
       readOnly,
       required,
