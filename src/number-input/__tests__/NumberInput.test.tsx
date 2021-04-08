@@ -45,6 +45,14 @@ const NumberInputComp = (props: AppProps) => {
 };
 
 describe("NumberInput", () => {
+  it("should start with empty string", () => {
+    render(<NumberInputComp />);
+
+    const numberInput = screen.getByTestId("numberinput");
+
+    expect(numberInput).toHaveValue("");
+  });
+
   it("should render correctly", () => {
     render(<NumberInputComp defaultValue={0} />);
 
@@ -80,6 +88,36 @@ describe("NumberInput", () => {
     expect(numberInput).toHaveValue("10");
   });
 
+  it("should increase/decrease by 0.1*step on ctrl+Arrow", () => {
+    render(<NumberInputComp defaultValue={0} step={0.1} precision={2} />);
+    const numberInput = screen.getByTestId("numberinput");
+
+    press.ArrowUp(numberInput);
+    expect(numberInput).toHaveValue("0.10");
+    press.ArrowUp(numberInput, { ctrlKey: true });
+    expect(numberInput).toHaveValue("0.11");
+
+    press.ArrowDown(numberInput, { ctrlKey: true });
+    expect(numberInput).toHaveValue("0.10");
+    press.ArrowDown(numberInput);
+    expect(numberInput).toHaveValue("0.00");
+  });
+
+  it("should increase/decrease by 10*step on shift+Arrow", () => {
+    render(<NumberInputComp defaultValue={0} />);
+    const numberInput = screen.getByTestId("numberinput");
+
+    press.ArrowUp(numberInput);
+    expect(numberInput).toHaveValue("1");
+    press.ArrowUp(numberInput, { shiftKey: true });
+    expect(numberInput).toHaveValue("11");
+
+    press.ArrowDown(numberInput, { shiftKey: true });
+    expect(numberInput).toHaveValue("1");
+    press.ArrowDown(numberInput);
+    expect(numberInput).toHaveValue("0");
+  });
+
   it("should increase/decrease with buttons", () => {
     render(<NumberInputComp defaultValue={0} />);
 
@@ -93,6 +131,8 @@ describe("NumberInput", () => {
     expect(numberInput).toHaveValue("0");
     repeat(() => click(incBtn), 3);
     expect(numberInput).toHaveValue("3");
+    // TODO: Input should be focused on buttonClick even without press.Tab()
+    // expect(numberInput).toHaveFocus();
     repeat(() => click(decBtn), 3);
     expect(numberInput).toHaveValue("0");
   });

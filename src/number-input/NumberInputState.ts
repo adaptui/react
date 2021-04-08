@@ -12,8 +12,9 @@ import {
 } from "@chakra-ui/utils";
 import * as React from "react";
 import { useCounter } from "@chakra-ui/counter";
+import { useSafeLayoutEffect } from "@chakra-ui/hooks";
 
-import { useSpinner, useSpinnerReturn } from "./helpers";
+import { useSpinner, useSpinnerReturn, sanitize } from "./helpers";
 
 export type NumberInputState = {
   /**
@@ -77,9 +78,29 @@ export type NumberInputState = {
    * The Input Element.
    */
   inputRef: React.RefObject<HTMLElement | null>;
+  /**
+   * If `true`, the input will be in readonly mode
+   */
+  isReadOnly?: boolean;
+  /**
+   * If `true`, the input will have `aria-invalid` set to `true`
+   */
+  isInvalid?: boolean;
+  /**
+   * If `true`, the input will be disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * If `true`, the input will required to be given a value
+   */
+  isRequired?: boolean;
 };
 
 export type NumberInputAction = {
+  /**
+   * Set the value which will be converted to string.
+   */
+  updateValue: (next: StringOrNumber) => void;
   /**
    * Set the value which will be converted to string.
    */
@@ -124,7 +145,16 @@ export type NumberInputAction = {
 
 export type NumberinputInitialState = Pick<
   Partial<NumberInputState>,
-  "value" | "keepWithinRange" | "min" | "max" | "step" | "precision"
+  | "value"
+  | "keepWithinRange"
+  | "min"
+  | "max"
+  | "step"
+  | "precision"
+  | "isDisabled"
+  | "isInvalid"
+  | "isReadOnly"
+  | "isRequired"
 > & {
   /**
    * The initial value of the counter. Should be less than `max` and greater than `min`
@@ -156,6 +186,10 @@ export function useNumberInputState(
     step: stepProp = 1,
     keepWithinRange = true,
     focusInputOnChange = true,
+    isReadOnly,
+    isDisabled,
+    isInvalid,
+    isRequired,
   } = props;
 
   /**
@@ -166,11 +200,33 @@ export function useNumberInputState(
   const counter = useCounter(props);
 
   const {
-    update: setValue,
+    update: updateValue,
     cast: setCastedValue,
     clamp: clampToPrecision,
+    increment: incrementFn,
+    decrement: decrementFn,
     ...counterProps
   } = counter;
+
+  const isInteractive = !(isReadOnly || isDisabled);
+
+  const increment = React.useCallback(
+    (step = stepProp) => {
+      if (isInteractive) {
+        incrementFn(step);
+      }
+    },
+    [incrementFn, isInteractive, stepProp],
+  );
+
+  const decrement = React.useCallback(
+    (step = stepProp) => {
+      if (isInteractive) {
+        decrementFn(step);
+      }
+    },
+    [decrementFn, isInteractive, stepProp],
+  );
 
   /**
    * Leverage the `useSpinner` hook to spin the input's value
@@ -178,13 +234,26 @@ export function useNumberInputState(
    *
    * This leverages `setInterval` internally
    */
-  const spinner = useSpinner(counter.increment, counter.decrement);
+  const spinner = useSpinner(increment, decrement);
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
+  /**
+   * Sync state with uncontrolled form libraries like `react-hook-form`.
+   */
+  useSafeLayoutEffect(() => {
+    if (!inputRef.current) return;
+
+    const notInSync = inputRef.current.value !== counter.value;
+
+    if (notInSync) {
+      counter.setValue(sanitize(inputRef.current.value));
+    }
+  }, [counter.value]);
+
   const focusInput = React.useCallback(() => {
     if (focusInputOnChange && inputRef.current) {
-      focus(inputRef.current);
+      focus(inputRef.current, { nextTick: true });
     }
   }, [focusInputOnChange]);
 
@@ -193,14 +262,20 @@ export function useNumberInputState(
     max,
     step: stepProp,
     keepWithinRange,
-    setValue,
+    updateValue,
     setCastedValue,
     clampToPrecision,
+    increment,
+    decrement,
     ...counterProps,
     inputRef,
     focusInput,
     spinUp: spinner.up,
     spinDown: spinner.down,
     spinStop: spinner.stop,
+    isReadOnly,
+    isDisabled,
+    isInvalid,
+    isRequired,
   };
 }

@@ -4,16 +4,15 @@ import {
   normalizeEventKey,
 } from "@chakra-ui/utils";
 import * as React from "react";
-import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
-import { EventKeyMap } from "@chakra-ui/react-utils";
+import { EventKeyMap, mergeRefs } from "@chakra-ui/react-utils";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 
 import {
+  sanitize,
   getStepFactor,
   isValidNumericKeyboardEvent,
-  isFloatingPointNumericCharacter,
 } from "./helpers";
 import { ariaAttr } from "../utils";
 import { NUMBER_INPUT_KEYS } from "./__keys";
@@ -26,7 +25,7 @@ export type NumberInputOptions = InputOptions &
     | "min"
     | "max"
     | "step"
-    | "setValue"
+    | "updateValue"
     | "increment"
     | "decrement"
     | "value"
@@ -34,6 +33,10 @@ export type NumberInputOptions = InputOptions &
     | "isOutOfRange"
     | "setCastedValue"
     | "inputRef"
+    | "isInvalid"
+    | "isDisabled"
+    | "isReadOnly"
+    | "isRequired"
   > & {
     /**
      * This controls the value update when you blur out of the input.
@@ -64,10 +67,13 @@ export const useNumberInput = createHook<
   keys: NUMBER_INPUT_KEYS,
 
   useOptions({ allowMouseWheel = true, clampValueOnBlur = true, ...options }) {
+    const disabled = options.disabled || options.isDisabled;
+
     return {
       allowMouseWheel,
       clampValueOnBlur,
       ...options,
+      disabled,
     };
   },
 
@@ -80,6 +86,8 @@ export const useNumberInput = createHook<
       onFocus: htmlOnFocus,
       onBlur: htmlOnBlur,
       onWheel: htmlOnWheel,
+      required: htmlRequired,
+      readOnly: htmlReadOnly,
       ...htmlProps
     },
   ) {
@@ -87,7 +95,7 @@ export const useNumberInput = createHook<
       min,
       max,
       step,
-      setValue,
+      updateValue,
       increment,
       decrement,
       value,
@@ -96,7 +104,14 @@ export const useNumberInput = createHook<
       setCastedValue,
       inputRef,
       disabled,
+      isInvalid,
+      isReadOnly,
+      isRequired,
+      isOutOfRange,
     } = options;
+
+    const readOnly = htmlReadOnly || isReadOnly;
+    const required = htmlRequired || isRequired;
 
     /**
      * The `onChange` handler filters out any character typed
@@ -104,21 +119,13 @@ export const useNumberInput = createHook<
      */
     const onChange = React.useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (disabled) return;
-
-        const valueString = event.target.value
-          .split("")
-          .filter(isFloatingPointNumericCharacter)
-          .join("");
-        setValue(valueString);
+        updateValue(sanitize(event.target.value));
       },
-      [disabled, setValue],
+      [updateValue],
     );
 
     const onKeyDown = React.useCallback(
       (event: React.KeyboardEvent) => {
-        if (disabled) return;
-
         /**
          * only allow valid numeric keys
          */
@@ -141,8 +148,8 @@ export const useNumberInput = createHook<
         const keyMap: EventKeyMap = {
           ArrowUp: () => increment(stepFactor),
           ArrowDown: () => decrement(stepFactor),
-          Home: () => setValue(min),
-          End: () => setValue(max),
+          Home: () => updateValue(min),
+          End: () => updateValue(max),
         };
 
         const action = keyMap[eventKey];
@@ -152,7 +159,7 @@ export const useNumberInput = createHook<
           action(event);
         }
       },
-      [disabled, decrement, increment, max, min, step, setValue],
+      [decrement, increment, max, min, step, updateValue],
     );
 
     const onBlur = React.useCallback(() => {
@@ -176,9 +183,7 @@ export const useNumberInput = createHook<
        * - sanitize the value by using parseFloat and some Regex
        * - used to round value to computed precision or decimal points
        */
-      if (value !== next) {
-        setCastedValue(next);
-      }
+      setCastedValue(next);
     }, [setCastedValue, clampValueOnBlur, max, min, value, valueAsNumber]);
 
     React.useEffect(() => {
@@ -210,8 +215,7 @@ export const useNumberInput = createHook<
 
     const onWheel = React.useCallback(
       (event: React.WheelEvent) => {
-        const isInputFocused = document.activeElement === inputRef.current;
-        if (!options.allowMouseWheel || !isInputFocused) return;
+        if (!options.allowMouseWheel) return;
 
         event.preventDefault();
 
@@ -224,10 +228,11 @@ export const useNumberInput = createHook<
           decrement(stepFactor);
         }
       },
-      [decrement, increment, inputRef, options.allowMouseWheel, step],
+      [decrement, increment, options.allowMouseWheel, step],
     );
 
     return {
+      ref: mergeRefs(htmlRef, inputRef),
       value,
       type: "text",
       role: "spinbutton",
@@ -235,16 +240,20 @@ export const useNumberInput = createHook<
       pattern: "[0-9]*(.[0-9]+)?",
       autoComplete: "off",
       autoCorrect: "off",
-      "aria-valuemin": min,
-      "aria-valuemax": max,
-      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
-      "aria-valuetext": !value.toString() ? undefined : value.toString(),
-      "aria-invalid": ariaAttr(options.isOutOfRange),
-      ref: useForkRef(htmlRef, inputRef),
+      disabled,
+      readOnly,
+      required,
       onChange: callAllHandlers(htmlOnChange, onChange),
       onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       onBlur: callAllHandlers(htmlOnBlur, onBlur),
       onWheel: callAllHandlers(htmlOnWheel, onWheel),
+      "aria-readonly": readOnly,
+      "aria-required": required,
+      "aria-invalid": ariaAttr(isInvalid ?? isOutOfRange),
+      "aria-valuemin": min,
+      "aria-valuemax": max,
+      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
+      "aria-valuetext": !value.toString() ? undefined : value.toString(),
       ...htmlProps,
     };
   },

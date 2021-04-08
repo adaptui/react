@@ -10,7 +10,7 @@ export type NumberInputIncrementButtonOptions = ButtonOptions &
   Pick<Partial<NumberInputStateReturn>, "keepWithinRange"> &
   Pick<
     NumberInputStateReturn,
-    "focusInput" | "isAtMax" | "spinUp" | "spinStop"
+    "focusInput" | "isAtMax" | "spinUp" | "spinStop" | "isDisabled"
   >;
 
 export type NumberInputIncrementButtonHTMLProps = ButtonHTMLProps;
@@ -28,7 +28,9 @@ export const useNumberInputIncrementButton = createHook<
 
   useOptions(options) {
     const { keepWithinRange, isAtMax } = options;
-    const disabled = options.disabled || (keepWithinRange && isAtMax);
+    const disabled =
+      options.disabled || (keepWithinRange && isAtMax) || options.isDisabled;
+
     return { ...options, disabled };
   },
 
@@ -68,6 +70,7 @@ export const useNumberInputIncrementButton = createHook<
     }, [options.disabled, spinStopProp]);
 
     return {
+      "aria-hidden": true,
       tabIndex: -1,
       onMouseDown: callAllHandlers(onMouseDown, spinUp),
       onTouchStart: callAllHandlers(onTouchStart, spinUp),
