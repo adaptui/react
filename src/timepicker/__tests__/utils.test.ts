@@ -7,9 +7,13 @@ import MockDate from "mockdate";
 
 describe("TimePicker Utils", () => {
   test("parseTime", () => {
-    expect(parseTime("12:40")?.toLocaleTimeString()).toBe("12:40:00 PM");
-    expect(parseTime("23:01")?.toLocaleTimeString()).toBe("11:01:00 PM");
-    expect(parseTime("1:1")?.toLocaleTimeString()).toBeUndefined();
+    expect(parseTime("12:40")?.toTimeString()).toBe(
+      "12:40:00 GMT+0530 (India Standard Time)",
+    );
+    expect(parseTime("23:01")?.toTimeString()).toBe(
+      "23:01:00 GMT+0530 (India Standard Time)",
+    );
+    expect(parseTime("1:1")?.toTimeString()).toBeUndefined();
   });
 
   test("getSelectedValueFromDate", () => {

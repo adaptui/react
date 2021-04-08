@@ -18,7 +18,16 @@ import {
 import { AppProps } from "../stories/NumberInput.component";
 import { repeat } from "../../utils/test-utils";
 
-afterEach(cleanup);
+beforeEach(() => {
+  jest
+    .spyOn(window, "requestAnimationFrame")
+    .mockImplementation((cb: any) => cb());
+});
+
+afterEach(() => {
+  cleanup();
+  (window.requestAnimationFrame as any).mockRestore();
+});
 
 const NumberInputComp = (props: AppProps) => {
   const state = useNumberInputState(props);
@@ -45,6 +54,7 @@ const NumberInputComp = (props: AppProps) => {
 };
 
 describe("NumberInput", () => {
+  expect.assertions(1);
   it("should start with empty string", () => {
     render(<NumberInputComp />);
 
@@ -126,13 +136,11 @@ describe("NumberInput", () => {
     const numberInput = screen.getByTestId("numberinput");
 
     expect(numberInput).not.toHaveFocus();
-    press.Tab();
-    expect(numberInput).toHaveFocus();
     expect(numberInput).toHaveValue("0");
     repeat(() => click(incBtn), 3);
     expect(numberInput).toHaveValue("3");
-    // TODO: Input should be focused on buttonClick even without press.Tab()
-    // expect(numberInput).toHaveFocus();
+    expect(numberInput).toHaveFocus();
+
     repeat(() => click(decBtn), 3);
     expect(numberInput).toHaveValue("0");
   });
