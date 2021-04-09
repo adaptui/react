@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render } from "reakit-test-utils";
-import { SpinButtonProps, useSpinButton } from "../helpers/useSpinButton";
+import { useSpinButton, SpinButtonProps } from "@react-aria/spinbutton";
 
 const SpinButtonComp: React.FC<SpinButtonProps> = props => {
   const { spinButtonProps } = useSpinButton(props);

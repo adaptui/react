@@ -18,12 +18,13 @@ export default {
   component: DatePicker,
   title: "DatePicker/Base",
   argTypes: {
+    defaultValue: { control: "date" },
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
-    defaultValue: { control: "date", defaultValue: new Date() },
   },
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: datePickerBaseTemplateJs,
       ts: datePickerBaseTemplate,
@@ -55,39 +56,48 @@ const Base: Story = args => {
 
 export const Default = Base.bind({});
 
-export const InitialDate = Base.bind({});
-InitialDate.args = {
-  value: "2020-02-29",
-  defaultDate: "2020-02-29",
+export const DefaultDate = Base.bind({});
+DefaultDate.args = {
+  defaultValue: addDays(new Date(), 2),
 };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
-  value: addDays(new Date(), 2),
+  defaultValue: addDays(new Date(), 2),
   minValue: new Date(),
   maxValue: addWeeks(new Date(), 2),
 };
 
 export const InValidDate = Base.bind({});
 InValidDate.args = {
-  value: addWeeks(new Date(), 2),
+  defaultValue: addWeeks(new Date(), 2),
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
 
-export const Options = Base.bind({});
-Options.args = {
-  defaultValue: addWeeks(new Date(), 2),
-  value: addWeeks(new Date(), 2),
-  minValue: null,
-  maxValue: null,
-  autoFocus: false,
-  isDisabled: false,
-  isReadOnly: false,
+export const Disabled = Base.bind({});
+Disabled.args = { defaultValue: new Date(), isDisabled: true };
+
+export const Readonly = Base.bind({});
+Readonly.args = { defaultValue: new Date(), isReadonly: true };
+
+export const AutoFocus = Base.bind({});
+AutoFocus.args = { defaultValue: new Date(), autoFocus: true };
+
+export const FormatOptions = Base.bind({});
+FormatOptions.args = {
+  defaultValue: new Date(),
   formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
 };
 
-export const ControllableState = () => {
+export const ControlledStory = Base.bind({});
+ControlledStory.args = {
+  value: addDays(new Date(), 2),
+  minValue: new Date(),
+  maxValue: addWeeks(new Date(), 2),
+};
+
+export const ControllableInput = () => {
   const [value, setValue] = React.useState("2020-10-13");
 
   return (

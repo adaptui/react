@@ -18,8 +18,6 @@ export default {
   title: "Calendar/Range",
   component: RangeCalendar,
   argTypes: {
-    start: { control: "date", name: "value.start" },
-    end: { control: "date", name: "value.end" },
     defaultStart: {
       control: "date",
       name: "default.start",
@@ -28,10 +26,13 @@ export default {
       control: "date",
       name: "default.end",
     },
+    start: { control: "date", name: "value.start" },
+    end: { control: "date", name: "value.end" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
   },
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: calendarRangeTemplateJs,
       ts: calendarRangeTemplate,
@@ -75,32 +76,44 @@ export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
 DefaultValue.args = {
-  start: new Date(),
-  end: addWeeks(new Date(), 1),
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
 };
 
-export const MinMaxDefaultDate = Base.bind({});
-MinMaxDefaultDate.args = {
-  start: new Date(),
-  end: addDays(new Date(), 1),
+export const MinMaxDate = Base.bind({});
+MinMaxDate.args = {
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
 
-export const Options = Base.bind({});
-Options.args = {
-  start: new Date(),
-  end: addWeeks(new Date(), 1),
-  minValue: null,
-  maxValue: null,
-  isDisabled: false,
-  isReadOnly: false,
-  autoFocus: false,
+export const Disabled = Base.bind({});
+Disabled.args = {
+  defaultStart: new Date(),
+  defaultEnd: addWeeks(new Date(), 1),
+  isDisabled: true,
 };
 
-export const ControlledValue = () => {
+export const Readonly = Base.bind({});
+Readonly.args = {
+  defaultStart: new Date(),
+  defaultEnd: addWeeks(new Date(), 1),
+  isReadonly: true,
+};
+
+export const Autofocus = Base.bind({});
+Autofocus.args = {
+  defaultStart: new Date(),
+  defaultEnd: addWeeks(new Date(), 1),
+  autoFocus: true,
+};
+
+export const ControlledStory = Base.bind({});
+ControlledStory.args = {
+  start: new Date(),
+  end: addWeeks(new Date(), 1),
+};
+
+export const ControlledInput = () => {
   const [start, setStart] = React.useState(
     format(subDays(new Date(), 1), "yyyy-MM-dd"),
   );

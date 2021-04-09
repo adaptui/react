@@ -9,7 +9,6 @@ import { useCompositeState } from "reakit";
 import { useDateFormatter } from "@react-aria/i18n";
 
 import { useControllableState } from "../utils";
-import { DateTimeFormatOpts } from "../utils/types";
 import { add, setSegment, convertValue, getSegmentLimits } from "./helpers";
 
 export interface DateSegment {
@@ -72,7 +71,7 @@ export type SegmentInitialState = {
    * }
    *
    */
-  formatOptions?: DateTimeFormatOpts;
+  formatOptions?: Intl.DateTimeFormatOptions;
   /**
    * Placeholder date
    */

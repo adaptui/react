@@ -16,6 +16,7 @@ export default {
   component: Toast,
   title: "Toast/CSSAnimated",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: toastCssAnimatedTemplateJs,
       jsUtils: utilsTemplateJs,

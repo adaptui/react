@@ -10,7 +10,7 @@ export type NumberInputDecrementButtonOptions = ButtonOptions &
   Pick<Partial<NumberInputStateReturn>, "keepWithinRange"> &
   Pick<
     NumberInputStateReturn,
-    "focusInput" | "isAtMin" | "spinDown" | "spinStop"
+    "focusInput" | "isAtMin" | "spinDown" | "spinStop" | "isDisabled"
   >;
 
 export type NumberInputDecrementButtonHTMLProps = ButtonHTMLProps;
@@ -28,7 +28,9 @@ export const useNumberInputDecrementButton = createHook<
 
   useOptions(options) {
     const { keepWithinRange, isAtMin } = options;
-    const disabled = options.disabled || (keepWithinRange && isAtMin);
+    const disabled =
+      options.disabled || (keepWithinRange && isAtMin) || options.isDisabled;
+
     return { ...options, disabled };
   },
 
@@ -72,6 +74,7 @@ export const useNumberInputDecrementButton = createHook<
     }, [options.disabled, spinStopProp]);
 
     return {
+      "aria-hidden": true,
       tabIndex: -1,
       onMouseDown: callAllHandlers(onMouseDown, spinDown),
       onTouchStart: callAllHandlers(onTouchStart, spinDown),

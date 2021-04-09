@@ -13,6 +13,7 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     document.body.id = kebabCase(context.kind);
+
     return <Story />;
   },
 ];

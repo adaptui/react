@@ -14,6 +14,7 @@ export default {
   component: SingleReversedSlider,
   title: "Slider/SingleReversed",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: singleReversedSliderTemplateJs,
       ts: singleReversedSliderTemplate,

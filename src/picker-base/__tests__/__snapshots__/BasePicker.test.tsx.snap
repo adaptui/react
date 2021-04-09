@@ -39,6 +39,7 @@ exports[`PickerBase should render correctly 1`] = `
       data-testid="picker-content"
       id="dialog-1"
       role="dialog"
+      style="position: fixed; left: 100%; top: 100%;"
       tabindex="-1"
     >
       Content

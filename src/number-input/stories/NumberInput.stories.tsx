@@ -16,6 +16,7 @@ export default {
   component: NumberInput,
   title: "NumberInput",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: numberInputTemplateJs,
       ts: numberInputTemplate,
@@ -87,31 +88,63 @@ MouseWheelScrollFalse.args = {
   allowMouseWheel: false,
 };
 
-const NumberComponent: React.FC<any> = ({ onChange, value, name }) => {
-  const state = useNumberInputState({ value });
-  const { value: stateValue, setValue: setStateValue } = state;
+export const Disabled = Base.bind({});
+Disabled.args = {
+  defaultValue: 15,
+  isDisabled: true,
+};
 
-  React.useEffect(() => {
-    onChange?.(stateValue);
-  }, [onChange, stateValue]);
+export const Readonly = Base.bind({});
+Readonly.args = {
+  defaultValue: 15,
+  isReadOnly: true,
+};
 
-  React.useEffect(() => {
-    setStateValue(value);
-  }, [setStateValue, value]);
+export const Invalid = Base.bind({});
+Invalid.args = {
+  defaultValue: 15,
+  max: 10,
+  keepWithinRange: false,
+  clampValueOnBlur: false,
+};
+
+export const Controlled = () => {
+  const [value, setValue] = React.useState(0);
+  const onChange = (value: any) => setValue(value);
+
+  return (
+    <div>
+      <input
+        type="number"
+        value={value}
+        onChange={event => onChange(event.target.value)}
+        style={{ display: "block", marginBottom: "1rem" }}
+      />
+      <NumberInput {...{ value, onChange }} />
+    </div>
+  );
+};
+
+const NumberComponent: React.FC<any> = props => {
+  const { value, onChange, ...rest } = props.field;
+  const state = useNumberInputState({ defaultValue: value, onChange });
 
   return (
     <>
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInputComp name={name} {...state} />
+      <NumberInputComp
+        aria-label="Number Input"
+        placeholder="Enter a number"
+        {...state}
+        {...rest}
+      />
       <NumberInputIncrementButton {...state}>+</NumberInputIncrementButton>
     </>
   );
 };
 
 export const ReactHookForm = () => {
-  const { control, handleSubmit } = useForm<{
-    num: number;
-  }>({ defaultValues: { num: 20 } });
+  const { control, handleSubmit } = useForm<{ num: number }>();
 
   return (
     <form
@@ -123,6 +156,7 @@ export const ReactHookForm = () => {
         <Controller
           name="num"
           control={control}
+          defaultValue={20}
           render={NumberComponent as any}
         />
       </div>

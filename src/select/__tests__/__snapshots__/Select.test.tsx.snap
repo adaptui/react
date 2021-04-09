@@ -21,7 +21,7 @@ exports[`Select should render correctly 1`] = `
       hidden=""
       id="select"
       role="listbox"
-      style="display: none;"
+      style="display: none; position: fixed; left: 100%; top: 100%;"
       tabindex="0"
     >
       <div

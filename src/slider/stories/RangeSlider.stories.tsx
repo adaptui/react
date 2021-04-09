@@ -14,6 +14,7 @@ export default {
   component: RangeSlider,
   title: "Slider/Range",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: rangeSliderTemplateJs,
       ts: rangeSliderTemplate,

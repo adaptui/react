@@ -45,6 +45,7 @@ export const App: React.FC<AppProps> = props => {
     <label htmlFor="number-input" id="numberinput-label">
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
       <NumberInput
+        placeholder="Enter a number"
         id="number-input"
         aria-labelledby="numberinput-label"
         clampValueOnBlur={clampValueOnBlur}

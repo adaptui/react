@@ -30,11 +30,10 @@ function addIdScope() {
 }
 
 module.exports = {
-  exec: true,
   plugins: [
-    require("postcss-import"),
     require("tailwindcss"),
-    require("autoprefixer"),
+    require("postcss-flexbugs-fixes"),
+    require("autoprefixer")({ flexbox: "no-2009" }),
     rewriteRootRule(),
     addIdScope(),
   ],

@@ -14,6 +14,7 @@ export default {
   component: SingleOriginSlider,
   title: "Slider/SingleOrigin",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: singleSliderTemplateJs,
       ts: singleSliderTemplate,

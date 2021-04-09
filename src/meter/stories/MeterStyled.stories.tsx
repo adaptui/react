@@ -9,6 +9,7 @@ export default {
   component: Meter,
   title: "Meter/Styled",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: meterStyledTemplateJs,
       ts: meterStyledTemplate,

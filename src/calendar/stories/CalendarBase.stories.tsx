@@ -18,12 +18,13 @@ export default {
   component: Calendar,
   title: "Calendar/Base",
   argTypes: {
+    defaultValue: { control: "date" },
     value: { control: "date" },
     minValue: { control: "date" },
     maxValue: { control: "date" },
-    defaultValue: { control: "date", defaultValue: new Date() },
   },
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: calendarBaseTemplateJs,
       ts: calendarBaseTemplate,
@@ -56,41 +57,31 @@ const Base: Story = args => {
 export const Default = Base.bind({});
 
 export const DefaultValue = Base.bind({});
-DefaultValue.args = { value: "2001-01-01", defaultValue: "2001-01-01" };
+DefaultValue.args = { defaultValue: new Date() };
 
 export const MinMaxDate = Base.bind({});
 MinMaxDate.args = {
-  value: new Date(2020, 10, 1),
   minValue: new Date(),
   maxValue: addWeeks(new Date(), 1),
 };
 
-export const MinMaxDefaultDate = Base.bind({});
-MinMaxDefaultDate.args = {
-  value: new Date(2020, 10, 7),
-  minValue: subWeeks(new Date(2020, 10, 7), 1),
-  maxValue: addWeeks(new Date(2020, 10, 7), 1),
-};
-
 export const IsDisabled = Base.bind({});
-IsDisabled.args = {
-  value: new Date(),
-  isDisabled: true,
-};
+IsDisabled.args = { defaultValue: new Date(), isDisabled: true };
 
 export const IsReadonly = Base.bind({});
-IsReadonly.args = {
-  value: new Date(),
-  isReadonly: true,
-};
+IsReadonly.args = { defaultValue: new Date(), isReadonly: true };
 
 export const AutoFocus = Base.bind({});
-AutoFocus.args = {
+AutoFocus.args = { defaultValue: new Date(), autoFocus: true };
+
+export const ControlledStory = Base.bind({});
+ControlledStory.args = {
   value: new Date(),
-  autoFocus: true,
+  minValue: new Date(),
+  maxValue: addWeeks(new Date(), 1),
 };
 
-export const WithNativeDateInput = () => {
+export const ControlledInput = () => {
   const [value, setValue] = React.useState("2020-10-13");
 
   return (

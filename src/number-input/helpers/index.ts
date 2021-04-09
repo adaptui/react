@@ -10,6 +10,9 @@ export function isFloatingPointNumericCharacter(character: string) {
   return FLOATING_POINT_REGEX.test(character);
 }
 
+export const sanitize = (value: string) =>
+  value.split("").filter(isFloatingPointNumericCharacter).join("");
+
 /**
  * Determine if the event is a valid numeric keyboard event.
  * We use this so we can prevent non-number characters in the input

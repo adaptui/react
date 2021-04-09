@@ -14,6 +14,7 @@ export default {
   component: Progress,
   title: "Progress/Basic",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: progressBasicTemplateJs,
       ts: progressBasicTemplate,

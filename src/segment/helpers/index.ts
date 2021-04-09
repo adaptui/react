@@ -14,8 +14,6 @@ import {
   setYear,
 } from "date-fns";
 
-import { DateTimeFormatOpts } from "../../utils/types";
-
 export function convertValue(value: Date | undefined): Date | undefined {
   if (!value) {
     return undefined;
@@ -27,7 +25,7 @@ export function convertValue(value: Date | undefined): Date | undefined {
 export function getSegmentLimits(
   date: Date,
   type: string,
-  options: DateTimeFormatOpts,
+  options: Intl.ResolvedDateTimeFormatOptions,
 ) {
   let value, minValue, maxValue;
   switch (type) {
@@ -231,5 +229,3 @@ export function parseNumber(str: string): number {
 export function isNumeric(str: string) {
   return /^[0-9\u0660-\u0669\u06f0-\u06f9]+$/.test(str);
 }
-
-export * from "./useSpinButton";

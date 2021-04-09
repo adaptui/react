@@ -12,6 +12,7 @@ export default {
   component: Progress,
   title: "Progress/Circular",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: circularProgressTemplateJs,
       ts: circularProgressTemplate,

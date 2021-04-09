@@ -16,6 +16,7 @@ export default {
   component: Toast,
   title: "Toast/Basic",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: toastBasicTemplateJs,
       jsUtils: utilsTemplateJs,
@@ -28,17 +29,7 @@ export default {
   decorators: [
     Story => {
       document.body.id = "toast";
-      return (
-        <div
-          style={{
-            height: "90vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Story />
-        </div>
-      );
+      return <Story />;
     },
   ],
 } as Meta;

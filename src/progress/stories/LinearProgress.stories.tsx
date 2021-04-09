@@ -9,6 +9,7 @@ export default {
   component: Progress,
   title: "Progress/Linear",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: linearProgressTemplateJs,
       ts: linearProgressTemplate,

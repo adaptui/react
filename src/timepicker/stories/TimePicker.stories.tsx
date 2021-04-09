@@ -16,6 +16,7 @@ export default {
   component: TimePicker,
   title: "TimePicker",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       ts: timePickerTemplate,
       js: timePickerTemplateJs,

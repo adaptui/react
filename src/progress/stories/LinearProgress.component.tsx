@@ -34,7 +34,7 @@ export const App: React.FC<AppProps> = props => {
     ...rest
   } = props;
   const [value, setValue] = React.useState<number | null>(0);
-  const state = useProgressState({ value, ...rest });
+  const state = useProgressState({ ...rest, value });
   const { percent, isIndeterminate } = state;
 
   React.useEffect(() => {

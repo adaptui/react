@@ -14,6 +14,7 @@ export default {
   component: Slider,
   title: "Slider/AllInOne",
   parameters: {
+    layout: "centered",
     preview: createPreviewTabs({
       js: sliderTemplateJs,
       ts: sliderTemplate,
