@@ -13,6 +13,7 @@ import { createHook, createComponent } from "reakit-system";
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
 import { getAccordionId, isPanelVisible } from "./helpers";
+import { AccordionMultiStateReturn } from "./AccordionMultiState";
 
 export const useAccordionPanel = createHook<
   AccordionPanelOptions,
@@ -29,6 +30,7 @@ export const useAccordionPanel = createHook<
 
     React.useLayoutEffect(() => {
       if (!id) return undefined;
+
       registerPanel?.({ id, ref, groupId: accordionId });
 
       return () => {
@@ -38,6 +40,7 @@ export const useAccordionPanel = createHook<
 
     return {
       ref: useForkRef(ref, htmlRef),
+      role: "region",
       "aria-labelledby": accordionId,
       ...htmlProps,
     };
@@ -72,8 +75,8 @@ export type AccordionPanelOptions = {
     | "items"
     | "allowMultiple"
     | "selectedId"
-    | "selectedIds"
-  >;
+  > &
+  Pick<AccordionMultiStateReturn, "selectedIds">;
 
 export type AccordionPanelHTMLProps = DisclosureContentHTMLProps &
   unstable_IdHTMLProps;

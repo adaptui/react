@@ -23,12 +23,14 @@ export function getAccordionId(options: AccordionPanelOptions) {
   const { panels, id, items } = options;
   const panel = panels?.find(p => p.id === id);
   const accordionId = options.accordionId || panel?.groupId;
+
   if (accordionId || !panel || !panels || !items) {
     return accordionId;
   }
 
   const panelIndex = getPanelIndex(panels, panel);
   const accordionsWithoutPanel = getAccordionsWithoutPanel(items, panels);
+
   return accordionsWithoutPanel[panelIndex]?.id || undefined;
 }
 
@@ -37,6 +39,7 @@ function getPanelIndex(
   panel: typeof panels[number],
 ) {
   const panelsWithoutAccordionId = panels.filter(p => !p.groupId);
+
   return panelsWithoutAccordionId.indexOf(panel);
 }
 
@@ -55,16 +58,20 @@ export function isPanelVisible(options: AccordionPanelOptions) {
   const { allowMultiple, selectedId, selectedIds } = options;
   const accordionId = getAccordionId(options);
 
-  if (!allowMultiple) return accordionId ? selectedId === accordionId : false;
-  return accordionId ? selectedIds?.includes(accordionId) : false;
+  if (allowMultiple)
+    return accordionId ? selectedIds?.includes(accordionId) : false;
+
+  return accordionId ? selectedId === accordionId : false;
 }
 
 export function isAccordionSelected(options: AccordionTriggerOptions) {
   const { id, allowMultiple, selectedId, selectedIds } = options;
+
   if (!id) return;
 
-  if (!allowMultiple) return selectedId === id;
-  return selectedIds?.includes(id);
+  if (allowMultiple) return selectedIds?.includes(id);
+
+  return selectedId === id;
 }
 
 export function useAccordionPanelId(options: AccordionTriggerOptions) {

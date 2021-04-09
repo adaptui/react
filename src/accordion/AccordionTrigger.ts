@@ -13,6 +13,7 @@ import { createHook, createComponent } from "reakit-system";
 import { ariaAttr } from "../utils";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
+import { AccordionMultiStateReturn } from "./AccordionMultiState";
 import { isAccordionSelected, useAccordionPanelId } from "./helpers";
 
 export const useAccordionTrigger = createHook<
@@ -23,10 +24,6 @@ export const useAccordionTrigger = createHook<
   compose: [useButton, useCompositeItem],
   keys: ACCORDION_TRIGGER_KEYS,
 
-  useOptions({ focusable = true, ...options }) {
-    return { focusable, ...options };
-  },
-
   useProps(
     options,
     {
@@ -36,15 +33,7 @@ export const useAccordionTrigger = createHook<
       ...htmlProps
     },
   ) {
-    const {
-      manual,
-      id,
-      allowToggle,
-      allowMultiple,
-      disabled,
-      select,
-      unSelect,
-    } = options;
+    const { manual, id, allowToggle, disabled, select, first, last } = options;
     const selected = isAccordionSelected(options);
     const accordionPanelId = useAccordionPanelId(options);
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
@@ -53,42 +42,29 @@ export const useAccordionTrigger = createHook<
 
     const onKeyDown = React.useCallback(
       (event: React.KeyboardEvent) => {
-        const first = options.first && (() => setTimeout(options.first));
-        const last = options.last && (() => setTimeout(options.last));
-        const keyMap = { Home: first, End: last };
+        onKeyDownRef.current?.(event);
+        if (event.defaultPrevented) return;
+
+        const _first = first && (() => setTimeout(first));
+        const _last = last && (() => setTimeout(last));
+        const keyMap = { Home: _first, End: _last };
         const action = keyMap[event.key as keyof typeof keyMap];
+
         if (action) {
           event.preventDefault();
           event.stopPropagation();
           action();
-          return;
         }
-
-        onKeyDownRef.current?.(event);
       },
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [options.first, options.last],
+      [first, last, onKeyDownRef],
     );
 
     const handleSelection = React.useCallback(() => {
-      if (disabled) return;
       if (!id) return;
-
-      if (selected) {
-        if (allowToggle && !allowMultiple) {
-          // Do not send null to make the toggle because that will also reset
-          //  the current Id in composite hence thats handled directly in state
-          select(id);
-          return;
-        }
-
-        unSelect(id);
-        return;
-      }
+      if (disabled) return;
 
       select?.(id);
-    }, [selected, id, allowMultiple, allowToggle, disabled, select, unSelect]);
+    }, [id, disabled, select]);
 
     const onClick = React.useCallback(
       (event: React.MouseEvent) => {
@@ -125,16 +101,6 @@ export const useAccordionTrigger = createHook<
       ...htmlProps,
     };
   },
-
-  useComposeProps(options, htmlProps) {
-    const buttonHtmlProps = useButton(options, htmlProps);
-    const compositeHtmlProps = useCompositeItem(options, buttonHtmlProps);
-
-    return {
-      ...compositeHtmlProps,
-      tabIndex: 0,
-    };
-  },
 });
 
 export const AccordionTrigger = createComponent({
@@ -145,17 +111,16 @@ export const AccordionTrigger = createComponent({
 
 export type AccordionTriggerOptions = ButtonOptions &
   CompositeItemOptions &
-  Pick<Partial<AccordionStateReturn>, "manual"> &
   Pick<
     AccordionStateReturn,
     | "panels"
     | "select"
-    | "unSelect"
     | "allowMultiple"
     | "allowToggle"
     | "selectedId"
-    | "selectedIds"
-  >;
+    | "manual"
+  > &
+  Pick<AccordionMultiStateReturn, "selectedIds">;
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps &
   CompositeItemHTMLProps;

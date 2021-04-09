@@ -9,40 +9,42 @@ import {
   useAccordionBaseState,
 } from "./AccordionBaseState";
 
-export function useAccordionState(
-  props: AccordionInitialState = {},
-): AccordionStateReturn {
-  const { manual = true, allowToggle = false } = props;
+export function useAccordionMultiState(
+  props: AccordionMultiInitialState = {},
+): AccordionMultiStateReturn {
+  const { manual = true } = props;
+
   const { move, ...baseState } = useAccordionBaseState(props);
 
-  const [selectedId, setSelectedId] = useControllableState({
-    defaultValue: props?.defaultSelectedId || null,
-    value: props?.selectedId,
-    onChange: props?.onSelectedIdChange,
+  const [selectedIds, setSelectedIds] = useControllableState({
+    defaultValue: props?.defaultSelectedIds || [],
+    value: props?.selectedIds,
+    onChange: props?.onSelectedIdsChange,
   });
 
   const select = React.useCallback(
     (id: string | null) => {
       move(id);
 
-      if (allowToggle && id === selectedId) {
-        setSelectedId(null);
+      if (selectedIds.includes(id)) {
+        setSelectedIds(prevIds => prevIds?.filter(pId => pId !== id));
+
         return;
       }
 
-      setSelectedId(id);
+      setSelectedIds(prevIds => [...prevIds, id]);
     },
 
-    [move, allowToggle, selectedId, setSelectedId],
+    [move, selectedIds, setSelectedIds],
   );
 
   return {
-    selectedId,
-    setSelectedId,
+    selectedIds,
+    setSelectedIds,
     select,
     manual,
-    allowToggle,
-    allowMultiple: false,
+    allowToggle: true,
+    allowMultiple: true,
     move,
     ...baseState,
   };
@@ -50,11 +52,11 @@ export function useAccordionState(
 
 type StringOrNull = string | null;
 
-export type AccordionState = AccordionBaseState & {
+export type AccordionMultiState = AccordionBaseState & {
   /**
    * The current selected accordion's `id`.
    */
-  selectedId: StringOrNull;
+  selectedIds: StringOrNull[];
 
   /**
    * Whether the accodion selection should be manual.
@@ -74,11 +76,11 @@ export type AccordionState = AccordionBaseState & {
   allowMultiple: boolean;
 };
 
-export type AccordionActions = AccordionBaseActions & {
+export type AccordionMultiActions = AccordionBaseActions & {
   /**
    * Sets the value.
    */
-  setSelectedId: Dispatch<SetStateAction<StringOrNull>>;
+  setSelectedIds: Dispatch<SetStateAction<StringOrNull[]>>;
 
   /**
    * Moves into and selects an accordion by its `id`.
@@ -86,24 +88,27 @@ export type AccordionActions = AccordionBaseActions & {
   select: AccordionBaseActions["move"];
 };
 
-export type AccordionInitialState = Pick<
-  Partial<AccordionState>,
-  "manual" | "allowToggle" | "selectedId"
+export type AccordionMultiInitialState = Pick<
+  Partial<AccordionMultiState>,
+  "manual" | "selectedIds"
 > &
   AccordionBaseInitialState & {
     /**
      * The initial value to be used, in uncontrolled mode
-     * @default null
+     * @default []
      */
-    defaultSelectedId?: StringOrNull | (() => StringOrNull);
+    defaultSelectedIds?: StringOrNull[] | (() => StringOrNull[]);
+
     /**
      * The callback fired when the value changes
      */
-    onSelectedIdChange?: (value: StringOrNull) => void;
+    onSelectedIdsChange?: (value: StringOrNull[]) => void;
+
     /**
      * The function that determines if the state should be updated
      */
-    shouldUpdate?: (prev: StringOrNull, next: StringOrNull) => boolean;
+    shouldUpdate?: (prev: StringOrNull[], next: StringOrNull[]) => boolean;
   };
 
-export type AccordionStateReturn = AccordionState & AccordionActions;
+export type AccordionMultiStateReturn = AccordionMultiState &
+  AccordionMultiActions;
