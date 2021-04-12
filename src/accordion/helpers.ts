@@ -3,6 +3,8 @@ import * as React from "react";
 import { AccordionPanelOptions } from "./AccordionPanel";
 import { AccordionTriggerOptions } from "./AccordionTrigger";
 
+export type StringOrNull = string | null;
+
 /**
  * When <AccordionPanel> is used without accordionId:
  *

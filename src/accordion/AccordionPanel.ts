@@ -25,11 +25,11 @@ export const useAccordionPanel = createHook<
 
   useProps(options, { ref: htmlRef, ...htmlProps }) {
     const ref = React.useRef<HTMLElement>(null);
-    const accordionId = getAccordionId(options);
     const { id, registerPanel, unregisterPanel } = options;
+    const accordionId = getAccordionId(options);
 
     React.useLayoutEffect(() => {
-      if (!id) return undefined;
+      if (!id) return;
 
       registerPanel?.({ id, ref, groupId: accordionId });
 
@@ -69,12 +69,12 @@ export type AccordionPanelOptions = {
   unstable_IdOptions &
   Pick<
     AccordionStateReturn,
+    | "items"
+    | "panels"
+    | "selectedId"
+    | "allowMultiple"
     | "registerPanel"
     | "unregisterPanel"
-    | "panels"
-    | "items"
-    | "allowMultiple"
-    | "selectedId"
   > &
   Pick<AccordionMultiStateReturn, "selectedIds">;
 

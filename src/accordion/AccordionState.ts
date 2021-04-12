@@ -8,6 +8,7 @@ import {
   AccordionBaseState,
   useAccordionBaseState,
 } from "./AccordionBaseState";
+import { StringOrNull } from "./helpers";
 
 export function useAccordionState(
   props: AccordionInitialState = {},
@@ -22,7 +23,7 @@ export function useAccordionState(
   });
 
   const select = React.useCallback(
-    (id: string | null) => {
+    (id: string) => {
       move(id);
 
       if (allowToggle && id === selectedId) {
@@ -48,19 +49,11 @@ export function useAccordionState(
   };
 }
 
-type StringOrNull = string | null;
-
 export type AccordionState = AccordionBaseState & {
   /**
    * The current selected accordion's `id`.
    */
   selectedId: StringOrNull;
-
-  /**
-   * Whether the accodion selection should be manual.
-   * @default true
-   */
-  manual: boolean;
 
   /**
    * Allow to toggle accordion items
@@ -72,6 +65,12 @@ export type AccordionState = AccordionBaseState & {
    * Allow to open multiple accordion items
    */
   allowMultiple: boolean;
+
+  /**
+   * Whether the accodion selection should be manual.
+   * @default true
+   */
+  manual: boolean;
 };
 
 export type AccordionActions = AccordionBaseActions & {
@@ -83,7 +82,7 @@ export type AccordionActions = AccordionBaseActions & {
   /**
    * Moves into and selects an accordion by its `id`.
    */
-  select: AccordionBaseActions["move"];
+  select: (id: string) => void;
 };
 
 export type AccordionInitialState = Pick<

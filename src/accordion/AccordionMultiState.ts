@@ -3,10 +3,10 @@ import { Dispatch, SetStateAction } from "react";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import {
-  AccordionBaseActions,
-  AccordionBaseInitialState,
   AccordionBaseState,
+  AccordionBaseActions,
   useAccordionBaseState,
+  AccordionBaseInitialState,
 } from "./AccordionBaseState";
 
 export function useAccordionMultiState(
@@ -23,7 +23,7 @@ export function useAccordionMultiState(
   });
 
   const select = React.useCallback(
-    (id: string | null) => {
+    (id: string) => {
       move(id);
 
       if (selectedIds.includes(id)) {
@@ -50,19 +50,11 @@ export function useAccordionMultiState(
   };
 }
 
-type StringOrNull = string | null;
-
 export type AccordionMultiState = AccordionBaseState & {
   /**
    * The current selected accordion's `id`.
    */
-  selectedIds: StringOrNull[];
-
-  /**
-   * Whether the accodion selection should be manual.
-   * @default true
-   */
-  manual: boolean;
+  selectedIds: string[];
 
   /**
    * Allow to toggle accordion items
@@ -74,18 +66,24 @@ export type AccordionMultiState = AccordionBaseState & {
    * Allow to open multiple accordion items
    */
   allowMultiple: boolean;
+
+  /**
+   * Whether the accodion selection should be manual.
+   * @default true
+   */
+  manual: boolean;
 };
 
 export type AccordionMultiActions = AccordionBaseActions & {
   /**
    * Sets the value.
    */
-  setSelectedIds: Dispatch<SetStateAction<StringOrNull[]>>;
+  setSelectedIds: Dispatch<SetStateAction<string[]>>;
 
   /**
    * Moves into and selects an accordion by its `id`.
    */
-  select: AccordionBaseActions["move"];
+  select: (id: string) => void;
 };
 
 export type AccordionMultiInitialState = Pick<
@@ -97,17 +95,17 @@ export type AccordionMultiInitialState = Pick<
      * The initial value to be used, in uncontrolled mode
      * @default []
      */
-    defaultSelectedIds?: StringOrNull[] | (() => StringOrNull[]);
+    defaultSelectedIds?: string[] | (() => string[]);
 
     /**
      * The callback fired when the value changes
      */
-    onSelectedIdsChange?: (value: StringOrNull[]) => void;
+    onSelectedIdsChange?: (value: string[]) => void;
 
     /**
      * The function that determines if the state should be updated
      */
-    shouldUpdate?: (prev: StringOrNull[], next: StringOrNull[]) => boolean;
+    shouldUpdate?: (prev: string[], next: string[]) => boolean;
   };
 
 export type AccordionMultiStateReturn = AccordionMultiState &

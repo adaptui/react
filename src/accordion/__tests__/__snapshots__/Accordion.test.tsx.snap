@@ -7,7 +7,7 @@ exports[`Accordion should render correctly 1`] = `
   >
     <h3>
       <button
-        aria-controls="accordion-2"
+        aria-controls="accordion-3"
         aria-expanded="false"
         id="accordion-1"
         tabindex="0"
@@ -19,7 +19,7 @@ exports[`Accordion should render correctly 1`] = `
     <div
       aria-labelledby="accordion-1"
       hidden=""
-      id="accordion-2"
+      id="accordion-3"
       role="region"
       style="display: none;"
     >
@@ -27,10 +27,10 @@ exports[`Accordion should render correctly 1`] = `
     </div>
     <h3>
       <button
-        aria-controls="accordion-4"
+        aria-controls="accordion-6"
         aria-expanded="false"
         id="accordion-2"
-        tabindex="-1"
+        tabindex="0"
         type="button"
       >
         trigger 2
@@ -39,7 +39,7 @@ exports[`Accordion should render correctly 1`] = `
     <div
       aria-labelledby="accordion-2"
       hidden=""
-      id="accordion-4"
+      id="accordion-6"
       role="region"
       style="display: none;"
     >
@@ -47,19 +47,19 @@ exports[`Accordion should render correctly 1`] = `
     </div>
     <h3>
       <button
-        aria-controls="accordion-6"
+        aria-controls="accordion-9"
         aria-expanded="false"
-        id="accordion-5"
-        tabindex="-1"
+        id="accordion-7"
+        tabindex="0"
         type="button"
       >
         trigger 3
       </button>
     </h3>
     <div
-      aria-labelledby="accordion-5"
+      aria-labelledby="accordion-7"
       hidden=""
-      id="accordion-6"
+      id="accordion-9"
       role="region"
       style="display: none;"
     >
@@ -67,21 +67,22 @@ exports[`Accordion should render correctly 1`] = `
     </div>
     <h3>
       <button
-        aria-controls="accordion-8"
+        aria-controls="accordion-12"
         aria-disabled="true"
         aria-expanded="false"
         disabled=""
-        id="accordion-7"
+        id="accordion-10"
         style="pointer-events: none;"
+        tabindex="0"
         type="button"
       >
         disabled
       </button>
     </h3>
     <div
-      aria-labelledby="accordion-7"
+      aria-labelledby="accordion-10"
       hidden=""
-      id="accordion-8"
+      id="accordion-12"
       role="region"
       style="display: none;"
     >
