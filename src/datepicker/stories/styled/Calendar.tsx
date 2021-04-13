@@ -21,7 +21,7 @@ export const Calendar: React.FC<CalendarStateReturn> = state => {
   return (
     <CalendarWrapper
       {...state}
-      className="styled-datepicker calendar p-3 rounded-md bg-white shadow-lg w-max"
+      className="p-3 bg-white rounded-md shadow-lg styled-datepicker calendar w-max"
     >
       <div className="flex justify-between">
         <CalendarButton
@@ -39,7 +39,7 @@ export const Calendar: React.FC<CalendarStateReturn> = state => {
           <ChevronLeft />
         </CalendarButton>
         <CalendarHeader
-          className="text-gray-700 font-bold text-sm"
+          className="text-sm font-bold text-gray-700"
           {...state}
         />
         <CalendarButton
@@ -65,7 +65,7 @@ export const Calendar: React.FC<CalendarStateReturn> = state => {
               return (
                 <CalendarWeekTitle
                   {...state}
-                  className="text-gray-500 font-light calendar__cell"
+                  className="font-light text-gray-500 calendar__cell"
                   as="th"
                   scope="col"
                   key={dayIndex}
