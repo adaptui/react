@@ -1,8 +1,8 @@
 import React from "react";
+import { DismissToast, UpdateToast } from "./CreateToastContext.types";
 
 import { getToast } from "./helpers";
 import { TimerToast } from "./ToastTypes";
-import { DismissToast, UpdateToast } from "./CreateToastContext";
 
 export const useToastTimer = (
   toasts: TimerToast[],
