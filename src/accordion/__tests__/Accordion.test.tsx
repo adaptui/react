@@ -7,12 +7,16 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
+  AccordionInitialState,
+  AccordionStateReturn,
+  useAccordionMultiState,
+  AccordionMultiInitialState,
+  AccordionMultiStateReturn,
 } from "../index";
-import { AccordionInitialState } from "../types";
 
-const AccordionComponent = (props: Partial<AccordionInitialState>) => {
-  const state = useAccordionState(props);
-
+const AccordionComponent = (
+  state: AccordionStateReturn | AccordionMultiStateReturn,
+) => {
   return (
     <Accordion {...state}>
       <h3>
@@ -39,15 +43,31 @@ const AccordionComponent = (props: Partial<AccordionInitialState>) => {
   );
 };
 
+const AccordionSingleComponent = (props: Partial<AccordionInitialState>) => {
+  const state = useAccordionState(props);
+
+  return <AccordionComponent {...state} />;
+};
+
+const AccordionMultipleComponent = (
+  props: Partial<AccordionMultiInitialState>,
+) => {
+  const state = useAccordionMultiState(props);
+
+  return <AccordionComponent {...state} />;
+};
+
 describe("Accordion", () => {
   it("should render correctly", () => {
-    const { asFragment } = render(<AccordionComponent baseId="accordion" />);
+    const { asFragment } = render(
+      <AccordionSingleComponent baseId="accordion" />,
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });
 
   it("Accordion should have proper keyboard navigation", () => {
-    const { getByText: text } = render(<AccordionComponent />);
+    const { getByText: text } = render(<AccordionSingleComponent />);
 
     press.Tab();
     expect(text("trigger 1")).toHaveFocus();
@@ -56,17 +76,17 @@ describe("Accordion", () => {
     press.ArrowDown();
     expect(text("trigger 3")).toHaveFocus();
     press.ArrowDown();
-    expect(text("disabled")).toHaveFocus();
+    expect(text("disabled")).not.toHaveFocus();
     press.ArrowDown();
-    expect(text("disabled")).toHaveFocus();
-    press.ArrowUp();
-    expect(text("trigger 3")).toHaveFocus();
+    expect(text("disabled")).not.toHaveFocus();
     press.ArrowUp();
     expect(text("trigger 2")).toHaveFocus();
+    press.ArrowUp();
+    expect(text("trigger 1")).toHaveFocus();
   });
 
   it("Accordion should work proper with mouse", () => {
-    const { getByText: text } = render(<AccordionComponent />);
+    const { getByText: text } = render(<AccordionSingleComponent />);
 
     expect(text("panel 1")).not.toBeVisible();
 
@@ -81,7 +101,7 @@ describe("Accordion", () => {
   });
 
   it("Accordion should have proper keyboard navigation when on loop", () => {
-    const { getByText: text } = render(<AccordionComponent loop />);
+    const { getByText: text } = render(<AccordionSingleComponent loop />);
 
     press.Tab();
     expect(text("trigger 1")).toHaveFocus();
@@ -90,18 +110,19 @@ describe("Accordion", () => {
     press.ArrowDown();
     expect(text("trigger 3")).toHaveFocus();
     press.ArrowDown();
-    expect(text("disabled")).toHaveFocus();
+    expect(text("disabled")).not.toHaveFocus();
     press.ArrowDown();
+    expect(text("trigger 2")).toHaveFocus();
+    press.ArrowUp();
     expect(text("trigger 1")).toHaveFocus();
     press.ArrowUp();
-    expect(text("disabled")).toHaveFocus();
-    press.ArrowUp();
+    expect(text("disabled")).not.toHaveFocus();
     expect(text("trigger 3")).toHaveFocus();
   });
 
   it.each([true, false])("Accordion allowToggle: %s", toggle => {
     const { getByText: text } = render(
-      <AccordionComponent allowToggle={toggle} />,
+      <AccordionSingleComponent allowToggle={toggle} />,
     );
 
     const panel1 = text("panel 1");
@@ -126,7 +147,7 @@ describe("Accordion", () => {
   });
 
   it("Accordion should open/close properly", () => {
-    const { getByText: text } = render(<AccordionComponent />);
+    const { getByText: text } = render(<AccordionSingleComponent />);
     const panel1 = text("panel 1");
     const panel2 = text("panel 2");
 
@@ -148,7 +169,7 @@ describe("Accordion", () => {
   });
 
   it("Accordion should open/close properly with AllowMultiple", () => {
-    const { getByText: text } = render(<AccordionComponent allowMultiple />);
+    const { getByText: text } = render(<AccordionMultipleComponent />);
     const panel1 = text("panel 1");
     const panel2 = text("panel 2");
 
@@ -169,7 +190,7 @@ describe("Accordion", () => {
   });
 
   it("Accordion should have none selected by default", () => {
-    const { getByText: text } = render(<AccordionComponent />);
+    const { getByText: text } = render(<AccordionSingleComponent />);
 
     press.Tab();
     expect(text("panel 1")).not.toBeVisible();
@@ -179,7 +200,7 @@ describe("Accordion", () => {
 
   it("Accordion with selectedId given to be selected properly", () => {
     const { getByText: text } = render(
-      <AccordionComponent defaultSelectedId="accordion-2" />,
+      <AccordionSingleComponent defaultSelectedId="accordion-2" />,
     );
 
     press.Tab();
@@ -188,7 +209,9 @@ describe("Accordion", () => {
   });
 
   it("Accordion manual: false", () => {
-    const { getByText: text } = render(<AccordionComponent manual={false} />);
+    const { getByText: text } = render(
+      <AccordionSingleComponent manual={false} />,
+    );
 
     press.Tab();
     expect(text("trigger 1")).toHaveFocus();
@@ -206,7 +229,7 @@ describe("Accordion", () => {
   });
 
   it("Accordion disabled item", () => {
-    const { getByText: text } = render(<AccordionComponent />);
+    const { getByText: text } = render(<AccordionSingleComponent />);
 
     press.Tab();
     expect(text("trigger 1")).toHaveFocus();
@@ -218,7 +241,7 @@ describe("Accordion", () => {
   });
 
   test("Accordion renders with no a11y violations", async () => {
-    const { container } = render(<AccordionComponent />);
+    const { container } = render(<AccordionSingleComponent />);
     const results = await axe(container);
 
     expect(results).toHaveNoViolations();

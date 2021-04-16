@@ -1,170 +1,108 @@
 import * as React from "react";
-import { CompositeInitialState, useCompositeState } from "reakit";
+import { Dispatch, SetStateAction } from "react";
+import { useControllableState } from "@chakra-ui/hooks";
 
 import {
-  SelectedIdPair,
-  AccordionState,
-  AccordionActions,
-  AccordionReturns,
-  AccordionPropsUnion,
-  MultiOverloadReturn,
-  MultiAccordionProps,
-  SingleOverloadReturn,
-  SingleAccordionProps,
-} from "./types";
-import { useControllableState } from "../utils";
-
-export function useAccordionState(
-  props: AccordionInitialStateSingle,
-): SingleOverloadReturn;
-
-export function useAccordionState(
-  props: AccordionInitialStateMulti,
-): MultiOverloadReturn;
-
-export function useAccordionState(
-  props: AccordionInitialState,
-): SingleOverloadReturn;
-
-export function useAccordionState(
-  props: AccordionInitialState,
-): MultiOverloadReturn;
+  AccordionBaseActions,
+  AccordionBaseInitialState,
+  AccordionBaseState,
+  useAccordionBaseState,
+} from "./AccordionBaseState";
+import { StringOrNull } from "./helpers";
 
 export function useAccordionState(
   props: AccordionInitialState = {},
 ): AccordionStateReturn {
-  const { manual = true, ...rest } = props;
+  const { manual = true, allowToggle = false } = props;
+  const { move, ...baseState } = useAccordionBaseState(props);
 
-  const allowToggle = props.allowMultiple
-    ? props.allowMultiple
-    : props.allowToggle || false;
-
-  let selectedIdProp;
-  let defaultSelectedId;
-  let onSelectedIdChange;
-
-  // @see https://github.com/microsoft/TypeScript/issues/12184
-  // @see https://stackoverflow.com/a/61181442/10629172
-  function isUndefinedDiscrimination(
-    props: AccordionInitialStateSingle | AccordionInitialStateMulti,
-  ): props is AccordionInitialStateSingle {
-    return props.allowMultiple === false || props.allowMultiple === undefined;
-  }
-
-  if (isUndefinedDiscrimination(props)) {
-    selectedIdProp = props.selectedId;
-    defaultSelectedId = props.defaultSelectedId || null;
-    onSelectedIdChange = props.onSelectedIdChange;
-  }
-
-  let selectedIdsProp;
-  let defaultSelectedIds;
-  let onSelectedIdsChange;
-  if (props.allowMultiple === true) {
-    selectedIdsProp = props.selectedIds;
-    defaultSelectedIds = props.defaultSelectedIds || [];
-    onSelectedIdsChange = props.onSelectedIdsChange;
-  }
-
-  // Single toggle accordion State
   const [selectedId, setSelectedId] = useControllableState({
-    defaultValue: defaultSelectedId,
-    value: selectedIdProp,
-    onChange: onSelectedIdChange,
-  });
-
-  // Multiple toggle accordion State
-  const [selectedIds, setSelectedIds] = useControllableState({
-    defaultValue: defaultSelectedIds,
-    value: selectedIdsProp,
-    onChange: onSelectedIdsChange,
-  });
-
-  const composite = useCompositeState({
-    orientation: "vertical",
-    ...rest,
+    defaultValue: props?.defaultSelectedId || null,
+    value: props?.selectedId,
+    onChange: props?.onSelectedIdChange,
   });
 
   const select = React.useCallback(
-    (id: string | null) => {
-      composite.move(id);
+    (id: string) => {
+      move(id);
 
-      if (!props.allowMultiple) {
-        if (allowToggle && id === selectedId) {
-          setSelectedId(null);
-          return;
-        }
-
-        setSelectedId(id);
+      if (allowToggle && id === selectedId) {
+        setSelectedId(null);
         return;
       }
 
-      if (id === null) return;
-      setSelectedIds(prevIds => [...prevIds, id]);
+      setSelectedId(id);
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      props.allowMultiple,
-      allowToggle,
-      composite.move,
-      selectedId,
-      setSelectedId,
-      setSelectedIds,
-    ],
+    [move, allowToggle, selectedId, setSelectedId],
   );
 
-  const unSelect = React.useCallback(
-    (id: string | null) => {
-      if (!props.allowMultiple && id === null) return;
-
-      composite.move(id);
-      setSelectedIds(prevIds => prevIds?.filter(pId => pId !== id));
-    },
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [composite.move, setSelectedIds, props.allowMultiple],
-  );
-
-  const panels = useCompositeState();
-
-  const common = {
+  return {
+    selectedId,
+    setSelectedId,
+    select,
     manual,
     allowToggle,
-    select,
-    unSelect,
-    panels: panels.items,
-    registerPanel: panels.registerItem,
-    unregisterPanel: panels.unregisterItem,
-    ...composite,
+    allowMultiple: false,
+    move,
+    ...baseState,
   };
-
-  return props.allowMultiple === true
-    ? {
-        allowMultiple: true,
-        selectedIds,
-        setSelectedIds,
-        ...common,
-      }
-    : {
-        allowMultiple: false,
-        selectedId,
-        setSelectedId,
-        ...common,
-      };
 }
 
-export type AccordionInitialState = Partial<
-  AccordionPropsUnion & CompositeInitialState
->;
-export type AccordionInitialStateSingle = Partial<
-  SingleAccordionProps & CompositeInitialState
->;
-export type AccordionInitialStateMulti = Partial<
-  MultiAccordionProps & CompositeInitialState
->;
+export type AccordionState = AccordionBaseState & {
+  /**
+   * The current selected accordion's `id`.
+   */
+  selectedId: StringOrNull;
 
-export type AccordionStateReturn = AccordionState &
-  AccordionActions &
-  AccordionReturns &
-  SelectedIdPair;
+  /**
+   * Allow to toggle accordion items
+   * @default false
+   */
+  allowToggle: boolean;
+
+  /**
+   * Allow to open multiple accordion items
+   */
+  allowMultiple: boolean;
+
+  /**
+   * Whether the accodion selection should be manual.
+   * @default true
+   */
+  manual: boolean;
+};
+
+export type AccordionActions = AccordionBaseActions & {
+  /**
+   * Sets the value.
+   */
+  setSelectedId: Dispatch<SetStateAction<StringOrNull>>;
+
+  /**
+   * Moves into and selects an accordion by its `id`.
+   */
+  select: (id: string) => void;
+};
+
+export type AccordionInitialState = Pick<
+  Partial<AccordionState>,
+  "manual" | "allowToggle" | "selectedId"
+> &
+  AccordionBaseInitialState & {
+    /**
+     * The initial value to be used, in uncontrolled mode
+     * @default null
+     */
+    defaultSelectedId?: StringOrNull | (() => StringOrNull);
+    /**
+     * The callback fired when the value changes
+     */
+    onSelectedIdChange?: (value: StringOrNull) => void;
+    /**
+     * The function that determines if the state should be updated
+     */
+    shouldUpdate?: (prev: StringOrNull, next: StringOrNull) => boolean;
+  };
+
+export type AccordionStateReturn = AccordionState & AccordionActions;

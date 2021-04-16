@@ -3,9 +3,9 @@ import { Meta } from "@storybook/react";
 import { CompositeState } from "reakit/ts";
 
 import { AccordionInitialState } from "../AccordionState";
-import { App as Accordion } from "./AccordionBasic.component";
+import { App as Accordion } from "./AccordionMulti.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { accordionBasicTemplate, accordionBasicTemplateJs } from "./templates";
+import { accordionMultiTemplate, accordionMultiTemplateJs } from "./templates";
 
 export const Default: React.FC<
   Omit<AccordionInitialState, keyof CompositeState>
@@ -13,24 +13,21 @@ export const Default: React.FC<
 
 export default {
   component: Default,
-  title: "Accordion/Basic",
+  title: "Accordion/Multi",
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: accordionBasicTemplateJs,
-      ts: accordionBasicTemplate,
+      js: accordionMultiTemplateJs,
+      ts: accordionMultiTemplate,
     }),
   },
 } as Meta;
 
 export const DefaultSelected = Default.bind({});
-DefaultSelected.args = { defaultSelectedId: "accordion3" };
+DefaultSelected.args = { defaultSelectedIds: ["accordion3", "accordion4"] };
 
 export const AutoSelect = Default.bind({});
 AutoSelect.args = { manual: false };
 
 export const Loop = Default.bind({});
 Loop.args = { loop: true };
-
-export const AllowToggle = Default.bind({});
-AllowToggle.args = { allowToggle: true };

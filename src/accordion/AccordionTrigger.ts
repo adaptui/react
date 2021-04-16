@@ -7,12 +7,13 @@ import {
   CompositeItemHTMLProps,
 } from "reakit";
 import * as React from "react";
-import { useLiveRef } from "reakit-utils";
+import { callAllHandlers } from "@chakra-ui/utils";
 import { createHook, createComponent } from "reakit-system";
 
 import { ariaAttr } from "../utils";
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
 import { AccordionStateReturn } from "./AccordionState";
+import { AccordionMultiStateReturn } from "./AccordionMultiState";
 import { isAccordionSelected, useAccordionPanelId } from "./helpers";
 
 export const useAccordionTrigger = createHook<
@@ -23,9 +24,8 @@ export const useAccordionTrigger = createHook<
   compose: [useButton, useCompositeItem],
   keys: ACCORDION_TRIGGER_KEYS,
 
-  useOptions({ focusable = true, ...options }) {
-    return { focusable, ...options };
-  },
+  // * Do not add `focusable: true` in useOptions or else the disabled button
+  // * will receive the focus & considered as an element in composite navigation
 
   useProps(
     options,
@@ -36,92 +36,49 @@ export const useAccordionTrigger = createHook<
       ...htmlProps
     },
   ) {
-    const {
-      manual,
-      id,
-      allowToggle,
-      allowMultiple,
-      disabled,
-      select,
-      unSelect,
-    } = options;
+    const { manual, id, allowToggle, select, first, last } = options;
     const selected = isAccordionSelected(options);
     const accordionPanelId = useAccordionPanelId(options);
-    const onKeyDownRef = useLiveRef(htmlOnKeyDown);
-    const onClickRef = useLiveRef(htmlOnClick);
-    const onFocusRef = useLiveRef(htmlOnFocus);
 
     const onKeyDown = React.useCallback(
       (event: React.KeyboardEvent) => {
-        const first = options.first && (() => setTimeout(options.first));
-        const last = options.last && (() => setTimeout(options.last));
-        const keyMap = { Home: first, End: last };
+        const _first = first && (() => setTimeout(first));
+        const _last = last && (() => setTimeout(last));
+        const keyMap = { Home: _first, End: _last };
         const action = keyMap[event.key as keyof typeof keyMap];
+
         if (action) {
           event.preventDefault();
           event.stopPropagation();
           action();
-          return;
         }
-
-        onKeyDownRef.current?.(event);
       },
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [options.first, options.last],
+      [first, last],
     );
 
     const handleSelection = React.useCallback(() => {
-      if (disabled) return;
       if (!id) return;
 
-      if (selected) {
-        if (allowToggle && !allowMultiple) {
-          // Do not send null to make the toggle because that will also reset
-          //  the current Id in composite hence thats handled directly in state
-          select(id);
-          return;
-        }
-
-        unSelect(id);
-        return;
-      }
-
       select?.(id);
-    }, [selected, id, allowMultiple, allowToggle, disabled, select, unSelect]);
+    }, [id, select]);
 
-    const onClick = React.useCallback(
-      (event: React.MouseEvent) => {
-        onClickRef.current?.(event);
-        if (event.defaultPrevented) return;
+    const onClick = React.useCallback(() => handleSelection(), [
+      handleSelection,
+    ]);
 
-        handleSelection();
-      },
+    const onFocus = React.useCallback(() => {
+      if (manual) return;
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [handleSelection],
-    );
-
-    const onFocus = React.useCallback(
-      (event: React.FocusEvent) => {
-        onFocusRef.current?.(event);
-        if (event.defaultPrevented) return;
-
-        if (manual) return;
-        handleSelection();
-      },
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [manual, handleSelection],
-    );
+      handleSelection();
+    }, [manual, handleSelection]);
 
     return {
       "aria-expanded": selected,
       "aria-controls": accordionPanelId,
       "aria-disabled": ariaAttr(!allowToggle && selected),
-      onClick,
-      onFocus,
-      onKeyDown,
+      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
+      onClick: callAllHandlers(htmlOnClick, onClick),
+      onFocus: callAllHandlers(htmlOnFocus, onFocus),
       ...htmlProps,
     };
   },
@@ -132,6 +89,8 @@ export const useAccordionTrigger = createHook<
 
     return {
       ...compositeHtmlProps,
+
+      // *Add the tabIndex = 0 to button to make it tabbable in composite
       tabIndex: 0,
     };
   },
@@ -145,17 +104,16 @@ export const AccordionTrigger = createComponent({
 
 export type AccordionTriggerOptions = ButtonOptions &
   CompositeItemOptions &
-  Pick<Partial<AccordionStateReturn>, "manual"> &
   Pick<
     AccordionStateReturn,
     | "panels"
     | "select"
-    | "unSelect"
-    | "allowMultiple"
-    | "allowToggle"
+    | "manual"
     | "selectedId"
-    | "selectedIds"
-  >;
+    | "allowToggle"
+    | "allowMultiple"
+  > &
+  Pick<AccordionMultiStateReturn, "selectedIds">;
 
 export type AccordionTriggerHTMLProps = ButtonHTMLProps &
   CompositeItemHTMLProps;

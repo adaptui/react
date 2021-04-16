@@ -4,17 +4,16 @@ import {
   Accordion,
   AccordionPanel,
   AccordionTrigger,
-  useAccordionState,
+  useAccordionMultiState,
 } from "@renderlesskit/react";
 
 export function App(props: any) {
-  const state = useAccordionState(props);
+  const state = useAccordionMultiState(props);
 
   // const initialProps = {
-  //   defaultSelectedId: "accordion3",
+  //   defaultSelectedId: ["accordion3", "accordion4"],
   //   manual: true,
   //   loop: true,
-  //   allowToggle: true,
   // };
 
   // const state = useAccordionState(initialProps);
@@ -36,7 +35,9 @@ export function App(props: any) {
       </h2>
       <AccordionPanel {...state}>Panel 3</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
+        <AccordionTrigger {...state} id="accordion4">
+          Trigger 4
+        </AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 4</AccordionPanel>
       <h2>

@@ -20,6 +20,7 @@ exports[`Accordion should render correctly 1`] = `
       aria-labelledby="accordion-1"
       hidden=""
       id="accordion-3"
+      role="region"
       style="display: none;"
     >
       panel 1
@@ -39,6 +40,7 @@ exports[`Accordion should render correctly 1`] = `
       aria-labelledby="accordion-2"
       hidden=""
       id="accordion-6"
+      role="region"
       style="display: none;"
     >
       panel 2
@@ -58,6 +60,7 @@ exports[`Accordion should render correctly 1`] = `
       aria-labelledby="accordion-7"
       hidden=""
       id="accordion-9"
+      role="region"
       style="display: none;"
     >
       panel 3
@@ -67,6 +70,7 @@ exports[`Accordion should render correctly 1`] = `
         aria-controls="accordion-12"
         aria-disabled="true"
         aria-expanded="false"
+        disabled=""
         id="accordion-10"
         style="pointer-events: none;"
         tabindex="0"
@@ -79,6 +83,7 @@ exports[`Accordion should render correctly 1`] = `
       aria-labelledby="accordion-10"
       hidden=""
       id="accordion-12"
+      role="region"
       style="display: none;"
     >
       disabled panel
