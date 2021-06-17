@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addWeeks, format, subWeeks } from "date-fns";
+import { addWeeks, format } from "date-fns";
 
 import "./CalendarBase.css";
 import {

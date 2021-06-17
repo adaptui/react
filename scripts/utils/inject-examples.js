@@ -7,6 +7,7 @@ const parserBabel = require("prettier/parser-babel");
 const injectMdContent = require("./inject-md-content");
 const prettierConfig = require("../../.prettierrc.json");
 
+// eslint-disable-next-line no-useless-escape
 const CODE_EXAMPLE_FLAG = /\<\!\-\- IMPORT_EXAMPLE (.*) \-\-\>/m;
 
 const injectExamples = docsTemplate => {

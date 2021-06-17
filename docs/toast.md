@@ -11,36 +11,22 @@ the
 ```js
 import * as React from "react";
 
-import { ToastProvider, useToast } from "@renderlesskit/react";
+import {
+  Alert,
+  ToastBar,
+  ToastProvider,
+  TriggerButton,
+  getRandomType,
+  AlertIndicator,
+  getRandomContent,
+  useToastHandlers,
+  getRandomPlacement,
+} from "./Utils.component";
 
 export const App = () => {
   return (
-    <ToastProvider
-      autoDismiss={true}
-      placement="bottom-center"
-      toastTypes={{
-        success: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#01c24e" }}>
-              <span style={{ padding: "0.5rem", color: "white" }}>
-                {content}
-              </span>
-              <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-        error: ({ hideToast, content, id }) => {
-          return (
-            <div className="toast" style={{ backgroundColor: "#f02c2d" }}>
-              <span style={{ padding: "0.5rem", color: "white" }}>
-                {content}
-              </span>
-              <button onClick={() => hideToast(id)}>x</button>
-            </div>
-          );
-        },
-      }}
-    >
+    <ToastProvider>
+      <ToastBar />
       <ToastTriggers />
     </ToastProvider>
   );
@@ -48,32 +34,199 @@ export const App = () => {
 
 export default App;
 
-const ToastTriggers = () => {
-  const { showToast } = useToast();
+const alert = (content, type) => ({ toast, handlers }) => {
+  const { pauseTimer, resumeTimer, removeToast } = handlers;
 
   return (
-    <>
-      <button
-        onClick={() => {
-          showToast({ type: "success", content: "Success" });
-        }}
-      >
-        Notify Success
-      </button>
-      <button
-        onClick={() => {
-          showToast({
-            type: "error",
-            content: "Error",
-            placement: "top-right",
-          });
-        }}
-      >
-        Notify Failure
-      </button>
-    </>
+    <Alert
+      toast={toast}
+      type={type}
+      hideToast={removeToast}
+      content={content}
+      onMouseEnter={() => pauseTimer(toast.id)}
+      onMouseLeave={() => resumeTimer(toast.id)}
+    >
+      <AlertIndicator toast={toast} type={type} />
+    </Alert>
   );
 };
+
+function ToastTriggers() {
+  const { addToast, removeToast } = useToastHandlers();
+
+  return (
+    <div className="space-y-2">
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent()), {
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add Info Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), "success"), {
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add success Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), "error"), {
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add error Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), "warning"), {
+              type: "warning",
+              ...getRandomPlacement(),
+            })
+          }
+        >
+          Add warning Toast
+        </TriggerButton>
+        <TriggerButton onClick={() => removeToast()}>
+          Remove All Toast
+        </TriggerButton>
+      </div>
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-left",
+            })
+          }
+        >
+          Add Top Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-center",
+            })
+          }
+        >
+          Add Top Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "top-right",
+            })
+          }
+        >
+          Add Top Right Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-left",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Left Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-center",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Center Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              placement: "bottom-right",
+              reverseOrder: true,
+            })
+          }
+        >
+          Add Bottom Right Toast
+        </TriggerButton>
+      </div>
+      <div className="space-x-2">
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: true,
+              dismissDuration: 1000,
+            })
+          }
+        >
+          Add 1s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: true,
+              dismissDuration: 2000,
+            })
+          }
+        >
+          Add 2s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: true,
+              dismissDuration: 3000,
+            })
+          }
+        >
+          Add 3s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: true,
+              dismissDuration: 4000,
+            })
+          }
+        >
+          Add 4s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: true,
+              dismissDuration: 5000,
+            })
+          }
+        >
+          Add 5s duration Toast
+        </TriggerButton>
+        <TriggerButton
+          onClick={() =>
+            addToast(alert(getRandomContent(), getRandomType()), {
+              ...getRandomPlacement(),
+              autoDismiss: false,
+            })
+          }
+        >
+          Add Non Dismissable Toast
+        </TriggerButton>
+      </div>
+    </div>
+  );
+}
 ```
 
 We can utilize the `toastWrapper` prop to add animations and other wrappers
@@ -101,10 +254,10 @@ We also have to add the `animationTimeout` inorder to specify a delay before
 removing the toast from the state, this would ensure the CSS or any other
 animations has the chance to finish without being interrupted.
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yf6i7)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/nd6zk)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1297l)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ws3ku)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hmpn1)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/t5mf3)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vfobg)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/38sif)

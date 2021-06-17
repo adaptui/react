@@ -30,8 +30,8 @@ export const App: React.FC<AppProps> = props => {
   const {
     children,
     withLabel = false,
-    withStripe = false,
-    withStripeAnimation = false,
+    // withStripe = false,
+    // withStripeAnimation = false,
     ...rest
   } = props;
   const meter = useMeterState(rest);

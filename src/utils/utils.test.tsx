@@ -1,4 +1,3 @@
-import React from "react";
 import MockDate from "mockdate";
 
 import {
@@ -115,16 +114,16 @@ afterAll(() => {
   console.error = oldLog;
 });
 
-class ErrorBoundary extends React.Component<any, { hasError: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  componentDidCatch(error: any, info: any) {
-    this.setState({ hasError: true });
-  }
-  render() {
-    if (this.state.hasError) return null;
-    return this.props.children;
-  }
-}
+// class ErrorBoundary extends React.Component<any, { hasError: boolean }> {
+//   constructor(props: any) {
+//     super(props);
+//     this.state = { hasError: false };
+//   }
+//   componentDidCatch(error: any, info: any) {
+//     this.setState({ hasError: true });
+//   }
+//   render() {
+//     if (this.state.hasError) return null;
+//     return this.props.children;
+//   }
+// }

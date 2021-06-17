@@ -236,7 +236,7 @@ describe("Accordion", () => {
     press.Enter();
     expect(text("panel 1")).toBeVisible();
 
-    userEvent.click(text("disabled"));
+    expect(text("disabled")).toBeDisabled();
     expect(text("disabled panel")).not.toBeVisible();
   });
 

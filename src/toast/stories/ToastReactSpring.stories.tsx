@@ -23,7 +23,7 @@ export default {
       ts: toastReactSpringTemplate,
       tsUtils: utilsTemplate,
       css: toastCssTemplate,
-      deps: ["react-spring", "@chakra-ui/utils"],
+      deps: ["@react-spring/web", "@chakra-ui/utils"],
     }),
   },
   decorators: [
