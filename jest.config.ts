@@ -8,6 +8,7 @@ const pkg = require("./package.json");
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   rootDir: __dirname,
+  testEnvironment: "jsdom",
   displayName: pkg.name,
   testMatch: [join(__dirname, "src/**/*.test.{js,ts,tsx}")],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
