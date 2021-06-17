@@ -44,18 +44,18 @@ const ACCORDION_BASE_STATE_KEYS = [
 const ACCORDION_MULTI_STATE_KEYS = [
   ...ACCORDION_BASE_STATE_KEYS,
   "selectedIds",
-  "manual",
   "allowToggle",
   "allowMultiple",
+  "manual",
   "setSelectedIds",
   "select",
 ] as const;
 const ACCORDION_STATE_KEYS = [
   ...ACCORDION_BASE_STATE_KEYS,
   "selectedId",
-  "manual",
   "allowToggle",
   "allowMultiple",
+  "manual",
   "setSelectedId",
   "select",
 ] as const;

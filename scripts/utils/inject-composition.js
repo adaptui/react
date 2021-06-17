@@ -1,4 +1,3 @@
-const fs = require("fs");
 const path = require("path");
 const outdent = require("outdent");
 const { Project, ts } = require("ts-morph");
@@ -6,6 +5,7 @@ const { Project, ts } = require("ts-morph");
 const injectMdContent = require("./inject-md-content");
 const { getEscapedName, getPublicFiles, sortSourceFiles } = require("./index");
 
+// eslint-disable-next-line no-useless-escape
 const COMPOSE_INJECT_FLAG = /\<\!\-\- INJECT_COMPOSITION (.*) \-\-\>/m;
 
 const injectComposition = docsTemplate => {

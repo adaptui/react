@@ -5,6 +5,7 @@
 const { join } = require("path");
 const pkg = require("./package.json");
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   rootDir: __dirname,
   displayName: pkg.name,

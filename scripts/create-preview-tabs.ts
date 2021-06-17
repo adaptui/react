@@ -1,3 +1,4 @@
+/* eslint-disable no-new-func */
 import { CodeSandboxTemplate } from "storybook-addon-preview";
 
 interface Props {

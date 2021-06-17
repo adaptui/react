@@ -51,7 +51,7 @@ const background = {
 
 [![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b9ri6)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8mxwv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/xv2oq)
 
 ## Accessibility Requirement
 

@@ -64,7 +64,7 @@ export const useTimePickerColumnValue = createHook<
 
     return {
       role: "option",
-      "aria-selected": selected == value,
+      "aria-selected": selected === value,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
       ...htmlProps,

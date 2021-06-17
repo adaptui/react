@@ -15,6 +15,7 @@ const {
 } = require("./index");
 const injectMdContent = require("./inject-md-content");
 
+// eslint-disable-next-line no-useless-escape
 const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
 const injectProps = docsTemplate => {

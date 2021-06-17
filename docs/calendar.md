@@ -141,7 +141,7 @@ Also we can customize and style the ranges with CSS attribute selectors
 }
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/9hpbv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vyh0d)
 
 [![Edit CodeSandbox](https://img.shields.io/badge/RangeCalendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ngv58)
 
@@ -292,9 +292,9 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 ### `CalendarHeader`
 
-| Name         | Type                                         | Description |
-| :----------- | :------------------------------------------- | :---------- |
-| **`format`** | <code>DateTimeFormatOpts \| undefined</code> |             |
+| Name         | Type                                            | Description |
+| :----------- | :---------------------------------------------- | :---------- |
+| **`format`** | <code>DateTimeFormatOptions \| undefined</code> |             |
 
 <details><summary>2 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.

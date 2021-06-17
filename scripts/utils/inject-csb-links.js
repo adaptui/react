@@ -5,6 +5,7 @@ const axios = require("axios");
 const { outdent } = require("outdent");
 const { getParameters } = require("codesandbox/lib/api/define");
 
+// eslint-disable-next-line no-useless-escape
 const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
 const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
 const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");

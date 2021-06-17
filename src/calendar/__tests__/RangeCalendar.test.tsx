@@ -1,4 +1,3 @@
-jest.mock("../../utils/LiveAnnouncer");
 import * as React from "react";
 import MockDate from "mockdate";
 import { cleanup, screen } from "@testing-library/react";
@@ -21,6 +20,8 @@ import {
   repeat,
 } from "../../utils/test-utils";
 import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
+
+jest.mock("../../utils/LiveAnnouncer");
 
 afterEach(cleanup);
 

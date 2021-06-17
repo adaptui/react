@@ -1,5 +1,15 @@
-dist
 node_modules
-coverage
 .next
+.cache
 build
+public
+dist
+coverage
+package.json
+package-lock.json
+yarn.lock
+storybook-static
+
+__js
+templates.ts
+docs
