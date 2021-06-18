@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
+  "git": {
+    "requireCleanWorkingDir": false,
+    "commitMessage": "chore(release): 🚀 v${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "Release ${version}"
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "ignoreRecommendedBump": true,
+      "infile": "CHANGELOG.md",
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "Feature Updates", "hidden": false },
+          { "type": "fix", "section": "Bug Fixes", "hidden": false },
+          {
+            "type": "refactor",
+            "section": "Code Refactors",
+            "hidden": false
+          },
+          {
+            "type": "docs",
+            "section": "Documentation Changes",
+            "hidden": false
+          },
+          {
+            "type": "chore",
+            "section": "Maintanance Updates",
+            "hidden": false
+          },
+          { "type": "build", "section": "Build Updates", "hidden": false },
+          { "type": "test", "section": "Test Updates", "hidden": false },
+          { "type": "style", "section": "Styling Changes", "hidden": false },
+          {
+            "type": "perf",
+            "section": "Performance Improvements",
+            "hidden": false
+          },
+          { "type": "ci", "section": "CI Changes", "hidden": false },
+          { "type": "revert", "section": "Reverts", "hidden": false }
+        ]
+      }
+    }
+  }
+}
