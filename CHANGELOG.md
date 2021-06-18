@@ -1,8 +1,21 @@
-# Changelog
+### [0.3.1](https://github.com/timelessco/renderlesskit-react/compare/v0.3.0...v0.3.1) (2021-06-18)
 
-All notable changes to this project will be documented in this file. See
-[standard-version](https://github.com/conventional-changelog/standard-version)
-for commit guidelines.
+
+### Feature Updates
+
+* **deps:** ✨  updated dev deps & improved support ([#202](https://github.com/timelessco/renderlesskit-react/issues/202)) ([4b96280](https://github.com/timelessco/renderlesskit-react/commit/4b9628059a782c170c00a82e75754f9d84685726))
+
+
+### Code Refactors
+
+* extract out createToastContext types ([#204](https://github.com/timelessco/renderlesskit-react/issues/204)) ([5328041](https://github.com/timelessco/renderlesskit-react/commit/5328041561c949090226563f1b97abe98185b3c2))
+* **accordion:** ♻️ separate single & multi accordion ([#203](https://github.com/timelessco/renderlesskit-react/issues/203)) ([747d50c](https://github.com/timelessco/renderlesskit-react/commit/747d50c4b0069f37e68a99e3c61d4a91c0d6e667))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️  upgrade dev & prod deps ([#205](https://github.com/timelessco/renderlesskit-react/issues/205)) ([5589444](https://github.com/timelessco/renderlesskit-react/commit/5589444ca2068e23cc2c494875654793d201eeb4))
+* **release:** 0.3.0 ([4d5b2c2](https://github.com/timelessco/renderlesskit-react/commit/4d5b2c2979c6d9d8cf359ff619e8dbd33a9f0841))
 
 ## [0.3.0](https://github.com/timelessco/renderlesskit-react/compare/v0.2.0...v0.3.0) (2021-03-31)
 
