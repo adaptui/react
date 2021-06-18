@@ -1,3 +1,15 @@
+### [0.3.2](https://github.com/timelessco/renderlesskit-react/compare/v0.3.1...v0.3.2) (2021-06-18)
+
+
+### Maintanance Updates
+
+* **husky:** 🚨  remove running test from commit for lint-staged ([540ee2e](https://github.com/timelessco/renderlesskit-react/commit/540ee2e35999d337dbbfe0bcd3f9e7e6eef61f5b))
+* **packagejson:** 🔧  move release scripts to the last ([12bd9b4](https://github.com/timelessco/renderlesskit-react/commit/12bd9b4c8e2880509d5bb8e4f3a4b8a81c2ec357))
+* **packagejson:** 🔧  remove unwanted scripts ([3db37e8](https://github.com/timelessco/renderlesskit-react/commit/3db37e84bd0d55bcaba56194dbf1530fd27bb253))
+* **releaseit:** 🔖  update releaseit config ([fe80e81](https://github.com/timelessco/renderlesskit-react/commit/fe80e816241d2e674743eb16e500502c9a9c4548))
+* **storybook:** ✨  add webpack 5 support ([355f2f0](https://github.com/timelessco/renderlesskit-react/commit/355f2f05881427d555b62488a79b54888a552cd4))
+* **tsconfig:** 🔧  remove storybook tsconfig ([ba307e2](https://github.com/timelessco/renderlesskit-react/commit/ba307e2006700a689c86238f0f20bc64220e64a4))
+
 ### [0.3.1](https://github.com/timelessco/renderlesskit-react/compare/v0.3.0...v0.3.1) (2021-06-18)
 
 ### Feature Updates
