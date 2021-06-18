@@ -1,10 +1,12 @@
 {
   "hooks": {
-    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    "before:init": "npm test",
+    "before:bump": "npm run build"
   },
   "git": {
     "requireCleanWorkingDir": false,
-    "commitMessage": "chore(release): 🚀 v${version}"
+    "commitMessage": "🚀 Release v${version}",
+    "commitArgs": ["--no-verify"]
   },
   "github": {
     "release": true,
@@ -16,6 +18,7 @@
       "infile": "CHANGELOG.md",
       "preset": {
         "name": "conventionalcommits",
+        "header": "Changelog",
         "types": [
           { "type": "feat", "section": "Feature Updates", "hidden": false },
           { "type": "fix", "section": "Bug Fixes", "hidden": false },
