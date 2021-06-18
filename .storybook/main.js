@@ -1,5 +1,4 @@
 const path = require("path");
-const tsconfig = path.resolve(__dirname, "../tsconfig.storybook.json");
 
 module.exports = {
   core: { builder: "webpack5" },
