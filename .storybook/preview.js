@@ -13,6 +13,7 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     document.body.id = kebabCase(context.kind);
+    document.body.classList.add("font-sans");
 
     return <Story />;
   },
