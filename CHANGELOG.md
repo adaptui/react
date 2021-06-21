@@ -1,3 +1,16 @@
+### [0.3.3](https://github.com/timelessco/renderlesskit-react/compare/v0.3.2...v0.3.3) (2021-06-21)
+
+
+### Build Updates
+
+* **types:** 💚  fix building types in last version ([5ebcf0c](https://github.com/timelessco/renderlesskit-react/commit/5ebcf0c875f94b23bf4aa7546ca3779d8fa33e3e))
+
+
+### Maintanance Updates
+
+* **prettier:** 🙈  add changelog to prettier ignore ([c9267c5](https://github.com/timelessco/renderlesskit-react/commit/c9267c5ead699bf330a9dec7ddfa1149fdab9edf))
+* **releaseit:** 🔧  update releaseit config ([1c03969](https://github.com/timelessco/renderlesskit-react/commit/1c039694589705512366fad530ddeadfe6d23a8d))
+
 ### [0.3.2](https://github.com/timelessco/renderlesskit-react/compare/v0.3.1...v0.3.2) (2021-06-18)
 
 
