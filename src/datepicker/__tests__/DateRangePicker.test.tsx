@@ -258,7 +258,9 @@ describe("DateRangePicker", () => {
 
   test("DateRangePicker renders with no a11y violations", async () => {
     const { container } = render(<DateRangePickerComp />);
-    const results = await axe(container);
+    const results = await axe(container, {
+      rules: { "nested-interactive": { enabled: false } },
+    });
 
     expect(results).toHaveNoViolations();
   });
