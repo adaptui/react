@@ -53,7 +53,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
 
   const setTimeProp = (date: Date) => {
     setTime(date);
-    popover.hide();
+    // popover.hide();
   };
 
   const hourState = useTimePickerColumnState({

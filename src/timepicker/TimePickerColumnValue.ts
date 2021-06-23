@@ -56,7 +56,7 @@ export const useTimePickerColumnValue = createHook<
         setCurrentId?.(id);
         ref?.current?.scrollIntoView();
       }
-    }, [id, move, selected, setCurrentId, value, visible]);
+    }, [visible]);
 
     const onClick = React.useCallback(() => {
       setSelected(value);

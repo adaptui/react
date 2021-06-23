@@ -5,7 +5,12 @@ module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "storybook-addon-preview",
-    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        measure: false,
+      },
+    },
     "@storybook/addon-a11y",
     {
       name: "@storybook/addon-postcss",
