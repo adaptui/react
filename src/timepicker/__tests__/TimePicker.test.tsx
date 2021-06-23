@@ -135,12 +135,98 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 AM");
+    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
+  });
+
+  it("should cancel and restore the timer on pressing escape", () => {
+    render(<TimePickerComp defaultValue="12:45" />);
+
+    const timepickerContent = screen.getByTestId("timepicker-content");
+
+    expect(timepickerContent).not.toBeVisible();
+    press.Tab();
+
+    press.ArrowDown(null, { altKey: true });
+
+    expect(timepickerContent).toBeVisible();
+
+    expect(document.activeElement).toHaveTextContent("12");
+    repeat(press.ArrowDown, 3);
+    expect(document.activeElement).toHaveTextContent("3");
+
+    // Go to minute column
+    press.ArrowRight();
+    expect(document.activeElement).toHaveTextContent("45");
+    repeat(press.ArrowUp, 3);
+    expect(document.activeElement).toHaveTextContent("42");
+
+    // Go to meridian column
+    press.ArrowRight();
+    expect(document.activeElement).toHaveTextContent("PM");
+    press.ArrowUp();
+    expect(document.activeElement).toHaveTextContent("AM");
+
+    press.Escape();
+    expect(timepickerContent).not.toBeVisible();
+    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 PM");
+  });
+
+  it("should cancel/restore/submit the time correctly", () => {
+    render(<TimePickerComp defaultValue="12:45" />);
+
+    const timepickerContent = screen.getByTestId("timepicker-content");
+
+    expect(timepickerContent).not.toBeVisible();
+    press.Tab();
+
+    press.ArrowDown(null, { altKey: true });
+
+    expect(timepickerContent).toBeVisible();
+
+    expect(document.activeElement).toHaveTextContent("12");
+    repeat(press.ArrowDown, 3);
+    expect(document.activeElement).toHaveTextContent("3");
+
+    // Go to minute column
+    press.ArrowRight();
+    expect(document.activeElement).toHaveTextContent("45");
+    repeat(press.ArrowUp, 3);
+    expect(document.activeElement).toHaveTextContent("42");
+
+    // Go to meridian column
+    press.ArrowRight();
+    expect(document.activeElement).toHaveTextContent("PM");
+    press.ArrowUp();
+    expect(document.activeElement).toHaveTextContent("AM");
+
+    press.Enter();
+    expect(timepickerContent).not.toBeVisible();
+    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
+
+    press.ArrowDown(null, { altKey: true });
+
+    // hour column
+    expect(document.activeElement).toHaveTextContent("3");
+    repeat(press.ArrowDown, 2);
+    expect(document.activeElement).toHaveTextContent("5");
+
+    // Go to minute column
+    press.ArrowRight();
+    expect(document.activeElement).toHaveTextContent("42");
+    repeat(press.ArrowUp, 3);
+    expect(document.activeElement).toHaveTextContent("39");
+
+    // should restore the old value on pressing escape
+    press.Escape();
+    expect(timepickerContent).not.toBeVisible();
+    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
   });
 
   test("TimePicker renders with no a11y violations", async () => {
     const { container } = render(<TimePickerComp />);
-    const results = await axe(container);
+    const results = await axe(container, {
+      rules: { "nested-interactive": { enabled: false } },
+    });
 
     expect(results).toHaveNoViolations();
   });
