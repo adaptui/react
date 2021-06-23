@@ -1,5 +1,7 @@
 // Automatically generated
 const TIME_PICKER_COLUMN_STATE_KEYS = [
+  "up",
+  "down",
   "baseId",
   "unstable_idCountRef",
   "setBaseId",
@@ -22,8 +24,6 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "move",
   "next",
   "previous",
-  "up",
-  "down",
   "first",
   "last",
   "sort",
@@ -41,6 +41,8 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "setSelected",
   "visible",
   "columnType",
+  "restoreOldTime",
+  "updateOldTime",
 ] as const;
 const TIME_PICKER_STATE_KEYS = [
   "fieldValue",

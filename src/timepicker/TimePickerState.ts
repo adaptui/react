@@ -39,6 +39,15 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange,
   });
 
+  const [oldTime, setOldTime] = React.useState(time);
+
+  const updateOldTime = () => {
+    setOldTime(time);
+  };
+  const restoreOldTime = () => {
+    setTime(oldTime);
+  };
+
   const segmentState = useSegmentState({
     value: time,
     onChange: setTime,
@@ -53,7 +62,6 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
 
   const setTimeProp = (date: Date) => {
     setTime(date);
-    // popover.hide();
   };
 
   const hourState = useTimePickerColumnState({
@@ -62,6 +70,8 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const minuteState = useTimePickerColumnState({
@@ -70,6 +80,8 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const meridiesState = useTimePickerColumnState({
@@ -78,6 +90,8 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const hours = [...new Array(13).keys()].slice(1);

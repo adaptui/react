@@ -18,7 +18,12 @@ export type TimePickerColumnValueOptions = ButtonOptions &
   CompositeItemOptions &
   Pick<
     TimePickerColumnStateReturn,
-    "selected" | "move" | "setSelected" | "visible"
+    | "selected"
+    | "move"
+    | "setSelected"
+    | "visible"
+    | "restoreOldTime"
+    | "updateOldTime"
   > & {
     value: number;
   };
@@ -37,8 +42,25 @@ export const useTimePickerColumnValue = createHook<
   compose: [useButton, useCompositeItem],
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
-  useProps(options, { ref: htmlRef, onClick: htmlOnClick, ...htmlProps }) {
-    const { setCurrentId, selected, value, id, setSelected, visible } = options;
+  useProps(
+    options,
+    {
+      ref: htmlRef,
+      onClick: htmlOnClick,
+      onKeyDown: htmlOnKeyDown,
+      ...htmlProps
+    },
+  ) {
+    const {
+      setCurrentId,
+      selected,
+      value,
+      id,
+      setSelected,
+      visible,
+      updateOldTime,
+      restoreOldTime,
+    } = options;
     const ref = React.useRef<HTMLElement>();
 
     React.useEffect(() => {
@@ -53,13 +75,24 @@ export const useTimePickerColumnValue = createHook<
 
     const onClick = React.useCallback(() => {
       setSelected(value, true);
-    }, [setSelected, value]);
+      updateOldTime?.();
+    }, [setSelected, updateOldTime, value]);
+
+    const onKeyDown = React.useCallback(
+      (e: React.KeyboardEvent<any>) => {
+        if (e.key === "Escape") {
+          restoreOldTime?.();
+        }
+      },
+      [restoreOldTime],
+    );
 
     return {
       role: "option",
       "aria-selected": selected === value,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
+      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       ...htmlProps,
     };
   },
