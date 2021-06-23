@@ -95,7 +95,7 @@ export const useTimePickerColumnState = (
   // then also set the currentId of composite to the corret count index,
   // so that when user opens the popover later it does not cause any syncing issues.
   React.useEffect(() => {
-    // subtract 1 from meridian & minute beause they are zero based index
+    // add 1 to meridian & minute beause they are zero based index
     const id = count + (columnType === "hour" ? 0 : 1);
     composite.setCurrentId(`${composite.baseId}-${id}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
