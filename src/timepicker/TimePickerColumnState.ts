@@ -4,6 +4,7 @@ import { ValueBase } from "@react-types/shared";
 
 import { useControllableState } from "../utils";
 import { getSelectedValueFromDate, getSelectedDateFromValue } from "./helpers";
+import { PickerBaseStateReturn } from "../picker-base";
 
 export type ColumnType = "hour" | "minute" | "meridian";
 
@@ -18,6 +19,7 @@ export interface TimePickerColumnInitialState extends ValueBase<Date> {
    * @default "hour"
    */
   columnType?: ColumnType;
+  popover?: PickerBaseStateReturn;
 }
 
 export const useTimePickerColumnState = (
@@ -29,6 +31,7 @@ export const useTimePickerColumnState = (
     onChange,
     visible,
     columnType = "hour",
+    popover,
   } = props;
 
   const [date, setDate] = useControllableState({
@@ -55,16 +58,17 @@ export const useTimePickerColumnState = (
   }, [selected, visible]);
 
   const setSelected = React.useCallback(
-    (value: number) => {
+    (value: number, close?: boolean) => {
       setDate(getSelectedDateFromValue(value, date, columnType));
+      close && popover?.hide();
     },
-    [columnType, date, setDate],
+    [columnType, date, popover, setDate],
   );
 
   const comp = {
     ...composite,
-    up: (args: boolean) => {
-      composite.up(args);
+    up: (unstable_allTheWay?: boolean) => {
+      composite.up(unstable_allTheWay);
       setCount(prev => {
         let count = prev - 1;
         if (count < 0) {
@@ -73,22 +77,10 @@ export const useTimePickerColumnState = (
         return count;
       });
     },
-    down: (args: boolean) => {
-      composite.down(args);
+    down: (unstable_allTheWay?: boolean) => {
+      composite.down(unstable_allTheWay);
       setCount(prev => {
-        let count = prev + 1;
-        if (count > composite.unstable_idCountRef.current) {
-          switch (columnType) {
-            case "hour":
-              count = 1;
-              break;
-            case "minute":
-              count = 0;
-              break;
-            case "meridian":
-              count = 0;
-          }
-        }
+        let count = (prev + 1) % composite.unstable_idCountRef.current;
         return count;
       });
     },
@@ -99,16 +91,15 @@ export const useTimePickerColumnState = (
   // then also set the currentId of composite to the corret count index,
   // so that when user opens the popover later it does not cause any syncing issues.
   React.useEffect(() => {
-    const id = count;
-    composite.setCurrentId(
-      composite.currentId?.replace(/-\d+$/, `-${id}`) as string,
-    );
-  }, [count, visible]);
+    // subtract 1 from meridian & minute beause they are zero based index
+    const id = count + (columnType === "hour" ? 0 : 1);
+    composite.setCurrentId(`${composite.baseId}-${id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnType, count, visible]);
 
   React.useEffect(() => {
-    console.log("Called 2");
-
     setSelected(count);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return {

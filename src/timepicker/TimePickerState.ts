@@ -61,6 +61,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
   });
 
   const minuteState = useTimePickerColumnState({
@@ -68,6 +69,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
   });
 
   const meridiesState = useTimePickerColumnState({
@@ -75,6 +77,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
   });
 
   const hours = [...new Array(13).keys()].slice(1);

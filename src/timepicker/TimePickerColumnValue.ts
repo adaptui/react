@@ -38,15 +38,7 @@ export const useTimePickerColumnValue = createHook<
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
   useProps(options, { ref: htmlRef, onClick: htmlOnClick, ...htmlProps }) {
-    const {
-      setCurrentId,
-      move,
-      selected,
-      value,
-      id,
-      setSelected,
-      visible,
-    } = options;
+    const { setCurrentId, selected, value, id, setSelected, visible } = options;
     const ref = React.useRef<HTMLElement>();
 
     React.useEffect(() => {
@@ -56,10 +48,11 @@ export const useTimePickerColumnValue = createHook<
         setCurrentId?.(id);
         ref?.current?.scrollIntoView();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible]);
 
     const onClick = React.useCallback(() => {
-      setSelected(value);
+      setSelected(value, true);
     }, [setSelected, value]);
 
     return {
