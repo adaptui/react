@@ -24,6 +24,8 @@ export type TimePickerColumnValueOptions = ButtonOptions &
     | "visible"
     | "restoreOldTime"
     | "updateOldTime"
+    | "date"
+    | "oldTime"
   > & {
     value: number;
   };
@@ -58,6 +60,8 @@ export const useTimePickerColumnValue = createHook<
       id,
       setSelected,
       visible,
+      date,
+      oldTime,
       updateOldTime,
       restoreOldTime,
     } = options;
@@ -80,16 +84,22 @@ export const useTimePickerColumnValue = createHook<
     const onKeyDown = React.useCallback(
       (e: React.KeyboardEvent<any>) => {
         if (e.key === "Escape") {
-          restoreOldTime?.();
+          console.log(
+            "%c oldTime.current_last",
+            "color: #40fff2",
+            oldTime.current,
+          );
+          restoreOldTime?.(oldTime.current);
           return;
         }
         if (e.key === "Enter") {
           setSelected(value, true);
-          updateOldTime?.();
+          console.log("%c date", "color: #cc0036", date);
+          updateOldTime?.(date);
           return;
         }
       },
-      [restoreOldTime, updateOldTime, setSelected, value],
+      [restoreOldTime, updateOldTime, setSelected, value, date, oldTime],
     );
 
     return {

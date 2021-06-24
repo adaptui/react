@@ -6,7 +6,6 @@ import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { usePrevious } from "@chakra-ui/hooks";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
@@ -41,16 +40,20 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   });
 
   const oldTime = React.useRef(time);
+  console.log("%c Actual oldTime", "color: #5200cc", oldTime.current);
 
-  const updateOldTime = React.useCallback(() => {
+  const updateOldTime = React.useCallback(time => {
+    console.log("%c Time to be update as oldTime", "color: #ff6600", time);
     oldTime.current = time;
-    console.log(oldTime.current);
-  }, [time]);
+  }, []);
 
-  const restoreOldTime = () => {
-    console.log("Restore", oldTime.current);
-    setTime(oldTime.current);
-  };
+  const restoreOldTime = React.useCallback(
+    time => {
+      console.log("%c Time to be restored", "color: #607339", time);
+      setTime(time);
+    },
+    [setTime],
+  );
 
   const segmentState = useSegmentState({
     value: time,
@@ -74,6 +77,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    oldTime,
     updateOldTime,
     restoreOldTime,
   });
@@ -84,6 +88,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    oldTime,
     updateOldTime,
     restoreOldTime,
   });
@@ -94,6 +99,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange: setTimeProp,
     visible: popover.visible,
     popover,
+    oldTime,
     updateOldTime,
     restoreOldTime,
   });
@@ -109,11 +115,29 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
 
+  // Some Weird React Bug
   React.useEffect(() => {
     if (popover.visible === false && oldTime.current !== time) {
-      updateOldTime();
+      console.log(
+        "%c Segment Effect time",
+        "color: #eeff00",
+        segmentState.fieldValue,
+      );
+      console.log("%c Current Effect time", "color: #ffa280", time);
+      updateOldTime(time);
     }
-  }, [popover.visible, time]);
+  }, [popover.visible, updateOldTime, time, segmentState.fieldValue]);
+
+  // Solution
+  React.useEffect(() => {
+    if (
+      popover.visible === false &&
+      oldTime.current !== segmentState.fieldValue
+    ) {
+      console.log("%c fieldValue", "color: #eeff00", segmentState.fieldValue);
+      updateOldTime(segmentState.fieldValue);
+    }
+  }, [popover.visible, updateOldTime, segmentState.fieldValue]);
 
   return {
     time,

@@ -20,8 +20,9 @@ export interface TimePickerColumnInitialState extends ValueBase<Date> {
    */
   columnType?: ColumnType;
   popover?: PickerBaseStateReturn;
-  restoreOldTime?(): void;
-  updateOldTime?(): void;
+  oldTime?: any;
+  restoreOldTime?(time: any): void;
+  updateOldTime?(time: any): void;
 }
 
 export const useTimePickerColumnState = (
@@ -34,6 +35,7 @@ export const useTimePickerColumnState = (
     visible,
     columnType = "hour",
     popover,
+    oldTime,
     updateOldTime,
     restoreOldTime,
   } = props;
@@ -107,6 +109,9 @@ export const useTimePickerColumnState = (
   }, [count]);
 
   return {
+    date,
+    setDate,
+    oldTime,
     selected,
     setSelected,
     visible,
