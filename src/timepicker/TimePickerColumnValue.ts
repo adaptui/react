@@ -74,17 +74,22 @@ export const useTimePickerColumnValue = createHook<
     }, [visible]);
 
     const onClick = React.useCallback(() => {
-      setSelected(value, true);
-      updateOldTime?.();
-    }, [setSelected, updateOldTime, value]);
+      setSelected(value);
+    }, [setSelected, value]);
 
     const onKeyDown = React.useCallback(
       (e: React.KeyboardEvent<any>) => {
         if (e.key === "Escape") {
           restoreOldTime?.();
+          return;
+        }
+        if (e.key === "Enter") {
+          setSelected(value, true);
+          updateOldTime?.();
+          return;
         }
       },
-      [restoreOldTime],
+      [restoreOldTime, updateOldTime, setSelected, value],
     );
 
     return {

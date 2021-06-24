@@ -59,6 +59,11 @@
   padding: 5px;
 }
 
+.timepicker__content .timepicker__column--value:hover {
+  background: #f0f1ff;
+  color: #1e65fd;
+}
+
 .timepicker__content ::-webkit-scrollbar {
   width: 5px;
 }

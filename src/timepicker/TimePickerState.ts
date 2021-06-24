@@ -6,6 +6,7 @@ import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { usePrevious } from "@chakra-ui/hooks";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
@@ -39,13 +40,16 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange,
   });
 
-  const [oldTime, setOldTime] = React.useState(time);
+  const oldTime = React.useRef(time);
 
-  const updateOldTime = () => {
-    setOldTime(time);
-  };
+  const updateOldTime = React.useCallback(() => {
+    oldTime.current = time;
+    console.log(oldTime.current);
+  }, [time]);
+
   const restoreOldTime = () => {
-    setTime(oldTime);
+    console.log("Restore", oldTime.current);
+    setTime(oldTime.current);
   };
 
   const segmentState = useSegmentState({
@@ -102,9 +106,14 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     if (autoFocus) {
       segmentState.first();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
+
+  React.useEffect(() => {
+    if (popover.visible === false && oldTime.current !== time) {
+      updateOldTime();
+    }
+  }, [popover.visible, time]);
 
   return {
     time,
