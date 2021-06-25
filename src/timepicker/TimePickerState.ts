@@ -112,6 +112,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     if (popover.visible === false && oldTime !== new Date(time)) {
       setOldTime(new Date(time));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
 
   return {

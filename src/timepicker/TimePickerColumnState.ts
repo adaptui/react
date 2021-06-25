@@ -57,6 +57,11 @@ export const useTimePickerColumnState = (
   // keep in sync
   React.useEffect(() => {
     setCount(selected);
+
+    if (!visible) {
+      updateOldTime?.();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, visible]);
 
   const setSelected = React.useCallback(

@@ -110,6 +110,7 @@ export const useTimePickerColumnValue = createHook<
           return;
         }
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [restoreOldTime, updateOldTime, setSelected, value],
     );
 
