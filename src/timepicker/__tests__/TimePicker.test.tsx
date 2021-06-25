@@ -167,7 +167,7 @@ describe("TimePicker", () => {
     expect(document.activeElement).toHaveTextContent("AM");
 
     press.Escape();
-    expect(timepickerContent).not.toBeVisible();
+    expect(timepickerContent).toBeVisible();
     expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 PM");
   });
 
@@ -218,7 +218,7 @@ describe("TimePicker", () => {
 
     // should restore the old value on pressing escape
     press.Escape();
-    expect(timepickerContent).not.toBeVisible();
+    expect(timepickerContent).toBeVisible();
     expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
   });
 
