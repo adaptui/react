@@ -7,7 +7,7 @@
 }
 
 .timepicker__trigger svg {
-  fill: #43424d;
+  fill: #2b303b;
   width: 20px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .timepicker__header:focus-within {
-  border: 1px solid #1e65fd;
+  border: 1px solid #2b303b;
 }
 
 .timepicker__field {
@@ -33,11 +33,10 @@
 
 .timepicker__field--item {
   padding: 2px;
-  border-radius: 4px;
 }
 
 .timepicker__field--item:focus {
-  background-color: #1e65fd;
+  background-color: #2b303b;
   color: white;
   outline: none;
 }
@@ -47,12 +46,13 @@
 }
 
 .timepicker__content .timepicker__column {
-  width: 80px;
+  width: 65px;
   text-align: center;
   max-height: 200px;
   overflow: hidden;
   overflow-y: scroll;
-  border: 1px solid #838bfa;
+  font-size: 14px;
+  border: 1px solid #494b5c;
 }
 
 .timepicker__content .timepicker__column--value {
@@ -60,24 +60,24 @@
 }
 
 .timepicker__content .timepicker__column--value:hover {
-  background: #f0f1ff;
-  color: #1e65fd;
+  background: #494b5c;
+  color: #f8f8f8;
 }
 
 .timepicker__content ::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
 }
 
 .timepicker__content ::-webkit-scrollbar-track {
-  background-color: #dde0ff;
+  background-color: #f8f8f8;
 }
 
 .timepicker__content ::-webkit-scrollbar-thumb {
-  background-color: #9097ff;
+  background-color: #2b303b;
 }
 
 .timepicker__column--value[aria-selected="true"] {
-  background-color: #1e65fd;
+  background-color: #2b303b;
   color: white;
 }
 
