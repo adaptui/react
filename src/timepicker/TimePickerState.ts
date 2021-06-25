@@ -6,7 +6,6 @@ import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
-import { usePrevious } from "@chakra-ui/hooks";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
