@@ -222,6 +222,39 @@ describe("TimePicker", () => {
     expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
   });
 
+  test("timepicker old time should update when popover is closed", () => {
+    render(<TimePickerComp defaultValue="01:00" />);
+
+    const timepickerContent = screen.getByTestId("timepicker-content");
+
+    expect(timepickerContent).not.toBeVisible();
+    press.Tab();
+
+    expect(timepickerContent).not.toBeVisible();
+
+    expect(document.activeElement).toHaveTextContent("1");
+    repeat(press.ArrowUp, 3);
+    expect(document.activeElement).toHaveTextContent("4");
+
+    expect(timepickerContent).not.toBeVisible();
+    expect(screen.getByTestId("current-time")).toHaveTextContent("4:00 AM");
+
+    press.ArrowDown(null, { altKey: true });
+
+    // hour column
+    expect(document.activeElement).toHaveTextContent("4");
+    repeat(press.ArrowDown, 2);
+    expect(document.activeElement).toHaveTextContent("6");
+
+    // should restore the old value on pressing escape
+    press.Escape();
+
+    // focus and selection has been moved to the previous old time
+    expect(document.activeElement).toHaveTextContent("4");
+    expect(timepickerContent).toBeVisible();
+    expect(screen.getByTestId("current-time")).toHaveTextContent("4:00 AM");
+  });
+
   test("TimePicker renders with no a11y violations", async () => {
     const { container } = render(<TimePickerComp />);
     const results = await axe(container, {
