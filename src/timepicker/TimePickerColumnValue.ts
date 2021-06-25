@@ -13,6 +13,7 @@ import { createComponent, createHook } from "reakit-system";
 
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
+import { getSelectedValueFromDate } from "./helpers";
 
 export type TimePickerColumnValueOptions = ButtonOptions &
   CompositeItemOptions &
@@ -24,6 +25,7 @@ export type TimePickerColumnValueOptions = ButtonOptions &
     | "visible"
     | "restoreOldTime"
     | "updateOldTime"
+    | "columnType"
   > & {
     value: number;
   };
@@ -60,6 +62,9 @@ export const useTimePickerColumnValue = createHook<
       visible,
       updateOldTime,
       restoreOldTime,
+      baseId,
+      move,
+      columnType,
     } = options;
     const ref = React.useRef<HTMLElement>();
 
@@ -73,6 +78,22 @@ export const useTimePickerColumnValue = createHook<
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible]);
 
+    const handleCancellation = () => {
+      const oldTime = restoreOldTime?.();
+      if (!oldTime) return;
+
+      const idx = getSelectedValueFromDate(oldTime, columnType);
+      const id = idx + (columnType === "hour" ? 0 : 1);
+      ref?.current?.scrollIntoView();
+
+      move(`${baseId}-${id}`);
+    };
+
+    const handleSubmit = () => {
+      setSelected(value, true);
+      updateOldTime?.();
+    };
+
     const onClick = React.useCallback(() => {
       setSelected(value);
     }, [setSelected, value]);
@@ -81,12 +102,11 @@ export const useTimePickerColumnValue = createHook<
       (e: React.KeyboardEvent<any>) => {
         e.preventDefault();
         if (e.key === "Escape") {
-          restoreOldTime?.();
+          handleCancellation();
           return;
         }
         if (e.key === "Enter") {
-          setSelected(value, true);
-          updateOldTime?.();
+          handleSubmit();
           return;
         }
       },

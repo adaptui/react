@@ -20,7 +20,7 @@ export interface TimePickerColumnInitialState extends ValueBase<Date> {
    */
   columnType?: ColumnType;
   popover?: PickerBaseStateReturn;
-  restoreOldTime?(): void;
+  restoreOldTime?(): Date;
   updateOldTime?(): void;
 }
 
@@ -56,9 +56,7 @@ export const useTimePickerColumnState = (
 
   // keep in sync
   React.useEffect(() => {
-    if (!visible) {
-      setCount(selected);
-    }
+    setCount(selected);
   }, [selected, visible]);
 
   const setSelected = React.useCallback(

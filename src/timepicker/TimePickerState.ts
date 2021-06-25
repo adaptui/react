@@ -40,7 +40,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange,
   });
 
-  const [oldTime, setOldTime] = React.useState(() => new Date(time));
+  const [oldTime, setOldTime] = React.useState(new Date(time));
 
   const updateOldTime = () => {
     setOldTime(new Date(time));
@@ -48,6 +48,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
 
   const restoreOldTime = () => {
     setTime(new Date(oldTime));
+    return new Date(oldTime);
   };
 
   const segmentState = useSegmentState({
