@@ -79,6 +79,7 @@ export const useTimePickerColumnValue = createHook<
 
     const onKeyDown = React.useCallback(
       (e: React.KeyboardEvent<any>) => {
+        e.preventDefault();
         if (e.key === "Escape") {
           restoreOldTime?.();
           return;

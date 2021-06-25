@@ -40,16 +40,14 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange,
   });
 
-  const oldTime = React.useRef(time);
+  const [oldTime, setOldTime] = React.useState(() => new Date(time));
 
-  const updateOldTime = React.useCallback(() => {
-    oldTime.current = time;
-    console.log(oldTime.current);
-  }, [time]);
+  const updateOldTime = () => {
+    setOldTime(new Date(time));
+  };
 
   const restoreOldTime = () => {
-    console.log("Restore", oldTime.current);
-    setTime(oldTime.current);
+    setTime(new Date(oldTime));
   };
 
   const segmentState = useSegmentState({
@@ -110,10 +108,10 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   }, [autoFocus, segmentState.first]);
 
   React.useEffect(() => {
-    if (popover.visible === false && oldTime.current !== time) {
-      updateOldTime();
+    if (popover.visible === false && oldTime !== new Date(time)) {
+      setOldTime(new Date(time));
     }
-  }, [popover.visible, time]);
+  }, [popover.visible]);
 
   return {
     time,
