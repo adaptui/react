@@ -26,6 +26,8 @@ export type TimePickerColumnValueOptions = ButtonOptions &
     | "restoreOldTime"
     | "updateOldTime"
     | "columnType"
+    | "date"
+    | "popover"
   > & {
     value: number;
   };
@@ -54,12 +56,14 @@ export const useTimePickerColumnValue = createHook<
     },
   ) {
     const {
+      popover,
       setCurrentId,
       selected,
       value,
       id,
       setSelected,
       visible,
+      date,
       updateOldTime,
       restoreOldTime,
       baseId,
@@ -81,6 +85,9 @@ export const useTimePickerColumnValue = createHook<
     const handleCancellation = () => {
       const oldTime = restoreOldTime?.();
       if (!oldTime) return;
+      if (oldTime.getTime() === date.getTime()) {
+        popover?.hide();
+      }
 
       const idx = getSelectedValueFromDate(oldTime, columnType);
       const id = idx + (columnType === "hour" ? 0 : 1);

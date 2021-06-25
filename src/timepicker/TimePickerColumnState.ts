@@ -110,6 +110,8 @@ export const useTimePickerColumnState = (
   }, [count]);
 
   return {
+    popover,
+    date,
     selected,
     setSelected,
     visible,

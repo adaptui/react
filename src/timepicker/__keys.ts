@@ -37,6 +37,8 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "reset",
   "unstable_setIncludesBaseElement",
   "unstable_setHasActiveWidget",
+  "popover",
+  "date",
   "selected",
   "setSelected",
   "visible",
