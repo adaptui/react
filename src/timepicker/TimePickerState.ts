@@ -6,6 +6,8 @@ import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { announce } from "../utils/LiveAnnouncer";
+import { format } from "date-fns/esm";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
@@ -99,6 +101,9 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   const hours = [...new Array(13).keys()].slice(1);
   const minutes = [...new Array(60).keys()];
   const meridies = ["AM", "PM"];
+  const announceSelectedDate = () => {
+    announce(`Selected Time: ${format(time, "h:m a")}`);
+  };
 
   React.useEffect(() => {
     if (autoFocus) {
@@ -110,6 +115,7 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   React.useEffect(() => {
     if (popover.visible === false && oldTime !== new Date(time)) {
       setOldTime(new Date(time));
+      announceSelectedDate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.visible]);
