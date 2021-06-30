@@ -213,8 +213,6 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       [],
     );
 
-    console.log("%c segment.type", "color: #cc7033", segment.type);
-    console.log("%c segment", "color: #ace2e6", segment);
     switch (segment.type) {
       // A separator, e.g. punctuation
       case "literal":
