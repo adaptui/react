@@ -7,7 +7,7 @@ import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 import { announce } from "../utils/LiveAnnouncer";
-import { format } from "date-fns/esm";
+import { format } from "date-fns";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
