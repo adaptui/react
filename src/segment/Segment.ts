@@ -2,7 +2,6 @@ import {
   useCompositeItem,
   CompositeItemOptions,
   CompositeItemHTMLProps,
-  unstable_useId as useId,
 } from "reakit";
 import * as React from "react";
 import { mergeProps } from "@react-aria/utils";
@@ -72,10 +71,17 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       hour12: options.dateFormatter.resolvedOptions().hour12,
     });
 
+    const hourFormattedValue = hourDateFormatter.format(options.fieldValue);
     if (segment.type === "month") {
       textValue = monthDateFormatter.format(options.fieldValue);
-    } else if (segment.type === "hour" || segment.type === "dayPeriod") {
-      textValue = hourDateFormatter.format(options.fieldValue);
+    }
+
+    if (segment.type === "hour") {
+      textValue = hourFormattedValue.split(" ")[0];
+    }
+
+    if (segment.type === "dayPeriod") {
+      textValue = hourFormattedValue.split(" ")[1];
     }
 
     const { spinButtonProps } = useSpinButton({
@@ -207,8 +213,6 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       [],
     );
 
-    const { id } = useId({ baseId: "segment-spin-button" });
-
     switch (segment.type) {
       // A separator, e.g. punctuation
       case "literal":
@@ -231,9 +235,7 @@ export const useSegment = createHook<SegmentOptions, SegmentHTMLProps>({
       // Editable segment
       default:
         return mergeProps(spinButtonProps, {
-          id,
           "aria-label": segment.type,
-          "aria-labelledby": `${id}`,
           onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
           onFocus: callAllHandlers(htmlOnFocus, onFocus),
           onMouseDown: callAllHandlers(htmlOnMouseDown, onMouseDown),
