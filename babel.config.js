@@ -10,7 +10,6 @@ module.exports = function (api) {
     [
       "@babel/env",
       {
-        loose: true,
         modules: isCommonJS ? "commonjs" : false,
         targets: {
           esmodules: isESM ? true : undefined,
@@ -23,7 +22,7 @@ module.exports = function (api) {
 
   const plugins = [
     "date-fns",
-    ["@babel/plugin-proposal-class-properties", { loose: true }],
+    ["@babel/plugin-proposal-class-properties"],
     "@babel/plugin-proposal-logical-assignment-operators",
   ];
 

@@ -259,7 +259,9 @@ describe("DatePicker", () => {
 
   test("DatePicker renders with no a11y violations", async () => {
     const { container } = render(<DatePickerComp />);
-    const results = await axe(container);
+    const results = await axe(container, {
+      rules: { "nested-interactive": { enabled: false } },
+    });
 
     expect(results).toHaveNoViolations();
   });

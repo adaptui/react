@@ -13,12 +13,21 @@ import { createComponent, createHook } from "reakit-system";
 
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";
+import { getSelectedValueFromDate } from "./helpers";
 
 export type TimePickerColumnValueOptions = ButtonOptions &
   CompositeItemOptions &
   Pick<
     TimePickerColumnStateReturn,
-    "selected" | "move" | "setSelected" | "visible"
+    | "selected"
+    | "move"
+    | "setSelected"
+    | "visible"
+    | "restoreOldTime"
+    | "updateOldTime"
+    | "columnType"
+    | "date"
+    | "popover"
   > & {
     value: number;
   };
@@ -37,15 +46,29 @@ export const useTimePickerColumnValue = createHook<
   compose: [useButton, useCompositeItem],
   keys: TIME_PICKER_COLUMN_VALUE_KEYS,
 
-  useProps(options, { ref: htmlRef, onClick: htmlOnClick, ...htmlProps }) {
+  useProps(
+    options,
+    {
+      ref: htmlRef,
+      onClick: htmlOnClick,
+      onKeyDown: htmlOnKeyDown,
+      ...htmlProps
+    },
+  ) {
     const {
+      popover,
       setCurrentId,
-      move,
       selected,
       value,
       id,
       setSelected,
       visible,
+      date,
+      updateOldTime,
+      restoreOldTime,
+      baseId,
+      move,
+      columnType,
     } = options;
     const ref = React.useRef<HTMLElement>();
 
@@ -56,17 +79,54 @@ export const useTimePickerColumnValue = createHook<
         setCurrentId?.(id);
         ref?.current?.scrollIntoView();
       }
-    }, [id, move, selected, setCurrentId, value, visible]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
+
+    const handleCancellation = () => {
+      const oldTime = restoreOldTime?.();
+      if (!oldTime) return;
+      if (oldTime.getTime() === date.getTime()) {
+        popover?.hide();
+      }
+
+      const idx = getSelectedValueFromDate(oldTime, columnType);
+      const id = idx + (columnType === "hour" ? 0 : 1);
+      ref?.current?.scrollIntoView();
+
+      move(`${baseId}-${id}`);
+    };
+
+    const handleSubmit = () => {
+      setSelected(value, true);
+      updateOldTime?.();
+    };
 
     const onClick = React.useCallback(() => {
       setSelected(value);
     }, [setSelected, value]);
+
+    const onKeyDown = React.useCallback(
+      (e: React.KeyboardEvent<any>) => {
+        e.preventDefault();
+        if (e.key === "Escape") {
+          handleCancellation();
+          return;
+        }
+        if (e.key === "Enter") {
+          handleSubmit();
+          return;
+        }
+      },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [restoreOldTime, updateOldTime, setSelected, value],
+    );
 
     return {
       role: "option",
       "aria-selected": selected === value,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
+      onKeyDown: callAllHandlers(htmlOnKeyDown, onKeyDown),
       ...htmlProps,
     };
   },

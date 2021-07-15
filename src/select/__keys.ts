@@ -1,5 +1,7 @@
 // Automatically generated
 const SELECT_LIST_STATE_KEYS = [
+  "baseId",
+  "unstable_idCountRef",
   "unstable_virtual",
   "rtl",
   "orientation",
@@ -9,8 +11,6 @@ const SELECT_LIST_STATE_KEYS = [
   "shift",
   "unstable_includesBaseElement",
   "unstable_hasActiveWidget",
-  "baseId",
-  "unstable_idCountRef",
   "groups",
   "unstable_moves",
   "menuRole",

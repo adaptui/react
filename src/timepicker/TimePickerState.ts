@@ -6,6 +6,8 @@ import { stringifyTime, parseTime } from "./helpers";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { announce } from "../utils/LiveAnnouncer";
+import { format } from "date-fns";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
@@ -39,6 +41,17 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     onChange,
   });
 
+  const [oldTime, setOldTime] = React.useState(new Date(time));
+
+  const updateOldTime = () => {
+    setOldTime(new Date(time));
+  };
+
+  const restoreOldTime = () => {
+    setTime(new Date(oldTime));
+    return new Date(oldTime);
+  };
+
   const segmentState = useSegmentState({
     value: time,
     onChange: setTime,
@@ -53,7 +66,6 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
 
   const setTimeProp = (date: Date) => {
     setTime(date);
-    popover.hide();
   };
 
   const hourState = useTimePickerColumnState({
@@ -61,6 +73,9 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const minuteState = useTimePickerColumnState({
@@ -68,6 +83,9 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const meridiesState = useTimePickerColumnState({
@@ -75,19 +93,32 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
     value: time,
     onChange: setTimeProp,
     visible: popover.visible,
+    popover,
+    updateOldTime,
+    restoreOldTime,
   });
 
   const hours = [...new Array(13).keys()].slice(1);
   const minutes = [...new Array(60).keys()];
   const meridies = ["AM", "PM"];
+  const announceSelectedDate = () => {
+    announce(`Selected Time: ${format(time, "h:m a")}`);
+  };
 
   React.useEffect(() => {
     if (autoFocus) {
       segmentState.first();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
+
+  React.useEffect(() => {
+    if (popover.visible === false && oldTime !== new Date(time)) {
+      setOldTime(new Date(time));
+      announceSelectedDate();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [popover.visible]);
 
   return {
     time,
