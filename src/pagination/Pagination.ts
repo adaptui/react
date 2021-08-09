@@ -27,6 +27,7 @@ export const Pagination = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
+      "See https://mzl.la/2VCL8ys",
     );
     return useCreateElement(type, props, children);
   },
