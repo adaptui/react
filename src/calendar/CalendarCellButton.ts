@@ -138,23 +138,23 @@ export const CalendarCellButton = createComponent({
   useHook: useCalendarCellButton,
 });
 
-export type CalendarCellButtonOptions = {
-  date: Date;
-} & Pick<
-  CalendarStateReturn,
-  | "focusedDate"
-  | "selectDate"
-  | "setFocusedDate"
-  | "isDisabled"
-  | "month"
-  | "minDate"
-  | "maxDate"
-  | "dateValue"
-  | "isFocused"
-  | "isRangeCalendar"
-> &
+export type CalendarCellButtonOptions = ButtonOptions &
   Partial<Pick<RangeCalendarStateReturn, "anchorDate">> &
-  ButtonOptions;
+  Pick<
+    CalendarStateReturn,
+    | "focusedDate"
+    | "selectDate"
+    | "setFocusedDate"
+    | "isDisabled"
+    | "month"
+    | "minDate"
+    | "maxDate"
+    | "dateValue"
+    | "isFocused"
+    | "isRangeCalendar"
+  > & {
+    date: Date;
+  };
 
 export type CalendarCellButtonHTMLProps = ButtonHTMLProps;
 

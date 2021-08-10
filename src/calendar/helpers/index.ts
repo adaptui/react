@@ -14,7 +14,7 @@ export function useWeekDays(weekStart: number) {
     const dateDay = setDay(Date.now(), (index + weekStart) % 7);
     const day = dayFormatter.format(dateDay);
     const dayLong = dayFormatterLong.format(dateDay);
-    return { title: dayLong, abbr: day };
+    return { title: dayLong, abbr: day } as const;
   });
 }
 
