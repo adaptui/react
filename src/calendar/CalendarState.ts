@@ -62,13 +62,15 @@ export function useCalendarState(
     defaultValue: parseDate(defaultValueProp),
     onChange,
   });
+  const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
 
+  const initialMonth = value ?? new Date();
   const minValue = parseDate(minValueProp);
   const maxValue = parseDate(maxValueProp);
 
-  const initialMonth = value ?? new Date();
   const [currentMonth, setCurrentMonth] = React.useState(initialMonth);
   const [focusedDate, setFocusedDate] = React.useState(initialMonth);
+  const [isFocused, setFocused] = React.useState(autoFocus);
 
   const month = currentMonth.getMonth();
   const year = currentMonth.getFullYear();
@@ -127,10 +129,6 @@ export function useCalendarState(
       announceSelectedDate(value);
     }
   }
-
-  const [isFocused, setFocused] = React.useState(autoFocus);
-
-  const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
 
   // Announce when the current month changes
   useUpdateEffect(() => {

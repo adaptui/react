@@ -92,39 +92,37 @@ export const useCalendarCellButton = createHook<
     });
 
     // aria-label should be localize Day of week, Month, Day and Year without Time.
-    let ariaLabel = dateFormatter.format(date);
-    if (isToday) {
-      // If date is today, set appropriate string depending on selected state:
-      ariaLabel = isSelected
-        ? `Today, ${ariaLabel} selected`
-        : `Today, ${ariaLabel}`;
-    } else if (isSelected) {
-      // If date is selected but not today:
-      ariaLabel = `${ariaLabel} selected`;
-    }
+    function getAriaLabel() {
+      let ariaLabel = dateFormatter.format(date);
+      const isTodayLabel = isToday ? "Today, " : "";
+      const isSelctedLabel = isSelected ? " selected" : "";
+      ariaLabel = `${isTodayLabel}${ariaLabel}${isSelctedLabel}`;
 
-    // When a cell is focused and this is a range calendar, add a prompt to help
-    // screenreader users know that they are in a range selection mode.
-    if (options.isRangeCalendar && isFocused && !isDisabled) {
-      let rangeSelectionPrompt = "";
+      // When a cell is focused and this is a range calendar, add a prompt to help
+      // screenreader users know that they are in a range selection mode.
+      if (options.isRangeCalendar && isFocused && !isDisabled) {
+        let rangeSelectionPrompt = "";
 
-      // If selection has started add "click to finish selecting range"
-      if (anchorDate) {
-        rangeSelectionPrompt = "click to finish selecting range";
-        // Otherwise, add "click to start selecting range" prompt
-      } else {
-        rangeSelectionPrompt = "click to start selecting range";
+        // If selection has started add "click to finish selecting range"
+        if (anchorDate) {
+          rangeSelectionPrompt = "click to finish selecting range";
+          // Otherwise, add "click to start selecting range" prompt
+        } else {
+          rangeSelectionPrompt = "click to start selecting range";
+        }
+
+        // Append to aria-label
+        if (rangeSelectionPrompt) {
+          ariaLabel = `${ariaLabel} (${rangeSelectionPrompt})`;
+        }
       }
 
-      // Append to aria-label
-      if (rangeSelectionPrompt) {
-        ariaLabel = `${ariaLabel} (${rangeSelectionPrompt})`;
-      }
+      return ariaLabel;
     }
 
     return {
       children: useDateFormatter({ day: "numeric" }).format(date),
-      "aria-label": ariaLabel,
+      "aria-label": getAriaLabel(),
       tabIndex: !disabled ? (isSameDay(date, focusedDate) ? 0 : -1) : undefined,
       ref: useForkRef(ref, htmlRef),
       onClick: callAllHandlers(htmlOnClick, onClick),
