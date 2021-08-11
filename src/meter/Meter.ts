@@ -45,6 +45,7 @@ export const Meter = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
+      "See https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-15",
     );
     return useCreateElement(type, props, children);
   },
