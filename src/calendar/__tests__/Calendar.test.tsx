@@ -226,6 +226,25 @@ describe("Calendar", () => {
     expect(label(/^saturday, october 31, 2020$/i)).toHaveFocus();
   });
 
+  it("should have proper aria-label for calendar cell button", () => {
+    MockDate.set(new Date(2021, 7, 10));
+    render(<CalendarComp />);
+
+    screen.getByRole("button", {
+      name: /today, tuesday, august 10, 2021/i,
+    });
+
+    repeat(press.Tab, 5);
+    press.Enter();
+    screen.getByRole("button", {
+      name: /today, tuesday, august 10, 2021 selected/i,
+    });
+    press.ArrowRight();
+    expect(screen.getByLabelText(/wednesday, august 11, 2021/i)).toHaveFocus();
+
+    MockDate.reset();
+  });
+
   test("Calendar renders with no a11y violations", async () => {
     const { container } = render(<CalendarComp />);
     const results = await axe(container);

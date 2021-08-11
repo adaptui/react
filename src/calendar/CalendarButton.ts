@@ -27,7 +27,7 @@ export const useCalendarButton = createHook<
       goto,
     } = options;
 
-    const TYPES = {
+    const HANDLER_TYPES = {
       nextMonth: {
         handler: focusNextMonth,
         ariaLabel: "Next Month",
@@ -47,8 +47,8 @@ export const useCalendarButton = createHook<
     };
 
     return {
-      "aria-label": TYPES[goto]?.ariaLabel,
-      onClick: callAllHandlers(htmlOnClick, TYPES[goto]?.handler),
+      "aria-label": HANDLER_TYPES[goto]?.ariaLabel,
+      onClick: callAllHandlers(htmlOnClick, HANDLER_TYPES[goto]?.handler),
       ...htmlProps,
     };
   },
@@ -60,16 +60,16 @@ export const CalendarButton = createComponent({
   useHook: useCalendarButton,
 });
 
-export type CalendarButtonOptions = {
-  goto: CalendarGoto;
-} & Pick<
-  CalendarStateReturn,
-  | "focusNextMonth"
-  | "focusPreviousMonth"
-  | "focusPreviousYear"
-  | "focusNextYear"
-> &
-  ButtonOptions;
+export type CalendarButtonOptions = ButtonOptions &
+  Pick<
+    CalendarStateReturn,
+    | "focusNextMonth"
+    | "focusPreviousMonth"
+    | "focusPreviousYear"
+    | "focusNextYear"
+  > & {
+    goto: CalendarGoto;
+  };
 
 export type CalendarButtonHTMLProps = ButtonHTMLProps;
 
