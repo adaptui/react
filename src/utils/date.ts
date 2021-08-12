@@ -9,12 +9,12 @@ dayjs.extend(advancedFormat);
 export function parseDate(dateValue: string | undefined) {
   if (dateValue == null) return;
 
-  const parsedDate = parse(dateValue, "yyyyyy-MM-dd", new Date());
+  const parsedDate = dayjs(dateValue, "YYYY-MM-DD", true);
 
   // Check for Invalid Date
-  if (isNaN(+parsedDate)) return;
-  parsedDate.setHours(new Date().getHours());
-  return parsedDate;
+  if (!parsedDate.isValid()) return;
+  parsedDate.set("hour", new Date().getHours());
+  return parsedDate.toDate();
 }
 
 export const parseRangeDate = (
