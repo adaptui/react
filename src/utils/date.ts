@@ -108,16 +108,16 @@ export const getSeconds = (date: Date) => dayjs(date).get("seconds");
 export const getYear = (date: Date) => dayjs(date).get("years");
 
 export const setDate = (date: Date, value: number) =>
-  dayjs(date).set("date", value);
+  dayjs(date).set("date", value).toDate();
 
 export const setHours = (date: Date, value: number) =>
-  dayjs(date).set("hour", value);
+  dayjs(date).set("hour", value).toDate();
 
 export const setMinutes = (date: Date, value: number) =>
-  dayjs(date).set("minute", value);
+  dayjs(date).set("minute", value).toDate();
 export const setSeconds = (date: Date, value: number) =>
-  dayjs(date).set("second", value);
+  dayjs(date).set("second", value).toDate();
 export const setMonth = (date: Date, value: number) =>
-  dayjs(date).set("month", value);
+  dayjs(date).set("month", value).toDate();
 export const setYear = (date: Date, value: number) =>
-  dayjs(date).set("year", value);
+  dayjs(date).set("year", value).toDate();

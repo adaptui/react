@@ -23,7 +23,7 @@ import {
   CalendarCellButton,
 } from "../../calendar";
 import { repeat } from "../../utils/test-utils";
-import { addWeeks, format, subWeeks } from "@renderlesskit/react/utils";
+import { addWeeks, format, subWeeks } from "../../utils";
 
 /*
 // Mocking useId otherwise snapshots will change each time
