@@ -81,6 +81,7 @@ export const isWeekend = (date: Date) => {
 // export const format = (date: Date, fmt: string) => {
 //   return dayjs(date).format(fmt);
 // };
+
 export { format, closestTo } from "date-fns";
 
 export const startOfMonth = (date: Date) => {
@@ -115,9 +116,12 @@ export const setHours = (date: Date, value: number) =>
 
 export const setMinutes = (date: Date, value: number) =>
   dayjs(date).set("minute", value).toDate();
+
 export const setSeconds = (date: Date, value: number) =>
   dayjs(date).set("second", value).toDate();
+
 export const setMonth = (date: Date, value: number) =>
   dayjs(date).set("month", value).toDate();
+
 export const setYear = (date: Date, value: number) =>
   dayjs(date).set("year", value).toDate();
