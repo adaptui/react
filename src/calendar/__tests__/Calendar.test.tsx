@@ -1,6 +1,5 @@
 import * as React from "react";
 import MockDate from "mockdate";
-import { subWeeks, addWeeks, format } from "date-fns";
 import { axe, render, press, screen } from "reakit-test-utils";
 
 import {
@@ -16,6 +15,7 @@ import {
 } from "../index";
 import { repeat } from "../../utils/test-utils";
 import { cleanup } from "@testing-library/react";
+import { addWeeks, format, subWeeks } from "@renderlesskit/react/utils";
 
 export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);

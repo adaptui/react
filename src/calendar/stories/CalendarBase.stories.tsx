@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addWeeks, format } from "date-fns";
 
 import "./CalendarBase.css";
 import {
@@ -13,6 +12,8 @@ import {
 } from "./templates";
 import { App as Calendar } from "./CalendarBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { format } from "util";
+import { addWeeks } from "@renderlesskit/react/utils";
 
 export default {
   component: Calendar,

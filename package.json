@@ -97,6 +97,7 @@
     "@react-aria/spinbutton": "3.0.0",
     "@react-aria/utils": "3.8.1",
     "date-fns": "2.22.1",
+    "dayjs": "^1.10.6",
     "reakit-system": "0.15.1",
     "reakit-utils": "0.15.1",
     "reakit-warning": "^0.6.1"

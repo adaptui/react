@@ -1,6 +1,5 @@
 import * as React from "react";
 import { cleanup } from "@testing-library/react";
-import { format, addWeeks, subWeeks } from "date-fns";
 
 import { axe, render, press, screen } from "reakit-test-utils";
 import {
@@ -24,6 +23,7 @@ import {
   CalendarCellButton,
 } from "../../calendar";
 import { repeat } from "../../utils/test-utils";
+import { addWeeks, format, subWeeks } from "@renderlesskit/react/utils";
 
 /*
 // Mocking useId otherwise snapshots will change each time

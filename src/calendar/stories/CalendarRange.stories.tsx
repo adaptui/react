@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addDays, addWeeks, subDays, format, subWeeks } from "date-fns";
 
 import "./CalendarRange.css";
 import {
@@ -13,6 +12,13 @@ import {
 } from "./templates";
 import { App as RangeCalendar } from "./CalendarRange.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import {
+  addDays,
+  addWeeks,
+  format,
+  subDays,
+  subWeeks,
+} from "@renderlesskit/react/utils";
 
 export default {
   title: "Calendar/Range",

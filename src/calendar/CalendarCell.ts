@@ -7,9 +7,14 @@ import { useCallback } from "react";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
-import { getDaysInMonth, isSameDay, isWeekend } from "date-fns";
 
-import { dataAttr, ariaAttr } from "../utils";
+import {
+  dataAttr,
+  ariaAttr,
+  getDaysInMonth,
+  isSameDay,
+  isWeekend,
+} from "../utils";
 import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";

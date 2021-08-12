@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
 import {
   datePickerBaseTemplate,
@@ -13,6 +12,12 @@ import {
 import "./DatePickerBase.css";
 import { App as DatePicker } from "./DatePickerBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import {
+  addDays,
+  addWeeks,
+  format,
+  subWeeks,
+} from "@renderlesskit/react/utils";
 
 export default {
   component: DatePicker,

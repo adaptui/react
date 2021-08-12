@@ -1,9 +1,9 @@
 import * as React from "react";
-import { addWeeks } from "date-fns";
 import { Meta, Story } from "@storybook/react";
 
 import "./tailwind/index.css";
 import { RangeDatePicker } from "./styled/RangeDatePicker.component";
+import { addWeeks } from "@renderlesskit/react/utils";
 
 export default {
   component: RangeDatePicker,
