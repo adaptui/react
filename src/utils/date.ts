@@ -1,7 +1,10 @@
-import { parse, format } from "date-fns";
+import { parse } from "date-fns";
 import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
 import { RangeValue } from "@react-types/shared";
+
+dayjs.extend(advancedFormat);
 
 export function parseDate(dateValue: string | undefined) {
   if (dateValue == null) return;
@@ -26,7 +29,7 @@ export const parseRangeDate = (
 };
 
 export function stringifyDate(date: Date) {
-  return format(date, "yyyy-MM-dd");
+  return format(date, "YYYY-MM-DD");
 }
 
 export function isInvalidDateRange(
@@ -120,8 +123,8 @@ export const isWeekend = (date: Date) => {
   return day === 0 || day === 6;
 };
 
-// export const format = (date: Date, fmt: string) => {
-//   return dayjs(date).format(fmt);
-// };
+export const format = (date: Date, fmt: string) => {
+  return dayjs(date).format(fmt);
+};
 
-export { format, closestTo } from "date-fns";
+export { closestTo } from "date-fns";

@@ -37,10 +37,10 @@ export default {
 } as Meta;
 
 const Base: Story = args => {
-  args.value &&= format(new Date(args.value), "yyyy-MM-dd");
-  args.defaultValue &&= format(new Date(args.defaultValue), "yyyy-MM-dd");
-  args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
-  args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
+  args.value &&= format(new Date(args.value), "YYYY-MM-DD");
+  args.defaultValue &&= format(new Date(args.defaultValue), "YYYY-MM-DD");
+  args.minValue &&= format(new Date(args.minValue), "YYYY-MM-DD");
+  args.maxValue &&= format(new Date(args.maxValue), "YYYY-MM-DD");
 
   const [{ value }, updateArgs] = useArgs();
 
@@ -48,7 +48,7 @@ const Base: Story = args => {
     <Calendar
       value={value}
       onChange={date =>
-        updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
+        updateArgs({ value: format(new Date(date), "YYYY-MM-DD") })
       }
       {...args}
     />

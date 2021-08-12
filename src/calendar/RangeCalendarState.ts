@@ -61,15 +61,15 @@ export function useRangeCalendarState(
       announce(
         `Selected range, from ${format(
           highlightedRange.start,
-          "do MMM yyyy",
-        )} to ${format(highlightedRange.start, "do MMM yyyy")}`,
+          "Do MMM YYYY",
+        )} to ${format(highlightedRange.start, "Do MMM YYYY")}`,
       );
     } else {
       announce(
         `Selected range, from ${format(
           highlightedRange.start,
-          "do MMM yyyy",
-        )} to ${format(highlightedRange.end, "do MMM yyyy")}`,
+          "Do MMM YYYY",
+        )} to ${format(highlightedRange.end, "Do MMM YYYY")}`,
       );
     }
   }, [highlightedRange]);
@@ -81,7 +81,7 @@ export function useRangeCalendarState(
 
     if (!anchorDate) {
       setAnchorDate(date);
-      announce(`Starting range from ${format(date, "do MMM yyyy")}`);
+      announce(`Starting range from ${format(date, "Do MMM YYYY")}`);
     } else {
       setValue(makeRange(anchorDate, date));
       announceRange();
