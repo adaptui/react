@@ -65,37 +65,6 @@ export const addYears = (date: Date, amount: number) =>
 export const addWeeks = (date: Date, amount: number) =>
   dayjs(date).add(amount, "weeks").toDate();
 
-export const getDaysInMonth = (date: Date) => dayjs(date).daysInMonth();
-
-export const isSameMonth = (date1: Date, date2: Date) =>
-  dayjs(date1).isSame(date2, "month");
-
-export const isSameDay = (date1: Date, date2: Date) =>
-  dayjs(date1).isSame(date2, "day");
-
-export const isWeekend = (date: Date) => {
-  const day = dayjs(date).get("day");
-  return day === 0 || day === 6;
-};
-
-// export const format = (date: Date, fmt: string) => {
-//   return dayjs(date).format(fmt);
-// };
-
-export { format, closestTo } from "date-fns";
-
-export const startOfMonth = (date: Date) => {
-  return dayjs(date).startOf("month");
-};
-
-export const startOfDay = (date: Date) => {
-  return dayjs(date).startOf("day");
-};
-
-export const endOfMonth = (date: Date) => {
-  return dayjs(date).endOf("month");
-};
-
 export const getDate = (date: Date) => dayjs(date).get("date");
 
 export const getHours = (date: Date) => dayjs(date).get("hours");
@@ -125,3 +94,34 @@ export const setMonth = (date: Date, value: number) =>
 
 export const setYear = (date: Date, value: number) =>
   dayjs(date).set("year", value).toDate();
+
+export const startOfMonth = (date: Date) => {
+  return dayjs(date).startOf("month");
+};
+
+export const startOfDay = (date: Date) => {
+  return dayjs(date).startOf("day");
+};
+
+export const endOfMonth = (date: Date) => {
+  return dayjs(date).endOf("month");
+};
+
+export const getDaysInMonth = (date: Date) => dayjs(date).daysInMonth();
+
+export const isSameMonth = (date1: Date, date2: Date) =>
+  dayjs(date1).isSame(date2, "month");
+
+export const isSameDay = (date1: Date, date2: Date) =>
+  dayjs(date1).isSame(date2, "day");
+
+export const isWeekend = (date: Date) => {
+  const day = dayjs(date).get("day");
+  return day === 0 || day === 6;
+};
+
+// export const format = (date: Date, fmt: string) => {
+//   return dayjs(date).format(fmt);
+// };
+
+export { format, closestTo } from "date-fns";
