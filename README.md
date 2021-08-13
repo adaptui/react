@@ -10,7 +10,7 @@ System.
   <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM version" src="https://img.shields.io/npm/v/@renderlesskit/react.svg" /></a>
   <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/@renderlesskit/react.svg"></a>
   <a href="https://github.com/timelessco/renderlesskit-react/actions"><img alt="Build Status" src="https://github.com/timelessco/renderlesskit-react/workflows/Test/badge.svg?event=push&branch=master" /></a><br/>
-  <a href="https://github.com/timelessco/renderlesskit-react/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <a href="https://github.com/timelessco/renderlesskit-react/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   </a>
   <a target="_blank" href="https://octo-repo-visualization.vercel.app/?repo=timelessco%2Frenderlesskit-react"><img src="https://img.shields.io/badge/Repo-Visualization-orange" alt="Repo Visualization">
   </a>
