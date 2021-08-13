@@ -90,13 +90,13 @@ export const App = args => {
 export default App;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1oixd)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/s7k9t)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mkdgw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mbvvy)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/f6hfw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ldgwg)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/usf1j)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/q2lvt)
 
 [![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/94sn8)
 
