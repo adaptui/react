@@ -1,3 +1,41 @@
+## [0.4.0](https://github.com/timelessco/renderlesskit-react/compare/v0.3.3...v0.4.0) (2021-08-13)
+
+
+### Bug Fixes
+
+* **patch:** 🐛 internationalized number ([149a796](https://github.com/timelessco/renderlesskit-react/commit/149a796939575f975aac77965624ed7c4e6868e1))
+
+
+### Feature Updates
+
+* Improved timepicker UX ([#208](https://github.com/timelessco/renderlesskit-react/issues/208)) ([af626b3](https://github.com/timelessco/renderlesskit-react/commit/af626b3f8f121fe47c192f95099e6dbc1056b33b))
+
+
+### Code Refactors
+
+* migrated to dayjs ([#214](https://github.com/timelessco/renderlesskit-react/issues/214)) ([623cc56](https://github.com/timelessco/renderlesskit-react/commit/623cc56265e9acad44669abe53c72eb5a965f2d1))
+* **calendar:** refactored cell button and added tests for aria label ([#212](https://github.com/timelessco/renderlesskit-react/issues/212)) ([ad8c77a](https://github.com/timelessco/renderlesskit-react/commit/ad8c77a8f9b979239e9e80cf14a927c4506e2ff4))
+
+
+### Test Updates
+
+* added tests for toast state ([#213](https://github.com/timelessco/renderlesskit-react/issues/213)) ([70f2ada](https://github.com/timelessco/renderlesskit-react/commit/70f2adabf69be48e6c0aef5969ce4407d81b7553))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️  upgrade dev deps & fix sb babel errors ([53fbd2a](https://github.com/timelessco/renderlesskit-react/commit/53fbd2a9429157e1c5e2dd53760c5317b7f2be82))
+* **deps:** ⬆️ update prod deps ([8a04447](https://github.com/timelessco/renderlesskit-react/commit/8a04447eeeb2e5732bcfed2ce4e66f3e4d538b67))
+* **format:** 🎨 fix eslint conflict with prettier latest ([7e6f028](https://github.com/timelessco/renderlesskit-react/commit/7e6f0289f6d0ca5099f1b6a91549fe04d07aa077))
+* **format:** 🎨 fix the wrong version ([bdcff12](https://github.com/timelessco/renderlesskit-react/commit/bdcff12d663bc42de056ac9a43cb264e4c625044))
+* added a11y links for warnings ([#211](https://github.com/timelessco/renderlesskit-react/issues/211)) ([2d1156a](https://github.com/timelessco/renderlesskit-react/commit/2d1156a8e684ced845b6a0a268452b69b5ef5964))
+
+
+### Documentation Changes
+
+* 📝 update docs ([749ac80](https://github.com/timelessco/renderlesskit-react/commit/749ac80cd42a0ed04f64286306a9348a5ec1816f))
+* **readme:** 📝 add repo visualization ([7267b98](https://github.com/timelessco/renderlesskit-react/commit/7267b98a46939b5cf8e4f799c206a2d22b2dc0df))
+
 ### [0.3.3](https://github.com/timelessco/renderlesskit-react/compare/v0.3.2...v0.3.3) (2021-06-21)
 
 
