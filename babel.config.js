@@ -22,8 +22,10 @@ module.exports = function (api) {
 
   const plugins = [
     "date-fns",
-    ["@babel/plugin-proposal-class-properties"],
-    "@babel/plugin-proposal-logical-assignment-operators",
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
+    ["@babel/plugin-proposal-logical-assignment-operators", { loose: true }],
+    ["@babel/plugin-proposal-private-property-in-object", { loose: true }],
+    ["@babel/plugin-proposal-private-methods", { loose: true }],
   ];
 
   return {

@@ -1,3 +1,7 @@
+diff --git a/node_modules/@internationalized/number/.DS_Store b/node_modules/@internationalized/number/.DS_Store
+new file mode 100644
+index 0000000..2353a3d
+Binary files /dev/null and b/node_modules/@internationalized/number/.DS_Store differ
 diff --git a/node_modules/@internationalized/number/dist/main.js b/node_modules/@internationalized/number/dist/main.js
 index 8b8facd..7ca3272 100644
 --- a/node_modules/@internationalized/number/dist/main.js

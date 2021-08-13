@@ -200,9 +200,9 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 | Name            | Type                                                                                                                                                                                                  | Description                                                                                                                                                  |
 | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`goto`**      | <code title="&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;previousYear&#34;">&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;p...</code> |                                                                                                                                                              |
 | **`disabled`**  | <code>boolean \| undefined</code>                                                                                                                                                                     | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code>                                                                                                                                                                     | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`goto`**      | <code title="&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;previousYear&#34;">&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;p...</code> |                                                                                                                                                              |
 
 <details><summary>4 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
@@ -240,15 +240,16 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 | Name            | Type                              | Description                                                                                                                                                  |
 | :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
 | **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
+| **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
 
 <details><summary>11 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
 | Name                  | Type                                                           | Description                                     |
 | :-------------------- | :------------------------------------------------------------- | :---------------------------------------------- |
+| **`anchorDate`**      | <code>Date \| null</code>                                      |                                                 |
 | **`dateValue`**       | <code>Date</code>                                              | Selected Date value                             |
 | **`isDisabled`**      | <code>boolean</code>                                           | `true` if the calendar is disabled              |
 | **`isRangeCalendar`** | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar |
@@ -259,7 +260,6 @@ Also we can customize and style the ranges with CSS attribute selectors
 | **`minDate`**         | <code>Date \| undefined</code>                                 | Minimum allowed Date value                      |
 | **`maxDate`**         | <code>Date \| undefined</code>                                 | Maximum allowed Date value                      |
 | **`isFocused`**       | <code>boolean</code>                                           | `true` if the calendar is focused               |
-| **`anchorDate`**      | <code>Date \| null</code>                                      |                                                 |
 
 </details>
 
