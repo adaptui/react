@@ -4,14 +4,19 @@
  * to work with Reakit System
  */
 import * as React from "react";
-import { format, isSameDay } from "date-fns";
 import { InputBase, RangeValue } from "@react-types/shared";
 
 import { makeRange } from "./helpers";
 import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
 import { CalendarActions, CalendarState } from "./CalendarState";
-import { parseRangeDate, stringifyDate, useControllableState } from "../utils";
+import {
+  format,
+  isSameDay,
+  parseRangeDate,
+  stringifyDate,
+  useControllableState,
+} from "../utils";
 
 export function useRangeCalendarState(
   props: RangeCalendarInitialState = {},
@@ -56,15 +61,15 @@ export function useRangeCalendarState(
       announce(
         `Selected range, from ${format(
           highlightedRange.start,
-          "do MMM yyyy",
-        )} to ${format(highlightedRange.start, "do MMM yyyy")}`,
+          "Do MMM YYYY",
+        )} to ${format(highlightedRange.start, "Do MMM YYYY")}`,
       );
     } else {
       announce(
         `Selected range, from ${format(
           highlightedRange.start,
-          "do MMM yyyy",
-        )} to ${format(highlightedRange.end, "do MMM yyyy")}`,
+          "Do MMM YYYY",
+        )} to ${format(highlightedRange.end, "Do MMM YYYY")}`,
       );
     }
   }, [highlightedRange]);
@@ -76,7 +81,7 @@ export function useRangeCalendarState(
 
     if (!anchorDate) {
       setAnchorDate(date);
-      announce(`Starting range from ${format(date, "do MMM yyyy")}`);
+      announce(`Starting range from ${format(date, "Do MMM YYYY")}`);
     } else {
       setValue(makeRange(anchorDate, date));
       announceRange();

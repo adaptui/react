@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from "../utils";
 import { isString } from "@chakra-ui/utils";
 
 import { ColumnType } from "./TimePickerColumnState";

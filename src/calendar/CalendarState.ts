@@ -9,7 +9,6 @@ import {
   addMonths,
   addWeeks,
   addYears,
-  closestTo,
   endOfMonth,
   format,
   getDaysInMonth,
@@ -20,19 +19,18 @@ import {
   subMonths,
   subWeeks,
   subYears,
-} from "date-fns";
+  parseDate,
+  stringifyDate,
+  isInvalidDateRange,
+  useControllableState,
+} from "../utils";
+import { closestTo } from "../utils";
 import * as React from "react";
 import { unstable_useId as useId } from "reakit";
 import { useUpdateEffect } from "@chakra-ui/hooks";
 import { useDateFormatter } from "@react-aria/i18n";
 import { InputBase } from "@react-types/shared";
 
-import {
-  parseDate,
-  stringifyDate,
-  isInvalidDateRange,
-  useControllableState,
-} from "../utils";
 import { announce } from "../utils/LiveAnnouncer";
 import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
 
@@ -77,7 +75,7 @@ export function useCalendarState(
   const weekStart = useWeekStart();
   const weekDays = useWeekDays(weekStart);
 
-  let monthStartsAt = (startOfMonth(currentMonth).getDay() - weekStart) % 7;
+  let monthStartsAt = (startOfMonth(currentMonth).get("day") - weekStart) % 7;
   if (monthStartsAt < 0) {
     monthStartsAt += 7;
   }
@@ -103,7 +101,7 @@ export function useCalendarState(
 
         const nextDate = closestTo(date, [minValue, maxValue]);
         if (!isSameMonth(nextDate, currentMonth)) {
-          setCurrentMonth(startOfMonth(nextDate));
+          setCurrentMonth(startOfMonth(nextDate).toDate());
         }
         setFocusedDate(nextDate);
       }
@@ -112,7 +110,7 @@ export function useCalendarState(
     }
 
     if (!isSameMonth(date, currentMonth)) {
-      setCurrentMonth(startOfMonth(date));
+      setCurrentMonth(startOfMonth(date).toDate());
     }
 
     setFocusedDate(date);
@@ -181,10 +179,10 @@ export function useCalendarState(
       focusCell(subMonths(focusedDate, 1));
     },
     focusStartOfMonth() {
-      focusCell(startOfMonth(focusedDate));
+      focusCell(startOfMonth(focusedDate).toDate());
     },
     focusEndOfMonth() {
-      focusCell(endOfMonth(startOfDay(focusedDate)));
+      focusCell(endOfMonth(startOfDay(focusedDate).toDate()).toDate());
     },
     focusNextYear() {
       focusCell(addYears(focusedDate, 1));

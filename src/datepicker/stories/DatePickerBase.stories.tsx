@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addWeeks, subWeeks, format, addDays } from "date-fns";
 
 import {
   datePickerBaseTemplate,
@@ -13,6 +12,12 @@ import {
 import "./DatePickerBase.css";
 import { App as DatePicker } from "./DatePickerBase.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import {
+  addDays,
+  addWeeks,
+  format,
+  subWeeks,
+} from "@renderlesskit/react/utils";
 
 export default {
   component: DatePicker,
@@ -36,10 +41,10 @@ export default {
 } as Meta;
 
 const Base: Story = args => {
-  args.value &&= format(new Date(args.value), "yyyy-MM-dd");
-  args.defaultValue &&= format(new Date(args.defaultValue), "yyyy-MM-dd");
-  args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
-  args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
+  args.value &&= format(new Date(args.value), "YYYY-MM-DD");
+  args.defaultValue &&= format(new Date(args.defaultValue), "YYYY-MM-DD");
+  args.minValue &&= format(new Date(args.minValue), "YYYY-MM-DD");
+  args.maxValue &&= format(new Date(args.maxValue), "YYYY-MM-DD");
 
   const [{ value }, updateArgs] = useArgs();
 
@@ -47,7 +52,7 @@ const Base: Story = args => {
     <DatePicker
       value={value}
       onChange={date =>
-        updateArgs({ value: format(new Date(date), "yyyy-MM-dd") })
+        updateArgs({ value: format(new Date(date), "YYYY-MM-DD") })
       }
       {...args}
     />

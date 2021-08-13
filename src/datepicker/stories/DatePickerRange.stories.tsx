@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { addDays, format, subDays, addWeeks, subWeeks } from "date-fns";
 
 import {
   datePickerRangeTemplate,
@@ -13,6 +12,13 @@ import {
 import "./DatePickerRange.css";
 import { App as DateRangePicker } from "./DatePickerRange.component";
 import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import {
+  addDays,
+  addWeeks,
+  format,
+  subDays,
+  subWeeks,
+} from "@renderlesskit/react/utils";
 
 export default {
   title: "DatePicker/Range",
@@ -45,16 +51,16 @@ export default {
 
 const Base: Story = args => {
   args.value = {
-    start: args.start && format(new Date(args.start), "yyyy-MM-dd"),
-    end: args.end && format(new Date(args.end), "yyyy-MM-dd"),
+    start: args.start && format(new Date(args.start), "YYYY-MM-DD"),
+    end: args.end && format(new Date(args.end), "YYYY-MM-DD"),
   };
   args.defaultValue = {
     start:
-      args.defaultStart && format(new Date(args.defaultStart), "yyyy-MM-dd"),
-    end: args.defaultEnd && format(new Date(args.defaultEnd), "yyyy-MM-dd"),
+      args.defaultStart && format(new Date(args.defaultStart), "YYYY-MM-DD"),
+    end: args.defaultEnd && format(new Date(args.defaultEnd), "YYYY-MM-DD"),
   };
-  args.minValue &&= format(new Date(args.minValue), "yyyy-MM-dd");
-  args.maxValue &&= format(new Date(args.maxValue), "yyyy-MM-dd");
+  args.minValue &&= format(new Date(args.minValue), "YYYY-MM-DD");
+  args.maxValue &&= format(new Date(args.maxValue), "YYYY-MM-DD");
 
   const [argProps, updateArgs] = useArgs();
 
@@ -63,8 +69,8 @@ const Base: Story = args => {
       value={{ start: argProps["start"], end: argProps["nd"] }}
       onChange={date => {
         updateArgs({
-          start: format(new Date(date.start), "yyyy-MM-dd"),
-          end: format(new Date(date.end), "yyyy-MM-dd"),
+          start: format(new Date(date.start), "YYYY-MM-DD"),
+          end: format(new Date(date.end), "YYYY-MM-DD"),
         });
       }}
       {...args}
@@ -117,10 +123,10 @@ ControlledStory.args = {
 
 export const ControlledInput = () => {
   const [start, setStart] = React.useState(
-    format(subDays(new Date(), 1), "yyyy-MM-dd"),
+    format(subDays(new Date(), 1), "YYYY-MM-DD"),
   );
   const [end, setEnd] = React.useState(
-    format(addDays(new Date(), 1), "yyyy-MM-dd"),
+    format(addDays(new Date(), 1), "YYYY-MM-DD"),
   );
 
   return (

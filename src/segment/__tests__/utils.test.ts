@@ -5,36 +5,42 @@ describe("Segment Utils", () => {
   test("getSegmentLimits", () => {
     MockDate.set(new Date("2020-02-01T11:30:00.000Z"));
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "month", {})).toEqual({
       value: 2,
       minValue: 1,
       maxValue: 12,
     });
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "year", {})).toEqual({
       value: 2020,
       minValue: 1,
       maxValue: 9999,
     });
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "day", {})).toEqual({
       value: 1,
       minValue: 1,
       maxValue: 29,
     });
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "dayPeriod", {})).toEqual({
       value: 12,
       minValue: 0,
       maxValue: 12,
     });
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "minute", {})).toEqual({
       value: 0,
       minValue: 0,
       maxValue: 59,
     });
 
+    // @ts-ignore
     expect(getSegmentLimits(new Date(), "second", {})).toEqual({
       value: 0,
       minValue: 0,
