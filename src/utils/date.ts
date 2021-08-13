@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { parse } from "date-fns";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 
 import { RangeValue } from "@react-types/shared";
@@ -8,12 +9,12 @@ dayjs.extend(advancedFormat);
 export function parseDate(dateValue: string | undefined) {
   if (dateValue == null) return;
 
-  const parsedDate = dayjs(dateValue, "YYYY-MM-DD", true);
+  const parsedDate = parse(dateValue, "yyyyyy-MM-dd", new Date());
 
   // Check for Invalid Date
-  if (!parsedDate.isValid()) return;
-  parsedDate.set("hour", new Date().getHours());
-  return parsedDate.toDate();
+  if (isNaN(+parsedDate)) return;
+  parsedDate.setHours(new Date().getHours());
+  return parsedDate;
 }
 
 export const parseRangeDate = (
@@ -127,9 +128,9 @@ export const format = (date: Date, fmt: string) => {
 };
 
 export function closestTo(
-  dirtyDateToCompare: string,
-  dirtyDatesArray: string[],
-) {
+  dirtyDateToCompare: Date | number,
+  dirtyDatesArray: (Date | number)[],
+): Date {
   let dateToCompare = dayjs(dirtyDateToCompare);
 
   if (!dateToCompare.isValid()) {
