@@ -28,6 +28,7 @@ const reducer = <T extends DefaultToast>(
         ),
       };
 
+    // Update toast by finding field value
     case ActionType.UPDATE_FIELD_TOAST:
       return {
         ...state,
