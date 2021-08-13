@@ -1,11 +1,16 @@
 {
   "hooks": {
-    "before:init": "npm test",
-    "before:bump": "npm run build"
+    "before:init": [
+      "if [ \"$(git log $(git describe --tags --abbrev=0)..HEAD)\" = \"\" ]; then exit 1; fi;",
+      "yarn test --updateSnapshot",
+      "yarn build"
+    ]
   },
   "git": {
+    "requireBranch": "main",
     "commitMessage": "🚀 Release v${version}",
-    "commitArgs": ["--no-verify"]
+    "commitArgs": ["--no-verify", "-S"],
+    "tagArgs": ["-s"]
   },
   "github": {
     "release": true,
