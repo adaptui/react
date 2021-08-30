@@ -89,19 +89,18 @@ function generateTemplateFile() {
     const componentPairs = components[componentName];
     componentPairs.forEach((component, index) => {
       const importString = generateImportString(component, index);
+      console.log(
+        chalk.green.bold(
+          `CREATED: ${startCase(componentName)} templates at ${chalk.cyanBright(
+            path.relative("./", templateFilePath),
+          )}`,
+        ),
+      );
 
       fs.appendFileSync(templateFilePath, importString, "UTF-8", {
         flags: "a+",
       });
     });
-
-    console.log(
-      chalk.green.bold(
-        `CREATED: ${startCase(componentName)} templates at ${chalk.cyanBright(
-          path.relative("./", templateFilePath),
-        )}`,
-      ),
-    );
   });
 }
 
