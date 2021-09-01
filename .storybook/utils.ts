@@ -1,6 +1,34 @@
 /* eslint-disable no-new-func */
 import { CodeSandboxTemplate } from "storybook-addon-preview";
 
+type CreateControlsOptions = {
+  unions?: string[];
+  ignore?: string[];
+  allow?: string[];
+};
+
+export const createControls = (options?: CreateControlsOptions) => {
+  try {
+    const ignoredControls = (options?.ignore || []).reduce((cur, key) => {
+      return {
+        ...cur,
+        [key]: { table: { disable: true } },
+      };
+    }, {});
+
+    const allowedControls = (options?.allow || []).reduce((cur, key) => {
+      return {
+        ...cur,
+        [key]: { table: { disable: true } },
+      };
+    }, {});
+
+    return { ...ignoredControls, ...allowedControls };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 interface Props {
   js?: string;
   ts?: string;

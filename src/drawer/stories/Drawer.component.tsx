@@ -8,7 +8,7 @@ import {
   DrawerBackdrop,
   DrawerCloseButton,
   DrawerDisclosure,
-} from "@renderlesskit/react";
+} from "../index";
 
 export const App = () => {
   const dialog = useDrawerState({ animated: true });

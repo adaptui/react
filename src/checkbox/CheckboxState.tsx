@@ -1,4 +1,4 @@
-import { useControllableState } from "@renderlesskit/react";
+import { useControllableState } from "../utils/index";
 
 export type CheckboxState = {
   /**
@@ -11,7 +11,7 @@ export type CheckboxState = {
 
 export type CheckboxActions = {
   /**
-   * Sets `state`.
+   * Sets `state` for the checkbox.
    */
   setState: React.Dispatch<React.SetStateAction<CheckboxState["state"]>>;
 };
@@ -47,14 +47,11 @@ export function useCheckboxState(
     onStateChange,
   } = props;
 
-  console.log("%cstateProp", "color: #00b300", stateProp);
-
   const [state, setState] = useControllableState({
     defaultValue: defaultState,
     value: stateProp,
     onChange: onStateChange,
   });
-  console.log("%cstate", "color: #d90000", state);
 
   return { state, setState };
 }

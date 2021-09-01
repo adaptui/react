@@ -1,5 +1,20 @@
 // Automatically generated
-const NUMBER_INPUT_STATE_KEYS = [
+export const USE_NUMBERINPUT_STATE_KEYS = [
+  "isDisabled",
+  "isReadOnly",
+  "value",
+  "min",
+  "max",
+  "step",
+  "keepWithinRange",
+  "precision",
+  "isInvalid",
+  "isRequired",
+  "defaultValue",
+  "onChange",
+  "focusInputOnChange",
+] as const;
+export const NUMBER_INPUT_STATE_KEYS = [
   "value",
   "min",
   "max",

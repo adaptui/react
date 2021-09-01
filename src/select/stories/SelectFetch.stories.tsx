@@ -8,7 +8,7 @@ import {
   selectFetchTemplateJs,
 } from "./templates";
 import { App as SelectFetch } from "./SelectFetch.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectFetch,

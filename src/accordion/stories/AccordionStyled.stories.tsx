@@ -10,7 +10,7 @@ import {
 import "./AccordionStyled.css";
 import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionStyled.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export const Default: React.FC<
   Omit<Partial<AccordionInitialState>, keyof CompositeState>

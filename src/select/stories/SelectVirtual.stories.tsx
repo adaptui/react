@@ -10,7 +10,7 @@
 //   selectVirtualTemplateJs,
 // } from "./templates";
 // import { App as SelectVirtual } from "./SelectVirtual.component";
-// import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+// import { createPreviewTabs } from "../../../.storybook/utils";
 
 // export default {
 //   component: SelectVirtual,

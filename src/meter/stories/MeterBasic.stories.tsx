@@ -8,7 +8,7 @@ import {
 } from "./templates";
 import "./MeterBasic.css";
 import { App as Meter } from "./MeterBasic.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Meter,

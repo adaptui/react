@@ -4,7 +4,7 @@ import { CompositeState } from "reakit/ts";
 
 import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionMulti.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import { accordionMultiTemplate, accordionMultiTemplateJs } from "./templates";
 
 export const Default: React.FC<

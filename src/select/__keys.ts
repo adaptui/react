@@ -1,8 +1,8 @@
 // Automatically generated
-const SELECT_LIST_STATE_KEYS = [
+export const USE_SELECT_BASE_STATE_KEYS = ["values", "selectedValue"] as const;
+export const USE_SELECT_LIST_STATE_KEYS = [
+  ...USE_SELECT_BASE_STATE_KEYS,
   "baseId",
-  "unstable_idCountRef",
-  "unstable_virtual",
   "rtl",
   "orientation",
   "currentId",
@@ -10,14 +10,17 @@ const SELECT_LIST_STATE_KEYS = [
   "wrap",
   "shift",
   "unstable_includesBaseElement",
+] as const;
+export const SELECT_LIST_STATE_KEYS = [
+  ...USE_SELECT_LIST_STATE_KEYS,
+  "unstable_idCountRef",
+  "unstable_virtual",
   "unstable_hasActiveWidget",
   "groups",
   "unstable_moves",
   "menuRole",
   "items",
-  "values",
   "valuesById",
-  "selectedValue",
   "currentValue",
   "selectedId",
   "setBaseId",
@@ -45,8 +48,20 @@ const SELECT_LIST_STATE_KEYS = [
   "registerItem",
   "setSelectedValue",
 ] as const;
-const SELECT_BASE_STATE_KEYS = SELECT_LIST_STATE_KEYS;
-const SELECT_POPOVER_STATE_KEYS = [
+export const SELECT_BASE_STATE_KEYS = SELECT_LIST_STATE_KEYS;
+export const USE_SELECT_POPOVER_STATE_KEYS = [
+  "baseId",
+  "visible",
+  "animated",
+  "modal",
+  "placement",
+  "unstable_fixed",
+  "unstable_flip",
+  "unstable_offset",
+  "gutter",
+  "unstable_preventOverflow",
+] as const;
+export const SELECT_POPOVER_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "visible",
@@ -72,9 +87,59 @@ const SELECT_POPOVER_STATE_KEYS = [
   "setModal",
   "place",
 ] as const;
-const SELECT_STATE_KEYS = [
-  ...SELECT_BASE_STATE_KEYS,
+export const USE_SELECT_STATE_KEYS = [
+  ...USE_SELECT_BASE_STATE_KEYS,
+  ...USE_SELECT_POPOVER_STATE_KEYS,
+  "rtl",
+  "orientation",
+  "currentId",
+  "loop",
+  "wrap",
+  "shift",
+  "unstable_includesBaseElement",
+] as const;
+export const SELECT_STATE_KEYS = [
+  ...USE_SELECT_BASE_STATE_KEYS,
   ...SELECT_POPOVER_STATE_KEYS,
+  "unstable_virtual",
+  "rtl",
+  "orientation",
+  "currentId",
+  "loop",
+  "wrap",
+  "shift",
+  "unstable_includesBaseElement",
+  "unstable_hasActiveWidget",
+  "groups",
+  "unstable_moves",
+  "menuRole",
+  "items",
+  "valuesById",
+  "currentValue",
+  "selectedId",
+  "unregisterItem",
+  "registerGroup",
+  "unregisterGroup",
+  "move",
+  "next",
+  "previous",
+  "up",
+  "down",
+  "first",
+  "last",
+  "sort",
+  "unstable_setVirtual",
+  "setRTL",
+  "setOrientation",
+  "setCurrentId",
+  "setLoop",
+  "setWrap",
+  "setShift",
+  "reset",
+  "unstable_setIncludesBaseElement",
+  "unstable_setHasActiveWidget",
+  "registerItem",
+  "setSelectedValue",
 ] as const;
 export const SELECT_KEYS = [...SELECT_STATE_KEYS, "hideOnEsc"] as const;
 export const SELECT_ITEM_KEYS = [...SELECT_STATE_KEYS, "value"] as const;

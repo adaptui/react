@@ -10,7 +10,7 @@ import {
 } from "./templates";
 import "./Toast.css";
 import { App as Toast } from "./ToastCSSAnimated.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Toast,

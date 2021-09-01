@@ -2,7 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { App as Select } from "./SelectStyled.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import { selectStyledTemplate, selectStyledTemplateJs } from "./templates";
 
 export default {

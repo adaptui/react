@@ -10,7 +10,7 @@ import {
   selectMultipleTemplateJs,
 } from "./templates";
 import { App as SelectMultiple } from "./SelectMultiple.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectMultiple,

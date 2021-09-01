@@ -1,5 +1,13 @@
 // Automatically generated
-const PAGINATION_STATE_KEYS = [
+export const USE_PAGINATION_STATE_KEYS = [
+  "defaultPage",
+  "page",
+  "onChange",
+  "count",
+  "boundaryCount",
+  "siblingCount",
+] as const;
+export const PAGINATION_STATE_KEYS = [
   "currentPage",
   "pages",
   "isAtFirstPage",

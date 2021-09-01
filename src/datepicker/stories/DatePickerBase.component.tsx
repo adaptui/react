@@ -7,6 +7,9 @@ import {
   DatePickerTrigger,
   useDatePickerState,
   DatePickerSegmentField,
+  DatePickerInitialState,
+} from "../index";
+import {
   Calendar as CalendarWrapper,
   CalendarButton,
   CalendarCell,
@@ -15,8 +18,7 @@ import {
   CalendarHeader,
   CalendarWeekTitle,
   CalendarStateReturn,
-  DatePickerInitialState,
-} from "@renderlesskit/react";
+} from "../../calendar/index";
 
 import {
   CalendarIcon,

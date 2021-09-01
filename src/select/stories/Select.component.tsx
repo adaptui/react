@@ -6,7 +6,7 @@ import {
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "@renderlesskit/react";
+} from "../index";
 
 export const App: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });

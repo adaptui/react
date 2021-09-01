@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { App as Meter } from "./MeterStyled.component";
 import { meterStyledTemplate, meterStyledTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Meter,

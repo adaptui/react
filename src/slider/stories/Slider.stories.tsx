@@ -8,7 +8,7 @@ import {
   sliderTemplateJs,
   sliderCssTemplate,
 } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Slider,

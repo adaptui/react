@@ -11,13 +11,8 @@ import {
 } from "./templates";
 import "./DatePickerBase.css";
 import { App as DatePicker } from "./DatePickerBase.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import {
-  addDays,
-  addWeeks,
-  format,
-  subWeeks,
-} from "@renderlesskit/react/utils";
+import { createPreviewTabs } from "../../../.storybook/utils";
+import { addDays, addWeeks, format, subWeeks } from "../../utils/index";
 
 export default {
   component: DatePicker,

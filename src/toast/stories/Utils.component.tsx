@@ -6,7 +6,7 @@ import {
   createToastStore,
   DefaultToastOptions,
   useToastTimer,
-} from "@renderlesskit/react";
+} from "../index";
 
 export interface Toast extends TimerToast {
   content?: Content;

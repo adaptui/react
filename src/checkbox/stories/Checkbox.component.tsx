@@ -1,17 +1,25 @@
 import * as React from "react";
 
 import {
-  Checkbox,
-  CheckboxProps,
+  Checkbox as RenderlesskitCheckbox,
+  CheckboxProps as RenderlesskitCheckboxProps,
   useCheckboxState,
-} from "@renderlesskit/react";
+  CheckboxInitialState,
+} from "../index";
+import { splitStateProps } from "../../utils/index";
+import { USE_CHECKBOX_STATE_KEYS } from "../__keys";
 
-export interface AppProps extends CheckboxProps {}
+export type CheckboxProps = RenderlesskitCheckboxProps &
+  CheckboxInitialState & {};
 
-export const App: React.FC<AppProps> = props => {
-  const state = useCheckboxState(props);
+export const Checkbox: React.FC<CheckboxProps> = props => {
+  const [stateProps, checkboxProps] = splitStateProps<
+    CheckboxInitialState,
+    CheckboxProps
+  >(props, USE_CHECKBOX_STATE_KEYS);
+  const state = useCheckboxState(stateProps);
 
-  return <Checkbox {...state} />;
+  return <RenderlesskitCheckbox {...state} {...checkboxProps} />;
 };
 
-export default App;
+export default Checkbox;

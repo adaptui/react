@@ -10,7 +10,7 @@ import {
   selectControlledTemplateJs,
 } from "./templates";
 import { App as SelectControlled } from "./SelectControlled.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectControlled,

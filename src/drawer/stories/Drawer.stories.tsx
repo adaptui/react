@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { App as Drawer } from "./Drawer.component";
 import { drawerTemplate, drawerTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   title: "Drawer",

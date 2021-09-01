@@ -21,10 +21,6 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "sourceMap": true,
     "declaration": true,
-    "declarationDir": "dist/types",
-    "paths": {
-      "@renderlesskit/react": ["src"],
-      "@renderlesskit/react/*": ["src/*"]
-    }
+    "declarationDir": "dist/types"
   }
 }

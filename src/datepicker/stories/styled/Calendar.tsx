@@ -8,7 +8,7 @@ import {
   CalendarCellButton,
   CalendarStateReturn,
   Calendar as CalendarWrapper,
-} from "@renderlesskit/react";
+} from "../../../calendar/index";
 
 import {
   ChevronLeft,

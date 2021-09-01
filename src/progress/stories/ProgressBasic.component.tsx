@@ -1,10 +1,6 @@
 import * as React from "react";
 
-import {
-  Progress,
-  useProgressState,
-  ProgressInitialState,
-} from "@renderlesskit/react";
+import { Progress, useProgressState, ProgressInitialState } from "../index";
 
 export const App: React.FC<ProgressInitialState> = props => {
   const state = useProgressState(props);

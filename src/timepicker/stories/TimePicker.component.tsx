@@ -10,7 +10,7 @@ import {
   TimePickerColumnValue,
   TimePickerSegmentField,
   TimePickerStateProps,
-} from "@renderlesskit/react";
+} from "../index";
 
 import { CalendarIcon } from "./Utils.component";
 

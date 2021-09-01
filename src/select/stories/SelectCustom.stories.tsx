@@ -10,7 +10,7 @@ import {
   selectCustomTemplateJs,
 } from "./templates";
 import { App as SelectCustom } from "./SelectCustom.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectCustom,

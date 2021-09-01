@@ -11,14 +11,14 @@ import {
 } from "./templates";
 import "./DatePickerRange.css";
 import { App as DateRangePicker } from "./DatePickerRange.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import {
   addDays,
   addWeeks,
   format,
   subDays,
   subWeeks,
-} from "@renderlesskit/react/utils";
+} from "../../utils/index";
 
 export default {
   title: "DatePicker/Range",

@@ -135,6 +135,17 @@ function isStateReturnDeclaration(node) {
 /**
  * @param {import("ts-morph").Node<Node>} node
  */
+function isInitialStateDeclaration(node) {
+  const kindName = node.getKindName();
+  const escapedName = getEscapedName(node);
+  return (
+    kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName)
+  );
+}
+
+/**
+ * @param {import("ts-morph").Node<Node>} node
+ */
 function isOptionsDeclaration(node) {
   const kindName = node.getKindName();
   const escapedName = getEscapedName(node);
@@ -296,10 +307,7 @@ function reduceKeys(acc, [moduleName, array]) {
 
   const finalString = `${declaration} = ${value};\n`;
 
-  if (!moduleName.endsWith("State")) {
-    return `${acc}export ${finalString}`;
-  }
-  return `${acc}${finalString}`;
+  return `${acc}export ${finalString}`;
 }
 
 /**
@@ -338,6 +346,13 @@ function makeKeys(rootPath) {
           } else {
             keys[getModuleName(node)] = [...stateKeys, ...props];
           }
+        }
+        if (isInitialStateDeclaration(node)) {
+          const literalNode = isOptionsDeclaration(node)
+            ? getLiteralNode(node)
+            : node;
+          const props = literalNode ? getPropsNames(literalNode, true) : [];
+          keys[getModuleName(node)] = props;
         }
       });
     });

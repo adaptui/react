@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { App as SingleSlider } from "./components/SingleSlider.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SingleSlider,

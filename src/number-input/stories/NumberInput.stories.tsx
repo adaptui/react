@@ -10,7 +10,7 @@ import {
 } from "../index";
 import { App as NumberInput } from "./NumberInput.component";
 import { numberInputTemplate, numberInputTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: NumberInput,

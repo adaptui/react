@@ -1,5 +1,16 @@
 // Automatically generated
-const CALENDAR_STATE_KEYS = [
+export const USE_CALENDAR_STATE_KEYS = [
+  "value",
+  "defaultValue",
+  "onChange",
+  "minValue",
+  "maxValue",
+  "isDisabled",
+  "isReadOnly",
+  "autoFocus",
+  "id",
+] as const;
+export const CALENDAR_STATE_KEYS = [
   "calendarId",
   "dateValue",
   "minDate",
@@ -33,7 +44,8 @@ const CALENDAR_STATE_KEYS = [
   "selectFocusedDate",
   "selectDate",
 ] as const;
-const RANGE_CALENDAR_STATE_KEYS = [
+export const USE_RANGE_CALENDAR_STATE_KEYS = USE_CALENDAR_STATE_KEYS;
+export const RANGE_CALENDAR_STATE_KEYS = [
   ...CALENDAR_STATE_KEYS,
   "dateRangeValue",
   "anchorDate",

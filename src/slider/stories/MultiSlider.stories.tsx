@@ -8,7 +8,7 @@ import {
   sliderCssTemplate,
 } from "./templates";
 import { App as MultiSlider } from "./components/MultiSlider.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: MultiSlider,

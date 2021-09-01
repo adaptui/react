@@ -6,7 +6,7 @@ import {
   NumberinputInitialState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
-} from "@renderlesskit/react";
+} from "../index";
 
 export interface AppProps extends NumberinputInitialState {
   /**

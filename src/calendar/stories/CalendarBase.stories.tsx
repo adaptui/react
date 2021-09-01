@@ -11,9 +11,9 @@ import {
   utilsTemplate,
 } from "./templates";
 import { App as Calendar } from "./CalendarBase.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import { format } from "util";
-import { addWeeks } from "@renderlesskit/react/utils";
+import { addWeeks } from "../../utils/index";
 
 export default {
   component: Calendar,

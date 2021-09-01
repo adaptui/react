@@ -8,7 +8,7 @@ import {
 } from "./templates";
 import "./Slider.css";
 import { App as RangeSlider } from "./components/RangeSlider.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: RangeSlider,

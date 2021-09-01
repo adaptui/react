@@ -8,7 +8,7 @@ import {
 } from "./templates";
 import "./ProgressBasic.css";
 import { App as Progress } from "./ProgressBasic.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Progress,

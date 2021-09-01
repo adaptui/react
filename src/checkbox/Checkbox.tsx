@@ -81,12 +81,12 @@ export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
 
     const onChange = React.useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("%cevent", "color: #1d5673", event);
         const element = event.currentTarget;
 
         if (disabled) {
           event.stopPropagation();
           event.preventDefault();
+
           return;
         }
 
@@ -103,7 +103,6 @@ export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
         if (!setState) return;
 
         if (typeof value === "undefined") {
-          console.log("%cchecked", "color: #731d1d", checked);
           setState(!checked);
         } else {
           const stateProp = Array.isArray(state) ? state : [];

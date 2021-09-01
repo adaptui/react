@@ -8,7 +8,7 @@ import {
 } from "./templates";
 import "./Segment.css";
 import { App as Segment } from "./Segment.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Segment,

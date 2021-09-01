@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionMultiState,
-} from "@renderlesskit/react";
+} from "../index";
 
 export function App(props: any) {
   const state = useAccordionMultiState(props);

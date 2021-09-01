@@ -3,13 +3,12 @@ import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
 
 import {
-  cx,
-  isNull,
   Progress,
   ProgressState,
   useProgressState,
   ProgressInitialState,
-} from "@renderlesskit/react";
+} from "../index";
+import { cx, isNull } from "../../utils/index";
 
 export interface AppProps extends ProgressInitialState {
   withLabel?: boolean;

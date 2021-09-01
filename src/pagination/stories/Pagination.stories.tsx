@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { paginationTemplate, paginationTemplateJs } from "./templates";
 import { App as Pagination } from "./Pagination.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Pagination,

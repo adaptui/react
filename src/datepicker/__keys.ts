@@ -1,5 +1,32 @@
 // Automatically generated
-const DATE_PICKER_STATE_KEYS = [
+export const USE_DATE_PICKER_STATE_KEYS = [
+  "value",
+  "defaultValue",
+  "onChange",
+  "minValue",
+  "maxValue",
+  "validationState",
+  "isRequired",
+  "baseId",
+  "visible",
+  "animated",
+  "modal",
+  "placement",
+  "unstable_fixed",
+  "unstable_flip",
+  "unstable_offset",
+  "gutter",
+  "unstable_preventOverflow",
+  "isDisabled",
+  "isReadOnly",
+  "pickerId",
+  "dialogId",
+  "segmentFocus",
+  "formatOptions",
+  "placeholderDate",
+  "autoFocus",
+] as const;
+export const DATE_PICKER_STATE_KEYS = [
   "calendar",
   "isDateRangePicker",
   "fieldValue",
@@ -83,7 +110,8 @@ const DATE_PICKER_STATE_KEYS = [
   "maxValue",
   "isRequired",
 ] as const;
-const DATE_RANGE_PICKER_STATE_KEYS = [
+export const USE_DATE_RANGE_PICKER_STATE_KEYS = USE_DATE_PICKER_STATE_KEYS;
+export const DATE_RANGE_PICKER_STATE_KEYS = [
   "startSegmentState",
   "endSegmentState",
   "calendar",

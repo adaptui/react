@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { App as Link } from "./Link.component";
 import { linkTemplate, linkTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Link,

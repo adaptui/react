@@ -1,19 +1,22 @@
 // Automatically generated
-const ACCORDION_BASE_STATE_KEYS = [
+export const USE_ACCORDION_BASE_STATE_KEYS = [
   "baseId",
-  "unstable_idCountRef",
   "unstable_virtual",
   "rtl",
   "orientation",
-  "items",
-  "groups",
   "currentId",
   "loop",
   "wrap",
   "shift",
+  "unstable_includesBaseElement",
+] as const;
+export const ACCORDION_BASE_STATE_KEYS = [
+  ...USE_ACCORDION_BASE_STATE_KEYS,
+  "unstable_idCountRef",
+  "items",
+  "groups",
   "unstable_moves",
   "unstable_hasActiveWidget",
-  "unstable_includesBaseElement",
   "panels",
   "setBaseId",
   "registerItem",
@@ -41,7 +44,15 @@ const ACCORDION_BASE_STATE_KEYS = [
   "registerPanel",
   "unregisterPanel",
 ] as const;
-const ACCORDION_MULTI_STATE_KEYS = [
+export const USE_ACCORDION_MULTI_STATE_KEYS = [
+  ...USE_ACCORDION_BASE_STATE_KEYS,
+  "manual",
+  "selectedIds",
+  "defaultSelectedIds",
+  "onSelectedIdsChange",
+  "shouldUpdate",
+] as const;
+export const ACCORDION_MULTI_STATE_KEYS = [
   ...ACCORDION_BASE_STATE_KEYS,
   "selectedIds",
   "allowToggle",
@@ -50,7 +61,16 @@ const ACCORDION_MULTI_STATE_KEYS = [
   "setSelectedIds",
   "select",
 ] as const;
-const ACCORDION_STATE_KEYS = [
+export const USE_ACCORDION_STATE_KEYS = [
+  ...USE_ACCORDION_BASE_STATE_KEYS,
+  "selectedId",
+  "manual",
+  "allowToggle",
+  "defaultSelectedId",
+  "onSelectedIdChange",
+  "shouldUpdate",
+] as const;
+export const ACCORDION_STATE_KEYS = [
   ...ACCORDION_BASE_STATE_KEYS,
   "selectedId",
   "allowToggle",

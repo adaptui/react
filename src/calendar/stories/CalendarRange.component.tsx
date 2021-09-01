@@ -10,7 +10,7 @@ import {
   CalendarWeekTitle,
   useRangeCalendarState,
   RangeCalendarInitialState,
-} from "@renderlesskit/react";
+} from "../index";
 
 import {
   ChevronLeft,

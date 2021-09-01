@@ -11,14 +11,14 @@ import {
   utilsTemplate,
 } from "./templates";
 import { App as RangeCalendar } from "./CalendarRange.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 import {
   addDays,
   addWeeks,
   format,
   subDays,
   subWeeks,
-} from "@renderlesskit/react/utils";
+} from "../../utils/index";
 
 export default {
   title: "Calendar/Range",

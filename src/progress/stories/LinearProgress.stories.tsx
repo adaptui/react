@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { App as Progress } from "./LinearProgress.component";
 import { linearProgressTemplate, linearProgressTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Progress,

@@ -10,7 +10,7 @@ import {
   timePickerCssTemplate,
 } from "./templates";
 import { App as TimePicker } from "./TimePicker.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: TimePicker,

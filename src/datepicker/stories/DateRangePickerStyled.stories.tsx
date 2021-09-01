@@ -3,7 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import "./tailwind/index.css";
 import { RangeDatePicker } from "./styled/RangeDatePicker.component";
-import { addWeeks } from "@renderlesskit/react/utils";
+import { addWeeks } from "../../utils/index";
 
 export default {
   component: RangeDatePicker,

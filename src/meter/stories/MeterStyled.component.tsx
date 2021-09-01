@@ -6,7 +6,7 @@ import {
   useMeterState,
   MeterStateReturn,
   MeterInitialState,
-} from "@renderlesskit/react";
+} from "../index";
 
 export interface AppProps extends MeterInitialState {
   /**

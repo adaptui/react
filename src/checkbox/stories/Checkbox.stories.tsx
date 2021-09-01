@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import {
-  App as Checkbox,
-  AppProps as CheckboxProps,
-} from "./Checkbox.component";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { Checkbox, CheckboxProps } from "./Checkbox.component";
 import { checkboxTemplate, checkboxTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
 
 export default {
   component: Checkbox,
@@ -18,6 +15,21 @@ export default {
       ts: checkboxTemplate,
     }),
   },
+  argTypes: createControls({
+    ignore: [
+      "unstable_system",
+      "unstable_clickOnEnter",
+      "unstable_clickOnSpace",
+      "wrapElement",
+      "focusable",
+      "as",
+      "checked",
+      "state",
+      "setState",
+      "onStateChange",
+      "value",
+    ],
+  }),
 } as Meta;
 
 const Base: Story<CheckboxProps> = args => <Checkbox {...args} />;

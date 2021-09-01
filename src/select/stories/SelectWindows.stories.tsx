@@ -10,7 +10,7 @@ import {
   selectWindowsTemplateJs,
 } from "./templates";
 import { App as SelectWindows } from "./SelectWindows.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectWindows,

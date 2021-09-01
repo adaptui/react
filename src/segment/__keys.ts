@@ -1,5 +1,12 @@
 // Automatically generated
-const SEGMENT_STATE_KEYS = [
+export const USE_SEGMENT_STATE_KEYS = [
+  "defaultValue",
+  "value",
+  "onChange",
+  "formatOptions",
+  "placeholderDate",
+] as const;
+export const SEGMENT_STATE_KEYS = [
   "fieldValue",
   "setFieldValue",
   "segments",

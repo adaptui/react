@@ -8,7 +8,7 @@ import {
   DatePicker as DatePickerWrapper,
   useDateRangePickerState,
   DateRangePickerInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
 import { Calendar, CalendarIcon } from "./Calendar";
 
 export const RangeDatePicker: React.FC<DateRangePickerInitialState> = props => {
