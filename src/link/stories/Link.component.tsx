@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Link } from "../index";
+import { Link } from "../../index";
 
 export interface AppProps {
   /**

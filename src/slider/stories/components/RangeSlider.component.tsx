@@ -7,7 +7,7 @@ import {
   SliderInput,
   useSliderState,
   SliderInitialState,
-} from "../../index";
+} from "../../../index";
 
 interface AppProps extends SliderInitialState {
   /**

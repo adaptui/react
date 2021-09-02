@@ -6,7 +6,7 @@ import {
   PickerBaseContent,
   usePickerBaseState,
   PickerBaseInitialState,
-} from "../index";
+} from "../../index";
 
 export const App: React.FC<PickerBaseInitialState> = props => {
   const state = usePickerBaseState(props);

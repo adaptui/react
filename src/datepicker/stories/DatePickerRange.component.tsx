@@ -8,7 +8,7 @@ import {
   DatePickerSegmentField,
   useDateRangePickerState,
   DateRangePickerInitialState,
-} from "../index";
+} from "../../index";
 import {
   Calendar,
   CalendarCell,

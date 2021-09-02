@@ -15,8 +15,8 @@ export type NumberInputIncrementButtonOptions = ButtonOptions &
 
 export type NumberInputIncrementButtonHTMLProps = ButtonHTMLProps;
 
-export type NumberInputIncrementButtonProps = NumberInputIncrementButtonOptions &
-  NumberInputIncrementButtonHTMLProps;
+export type NumberInputIncrementButtonProps =
+  NumberInputIncrementButtonOptions & NumberInputIncrementButtonHTMLProps;
 
 export const useNumberInputIncrementButton = createHook<
   NumberInputIncrementButtonOptions,

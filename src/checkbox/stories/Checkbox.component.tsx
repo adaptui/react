@@ -1,13 +1,13 @@
 import * as React from "react";
 
 import {
-  Checkbox as RenderlesskitCheckbox,
-  CheckboxProps as RenderlesskitCheckboxProps,
   useCheckboxState,
   CheckboxInitialState,
-} from "../index";
-import { splitStateProps } from "../../utils/index";
-import { USE_CHECKBOX_STATE_KEYS } from "../__keys";
+  Checkbox as RenderlesskitCheckbox,
+  CheckboxProps as RenderlesskitCheckboxProps,
+  USE_CHECKBOX_STATE_KEYS,
+  splitStateProps,
+} from "../../index";
 
 export type CheckboxProps = RenderlesskitCheckboxProps &
   CheckboxInitialState & {};

@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   AccordionTrigger,
   useAccordionMultiState,
-} from "../index";
+} from "../../index";
 
 export function App(props: any) {
   const state = useAccordionMultiState(props);

@@ -57,7 +57,7 @@ export function createToastStore<T extends DefaultToast, Content>(
 
     const createToast = React.useCallback(
       (content: Content, opts?: ToastOptions<T>) =>
-        (({
+        ({
           visible: false,
           reverseOrder: true,
           createdAt: Date.now(),
@@ -66,7 +66,7 @@ export function createToastStore<T extends DefaultToast, Content>(
           ...opts,
           content,
           id: opts?.id || genId(),
-        } as unknown) as T),
+        } as unknown as T),
       // Since its only a few object https://twitter.com/dan_abramov/status/1104414272753487872
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [JSON.stringify(rest)],

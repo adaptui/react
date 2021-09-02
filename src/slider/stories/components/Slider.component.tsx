@@ -7,7 +7,7 @@ import {
   SliderInput,
   useSliderState,
   SliderInitialState,
-} from "../../index";
+} from "../../../index";
 
 interface AppProps extends SliderInitialState {
   /**
@@ -36,12 +36,8 @@ export const App: React.FC<AppProps> = args => {
   const origin = originProp ?? args.min ?? 0;
 
   const state = useSliderState({ reversed: isReversed, ...rest });
-  const {
-    values,
-    getValuePercent,
-    getThumbValueLabel,
-    getThumbPercent,
-  } = state;
+  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
+    state;
 
   const isVertical = args.orientation === "vertical";
   const isRange = values.length === 2;

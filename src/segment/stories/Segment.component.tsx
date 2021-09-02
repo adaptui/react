@@ -5,7 +5,7 @@ import {
   SegmentField,
   useSegmentState,
   SegmentInitialState,
-} from "../index";
+} from "../../index";
 
 export const App: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);

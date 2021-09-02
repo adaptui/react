@@ -62,9 +62,10 @@ export const useAccordionTrigger = createHook<
       select?.(id);
     }, [id, select]);
 
-    const onClick = React.useCallback(() => handleSelection(), [
-      handleSelection,
-    ]);
+    const onClick = React.useCallback(
+      () => handleSelection(),
+      [handleSelection],
+    );
 
     const onFocus = React.useCallback(() => {
       if (manual) return;

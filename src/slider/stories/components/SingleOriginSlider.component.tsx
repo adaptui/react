@@ -7,7 +7,7 @@ import {
   SliderInput,
   useSliderState,
   SliderInitialState,
-} from "../../index";
+} from "../../../index";
 
 interface AppProps extends SliderInitialState {
   /**
@@ -26,12 +26,8 @@ export const App: React.FC<AppProps> = args => {
   const { label, ...rest } = args;
 
   const state = useSliderState(rest);
-  const {
-    values,
-    getValuePercent,
-    getThumbValueLabel,
-    getThumbPercent,
-  } = state;
+  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
+    state;
   const origin = 0;
 
   return (

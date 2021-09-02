@@ -10,7 +10,7 @@ import {
   TimePickerColumnValue,
   TimePickerSegmentField,
   TimePickerStateProps,
-} from "../index";
+} from "../../index";
 
 import { CalendarIcon } from "./Utils.component";
 

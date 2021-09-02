@@ -83,9 +83,8 @@ function getPublicFiles(rootPath, prefix = "") {
         isDirectory(path) && getPublicFiles(path, join(prefix, filename));
       return {
         ...(childFiles || {
-          [removeExt(normalizePath(join(prefix, filename)))]: normalizePath(
-            path,
-          ),
+          [removeExt(normalizePath(join(prefix, filename)))]:
+            normalizePath(path),
         }),
         ...acc,
       };

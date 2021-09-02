@@ -8,7 +8,7 @@ import {
   DatePicker as DatePickerWrapper,
   useDateRangePickerState,
   DateRangePickerInitialState,
-} from "../../index";
+} from "../../../index";
 import { Calendar, CalendarIcon } from "./Calendar";
 
 export const RangeDatePicker: React.FC<DateRangePickerInitialState> = props => {

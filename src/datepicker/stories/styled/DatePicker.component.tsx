@@ -8,7 +8,7 @@ import {
   DatePickerSegmentField,
   DatePickerInitialState,
   DatePicker as DatePickerWrapper,
-} from "../../index";
+} from "../../../index";
 import { Calendar, CalendarIcon } from "./Calendar";
 
 export const DatePicker: React.FC<DatePickerInitialState> = props => {

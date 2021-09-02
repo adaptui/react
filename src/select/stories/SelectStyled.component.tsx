@@ -6,7 +6,7 @@ import {
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "../index";
+} from "../../index";
 
 const people = [
   "Wade Cooper",

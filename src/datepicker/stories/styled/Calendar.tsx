@@ -8,7 +8,7 @@ import {
   CalendarCellButton,
   CalendarStateReturn,
   Calendar as CalendarWrapper,
-} from "../../../calendar/index";
+} from "../../../index";
 
 import {
   ChevronLeft,

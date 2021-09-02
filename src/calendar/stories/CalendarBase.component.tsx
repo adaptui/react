@@ -10,7 +10,7 @@ import {
   CalendarHeader,
   CalendarWeekTitle,
   CalendarInitialState,
-} from "../index";
+} from "../../index";
 
 import {
   ChevronLeft,

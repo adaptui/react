@@ -6,7 +6,7 @@ import {
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "../index";
+} from "../../index";
 import { fruits } from "./Utils.component";
 
 export const App: React.FC<SelectInitialState> = props => {

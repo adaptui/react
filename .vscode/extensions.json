@@ -3,6 +3,7 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "orta.vscode-jest",
-    "tlent.jest-snapshot-language-support"
+    "tlent.jest-snapshot-language-support",
+    "vespa-dev-works.jestrunit"
   ]
 }

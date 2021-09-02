@@ -6,7 +6,7 @@ import {
   NumberinputInitialState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
-} from "../index";
+} from "../../index";
 
 export interface AppProps extends NumberinputInitialState {
   /**

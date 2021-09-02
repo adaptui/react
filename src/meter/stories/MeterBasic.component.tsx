@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Meter, useMeterState, MeterInitialState } from "../index";
+import { Meter, useMeterState, MeterInitialState } from "../../index";
 
 export const App: React.FC<MeterInitialState> = props => {
   const state = useMeterState(props);

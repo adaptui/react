@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Breadcrumbs, BreadcrumbLink } from "../index";
+import { Breadcrumbs, BreadcrumbLink } from "../../index";
 
 export const App: React.FC = props => {
   return (

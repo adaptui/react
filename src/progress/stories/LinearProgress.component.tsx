@@ -7,7 +7,7 @@ import {
   ProgressState,
   useProgressState,
   ProgressInitialState,
-} from "../index";
+} from "../../index";
 import { cx, isNull } from "../../utils/index";
 
 export interface AppProps extends ProgressInitialState {

@@ -6,7 +6,7 @@ import {
   useMeterState,
   MeterStateReturn,
   MeterInitialState,
-} from "../index";
+} from "../../index";
 
 export interface AppProps extends MeterInitialState {
   /**

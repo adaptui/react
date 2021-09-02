@@ -8,7 +8,7 @@ import {
   useDatePickerState,
   DatePickerSegmentField,
   DatePickerInitialState,
-} from "../index";
+} from "../../index";
 import {
   Calendar as CalendarWrapper,
   CalendarButton,

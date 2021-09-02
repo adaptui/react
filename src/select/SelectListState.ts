@@ -14,9 +14,11 @@ import {
 export function useSelectListState(
   initialState: SealedInitialState<SelectListInitialState> = {},
 ): SelectListStateReturn {
-  const { orientation = "vertical", loop = true, ...sealed } = useSealedState(
-    initialState,
-  );
+  const {
+    orientation = "vertical",
+    loop = true,
+    ...sealed
+  } = useSealedState(initialState);
 
   const composite = useCompositeState({
     orientation,

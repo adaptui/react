@@ -8,13 +8,13 @@ const createToast = <T extends DefaultToast>(
   content: Content,
   opts?: ToastOptions<T>,
 ) =>
-  (({
+  ({
     content,
     visible: true,
     reverseOrder: true,
     animationDuration: 100,
     ...opts,
-  } as unknown) as T);
+  } as unknown as T);
 
 describe("Toast State Reducer", () => {
   it("should pass smoke test", () => {
