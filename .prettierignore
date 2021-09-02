@@ -11,6 +11,7 @@ yarn.lock
 storybook-static
 
 __js
+templates
 templates.ts
 docs
 CHANGELOG.md

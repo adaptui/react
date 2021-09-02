@@ -1,19 +1,17 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import js from "./templates/CheckboxJsx";
+import ts from "./templates/CheckboxTsx";
 import { Checkbox, CheckboxProps } from "./Checkbox.component";
-import { checkboxTemplate, checkboxTemplateJs } from "./templates";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Checkbox,
   title: "Checkbox",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: checkboxTemplateJs,
-      ts: checkboxTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts }),
   },
   argTypes: createControls({
     ignore: [

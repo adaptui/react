@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Meta } from "@storybook/react";
-import { CompositeState } from "reakit/ts";
+import { CompositeState } from "reakit";
 
+import js from "./templates/AccordionMultiJsx";
+import ts from "./templates/AccordionMultiTsx";
 import { AccordionInitialState } from "../AccordionState";
 import { App as Accordion } from "./AccordionMulti.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { accordionMultiTemplate, accordionMultiTemplateJs } from "./templates";
 
 export const Default: React.FC<
   Omit<AccordionInitialState, keyof CompositeState>
@@ -16,10 +17,7 @@ export default {
   title: "Accordion/Multi",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: accordionMultiTemplateJs,
-      ts: accordionMultiTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
