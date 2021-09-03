@@ -2,8 +2,8 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
-import js from "./templates/SingleSliderJsx";
-import ts from "./templates/SingleSliderTsx";
+import js from "./templates/SliderBasicJsx";
+import ts from "./templates/SliderBasicTsx";
 import css from "./templates/SliderBasicCss";
 import { App as SingleSlider } from "./SliderBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
