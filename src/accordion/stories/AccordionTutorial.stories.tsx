@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import js from "./templates/AccordionZAutoJsx";
-import ts from "./templates/AccordionZAutoTsx";
+import js from "./templates/AccordionTutorialJsx";
+import ts from "./templates/AccordionTutorialTsx";
 import Accordion from "./AccordionTutorial.component";
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Accordion,
-  title: "Accordion/zAuto",
+  title: "Accordion/Tutorial",
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts }),
