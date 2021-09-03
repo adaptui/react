@@ -100,7 +100,8 @@
     "dayjs": "^1.10.6",
     "reakit-system": "0.15.1",
     "reakit-utils": "0.15.1",
-    "reakit-warning": "^0.6.1"
+    "reakit-warning": "^0.6.1",
+    "storybook-addon-react-docgen": "^1.2.42"
   },
   "devDependencies": {
     "@babel/cli": "7.14.8",

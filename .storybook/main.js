@@ -1,10 +1,9 @@
-const path = require("path");
-
 module.exports = {
   core: { builder: "webpack5" },
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "storybook-addon-preview",
+    "storybook-addon-react-docgen",
     {
       name: "@storybook/addon-essentials",
       options: {

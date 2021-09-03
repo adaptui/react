@@ -1,38 +1,28 @@
-// import * as React from "react";
-// import { Meta, Story } from "@storybook/react";
+import * as React from "react";
+import { Meta, Story } from "@storybook/react";
 
-// import "./Select.css";
-// import {
-//   utilsTemplate,
-//   utilsTemplateJs,
-//   selectVirtualTemplate,
-//   selectCssTemplate,
-//   selectVirtualTemplateJs,
-// } from "./templates";
-// import { App as SelectVirtual } from "./SelectVirtual.component";
-// import { createPreviewTabs } from "../../../.storybook/utils";
+import "./SelectBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/SelectBasicCss";
+import js from "./templates/SelectVirtualJsx";
+import ts from "./templates/SelectVirtualTsx";
+import Select from "./SelectVirtual.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
-// export default {
-//   component: SelectVirtual,
-//   title: "Select/SelectVirtual",
-//   parameters: {
-//     preview: createPreviewTabs({
-//       js: selectVirtualTemplateJs,
-//       jsUtils: utilsTemplateJs,
-//       ts: selectVirtualTemplate,
-//       tsUtils: utilsTemplate,
-//       css: selectCssTemplate,
-//     }),
-//   },
-//   decorators: [
-//     Story => {
-//       document.body.id = "select";
-//       return <Story />;
-//     },
-//   ],
-// } as Meta;
+export default {
+  component: Select,
+  title: "Select/SelectVirtual",
+  parameters: {
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+  },
+  decorators: [
+    Story => {
+      document.body.id = "select-basic";
+      return <Story />;
+    },
+  ],
+} as Meta;
 
-// const Base: Story = args => <SelectVirtual {...args} />;
-
-// export const Default = Base.bind({});
-// Default.args = {};
+export const Default: Story = args => <Select {...args} />;
+Default.args = {};

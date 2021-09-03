@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Accordion,
+  Accordion as RenderlesskitAccordion,
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
@@ -9,22 +9,15 @@ import {
 } from "../../index";
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const App: React.FC<AccordionInitialState> = props => {
+export const Accordion: React.FC<AccordionInitialState> = props => {
   const state = useAccordionState(props);
 
-  // const initialProps = {
-  //   selectedId: "accordion2",
-  //   manual: false,
-  //   loop: true,
-  //   allowToggle: true,
-  //   allowMultiple: true,
-  //   selectedIds: [],
-  // };
-
-  // const state = useAccordionState(initialProps);
-
   return (
-    <Accordion {...state} id="accordionGroup" className="accordion">
+    <RenderlesskitAccordion
+      {...state}
+      id="accordionGroup"
+      className="accordion"
+    >
       <h2>
         <AccordionTrigger {...state} className="accordion-trigger">
           <span className="accordion-title">
@@ -149,8 +142,8 @@ export const App: React.FC<AccordionInitialState> = props => {
           </fieldset>
         </div>
       </AccordionPanel>
-    </Accordion>
+    </RenderlesskitAccordion>
   );
 };
 
-export default App;
+export default Accordion;

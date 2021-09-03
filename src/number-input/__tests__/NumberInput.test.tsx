@@ -16,7 +16,7 @@ import {
   NumberInputIncrementButton,
 } from "../index";
 import { repeat } from "../../utils/test-utils";
-import { AppProps } from "../stories/NumberInput.component";
+import { NumberInputProps } from "../stories/NumberInputBasic.component";
 
 beforeEach(() => {
   jest
@@ -29,7 +29,7 @@ afterEach(() => {
   (window.requestAnimationFrame as any).mockRestore();
 });
 
-const NumberInputComp = (props: AppProps) => {
+const NumberInputComp = (props: NumberInputProps) => {
   const state = useNumberInputState(props);
   const { clampValueOnBlur, allowMouseWheel } = props;
 

@@ -1,14 +1,18 @@
 import * as React from "react";
 
-import { Progress, useProgressState, ProgressInitialState } from "../../index";
+import {
+  Progress as RenderlesskitProgress,
+  useProgressState,
+  ProgressInitialState,
+} from "../../index";
 
-export const App: React.FC<ProgressInitialState> = props => {
+export const Progress: React.FC<ProgressInitialState> = props => {
   const state = useProgressState(props);
   const { value, percent, isIndeterminate } = state;
 
   return (
     <div className="progress">
-      <Progress
+      <RenderlesskitProgress
         {...state}
         value={value}
         aria-label="progress"
@@ -19,4 +23,4 @@ export const App: React.FC<ProgressInitialState> = props => {
   );
 };
 
-export default App;
+export default Progress;

@@ -1,49 +1,42 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Slider.css";
-import {
-  singleReversedSliderTemplate,
-  singleReversedSliderTemplateJs,
-  sliderCssTemplate,
-} from "./templates";
+import "./SliderBasic.css";
+import css from "./templates/SliderBasicCss";
+import js from "./templates/SingleReversedSliderJsx";
+import ts from "./templates/SingleReversedSliderTsx";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { App as SingleReversedSlider } from "./components/SingleReversedSlider.component";
+import { App as SingleReversedSlider } from "./SingleReversedSlider.component";
 
 export default {
   component: SingleReversedSlider,
   title: "Slider/SingleReversed",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: singleReversedSliderTemplateJs,
-      ts: singleReversedSliderTemplate,
-      css: sliderCssTemplate,
-    }),
+    parameters: { preview: createPreviewTabs({ js, ts, css }) },
   },
   decorators: [
     Story => {
-      document.body.id = "slider";
+      document.body.id = "slider-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <SingleReversedSlider {...args} />;
+export const Default: Story = args => <SingleReversedSlider {...args} />;
 
-export const Default = Base.bind({});
 Default.args = {
   reversed: true,
 };
 
-export const ThumbTip = Base.bind({});
+export const ThumbTip = Default.bind({});
 ThumbTip.args = {
   reversed: true,
   label: "Thumb Tipped",
   showTip: true,
 };
 
-export const MinMax = Base.bind({});
+export const MinMax = Default.bind({});
 MinMax.args = {
   reversed: true,
   label: "Min Max",
@@ -51,21 +44,21 @@ MinMax.args = {
   max: 80,
 };
 
-export const Step = Base.bind({});
+export const Step = Default.bind({});
 Step.args = {
   reversed: true,
   label: "Stepped",
   step: 10,
 };
 
-export const DefaultValue = Base.bind({});
+export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   reversed: true,
   label: "Default Valued",
   defaultValues: [80],
 };
 
-export const FormatOptions = Base.bind({});
+export const FormatOptions = Default.bind({});
 FormatOptions.args = {
   reversed: true,
   label: "Temperature Formatted",
@@ -76,7 +69,7 @@ FormatOptions.args = {
   },
 };
 
-export const Disabled = Base.bind({});
+export const Disabled = Default.bind({});
 Disabled.args = {
   reversed: true,
   label: "Disabled",

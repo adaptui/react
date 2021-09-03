@@ -88,21 +88,20 @@ export type AccordionActions = AccordionBaseActions & {
 export type AccordionInitialState = Pick<
   Partial<AccordionState>,
   "manual" | "allowToggle" | "selectedId"
-> &
-  AccordionBaseInitialState & {
-    /**
-     * The initial value to be used, in uncontrolled mode
-     * @default null
-     */
-    defaultSelectedId?: StringOrNull | (() => StringOrNull);
-    /**
-     * The callback fired when the value changes
-     */
-    onSelectedIdChange?: (value: StringOrNull) => void;
-    /**
-     * The function that determines if the state should be updated
-     */
-    shouldUpdate?: (prev: StringOrNull, next: StringOrNull) => boolean;
-  };
+> & {
+  /**
+   * The initial value to be used, in uncontrolled mode
+   * @default null
+   */
+  defaultSelectedId?: StringOrNull | (() => StringOrNull);
+  /**
+   * The callback fired when the value changes
+   */
+  onSelectedIdChange?: (value: StringOrNull) => void;
+  /**
+   * The function that determines if the state should be updated
+   */
+  shouldUpdate?: (prev: StringOrNull, next: StringOrNull) => boolean;
+} & AccordionBaseInitialState;
 
 export type AccordionStateReturn = AccordionState & AccordionActions;

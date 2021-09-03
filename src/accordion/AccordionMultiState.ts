@@ -89,24 +89,23 @@ export type AccordionMultiActions = AccordionBaseActions & {
 export type AccordionMultiInitialState = Pick<
   Partial<AccordionMultiState>,
   "manual" | "selectedIds"
-> &
-  AccordionBaseInitialState & {
-    /**
-     * The initial value to be used, in uncontrolled mode
-     * @default []
-     */
-    defaultSelectedIds?: string[] | (() => string[]);
+> & {
+  /**
+   * The initial value to be used, in uncontrolled mode
+   * @default []
+   */
+  defaultSelectedIds?: string[] | (() => string[]);
 
-    /**
-     * The callback fired when the value changes
-     */
-    onSelectedIdsChange?: (value: string[]) => void;
+  /**
+   * The callback fired when the value changes
+   */
+  onSelectedIdsChange?: (value: string[]) => void;
 
-    /**
-     * The function that determines if the state should be updated
-     */
-    shouldUpdate?: (prev: string[], next: string[]) => boolean;
-  };
+  /**
+   * The function that determines if the state should be updated
+   */
+  shouldUpdate?: (prev: string[], next: string[]) => boolean;
+} & AccordionBaseInitialState;
 
 export type AccordionMultiStateReturn = AccordionMultiState &
   AccordionMultiActions;

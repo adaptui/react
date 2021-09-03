@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
@@ -9,20 +9,20 @@ import {
 } from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });
 
   return (
     <>
       <h2>Hover over the button to open the options</h2>
-      <Select
+      <RenderlesskitSelect
         className="select"
         {...select}
         onMouseEnter={() => select.show()}
         aria-label="Fruit"
       >
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <button
         type="button"
         tabIndex={-1}
@@ -44,4 +44,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

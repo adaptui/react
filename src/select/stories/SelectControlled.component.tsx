@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
@@ -9,7 +9,7 @@ import {
 } from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC = () => {
+export const Select = () => {
   const [fruit, setFruit] = React.useState<string | null>(null);
 
   return (
@@ -61,9 +61,9 @@ const SelectComp: React.FC<SelectCompProps> = props => {
 
   return (
     <>
-      <Select className="select" {...select} aria-label="Fruit">
+      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover {...select} aria-label="Fruits">
         {values?.length
           ? values.map(value => (
@@ -75,4 +75,4 @@ const SelectComp: React.FC<SelectCompProps> = props => {
   );
 };
 
-export default App;
+export default Select;

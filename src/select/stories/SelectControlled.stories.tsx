@@ -1,38 +1,26 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Select.css";
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  selectCssTemplate,
-  selectControlledTemplate,
-  selectControlledTemplateJs,
-} from "./templates";
-import { App as SelectControlled } from "./SelectControlled.component";
+import "./SelectBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/SelectBasicCss";
+import js from "./templates/SelectControlledJsx";
+import ts from "./templates/SelectControlledTsx";
+import Select from "./SelectControlled.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: SelectControlled,
+  component: Select,
   title: "Select/Controlled",
-  parameters: {
-    preview: createPreviewTabs({
-      js: selectControlledTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: selectControlledTemplate,
-      tsUtils: utilsTemplate,
-      css: selectCssTemplate,
-    }),
-  },
+  parameters: { preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }) },
   decorators: [
     Story => {
-      document.body.id = "select";
+      document.body.id = "select-basic";
       return <Story />;
     },
   ],
+  options: { showPanel: false },
 } as Meta;
 
-const Base: Story = args => <SelectControlled {...args} />;
-
-export const Default = Base.bind({});
-Default.args = {};
+export const Default: Story = args => <Select {...args} />;

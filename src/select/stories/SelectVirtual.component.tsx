@@ -2,7 +2,7 @@ import * as React from "react";
 import { useVirtual } from "react-virtual";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
@@ -28,9 +28,9 @@ export const App: React.FC<SelectInitialState> = props => {
 
   return (
     <>
-      <Select className="select" {...select} aria-label="Fruit">
+      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover
         {...select}
         aria-label="Fruits"

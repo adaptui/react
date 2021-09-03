@@ -2,13 +2,13 @@ import * as React from "react";
 import { css, keyframes } from "@emotion/css";
 
 import {
-  Meter,
+  Meter as RenderlesskitMeter,
   useMeterState,
   MeterStateReturn,
   MeterInitialState,
 } from "../../index";
 
-export interface AppProps extends MeterInitialState {
+export interface MeterProps extends MeterInitialState {
   /**
    * Adds a label to meter.
    * @default false
@@ -26,30 +26,30 @@ export interface AppProps extends MeterInitialState {
   withStripeAnimation?: boolean;
 }
 
-export const App: React.FC<AppProps> = props => {
+export const Meter: React.FC<MeterProps> = props => {
   const {
     children,
     withLabel = false,
-    // withStripe = false,
-    // withStripeAnimation = false,
+    withStripe,
+    withStripeAnimation,
     ...rest
   } = props;
   const meter = useMeterState(rest);
 
   return (
     <div className={meterStyle}>
-      <Meter
+      <RenderlesskitMeter
         className={meterBarStyle(meter, props)}
         aria-label="meter"
         {...meter}
         {...rest}
-      ></Meter>
+      ></RenderlesskitMeter>
       {withLabel && <div className={labelStyles}>{`${meter.percent}%`}</div>}
     </div>
   );
 };
 
-export default App;
+export default Meter;
 
 // CSS Styles from https://css-tricks.com/html5-meter-element/
 const meterStyle = css({
@@ -100,7 +100,7 @@ const generateStripe = {
   backgroundSize: "1rem 1rem",
 };
 
-function meterBarStyle(meter: MeterStateReturn, props: AppProps) {
+function meterBarStyle(meter: MeterStateReturn, props: MeterProps) {
   const { percent, status } = meter;
   const { withStripe, withStripeAnimation } = props;
 

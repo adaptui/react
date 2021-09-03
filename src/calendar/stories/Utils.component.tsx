@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const DoubleChevronLeft = (props: any) => {
+export const DoubleChevronLeft = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       {...props}
@@ -19,7 +19,7 @@ export const DoubleChevronLeft = (props: any) => {
   );
 };
 
-export const ChevronLeft = (props: any) => {
+export const ChevronLeft = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       {...props}
@@ -38,10 +38,10 @@ export const ChevronLeft = (props: any) => {
   );
 };
 
-export const ChevronRight = (props: any) => (
+export const ChevronRight = (props: React.SVGProps<SVGSVGElement>) => (
   <ChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );
 
-export const DoubleChevronRight = (props: any) => (
+export const DoubleChevronRight = (props: React.SVGProps<SVGSVGElement>) => (
   <DoubleChevronLeft style={{ transform: "rotate(180deg)" }} {...props} />
 );

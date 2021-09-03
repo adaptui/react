@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
@@ -21,7 +21,7 @@ const people = [
   "Emil Schaefer",
 ];
 
-export const App: React.FC<SelectInitialState> = () => {
+export const Select: React.FC<SelectInitialState> = () => {
   const select = useSelectState({ gutter: 8 });
 
   return (
@@ -33,7 +33,7 @@ export const App: React.FC<SelectInitialState> = () => {
           </div>
           <div className="relative">
             <span className="inline-block w-full rounded-md shadow-sm">
-              <Select
+              <RenderlesskitSelect
                 {...select}
                 aria-labelledby="select-1"
                 className="relative w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
@@ -56,7 +56,7 @@ export const App: React.FC<SelectInitialState> = () => {
                     />
                   </svg>
                 </span>
-              </Select>
+              </RenderlesskitSelect>
             </span>
             <SelectPopover
               as="ul"
@@ -116,3 +116,5 @@ export const App: React.FC<SelectInitialState> = () => {
     </div>
   );
 };
+
+export default Select;

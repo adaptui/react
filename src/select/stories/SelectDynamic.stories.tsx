@@ -1,38 +1,27 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Select.css";
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  selectCssTemplate,
-  selectDynamicTemplate,
-  selectDynamicTemplateJs,
-} from "./templates";
-import { App as SelectDynamic } from "./SelectDynamic.component";
+import "./SelectBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/SelectBasicCss";
+import js from "./templates/SelectDynamicJsx";
+import ts from "./templates/SelectDynamicTsx";
+import Select from "./SelectDynamic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: SelectDynamic,
+  component: Select,
   title: "Select/Dynamic",
   parameters: {
-    preview: createPreviewTabs({
-      js: selectDynamicTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: selectDynamicTemplate,
-      tsUtils: utilsTemplate,
-      css: selectCssTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
   },
   decorators: [
     Story => {
-      document.body.id = "select";
+      document.body.id = "select-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <SelectDynamic {...args} />;
-
-export const Default = Base.bind({});
-Default.args = {};
+export const Default: Story = args => <Select {...args} />;

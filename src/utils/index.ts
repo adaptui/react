@@ -60,6 +60,7 @@ export function isTouch() {
   return Boolean(
     "ontouchstart" in window ||
       window.navigator.maxTouchPoints > 0 ||
+      // @ts-ignore
       window.navigator.msMaxTouchPoints > 0,
   );
 }

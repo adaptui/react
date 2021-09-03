@@ -1,14 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  toastCssTemplate,
-  toastReactSpringTemplate,
-  toastReactSpringTemplateJs,
-} from "./templates";
-import "./Toast.css";
+import "./ToastBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/ToastBasicCss";
+import js from "./templates/ToastReactSpringJsx";
+import ts from "./templates/ToastReactSpringTsx";
 import { App as Toast } from "./ToastReactSpring.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
@@ -18,17 +16,17 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: toastReactSpringTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: toastReactSpringTemplate,
-      tsUtils: utilsTemplate,
-      css: toastCssTemplate,
+      js,
+      ts,
+      css,
+      jsUtils,
+      tsUtils,
       deps: ["@react-spring/web", "@chakra-ui/utils"],
     }),
   },
   decorators: [
     Story => {
-      document.body.id = "toast";
+      document.body.id = "toast-basic";
       return (
         <div
           style={{

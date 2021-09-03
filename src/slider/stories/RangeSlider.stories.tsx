@@ -1,13 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import {
-  rangeSliderTemplate,
-  rangeSliderTemplateJs,
-  sliderCssTemplate,
-} from "./templates";
-import "./Slider.css";
-import { App as RangeSlider } from "./components/RangeSlider.component";
+import "./SliderBasic.css";
+import js from "./templates/RangeSliderJsx";
+import ts from "./templates/RangeSliderTsx";
+import css from "./templates/SliderBasicCss";
+import { App as RangeSlider } from "./RangeSlider.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -15,49 +13,44 @@ export default {
   title: "Slider/Range",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: rangeSliderTemplateJs,
-      ts: rangeSliderTemplate,
-      css: sliderCssTemplate,
-    }),
+    parameters: { preview: createPreviewTabs({ js, ts, css }) },
   },
   decorators: [
     Story => {
-      document.body.id = "slider";
+      document.body.id = "slider-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <RangeSlider {...args} />;
+export const Default: Story = args => <RangeSlider {...args} />;
 
-export const Default = Base.bind({});
 Default.args = {
   defaultValues: [25, 75],
 };
 
-export const ThumbTip = Base.bind({});
+export const ThumbTip = Default.bind({});
 ThumbTip.args = {
   defaultValues: [25, 75],
   label: "Thumb Tipped",
   showTip: true,
 };
 
-export const Reversed = Base.bind({});
+export const Reversed = Default.bind({});
 Reversed.args = {
   defaultValues: [25, 75],
   label: "Reversed",
   isReversed: true,
 };
 
-export const Vertical = Base.bind({});
+export const Vertical = Default.bind({});
 Vertical.args = {
   defaultValues: [25, 75],
   label: "Vertical",
   orientation: "vertical",
 };
 
-export const MinMax = Base.bind({});
+export const MinMax = Default.bind({});
 MinMax.args = {
   defaultValues: [25, 75],
   label: "Min Max",
@@ -65,20 +58,20 @@ MinMax.args = {
   max: 80,
 };
 
-export const Step = Base.bind({});
+export const Step = Default.bind({});
 Step.args = {
   defaultValues: [25, 75],
   label: "Stepped",
   step: 10,
 };
 
-export const DefaultValue = Base.bind({});
+export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   label: "Default Valued",
   defaultValues: [10, 80],
 };
 
-export const FormatOptions = Base.bind({});
+export const FormatOptions = Default.bind({});
 FormatOptions.args = {
   defaultValues: [25, 75],
   label: "Temperature Formatted",
@@ -89,7 +82,7 @@ FormatOptions.args = {
   },
 };
 
-export const Disabled = Base.bind({});
+export const Disabled = Default.bind({});
 Disabled.args = {
   defaultValues: [25, 75],
   label: "Disabled",

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
@@ -9,7 +9,7 @@ import {
 } from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });
 
   const onKeyDown = React.useCallback(
@@ -68,14 +68,14 @@ export const App: React.FC<SelectInitialState> = props => {
   return (
     <>
       <h2>Press up & down on the button to change the value directly</h2>
-      <Select
+      <RenderlesskitSelect
         className="select"
         onKeyDown={onKeyDown}
         aria-label="Fruit"
         {...select}
       >
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover {...select} aria-label="Fruits">
         {fruits.length
           ? fruits.map(value => (
@@ -87,4 +87,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

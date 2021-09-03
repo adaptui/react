@@ -1,11 +1,9 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Progress } from "./CircularProgress.component";
-import {
-  circularProgressTemplate,
-  circularProgressTemplateJs,
-} from "./templates";
+import js from "./templates/CircularProgressJsx";
+import ts from "./templates/CircularProgressTsx";
+import { Progress } from "./CircularProgress.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -14,19 +12,17 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: circularProgressTemplateJs,
-      ts: circularProgressTemplate,
+      js,
+      ts,
       deps: ["reakit@latest", "@emotion/css@latest"],
     }),
   },
 } as Meta;
 
-const Base: Story = args => <Progress {...args} />;
+export const Default: Story = args => <Progress {...args} />;
 
-export const Default = Base.bind({});
-
-export const WithLabel = Base.bind({});
+export const WithLabel = Default.bind({});
 WithLabel.args = { withLabel: true };
 
-export const IsIndeterminate = Base.bind({});
+export const IsIndeterminate = Default.bind({});
 IsIndeterminate.args = { value: null };

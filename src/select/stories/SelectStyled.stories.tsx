@@ -1,18 +1,16 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Select } from "./SelectStyled.component";
+import Select from "./SelectStyled.component";
+import js from "./templates/SelectStyledJsx";
+import ts from "./templates/SelectStyledTsx";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { selectStyledTemplate, selectStyledTemplateJs } from "./templates";
 
 export default {
   component: Select,
   title: "Select/Styled",
   parameters: {
-    preview: createPreviewTabs({
-      js: selectStyledTemplateJs,
-      ts: selectStyledTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts }),
   },
   decorators: [
     Story => {
@@ -22,7 +20,5 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <Select {...args} />;
-
-export const Default = Base.bind({});
+export const Default: Story = args => <Select {...args} />;
 Default.args = {};

@@ -1,44 +1,37 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Slider.css";
-import {
-  singleSliderTemplate,
-  singleSliderTemplateJs,
-  sliderCssTemplate,
-} from "./templates";
+import "./SliderBasic.css";
+import js from "./templates/SingleOriginSliderJsx";
+import ts from "./templates/SingleOriginSliderTsx";
+import css from "./templates/SliderBasicCss";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { App as SingleOriginSlider } from "./components/SingleOriginSlider.component";
+import { App as SingleOriginSlider } from "./SingleOriginSlider.component";
 
 export default {
   component: SingleOriginSlider,
   title: "Slider/SingleOrigin",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: singleSliderTemplateJs,
-      ts: singleSliderTemplate,
-      css: sliderCssTemplate,
-    }),
+    parameters: { preview: createPreviewTabs({ js, ts, css }) },
   },
   decorators: [
     Story => {
-      document.body.id = "slider";
+      document.body.id = "slider-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <SingleOriginSlider {...args} />;
+export const Default: Story = args => <SingleOriginSlider {...args} />;
 
-export const Default = Base.bind({});
 Default.args = {
   min: -10,
   max: +10,
   defaultValues: [0],
 };
 
-export const ThumbTip = Base.bind({});
+export const ThumbTip = Default.bind({});
 ThumbTip.args = {
   min: -10,
   max: +10,
@@ -47,7 +40,7 @@ ThumbTip.args = {
   showTip: true,
 };
 
-export const MinMax = Base.bind({});
+export const MinMax = Default.bind({});
 MinMax.args = {
   defaultValues: [0],
   label: "Min Max",
@@ -55,7 +48,7 @@ MinMax.args = {
   max: +20,
 };
 
-export const Step = Base.bind({});
+export const Step = Default.bind({});
 Step.args = {
   min: -10,
   max: +10,
@@ -64,7 +57,7 @@ Step.args = {
   step: 2,
 };
 
-export const DefaultValue = Base.bind({});
+export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   min: -10,
   max: +10,
@@ -72,7 +65,7 @@ DefaultValue.args = {
   defaultValues: [-5],
 };
 
-export const FormatOptions = Base.bind({});
+export const FormatOptions = Default.bind({});
 FormatOptions.args = {
   min: -10,
   max: +10,
@@ -85,7 +78,7 @@ FormatOptions.args = {
   },
 };
 
-export const Disabled = Base.bind({});
+export const Disabled = Default.bind({});
 Disabled.args = {
   min: -10,
   max: +10,

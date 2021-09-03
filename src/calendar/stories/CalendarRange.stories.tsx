@@ -3,26 +3,18 @@ import { Meta, Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 
 import "./CalendarRange.css";
-import {
-  calendarRangeTemplate,
-  calendarRangeTemplateJs,
-  calendarRangeCssTemplate,
-  utilsTemplateJs,
-  utilsTemplate,
-} from "./templates";
-import { App as RangeCalendar } from "./CalendarRange.component";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import js from "./templates/CalendarRangeJsx";
+import ts from "./templates/CalendarRangeTsx";
+import css from "./templates/CalendarRangeCss";
+import RangeCalendar from "./CalendarRange.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import {
-  addDays,
-  addWeeks,
-  format,
-  subDays,
-  subWeeks,
-} from "../../utils/index";
+import { addDays, addWeeks, format, subDays, subWeeks } from "../../utils";
 
 export default {
-  title: "Calendar/Range",
   component: RangeCalendar,
+  title: "Calendar/Range",
   argTypes: {
     defaultStart: {
       control: "date",
@@ -39,17 +31,11 @@ export default {
   },
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: calendarRangeTemplateJs,
-      ts: calendarRangeTemplate,
-      css: calendarRangeCssTemplate,
-      jsUtils: utilsTemplateJs,
-      tsUtils: utilsTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
   },
 } as Meta;
 
-const Base: Story = args => {
+export const Default: Story = args => {
   args.value = {
     start: args.start && format(new Date(args.start), "YYYY-MM-DD"),
     end: args.end && format(new Date(args.end), "YYYY-MM-DD"),
@@ -78,42 +64,40 @@ const Base: Story = args => {
   );
 };
 
-export const Default = Base.bind({});
-
-export const DefaultValue = Base.bind({});
+export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
 };
 
-export const MinMaxDate = Base.bind({});
+export const MinMaxDate = Default.bind({});
 MinMaxDate.args = {
   minValue: subWeeks(new Date(), 1),
   maxValue: addWeeks(new Date(), 1),
 };
 
-export const Disabled = Base.bind({});
+export const Disabled = Default.bind({});
 Disabled.args = {
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
   isDisabled: true,
 };
 
-export const Readonly = Base.bind({});
+export const Readonly = Default.bind({});
 Readonly.args = {
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
   isReadonly: true,
 };
 
-export const Autofocus = Base.bind({});
+export const Autofocus = Default.bind({});
 Autofocus.args = {
   defaultStart: new Date(),
   defaultEnd: addWeeks(new Date(), 1),
   autoFocus: true,
 };
 
-export const ControlledStory = Base.bind({});
+export const ControlledStory = Default.bind({});
 ControlledStory.args = {
   start: new Date(),
   end: addWeeks(new Date(), 1),

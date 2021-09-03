@@ -1,26 +1,18 @@
 import * as React from "react";
 
 import {
-  Accordion,
+  Accordion as RenderlesskitAccordion,
+  AccordionInitialState,
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
 } from "../../index";
 
-export function App(props: any) {
+export const Accordion: React.FC<AccordionInitialState> = props => {
   const state = useAccordionState(props);
 
-  // const initialProps = {
-  //   defaultSelectedId: "accordion3",
-  //   manual: true,
-  //   loop: true,
-  //   allowToggle: true,
-  // };
-
-  // const state = useAccordionState(initialProps);
-
   return (
-    <Accordion {...state}>
+    <RenderlesskitAccordion {...state}>
       <h2>
         <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
       </h2>
@@ -49,8 +41,8 @@ export function App(props: any) {
         <AccordionTrigger {...state}>Trigger 6</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 6</AccordionPanel>
-    </Accordion>
+    </RenderlesskitAccordion>
   );
-}
+};
 
-export default App;
+export default Accordion;
