@@ -7,7 +7,7 @@ import tsUtils from "./templates/UtilsTsx";
 import css from "./templates/ToastBasicCss";
 import js from "./templates/ToastCSSAnimatedJsx";
 import ts from "./templates/ToastCSSAnimatedTsx";
-import { App as Toast } from "./ToastCSSAnimated.component";
+import { Toast } from "./ToastCSSAnimated.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -23,21 +23,12 @@ export default {
       tsUtils,
       deps: ["@chakra-ui/utils"],
     }),
+    options: { showPanel: false },
   },
   decorators: [
     Story => {
       document.body.id = "toast-basic";
-      return (
-        <div
-          style={{
-            height: "90vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Story />
-        </div>
-      );
+      return <Story />;
     },
   ],
 } as Meta;

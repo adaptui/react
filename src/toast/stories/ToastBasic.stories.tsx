@@ -7,7 +7,7 @@ import tsUtils from "./templates/UtilsTsx";
 import js from "./templates/ToastBasicJsx";
 import ts from "./templates/ToastBasicTsx";
 import css from "./templates/ToastBasicCss";
-import { App as Toast } from "./ToastBasic.component";
+import { Toast } from "./ToastBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -23,6 +23,7 @@ export default {
       tsUtils,
       deps: ["@chakra-ui/utils"],
     }),
+    options: { showPanel: false },
   },
 } as Meta;
 

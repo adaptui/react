@@ -15,6 +15,7 @@ export default {
   title: "Select/Fetch",
   parameters: {
     preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    options: { showPanel: true },
   },
   decorators: [
     Story => {

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  TimePicker,
+  TimePicker as RenderlesskitTimePicker,
   TimePickerColumn,
   TimePickerSegment,
   TimePickerTrigger,
@@ -13,12 +13,12 @@ import {
 } from "../../index";
 import { CalendarIcon } from "./Utils.component";
 
-export const App: React.FC<TimePickerInitialState> = props => {
+export const TimePicker: React.FC<TimePickerInitialState> = props => {
   const state = useTimePickerState(props);
 
   return (
     <>
-      <TimePicker className="timepicker" {...state}>
+      <RenderlesskitTimePicker className="timepicker" {...state}>
         <div className="timepicker__header">
           <TimePickerSegmentField {...state} className="timepicker__field">
             {state.segments.map((segment, i) => (
@@ -34,7 +34,7 @@ export const App: React.FC<TimePickerInitialState> = props => {
             <CalendarIcon />
           </TimePickerTrigger>
         </div>
-      </TimePicker>
+      </RenderlesskitTimePicker>
       <TimePickerContent className="timepicker__content" {...state}>
         <TimePickerColumn className="timepicker__column" {...state.hourState}>
           {state.hours.map(n => {
@@ -86,4 +86,4 @@ export const App: React.FC<TimePickerInitialState> = props => {
   );
 };
 
-export default App;
+export default TimePicker;

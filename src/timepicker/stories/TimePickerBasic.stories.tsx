@@ -7,7 +7,7 @@ import tsUtils from "./templates/UtilsTsx";
 import js from "./templates/TimePickerBasicJsx";
 import ts from "./templates/TimePickerBasicTsx";
 import css from "./templates/TimePickerBasicCss";
-import { App as TimePicker } from "./TimePickerBasic.component";
+import { TimePicker } from "./TimePickerBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -16,6 +16,7 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    options: { showPanel: true },
   },
 } as Meta;
 

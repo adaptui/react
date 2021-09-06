@@ -10,7 +10,7 @@ import {
 } from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, values: fruits, ...props });
 
   const listRef = React.useRef();
@@ -72,4 +72,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

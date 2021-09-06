@@ -2,18 +2,19 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
-import js from "./templates/MultiSliderJsx";
-import ts from "./templates/MultiSliderTsx";
 import css from "./templates/SliderBasicCss";
-import { App as MultiSlider } from "./MultiSlider.component";
+import js from "./templates/SingleReversedSliderJsx";
+import ts from "./templates/SingleReversedSliderTsx";
+import { Slider } from "./SliderSingleReversed.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: MultiSlider,
-  title: "Slider/Multi",
+  component: Slider,
+  title: "Slider/SingleReversed",
   parameters: {
     layout: "centered",
     parameters: { preview: createPreviewTabs({ js, ts, css }) },
+    options: { showPanel: true },
   },
   decorators: [
     Story => {
@@ -23,35 +24,22 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <MultiSlider {...args} />;
+export const Default: Story = args => <Slider {...args} />;
+
 Default.args = {
-  defaultValues: [25, 50, 75],
+  reversed: true,
 };
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
-  defaultValues: [25, 50, 75],
+  reversed: true,
   label: "Thumb Tipped",
   showTip: true,
 };
 
-export const Reversed = Default.bind({});
-Reversed.args = {
-  defaultValues: [25, 50, 75],
-  label: "Reversed",
-  isReversed: true,
-};
-
-export const Vertical = Default.bind({});
-Vertical.args = {
-  defaultValues: [25, 50, 75],
-  label: "Vertical",
-  orientation: "vertical",
-};
-
 export const MinMax = Default.bind({});
 MinMax.args = {
-  defaultValues: [25, 50, 75],
+  reversed: true,
   label: "Min Max",
   min: 20,
   max: 80,
@@ -59,20 +47,32 @@ MinMax.args = {
 
 export const Step = Default.bind({});
 Step.args = {
-  defaultValues: [25, 50, 75],
+  reversed: true,
   label: "Stepped",
   step: 10,
 };
 
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
+  reversed: true,
   label: "Default Valued",
-  defaultValues: [10, 20, 30],
+  defaultValues: [80],
+};
+
+export const FormatOptions = Default.bind({});
+FormatOptions.args = {
+  reversed: true,
+  label: "Temperature Formatted",
+  formatOptions: {
+    style: "unit",
+    unit: "celsius",
+    unitDisplay: "narrow",
+  },
 };
 
 export const Disabled = Default.bind({});
 Disabled.args = {
-  defaultValues: [25, 50, 75],
+  reversed: true,
   label: "Disabled",
   isDisabled: true,
 };

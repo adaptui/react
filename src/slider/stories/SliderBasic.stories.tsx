@@ -5,19 +5,20 @@ import "./SliderBasic.css";
 import js from "./templates/SliderBasicJsx";
 import ts from "./templates/SliderBasicTsx";
 import css from "./templates/SliderBasicCss";
-import { App as SingleSlider } from "./SliderBasic.component";
+import { Slider } from "./SliderBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: SingleSlider,
+  component: Slider,
   title: "Slider/Basic",
   parameters: {
     layout: "centered",
-    parameters: { preview: createPreviewTabs({ js, ts, css }) },
+    preview: createPreviewTabs({ js, ts, css }),
+    options: { showPanel: true },
   },
 } as Meta;
 
-export const Default: Story = args => <SingleSlider {...args} />;
+export const Default: Story = args => <Slider {...args} />;
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {

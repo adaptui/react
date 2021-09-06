@@ -7,7 +7,7 @@ import tsUtils from "./templates/UtilsTsx";
 import css from "./templates/ToastBasicCss";
 import js from "./templates/ToastReactSpringJsx";
 import ts from "./templates/ToastReactSpringTsx";
-import { App as Toast } from "./ToastReactSpring.component";
+import { Toast } from "./ToastReactSpring.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -23,21 +23,12 @@ export default {
       tsUtils,
       deps: ["@react-spring/web", "@chakra-ui/utils"],
     }),
+    options: { showPanel: false },
   },
   decorators: [
     Story => {
       document.body.id = "toast-basic";
-      return (
-        <div
-          style={{
-            height: "90vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Story />
-        </div>
-      );
+      return <Story />;
     },
   ],
 } as Meta;

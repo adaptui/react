@@ -11,7 +11,10 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 export default {
   component: Select,
   title: "Select/Basic",
-  parameters: { preview: createPreviewTabs({ js, ts, css }) },
+  parameters: {
+    preview: createPreviewTabs({ js, ts, css }),
+    options: { showPanel: true },
+  },
 } as Meta;
 
 export const Default: Story = args => <Select {...args} />;

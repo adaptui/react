@@ -2,7 +2,7 @@ import * as React from "react";
 import { a, useTransition } from "@react-spring/web";
 
 import {
-  Toast,
+  Toast as RenderlesskitToast,
   Alert,
   ToastBar,
   AlertType,
@@ -15,7 +15,7 @@ import {
   useToastHandlers,
 } from "./Utils.component";
 
-export const App = () => {
+export const Toast = () => {
   return (
     <ToastProvider animationDuration={500}>
       <ToastBar />
@@ -24,7 +24,7 @@ export const App = () => {
   );
 };
 
-export default App;
+export default Toast;
 
 const alert =
   (content: any, type?: AlertType) =>
@@ -115,31 +115,32 @@ export function ToastTriggers() {
   );
 }
 
-const SpringAnimationWrapper: React.FC<{ toast: Toast }> = props => {
-  const {
-    toast: { placement = "bottom-right", visible },
-    children,
-  } = props;
-  const translate = getTransform(placement, 50);
-  const transition = useTransition(visible, {
-    from: { opacity: 0, maxHeight: 0, transform: translate.from },
-    enter: {
-      opacity: 1,
-      maxHeight: 200,
-      transform: translate.enter,
-    },
-    leave: { opacity: 0, maxHeight: 0, transform: translate.leave },
-  });
+const SpringAnimationWrapper: React.FC<{ toast: RenderlesskitToast }> =
+  props => {
+    const {
+      toast: { placement = "bottom-right", visible },
+      children,
+    } = props;
+    const translate = getTransform(placement, 50);
+    const transition = useTransition(visible, {
+      from: { opacity: 0, maxHeight: 0, transform: translate.from },
+      enter: {
+        opacity: 1,
+        maxHeight: 200,
+        transform: translate.enter,
+      },
+      leave: { opacity: 0, maxHeight: 0, transform: translate.leave },
+    });
 
-  return (
-    <>
-      {transition((style, item) => {
-        if (!item) return null;
-        return <a.div style={style}>{children}</a.div>;
-      })}
-    </>
-  );
-};
+    return (
+      <>
+        {transition((style, item) => {
+          if (!item) return null;
+          return <a.div style={style}>{children}</a.div>;
+        })}
+      </>
+    );
+  };
 
 // Animation util
 export const getTransform = (placement: string, pixels: number) => {

@@ -2,18 +2,19 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
-import js from "./templates/SingleOriginSliderJsx";
-import ts from "./templates/SingleOriginSliderTsx";
 import css from "./templates/SliderBasicCss";
+import js from "./templates/SingleVerticalSliderJsx";
+import ts from "./templates/SingleVerticalSliderTsx";
+import { Slider } from "./SliderSingleVertical.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { App as SingleOriginSlider } from "./SingleOriginSlider.component";
 
 export default {
-  component: SingleOriginSlider,
-  title: "Slider/SingleOrigin",
+  component: Slider,
+  title: "Slider/SingleVertical",
   parameters: {
     layout: "centered",
     parameters: { preview: createPreviewTabs({ js, ts, css }) },
+    options: { showPanel: true },
   },
   decorators: [
     Story => {
@@ -23,53 +24,44 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <SingleOriginSlider {...args} />;
+export const Default: Story = args => <Slider {...args} />;
 
 Default.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  orientation: "vertical",
 };
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  orientation: "vertical",
   label: "Thumb Tipped",
   showTip: true,
 };
 
 export const MinMax = Default.bind({});
 MinMax.args = {
-  defaultValues: [0],
+  orientation: "vertical",
   label: "Min Max",
-  min: -20,
-  max: +20,
+  min: 20,
+  max: 80,
 };
 
 export const Step = Default.bind({});
 Step.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  orientation: "vertical",
   label: "Stepped",
-  step: 2,
+  step: 10,
 };
 
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
-  min: -10,
-  max: +10,
+  orientation: "vertical",
   label: "Default Valued",
-  defaultValues: [-5],
+  defaultValues: [80],
 };
 
 export const FormatOptions = Default.bind({});
 FormatOptions.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  orientation: "vertical",
   label: "Temperature Formatted",
   formatOptions: {
     style: "unit",
@@ -80,9 +72,7 @@ FormatOptions.args = {
 
 export const Disabled = Default.bind({});
 Disabled.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  orientation: "vertical",
   label: "Disabled",
   isDisabled: true,
 };

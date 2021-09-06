@@ -9,7 +9,7 @@ import {
   SliderInitialState,
 } from "../../index";
 
-interface AppProps extends SliderInitialState {
+interface SliderProps extends SliderInitialState {
   /**
    * Label for the slider
    *
@@ -20,15 +20,19 @@ interface AppProps extends SliderInitialState {
    * True, if thumb needs a tip to show it's current percent
    */
   showTip?: boolean;
+  /**
+   * True, if the direction of the slider is reversed
+   * @default false
+   */
+  isReversed?: boolean;
 }
 
-export const App: React.FC<AppProps> = args => {
+export const Slider: React.FC<SliderProps> = args => {
   const { label, ...rest } = args;
 
   const state = useSliderState(rest);
   const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
     state;
-  const origin = 0;
 
   return (
     <div
@@ -43,24 +47,17 @@ export const App: React.FC<AppProps> = args => {
         <div className="value">{getThumbValueLabel(0)}</div>
       </div>
 
-      <div className="slider">
+      <div className="slider vertical">
         <SliderTrack {...state} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
-            style={{
-              width: `${
-                (getValuePercent(Math.max(values[0], origin)) -
-                  getValuePercent(Math.min(values[0], origin))) *
-                100
-              }%`,
-              left: `${getValuePercent(Math.min(values[0], origin)) * 100}%`,
-            }}
+            style={{ height: `${getValuePercent(values[0]) * 100}%` }}
           />
         </SliderTrack>
         <div
           className="slider-thumb"
-          style={{ left: `calc(${getThumbPercent(0) * 100}% - 7px)` }}
+          style={{ bottom: `calc(${getThumbPercent(0) * 100}% - 7px)` }}
         >
           <SliderThumb {...state} index={0} className="slider-thumb-handle">
             <VisuallyHidden>
@@ -81,4 +78,4 @@ export const App: React.FC<AppProps> = args => {
   );
 };
 
-export default App;
+export default Slider;

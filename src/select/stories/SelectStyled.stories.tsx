@@ -11,6 +11,7 @@ export default {
   title: "Select/Styled",
   parameters: {
     preview: createPreviewTabs({ js, ts }),
+    options: { showPanel: true },
   },
   decorators: [
     Story => {

@@ -14,7 +14,7 @@ import {
   useToastHandlers,
 } from "./Utils.component";
 
-export const App = () => {
+export const Toast = () => {
   return (
     <ToastProvider animationDuration={300}>
       <ToastBar />
@@ -23,7 +23,7 @@ export const App = () => {
   );
 };
 
-export default App;
+export default Toast;
 
 const alert =
   (content: any, type?: AlertType) =>

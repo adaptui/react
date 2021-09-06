@@ -5,7 +5,7 @@ import "./SliderBasic.css";
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderAllInOneJsx";
 import ts from "./templates/SliderAllInOneTsx";
-import { App as Slider } from "./SliderAllInOne.component";
+import { Slider } from "./SliderAllInOne.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
@@ -14,6 +14,7 @@ export default {
   parameters: {
     layout: "centered",
     parameters: { preview: createPreviewTabs({ js, ts, css }) },
+    options: { showPanel: true },
   },
   decorators: [
     Story => {

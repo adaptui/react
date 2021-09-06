@@ -13,7 +13,10 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 export default {
   component: Select,
   title: "Select/Controlled",
-  parameters: { preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }) },
+  parameters: {
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    options: { showPanel: true },
+  },
   decorators: [
     Story => {
       document.body.id = "select-basic";

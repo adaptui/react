@@ -2,18 +2,19 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
+import js from "./templates/RangeSliderJsx";
+import ts from "./templates/RangeSliderTsx";
 import css from "./templates/SliderBasicCss";
-import js from "./templates/SingleVerticalSliderJsx";
-import ts from "./templates/SingleVerticalSliderTsx";
+import { Slider } from "./SliderRange.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
-import { App as SingleVerticalSlider } from "./SingleVerticalSlider.component";
 
 export default {
-  component: SingleVerticalSlider,
-  title: "Slider/SingleVertical",
+  component: Slider,
+  title: "Slider/Range",
   parameters: {
     layout: "centered",
     parameters: { preview: createPreviewTabs({ js, ts, css }) },
+    options: { showPanel: true },
   },
   decorators: [
     Story => {
@@ -23,22 +24,36 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <SingleVerticalSlider {...args} />;
+export const Default: Story = args => <Slider {...args} />;
 
 Default.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
 };
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
   label: "Thumb Tipped",
   showTip: true,
 };
 
+export const Reversed = Default.bind({});
+Reversed.args = {
+  defaultValues: [25, 75],
+  label: "Reversed",
+  isReversed: true,
+};
+
+export const Vertical = Default.bind({});
+Vertical.args = {
+  defaultValues: [25, 75],
+  label: "Vertical",
+  orientation: "vertical",
+};
+
 export const MinMax = Default.bind({});
 MinMax.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
   label: "Min Max",
   min: 20,
   max: 80,
@@ -46,21 +61,20 @@ MinMax.args = {
 
 export const Step = Default.bind({});
 Step.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
   label: "Stepped",
   step: 10,
 };
 
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
-  orientation: "vertical",
   label: "Default Valued",
-  defaultValues: [80],
+  defaultValues: [10, 80],
 };
 
 export const FormatOptions = Default.bind({});
 FormatOptions.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
   label: "Temperature Formatted",
   formatOptions: {
     style: "unit",
@@ -71,7 +85,7 @@ FormatOptions.args = {
 
 export const Disabled = Default.bind({});
 Disabled.args = {
-  orientation: "vertical",
+  defaultValues: [25, 75],
   label: "Disabled",
   isDisabled: true,
 };

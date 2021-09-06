@@ -9,7 +9,7 @@ import {
   SliderInitialState,
 } from "../../index";
 
-interface AppProps extends SliderInitialState {
+interface SliderProps extends SliderInitialState {
   /**
    * Label for the slider
    *
@@ -27,7 +27,7 @@ interface AppProps extends SliderInitialState {
   isReversed?: boolean;
 }
 
-export const App: React.FC<AppProps> = args => {
+export const Slider: React.FC<SliderProps> = args => {
   const { label, isReversed, ...rest } = args;
 
   const state = useSliderState({
@@ -122,4 +122,4 @@ export const App: React.FC<AppProps> = args => {
   );
 };
 
-export default App;
+export default Slider;
