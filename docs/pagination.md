@@ -19,16 +19,16 @@ navigation.
 import * as React from "react";
 
 import {
-  Pagination,
+  Pagination as RenderlesskitPagination,
   PaginationButton,
   usePaginationState,
 } from "@renderlesskit/react";
 
-export const App = props => {
+export const Pagination = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
-    <Pagination {...state} aria-label="Pagination">
+    <RenderlesskitPagination {...state} aria-label="Pagination">
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
           <PaginationButton goto="firstPage" {...state}>
@@ -70,14 +70,14 @@ export const App = props => {
           </PaginationButton>
         </li>
       </ul>
-    </Pagination>
+    </RenderlesskitPagination>
   );
 };
 
-export default App;
+export default Pagination;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/cwuhv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z2fd3)
 
 ## Accessibility Requirement
 

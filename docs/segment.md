@@ -19,16 +19,20 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 ```js
 import React from "react";
 
-import { Segment, SegmentField, useSegmentState } from "@renderlesskit/react";
+import {
+  Segment as RenderlesskitSegment,
+  SegmentField,
+  useSegmentState,
+} from "@renderlesskit/react";
 
-export const App = props => {
+export const Segment = props => {
   const state = useSegmentState(props);
 
   return (
     <div>
       <SegmentField {...state} className="segment__field">
         {state.segments.map((segment, i) => (
-          <Segment
+          <RenderlesskitSegment
             key={i}
             segment={segment}
             className="segment__field--item"
@@ -40,10 +44,10 @@ export const App = props => {
   );
 };
 
-export default App;
+export default Segment;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Segment-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3wjgt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Segment-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0wcu5)
 
 ## Composition
 

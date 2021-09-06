@@ -14,7 +14,14 @@ export default {
   component: Select,
   title: "Select/SelectVirtual",
   parameters: {
-    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    preview: createPreviewTabs({
+      js,
+      ts,
+      css,
+      jsUtils,
+      tsUtils,
+      deps: ["react-virtual"],
+    }),
     options: { showPanel: true },
   },
   decorators: [

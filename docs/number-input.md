@@ -24,20 +24,20 @@ for the accessibility features.
 import * as React from "react";
 
 import {
-  NumberInput,
+  NumberInput as RenderlesskitNumberInput,
   useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "@renderlesskit/react";
 
-export const App = props => {
+export const NumberInput = props => {
   const state = useNumberInputState(props);
   const { clampValueOnBlur, allowMouseWheel } = props;
 
   return (
     <label htmlFor="number-input" id="numberinput-label">
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <NumberInput
+      <RenderlesskitNumberInput
         placeholder="Enter a number"
         id="number-input"
         aria-labelledby="numberinput-label"
@@ -50,10 +50,10 @@ export const App = props => {
   );
 };
 
-export default App;
+export default NumberInput;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/NumberInput-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/27o5z)
+[![Edit CodeSandbox](https://img.shields.io/badge/NumberInput-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yko82)
 
 ## Accessibility Requirement
 

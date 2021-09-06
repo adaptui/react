@@ -9,17 +9,17 @@ that varies within a defined range. It follows the
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/meter/stories/__js/MeterBasic.component.jsx -->
+<!-- IMPORT_EXAMPLE src/meter/stories/templates/MeterBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Meter Basic
-js: src/meter/stories/__js/MeterBasic.component.jsx
-css: src/meter/stories/MeterBasic.css
+js: src/meter/stories/templates/MeterBasicJsx.ts
+css: src/meter/stories/templates/MeterBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Meter Styled
-js: src/meter/stories/__js/MeterStyled.component.jsx
+js: src/meter/stories/templates/MeterStyledJsx.ts
 deps: ['@emotion/css']
 -->
 

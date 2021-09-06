@@ -8,23 +8,23 @@ of time to load. It follows
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/progress/stories/__js/ProgressBasic.component.jsx -->
+<!-- IMPORT_EXAMPLE src/progress/stories/templates/ProgressBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Progress Basic
-js: src/progress/stories/__js/ProgressBasic.component.jsx
-css: src/progress/stories/ProgressBasic.css
+js: src/progress/stories/templates/ProgressBasicJsx.ts
+css: src/progress/stories/templates/ProgressBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Progress Linear
-js: src/progress/stories/__js/LinearProgress.component.jsx
+js: src/progress/stories/templates/LinearProgressJsx.ts
 deps: ['@emotion/css']
 -->
 
 <!-- CODESANDBOX
 link_title: Progress Circular
-js: src/progress/stories/__js/CircularProgress.component.jsx
+js: src/progress/stories/templates/CircularProgressJsx.ts
 deps: ['@emotion/css']
 -->
 

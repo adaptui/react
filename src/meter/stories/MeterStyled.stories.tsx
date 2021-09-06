@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { Meter, MeterProps } from "./MeterStyled.component";
 import js from "./templates/MeterStyledJsx";
 import ts from "./templates/MeterStyledTsx";
+import { Meter, MeterProps } from "./MeterStyled.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {

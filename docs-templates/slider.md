@@ -12,42 +12,42 @@ for the
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/slider/stories/__js/components/SingleSlider.component.jsx -->
+<!-- IMPORT_EXAMPLE src/slider/stories/templates/SliderBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Single Slider
-js: src/slider/stories/__js/components/SingleSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderBasicJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Single Origin Slider
-js: src/slider/stories/__js/components/SingleOriginSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderSingleOriginJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Single Reversed Slider
-js: src/slider/stories/__js/components/SingleReversedSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderSingleReversedJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Single Vertical Slider
-js: src/slider/stories/__js/components/SingleVerticalSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderSingleVerticalJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Range Slider
-js: src/slider/stories/__js/components/RangeSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderRangeJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Multi Slider
-js: src/slider/stories/__js/components/MultiSlider.component.jsx
-css: src/slider/stories/Slider.css
+js: src/slider/stories/templates/SliderMultiJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
 ## Accessibility Requirement

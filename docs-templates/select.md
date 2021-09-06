@@ -10,53 +10,61 @@ for the show/hide.
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/select/stories/__js/Select.component.jsx -->
+<!-- IMPORT_EXAMPLE src/select/stories/templates/SelectBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Select
-js: src/select/stories/__js/Select.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectBasicJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Dynamic Select
-js: src/select/stories/__js/SelectDynamic.component.jsx
-utils: src/select/stories/__js/Utils.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectDynamicJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Multiple Select
-js: src/select/stories/__js/SelectMultiple.component.jsx
-utils: src/select/stories/__js/Utils.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectMultipleJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Fetch Select
-js: src/select/stories/__js/SelectFetch.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectFetchJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Windows Select
-js: src/select/stories/__js/SelectWindows.component.jsx
-utils: src/select/stories/__js/Utils.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectWindowsJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Custom Select
-js: src/select/stories/__js/SelectCustom.component.jsx
-utils: src/select/stories/__js/Utils.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectCustomJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Controlled Select
-js: src/select/stories/__js/SelectControlled.component.jsx
-utils: src/select/stories/__js/Utils.component.jsx
-css: src/select/stories/Select.css
+js: src/select/stories/templates/SelectControlledJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
+-->
+
+<!-- CODESANDBOX
+link_title: Virtual Select Options
+js: src/select/stories/templates/SelectVirtualJsx.ts
+utils: src/select/stories/templates/UtilsJsx.ts
+css: src/select/stories/templates/SelectBasicCss.ts
+deps: ["react-virtual"]
 -->
 
 <!-- INJECT_COMPOSITION src/select -->

@@ -42,7 +42,6 @@ import {
   CalendarHeader,
   CalendarWeekTitle,
 } from "@renderlesskit/react";
-
 import {
   CalendarIcon,
   ChevronLeft,
@@ -51,7 +50,7 @@ import {
   DoubleChevronRight,
 } from "./Utils.component";
 
-export const App = props => {
+export const Datepicker = props => {
   const state = useDatePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,
@@ -84,7 +83,7 @@ export const App = props => {
   );
 };
 
-export default App;
+export default Datepicker;
 
 const Calendar = state => {
   return (
@@ -140,6 +139,8 @@ const Calendar = state => {
 };
 ```
 
+[![Edit CodeSandbox](https://img.shields.io/badge/DatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5hx47)
+
 ### Range DatePicker
 
 ```js
@@ -169,7 +170,7 @@ import {
   DoubleChevronRight,
 } from "./Utils.component";
 
-export const App = props => {
+export const DateRangePicker = props => {
   const state = useDateRangePickerState({
     formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
     ...props,
@@ -222,7 +223,7 @@ export const App = props => {
   );
 };
 
-export default App;
+export default DatePicker;
 
 const RangeCalendar = state => {
   return (
@@ -278,9 +279,7 @@ const RangeCalendar = state => {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/DatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/kr468)
-
-[![Edit CodeSandbox](https://img.shields.io/badge/RangeDatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4kj5z)
+[![Edit CodeSandbox](https://img.shields.io/badge/RangeDatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/prvgx)
 
 ## Composition
 

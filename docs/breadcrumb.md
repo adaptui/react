@@ -20,11 +20,14 @@ for its
 ```js
 import * as React from "react";
 
-import { Breadcrumbs, BreadcrumbLink } from "@renderlesskit/react";
+import {
+  Breadcrumbs as RenderlesskitBreadcrumbs,
+  BreadcrumbLink,
+} from "@renderlesskit/react";
 
-export const App = props => {
+export const Breadcrumbs = () => {
   return (
-    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
+    <RenderlesskitBreadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -50,14 +53,14 @@ export const App = props => {
           </BreadcrumbLink>
         </li>
       </ol>
-    </Breadcrumbs>
+    </RenderlesskitBreadcrumbs>
   );
 };
 
-export default App;
+export default Breadcrumbs;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/t3ygx)
+[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/40ezi)
 
 ## Accessibility Requirement
 

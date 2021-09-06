@@ -70,7 +70,7 @@ See example for [accordion](/docs-templates/Accordion.md)
 ### Examples
 
 - `IMPORT_EXAMPLE` will inject the examples from the components as code.
-- Usage: `<!-- IMPORT_EXAMPLE src/accordion/AccordionBasic.jsx -->` as markdown
+- Usage: `<!-- IMPORT_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->` as markdown
   comment.
 
 ### Sandbox links
@@ -84,7 +84,7 @@ link
   ```md
   <!-- CODESANDBOX
   link_title: Accordion Example
-  js: src/accordion/stories/__js/AccordionBasic.component.jsx
+  js: src/accordion/stories/templates/AccordionBasicJsx.ts
   css: src/accordion/stories/AccordionStyled.css
   -->
   ```

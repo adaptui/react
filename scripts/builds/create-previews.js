@@ -4,8 +4,13 @@ const chalk = require("chalk");
 const globFs = require("glob-fs")();
 const outdent = require("outdent");
 
-const transpileTs = require("./transpile-ts");
-const { createFile, createDirectory } = require("./utils/fs-utils");
+const {
+  createFile,
+  createDirectory,
+  readFile,
+  joinCwd,
+} = require("../utils/common-utils");
+const transpileTs = require("../utils/transpile-ts");
 
 function globRecurse(file) {
   // `file.pattern` is an object with a `glob` (string) property
@@ -54,24 +59,21 @@ const generatePreviewTemplateFiles = filePath => {
   const componentName = path.basename(filePath).replace(".component.tsx", "");
   const componentType = path.extname(filePath).replace(".", "");
 
-  const templateDir = path.join(process.cwd(), templatesFolderPath);
+  const templateDir = joinCwd(templatesFolderPath);
   createDirectory(templateDir);
 
-  let code = fs.readFileSync(path.join(process.cwd(), filePath), {
-    encoding: "utf8",
-  });
+  let code = readFile(joinCwd(filePath));
   createTemplateFile(code, componentName, componentType, templateDir);
 
   const jsCode = transpileTs(code);
   createTemplateFile(jsCode, componentName, "jsx", templateDir);
 
   try {
-    const cssFilePath = path.join(
-      process.cwd(),
+    const cssFilePath = joinCwd(
       `${storiesDirectory}${path.sep}${componentName}.css`,
     );
     if (fs.existsSync(cssFilePath)) {
-      const cssCode = fs.readFileSync(cssFilePath, { encoding: "utf8" });
+      const cssCode = readFile(cssFilePath);
       createTemplateFile(cssCode, componentName, "css", templateDir);
     }
   } catch (err) {

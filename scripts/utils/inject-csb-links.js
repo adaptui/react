@@ -1,9 +1,7 @@
-const fs = require("fs");
-const path = require("path");
 const yaml = require("yaml");
-const axios = require("axios");
+const fetch = require("node-fetch");
 const { outdent } = require("outdent");
-const { getParameters } = require("codesandbox/lib/api/define");
+const { joinCwd, extractCode } = require("./common-utils");
 
 // eslint-disable-next-line no-useless-escape
 const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
@@ -24,12 +22,13 @@ const injectCsbLinks = async docsTemplate => {
 
       const sandboxLink = await getSandboxShortURL(parsed);
       return { sandboxLink, linkTitle };
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   });
 
   const result = await Promise.allSettled(promises);
+
   result.forEach(({ value: { sandboxLink, linkTitle } }) => {
     docsTemplate = docsTemplate.replace(
       CODESANDBOX_REPLACE_FLAG,
@@ -43,23 +42,34 @@ const injectCsbLinks = async docsTemplate => {
 module.exports = injectCsbLinks;
 
 const getSandboxShortURL = async parsed => {
-  const defineLink = getSandboxDefineLink(
+  const body = getSandboxContents(
     {
-      js: readFile(parsed.js),
-      css: readFile(parsed.css),
-      utils: readFile(parsed.utils),
+      js: parsed.js ? extractCode(joinCwd(parsed.js)) : undefined,
+      css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
+      utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
     },
     parsed.deps && parsed.deps,
   );
 
   // fetching the sandbox_id, otherwise the URL would be longer
-  const response = await axios.get(`${defineLink}&json=1`);
-  const sandboxLink = `https://codesandbox.io/s/${response.data.sandbox_id}`;
+  const response = await fetch(
+    "https://codesandbox.io/api/v1/sandboxes/define?json=1",
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body,
+    },
+  );
+  const json = await response.json();
+  const sandboxLink = `https://codesandbox.io/s/${json.sandbox_id}`;
 
   return sandboxLink;
 };
 
-const getSandboxDefineLink = (files, extraDeps) => {
+const getSandboxContents = (files, extraDeps) => {
   const deps = {
     reakit: "latest",
     "@renderlesskit/react": "latest",
@@ -72,7 +82,7 @@ const getSandboxDefineLink = (files, extraDeps) => {
       }, {})),
   };
 
-  const parameters = getParameters({
+  return JSON.stringify({
     files: {
       "src/index.js": {
         content: outdent`
@@ -95,18 +105,6 @@ const getSandboxDefineLink = (files, extraDeps) => {
       },
     },
   });
-
-  return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}`;
-};
-
-const readFile = url => {
-  try {
-    return fs.readFileSync(path.join(process.cwd(), url), {
-      encoding: "utf-8",
-    });
-  } catch (er) {
-    return;
-  }
 };
 
 const resolveVersion = userModule => {

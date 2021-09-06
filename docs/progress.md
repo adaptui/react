@@ -18,15 +18,18 @@ of time to load. It follows
 ```js
 import * as React from "react";
 
-import { Progress, useProgressState } from "@renderlesskit/react";
+import {
+  Progress as RenderlesskitProgress,
+  useProgressState,
+} from "@renderlesskit/react";
 
-export const App = props => {
+export const Progress = props => {
   const state = useProgressState(props);
   const { value, percent, isIndeterminate } = state;
 
   return (
     <div className="progress">
-      <Progress
+      <RenderlesskitProgress
         {...state}
         value={value}
         aria-label="progress"
@@ -37,14 +40,14 @@ export const App = props => {
   );
 };
 
-export default App;
+export default Progress;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/cov1f)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2bwye)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/quyuf)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/htpvy)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/t9tf0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2z6dk)
 
 ## Accessibility Requirement
 

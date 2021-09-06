@@ -11,24 +11,24 @@ for the keyboard navigation & accessibility features.
 
 ### DatePicker
 
-<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePickerBase.component.jsx -->
-
-### Range DatePicker
-
-<!-- IMPORT_EXAMPLE src/datepicker/stories/__js/DatePickerRange.component.jsx -->
+<!-- IMPORT_EXAMPLE src/datepicker/stories/templates/DatePickerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: DatePicker
-js: src/datepicker/stories/__js/DatePickerBase.component.jsx
-css: src/datepicker/stories/DatePickerBase.css
-utils: src/datepicker/stories/__js/Utils.component.jsx
+js: src/datepicker/stories/templates/DatePickerBasicJsx.ts
+css: src/datepicker/stories/templates/DatePickerBasicCss.ts
+utils: src/datepicker/stories/templates/UtilsJsx.ts
 -->
+
+### Range DatePicker
+
+<!-- IMPORT_EXAMPLE src/datepicker/stories/templates/DateRangePickerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: RangeDatePicker
-js: src/datepicker/stories/__js/DatePickerRange.component.jsx
-css: src/datepicker/stories/DatePickerRange.css
-utils: src/datepicker/stories/__js/Utils.component.jsx
+js: src/datepicker/stories/templates/DateRangePickerBasicJsx.ts
+css: src/datepicker/stories/templates/DateRangePickerBasicCss.ts
+utils: src/datepicker/stories/templates/UtilsJsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/datepicker -->

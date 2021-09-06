@@ -19,15 +19,18 @@ that varies within a defined range. It follows the
 ```js
 import * as React from "react";
 
-import { Meter, useMeterState } from "@renderlesskit/react";
+import {
+  Meter as RenderlesskitMeter,
+  useMeterState,
+} from "@renderlesskit/react";
 
-export const App = props => {
+export const Meter = props => {
   const state = useMeterState(props);
   const { percent, status } = state;
 
   return (
     <div className="meter">
-      <Meter
+      <RenderlesskitMeter
         aria-label="meter"
         className="meterbar"
         style={{
@@ -35,12 +38,12 @@ export const App = props => {
           backgroundColor: status == null ? undefined : background[status],
         }}
         {...state}
-      ></Meter>
+      ></RenderlesskitMeter>
     </div>
   );
 };
 
-export default App;
+export default Meter;
 
 const background = {
   safe: "#8bcf69",
@@ -49,9 +52,9 @@ const background = {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b9ri6)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hvo2u)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/xv2oq)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/eet0g)
 
 ## Accessibility Requirement
 

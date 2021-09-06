@@ -9,11 +9,13 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/segment/stories/__js/Segment.component.jsx -->
+<!-- IMPORT_EXAMPLE src/segment/stories/templates/SegmentBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Segment
-js: src/segment/stories/__js/Segment.component.jsx
+js: src/segment/stories/templates/SegmentBasicJsx.ts
+css: src/segment/stories/templates/SegmentBasicCss.ts
+
 -->
 
 <!-- INJECT_COMPOSITION src/segment -->

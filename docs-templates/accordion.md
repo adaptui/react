@@ -12,17 +12,17 @@ for
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/accordion/stories/__js/AccordionBasic.component.jsx -->
+<!-- IMPORT_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->
 
 <!-- CODESANDBOX
-link_title: Accordion Basic
-js: src/accordion/stories/__js/AccordionBasic.component.jsx
+link_title: Accordion
+js: src/accordion/stories/templates/AccordionBasicJsx.ts
 -->
 
 <!-- CODESANDBOX
 link_title: Accordion Styled
-js: src/accordion/stories/__js/AccordionStyled.component.jsx
-css: src/accordion/stories/AccordionStyled.css
+js: src/accordion/stories/templates/AccordionStyledJsx.ts
+css: src/accordion/stories/templates/AccordionStyledCss.ts
 -->
 
 ## Accessibility Requirements
