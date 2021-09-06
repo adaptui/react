@@ -3,8 +3,8 @@ import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
 import css from "./templates/SliderBasicCss";
-import js from "./templates/SingleVerticalSliderJsx";
-import ts from "./templates/SingleVerticalSliderTsx";
+import js from "./templates/SliderSingleVerticalJsx";
+import ts from "./templates/SliderSingleVerticalTsx";
 import { Slider } from "./SliderSingleVertical.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 

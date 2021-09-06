@@ -2,8 +2,8 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import "./SliderBasic.css";
-import js from "./templates/RangeSliderJsx";
-import ts from "./templates/RangeSliderTsx";
+import js from "./templates/SliderRangeJsx";
+import ts from "./templates/SliderRangeTsx";
 import css from "./templates/SliderBasicCss";
 import { Slider } from "./SliderRange.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
