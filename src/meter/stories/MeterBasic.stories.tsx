@@ -1,31 +1,25 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import {
-  meterBasicTemplate,
-  meterBasicTemplateJs,
-  meterBasicCssTemplate,
-} from "./templates";
 import "./MeterBasic.css";
-import { App as Meter } from "./MeterBasic.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import js from "./templates/MeterBasicJsx";
+import ts from "./templates/MeterBasicTsx";
+import css from "./templates/MeterBasicCss";
+import { Meter } from "./MeterBasic.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Meter,
   title: "Meter/Basic",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: meterBasicTemplateJs,
-      ts: meterBasicTemplate,
-      css: meterBasicCssTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 
-const Base: Story = args => <Meter {...args} />;
+const Default: Story = args => <Meter {...args} />;
 
-export const Playground = Base.bind({});
+export const Playground = Default.bind({});
 Playground.args = {
   value: 5,
   min: 0,
@@ -36,7 +30,7 @@ Playground.args = {
 };
 
 // Examples from https://css-tricks.com/html5-meter-element/
-export const Stories = () => {
+export const AllUseCases = () => {
   return (
     <div>
       <h4>Case 1 - No attributes</h4>

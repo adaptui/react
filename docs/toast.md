@@ -23,7 +23,7 @@ import {
   getRandomPlacement,
 } from "./Utils.component";
 
-export const App = () => {
+export const Toast = () => {
   return (
     <ToastProvider>
       <ToastBar />
@@ -32,24 +32,26 @@ export const App = () => {
   );
 };
 
-export default App;
+export default Toast;
 
-const alert = (content, type) => ({ toast, handlers }) => {
-  const { pauseTimer, resumeTimer, removeToast } = handlers;
+const alert =
+  (content, type) =>
+  ({ toast, handlers }) => {
+    const { pauseTimer, resumeTimer, removeToast } = handlers;
 
-  return (
-    <Alert
-      toast={toast}
-      type={type}
-      hideToast={removeToast}
-      content={content}
-      onMouseEnter={() => pauseTimer(toast.id)}
-      onMouseLeave={() => resumeTimer(toast.id)}
-    >
-      <AlertIndicator toast={toast} type={type} />
-    </Alert>
-  );
-};
+    return (
+      <Alert
+        toast={toast}
+        type={type}
+        hideToast={removeToast}
+        content={content}
+        onMouseEnter={() => pauseTimer(toast.id)}
+        onMouseLeave={() => resumeTimer(toast.id)}
+      >
+        <AlertIndicator toast={toast} type={type} />
+      </Alert>
+    );
+  };
 
 function ToastTriggers() {
   const { addToast, removeToast } = useToastHandlers();
@@ -229,35 +231,40 @@ function ToastTriggers() {
 }
 ```
 
-We can utilize the `toastWrapper` prop to add animations and other wrappers
-around the toast.
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/os0ei)
 
-Example:
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/dg27l)
 
-```jsx
-<ToastProvider
-  animationTimeout={500}
-  toastWrapper={({ id, isVisible, children }) => (
-    <CSSTransition className="fadeIn" in={isVisible} timeout={500}>
-      {children}
-    </CSSTransition>
-  )}
-  toastTypes={{
-    primary: ({ content }) => <span>{content}</span>,
-  }}
->
-  <ToastTriggers />
-</ToastProvider>
-```
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/j20bg)
 
-We also have to add the `animationTimeout` inorder to specify a delay before
-removing the toast from the state, this would ensure the CSS or any other
-animations has the chance to finish without being interrupted.
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/qx2ok)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7kuhj)
+## Props
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/08vwp)
+### `DefaultToast`
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2iewn)
+| Name                    | Type                | Description |
+| :---------------------- | :------------------ | :---------- |
+| **`animationDuration`** | <code>number</code> |             |
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/gn7lf)
+### `DefaultToastProvider`
+
+| Name                    | Type                | Description |
+| :---------------------- | :------------------ | :---------- |
+| **`animationDuration`** | <code>number</code> |             |
+
+### `ConfigurableToast`
+
+| Name                    | Type                 | Description |
+| :---------------------- | :------------------- | :---------- |
+| **`id`**                | <code>string</code>  |             |
+| **`reverseOrder`**      | <code>boolean</code> |             |
+| **`animationDuration`** | <code>number</code>  |             |
+
+### `Toast`
+
+| Name                    | Type                 | Description |
+| :---------------------- | :------------------- | :---------- |
+| **`id`**                | <code>string</code>  |             |
+| **`reverseOrder`**      | <code>boolean</code> |             |
+| **`animationDuration`** | <code>number</code>  |             |

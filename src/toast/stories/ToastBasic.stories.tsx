@@ -1,16 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  toastBasicTemplate,
-  toastBasicTemplateJs,
-  toastCssTemplate,
-} from "./templates";
-import "./Toast.css";
-import { App as Toast } from "./ToastBasic.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import "./ToastBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import js from "./templates/ToastBasicJsx";
+import ts from "./templates/ToastBasicTsx";
+import css from "./templates/ToastBasicCss";
+import { Toast } from "./ToastBasic.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Toast,
@@ -18,20 +16,15 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: toastBasicTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: toastBasicTemplate,
-      tsUtils: utilsTemplate,
-      css: toastCssTemplate,
+      js,
+      ts,
+      css,
+      jsUtils,
+      tsUtils,
       deps: ["@chakra-ui/utils"],
     }),
+    options: { showPanel: false },
   },
-  decorators: [
-    Story => {
-      document.body.id = "toast";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 export const Default = () => <Toast />;

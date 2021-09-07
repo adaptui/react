@@ -83,9 +83,8 @@ function getPublicFiles(rootPath, prefix = "") {
         isDirectory(path) && getPublicFiles(path, join(prefix, filename));
       return {
         ...(childFiles || {
-          [removeExt(normalizePath(join(prefix, filename)))]: normalizePath(
-            path,
-          ),
+          [removeExt(normalizePath(join(prefix, filename)))]:
+            normalizePath(path),
         }),
         ...acc,
       };
@@ -129,6 +128,17 @@ function isStateReturnDeclaration(node) {
   const escapedName = getEscapedName(node);
   return (
     kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName)
+  );
+}
+
+/**
+ * @param {import("ts-morph").Node<Node>} node
+ */
+function isInitialStateDeclaration(node) {
+  const kindName = node.getKindName();
+  const escapedName = getEscapedName(node);
+  return (
+    kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName)
   );
 }
 
@@ -296,10 +306,7 @@ function reduceKeys(acc, [moduleName, array]) {
 
   const finalString = `${declaration} = ${value};\n`;
 
-  if (!moduleName.endsWith("State")) {
-    return `${acc}export ${finalString}`;
-  }
-  return `${acc}${finalString}`;
+  return `${acc}export ${finalString}`;
 }
 
 /**
@@ -338,6 +345,13 @@ function makeKeys(rootPath) {
           } else {
             keys[getModuleName(node)] = [...stateKeys, ...props];
           }
+        }
+        if (isInitialStateDeclaration(node)) {
+          const literalNode = isOptionsDeclaration(node)
+            ? getLiteralNode(node)
+            : node;
+          const props = literalNode ? getPropsNames(literalNode, true) : [];
+          keys[getModuleName(node)] = props;
         }
       });
     });

@@ -3,14 +3,14 @@ import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
 
 import {
-  isNull,
-  Progress,
+  Progress as RenderlesskitProgress,
   ProgressState,
   useProgressState,
   ProgressInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
+import { isNull } from "../../utils/index";
 
-export interface AppProps extends ProgressInitialState {
+export interface ProgressProps extends ProgressInitialState {
   /**
    * Adds a label to meter.
    * @default false
@@ -18,10 +18,13 @@ export interface AppProps extends ProgressInitialState {
   withLabel?: boolean;
 }
 
-export const App: React.FC<AppProps> = props => {
+export const Progress: React.FC<ProgressProps> = props => {
   const { withLabel = false, children, ...rest } = props;
   const [value, setValue] = React.useState<number | null>(0);
-  const state = useProgressState({ ...rest, value });
+  const state = useProgressState({
+    ...rest,
+    value: rest.value === null ? null : value,
+  });
   const { percent, isIndeterminate } = state;
 
   React.useEffect(() => {
@@ -45,7 +48,11 @@ export const App: React.FC<AppProps> = props => {
   return (
     <div>
       <div>
-        <Progress {...state} className={rootStyles} aria-label="progress">
+        <RenderlesskitProgress
+          {...state}
+          className={rootStyles}
+          aria-label="progress"
+        >
           <svg viewBox="0 0 100 100" className={svgStyles(isIndeterminate)}>
             <circle
               cx={50}
@@ -68,7 +75,7 @@ export const App: React.FC<AppProps> = props => {
           {withLabel ? (
             <div className={labelStyles}>{`${percent}%`}</div>
           ) : null}
-        </Progress>
+        </RenderlesskitProgress>
       </div>
       <br />
       <Button type="reset" onClick={() => setValue(0)}>
@@ -78,7 +85,7 @@ export const App: React.FC<AppProps> = props => {
   );
 };
 
-export default App;
+export default Progress;
 
 const rootStyles = css({
   display: "inline-block",
@@ -87,9 +94,9 @@ const rootStyles = css({
 });
 
 const labelStyles = css({
-  fontSize: "14px",
-  top: "50%",
-  left: "50%",
+  fontSize: "11px",
+  top: "48%",
+  left: "52%",
   width: "100%",
   textAlign: "center",
   position: "absolute",

@@ -1,38 +1,29 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Select.css";
-import {
-  selectCssTemplate,
-  utilsTemplate,
-  utilsTemplateJs,
-  selectMultipleTemplate,
-  selectMultipleTemplateJs,
-} from "./templates";
-import { App as SelectMultiple } from "./SelectMultiple.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import "./SelectBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/SelectBasicCss";
+import js from "./templates/SelectMultipleJsx";
+import ts from "./templates/SelectMultipleTsx";
+import { Select as SelectMultiple } from "./SelectMultiple.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: SelectMultiple,
   title: "Select/Multiple",
   parameters: {
-    preview: createPreviewTabs({
-      js: selectMultipleTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: selectMultipleTemplate,
-      tsUtils: utilsTemplate,
-      css: selectCssTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    options: { showPanel: true },
   },
   decorators: [
     Story => {
-      document.body.id = "select";
+      document.body.id = "select-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <SelectMultiple {...args} />;
-
-export const Default = Base.bind({});
+export const Default: Story = args => <SelectMultiple {...args} />;
 Default.args = {};

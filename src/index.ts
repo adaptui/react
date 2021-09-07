@@ -1,6 +1,7 @@
 export * from "./accordion";
 export * from "./breadcrumbs";
 export * from "./calendar";
+export * from "./checkbox";
 export * from "./datepicker";
 export * from "./drawer";
 export * from "./link";

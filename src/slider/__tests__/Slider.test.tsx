@@ -55,12 +55,8 @@ export const SliderComponent = (
 ) => {
   const state = useSliderState(props);
   const originProp = props.origin ?? state.min ?? 0;
-  const {
-    values,
-    getValuePercent,
-    getThumbPercent,
-    getThumbValueLabel,
-  } = state;
+  const { values, getValuePercent, getThumbPercent, getThumbValueLabel } =
+    state;
 
   const trackWidth = `${
     (getValuePercent(Math.max(values[0], originProp)) -

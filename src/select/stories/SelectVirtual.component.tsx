@@ -2,15 +2,15 @@ import * as React from "react";
 import { useVirtual } from "react-virtual";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, values: fruits, ...props });
 
   const listRef = React.useRef();
@@ -28,9 +28,9 @@ export const App: React.FC<SelectInitialState> = props => {
 
   return (
     <>
-      <Select className="select" {...select} aria-label="Fruit">
+      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover
         {...select}
         aria-label="Fruits"
@@ -72,4 +72,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

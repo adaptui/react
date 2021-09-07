@@ -97,17 +97,15 @@ describe("usePaginationState", () => {
   });
 
   it("has no ellipses when count <= 7", () => {
-    const { pages } = renderHook(() =>
-      usePaginationState({ count: 7 }),
-    ).result.current;
+    const { pages } = renderHook(() => usePaginationState({ count: 7 })).result
+      .current;
 
     expect(pages).not.toContain("end-ellipsis");
   });
 
   it("should have end-ellipses when count >= 8", () => {
-    const { pages } = renderHook(() =>
-      usePaginationState({ count: 8 }),
-    ).result.current;
+    const { pages } = renderHook(() => usePaginationState({ count: 8 })).result
+      .current;
 
     expect(pages).toContain("end-ellipsis");
   });

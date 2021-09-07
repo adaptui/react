@@ -12,7 +12,7 @@ keyboard navigaiton & focus management.
 
 ### Base Calendar
 
-<!-- IMPORT_EXAMPLE src/calendar/stories/__js/CalendarBase.component.jsx -->
+<!-- IMPORT_EXAMPLE src/calendar/stories/templates/CalendarBasicJsx.ts -->
 
 ### Range Calendar
 
@@ -51,16 +51,16 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 <!-- CODESANDBOX
 link_title: Calendar
-js: src/calendar/stories/__js/CalendarBase.component.jsx
-css: src/calendar/stories/CalendarBase.css
-utils: src/calendar/stories/__js/Utils.component.jsx
+js: src/calendar/stories/templates/CalendarBasicJsx.ts
+css: src/calendar/stories/templates/CalendarBasicCss.ts
+utils: src/calendar/stories/templates/UtilsJsx.ts
 -->
 
 <!-- CODESANDBOX
-link_title: RangeCalendar
-js: src/calendar/stories/__js/CalendarRange.component.jsx
-css: src/calendar/stories/CalendarRange.css
-utils: src/calendar/stories/__js/Utils.component.jsx
+link_title: Range Calendar
+js: src/calendar/stories/templates/CalendarRangeJsx.ts
+css: src/calendar/stories/templates/CalendarRangeCss.ts
+utils: src/calendar/stories/templates/UtilsJsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/calendar -->

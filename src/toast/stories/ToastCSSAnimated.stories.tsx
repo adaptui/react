@@ -1,16 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  toastCssTemplate,
-  toastCssAnimatedTemplate,
-  toastCssAnimatedTemplateJs,
-} from "./templates";
-import "./Toast.css";
-import { App as Toast } from "./ToastCSSAnimated.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import "./ToastBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/ToastBasicCss";
+import js from "./templates/ToastCSSAnimatedJsx";
+import ts from "./templates/ToastCSSAnimatedTsx";
+import { Toast } from "./ToastCSSAnimated.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Toast,
@@ -18,28 +16,19 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: toastCssAnimatedTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: toastCssAnimatedTemplate,
-      tsUtils: utilsTemplate,
-      css: toastCssTemplate,
+      js,
+      ts,
+      css,
+      jsUtils,
+      tsUtils,
       deps: ["@chakra-ui/utils"],
     }),
+    options: { showPanel: false },
   },
   decorators: [
     Story => {
-      document.body.id = "toast";
-      return (
-        <div
-          style={{
-            height: "90vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Story />
-        </div>
-      );
+      document.body.id = "toast-basic";
+      return <Story />;
     },
   ],
 } as Meta;

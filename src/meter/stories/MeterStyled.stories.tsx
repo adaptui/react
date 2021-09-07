@@ -1,26 +1,23 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Meter } from "./MeterStyled.component";
-import { meterStyledTemplate, meterStyledTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import js from "./templates/MeterStyledJsx";
+import ts from "./templates/MeterStyledTsx";
+import { Meter, MeterProps } from "./MeterStyled.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Meter,
   title: "Meter/Styled",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: meterStyledTemplateJs,
-      ts: meterStyledTemplate,
-      deps: ["@emotion/css@latest"],
-    }),
+    preview: createPreviewTabs({ js, ts, deps: ["@emotion/css@latest"] }),
   },
 } as Meta;
 
-const Base: Story = args => <Meter {...args} />;
+const Default: Story<MeterProps> = args => <Meter {...args} />;
 
-export const Playground = Base.bind({});
+export const Playground = Default.bind({});
 Playground.args = {
   value: 5,
   min: 0,
@@ -30,13 +27,13 @@ Playground.args = {
   optimum: 5,
 };
 
-export const WithLabel = Base.bind({});
+export const WithLabel = Default.bind({});
 WithLabel.args = { ...Playground.args, withLabel: true };
 
-export const WithStripe = Base.bind({});
+export const WithStripe = Default.bind({});
 WithStripe.args = { ...Playground.args, withStripe: true };
 
-export const WithStripeAnimation = Base.bind({});
+export const WithStripeAnimation = Default.bind({});
 WithStripeAnimation.args = {
   ...Playground.args,
   withStripe: true,
@@ -44,7 +41,7 @@ WithStripeAnimation.args = {
 };
 
 // Examples from https://css-tricks.com/html5-meter-element/
-export const Stories = () => {
+export const AllUseCases = () => {
   return (
     <div>
       <h4>Case 1 - No attributes</h4>

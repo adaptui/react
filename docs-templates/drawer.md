@@ -8,11 +8,11 @@ component to provide the drawer ability from four ends. It follows the
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/drawer/stories/__js/Drawer.component.jsx -->
+<!-- IMPORT_EXAMPLE src/drawer/stories/templates/DrawerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Drawer
-js: src/drawer/stories/__js/Drawer.component.jsx
+js: src/drawer/stories/templates/DrawerBasicJsx.ts
 deps: ["@emotion/css"]
 -->
 

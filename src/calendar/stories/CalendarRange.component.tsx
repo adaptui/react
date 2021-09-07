@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import {
   Calendar,
@@ -10,8 +10,7 @@ import {
   CalendarWeekTitle,
   useRangeCalendarState,
   RangeCalendarInitialState,
-} from "@renderlesskit/react";
-
+} from "../../index";
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,7 +18,7 @@ import {
   DoubleChevronRight,
 } from "./Utils.component";
 
-export const App: React.FC<RangeCalendarInitialState> = props => {
+export const RangeCalendar: React.FC<RangeCalendarInitialState> = props => {
   const state = useRangeCalendarState(props);
 
   return (
@@ -74,4 +73,4 @@ export const App: React.FC<RangeCalendarInitialState> = props => {
   );
 };
 
-export default App;
+export default RangeCalendar;

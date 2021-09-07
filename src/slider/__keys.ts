@@ -1,5 +1,19 @@
 // Automatically generated
-const SLIDER_STATE_KEYS = [
+export const USE_SLIDER_STATE_KEYS = [
+  "isDisabled",
+  "orientation",
+  "values",
+  "min",
+  "max",
+  "step",
+  "reversed",
+  "defaultValues",
+  "onChange",
+  "onChangeEnd",
+  "onChangeStart",
+  "formatOptions",
+] as const;
+export const SLIDER_STATE_KEYS = [
   "values",
   "min",
   "max",

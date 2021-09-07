@@ -44,9 +44,8 @@ export function useSelectBaseState(
     unregisterItem: compositeUnregisterItem,
   } = composite;
 
-  const [selectedValue, setSelectedValue] = React.useState(
-    initialSelectedValue,
-  );
+  const [selectedValue, setSelectedValue] =
+    React.useState(initialSelectedValue);
   const selectedId = React.useMemo(
     () => getIdFromValue(valuesById.current, selectedValue),
     [valuesById.current, selectedValue],

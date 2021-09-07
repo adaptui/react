@@ -10,12 +10,12 @@ for its
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx -->
+<!-- IMPORT_EXAMPLE src/breadcrumbs/stories/templates/BreadcrumbsBasicJsx.ts -->
 
 <!-- CODESANDBOX
-link_title: Breadcrumbs Basic
-js: src/breadcrumbs/stories/__js/Breadcrumbs.component.jsx
-css: src/breadcrumbs/stories/Breadcrumbs.css
+link_title: Breadcrumbs
+js: src/breadcrumbs/stories/templates/BreadcrumbsBasicJsx.ts
+css: src/breadcrumbs/stories/templates/BreadcrumbsBasicCss.ts
 -->
 
 ## Accessibility Requirement

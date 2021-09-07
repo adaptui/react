@@ -1,27 +1,36 @@
 import * as React from "react";
-import { Meta } from "@storybook/react";
-import { CompositeState } from "reakit/ts";
+import { Meta, Story } from "@storybook/react";
 
-import { AccordionInitialState } from "../AccordionState";
-import { App as Accordion } from "./AccordionMulti.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
-import { accordionMultiTemplate, accordionMultiTemplateJs } from "./templates";
-
-export const Default: React.FC<
-  Omit<AccordionInitialState, keyof CompositeState>
-> = args => <Accordion {...args} />;
+import js from "./templates/AccordionMultiJsx";
+import ts from "./templates/AccordionMultiTsx";
+import Accordion from "./AccordionMulti.component";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: Default,
+  component: Accordion,
   title: "Accordion/Multi",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({
-      js: accordionMultiTemplateJs,
-      ts: accordionMultiTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls({
+    ignore: [
+      "selectedIds",
+      "wrap",
+      "baseId",
+      "unstable_virtual",
+      "rtl",
+      "orientation",
+      "currentId",
+      "shift",
+      "unstable_includesBaseElement",
+      "onSelectedIdsChange",
+      "shouldUpdate",
+    ],
+  }),
 } as Meta;
+
+export const Default: Story = args => <Accordion {...args} />;
 
 export const DefaultSelected = Default.bind({});
 DefaultSelected.args = { defaultSelectedIds: ["accordion3", "accordion4"] };

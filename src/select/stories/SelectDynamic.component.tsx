@@ -1,22 +1,22 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
 import { fruits } from "./Utils.component";
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });
 
   return (
     <>
-      <Select className="select" {...select} aria-label="Fruit">
+      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover {...select} aria-label="Fruits">
         {fruits.length
           ? fruits.map(value => (
@@ -28,4 +28,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

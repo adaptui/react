@@ -11,11 +11,11 @@ and
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/link/stories/__js/Link.component.jsx -->
+<!-- IMPORT_EXAMPLE src/link/stories/templates/LinkBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Link
-js: src/link/stories/__js/Link.component.jsx
+js: src/link/stories/templates/LinkBasicJsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/link -->

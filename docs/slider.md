@@ -32,16 +32,12 @@ import {
   useSliderState,
 } from "@renderlesskit/react";
 
-export const App = args => {
+export const Slider = args => {
   const { label, ...rest } = args;
 
   const state = useSliderState(rest);
-  const {
-    values,
-    getValuePercent,
-    getThumbValueLabel,
-    getThumbPercent,
-  } = state;
+  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
+    state;
 
   return (
     <div
@@ -87,20 +83,20 @@ export const App = args => {
   );
 };
 
-export default App;
+export default Slider;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/s7k9t)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/oii0e)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mbvvy)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0i333)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ldgwg)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rcn4d)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/q2lvt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/wl1jp)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/94sn8)
+[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bibgn)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Multi%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4vqux)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multi%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/tgseh)
 
 ## Accessibility Requirement
 

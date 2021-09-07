@@ -1,38 +1,29 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./Select.css";
-import {
-  utilsTemplate,
-  utilsTemplateJs,
-  selectCssTemplate,
-  selectWindowsTemplate,
-  selectWindowsTemplateJs,
-} from "./templates";
-import { App as SelectWindows } from "./SelectWindows.component";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import "./SelectBasic.css";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import css from "./templates/SelectBasicCss";
+import js from "./templates/SelectWindowsJsx";
+import ts from "./templates/SelectWindowsTsx";
+import Select from "./SelectWindows.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
-  component: SelectWindows,
+  component: Select,
   title: "Select/Windows",
   parameters: {
-    preview: createPreviewTabs({
-      js: selectWindowsTemplateJs,
-      jsUtils: utilsTemplateJs,
-      ts: selectWindowsTemplate,
-      tsUtils: utilsTemplate,
-      css: selectCssTemplate,
-    }),
+    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    options: { showPanel: true },
   },
   decorators: [
     Story => {
-      document.body.id = "select";
+      document.body.id = "select-basic";
       return <Story />;
     },
   ],
 } as Meta;
 
-const Base: Story = args => <SelectWindows {...args} />;
-
-export const Default = Base.bind({});
+export const Default: Story = args => <Select {...args} />;
 Default.args = {};

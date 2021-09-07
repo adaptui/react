@@ -19,16 +19,16 @@ and
 ```js
 import * as React from "react";
 
-import { Link } from "@renderlesskit/react";
+import { Link as RenderlesskitLink } from "@renderlesskit/react";
 
-export const App = props => {
-  return <Link {...props}>Reakit</Link>;
+export const Link = props => {
+  return <RenderlesskitLink {...props}>Reakit</RenderlesskitLink>;
 };
 
-export default App;
+export default Link;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5gwlm)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/c2yxn)
 
 ## Composition
 

@@ -15,8 +15,8 @@ export type NumberInputDecrementButtonOptions = ButtonOptions &
 
 export type NumberInputDecrementButtonHTMLProps = ButtonHTMLProps;
 
-export type NumberInputDecrementButtonProps = NumberInputDecrementButtonOptions &
-  NumberInputDecrementButtonHTMLProps;
+export type NumberInputDecrementButtonProps =
+  NumberInputDecrementButtonOptions & NumberInputDecrementButtonHTMLProps;
 
 export const useNumberInputDecrementButton = createHook<
   NumberInputDecrementButtonOptions,

@@ -3,15 +3,14 @@ import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
 
 import {
-  cx,
-  isNull,
-  Progress,
+  Progress as RenderlesskitProgress,
   ProgressState,
   useProgressState,
   ProgressInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
+import { cx, isNull } from "../../utils/index";
 
-export interface AppProps extends ProgressInitialState {
+export interface ProgressProps extends ProgressInitialState {
   withLabel?: boolean;
   /**
    * Adds a stripe style to meter bar.
@@ -25,7 +24,7 @@ export interface AppProps extends ProgressInitialState {
   withStripeAnimation?: boolean;
 }
 
-export const App: React.FC<AppProps> = props => {
+export const Progress: React.FC<ProgressProps> = props => {
   const {
     children,
     withLabel = false,
@@ -34,7 +33,10 @@ export const App: React.FC<AppProps> = props => {
     ...rest
   } = props;
   const [value, setValue] = React.useState<number | null>(0);
-  const state = useProgressState({ ...rest, value });
+  const state = useProgressState({
+    ...rest,
+    value: rest.value === null ? null : value,
+  });
   const { percent, isIndeterminate } = state;
 
   React.useEffect(() => {
@@ -59,7 +61,7 @@ export const App: React.FC<AppProps> = props => {
     <div>
       <div className={progressStyle}>
         {withLabel ? <div className={labelStyles}>{`${percent}%`}</div> : null}
-        <Progress
+        <RenderlesskitProgress
           {...state}
           value={value}
           aria-label="progress"
@@ -79,11 +81,11 @@ export const App: React.FC<AppProps> = props => {
   );
 };
 
-export default App;
+export default Progress;
 
 const progressStyle = css({
   background: "rgb(237, 242, 247)",
-  height: "0.5rem",
+  height: "1rem",
   width: "400px",
   overflow: "hidden",
   position: "relative",
@@ -106,7 +108,7 @@ export const labelStyles = css({
   position: "absolute",
   transform: "translate(-50%, -50%)",
   fontWeight: "bold",
-  fontSize: "0.75em",
+  fontSize: "12px",
   lineHeight: 1,
 });
 

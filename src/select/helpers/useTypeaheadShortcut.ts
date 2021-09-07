@@ -53,22 +53,21 @@ export function useTypeaheadShortcut({
   }, [onCharacterPress]);
 }
 
-const handleCharacterPress = (options: TypeAheadShortcutOption) => (
-  character: string,
-) => {
-  const selectedValue = options.values.find(value =>
-    options.currentValue?.includes(value),
-  );
+const handleCharacterPress =
+  (options: TypeAheadShortcutOption) => (character: string) => {
+    const selectedValue = options.values.find(value =>
+      options.currentValue?.includes(value),
+    );
 
-  const nextItem = getNextItemFromSearch(
-    options.values,
-    character,
-    item => item ?? "",
-    selectedValue,
-  );
+    const nextItem = getNextItemFromSearch(
+      options.values,
+      character,
+      item => item ?? "",
+      selectedValue,
+    );
 
-  if (nextItem) {
-    const nextId = getIdFromValue(options.valuesById, nextItem);
-    options.move?.(nextId);
-  }
-};
+    if (nextItem) {
+      const nextId = getIdFromValue(options.valuesById, nextItem);
+      options.move?.(nextId);
+    }
+  };

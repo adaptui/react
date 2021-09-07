@@ -85,9 +85,10 @@ export function useSegmentState(props: SegmentInitialState) {
 
   // https://stackoverflow.com/a/9893752/10629172
   const dateFormatter = useDateFormatter(props.formatOptions);
-  const resolvedOptions = useMemo(() => dateFormatter.resolvedOptions(), [
-    dateFormatter,
-  ]);
+  const resolvedOptions = useMemo(
+    () => dateFormatter.resolvedOptions(),
+    [dateFormatter],
+  );
 
   // Determine how many editable segments there are for validation purposes.
   // The result is cached for performance.

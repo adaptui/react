@@ -27,20 +27,20 @@ for the show/hide.
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
 } from "@renderlesskit/react";
 
-export const App = props => {
+export const Select = props => {
   const select = useSelectState({ gutter: 8, ...props });
 
   return (
     <>
-      <Select className="select" {...select} aria-label="Fruit">
+      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover {...select} aria-label="Fruits">
         <SelectOption {...select} value="Apple" />
         <SelectOption {...select} value="AppleCusturd" />
@@ -51,22 +51,24 @@ export const App = props => {
   );
 };
 
-export default App;
+export default Select;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rq2qc)
+[![Edit CodeSandbox](https://img.shields.io/badge/Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/surso)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Dynamic%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/34ihp)
+[![Edit CodeSandbox](https://img.shields.io/badge/Dynamic%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/l50wh)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Multiple%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/dybrt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multiple%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/quwfv)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Fetch%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/eg10b)
+[![Edit CodeSandbox](https://img.shields.io/badge/Fetch%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8irr5)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Windows%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/g7257)
+[![Edit CodeSandbox](https://img.shields.io/badge/Windows%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/osmtv)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Custom%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/f2sbj)
+[![Edit CodeSandbox](https://img.shields.io/badge/Custom%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mbn6n)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Controlled%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yc1tx)
+[![Edit CodeSandbox](https://img.shields.io/badge/Controlled%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b4w5q)
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Virtual%20Select%20Options-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/l9z28)
 
 ## Composition
 

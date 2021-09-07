@@ -7,11 +7,11 @@ navigation.
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/pagination/stories/__js/Pagination.component.jsx -->
+<!-- IMPORT_EXAMPLE src/pagination/stories/templates/PaginationBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Pagination
-js: src/pagination/stories/__js/Pagination.component.jsx
+js: src/pagination/stories/templates/PaginationBasicJsx.ts
 -->
 
 ## Accessibility Requirement

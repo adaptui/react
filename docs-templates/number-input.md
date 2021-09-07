@@ -11,11 +11,11 @@ for the accessibility features.
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/number-input/stories/__js/NumberInput.component.jsx -->
+<!-- IMPORT_EXAMPLE src/number-input/stories/templates/NumberInputBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: NumberInput
-js: src/number-input/stories/__js/NumberInput.component.jsx
+js: src/number-input/stories/templates/NumberInputBasicJsx.ts
 -->
 
 ## Accessibility Requirement

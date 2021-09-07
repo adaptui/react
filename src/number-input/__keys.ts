@@ -1,5 +1,20 @@
 // Automatically generated
-const NUMBER_INPUT_STATE_KEYS = [
+export const USE_NUMBERINPUT_STATE_KEYS = [
+  "isDisabled",
+  "isReadOnly",
+  "value",
+  "min",
+  "max",
+  "step",
+  "keepWithinRange",
+  "precision",
+  "isInvalid",
+  "isRequired",
+  "defaultValue",
+  "onChange",
+  "focusInputOnChange",
+] as const;
+export const NUMBER_INPUT_STATE_KEYS = [
   "value",
   "min",
   "max",
@@ -33,4 +48,5 @@ export const NUMBER_INPUT_KEYS = [
   "allowMouseWheel",
 ] as const;
 export const NUMBER_INPUT_DECREMENT_BUTTON_KEYS = NUMBER_INPUT_STATE_KEYS;
-export const NUMBER_INPUT_INCREMENT_BUTTON_KEYS = NUMBER_INPUT_DECREMENT_BUTTON_KEYS;
+export const NUMBER_INPUT_INCREMENT_BUTTON_KEYS =
+  NUMBER_INPUT_DECREMENT_BUTTON_KEYS;

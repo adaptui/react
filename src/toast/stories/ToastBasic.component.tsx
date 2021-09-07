@@ -14,7 +14,7 @@ import {
   AlertType,
 } from "./Utils.component";
 
-export const App = () => {
+export const Toast = () => {
   return (
     <ToastProvider>
       <ToastBar />
@@ -23,27 +23,26 @@ export const App = () => {
   );
 };
 
-export default App;
+export default Toast;
 
-const alert = (content: any, type?: AlertType) => ({
-  toast,
-  handlers,
-}: ContentType) => {
-  const { pauseTimer, resumeTimer, removeToast } = handlers;
+const alert =
+  (content: any, type?: AlertType) =>
+  ({ toast, handlers }: ContentType) => {
+    const { pauseTimer, resumeTimer, removeToast } = handlers;
 
-  return (
-    <Alert
-      toast={toast}
-      type={type}
-      hideToast={removeToast}
-      content={content}
-      onMouseEnter={() => pauseTimer(toast.id)}
-      onMouseLeave={() => resumeTimer(toast.id)}
-    >
-      <AlertIndicator toast={toast} type={type} />
-    </Alert>
-  );
-};
+    return (
+      <Alert
+        toast={toast}
+        type={type}
+        hideToast={removeToast}
+        content={content}
+        onMouseEnter={() => pauseTimer(toast.id)}
+        onMouseLeave={() => resumeTimer(toast.id)}
+      >
+        <AlertIndicator toast={toast} type={type} />
+      </Alert>
+    );
+  };
 
 function ToastTriggers() {
   const { addToast, removeToast } = useToastHandlers();

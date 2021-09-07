@@ -1,16 +1,16 @@
 import * as React from "react";
 
 import {
-  Select,
+  Select as RenderlesskitSelect,
   SelectOption,
   SelectPopover,
   useSelectState,
   SelectInitialState,
-} from "@renderlesskit/react";
+} from "../../index";
 
 type User = { value: string; label: string };
 
-export const App: React.FC<SelectInitialState> = props => {
+export const Select: React.FC<SelectInitialState> = props => {
   const select = useSelectState({ gutter: 8, ...props });
   const [users, setUsers] = React.useState<User[]>([]);
 
@@ -32,9 +32,9 @@ export const App: React.FC<SelectInitialState> = props => {
 
   return (
     <>
-      <Select className="select" {...select} aria-label="User">
+      <RenderlesskitSelect className="select" {...select} aria-label="User">
         {selectedUser?.label || "Select a user"}
-      </Select>
+      </RenderlesskitSelect>
       <SelectPopover {...select} aria-label="Users">
         {users.length
           ? users.map(({ value, label }) => (
@@ -48,4 +48,4 @@ export const App: React.FC<SelectInitialState> = props => {
   );
 };
 
-export default App;
+export default Select;

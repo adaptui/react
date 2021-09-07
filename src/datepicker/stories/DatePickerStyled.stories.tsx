@@ -1,14 +1,15 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./tailwind/index.css";
-import { DatePicker } from "./styled/DatePicker.component";
+import "./tailwind.css";
+import { DatePicker } from "./DatePickerStyled.component";
 
 export default {
   component: DatePicker,
-  title: "DatePicker/Styled/Base",
+  title: "DatePicker/Styled",
   parameters: {
     layout: "centered",
+    options: { showPanel: false },
   },
   argTypes: {
     defaultValue: { control: "date", defaultValue: new Date() },
@@ -24,7 +25,4 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <DatePicker {...args} />;
-
-export const Default = Base.bind({});
-Default.args = {};
+export const Default: Story = args => <DatePicker {...args} />;

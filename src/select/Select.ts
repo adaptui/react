@@ -135,26 +135,25 @@ export const Select = createComponent({
   useHook: useSelect,
 });
 
-const handleCharacterPress = (options: SelectOptions) => (
-  character: string,
-) => {
-  /**
-   * Typeahead: Based on current character pressed,
-   * find the next item to be selected
-   */
-  const selectedValue = options.values.find(value =>
-    options.selectedValue?.includes(value),
-  );
+const handleCharacterPress =
+  (options: SelectOptions) => (character: string) => {
+    /**
+     * Typeahead: Based on current character pressed,
+     * find the next item to be selected
+     */
+    const selectedValue = options.values.find(value =>
+      options.selectedValue?.includes(value),
+    );
 
-  const nextItem = getNextItemFromSearch(
-    options.values,
-    character,
-    item => item ?? "",
-    selectedValue,
-  );
+    const nextItem = getNextItemFromSearch(
+      options.values,
+      character,
+      item => item ?? "",
+      selectedValue,
+    );
 
-  if (nextItem) options.setSelectedValue(nextItem);
-};
+    if (nextItem) options.setSelectedValue(nextItem);
+  };
 
 const noop = () => {};
 

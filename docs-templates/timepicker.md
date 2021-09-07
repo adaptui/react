@@ -9,13 +9,13 @@ for the keyboard navigation & accessibility features.
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/timepicker/stories/__js/TimePicker.component.jsx -->
+<!-- IMPORT_EXAMPLE src/timepicker/stories/templates/TimePickerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: TimePicker
-js: src/timepicker/stories/__js/TimePicker.component.jsx
-css: src/timepicker/stories/TimePicker.css
-utils: src/timepicker/stories/__js/Utils.component.jsx
+js: src/timepicker/stories/templates/TimePickerBasicJsx.ts
+css: src/timepicker/stories/templates/TimePickerBasicCss.ts
+utils: src/timepicker/stories/templates/UtilsJsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/timepicker -->

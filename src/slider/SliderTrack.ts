@@ -124,9 +124,10 @@ export const useSliderTrack = createHook<
           ? options.trackRef.current.offsetHeight
           : options.trackRef.current.offsetWidth;
         // Find the closest thumb
-        const trackPosition = options.trackRef.current.getBoundingClientRect()[
-          isVertical ? "top" : "left"
-        ];
+        const trackPosition =
+          options.trackRef.current.getBoundingClientRect()[
+            isVertical ? "top" : "left"
+          ];
         const clickPosition = isVertical ? clientY : clientX;
         const offset = clickPosition - trackPosition;
 

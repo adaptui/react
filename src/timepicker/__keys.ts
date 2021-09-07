@@ -1,5 +1,5 @@
 // Automatically generated
-const TIME_PICKER_COLUMN_STATE_KEYS = [
+export const TIME_PICKER_COLUMN_STATE_KEYS = [
   "up",
   "down",
   "baseId",
@@ -46,7 +46,30 @@ const TIME_PICKER_COLUMN_STATE_KEYS = [
   "restoreOldTime",
   "updateOldTime",
 ] as const;
-const TIME_PICKER_STATE_KEYS = [
+export const USE_TIME_PICKER_STATE_KEYS = [
+  "baseId",
+  "visible",
+  "animated",
+  "modal",
+  "placement",
+  "unstable_fixed",
+  "unstable_flip",
+  "unstable_offset",
+  "gutter",
+  "unstable_preventOverflow",
+  "isDisabled",
+  "isReadOnly",
+  "pickerId",
+  "dialogId",
+  "segmentFocus",
+  "value",
+  "defaultValue",
+  "onChange",
+  "formatOptions",
+  "placeholderDate",
+  "autoFocus",
+] as const;
+export const TIME_PICKER_STATE_KEYS = [
   "fieldValue",
   "setFieldValue",
   "segments",

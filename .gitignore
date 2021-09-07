@@ -77,3 +77,6 @@ yarn-error.log*
 size-plugin.json
 stats-react.json
 stats.html
+
+#Project
+templates

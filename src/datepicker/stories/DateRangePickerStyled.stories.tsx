@@ -1,15 +1,16 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./tailwind/index.css";
-import { RangeDatePicker } from "./styled/RangeDatePicker.component";
-import { addWeeks } from "@renderlesskit/react/utils";
+import "./tailwind.css";
+import { addWeeks } from "../../utils";
+import { DateRangePicker } from "./DateRangePickerStyled.component";
 
 export default {
-  component: RangeDatePicker,
-  title: "DatePicker/Styled/Range",
+  component: DateRangePicker,
+  title: "DateRangePicker/Styled",
   parameters: {
     layout: "centered",
+    options: { showPanel: false },
   },
   argTypes: {
     defaultStart: {
@@ -35,7 +36,4 @@ export default {
   ],
 } as Meta;
 
-const Base: Story = args => <RangeDatePicker {...args} />;
-
-export const Default = Base.bind({});
-Default.args = {};
+export const Default: Story = args => <DateRangePicker {...args} />;

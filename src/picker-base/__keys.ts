@@ -1,5 +1,22 @@
 // Automatically generated
-const PICKER_BASE_STATE_KEYS = [
+export const USE_PICKER_BASE_STATE_KEYS = [
+  "baseId",
+  "visible",
+  "animated",
+  "modal",
+  "placement",
+  "unstable_fixed",
+  "unstable_flip",
+  "unstable_offset",
+  "gutter",
+  "unstable_preventOverflow",
+  "isDisabled",
+  "isReadOnly",
+  "pickerId",
+  "dialogId",
+  "segmentFocus",
+] as const;
+export const PICKER_BASE_STATE_KEYS = [
   "baseId",
   "unstable_idCountRef",
   "visible",

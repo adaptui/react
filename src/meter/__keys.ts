@@ -1,11 +1,14 @@
 // Automatically generated
-const METER_STATE_KEYS = [
+export const USE_METER_STATE_KEYS = [
   "value",
   "min",
   "max",
   "low",
-  "high",
   "optimum",
+  "high",
+] as const;
+export const METER_STATE_KEYS = [
+  ...USE_METER_STATE_KEYS,
   "percent",
   "status",
 ] as const;

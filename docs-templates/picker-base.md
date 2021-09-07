@@ -8,11 +8,11 @@
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/picker-base/stories/__js/PickerBase.component.jsx -->
+<!-- IMPORT_EXAMPLE src/picker-base/stories/templates/PickerBaseBasicJsx.ts -->
 
 <!-- CODESANDBOX
-link_title: PickerBase
-js: src/picker-base/stories/__js/PickerBase.component.jsx
+link_title: Picker Base
+js: src/picker-base/stories/templates/PickerBaseBasicJsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/picker-base -->

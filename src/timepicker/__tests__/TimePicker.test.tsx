@@ -9,7 +9,7 @@ import {
   TimePickerSegment,
   TimePickerContent,
   useTimePickerState,
-  TimePickerStateProps,
+  TimePickerInitialState,
   TimePickerColumnValue,
   TimePickerSegmentField,
 } from "../index";
@@ -31,7 +31,7 @@ afterAll(() => {
 
 afterEach(cleanup);
 
-const TimePickerComp: React.FC<TimePickerStateProps> = props => {
+const TimePickerComp: React.FC<TimePickerInitialState> = props => {
   const state = useTimePickerState(props);
 
   return (

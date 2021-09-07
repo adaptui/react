@@ -1,4 +1,5 @@
 import { warn } from "@chakra-ui/utils";
+import { splitProps } from "reakit-utils";
 
 import { Booleanish } from "./types";
 
@@ -59,6 +60,7 @@ export function isTouch() {
   return Boolean(
     "ontouchstart" in window ||
       window.navigator.maxTouchPoints > 0 ||
+      // @ts-ignore
       window.navigator.msMaxTouchPoints > 0,
   );
 }
@@ -74,6 +76,13 @@ export const cx = (...classNames: any[]) =>
 
 export function kebabCase(string: string) {
   return string.toLowerCase().replace(/[^a-z0-9]/g, "-");
+}
+
+// Split state props
+export function splitStateProps<T, P>(props: any, keys: readonly any[]) {
+  const [stateProps, otherProps] = splitProps(props, keys);
+
+  return [stateProps, otherProps] as [T, P];
 }
 
 export * from "./date";

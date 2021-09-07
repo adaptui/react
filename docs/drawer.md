@@ -19,21 +19,21 @@ import React from "react";
 import { css } from "@emotion/css";
 
 import {
-  Drawer,
+  Drawer as RenderlesskitDrawer,
   useDrawerState,
   DrawerBackdrop,
   DrawerCloseButton,
   DrawerDisclosure,
 } from "@renderlesskit/react";
 
-export const App = () => {
-  const dialog = useDrawerState({ animated: true });
+export const Drawer = props => {
+  const dialog = useDrawerState({ animated: true, ...props });
   const inputRef = React.useRef(null);
   const [placement, setPlacement] = React.useState("left");
 
   return (
     <div>
-      <DrawerDisclosure {...dialog}>Open Drawer</DrawerDisclosure>
+      <DrawerDisclosure {...dialog}>{`Open Drawer`}</DrawerDisclosure>
       <select
         defaultValue={placement}
         onBlur={e => setPlacement(e.target.value)}
@@ -44,7 +44,7 @@ export const App = () => {
         <option value="left">Left</option>
       </select>
       <DrawerBackdrop className={backdropStyles} {...dialog}>
-        <Drawer
+        <RenderlesskitDrawer
           {...dialog}
           placement={placement}
           aria-label="Hello world"
@@ -65,13 +65,13 @@ export const App = () => {
           <DrawerCloseButton {...dialog}>X</DrawerCloseButton>
           <p>Welcome to Reakit!</p>
           <input ref={inputRef} />
-        </Drawer>
+        </RenderlesskitDrawer>
       </DrawerBackdrop>
     </div>
   );
 };
 
-export default App;
+export default Drawer;
 
 const backdropStyles = css`
   opacity: 0;
@@ -95,7 +95,7 @@ const cssTransforms = {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Drawer-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/igtld)
+[![Edit CodeSandbox](https://img.shields.io/badge/Drawer-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/fyqw3)
 
 ## Composition
 

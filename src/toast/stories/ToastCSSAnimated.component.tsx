@@ -14,7 +14,7 @@ import {
   useToastHandlers,
 } from "./Utils.component";
 
-export const App = () => {
+export const Toast = () => {
   return (
     <ToastProvider animationDuration={300}>
       <ToastBar />
@@ -23,29 +23,28 @@ export const App = () => {
   );
 };
 
-export default App;
+export default Toast;
 
-const alert = (content: any, type?: AlertType) => ({
-  toast,
-  handlers,
-}: ContentType) => {
-  const { pauseTimer, resumeTimer, dismissToast } = handlers;
+const alert =
+  (content: any, type?: AlertType) =>
+  ({ toast, handlers }: ContentType) => {
+    const { pauseTimer, resumeTimer, dismissToast } = handlers;
 
-  return (
-    <ToastWrapper toast={toast}>
-      <Alert
-        toast={toast}
-        type={type}
-        hideToast={dismissToast}
-        content={content}
-        onMouseEnter={() => pauseTimer(toast.id)}
-        onMouseLeave={() => resumeTimer(toast.id)}
-      >
-        <AlertIndicator toast={toast} type={type} />
-      </Alert>
-    </ToastWrapper>
-  );
-};
+    return (
+      <ToastWrapper toast={toast}>
+        <Alert
+          toast={toast}
+          type={type}
+          hideToast={dismissToast}
+          content={content}
+          onMouseEnter={() => pauseTimer(toast.id)}
+          onMouseLeave={() => resumeTimer(toast.id)}
+        >
+          <AlertIndicator toast={toast} type={type} />
+        </Alert>
+      </ToastWrapper>
+    );
+  };
 
 export function ToastTriggers() {
   const { showToast } = useToastHandlers();

@@ -1,9 +1,8 @@
-const fs = require("fs");
-const path = require("path");
 const strip = require("strip-comments");
 const prettier = require("prettier/standalone");
 const parserBabel = require("prettier/parser-babel");
 
+const { joinCwd, extractCode } = require("./common-utils");
 const injectMdContent = require("./inject-md-content");
 const prettierConfig = require("../../.prettierrc.json");
 
@@ -16,10 +15,8 @@ const injectExamples = docsTemplate => {
     CODE_EXAMPLE_FLAG,
     (line, regexMatched) => {
       const importString = regexMatched[1];
-      const importPath = path.resolve(process.cwd(), importString);
-
-      const code = fs.readFileSync(importPath, { encoding: "utf-8" });
-      const prettifiedCode = prettier.format(strip(code), {
+      const importPath = joinCwd(importString);
+      const prettifiedCode = prettier.format(strip(extractCode(importPath)), {
         parser: "babel",
         plugins: [parserBabel],
         ...prettierConfig,

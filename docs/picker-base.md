@@ -20,29 +20,29 @@
 import * as React from "react";
 
 import {
-  PickerBase,
+  PickerBase as RenderlesskitPickerBase,
   PickerBaseTrigger,
   PickerBaseContent,
   usePickerBaseState,
 } from "@renderlesskit/react";
 
-export const App = props => {
+export const PickerBase = props => {
   const state = usePickerBaseState(props);
 
   return (
     <>
-      <PickerBase {...state}>
+      <RenderlesskitPickerBase {...state}>
         <PickerBaseTrigger {...state}>open</PickerBaseTrigger>
-      </PickerBase>
+      </RenderlesskitPickerBase>
       <PickerBaseContent {...state}>Content</PickerBaseContent>
     </>
   );
 };
 
-export default App;
+export default PickerBase;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/PickerBase-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/h7pxf)
+[![Edit CodeSandbox](https://img.shields.io/badge/Picker%20Base-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yighd)
 
 ## Composition
 

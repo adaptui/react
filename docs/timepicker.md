@@ -25,7 +25,7 @@ for the keyboard navigation & accessibility features.
 import * as React from "react";
 
 import {
-  TimePicker,
+  TimePicker as RenderlesskitTimePicker,
   TimePickerColumn,
   TimePickerSegment,
   TimePickerTrigger,
@@ -34,15 +34,14 @@ import {
   TimePickerColumnValue,
   TimePickerSegmentField,
 } from "@renderlesskit/react";
-
 import { CalendarIcon } from "./Utils.component";
 
-export const App = props => {
+export const TimePicker = props => {
   const state = useTimePickerState(props);
 
   return (
     <>
-      <TimePicker className="timepicker" {...state}>
+      <RenderlesskitTimePicker className="timepicker" {...state}>
         <div className="timepicker__header">
           <TimePickerSegmentField {...state} className="timepicker__field">
             {state.segments.map((segment, i) => (
@@ -58,7 +57,7 @@ export const App = props => {
             <CalendarIcon />
           </TimePickerTrigger>
         </div>
-      </TimePicker>
+      </RenderlesskitTimePicker>
       <TimePickerContent className="timepicker__content" {...state}>
         <TimePickerColumn className="timepicker__column" {...state.hourState}>
           {state.hours.map(n => {
@@ -110,10 +109,10 @@ export const App = props => {
   );
 };
 
-export default App;
+export default TimePicker;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/xwghd)
+[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3d78z)
 
 ## Composition
 

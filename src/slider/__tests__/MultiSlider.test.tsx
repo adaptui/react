@@ -60,12 +60,8 @@ export const MultiSliderComponent = (
 
   const state = useSliderState({ reversed: reversed, ...rest });
   const origin = originProp ?? state.min ?? 0;
-  const {
-    values,
-    getValuePercent,
-    getThumbValueLabel,
-    getThumbPercent,
-  } = state;
+  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
+    state;
 
   const isVertical = false;
   const isRange = values.length === 2;

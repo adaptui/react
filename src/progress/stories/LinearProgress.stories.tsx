@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { App as Progress } from "./LinearProgress.component";
-import { linearProgressTemplate, linearProgressTemplateJs } from "./templates";
-import { createPreviewTabs } from "../../../scripts/create-preview-tabs";
+import js from "./templates/LinearProgressJsx";
+import ts from "./templates/LinearProgressTsx";
+import { Progress } from "./LinearProgress.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Progress,
@@ -11,28 +12,26 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: linearProgressTemplateJs,
-      ts: linearProgressTemplate,
+      js,
+      ts,
       deps: ["reakit@latest", "@emotion/css@latest"],
     }),
   },
 } as Meta;
 
-const Base: Story = args => <Progress {...args} />;
+export const Default: Story = args => <Progress {...args} />;
 
-export const Default = Base.bind({});
-
-export const WithLabel = Base.bind({});
+export const WithLabel = Default.bind({});
 WithLabel.args = { withLabel: true };
 
-export const WithStripe = Base.bind({});
+export const WithStripe = Default.bind({});
 WithStripe.args = { withStripe: true };
 
-export const WithStripeAnimation = Base.bind({});
+export const WithStripeAnimation = Default.bind({});
 WithStripeAnimation.args = {
   withStripe: true,
   withStripeAnimation: true,
 };
 
-export const IsIndeterminate = Base.bind({});
+export const IsIndeterminate = Default.bind({});
 IsIndeterminate.args = { value: null };
