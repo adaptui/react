@@ -13,8 +13,6 @@ export const USE_CALENDAR_STATE_KEYS = [
 export const CALENDAR_STATE_KEYS = [
   "calendarId",
   "dateValue",
-  "minDate",
-  "maxDate",
   "month",
   "year",
   "weekStart",
@@ -25,6 +23,7 @@ export const CALENDAR_STATE_KEYS = [
   "isReadOnly",
   "currentMonth",
   "focusedDate",
+  "isInvalidDateRange",
   "isRangeCalendar",
   "setFocused",
   "setCurrentMonth",

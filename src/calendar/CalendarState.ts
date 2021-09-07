@@ -10,7 +10,7 @@ import {
   addWeeks,
   addYears,
   endOfMonth,
-  format,
+  formatDate,
   getDaysInMonth,
   isSameMonth,
   startOfDay,
@@ -19,12 +19,9 @@ import {
   subMonths,
   subWeeks,
   subYears,
-  parseDate,
-  stringifyDate,
-  isInvalidDateRange,
   useControllableState,
+  toUTCString,
 } from "../utils";
-import { closestTo } from "../utils";
 import * as React from "react";
 import { unstable_useId as useId } from "reakit";
 import { useUpdateEffect } from "@chakra-ui/hooks";
@@ -38,38 +35,34 @@ export function useCalendarState(
   props: CalendarInitialState = {},
 ): CalendarStateReturn {
   const {
-    value: initialDate,
-    defaultValue: defaultValueProp,
-    onChange: onChangeProp,
-    minValue: minValueProp,
-    maxValue: maxValueProp,
+    value: initialValue,
+    defaultValue = toUTCString(new Date()),
+    onChange,
+    minValue,
+    maxValue,
     isDisabled = false,
     isReadOnly = false,
     autoFocus = false,
   } = props;
 
-  const onChange = React.useCallback(
-    (date: Date) => {
-      return onChangeProp?.(stringifyDate(date));
-    },
-    [onChangeProp],
-  );
-
-  const [value, setControllableValue] = useControllableState({
-    value: parseDate(initialDate),
-    defaultValue: parseDate(defaultValueProp),
+  const [value, setValue] = useControllableState({
+    value: initialValue,
+    defaultValue,
     onChange,
   });
-  const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
 
-  const initialMonth = value ?? new Date();
-  const minValue = parseDate(minValueProp);
-  const maxValue = parseDate(maxValueProp);
-
-  const [currentMonth, setCurrentMonth] = React.useState(initialMonth);
-  const [focusedDate, setFocusedDate] = React.useState(initialMonth);
+  const date = React.useMemo(() => new Date(value), [value]);
+  const minDateValue = React.useMemo(
+    () => (minValue ? new Date(minValue) : new Date(-864e13)),
+    [minValue],
+  );
+  const maxDateValue = React.useMemo(
+    () => (maxValue ? new Date(maxValue) : new Date(864e13)),
+    [maxValue],
+  );
+  const [currentMonth, setCurrentMonth] = React.useState(date);
+  const [focusedDate, setFocusedDate] = React.useState(date);
   const [isFocused, setFocused] = React.useState(autoFocus);
-
   const month = currentMonth.getMonth();
   const year = currentMonth.getFullYear();
   const weekStart = useWeekStart();
@@ -89,25 +82,16 @@ export function useCalendarState(
     [month, monthStartsAt, weeksInMonth, year],
   );
 
+  function isInvalidDateRange(value: Date) {
+    const min = new Date(minDateValue);
+    const max = new Date(maxDateValue);
+
+    return value < min || value > max;
+  }
+
   // Sets focus to a specific cell date
   function focusCell(date: Date) {
-    if (isInvalidDateRange(date, minValue, maxValue)) {
-      // Fixes https://github.com/timelessco/renderlesskit-react/issues/116
-      // Issue causing the focusNextMonth & focusPrevMonth to not work because
-      // of adding one month to the current date which becomes invalid above.
-      if (minValue && maxValue) {
-        if (!isSameMonth(date, minValue) && !isSameMonth(date, maxValue))
-          return;
-
-        const nextDate = closestTo(date, [minValue, maxValue]);
-        if (!isSameMonth(nextDate, currentMonth)) {
-          setCurrentMonth(startOfMonth(nextDate).toDate());
-        }
-        setFocusedDate(nextDate);
-      }
-
-      return;
-    }
+    if (isInvalidDateRange(date)) return;
 
     if (!isSameMonth(date, currentMonth)) {
       setCurrentMonth(startOfMonth(date).toDate());
@@ -118,15 +102,34 @@ export function useCalendarState(
 
   const announceSelectedDate = React.useCallback((value: Date) => {
     if (!value) return;
-    announce(`Selected Date: ${format(value, "do MMM yyyy")}`);
+
+    announce(`Selected Date: ${formatDate(value, "do MMM yyyy")}`);
   }, []);
 
-  function setValue(value: Date) {
-    if (!isDisabled && !isReadOnly) {
-      setControllableValue(value);
-      announceSelectedDate(value);
-    }
-  }
+  const setDate = React.useCallback(
+    (value: Date) => {
+      if (!isDisabled && !isReadOnly) {
+        setValue(toUTCString(value));
+        announceSelectedDate(value);
+      }
+    },
+    [announceSelectedDate, isDisabled, isReadOnly, setValue],
+  );
+
+  // TODO
+  // This runs only once when the component is mounted
+  // Controlled state doesn't change the claender position
+  // React.useEffect(() => {
+  // const clampedDate = clamp(date, {
+  //   start: minDateValue,
+  //   end: maxDateValue,
+  // });
+  // setDate(clampedDate);
+  // setCurrentMonth(clampedDate);
+  // setFocusedDate(clampedDate);
+  // }, [date, maxDateValue, minDateValue, setDate]);
+
+  const monthFormatter = useDateFormatter({ month: "long", year: "numeric" });
 
   // Announce when the current month changes
   useUpdateEffect(() => {
@@ -141,10 +144,9 @@ export function useCalendarState(
   const { id: calendarId } = useId({ id: props.id, baseId: "calendar" });
 
   return {
+    dateValue: date,
+    setDateValue: setDate,
     calendarId,
-    dateValue: value,
-    minDate: minValue,
-    maxDate: maxValue,
     month,
     year,
     weekStart,
@@ -154,7 +156,6 @@ export function useCalendarState(
     isFocused,
     isReadOnly,
     setFocused,
-    setDateValue: setValue,
     currentMonth,
     setCurrentMonth,
     focusedDate,
@@ -191,11 +192,12 @@ export function useCalendarState(
       focusCell(subYears(focusedDate, 1));
     },
     selectFocusedDate() {
-      setValue(focusedDate);
+      setDate(focusedDate);
     },
     selectDate(date: Date) {
-      setValue(date);
+      setDate(date);
     },
+    isInvalidDateRange,
     isRangeCalendar: false,
   };
 }
@@ -209,14 +211,6 @@ export type CalendarState = {
    * Selected Date value
    */
   dateValue: Date;
-  /**
-   * Minimum allowed Date value
-   */
-  minDate: Date | undefined;
-  /**
-   * Maximum allowed Date value
-   */
-  maxDate: Date | undefined;
   /**
    * Month of the current date value
    */
@@ -260,6 +254,10 @@ export type CalendarState = {
    * Date value that is currently focused
    */
   focusedDate: Date;
+  /**
+   * Informs if the given date is within the min & max date.
+   */
+  isInvalidDateRange: (value: Date) => boolean;
   /**
    * `true` if the calendar is used as RangeCalendar
    */
@@ -338,18 +336,18 @@ export type CalendarActions = {
 };
 
 type ValueBase = {
-  /** The current value (controlled). */
+  /** The current date (controlled). */
   value?: string;
-  /** The default value (uncontrolled). */
+  /** The default date (uncontrolled). */
   defaultValue?: string;
-  /** Handler that is called when the value changes. */
+  /** Handler that is called when the date changes. */
   onChange?: (value: string) => void;
 };
 
 type RangeValueMinMax = {
-  /** The smallest value allowed. */
+  /** The lowest date allowed. */
   minValue?: string;
-  /** The largest value allowed. */
+  /** The highest date allowed. */
   maxValue?: string;
 };
 

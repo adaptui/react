@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import { useArgs } from "@storybook/client-api";
 
 import "./CalendarBasic.css";
 import jsUtils from "./templates/UtilsJsx";
@@ -8,9 +7,9 @@ import tsUtils from "./templates/UtilsTsx";
 import js from "./templates/CalendarBasicJsx";
 import ts from "./templates/CalendarBasicTsx";
 import css from "./templates/CalendarBasicCss";
-import { format, addWeeks } from "../../utils";
 import Calendar from "./CalendarBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
+import { addMonths, addYears, subMonths, toUTCString } from "../../utils";
 
 export default {
   component: Calendar,
@@ -28,48 +27,26 @@ export default {
 } as Meta;
 
 export const Default: Story = args => {
-  args.value &&= format(new Date(args.value), "YYYY-MM-DD");
-  args.defaultValue &&= format(new Date(args.defaultValue), "YYYY-MM-DD");
-  args.minValue &&= format(new Date(args.minValue), "YYYY-MM-DD");
-  args.maxValue &&= format(new Date(args.maxValue), "YYYY-MM-DD");
-
-  const [{ value }, updateArgs] = useArgs();
-
-  return (
-    <Calendar
-      value={value}
-      onChange={date =>
-        updateArgs({ value: format(new Date(date), "YYYY-MM-DD") })
-      }
-      {...args}
-    />
-  );
+  return <Calendar {...args} />;
 };
 
-export const DefaultValue = Default.bind({});
-DefaultValue.args = { defaultValue: new Date() };
+export const DefaultDate = Default.bind({});
+DefaultDate.args = { defaultValue: toUTCString(addYears(new Date(), 1)) };
 
 export const MinMaxDate = Default.bind({});
 MinMaxDate.args = {
-  minValue: new Date(),
-  maxValue: addWeeks(new Date(), 1),
+  minValue: toUTCString(subMonths(new Date(), 1)),
+  maxValue: toUTCString(addMonths(new Date(), 1)),
 };
 
 export const IsDisabled = Default.bind({});
-IsDisabled.args = { defaultValue: new Date(), isDisabled: true };
+IsDisabled.args = { defaultValue: toUTCString(new Date()), isDisabled: true };
 
 export const IsReadonly = Default.bind({});
-IsReadonly.args = { defaultValue: new Date(), isReadonly: true };
+IsReadonly.args = { defaultValue: toUTCString(new Date()), isReadOnly: true };
 
 export const AutoFocus = Default.bind({});
-AutoFocus.args = { defaultValue: new Date(), autoFocus: true };
-
-export const ControlledStory = Default.bind({});
-ControlledStory.args = {
-  value: new Date(),
-  minValue: new Date(),
-  maxValue: addWeeks(new Date(), 1),
-};
+AutoFocus.args = { defaultValue: toUTCString(new Date()), autoFocus: true };
 
 export const ControlledInput = () => {
   const [value, setValue] = React.useState("2020-10-13");

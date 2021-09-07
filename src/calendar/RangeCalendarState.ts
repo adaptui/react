@@ -11,44 +11,47 @@ import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
 import { CalendarActions, CalendarState } from "./CalendarState";
 import {
-  format,
+  formatDate,
   isSameDay,
-  parseRangeDate,
-  stringifyDate,
+  toUTCRangeString,
+  toUTCString,
   useControllableState,
+  addDays,
 } from "../utils";
 
 export function useRangeCalendarState(
   props: RangeCalendarInitialState = {},
 ): RangeCalendarStateReturn {
   const {
-    value: initialDate,
-    defaultValue: defaultValueProp,
-    onChange: onChangeProp,
+    value: initialValue,
+    defaultValue = {
+      start: toUTCString(new Date()),
+      end: toUTCString(addDays(new Date(), 1)),
+    },
+    onChange,
     ...calendarProps
   } = props;
 
-  const onChange = React.useCallback(
-    (date: RangeValue<Date>) => {
-      return onChangeProp?.({
-        start: stringifyDate(date.start),
-        end: stringifyDate(date.end),
-      });
-    },
-    [onChangeProp],
-  );
-
-  const [value, setValue] = useControllableState<RangeValue<Date>>({
-    value: parseRangeDate(initialDate),
-    defaultValue: parseRangeDate(defaultValueProp),
+  const [value, setValue] = useControllableState({
+    value: initialValue,
+    defaultValue,
     onChange,
   });
 
-  const dateRange = value != null ? value : null;
+  const dateRange: RangeValue<Date> = React.useMemo(
+    () => ({
+      start: new Date(value.start),
+      end: new Date(value.end),
+    }),
+    [value.end, value.start],
+  );
   const [anchorDate, setAnchorDate] = React.useState<Date | null>(null);
+  const [lastSelectedDate, setLastSelectedDate] = React.useState<Date>(
+    dateRange.end,
+  );
   const calendar = useCalendarState({
     ...calendarProps,
-    value: value && stringifyDate(value.start),
+    value: toUTCString(lastSelectedDate),
   });
 
   const highlightedRange = anchorDate
@@ -57,42 +60,52 @@ export function useRangeCalendarState(
 
   const announceRange = React.useCallback(() => {
     if (!highlightedRange) return;
+
     if (isSameDay(highlightedRange.start, highlightedRange.end)) {
       announce(
-        `Selected range, from ${format(
+        `Selected range, from ${formatDate(
           highlightedRange.start,
           "Do MMM YYYY",
-        )} to ${format(highlightedRange.start, "Do MMM YYYY")}`,
+        )} to ${formatDate(highlightedRange.start, "Do MMM YYYY")}`,
       );
     } else {
       announce(
-        `Selected range, from ${format(
+        `Selected range, from ${formatDate(
           highlightedRange.start,
           "Do MMM YYYY",
-        )} to ${format(highlightedRange.end, "Do MMM YYYY")}`,
+        )} to ${formatDate(highlightedRange.end, "Do MMM YYYY")}`,
       );
     }
   }, [highlightedRange]);
 
-  const selectDate = (date: Date) => {
-    if (props.isReadOnly) {
-      return;
-    }
+  const selectDate = React.useCallback(
+    (date: Date) => {
+      if (props.isReadOnly) return;
 
-    if (!anchorDate) {
-      setAnchorDate(date);
-      announce(`Starting range from ${format(date, "Do MMM YYYY")}`);
-    } else {
-      setValue(makeRange(anchorDate, date));
-      announceRange();
-      setAnchorDate(null);
-    }
-  };
+      setLastSelectedDate(date);
+      if (!anchorDate) {
+        setAnchorDate(date);
+        announce(`Starting range from ${formatDate(date, "Do MMM YYYY")}`);
+      } else {
+        setValue(toUTCRangeString(makeRange(anchorDate, date)));
+        announceRange();
+        setAnchorDate(null);
+      }
+    },
+    [anchorDate, announceRange, props.isReadOnly, setValue],
+  );
+
+  const setDateValue = React.useCallback(
+    (value: RangeValue<Date>) => {
+      setValue(toUTCRangeString(value));
+    },
+    [setValue],
+  );
 
   return {
     ...calendar,
     dateRangeValue: dateRange,
-    setDateRangeValue: setValue,
+    setDateRangeValue: setDateValue,
     anchorDate,
     setAnchorDate,
     highlightedRange,
@@ -101,9 +114,8 @@ export function useRangeCalendarState(
       selectDate(calendar.focusedDate);
     },
     highlightDate(date: Date) {
-      if (anchorDate) {
-        calendar.setFocusedDate(date);
-      }
+      if (!anchorDate) return;
+      calendar.setFocusedDate(date);
     },
     isRangeCalendar: true,
   };
@@ -117,7 +129,7 @@ export type RangeCalendarState = CalendarState & {
 };
 
 export type RangeCalendarActions = CalendarActions & {
-  setDateRangeValue: React.Dispatch<React.SetStateAction<RangeValue<Date>>>;
+  setDateRangeValue: (value: RangeValue<Date>) => void;
   setAnchorDate: React.Dispatch<React.SetStateAction<Date | null>>;
   selectDate: (date: Date) => void;
   selectFocusedDate: () => void;

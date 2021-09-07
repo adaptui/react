@@ -15,7 +15,6 @@ import {
 } from "../index";
 import { repeat } from "../../utils/test-utils";
 import { cleanup } from "@testing-library/react";
-import { addWeeks, format, subWeeks } from "../../utils";
 
 export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
@@ -152,9 +151,9 @@ describe("Calendar", () => {
   test("should have min/max values", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue="2020-11-07"
+        minValue="2020-10-31"
+        maxValue="2020-11-14"
       />,
     );
     const { getByLabelText: label } = screen;
@@ -173,9 +172,9 @@ describe("Calendar", () => {
   test("should be able to go to prev/next month when min/max values are set", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue="2020-11-07"
+        minValue="2020-10-31"
+        maxValue="2020-11-14"
       />,
     );
     const { getByLabelText: label } = screen;
@@ -199,9 +198,9 @@ describe("Calendar", () => {
   test("should be able to go to prev/next year when min/max values are set", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2021, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue="2020-11-07"
+        minValue="2020-10-31"
+        maxValue="2020-11-14"
       />,
     );
 

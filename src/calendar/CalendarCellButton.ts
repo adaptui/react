@@ -10,7 +10,7 @@ import { ensureFocus, useForkRef } from "reakit-utils";
 import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 
-import { isInvalidDateRange, isSameDay } from "../utils";
+import { isSameDay } from "../utils";
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";
@@ -28,14 +28,11 @@ export const useCalendarCellButton = createHook<
       isDisabled: isDisabledOption,
       date,
       month,
-      minDate,
-      maxDate,
+      isInvalidDateRange,
     } = options;
     const isCurrentMonth = date.getMonth() === month;
     const isDisabled =
-      isDisabledOption ||
-      !isCurrentMonth ||
-      isInvalidDateRange(date, minDate, maxDate);
+      isDisabledOption || !isCurrentMonth || isInvalidDateRange(date);
     const truelyDisabled = disabled || isDisabled;
 
     return { disabled: truelyDisabled, ...options };
@@ -146,11 +143,10 @@ export type CalendarCellButtonOptions = ButtonOptions &
     | "setFocusedDate"
     | "isDisabled"
     | "month"
-    | "minDate"
-    | "maxDate"
     | "dateValue"
     | "isFocused"
     | "isRangeCalendar"
+    | "isInvalidDateRange"
   > & {
     date: Date;
   };
