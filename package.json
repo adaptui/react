@@ -96,7 +96,7 @@
     "@react-aria/interactions": "^3.5.1",
     "@react-aria/spinbutton": "^3.0.1",
     "@react-aria/utils": "^3.8.2",
-    "dayjs": "^1.10.6",
+    "date-fns": "^2.23.0",
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
     "reakit-warning": "^0.6.2"

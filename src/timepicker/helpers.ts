@@ -1,4 +1,3 @@
-import { formatDate } from "../utils";
 import { isString } from "@chakra-ui/utils";
 
 import { ColumnType } from "./TimePickerColumnState";
@@ -28,7 +27,7 @@ export function parseTime(timeValue: string | undefined) {
 }
 
 export function stringifyTime(date: Date) {
-  return formatDate(date, "HH:mm:ss");
+  return date.toString().slice(16, 24);
 }
 
 export function getSelectedValueFromDate(date: Date, type: ColumnType) {

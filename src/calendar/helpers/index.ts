@@ -2,20 +2,18 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
-import dayjs from "dayjs";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
 
-import { toUTCString } from "../../utils";
+import { toUTCString, setDay } from "../../utils";
 
 export function useWeekDays(weekStart: number) {
   const dayFormatter = useDateFormatter({ weekday: "short" });
   const dayFormatterLong = useDateFormatter({ weekday: "long" });
 
   return [0, 1, 2, 3, 4, 5, 6].map(index => {
-    const dateDay = dayjs(Date.now())
-      .set("day", (index + weekStart) % 7)
-      .toDate();
+    const dateDay = setDay(Date.now(), (index + weekStart) % 7);
+
     const day = dayFormatter.format(dateDay);
     const dayLong = dayFormatterLong.format(dateDay);
     return { title: dayLong, abbr: day } as const;

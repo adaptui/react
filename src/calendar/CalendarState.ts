@@ -67,7 +67,7 @@ export function useCalendarState(
   const weekStart = useWeekStart();
   const weekDays = useWeekDays(weekStart);
 
-  let monthStartsAt = (startOfMonth(currentMonth).get("day") - weekStart) % 7;
+  let monthStartsAt = (startOfMonth(currentMonth).getDay() - weekStart) % 7;
   if (monthStartsAt < 0) {
     monthStartsAt += 7;
   }
@@ -93,7 +93,7 @@ export function useCalendarState(
     if (isInvalidDateRange(date)) return;
 
     if (!isSameMonth(date, currentMonth)) {
-      setCurrentMonth(startOfMonth(date).toDate());
+      setCurrentMonth(startOfMonth(date));
     }
 
     setFocusedDate(date);
@@ -184,10 +184,10 @@ export function useCalendarState(
       focusCell(subMonths(focusedDate, 1));
     },
     focusStartOfMonth() {
-      focusCell(startOfMonth(focusedDate).toDate());
+      focusCell(startOfMonth(focusedDate));
     },
     focusEndOfMonth() {
-      focusCell(endOfMonth(startOfDay(focusedDate).toDate()).toDate());
+      focusCell(endOfMonth(startOfDay(focusedDate)));
     },
     focusNextYear() {
       focusCell(addYears(focusedDate, 1));

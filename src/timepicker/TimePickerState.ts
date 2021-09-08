@@ -7,7 +7,7 @@ import { SegmentInitialState, useSegmentState } from "../segment";
 import { useTimePickerColumnState } from "./TimePickerColumnState";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 import { announce } from "../utils/LiveAnnouncer";
-import { formatDate } from "../utils";
+import { useDateFormatter } from "@react-aria/i18n";
 
 export type TimePickerInitialState = PickerBaseInitialState &
   ValueBase<string> &
@@ -101,8 +101,11 @@ export const useTimePickerState = (props: TimePickerInitialState = {}) => {
   const hours = [...new Array(13).keys()].slice(1);
   const minutes = [...new Array(60).keys()];
   const meridies = ["AM", "PM"];
+
+  const dateFormatter = useDateFormatter({ timeStyle: "medium" });
+
   const announceSelectedDate = () => {
-    announce(`Selected Time: ${formatDate(time, "h:m a")}`);
+    announce(`Selected Time: ${dateFormatter.format(time)}`);
   };
 
   React.useEffect(() => {
