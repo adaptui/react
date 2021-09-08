@@ -1,3 +1,11 @@
+### [0.5.2](https://github.com/timelessco/renderlesskit-react/compare/v0.5.1...v0.5.2) (2021-09-08)
+
+
+### Build Updates
+
+* **date-fns:** 💚 add esm imports ([a84adf9](https://github.com/timelessco/renderlesskit-react/commit/a84adf962313a2198ed08fd9c01082ef00d367a5))
+* **esm:** 💚 fix date fns esm error ([af945d2](https://github.com/timelessco/renderlesskit-react/commit/af945d273291d23b38350dbca5a78ef6522123b6))
+
 ### [0.5.1](https://github.com/timelessco/renderlesskit-react/compare/v0.5.0...v0.5.1) (2021-09-08)
 
 
