@@ -14,11 +14,10 @@ import * as React from "react";
 import { useCompositeState, unstable_useId as useId } from "reakit";
 
 import {
-  parseDate,
-  stringifyDate,
-  parseRangeDate,
-  isInvalidDateRange,
   useControllableState,
+  addDays,
+  toUTCString,
+  toUTCRangeString,
 } from "../utils";
 import { makeRange } from "../calendar/helpers";
 import { RangeValueBase } from "../utils/types";
@@ -41,43 +40,35 @@ export const useDateRangePickerState = (
   props: DateRangePickerInitialState = {},
 ) => {
   const {
-    value: initialDate,
-    defaultValue: defaultValueProp = {
-      start: stringifyDate(new Date()),
-      end: stringifyDate(new Date()),
+    value: initialValue,
+    defaultValue = {
+      start: toUTCString(new Date()),
+      end: toUTCString(addDays(new Date(), 1)),
     },
-    onChange: onChangeProp,
-    minValue: minValueProp,
-    maxValue: maxValueProp,
+    onChange,
+    minValue,
+    maxValue,
     isRequired,
     autoFocus,
     formatOptions,
     placeholderDate,
   } = props;
 
-  const onChange = React.useCallback(
-    (date: RangeValue<Date>) => {
-      return onChangeProp?.({
-        start: stringifyDate(date.start),
-        end: stringifyDate(date.end),
-      });
-    },
-    [onChangeProp],
-  );
-
-  const [value, setValue] = useControllableState<RangeValue<Date>>({
-    value: parseRangeDate(initialDate),
-    defaultValue:
-      parseRangeDate(defaultValueProp) ||
-      parseRangeDate({
-        start: stringifyDate(new Date()),
-        end: stringifyDate(new Date()),
-      }),
+  const [value, setValue] = useControllableState({
+    value: initialValue,
+    defaultValue,
     onChange,
   });
 
-  const minValue = parseDate(minValueProp);
-  const maxValue = parseDate(maxValueProp);
+  const dateRange: RangeValue<Date> = React.useMemo(
+    () => ({
+      start: new Date(value.start),
+      end: new Date(value.end),
+    }),
+    [value.end, value.start],
+  );
+  const minDateValue = minValue ? new Date(minValue) : new Date(-864e13);
+  const maxDateValue = maxValue ? new Date(maxValue) : new Date(864e13);
 
   const selectDate = (date: RangeValue<string>) => {
     if (props.isReadOnly || props.isDisabled) {
@@ -85,7 +76,7 @@ export const useDateRangePickerState = (
     }
 
     setValue(
-      makeRange(parseDate(date.start) as Date, parseDate(date.end) as Date),
+      toUTCRangeString(makeRange(new Date(date.start), new Date(date.end))),
     );
 
     popover.hide();
@@ -94,17 +85,19 @@ export const useDateRangePickerState = (
   const segmentComposite = useCompositeState({ orientation: "horizontal" });
 
   const startSegmentState = useSegmentState({
-    value: value.start,
-    defaultValue: parseDate(defaultValueProp?.start),
-    onChange: date => setValue({ start: date, end: value.end }),
+    value: dateRange.start,
+    defaultValue: new Date(defaultValue.start),
+    onChange: date =>
+      setValue(toUTCRangeString({ start: date, end: dateRange.end })),
     formatOptions,
     placeholderDate,
   });
 
   const endSegmentState = useSegmentState({
-    value: value.end,
-    defaultValue: parseDate(defaultValueProp?.end),
-    onChange: date => setValue({ start: value.start, end: date }),
+    value: dateRange.end,
+    defaultValue: new Date(defaultValue.end),
+    onChange: date =>
+      setValue(toUTCRangeString({ start: dateRange.start, end: date })),
     formatOptions,
     placeholderDate,
   });
@@ -115,23 +108,21 @@ export const useDateRangePickerState = (
   });
 
   const calendar = useRangeCalendarState({
-    value: { start: stringifyDate(value.start), end: stringifyDate(value.end) },
+    value: { start: value.start, end: value.end },
     onChange: selectDate,
-    minValue: minValueProp,
-    maxValue: maxValueProp,
+    minValue: minValue,
+    maxValue: maxValue,
   });
 
-  const isStartInRange = isInvalidDateRange(
-    value.start,
-    parseDate(props.minValue),
-    parseDate(props.maxValue),
-  );
+  function isInvalidDateRange(value: Date) {
+    const min = new Date(minDateValue);
+    const max = new Date(maxDateValue);
 
-  const isEndInRange = isInvalidDateRange(
-    value.end,
-    parseDate(props.minValue),
-    parseDate(props.maxValue),
-  );
+    return value < min || value > max;
+  }
+
+  const isStartInRange = isInvalidDateRange(dateRange.start);
+  const isEndInRange = isInvalidDateRange(dateRange.end);
 
   const validationState: ValidationState =
     props.validationState ||

@@ -15,7 +15,6 @@ import {
 } from "../index";
 import { repeat } from "../../utils/test-utils";
 import { cleanup } from "@testing-library/react";
-import { addWeeks, format, subWeeks } from "../../utils";
 
 export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
@@ -125,8 +124,9 @@ describe("Calendar", () => {
     const { getByLabelText: label } = screen;
 
     expect(currentYear).toHaveTextContent(/^october 2020$/i);
-    repeat(press.Tab, 5);
 
+    // Tab to go inside the calendar dates
+    repeat(press.Tab, 5);
     expect(label(/wednesday, october 7, 2020 selected/i)).toHaveFocus();
 
     // Let's navigate to 30
@@ -152,13 +152,14 @@ describe("Calendar", () => {
   test("should have min/max values", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue={"2020-11-07"}
+        minValue={"2020-10-31"}
+        maxValue={"2020-11-14"}
       />,
     );
     const { getByLabelText: label } = screen;
 
+    // Tab to go inside the calendar dates
     repeat(press.Tab, 5);
     expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
@@ -173,35 +174,38 @@ describe("Calendar", () => {
   test("should be able to go to prev/next month when min/max values are set", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue={"2020-11-07"}
+        minValue={"2020-10-31"}
+        maxValue={"2020-11-14"}
       />,
     );
     const { getByLabelText: label } = screen;
 
+    // Tab to go inside the calendar dates
     repeat(press.Tab, 5);
     expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
+    // Should not be able to go to next/prev months
     press.PageUp();
-    expect(label(/^saturday, october 31, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageDown();
-    expect(label(/^saturday, november 14, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
-    // Should not be able to go to next/prev year
+    // Should not be able to go to next/prev years
     press.PageDown(null, { shiftKey: true });
-    expect(label(/^saturday, november 14, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
+
     press.PageUp(null, { shiftKey: true });
-    expect(label(/^saturday, november 14, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
   });
 
-  test("should be able to go to prev/next year when min/max values are set", () => {
+  test("should not be able to go to prev/next year when min/max values are set", () => {
     render(
       <CalendarComp
-        defaultValue={format(new Date(2020, 10, 7), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(2020, 10, 7), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(2021, 10, 7), 1), "YYYY-MM-DD")}
+        defaultValue={"2020-11-07"}
+        minValue={"2020-10-31"}
+        maxValue={"2020-11-14"}
       />,
     );
 
@@ -211,36 +215,41 @@ describe("Calendar", () => {
     expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageUp();
-    expect(label(/^saturday, october 31, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageDown(null, { shiftKey: true });
-    expect(label(/^sunday, october 31, 2021$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageDown();
-    expect(label(/^sunday, november 14, 2021$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageUp();
-    expect(label(/^thursday, october 14, 2021$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
 
     press.PageUp(null, { shiftKey: true });
-    expect(label(/^saturday, october 31, 2020$/i)).toHaveFocus();
+    expect(label(/^saturday, november 7, 2020 selected$/i)).toHaveFocus();
   });
 
   it("should have proper aria-label for calendar cell button", () => {
-    MockDate.set(new Date(2021, 7, 10));
+    MockDate.set("2020-11-07");
     render(<CalendarComp />);
 
     screen.getByRole("button", {
-      name: /today, tuesday, august 10, 2021/i,
+      name: /^today, saturday, november 7, 2020 selected$/i,
     });
 
     repeat(press.Tab, 5);
+    press.ArrowRight();
     press.Enter();
     screen.getByRole("button", {
-      name: /today, tuesday, august 10, 2021 selected/i,
+      name: /sunday, november 8, 2020 selected/i,
     });
-    press.ArrowRight();
-    expect(screen.getByLabelText(/wednesday, august 11, 2021/i)).toHaveFocus();
+
+    repeat(press.ArrowLeft, 2);
+    press.Enter();
+    screen.getByRole("button", {
+      name: /friday, november 6, 2020 selected/i,
+    });
 
     MockDate.reset();
   });

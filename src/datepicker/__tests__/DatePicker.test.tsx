@@ -23,7 +23,7 @@ import {
   CalendarCellButton,
 } from "../../calendar";
 import { repeat } from "../../utils/test-utils";
-import { addWeeks, format, subWeeks } from "../../utils";
+import { addWeeks, subWeeks, toUTCString } from "../../utils";
 
 /*
 // Mocking useId otherwise snapshots will change each time
@@ -227,9 +227,9 @@ describe("DatePicker", () => {
   it("should be invalid on out of range value", () => {
     render(
       <DatePickerComp
-        defaultValue={format(addWeeks(new Date(), 2), "YYYY-MM-DD")}
-        minValue={format(subWeeks(new Date(), 1), "YYYY-MM-DD")}
-        maxValue={format(addWeeks(new Date(), 1), "YYYY-MM-DD")}
+        defaultValue={toUTCString(addWeeks(new Date(), 2))}
+        minValue={toUTCString(subWeeks(new Date(), 1))}
+        maxValue={toUTCString(addWeeks(new Date(), 1))}
       />,
     );
 

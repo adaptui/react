@@ -2,9 +2,11 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
+import dayjs from "dayjs";
 import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
-import dayjs from "dayjs";
+
+import { toUTCString } from "../../utils";
 
 export function useWeekDays(weekStart: number) {
   const dayFormatter = useDateFormatter({ weekday: "short" });
@@ -31,8 +33,9 @@ export function generateDaysInMonthArray(
     .reduce((weeks: Date[][], _, weekIndex) => {
       const daysInWeek = [0, 1, 2, 3, 4, 5, 6].reduce(
         (days: Date[], dayIndex) => {
-          const day = weekIndex * 7 + dayIndex - monthStartsAt + 1;
-          const cellDate = new Date(year, month, day, new Date().getHours());
+          const day = weekIndex * 7 + dayIndex - monthStartsAt + 2;
+          const utcDate = toUTCString(new Date(year, month, day));
+          const cellDate = new Date(utcDate);
 
           return [...days, cellDate];
         },

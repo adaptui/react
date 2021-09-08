@@ -1,48 +1,13 @@
 import dayjs from "dayjs";
-import { parse } from "date-fns";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-
 import { RangeValue } from "@react-types/shared";
 
-dayjs.extend(advancedFormat);
-
-export function parseDate(dateValue: string | undefined) {
-  if (dateValue == null) return;
-
-  const parsedDate = parse(dateValue, "yyyyyy-MM-dd", new Date());
-
-  // Check for Invalid Date
-  if (isNaN(+parsedDate)) return;
-  parsedDate.setHours(new Date().getHours());
-  return parsedDate;
-}
-
-export const parseRangeDate = (
-  date?: RangeValue<string>,
-): RangeValue<Date> | undefined => {
-  if (!date) return;
-
-  const start = parseDate(date.start);
-  const end = parseDate(date.end);
-  if (!start || !end) return;
-  return { start, end };
+export const toUTCString = (date: Date) => {
+  return date.toISOString().slice(0, 10);
 };
 
-export function stringifyDate(date: Date) {
-  return format(date, "YYYY-MM-DD");
-}
-
-export function isInvalidDateRange(
-  value: Date,
-  minValue?: Date,
-  maxValue?: Date,
-) {
-  return (
-    value != null &&
-    ((minValue != null && value < minValue) ||
-      (maxValue != null && value > maxValue))
-  );
-}
+export const toUTCRangeString = (date: RangeValue<Date>) => {
+  return { start: toUTCString(date.start), end: toUTCString(date.end) };
+};
 
 export const subDays = (date: Date, amount: number) =>
   dayjs(date).subtract(amount, "day").toDate();
@@ -123,54 +88,6 @@ export const isWeekend = (date: Date) => {
   return day === 0 || day === 6;
 };
 
-export const format = (date: Date, fmt: string) => {
+export const formatDate = (date: Date, fmt: string) => {
   return dayjs(date).format(fmt);
 };
-
-export function closestTo(
-  dirtyDateToCompare: Date | number,
-  dirtyDatesArray: (Date | number)[],
-): Date {
-  let dateToCompare = dayjs(dirtyDateToCompare);
-
-  if (!dateToCompare.isValid()) {
-    return new Date(NaN);
-  }
-
-  let timeToCompare = dateToCompare.toDate().getTime();
-
-  let datesArray;
-  // `dirtyDatesArray` is undefined or null
-  if (dirtyDatesArray == null) {
-    datesArray = [];
-
-    // `dirtyDatesArray` is Array, Set or Map, or object with custom `forEach` method
-  } else if (typeof dirtyDatesArray.forEach === "function") {
-    datesArray = dirtyDatesArray;
-
-    // If `dirtyDatesArray` is Array-like Object, convert to Array. Otherwise, make it empty Array
-  } else {
-    datesArray = Array.prototype.slice.call(dirtyDatesArray);
-  }
-
-  let result: Date | null;
-  let minDistance: number;
-  datesArray.forEach(function (dirtyDate: any) {
-    let currentDate = dayjs(dirtyDate);
-
-    if (!currentDate.isValid()) {
-      result = new Date(NaN);
-      minDistance = NaN;
-      return;
-    }
-
-    let distance = Math.abs(timeToCompare - currentDate.toDate().getTime());
-    if (result == null || distance < minDistance) {
-      result = currentDate.toDate();
-      minDistance = distance;
-    }
-  });
-
-  // @ts-ignore
-  return result;
-}

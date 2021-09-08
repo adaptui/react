@@ -7,14 +7,9 @@
 import * as React from "react";
 import { Validation, ValueBase, ValidationState } from "@react-types/shared";
 
-import {
-  parseDate,
-  stringifyDate,
-  isInvalidDateRange,
-  useControllableState,
-} from "../utils";
 import { useCalendarState } from "../calendar";
 import { RangeValueBase } from "../utils/types";
+import { toUTCString, useControllableState } from "../utils";
 import { SegmentInitialState, useSegmentState } from "../segment";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
 
@@ -31,36 +26,31 @@ export type DatePickerInitialState = ValueBase<string> &
 
 export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   const {
-    value: initialDate,
-    defaultValue: defaultValueProp = stringifyDate(new Date()),
-    onChange: onChangeProp,
-    minValue: minValueProp,
-    maxValue: maxValueProp,
+    value: initialValue,
+    defaultValue = toUTCString(new Date()),
+    onChange,
+    minValue,
+    maxValue,
     isRequired,
     autoFocus,
     formatOptions,
     placeholderDate,
   } = props;
 
-  const onChange = React.useCallback(
-    (date: Date) => {
-      return onChangeProp?.(stringifyDate(date));
-    },
-    [onChangeProp],
-  );
-
   const [value, setValue] = useControllableState({
-    value: parseDate(initialDate),
-    defaultValue: parseDate(defaultValueProp) || new Date(),
+    value: initialValue,
+    defaultValue,
     onChange,
   });
 
-  const minValue = parseDate(minValueProp);
-  const maxValue = parseDate(maxValueProp);
+  const date = new Date(value);
+  const setDate = (date: Date) => setValue(toUTCString(date));
+  const minDateValue = minValue ? new Date(minValue) : new Date(-864e13);
+  const maxDateValue = maxValue ? new Date(maxValue) : new Date(864e13);
 
   const segmentState = useSegmentState({
-    value,
-    onChange: setValue,
+    value: date,
+    onChange: setDate,
     formatOptions,
     placeholderDate,
   });
@@ -71,26 +61,24 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
   });
 
   const selectDate = (newValue: string) => {
-    const newDate = parseDate(newValue);
-    if (newDate) setValue(newDate);
+    setValue(newValue);
     popover.hide();
   };
 
   const calendar = useCalendarState({
-    value: stringifyDate(value),
+    value,
     onChange: selectDate,
-    minValue: minValueProp,
-    maxValue: maxValueProp,
+    minValue: minValue,
+    maxValue: maxValue,
   });
 
   const validationState: ValidationState =
-    props.validationState ||
-    (isInvalidDateRange(value, minValue, maxValue) ? "invalid" : "valid");
+    props.validationState || (isInvalidDateRange(date) ? "invalid" : "valid");
 
   React.useEffect(() => {
     if (popover.visible) {
       calendar.setFocused(true);
-      calendar.focusCell(value);
+      calendar.focusCell(date);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,6 +91,13 @@ export const useDatePickerState = (props: DatePickerInitialState = {}) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, segmentState.first]);
+
+  function isInvalidDateRange(value: Date) {
+    const min = new Date(minDateValue);
+    const max = new Date(maxDateValue);
+
+    return value < min || value > max;
+  }
 
   return {
     dateValue: value,

@@ -1,7 +1,7 @@
 import * as React from "react";
 import MockDate from "mockdate";
 import { cleanup, screen } from "@testing-library/react";
-import { axe, render, press, fireEvent } from "reakit-test-utils";
+import { axe, render, press } from "reakit-test-utils";
 
 import {
   Calendar,
@@ -128,19 +128,27 @@ describe("RangeCalendar", () => {
     );
 
     repeat(press.Tab, 5);
-    press.Enter(label(/Monday, October 7, 2019 selected/));
-    press.ArrowDown();
-    press.ArrowRight();
-    press.Enter(label(/Tuesday, October 15, 2019/));
+    expect(label(/Wednesday, October 30, 2019 selected/)).toHaveFocus();
 
-    expect(announce).toHaveBeenCalledTimes(2);
+    press.ArrowUp();
+    press.ArrowRight();
+    press.Enter(label(/Thursday, October 24, 2019/));
+
     expect(announce).toHaveBeenLastCalledWith(
-      "Selected range, from 7th Oct 2019 to 15th Oct 2019",
+      "Starting range from Thursday, October 24, 2019",
     );
+
+    press.ArrowRight();
+    press.Enter(label(/Friday, October 25, 2019/));
+
+    expect(announce).toHaveBeenLastCalledWith(
+      "Selected range from Thursday, October 24, 2019 to Thursday, October 24, 2019",
+    );
+    expect(announce).toHaveBeenCalledTimes(2);
   });
 
   it("should be able to select ranges with keyboard navigation", () => {
-    MockDate.set(new Date(2020, 10, 7));
+    MockDate.set("2020-10-07");
     const { baseElement } = render(
       <RangeCalendarComp
         defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
@@ -150,86 +158,90 @@ describe("RangeCalendar", () => {
     expect(screen.getByTestId("current-year")).toHaveTextContent(
       /October 2020/i,
     );
-    repeat(press.Tab, 5);
 
+    repeat(press.Tab, 5);
     expect(
       screen.getByLabelText(
-        /^Wednesday, October 7, 2020 selected \(click to start selecting range\)$/,
+        /^Friday, October 30, 2020 selected \(click to start selecting range\)$/,
       ),
     ).toHaveFocus();
-    press.ArrowDown(); // go to down just for some variety
 
+    press.ArrowUp(); // go to down just for some variety
     press.Enter(); // start the selection, currently the start and end should be the same date
     expect(
       baseElement.querySelector("[data-is-selection-start]"),
-    ).toHaveTextContent("14");
+    ).toHaveTextContent("23");
+    press.ArrowDown();
     expect(
       baseElement.querySelector("[data-is-selection-end]"),
-    ).toHaveTextContent("14");
+    ).toHaveTextContent("30");
 
-    // Now we choose the end date, let's choose 19
-    repeat(press.ArrowDown, 3);
-    repeat(press.ArrowLeft, 2);
+    // finish the selection
     expect(
       screen.getByLabelText(
-        /^Monday, November 2, 2020 \(click to finish selecting range\)$/i,
+        /^Friday, October 30, 2020 \(click to finish selecting range\)$/,
       ),
     ).toHaveFocus();
-    // finish the selection
-    press.Enter();
 
     // check if the selection is actually finished or not
-    repeat(press.ArrowRight, 2);
-    const fourThNovember = screen.getByLabelText(
-      /^Wednesday, November 4, 2020 \(click to start selecting range\)$/i,
+    press.Enter();
+    const selectedDate = screen.getByLabelText(
+      /^Friday, October 30, 2020 selected \(click to start selecting range\)$/,
     );
-    expect(fourThNovember).toHaveFocus();
-    expect(fourThNovember?.parentElement).not.toHaveAttribute(
+    expect(selectedDate).toHaveFocus();
+    expect(selectedDate?.parentElement).toHaveAttribute(
+      "data-is-range-selection",
+    );
+
+    press.ArrowRight();
+    const nextDate = screen.getByLabelText(
+      /^Saturday, October 31, 2020 \(click to start selecting range\)$/,
+    );
+    expect(nextDate).toHaveFocus();
+    expect(nextDate?.parentElement).not.toHaveAttribute(
       "data-is-range-selection",
     );
 
     // Verify selection ranges
     const end = baseElement.querySelector("[data-is-selection-end]");
-    expect(end).toHaveTextContent("2");
+    expect(end).toHaveTextContent("30");
 
-    fireEvent.click(screen.getByTestId("prev-month"));
-    // We need to go to previous month to see/verify the start selection
     const start = baseElement.querySelector("[data-is-selection-start]");
-    expect(start).toHaveTextContent("14");
+    expect(start).toHaveTextContent("23");
   });
 
   it("should be able to cancel selection", () => {
     render(
       <RangeCalendarComp
-        defaultValue={{ start: "2019-10-07", end: "2019-10-30" }}
+        defaultValue={{ start: "2020-10-07", end: "2020-10-30" }}
       />,
     );
 
     expect(screen.getByTestId("current-year")).toHaveTextContent(
-      /October 2019/i,
+      /October 2020/i,
     );
-    repeat(press.Tab, 5);
 
+    repeat(press.Tab, 5);
     expect(
       screen.getByLabelText(
-        /^Monday, October 7, 2019 selected \(click to start selecting range\)$/i,
+        /^Friday, October 30, 2020 selected \(click to start selecting range\)$/,
       ),
     ).toHaveFocus();
-    press.ArrowDown();
+
+    press.ArrowUp();
     press.Enter(); // start the selection
 
-    // Now we choose the end date, let's choose 19
+    // Now we choose the end date, let's choose 30
     press.ArrowDown();
-    repeat(press.ArrowRight, 2);
     expect(
       screen.getByLabelText(
-        /^Wednesday, October 23, 2019 \(click to finish selecting range\)$/i,
+        /^Friday, October 30, 2020 \(click to finish selecting range\)$/i,
       ),
     ).toHaveFocus();
 
     press.Escape();
-    isEndSelection(screen.getByLabelText(/Wednesday, October 30, 2019/));
-    isStartSelection(screen.getByLabelText(/Monday, October 7, 2019 selected/));
+    isStartSelection(screen.getByLabelText(/Wednesday, October 7, 2020/));
+    isEndSelection(screen.getByLabelText(/Friday, October 30, 2020/));
   });
 
   test("RangeCalendar renders with no a11y violations", async () => {
