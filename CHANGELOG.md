@@ -1,3 +1,51 @@
+## [0.5.0](https://github.com/timelessco/renderlesskit-react/compare/v0.4.0...v0.5.0) (2021-09-08)
+
+
+### Feature Updates
+
+* **checkbox:** ✨ add checkbox & update deps ([fc12143](https://github.com/timelessco/renderlesskit-react/commit/fc1214366df2007a8d525528dbbc8c592bae1cfc))
+
+
+### Build Updates
+
+* **build:** 💚 fix vercel build error with path ([f58b8c0](https://github.com/timelessco/renderlesskit-react/commit/f58b8c05ca16ef4f5fb27bad1d9bc7845d984187))
+* **release-it:** 👷 update release configs ([949fcc9](https://github.com/timelessco/renderlesskit-react/commit/949fcc91e2c34f321a04b849e052346f8f769e10))
+* **release-it:** 💚 remove snapshot update in test ([a6e2477](https://github.com/timelessco/renderlesskit-react/commit/a6e2477178d47426f494fe6cfdeed1b5d63818a3))
+* **vercel:** 💚 fix slider import path ([ad4cdba](https://github.com/timelessco/renderlesskit-react/commit/ad4cdbae6388f4abac9a1eafddd87488018e6761))
+
+
+### CI Changes
+
+* **templates:** 💚 fix vercel templates bug ([3c7d717](https://github.com/timelessco/renderlesskit-react/commit/3c7d717cbba72695b63c2d7c6313c1e6375b1fbb))
+
+
+### Code Refactors
+
+* **date:** ♻️ update format & parse to reduce bundle size ([8586325](https://github.com/timelessco/renderlesskit-react/commit/85863258f673ca045b49d88a2dbc81a1c641379f))
+* **format:** 🎨 update path and improve format ([e0b3140](https://github.com/timelessco/renderlesskit-react/commit/e0b31408b8dedd81b3e02f786f3d5a2826e28b40))
+
+
+### Test Updates
+
+* **dates:** ✅ add & update tests for the new changes ([b254100](https://github.com/timelessco/renderlesskit-react/commit/b254100ac22351c8fb43c6bf0d023635dab2cbef))
+
+
+### Maintanance Updates
+
+* **branch:** 🔧 change master to main ([ebc7b42](https://github.com/timelessco/renderlesskit-react/commit/ebc7b42d3cf66fb4f433c395a5a63ede1af5bdca))
+* **pkg:** ⬆️ update dev deps & move dev deps ([7673fd6](https://github.com/timelessco/renderlesskit-react/commit/7673fd646bd47278a46d818cf352309cea909c12))
+
+
+### Documentation Changes
+
+* **calendar:** 📝 update docs generation ([8d41c71](https://github.com/timelessco/renderlesskit-react/commit/8d41c7181e5626a69d028d9f06e651ac6933b18d))
+* **checkbox:** 📝 change misnaming in aria text ([c1da1b4](https://github.com/timelessco/renderlesskit-react/commit/c1da1b4f61b1ec2f2dcef6e185652b3999af8f76))
+* **checkbox:** 📝 refactor stories with better types handling ([09d84e4](https://github.com/timelessco/renderlesskit-react/commit/09d84e43e69804221e4c57c76d43e3e3e6e70660))
+* **docs:** 📝 improve docs csb script & templates ([abdda0e](https://github.com/timelessco/renderlesskit-react/commit/abdda0ee2b65d13426e06b366dc2d5cc6c109c63))
+* **generatejs:** 📝 update sb preview templates generation ([2b7c51d](https://github.com/timelessco/renderlesskit-react/commit/2b7c51d9cbd09fbe24dffdf38e3b7ea71c98d553))
+* **stories:** 📝 update docs with new format ([6649010](https://github.com/timelessco/renderlesskit-react/commit/6649010dc227163c21b9afd2b08e14bb3337b54b))
+* **storybook:** 📝 finish stories migration to new component ([a780c1a](https://github.com/timelessco/renderlesskit-react/commit/a780c1a1162ed5c490c4086784d3bb178c7f44f4))
+
 ## [0.4.0](https://github.com/timelessco/renderlesskit-react/compare/v0.3.3...v0.4.0) (2021-08-13)
 
 
