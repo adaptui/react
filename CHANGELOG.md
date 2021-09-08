@@ -1,3 +1,10 @@
+### [0.5.3](https://github.com/timelessco/renderlesskit-react/compare/v0.5.2...v0.5.3) (2021-09-08)
+
+
+### Build Updates
+
+* **date-fns:** 👷 revert date-fns exports ([efebd31](https://github.com/timelessco/renderlesskit-react/commit/efebd31924f073d40031662c04b54ea6c87ab174))
+
 ### [0.5.2](https://github.com/timelessco/renderlesskit-react/compare/v0.5.1...v0.5.2) (2021-09-08)
 
 
