@@ -29,7 +29,6 @@ import {
   isInSelectionRange,
   repeat,
 } from "../../utils/test-utils";
-import { stringifyDate } from "../../utils";
 
 afterEach(cleanup);
 
@@ -138,8 +137,8 @@ describe("DateRangePicker", () => {
     render(
       <DateRangePickerComp
         defaultValue={{
-          start: stringifyDate(new Date(2020, 10, 15)),
-          end: stringifyDate(new Date(2020, 10, 15)),
+          start: "2020-11-15",
+          end: "2020-11-15",
         }}
       />,
     );
@@ -147,16 +146,14 @@ describe("DateRangePicker", () => {
     openDatePicker();
 
     expect(
-      screen.getByLabelText(
-        /Sunday, November 15, 2020 selected \(click to start selecting range\)/i,
-      ),
+      screen.getByLabelText(/Sunday, November 15, 2020 selected/),
     ).toHaveFocus();
 
-    // check if current date is selected
-    isEndSelection(
+    isStartSelection(
       screen.getByLabelText(/Sunday, November 15, 2020 selected/i),
     );
-    isStartSelection(
+    // check if current date is selected
+    isEndSelection(
       screen.getByLabelText(/Sunday, November 15, 2020 selected/i),
     );
     isInSelectionRange(
@@ -187,8 +184,8 @@ describe("DateRangePicker", () => {
     render(
       <DateRangePickerComp
         defaultValue={{
-          start: stringifyDate(new Date(2020, 10, 15)),
-          end: stringifyDate(new Date(2020, 10, 15)),
+          start: "2020-11-15",
+          end: "2020-11-15",
         }}
       />,
     );
@@ -209,11 +206,11 @@ describe("DateRangePicker", () => {
     render(
       <DateRangePickerComp
         defaultValue={{
-          start: stringifyDate(new Date(2020, 10, 15)),
-          end: stringifyDate(new Date(2020, 10, 15)),
+          start: "2020-11-15",
+          end: "2020-11-15",
         }}
-        minValue={stringifyDate(new Date(2020, 0, 15))}
-        maxValue={stringifyDate(new Date(2020, 10, 15))}
+        minValue={"2020-01-15"}
+        maxValue={"2020-11-15"}
       />,
     );
     const datepicker = screen.getByTestId("datepicker");

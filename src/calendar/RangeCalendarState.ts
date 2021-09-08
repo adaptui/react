@@ -11,13 +11,13 @@ import { announce } from "../utils/LiveAnnouncer";
 import { useCalendarState } from "./CalendarState";
 import { CalendarActions, CalendarState } from "./CalendarState";
 import {
-  formatDate,
   isSameDay,
   toUTCRangeString,
   toUTCString,
   useControllableState,
   addDays,
 } from "../utils";
+import { useDateFormatter } from "@react-aria/i18n";
 
 export function useRangeCalendarState(
   props: RangeCalendarInitialState = {},
@@ -58,25 +58,25 @@ export function useRangeCalendarState(
     ? makeRange(anchorDate, calendar.focusedDate)
     : value && dateRange && makeRange(dateRange.start, dateRange.end);
 
+  const dateFormatter = useDateFormatter({ dateStyle: "full" });
+
   const announceRange = React.useCallback(() => {
     if (!highlightedRange) return;
 
     if (isSameDay(highlightedRange.start, highlightedRange.end)) {
       announce(
-        `Selected range, from ${formatDate(
+        `Selected range, from ${dateFormatter.format(
           highlightedRange.start,
-          "Do MMM YYYY",
-        )} to ${formatDate(highlightedRange.start, "Do MMM YYYY")}`,
+        )} to ${dateFormatter.format(highlightedRange.start)}`,
       );
     } else {
       announce(
-        `Selected range, from ${formatDate(
+        `Selected range from ${dateFormatter.format(
           highlightedRange.start,
-          "Do MMM YYYY",
-        )} to ${formatDate(highlightedRange.end, "Do MMM YYYY")}`,
+        )} to ${dateFormatter.format(highlightedRange.start)}`,
       );
     }
-  }, [highlightedRange]);
+  }, [dateFormatter, highlightedRange]);
 
   const selectDate = React.useCallback(
     (date: Date) => {
@@ -85,14 +85,14 @@ export function useRangeCalendarState(
       setLastSelectedDate(date);
       if (!anchorDate) {
         setAnchorDate(date);
-        announce(`Starting range from ${formatDate(date, "Do MMM YYYY")}`);
+        announce(`Starting range from ${dateFormatter.format(date)}`);
       } else {
         setValue(toUTCRangeString(makeRange(anchorDate, date)));
         announceRange();
         setAnchorDate(null);
       }
     },
-    [anchorDate, announceRange, props.isReadOnly, setValue],
+    [anchorDate, announceRange, dateFormatter, props.isReadOnly, setValue],
   );
 
   const setDateValue = React.useCallback(

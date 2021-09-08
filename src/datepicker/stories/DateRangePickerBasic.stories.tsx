@@ -39,11 +39,11 @@ DefaultValue.args = {
 export const MinMaxValue = Default.bind({});
 MinMaxValue.args = {
   defaultValue: {
-    start: toUTCString(new Date()),
-    end: toUTCString(addWeeks(new Date(), 1)),
+    start: "2020-11-15",
+    end: "2020-11-15",
   },
-  minValue: toUTCString(subWeeks(new Date(), 1)),
-  maxValue: toUTCString(addWeeks(new Date(), 2)),
+  minValue: "2020-01-15",
+  maxValue: "2020-11-15",
 };
 
 export const Disabled = Default.bind({});

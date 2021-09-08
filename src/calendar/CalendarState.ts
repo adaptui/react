@@ -10,7 +10,6 @@ import {
   addWeeks,
   addYears,
   endOfMonth,
-  formatDate,
   getDaysInMonth,
   isSameMonth,
   startOfDay,
@@ -100,11 +99,16 @@ export function useCalendarState(
     setFocusedDate(date);
   }
 
-  const announceSelectedDate = React.useCallback((value: Date) => {
-    if (!value) return;
+  const dateFormatter = useDateFormatter({ dateStyle: "full" });
 
-    announce(`Selected Date: ${formatDate(value, "do MMM yyyy")}`);
-  }, []);
+  const announceSelectedDate = React.useCallback(
+    (value: Date) => {
+      if (!value) return;
+
+      announce(`Selected Date: ${dateFormatter.format(value)}`);
+    },
+    [dateFormatter],
+  );
 
   const setDate = React.useCallback(
     (value: Date) => {
