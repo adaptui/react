@@ -2,8 +2,8 @@
 
 `Checkbox` component can be used as dual or tri-state toggle button regardless
 of the type of the underlying element. It follows the
-[WAI-ARIA Meter Pattern](https://www.w3.org/TR/wai-aria-practices/#checkbox) for
-it's
+[WAI-ARIA Checkbox Pattern](https://www.w3.org/TR/wai-aria-practices/#checkbox)
+for it's
 [accessibility properties](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-5).
 By default, it renders the native `<input type="checkbox">`.
 

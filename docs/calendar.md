@@ -160,11 +160,11 @@ Also we can customize and style the ranges with CSS attribute selectors
 
 | Name               | Type                                                    | Description                                                    |
 | :----------------- | :------------------------------------------------------ | :------------------------------------------------------------- |
-| **`value`**        | <code>string \| undefined</code>                        | The current value (controlled).                                |
-| **`defaultValue`** | <code>string \| undefined</code>                        | The default value (uncontrolled).                              |
-| **`onChange`**     | <code>((value: string) =&#62; void) \| undefined</code> | Handler that is called when the value changes.                 |
-| **`minValue`**     | <code>string \| undefined</code>                        | The smallest value allowed.                                    |
-| **`maxValue`**     | <code>string \| undefined</code>                        | The largest value allowed.                                     |
+| **`value`**        | <code>string \| undefined</code>                        | The current date (controlled).                                 |
+| **`defaultValue`** | <code>string \| undefined</code>                        | The default date (uncontrolled).                               |
+| **`onChange`**     | <code>((value: string) =&#62; void) \| undefined</code> | Handler that is called when the date changes.                  |
+| **`minValue`**     | <code>string \| undefined</code>                        | The lowest date allowed.                                       |
+| **`maxValue`**     | <code>string \| undefined</code>                        | The highest date allowed.                                      |
 | **`isDisabled`**   | <code>boolean \| undefined</code>                       | Whether the input is disabled.                                 |
 | **`isReadOnly`**   | <code>boolean \| undefined</code>                       | Whether the input can be selected but not changed by the user. |
 | **`autoFocus`**    | <code>boolean \| undefined</code>                       | Whether the element should receive focus on render.            |
@@ -243,22 +243,21 @@ Also we can customize and style the ranges with CSS attribute selectors
 | **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
 | **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
 
-<details><summary>11 state props</summary>
+<details><summary>10 state props</summary>
 > These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
 
-| Name                  | Type                                                           | Description                                     |
-| :-------------------- | :------------------------------------------------------------- | :---------------------------------------------- |
-| **`anchorDate`**      | <code>Date \| null</code>                                      |                                                 |
-| **`dateValue`**       | <code>Date</code>                                              | Selected Date value                             |
-| **`isDisabled`**      | <code>boolean</code>                                           | `true` if the calendar is disabled              |
-| **`isRangeCalendar`** | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar |
-| **`focusedDate`**     | <code>Date</code>                                              | Date value that is currently focused            |
-| **`selectDate`**      | <code>(value: Date) =&#62; void</code>                         | sets `dateValue`                                |
-| **`setFocusedDate`**  | <code>(value: SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate`                              |
-| **`month`**           | <code>number</code>                                            | Month of the current date value                 |
-| **`minDate`**         | <code>Date \| undefined</code>                                 | Minimum allowed Date value                      |
-| **`maxDate`**         | <code>Date \| undefined</code>                                 | Maximum allowed Date value                      |
-| **`isFocused`**       | <code>boolean</code>                                           | `true` if the calendar is focused               |
+| Name                     | Type                                                           | Description                                             |
+| :----------------------- | :------------------------------------------------------------- | :------------------------------------------------------ |
+| **`anchorDate`**         | <code>Date \| null</code>                                      |                                                         |
+| **`dateValue`**          | <code>Date</code>                                              | Selected Date value                                     |
+| **`isDisabled`**         | <code>boolean</code>                                           | `true` if the calendar is disabled                      |
+| **`isRangeCalendar`**    | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar         |
+| **`focusedDate`**        | <code>Date</code>                                              | Date value that is currently focused                    |
+| **`selectDate`**         | <code>(value: Date) =&#62; void</code>                         | sets `dateValue`                                        |
+| **`setFocusedDate`**     | <code>(value: SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate`                                      |
+| **`month`**              | <code>number</code>                                            | Month of the current date value                         |
+| **`isFocused`**          | <code>boolean</code>                                           | `true` if the calendar is focused                       |
+| **`isInvalidDateRange`** | <code>(value: Date) =&#62; boolean</code>                      | Informs if the given date is within the min & max date. |
 
 </details>
 
