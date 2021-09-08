@@ -99,8 +99,7 @@
     "dayjs": "^1.10.6",
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
-    "reakit-warning": "^0.6.2",
-    "storybook-addon-react-docgen": "^1.2.42"
+    "reakit-warning": "^0.6.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
@@ -194,8 +193,9 @@
     "rimraf": "^3.0.2",
     "sort-package-json": "^1.50.0",
     "storybook-addon-preview": "^2.1.2",
+    "storybook-addon-react-docgen": "^1.2.42",
     "strip-comments": "^2.0.1",
-    "tailwindcss": "^2.2.11",
+    "tailwindcss": "^2.2.12",
     "ts-jest": "^27.0.5",
     "ts-morph": "^12.0.0",
     "ts-node": "^10.2.1",
