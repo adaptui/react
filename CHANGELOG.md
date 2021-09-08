@@ -1,3 +1,10 @@
+### [0.5.1](https://github.com/timelessco/renderlesskit-react/compare/v0.5.0...v0.5.1) (2021-09-08)
+
+
+### Code Refactors
+
+* **date-fns:** ♻️ check date-fns bundle size ([2febac0](https://github.com/timelessco/renderlesskit-react/commit/2febac097a507d4c5a53d10670516ad8627760f3))
+
 ## [0.5.0](https://github.com/timelessco/renderlesskit-react/compare/v0.4.0...v0.5.0) (2021-09-08)
 
 
