@@ -51,7 +51,7 @@ export default Checkbox;
 - When not checked, Checkbox has `aria-checked` set to `false`.
 - When partially checked, Checkbox has `aria-checked` set to `mixed`.
 - When Checkbox is not rendered as a native input checkbox, Checkbox will add
-  `role="checkbox`
+  `role="checkbox"`
 
 ## Composition
 
