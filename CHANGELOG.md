@@ -1,3 +1,15 @@
+## [0.6.0](https://github.com/timelessco/renderlesskit-react/compare/v0.5.3...v0.6.0) (2021-09-14)
+
+
+### Feature Updates
+
+* **radio:** ✨ add radio component ([d45813e](https://github.com/timelessco/renderlesskit-react/commit/d45813e73dea7c13dabaf6e9a54e8433ee23a7c0))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update prod & dev deps ([e5bc5b5](https://github.com/timelessco/renderlesskit-react/commit/e5bc5b51a5952a2ef2461ab5503e55d89c9bc656))
+
 ### [0.5.3](https://github.com/timelessco/renderlesskit-react/compare/v0.5.2...v0.5.3) (2021-09-08)
 
 
