@@ -6,6 +6,5 @@ export {
   useDialogBackdrop as useDrawerBackdrop,
   DialogDisclosure as DrawerDisclosure,
   useDialogDisclosure as useDrawerDisclosure,
-  DialogInitialState as DrawerInitialState,
 } from "reakit/Dialog";
 export * from "./__keys";
