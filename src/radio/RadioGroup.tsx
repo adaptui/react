@@ -12,15 +12,17 @@ export type RadioGroupHTMLProps = CompositeHTMLProps &
 
 export type RadioGroupProps = RadioGroupOptions & RadioGroupHTMLProps;
 
-const useRadioGroup = createHook<RadioGroupOptions, RadioGroupHTMLProps>({
-  name: "RadioGroup",
-  compose: useComposite,
-  keys: RADIO_GROUP_KEYS,
+export const useRadioGroup = createHook<RadioGroupOptions, RadioGroupHTMLProps>(
+  {
+    name: "RadioGroup",
+    compose: useComposite,
+    keys: RADIO_GROUP_KEYS,
 
-  useProps(options, htmlProps) {
-    return { role: "radiogroup", ...htmlProps };
+    useProps(options, htmlProps) {
+      return { role: "radiogroup", ...htmlProps };
+    },
   },
-});
+);
 
 export const RadioGroup = createComponent({
   as: "div",
