@@ -1,3 +1,15 @@
+### [0.6.1](https://github.com/timelessco/renderlesskit-react/compare/v0.6.0...v0.6.1) (2021-09-20)
+
+
+### Documentation Changes
+
+* **readme:** 📝 add checkbox & radio ([fcbf4ef](https://github.com/timelessco/renderlesskit-react/commit/fcbf4eff8feb08df86d6b184599ae24b979de629))
+
+
+### Build Updates
+
+* **dialog:** 💚 fix bug in type reexport ([132b4b7](https://github.com/timelessco/renderlesskit-react/commit/132b4b7659d9fd97e7acfc816902f1b64a553bfb))
+
 ## [0.6.0](https://github.com/timelessco/renderlesskit-react/compare/v0.5.3...v0.6.0) (2021-09-14)
 
 
