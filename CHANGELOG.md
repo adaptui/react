@@ -1,3 +1,15 @@
+### [0.6.2](https://github.com/timelessco/renderlesskit-react/compare/v0.6.1...v0.6.2) (2021-09-20)
+
+
+### Code Refactors
+
+* **radio:** ♻️ export useRadioGroup to the src ([bf9111b](https://github.com/timelessco/renderlesskit-react/commit/bf9111bc2393e27a360d377ada845529fc814479))
+
+
+### Maintanance Updates
+
+* **deps:** 📝 update dev deps ([810ae11](https://github.com/timelessco/renderlesskit-react/commit/810ae11db3d2bcb402a75864b324219c0984a1b8))
+
 ### [0.6.1](https://github.com/timelessco/renderlesskit-react/compare/v0.6.0...v0.6.1) (2021-09-20)
 
 
