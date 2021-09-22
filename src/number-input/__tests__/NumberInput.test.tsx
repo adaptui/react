@@ -15,6 +15,7 @@ import {
   NumberInputDecrementButton,
   NumberInputIncrementButton,
 } from "../index";
+import { act } from "react-dom/test-utils";
 import { repeat } from "../../utils/test-utils";
 import { NumberInputProps } from "../stories/NumberInputBasic.component";
 
@@ -25,6 +26,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  jest.useRealTimers();
   cleanup();
   (window.requestAnimationFrame as any).mockRestore();
 });
@@ -54,7 +56,6 @@ const NumberInputComp = (props: NumberInputProps) => {
 };
 
 describe("NumberInput", () => {
-  expect.assertions(1);
   it("should start with empty string", () => {
     render(<NumberInputComp />);
 
@@ -146,6 +147,8 @@ describe("NumberInput", () => {
   });
 
   it("should increase/decrease with scrollwheel", () => {
+    jest.useFakeTimers();
+
     render(<NumberInputComp defaultValue={0} />);
     const numberInput = screen.getByTestId("numberinput");
 
@@ -153,12 +156,20 @@ describe("NumberInput", () => {
     expect(numberInput).toHaveFocus();
     expect(numberInput).toHaveValue("0");
 
-    fireEvent.wheel(numberInput, { deltaY: -100 });
-    fireEvent.wheel(numberInput, { deltaY: -100 });
+    act(() => {
+      fireEvent.wheel(numberInput, { deltaY: -100 });
+    });
+    act(() => {
+      fireEvent.wheel(numberInput, { deltaY: -100 });
+    });
     expect(numberInput).toHaveValue("2");
 
-    fireEvent.wheel(numberInput, { deltaY: 100 });
-    fireEvent.wheel(numberInput, { deltaY: 100 });
+    act(() => {
+      fireEvent.wheel(numberInput, { deltaY: 100 });
+    });
+    act(() => {
+      fireEvent.wheel(numberInput, { deltaY: 100 });
+    });
     expect(numberInput).toHaveValue("0");
   });
 

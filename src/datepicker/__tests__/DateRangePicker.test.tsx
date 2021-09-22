@@ -129,11 +129,15 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
 const openDatePicker = () => {
   fireEvent.click(screen.getByText(/open/i));
 
+  jest.advanceTimersByTime(1);
+
   expect(screen.getByTestId("datepicker-content")).toBeVisible();
 };
 
 describe("DateRangePicker", () => {
   it("should select date ranges correctly", () => {
+    jest.useFakeTimers();
+
     render(
       <DateRangePickerComp
         defaultValue={{
@@ -178,6 +182,8 @@ describe("DateRangePicker", () => {
     expect(screen.getByTestId("segment")).toHaveTextContent(
       "11/15/2020 - 11/24/2020",
     );
+
+    jest.useRealTimers();
   });
 
   it("should be invalid on wrong date selection", () => {
