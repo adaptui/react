@@ -38,17 +38,17 @@ This possibly was because of wrong jest config.
 
 import React from "react";
 import { VisuallyHidden } from "reakit";
+import { axe, fireEvent, render } from "reakit-test-utils";
 import { cleanup, screen } from "@testing-library/react";
-import { axe, render, fireEvent } from "reakit-test-utils";
 
+import { installMouseEvent } from "../../utils/test-utils";
 import {
-  SliderTrack,
-  SliderThumb,
   SliderInput,
+  SliderThumb,
+  SliderTrack,
   useSliderState,
 } from "../index";
 import { SliderInitialState } from "../SliderState";
-import { installMouseEvent } from "../../utils/test-utils";
 
 export const SliderComponent = (
   props: SliderInitialState & { origin?: number },
@@ -78,7 +78,7 @@ export const SliderComponent = (
         <label className="label" htmlFor="styled-slider">
           Minimal slider
         </label>
-        <div data-testid="slider-value" className="value">
+        <div data-testid="testid-slider-value" className="value">
           {labelValue}
         </div>
       </div>
@@ -103,13 +103,13 @@ export const SliderComponent = (
         >
           <SliderThumb
             className="slider-thumb-handle"
-            data-testid="slider-thumb"
+            data-testid="testid-slider-thumb"
             index={0}
             {...state}
           >
             <VisuallyHidden>
               <SliderInput
-                data-testid="slider-input"
+                data-testid="testid-slider-input"
                 index={0}
                 id="styled-slider"
                 aria-label={`Thumb-${0}`}

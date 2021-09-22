@@ -2,16 +2,16 @@ import * as React from "react";
 import { a, useTransition } from "@react-spring/web";
 
 import {
-  Toast as RenderlesskitToast,
   Alert,
-  ToastBar,
+  AlertIndicator,
   AlertType,
   ContentType,
+  getRandomContent,
+  getRandomType,
+  Toast as RenderlesskitToast,
+  ToastBar,
   ToastProvider,
   TriggerButton,
-  getRandomType,
-  AlertIndicator,
-  getRandomContent,
   useToastHandlers,
 } from "./Utils.component";
 

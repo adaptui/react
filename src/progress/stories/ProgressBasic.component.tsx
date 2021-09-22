@@ -2,8 +2,8 @@ import * as React from "react";
 
 import {
   Progress as RenderlesskitProgress,
-  useProgressState,
   ProgressInitialState,
+  useProgressState,
 } from "../../index";
 
 export const Progress: React.FC<ProgressInitialState> = props => {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createComponent, createHook } from "reakit-system";
-import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
+import { callAllHandlers, isNumber } from "@chakra-ui/utils";
 
 import { PAGINATION_BUTTON_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";

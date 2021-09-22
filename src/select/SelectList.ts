@@ -1,8 +1,8 @@
-import { useWarning } from "reakit-warning";
-import { createHook } from "reakit-system/createHook";
 import { createComponent } from "reakit-system/createComponent";
+import { createHook } from "reakit-system/createHook";
 import { useCreateElement } from "reakit-system/useCreateElement";
-import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
+import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
+import { useWarning } from "reakit-warning";
 
 import { SELECT_LIST_KEYS } from "./__keys";
 import { SelectStateReturn } from "./SelectState";

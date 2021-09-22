@@ -2,10 +2,10 @@ import * as React from "react";
 
 import {
   Select as RenderlesskitSelect,
+  SelectInitialState,
   SelectOption,
   SelectPopover,
   useSelectState,
-  SelectInitialState,
 } from "../../index";
 
 export const Select: React.FC<SelectInitialState> = props => {

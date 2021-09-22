@@ -1,18 +1,18 @@
 import * as React from "react";
+import { createComponent } from "reakit-system/createComponent";
+import { createHook } from "reakit-system/createHook";
+import { useCreateElement } from "reakit-system/useCreateElement";
+import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
-import { createHook } from "reakit-system/createHook";
-import { createComponent } from "reakit-system/createComponent";
-import { useCreateElement } from "reakit-system/useCreateElement";
-import { PopoverOptions, PopoverHTMLProps, usePopover } from "reakit";
 
-import {
-  SelectListOptions,
-  SelectListHTMLProps,
-  useSelectList,
-} from "./SelectList";
 import { SELECT_POPOVER_KEYS } from "./__keys";
 import { useTypeaheadShortcut } from "./helpers";
+import {
+  SelectListHTMLProps,
+  SelectListOptions,
+  useSelectList,
+} from "./SelectList";
 import { SelectStateReturn } from "./SelectState";
 
 export const useSelectPopover = createHook<

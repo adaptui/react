@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useCompositeState } from "reakit";
-import { useNumberFormatter } from "@react-aria/i18n";
 import { Item } from "reakit/ts/Composite/__utils/types";
+import { useNumberFormatter } from "@react-aria/i18n";
 
-import { getOptimumValue, clamp, useControllableState } from "../utils";
+import { clamp, getOptimumValue, useControllableState } from "../utils";
 
 export interface SliderState {
   /**

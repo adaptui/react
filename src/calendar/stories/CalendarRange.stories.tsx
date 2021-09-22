@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./CalendarRange.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
-import js from "./templates/CalendarRangeJsx";
-import ts from "./templates/CalendarRangeTsx";
-import css from "./templates/CalendarRangeCss";
-import RangeCalendar from "./CalendarRange.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 import { addDays, addWeeks, subDays, subWeeks, toUTCString } from "../../utils";
+
+import css from "./templates/CalendarRangeCss";
+import js from "./templates/CalendarRangeJsx";
+import ts from "./templates/CalendarRangeTsx";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import RangeCalendar from "./CalendarRange.component";
+
+import "./CalendarRange.css";
 
 export default {
   component: RangeCalendar,

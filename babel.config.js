@@ -16,8 +16,8 @@ module.exports = function (api) {
         },
       },
     ],
+    ["@babel/preset-react", { runtime: "automatic" }],
     "@babel/preset-typescript",
-    "@babel/preset-react",
   ];
 
   const plugins = [
@@ -25,6 +25,12 @@ module.exports = function (api) {
     ["@babel/plugin-proposal-logical-assignment-operators", { loose: true }],
     ["@babel/plugin-proposal-private-property-in-object", { loose: true }],
     ["@babel/plugin-proposal-private-methods", { loose: true }],
+    isBuild
+      ? [
+          "babel-plugin-jsx-remove-data-test-id",
+          { attributes: ["data-testid"] },
+        ]
+      : {},
   ];
 
   return {

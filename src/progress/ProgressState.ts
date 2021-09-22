@@ -4,7 +4,7 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { valueToPercent, isNull } from "../utils";
+import { isNull, valueToPercent } from "../utils";
 
 export interface ProgressState {
   /**

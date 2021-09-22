@@ -1,16 +1,17 @@
 import * as React from "react";
 
 import {
-  useCalendarState,
   Calendar as CalendarWrapper,
   CalendarButton,
   CalendarCell,
   CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarWeekTitle,
   CalendarInitialState,
+  CalendarWeekTitle,
+  useCalendarState,
 } from "../../index";
+
 import {
   ChevronLeft,
   ChevronRight,

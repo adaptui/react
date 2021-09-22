@@ -1,19 +1,19 @@
 import * as React from "react";
+import { axe, press, render, screen } from "reakit-test-utils";
 import { cleanup } from "@testing-library/react";
-import { axe, render, press, screen } from "reakit-test-utils";
 
+import { repeat } from "../../utils/test-utils";
 import {
   TimePicker,
   TimePickerColumn,
-  TimePickerTrigger,
-  TimePickerSegment,
-  TimePickerContent,
-  useTimePickerState,
-  TimePickerInitialState,
   TimePickerColumnValue,
+  TimePickerContent,
+  TimePickerInitialState,
+  TimePickerSegment,
   TimePickerSegmentField,
+  TimePickerTrigger,
+  useTimePickerState,
 } from "../index";
-import { repeat } from "../../utils/test-utils";
 
 beforeAll(() => {
   // https://github.com/jsdom/jsdom/issues/1695
@@ -37,14 +37,14 @@ const TimePickerComp: React.FC<TimePickerInitialState> = props => {
   return (
     <>
       <TimePicker {...state}>
-        <TimePickerSegmentField data-testid="current-time" {...state}>
+        <TimePickerSegmentField data-testid="testid-current-time" {...state}>
           {state.segments.map((segment, i) => (
             <TimePickerSegment key={i} segment={segment} {...state} />
           ))}
         </TimePickerSegmentField>
         <TimePickerTrigger {...state}>open</TimePickerTrigger>
       </TimePicker>
-      <TimePickerContent data-testid="timepicker-content" {...state}>
+      <TimePickerContent data-testid="testid-timepicker-content" {...state}>
         <TimePickerColumn {...state.hourState}>
           {state.hours.map(n => {
             return (

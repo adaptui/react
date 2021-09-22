@@ -1,6 +1,6 @@
-import { useWarning } from "reakit-warning";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { createHook, createComponent, useCreateElement } from "reakit-system";
+import { useWarning } from "reakit-warning";
 
 import { METER_KEYS } from "./__keys";
 import { MeterStateReturn } from "./MeterState";

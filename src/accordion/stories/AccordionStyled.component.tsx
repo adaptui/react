@@ -2,10 +2,10 @@ import * as React from "react";
 
 import {
   Accordion as RenderlesskitAccordion,
+  AccordionInitialState,
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
-  AccordionInitialState,
 } from "../../index";
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html

@@ -2,10 +2,10 @@
  * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
  * for these utils inspiration
  */
-import { RangeValue } from "@react-types/shared";
 import { useDateFormatter } from "@react-aria/i18n";
+import { RangeValue } from "@react-types/shared";
 
-import { toUTCString, setDay } from "../../utils";
+import { setDay, toUTCString } from "../../utils";
 
 export function useWeekDays(weekStart: number) {
   const dayFormatter = useDateFormatter({ weekday: "short" });

@@ -1,7 +1,7 @@
 import {
-  usePopoverState,
   PopoverInitialState,
   unstable_useId as useId,
+  usePopoverState,
 } from "reakit";
 import { InputBase } from "@react-types/shared";
 

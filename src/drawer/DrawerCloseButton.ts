@@ -1,9 +1,9 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  useDialogDisclosure,
-  DialogDisclosureOptions,
   DialogDisclosureHTMLProps,
+  DialogDisclosureOptions,
+  useDialogDisclosure,
 } from "reakit";
-import { createHook, createComponent } from "reakit-system";
 
 import { DRAWER_CLOSE_BUTTON_KEYS } from "./__keys";
 

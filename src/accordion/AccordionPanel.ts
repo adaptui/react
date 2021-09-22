@@ -1,19 +1,19 @@
-import {
-  unstable_useId,
-  unstable_IdOptions,
-  unstable_IdHTMLProps,
-  useDisclosureContent,
-  DisclosureContentOptions,
-  DisclosureContentHTMLProps,
-} from "reakit";
 import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
+import {
+  DisclosureContentHTMLProps,
+  DisclosureContentOptions,
+  unstable_IdHTMLProps,
+  unstable_IdOptions,
+  unstable_useId,
+  useDisclosureContent,
+} from "reakit";
 import { useForkRef } from "reakit-utils";
-import { createHook, createComponent } from "reakit-system";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
+import { AccordionMultiStateReturn } from "./AccordionMultiState";
 import { AccordionStateReturn } from "./AccordionState";
 import { getAccordionId, isPanelVisible } from "./helpers";
-import { AccordionMultiStateReturn } from "./AccordionMultiState";
 
 export const useAccordionPanel = createHook<
   AccordionPanelOptions,

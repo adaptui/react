@@ -1,6 +1,6 @@
 import * as React from "react";
-import { warning } from "reakit-warning";
 import { createEvent } from "reakit-utils";
+import { warning } from "reakit-warning";
 
 import { CheckboxOptions } from "./Checkbox";
 

@@ -1,8 +1,8 @@
 import {
-  CompositeState,
   CompositeActions,
-  useCompositeState,
   CompositeInitialState,
+  CompositeState,
+  useCompositeState,
 } from "reakit";
 
 export function useAccordionBaseState(

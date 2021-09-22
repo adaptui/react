@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/DrawerBasicJsx";
 import ts from "./templates/DrawerBasicTsx";
 import { Drawer } from "./DrawerBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Drawer,

@@ -1,16 +1,16 @@
+import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
 import {
-  CompositeItemOptions,
   CompositeItemHTMLProps,
+  CompositeItemOptions,
   useCompositeItem,
 } from "reakit";
-import * as React from "react";
+import { useForkRef, useLiveRef } from "reakit-utils";
 import { warning } from "reakit-warning/warning";
-import { useLiveRef, useForkRef } from "reakit-utils";
-import { createComponent, createHook } from "reakit-system";
 
 import { RADIO_KEYS } from "./__keys";
+import { fireChange, getChecked, useInitialChecked } from "./helpers";
 import { RadioStateReturn } from "./RadioState";
-import { useInitialChecked, getChecked, fireChange } from "./helpers";
 
 export type RadioOptions = CompositeItemOptions &
   Pick<Partial<RadioStateReturn>, "state" | "setState"> & {

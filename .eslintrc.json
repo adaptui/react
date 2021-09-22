@@ -1,8 +1,39 @@
 {
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": { "es6": true },
   "parser": "@typescript-eslint/parser",
-  "extends": ["react-app", "plugin:prettier/recommended"],
-  "plugins": ["@typescript-eslint"],
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        // https://github.com/lydell/eslint-plugin-simple-import-sort#custom-grouping
+        "groups": [
+          // Packages. `react` related packages come first.
+          ["^react", "^reakit-system", "^reakit", "^@?\\w"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "testing-library/prefer-explicit-assert": ["error"],
+    "testing-library/consistent-data-testid": [
+      2,
+      {
+        "testIdPattern": "^testid(-.*\\w)?$"
+      }
+    ]
   }
 }

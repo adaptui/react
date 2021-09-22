@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./SelectBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/SelectBasicCss";
 import js from "./templates/SelectBasicJsx";
 import ts from "./templates/SelectBasicTsx";
-import css from "./templates/SelectBasicCss";
 import Select from "./SelectBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./SelectBasic.css";
 
 export default {
   component: Select,

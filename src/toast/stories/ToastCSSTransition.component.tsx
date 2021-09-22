@@ -3,14 +3,14 @@ import { CSSTransition } from "react-transition-group";
 
 import {
   Alert,
-  ToastBar,
+  AlertIndicator,
   AlertType,
   ContentType,
+  getRandomContent,
+  getRandomType,
+  ToastBar,
   ToastProvider,
   TriggerButton,
-  getRandomType,
-  AlertIndicator,
-  getRandomContent,
   useToastHandlers,
 } from "./Utils.component";
 

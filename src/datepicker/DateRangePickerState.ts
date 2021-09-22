@@ -4,26 +4,26 @@
  * to work with Reakit System
  */
 
-import {
-  Validation,
-  ValueBase,
-  RangeValue,
-  ValidationState,
-} from "@react-types/shared";
 import * as React from "react";
-import { useCompositeState, unstable_useId as useId } from "reakit";
-
+import { unstable_useId as useId, useCompositeState } from "reakit";
 import {
-  useControllableState,
-  addDays,
-  toUTCString,
-  toUTCRangeString,
-} from "../utils";
-import { makeRange } from "../calendar/helpers";
-import { RangeValueBase } from "../utils/types";
+  RangeValue,
+  Validation,
+  ValidationState,
+  ValueBase,
+} from "@react-types/shared";
+
 import { useRangeCalendarState } from "../calendar";
-import { SegmentInitialState, useSegmentState } from "../segment";
+import { makeRange } from "../calendar/helpers";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { SegmentInitialState, useSegmentState } from "../segment";
+import {
+  addDays,
+  toUTCRangeString,
+  toUTCString,
+  useControllableState,
+} from "../utils";
+import { RangeValueBase } from "../utils/types";
 
 export type DateRangePickerInitialState = ValueBase<RangeValue<string>> &
   RangeValueBase<string> &

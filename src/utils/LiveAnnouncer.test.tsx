@@ -1,6 +1,6 @@
 import React from "react";
-import { axe } from "jest-axe";
 import { fireEvent, render } from "reakit-test-utils";
+import { axe } from "jest-axe";
 
 import {
   announce,

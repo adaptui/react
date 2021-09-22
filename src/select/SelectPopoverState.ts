@@ -1,10 +1,10 @@
+import * as React from "react";
 import {
-  PopoverState,
   PopoverActions,
   PopoverInitialState,
+  PopoverState,
   usePopoverState,
 } from "reakit";
-import * as React from "react";
 
 import { SelectListStateReturn } from "./SelectListState";
 

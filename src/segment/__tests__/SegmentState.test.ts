@@ -1,6 +1,6 @@
 import { act, renderHook } from "reakit-test-utils/hooks";
 
-import { useSegmentState, SegmentInitialState } from "../SegmentState";
+import { SegmentInitialState, useSegmentState } from "../SegmentState";
 
 function render({ ...initialState }: SegmentInitialState = {}) {
   return renderHook(() => useSegmentState({ ...initialState })).result;
@@ -40,6 +40,7 @@ describe("SegmentState", () => {
   );
 
   it.each(["incrementPage", "decrementPage"])(
+    // eslint-disable-next-line jest/no-identical-title
     "should be able to %s a segment",
     type => {
       const result = render();

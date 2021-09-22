@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./DatePickerBasic.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
-import js from "./templates/DatePickerBasicJsx";
-import ts from "./templates/DatePickerBasicTsx";
-import css from "./templates/DatePickerBasicCss";
-import DatePicker from "./DatePickerBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 import { addDays, addWeeks, subWeeks, toUTCString } from "../../utils/index";
+
+import css from "./templates/DatePickerBasicCss";
+import js from "./templates/DatePickerBasicJsx";
+import ts from "./templates/DatePickerBasicTsx";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import DatePicker from "./DatePickerBasic.component";
+
+import "./DatePickerBasic.css";
 
 export default {
   component: DatePicker,

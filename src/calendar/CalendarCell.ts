@@ -4,17 +4,18 @@
  * to work with Reakit System
  */
 import { useCallback } from "react";
-import { callAllHandlers } from "@chakra-ui/utils";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { callAllHandlers } from "@chakra-ui/utils";
 
 import {
-  dataAttr,
   ariaAttr,
+  dataAttr,
   getDaysInMonth,
   isSameDay,
   isWeekend,
 } from "../utils";
+
 import { CALENDAR_CELL_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";
 import { RangeCalendarStateReturn } from "./RangeCalendarState";

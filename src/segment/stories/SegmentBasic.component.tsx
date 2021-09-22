@@ -3,8 +3,8 @@ import React from "react";
 import {
   Segment as RenderlesskitSegment,
   SegmentField,
-  useSegmentState,
   SegmentInitialState,
+  useSegmentState,
 } from "../../index";
 
 export const Segment: React.FC<SegmentInitialState> = props => {

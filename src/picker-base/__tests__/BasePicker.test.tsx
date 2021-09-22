@@ -1,12 +1,12 @@
 import * as React from "react";
-import { axe, render, press, fireEvent, screen } from "reakit-test-utils";
+import { axe, fireEvent, press, render, screen } from "reakit-test-utils";
 
 import {
   PickerBase,
   PickerBaseContent,
+  PickerBaseInitialState,
   PickerBaseTrigger,
   usePickerBaseState,
-  PickerBaseInitialState,
 } from "../index";
 
 const PickerBaseComp: React.FC<PickerBaseInitialState> = props => {
@@ -22,7 +22,7 @@ const PickerBaseComp: React.FC<PickerBaseInitialState> = props => {
       <PickerBase aria-label="picker base" {...state}>
         <PickerBaseTrigger {...state}>open</PickerBaseTrigger>
       </PickerBase>
-      <PickerBaseContent data-testid="picker-content" {...state}>
+      <PickerBaseContent data-testid="testid-picker-content" {...state}>
         Content
       </PickerBaseContent>
     </>

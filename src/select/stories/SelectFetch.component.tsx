@@ -2,10 +2,10 @@ import * as React from "react";
 
 import {
   Select as RenderlesskitSelect,
+  SelectInitialState,
   SelectOption,
   SelectPopover,
   useSelectState,
-  SelectInitialState,
 } from "../../index";
 
 type User = { value: string; label: string };

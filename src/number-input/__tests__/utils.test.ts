@@ -1,4 +1,4 @@
-import { isFloatingPointNumericCharacter, getStepFactor } from "../helpers";
+import { getStepFactor, isFloatingPointNumericCharacter } from "../helpers";
 
 describe("NumberInput Utils", () => {
   test("isFloatingPointNumericCharacter", () => {

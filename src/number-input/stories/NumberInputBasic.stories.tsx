@@ -1,17 +1,18 @@
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
 import { Controller, useForm } from "react-hook-form";
+import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
 import {
   NumberInput as RenderlesskitNumberInput,
-  useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
+  useNumberInputState,
 } from "../index";
+
 import js from "./templates/NumberInputBasicJsx";
 import ts from "./templates/NumberInputBasicTsx";
 import { NumberInput } from "./NumberInputBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: NumberInput,

@@ -1,10 +1,10 @@
 import * as React from "react";
-import { callAllHandlers } from "@chakra-ui/utils";
-import { createHook, createComponent } from "reakit-system";
+import { createComponent, createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
+import { callAllHandlers } from "@chakra-ui/utils";
 
-import { NumberInputStateReturn } from "./index";
 import { NUMBER_INPUT_INCREMENT_BUTTON_KEYS } from "./__keys";
+import { NumberInputStateReturn } from "./index";
 
 export type NumberInputIncrementButtonOptions = ButtonOptions &
   Pick<Partial<NumberInputStateReturn>, "keepWithinRange"> &

@@ -3,11 +3,12 @@ import { useVirtual } from "react-virtual";
 
 import {
   Select as RenderlesskitSelect,
+  SelectInitialState,
   SelectOption,
   SelectPopover,
   useSelectState,
-  SelectInitialState,
 } from "../../index";
+
 import { fruits } from "./Utils.component";
 
 export const Select: React.FC<SelectInitialState> = props => {

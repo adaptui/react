@@ -1,7 +1,8 @@
 import { createComponent, createHook } from "reakit-system";
 
-import { BREADCRUMB_LINK_KEYS } from "./__keys";
 import { LinkHTMLProps, LinkOptions, useLink } from "../link";
+
+import { BREADCRUMB_LINK_KEYS } from "./__keys";
 
 export const useBreadcrumbLink = createHook<
   BreadcrumbLinkOptions,

@@ -1,21 +1,22 @@
-import {
-  StringOrNumber,
-  callAllHandlers,
-  normalizeEventKey,
-} from "@chakra-ui/utils";
 import * as React from "react";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
+import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { useWarning } from "reakit-warning";
 import { EventKeyMap, mergeRefs } from "@chakra-ui/react-utils";
-import { InputHTMLProps, InputOptions, useInput } from "reakit";
-import { createComponent, createHook, useCreateElement } from "reakit-system";
-
 import {
-  sanitize,
+  callAllHandlers,
+  normalizeEventKey,
+  StringOrNumber,
+} from "@chakra-ui/utils";
+
+import { ariaAttr } from "../utils";
+
+import { NUMBER_INPUT_KEYS } from "./__keys";
+import {
   getStepFactor,
   isValidNumericKeyboardEvent,
+  sanitize,
 } from "./helpers";
-import { ariaAttr } from "../utils";
-import { NUMBER_INPUT_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./NumberInputState";
 
 export type NumberInputOptions = InputOptions &

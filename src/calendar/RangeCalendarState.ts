@@ -4,20 +4,24 @@
  * to work with Reakit System
  */
 import * as React from "react";
+import { useDateFormatter } from "@react-aria/i18n";
 import { InputBase, RangeValue } from "@react-types/shared";
 
-import { makeRange } from "./helpers";
-import { announce } from "../utils/LiveAnnouncer";
-import { useCalendarState } from "./CalendarState";
-import { CalendarActions, CalendarState } from "./CalendarState";
 import {
+  addDays,
   isSameDay,
   toUTCRangeString,
   toUTCString,
   useControllableState,
-  addDays,
 } from "../utils";
-import { useDateFormatter } from "@react-aria/i18n";
+import { announce } from "../utils/LiveAnnouncer";
+
+import {
+  CalendarActions,
+  CalendarState,
+  useCalendarState,
+} from "./CalendarState";
+import { makeRange } from "./helpers";
 
 export function useRangeCalendarState(
   props: RangeCalendarInitialState = {},

@@ -1,5 +1,5 @@
-import { warn } from "@chakra-ui/utils";
 import { splitProps } from "reakit-utils";
+import { warn } from "@chakra-ui/utils";
 
 import { Booleanish } from "./types";
 

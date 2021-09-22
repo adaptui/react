@@ -1,25 +1,25 @@
 import * as React from "react";
-import MockDate from "mockdate";
+import { axe, press, render } from "reakit-test-utils";
 import { cleanup, screen } from "@testing-library/react";
-import { axe, render, press } from "reakit-test-utils";
+import MockDate from "mockdate";
 
-import {
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarWeekTitle,
-  CalendarCellButton,
-  useRangeCalendarState,
-  RangeCalendarInitialState,
-} from "../index";
+import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
 import {
   isEndSelection,
   isStartSelection,
   repeat,
 } from "../../utils/test-utils";
-import { announce, destroyAnnouncer } from "../../utils/LiveAnnouncer";
+import {
+  Calendar,
+  CalendarButton,
+  CalendarCell,
+  CalendarCellButton,
+  CalendarGrid,
+  CalendarHeader,
+  CalendarWeekTitle,
+  RangeCalendarInitialState,
+  useRangeCalendarState,
+} from "../index";
 
 jest.mock("../../utils/LiveAnnouncer");
 
@@ -41,11 +41,11 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
         <CalendarButton
           {...state}
           goto="previousMonth"
-          data-testid="prev-month"
+          data-testid="testid-prev-month"
         >
           previous month
         </CalendarButton>
-        <CalendarHeader data-testid="current-year" {...state} />
+        <CalendarHeader data-testid="testid-current-year" {...state} />
         <CalendarButton {...state} goto="nextMonth">
           next month
         </CalendarButton>
@@ -56,7 +56,7 @@ const RangeCalendarComp: React.FC<RangeCalendarInitialState> = props => {
 
       <CalendarGrid {...state} as="table" className="dates">
         <thead>
-          <tr data-testid="week-days">
+          <tr data-testid="testid-week-days">
             {state.weekDays.map((day, dayIndex) => {
               return (
                 <CalendarWeekTitle

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/CircularProgressJsx";
 import ts from "./templates/CircularProgressTsx";
 import { Progress } from "./CircularProgress.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Progress,

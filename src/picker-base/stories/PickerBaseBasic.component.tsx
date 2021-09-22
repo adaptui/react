@@ -2,10 +2,10 @@ import * as React from "react";
 
 import {
   PickerBase as RenderlesskitPickerBase,
-  PickerBaseTrigger,
   PickerBaseContent,
-  usePickerBaseState,
   PickerBaseInitialState,
+  PickerBaseTrigger,
+  usePickerBaseState,
 } from "../../index";
 
 export const PickerBase: React.FC<PickerBaseInitialState> = props => {

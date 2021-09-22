@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./ProgressBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/ProgressBasicCss";
 import js from "./templates/ProgressBasicJsx";
 import ts from "./templates/ProgressBasicTsx";
-import css from "./templates/ProgressBasicCss";
 import { Progress } from "./ProgressBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./ProgressBasic.css";
 
 export default {
   component: Progress,

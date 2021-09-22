@@ -1,22 +1,22 @@
+import * as React from "react";
+import { act } from "react-dom/test-utils";
 import {
   axe,
-  press,
   click,
-  screen,
-  render,
   fireEvent,
+  press,
+  render,
+  screen,
 } from "reakit-test-utils";
-import * as React from "react";
 import { cleanup } from "@testing-library/react";
 
+import { repeat } from "../../utils/test-utils";
 import {
   NumberInput,
-  useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
+  useNumberInputState,
 } from "../index";
-import { act } from "react-dom/test-utils";
-import { repeat } from "../../utils/test-utils";
 import { NumberInputProps } from "../stories/NumberInputBasic.component";
 
 beforeEach(() => {
@@ -37,18 +37,18 @@ const NumberInputComp = (props: NumberInputProps) => {
 
   return (
     <label htmlFor="numberinput">
-      <NumberInputDecrementButton data-testid="dec" {...state}>
+      <NumberInputDecrementButton data-testid="testid-dec" {...state}>
         -
       </NumberInputDecrementButton>
       <NumberInput
         id="numberinput"
-        data-testid="numberinput"
+        data-testid="testid-numberinput"
         aria-label="Number Input"
         clampValueOnBlur={clampValueOnBlur}
         allowMouseWheel={allowMouseWheel}
         {...state}
       />
-      <NumberInputIncrementButton data-testid="inc" {...state}>
+      <NumberInputIncrementButton data-testid="testid-inc" {...state}>
         +
       </NumberInputIncrementButton>
     </label>

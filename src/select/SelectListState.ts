@@ -1,13 +1,13 @@
+import { CompositeInitialState, useCompositeState } from "reakit";
 import {
   SealedInitialState,
   useSealedState,
 } from "reakit-utils/useSealedState";
-import { useCompositeState, CompositeInitialState } from "reakit";
 
 import {
-  SelectBaseState,
   SelectBaseActions,
   SelectBaseInitialState,
+  SelectBaseState,
   useSelectBaseState,
 } from "./SelectBaseState";
 

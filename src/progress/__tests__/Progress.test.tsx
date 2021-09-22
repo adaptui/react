@@ -8,7 +8,11 @@ const ProgressComp = (props: Partial<ProgressProps>) => {
 
   return (
     <div>
-      <Progress data-testid="progress" aria-label="progress" {...progress} />
+      <Progress
+        data-testid="testid-progress"
+        aria-label="progress"
+        {...progress}
+      />
     </div>
   );
 };
@@ -26,7 +30,7 @@ describe("Progress", () => {
             aria-valuemin="0"
             aria-valuenow="10"
             aria-valuetext="10"
-            data-testid="progress"
+            data-testid="testid-progress"
             role="progressbar"
           />
         </div>

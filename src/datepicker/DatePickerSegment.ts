@@ -1,9 +1,10 @@
-import { DatePickerStateReturn } from ".";
-import { unstable_useId as useId } from "reakit";
 import { createComponent, createHook } from "reakit-system";
+import { unstable_useId as useId } from "reakit";
+
+import { SegmentHTMLProps, SegmentOptions, useSegment } from "../segment";
 
 import { DATE_PICKER_SEGMENT_KEYS } from "./__keys";
-import { useSegment, SegmentOptions, SegmentHTMLProps } from "../segment";
+import { DatePickerStateReturn } from ".";
 
 export type DatePickerSegmentOptions = SegmentOptions &
   Partial<Pick<DatePickerStateReturn, "pickerId" | "isDateRangePicker">>;

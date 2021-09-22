@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/RadioBasicJsx";
 import ts from "./templates/RadioBasicTsx";
 import { Radio, RadioProps } from "./RadioBasic.component";
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Radio,

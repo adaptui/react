@@ -3,14 +3,15 @@ import * as React from "react";
 import {
   TimePicker as RenderlesskitTimePicker,
   TimePickerColumn,
-  TimePickerSegment,
-  TimePickerTrigger,
-  TimePickerContent,
-  useTimePickerState,
   TimePickerColumnValue,
-  TimePickerSegmentField,
+  TimePickerContent,
   TimePickerInitialState,
+  TimePickerSegment,
+  TimePickerSegmentField,
+  TimePickerTrigger,
+  useTimePickerState,
 } from "../../index";
+
 import { CalendarIcon } from "./Utils.component";
 
 export const TimePicker: React.FC<TimePickerInitialState> = props => {

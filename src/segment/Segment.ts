@@ -1,19 +1,20 @@
-import {
-  useCompositeItem,
-  CompositeItemOptions,
-  CompositeItemHTMLProps,
-} from "reakit";
 import * as React from "react";
-import { mergeProps } from "@react-aria/utils";
+import { createComponent, createHook } from "reakit-system";
+import {
+  CompositeItemHTMLProps,
+  CompositeItemOptions,
+  useCompositeItem,
+} from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 import { useSpinButton } from "@react-aria/spinbutton";
-import { createComponent, createHook } from "reakit-system";
+import { mergeProps } from "@react-aria/utils";
 
 import { dataAttr } from "../utils";
+
 import { SEGMENT_KEYS } from "./__keys";
-import { DateSegment, SegmentStateReturn } from "./SegmentState";
 import { isNumeric, parseNumber } from "./helpers";
+import { DateSegment, SegmentStateReturn } from "./SegmentState";
 
 export type SegmentOptions = CompositeItemOptions &
   Pick<

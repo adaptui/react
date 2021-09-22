@@ -1,6 +1,6 @@
 import {
-  Item as ReakitItem,
   Group as ReakitGroup,
+  Item as ReakitItem,
 } from "reakit/ts/Composite/__utils/types";
 
 export type Group = ReakitGroup;

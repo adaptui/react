@@ -2,15 +2,15 @@ import * as React from "react";
 
 import {
   Alert,
-  ToastBar,
+  AlertIndicator,
   AlertType,
   ContentType,
+  getRandomContent,
+  getRandomType,
+  ToastBar,
+  ToastProvider,
   ToastWrapper,
   TriggerButton,
-  ToastProvider,
-  getRandomType,
-  AlertIndicator,
-  getRandomContent,
   useToastHandlers,
 } from "./Utils.component";
 

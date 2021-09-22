@@ -3,12 +3,12 @@ import { css } from "@emotion/css";
 
 import {
   Drawer as RenderlesskitDrawer,
-  Placement,
-  useDrawerState,
   DrawerBackdrop,
   DrawerCloseButton,
   DrawerDisclosure,
   DrawerInitialState,
+  Placement,
+  useDrawerState,
 } from "../../index";
 
 export const Drawer: React.FC<DrawerInitialState> = props => {

@@ -1,16 +1,16 @@
 import * as React from "react";
-import MockDate from "mockdate";
+import { axe, press, render, screen } from "reakit-test-utils";
 import { cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press, screen } from "reakit-test-utils";
+import MockDate from "mockdate";
 
+import { repeat } from "../../utils/test-utils";
 import {
   Segment,
   SegmentField,
-  useSegmentState,
   SegmentInitialState,
+  useSegmentState,
 } from "../index";
-import { repeat } from "../../utils/test-utils";
 
 beforeAll(() => {
   MockDate.set(new Date("1/1/2020"));
@@ -21,7 +21,7 @@ const SegmentSpinnerComp: React.FC<SegmentInitialState> = props => {
   const state = useSegmentState(props);
 
   return (
-    <SegmentField data-testid="segment-field" {...state}>
+    <SegmentField data-testid="testid-segment-field" {...state}>
       {state.segments.map((segment, i) => (
         <Segment key={i} segment={segment} {...state} />
       ))}

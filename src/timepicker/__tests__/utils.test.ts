@@ -1,9 +1,10 @@
+import MockDate from "mockdate";
+
 import {
-  parseTime,
   getSelectedDateFromValue,
   getSelectedValueFromDate,
+  parseTime,
 } from "../helpers";
-import MockDate from "mockdate";
 
 describe("TimePicker Utils", () => {
   test("parseTime", () => {

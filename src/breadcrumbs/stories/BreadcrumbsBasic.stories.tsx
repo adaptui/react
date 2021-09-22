@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./BreadcrumbsBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/BreadcrumbsBasicCss";
 import js from "./templates/BreadcrumbsBasicJsx";
 import ts from "./templates/BreadcrumbsBasicTsx";
-import css from "./templates/BreadcrumbsBasicCss";
 import Breadcrumbs from "./BreadcrumbsBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./BreadcrumbsBasic.css";
 
 export default {
   component: Breadcrumbs,

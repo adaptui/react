@@ -1,14 +1,14 @@
 import * as React from "react";
-import { axe, render, press } from "reakit-test-utils";
+import { axe, press, render } from "reakit-test-utils";
 
+import { repeat } from "../../utils/test-utils";
 import {
-  TGoto,
   Pagination,
   PaginationButton,
-  usePaginationState,
   PaginationInitialState,
+  TGoto,
+  usePaginationState,
 } from "../index";
-import { repeat } from "../../utils/test-utils";
 
 const PaginationComp: React.FC<PaginationInitialState> = props => {
   const state = usePaginationState({ count: 10, ...props });

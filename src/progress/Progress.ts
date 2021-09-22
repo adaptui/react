@@ -4,12 +4,13 @@
  * We improved the Progress Component [Progress](https://github.com/chakra-ui/chakra-ui/tree/develop/packages/progress)
  * to work with Reakit System
  */
-import { useWarning } from "reakit-warning";
+import { createComponent, createHook, useCreateElement } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { createHook, createComponent, useCreateElement } from "reakit-system";
+import { useWarning } from "reakit-warning";
+
+import { dataAttr, isNull } from "../utils";
 
 import { PROGRESS_KEYS } from "./__keys";
-import { dataAttr, isNull } from "../utils";
 import { ProgressStateReturn } from "./ProgressState";
 
 export type ProgressOptions = RoleOptions &

@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
 import { LinkProps } from "../index";
+
 import js from "./templates/LinkBasicJsx";
 import ts from "./templates/LinkBasicTsx";
 import { Link } from "./LinkBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Link,

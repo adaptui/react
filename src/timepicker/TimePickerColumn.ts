@@ -1,9 +1,9 @@
-import {
-  useComposite,
-  CompositeOptions,
-  CompositeHTMLProps,
-} from "reakit/Composite";
 import { createComponent, createHook } from "reakit-system";
+import {
+  CompositeHTMLProps,
+  CompositeOptions,
+  useComposite,
+} from "reakit/Composite";
 
 import { TIME_PICKER_COLUMN_KEYS } from "./__keys";
 import { TimePickerColumnStateReturn } from "./TimePickerColumnState";

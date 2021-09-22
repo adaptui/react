@@ -1,7 +1,7 @@
 import * as React from "react";
 import { axe, render } from "reakit-test-utils";
 
-import { Breadcrumbs, BreadcrumbLink } from "../index";
+import { BreadcrumbLink, Breadcrumbs } from "../index";
 
 const BreadcrumbComp = () => {
   return (

@@ -1,20 +1,21 @@
+/* eslint-disable testing-library/prefer-explicit-assert */
 import * as React from "react";
+import { axe, press, render, screen } from "reakit-test-utils";
+import { cleanup } from "@testing-library/react";
 import MockDate from "mockdate";
-import { axe, render, press, screen } from "reakit-test-utils";
 
+import { repeat } from "../../utils/test-utils";
 import {
+  Calendar as CalendarWrapper,
+  CalendarButton,
   CalendarCell,
+  CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarButton,
-  useCalendarState,
-  CalendarWeekTitle,
-  CalendarCellButton,
   CalendarInitialState,
-  Calendar as CalendarWrapper,
+  CalendarWeekTitle,
+  useCalendarState,
 } from "../index";
-import { repeat } from "../../utils/test-utils";
-import { cleanup } from "@testing-library/react";
 
 export const CalendarComp: React.FC<CalendarInitialState> = props => {
   const state = useCalendarState(props);
@@ -28,8 +29,12 @@ export const CalendarComp: React.FC<CalendarInitialState> = props => {
         <CalendarButton {...state} goto="previousMonth">
           previous month
         </CalendarButton>
-        <CalendarHeader {...state} data-testid="current-year" />
-        <CalendarButton {...state} goto="nextMonth" data-testid="next-month">
+        <CalendarHeader {...state} data-testid="testid-current-year" />
+        <CalendarButton
+          {...state}
+          goto="nextMonth"
+          data-testid="testid-next-month"
+        >
           next month
         </CalendarButton>
         <CalendarButton {...state} goto="nextYear">
@@ -39,7 +44,7 @@ export const CalendarComp: React.FC<CalendarInitialState> = props => {
 
       <CalendarGrid {...state} as="table" className="dates">
         <thead>
-          <tr data-testid="weekDays">
+          <tr data-testid="testid-weekDays">
             {state.weekDays.map((day, dayIndex) => {
               return (
                 <CalendarWeekTitle

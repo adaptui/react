@@ -4,9 +4,9 @@ import { css, keyframes } from "@emotion/css";
 
 import {
   Progress as RenderlesskitProgress,
+  ProgressInitialState,
   ProgressState,
   useProgressState,
-  ProgressInitialState,
 } from "../../index";
 import { isNull } from "../../utils/index";
 

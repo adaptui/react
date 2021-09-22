@@ -1,5 +1,6 @@
+import { getOptimumValue, valueToPercent } from "../utils";
+
 import { calculateStatus, clamp } from "./helpers";
-import { valueToPercent, getOptimumValue } from "../utils";
 
 type Status = "safe" | "caution" | "danger" | undefined;
 

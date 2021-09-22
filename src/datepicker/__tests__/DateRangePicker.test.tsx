@@ -1,34 +1,34 @@
 import * as React from "react";
+import { axe, fireEvent, press, render, screen } from "reakit-test-utils";
 import { cleanup } from "@testing-library/react";
-import { axe, render, press, fireEvent, screen } from "reakit-test-utils";
 
+import {
+  Calendar,
+  CalendarButton,
+  CalendarCell,
+  CalendarCellButton,
+  CalendarGrid,
+  CalendarHeader,
+  CalendarWeekTitle,
+  RangeCalendarStateReturn,
+} from "../../calendar";
+import {
+  isEndSelection,
+  isInSelectionRange,
+  isStartSelection,
+  repeat,
+} from "../../utils/test-utils";
+import {
+  DateRangePickerInitialState,
+  useDateRangePickerState,
+} from "../DateRangePickerState";
 import {
   DatePicker,
   DatePickerContent,
   DatePickerSegment,
-  DatePickerTrigger,
   DatePickerSegmentField,
+  DatePickerTrigger,
 } from "../index";
-import {
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarWeekTitle,
-  CalendarCellButton,
-  RangeCalendarStateReturn,
-} from "../../calendar";
-import {
-  useDateRangePickerState,
-  DateRangePickerInitialState,
-} from "../DateRangePickerState";
-import {
-  isEndSelection,
-  isStartSelection,
-  isInSelectionRange,
-  repeat,
-} from "../../utils/test-utils";
 
 afterEach(cleanup);
 
@@ -93,8 +93,8 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
 
   return (
     <>
-      <DatePicker data-testid="datepicker" {...state}>
-        <div data-testid="segment">
+      <DatePicker data-testid="testid-datepicker" {...state}>
+        <div data-testid="testid-segment">
           <DatePickerSegmentField {...state.startSegmentState}>
             {state.startSegmentState.segments.map((segment, i) => (
               <DatePickerSegment
@@ -119,7 +119,7 @@ const DateRangePickerComp: React.FC<DateRangePickerInitialState> = props => {
           <DatePickerTrigger {...state}>open</DatePickerTrigger>
         </div>
       </DatePicker>
-      <DatePickerContent data-testid="datepicker-content" {...state}>
+      <DatePickerContent data-testid="testid-datepicker-content" {...state}>
         <RangeCalendarComp {...state.calendar} />
       </DatePickerContent>
     </>

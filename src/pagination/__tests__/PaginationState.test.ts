@@ -1,4 +1,4 @@
-import { renderHook, act } from "reakit-test-utils/hooks";
+import { act, renderHook } from "reakit-test-utils/hooks";
 
 import { usePaginationState } from "..";
 

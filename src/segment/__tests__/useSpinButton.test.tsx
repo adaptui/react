@@ -1,11 +1,11 @@
 import React from "react";
 import { fireEvent, render } from "reakit-test-utils";
-import { useSpinButton, SpinButtonProps } from "@react-aria/spinbutton";
+import { SpinButtonProps, useSpinButton } from "@react-aria/spinbutton";
 
 const SpinButtonComp: React.FC<SpinButtonProps> = props => {
   const { spinButtonProps } = useSpinButton(props);
   return (
-    <div {...spinButtonProps} tabIndex={-1} data-testid="test">
+    <div {...spinButtonProps} tabIndex={-1} data-testid="testid-test">
       {props.children}
     </div>
   );

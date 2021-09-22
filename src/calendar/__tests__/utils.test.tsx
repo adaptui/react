@@ -1,5 +1,5 @@
-import MockDate from "mockdate";
 import { renderHook } from "@testing-library/react-hooks";
+import MockDate from "mockdate";
 
 import { generateDaysInMonthArray, makeRange, useWeekDays } from "../helpers";
 

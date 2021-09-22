@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./MeterBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/MeterBasicCss";
 import js from "./templates/MeterBasicJsx";
 import ts from "./templates/MeterBasicTsx";
-import css from "./templates/MeterBasicCss";
 import { Meter } from "./MeterBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./MeterBasic.css";
 
 export default {
   component: Meter,

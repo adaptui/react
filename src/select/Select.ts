@@ -1,12 +1,12 @@
+import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
 import {
   PopoverDisclosureHTMLProps,
   PopoverDisclosureOptions,
   usePopoverDisclosure,
 } from "reakit";
-import * as React from "react";
-import { useShortcut } from "@chakra-ui/hooks";
 import { useLiveRef } from "reakit-utils/useLiveRef";
-import { createComponent, createHook } from "reakit-system";
+import { useShortcut } from "@chakra-ui/hooks";
 import { callAllHandlers, getNextItemFromSearch } from "@chakra-ui/utils";
 
 import { SELECT_KEYS } from "./__keys";

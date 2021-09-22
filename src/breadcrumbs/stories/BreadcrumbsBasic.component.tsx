@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import {
-  Breadcrumbs as RenderlesskitBreadcrumbs,
   BreadcrumbLink,
+  Breadcrumbs as RenderlesskitBreadcrumbs,
 } from "../../index";
 
 export const Breadcrumbs = () => {

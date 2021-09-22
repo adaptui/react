@@ -3,9 +3,9 @@ import * as React from "react";
 import {
   Pagination as RenderlesskitPagination,
   PaginationButton,
-  usePaginationState,
   PaginationInitialState,
   TGoto,
+  usePaginationState,
 } from "../../index";
 
 export const Pagination: React.FC<PaginationInitialState> = props => {

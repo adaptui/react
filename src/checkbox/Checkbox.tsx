@@ -1,8 +1,8 @@
 import * as React from "react";
-import { warning } from "reakit-warning";
 import { createComponent, createHook } from "reakit-system";
-import { useForkRef, useLiveRef, removeIndexFromArray } from "reakit-utils";
-import { ClickableOptions, ClickableHTMLProps, useClickable } from "reakit";
+import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
+import { removeIndexFromArray, useForkRef, useLiveRef } from "reakit-utils";
+import { warning } from "reakit-warning";
 
 import { CHECKBOX_KEYS } from "./__keys";
 import { CheckboxStateReturn } from "./CheckboxState";

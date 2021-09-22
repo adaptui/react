@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./SelectBasic.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import css from "./templates/SelectBasicCss";
 import js from "./templates/SelectMultipleJsx";
 import ts from "./templates/SelectMultipleTsx";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
 import { Select as SelectMultiple } from "./SelectMultiple.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./SelectBasic.css";
 
 export default {
   component: SelectMultiple,

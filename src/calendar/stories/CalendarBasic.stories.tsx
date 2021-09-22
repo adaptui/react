@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./CalendarBasic.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
-import js from "./templates/CalendarBasicJsx";
-import ts from "./templates/CalendarBasicTsx";
-import css from "./templates/CalendarBasicCss";
-import Calendar from "./CalendarBasic.component";
 import { createPreviewTabs } from "../../../.storybook/utils";
 import { addMonths, addYears, subMonths, toUTCString } from "../../utils";
+
+import css from "./templates/CalendarBasicCss";
+import js from "./templates/CalendarBasicJsx";
+import ts from "./templates/CalendarBasicTsx";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
+import Calendar from "./CalendarBasic.component";
+
+import "./CalendarBasic.css";
 
 export default {
   component: Calendar,

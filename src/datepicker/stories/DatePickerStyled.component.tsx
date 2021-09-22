@@ -1,28 +1,29 @@
 import * as React from "react";
 
 import {
-  DatePickerSegment,
-  DatePickerContent,
-  DatePickerTrigger,
-  useDatePickerState,
-  DatePickerSegmentField,
-  DatePickerInitialState,
-  DatePicker as DatePickerWrapper,
+  Calendar as CalendarWrapper,
+  CalendarButton,
   CalendarCell,
+  CalendarCellButton,
   CalendarGrid,
   CalendarHeader,
-  CalendarButton,
-  CalendarWeekTitle,
-  CalendarCellButton,
   CalendarStateReturn,
-  Calendar as CalendarWrapper,
+  CalendarWeekTitle,
+  DatePicker as DatePickerWrapper,
+  DatePickerContent,
+  DatePickerInitialState,
+  DatePickerSegment,
+  DatePickerSegmentField,
+  DatePickerTrigger,
+  useDatePickerState,
 } from "../../index";
+
 import {
+  CalendarStyledIcon,
   ChevronLeft,
   ChevronRight,
   DoubleChevronLeft,
   DoubleChevronRight,
-  CalendarStyledIcon,
 } from "./Utils.component";
 
 export const DatePicker: React.FC<DatePickerInitialState> = props => {

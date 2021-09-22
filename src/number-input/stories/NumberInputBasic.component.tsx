@@ -2,11 +2,11 @@ import * as React from "react";
 
 import {
   NumberInput as RenderlesskitNumberInput,
-  NumberInputProps as RenderlesskitNumberInputProps,
-  useNumberInputState,
-  NumberinputInitialState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
+  NumberinputInitialState,
+  NumberInputProps as RenderlesskitNumberInputProps,
+  useNumberInputState,
 } from "../../index";
 
 export type NumberInputProps = NumberinputInitialState &

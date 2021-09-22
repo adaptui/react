@@ -1,12 +1,13 @@
 import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { useLocale } from "@react-aria/i18n";
 import { useMove } from "@react-aria/interactions";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { createComponent, createHook } from "reakit-system";
 import { mergeProps, useGlobalListeners } from "@react-aria/utils";
 
 import { clamp } from "../utils";
+
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 

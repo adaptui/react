@@ -1,6 +1,6 @@
 import * as React from "react";
+import { axe, press, render, screen } from "reakit-test-utils";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press, screen } from "reakit-test-utils";
 
 import MultiSelectComponent from "../stories/SelectMultiple.component";
 

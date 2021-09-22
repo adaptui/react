@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/PaginationBasicJsx";
 import ts from "./templates/PaginationBasicTsx";
 import { Pagination } from "./PaginationBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Pagination,

@@ -2,16 +2,16 @@ import * as React from "react";
 
 import {
   Alert,
-  ToastBar,
+  AlertIndicator,
+  AlertType,
   ContentType,
+  getRandomContent,
+  getRandomPlacement,
+  getRandomType,
+  ToastBar,
   ToastProvider,
   TriggerButton,
-  getRandomType,
-  AlertIndicator,
-  getRandomContent,
   useToastHandlers,
-  getRandomPlacement,
-  AlertType,
 } from "./Utils.component";
 
 export const Toast = () => {

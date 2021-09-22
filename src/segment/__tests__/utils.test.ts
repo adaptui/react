@@ -1,5 +1,6 @@
 import MockDate from "mockdate";
-import { getSegmentLimits, setSegment, cycleValue } from "../helpers";
+
+import { cycleValue, getSegmentLimits, setSegment } from "../helpers";
 
 describe("Segment Utils", () => {
   test("getSegmentLimits", () => {
@@ -70,28 +71,28 @@ describe("Segment Utils", () => {
   });
 
   describe("cycleValue", () => {
-    it("it should cycle one step", () => {
+    it("should cycle one step", () => {
       let value = 100;
       value = cycleValue(value, 1, 0, 500, false);
 
       expect(value).toBe(101);
     });
 
-    it("it should cycle back at when reached max value", () => {
+    it("should cycle back at when reached max value", () => {
       let value = 100;
       value = cycleValue(value, 1, 0, 100, false);
 
       expect(value).toBe(0);
     });
 
-    it("it should cycle from minimum value if it's our of range", () => {
+    it("should cycle from minimum value if it's our of range", () => {
       let value = 0;
       value = cycleValue(value, 1, 50, 100, false);
 
       expect(value).toBe(52);
     });
 
-    it("it should cycle with round", () => {
+    it("should cycle with round", () => {
       let value = 0;
       value = cycleValue(value, 10, 0, 100, true);
 

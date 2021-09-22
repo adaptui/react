@@ -1,17 +1,18 @@
+/* eslint-disable jest/no-conditional-expect */
 import * as React from "react";
+import { axe, press, render } from "reakit-test-utils";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press } from "reakit-test-utils";
 
 import {
   Accordion,
-  AccordionPanel,
-  AccordionTrigger,
-  useAccordionState,
   AccordionInitialState,
-  AccordionStateReturn,
-  useAccordionMultiState,
   AccordionMultiInitialState,
   AccordionMultiStateReturn,
+  AccordionPanel,
+  AccordionStateReturn,
+  AccordionTrigger,
+  useAccordionMultiState,
+  useAccordionState,
 } from "../index";
 
 const AccordionComponent = (

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/CheckboxBasicJsx";
 import ts from "./templates/CheckboxBasicTsx";
 import { Checkbox, CheckboxProps } from "./CheckboxBasic.component";
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Checkbox,

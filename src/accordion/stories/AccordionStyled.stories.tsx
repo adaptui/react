@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./AccordionStyled.css";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/AccordionStyledCss";
 import js from "./templates/AccordionStyledJsx";
 import ts from "./templates/AccordionStyledTsx";
-import css from "./templates/AccordionStyledCss";
 import { Accordion } from "./AccordionStyled.component";
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+
+import "./AccordionStyled.css";
 
 export default {
   component: Accordion,

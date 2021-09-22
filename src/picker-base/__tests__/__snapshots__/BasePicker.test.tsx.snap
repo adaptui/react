@@ -36,7 +36,7 @@ exports[`PickerBase should render correctly 1`] = `
     <div
       aria-modal="true"
       data-dialog="true"
-      data-testid="picker-content"
+      data-testid="testid-picker-content"
       id="dialog-1"
       role="dialog"
       style="position: fixed; left: 100%; top: 100%;"

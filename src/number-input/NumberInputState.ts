@@ -4,17 +4,17 @@
  * We improved the hook [useNumberInput](https://github.com/chakra-ui/chakra-ui/blob/develop/packages/number-input/src/use-number-input.ts)
  * to work with Reakit System
  */
-import {
-  focus,
-  minSafeInteger,
-  maxSafeInteger,
-  StringOrNumber,
-} from "@chakra-ui/utils";
 import * as React from "react";
 import { useCounter } from "@chakra-ui/counter";
 import { useSafeLayoutEffect } from "@chakra-ui/hooks";
+import {
+  focus,
+  maxSafeInteger,
+  minSafeInteger,
+  StringOrNumber,
+} from "@chakra-ui/utils";
 
-import { useSpinner, useSpinnerReturn, sanitize } from "./helpers";
+import { sanitize, useSpinner, useSpinnerReturn } from "./helpers";
 
 export type NumberInputState = {
   /**

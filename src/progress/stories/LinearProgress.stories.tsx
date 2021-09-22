@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/LinearProgressJsx";
 import ts from "./templates/LinearProgressTsx";
 import { Progress } from "./LinearProgress.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
 
 export default {
   component: Progress,

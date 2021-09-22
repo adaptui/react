@@ -1,6 +1,6 @@
-import { useWarning } from "reakit-warning";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { useWarning } from "reakit-warning";
 
 import { PAGINATION_KEYS } from "./__keys";
 import { PaginationStateReturn } from "./PaginationState";

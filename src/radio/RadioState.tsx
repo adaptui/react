@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useControllableState } from "../utils";
 import {
-  CompositeState,
   CompositeActions,
   CompositeInitialState,
+  CompositeState,
   useCompositeState,
 } from "reakit";
+
+import { useControllableState } from "../utils";
 
 export type RadioState = CompositeState & {
   /**

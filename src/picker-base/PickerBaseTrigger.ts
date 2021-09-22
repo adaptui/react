@@ -1,10 +1,10 @@
+import { createComponent, createHook } from "reakit-system";
 import {
-  usePopoverDisclosure,
   PopoverDisclosureHTMLProps,
   PopoverDisclosureOptions,
+  usePopoverDisclosure,
 } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { createComponent, createHook } from "reakit-system";
 
 import { PICKER_BASE_TRIGGER_KEYS } from "./__keys";
 import { PickerBaseStateReturn } from "./PickerBaseState";

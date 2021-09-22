@@ -1,12 +1,13 @@
 import * as React from "react";
+import { axe, fireEvent, press, render, screen } from "reakit-test-utils";
 import userEvent from "@testing-library/user-event";
-import { axe, render, press, screen, fireEvent } from "reakit-test-utils";
+
 import {
   Select,
+  SelectInitialState,
   SelectOption,
   SelectPopover,
   useSelectState,
-  SelectInitialState,
 } from "..";
 
 jest.useFakeTimers();
@@ -19,7 +20,11 @@ export const SelectComponent: React.FC<SelectInitialState> = props => {
       <Select className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
       </Select>
-      <SelectPopover data-testid="popover" {...select} aria-label="Fruits">
+      <SelectPopover
+        data-testid="testid-popover"
+        {...select}
+        aria-label="Fruits"
+      >
         <SelectOption {...select} value="Apple" />
         <SelectOption {...select} value="AppleCusturd" />
         <SelectOption {...select} value="Orange" />

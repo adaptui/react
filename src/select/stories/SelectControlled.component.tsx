@@ -2,11 +2,12 @@ import * as React from "react";
 
 import {
   Select as RenderlesskitSelect,
+  SelectInitialState,
   SelectOption,
   SelectPopover,
   useSelectState,
-  SelectInitialState,
 } from "../../index";
+
 import { fruits } from "./Utils.component";
 
 export const Select = () => {

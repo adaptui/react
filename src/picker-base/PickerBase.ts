@@ -1,11 +1,12 @@
 import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
+import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createOnKeyDown } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { createComponent, createHook } from "reakit-system";
+
+import { ariaAttr, isTouch } from "../utils";
 
 import { PICKER_BASE_KEYS } from "./__keys";
-import { isTouch, ariaAttr } from "../utils";
 import { PickerBaseStateReturn } from "./PickerBaseState";
 
 export type PickerBaseOptions = RoleOptions &

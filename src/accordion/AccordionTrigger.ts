@@ -1,19 +1,20 @@
-import {
-  useButton,
-  ButtonOptions,
-  ButtonHTMLProps,
-  useCompositeItem,
-  CompositeItemOptions,
-  CompositeItemHTMLProps,
-} from "reakit";
 import * as React from "react";
+import { createComponent, createHook } from "reakit-system";
+import {
+  ButtonHTMLProps,
+  ButtonOptions,
+  CompositeItemHTMLProps,
+  CompositeItemOptions,
+  useButton,
+  useCompositeItem,
+} from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
-import { createHook, createComponent } from "reakit-system";
 
 import { ariaAttr } from "../utils";
+
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";
-import { AccordionStateReturn } from "./AccordionState";
 import { AccordionMultiStateReturn } from "./AccordionMultiState";
+import { AccordionStateReturn } from "./AccordionState";
 import { isAccordionSelected, useAccordionPanelId } from "./helpers";
 
 export const useAccordionTrigger = createHook<

@@ -1,23 +1,23 @@
 import * as React from "react";
 import { createContext } from "@chakra-ui/react-utils";
 
-import { genId, ActionType, useToastState, DefaultToast } from "./index";
 import type {
   AddToast,
-  ShowToast,
-  ToastStore,
   CreateToast,
-  RemoveToast,
-  UpdateToast,
-  ToastOptions,
+  CreateToastStoreReturn,
+  DefaultToastOptions,
+  DefaultToastProviderOptions,
   DismissToast,
+  RemoveToast,
+  ShowToast,
   ToastHandlers,
+  ToastOptions,
+  ToastStore,
   UpdateAllToast,
   UpdateFieldToast,
-  DefaultToastOptions,
-  CreateToastStoreReturn,
-  DefaultToastProviderOptions,
+  UpdateToast,
 } from "./CreateToastContext.types";
+import { ActionType, DefaultToast, genId, useToastState } from "./index";
 
 export function createToastStore<T extends DefaultToast, Content>(
   defaultOptions: DefaultToastOptions<T>,

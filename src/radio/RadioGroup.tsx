@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useWarning } from "reakit-warning";
-import { CompositeOptions, CompositeHTMLProps, useComposite } from "reakit";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
+import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
+import { useWarning } from "reakit-warning";
 
 import { RADIO_GROUP_KEYS } from "./__keys";
 

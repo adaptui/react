@@ -1,12 +1,13 @@
 import * as React from "react";
-import cases from "jest-in-case";
 import { render } from "reakit-test-utils";
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
+import cases from "jest-in-case";
 
+import { MeterInitialState, useMeterState } from "../../index";
 import { Meter } from "../Meter";
+
 import { data } from "./statehook-test-data";
-import { useMeterState, MeterInitialState } from "../../index";
 
 expect.addSnapshotSerializer(jestSerializerStripFunctions);
 
@@ -111,7 +112,7 @@ describe("Meter", () => {
   });
 
   it("supports custom DOM props", function () {
-    const { getByTestId } = render(<MeterComp data-testid="test" />);
+    const { getByTestId } = render(<MeterComp data-testid="testid-test" />);
     const meter = getByTestId("test");
 
     expect(meter).toBeInTheDocument();

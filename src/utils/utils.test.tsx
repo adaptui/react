@@ -1,4 +1,4 @@
-import { clampValue, valueToPercent, getOptimumValue } from ".";
+import { clampValue, getOptimumValue, valueToPercent } from ".";
 
 describe("Utils", () => {
   test("clampValue", () => {

@@ -1,29 +1,28 @@
 import * as React from "react";
+import { axe, press, render, screen } from "reakit-test-utils";
 import { cleanup } from "@testing-library/react";
-
-import { axe, render, press, screen } from "reakit-test-utils";
-import {
-  DatePicker,
-  DatePickerSegment,
-  DatePickerTrigger,
-  DatePickerContent,
-  useDatePickerState,
-  DatePickerInitialState,
-  DatePickerSegmentField,
-} from "..";
 
 import {
   Calendar,
-  CalendarStateReturn,
   CalendarButton,
-  CalendarHeader,
-  CalendarGrid,
-  CalendarWeekTitle,
   CalendarCell,
   CalendarCellButton,
+  CalendarGrid,
+  CalendarHeader,
+  CalendarStateReturn,
+  CalendarWeekTitle,
 } from "../../calendar";
-import { repeat } from "../../utils/test-utils";
 import { addWeeks, subWeeks, toUTCString } from "../../utils";
+import { repeat } from "../../utils/test-utils";
+import {
+  DatePicker,
+  DatePickerContent,
+  DatePickerInitialState,
+  DatePickerSegment,
+  DatePickerSegmentField,
+  DatePickerTrigger,
+  useDatePickerState,
+} from "..";
 
 /*
 // Mocking useId otherwise snapshots will change each time
@@ -44,7 +43,7 @@ export const CalendarComp: React.FC<CalendarStateReturn> = state => {
         <CalendarButton {...state} goto="previousMonth">
           {"<<"}
         </CalendarButton>
-        <CalendarHeader data-testid="calendar-header" {...state} />
+        <CalendarHeader data-testid="testid-calendar-header" {...state} />
         <CalendarButton {...state} goto="nextMonth">
           {">>"}
         </CalendarButton>
@@ -98,9 +97,9 @@ const DatePickerComp: React.FC<DatePickerInitialState> = props => {
 
   return (
     <>
-      <DatePicker data-testid="datepicker" {...state}>
+      <DatePicker data-testid="testid-datepicker" {...state}>
         <div>
-          <DatePickerSegmentField data-testid="segment" {...state}>
+          <DatePickerSegmentField data-testid="testid-segment" {...state}>
             {state.segments.map((segment, i) => (
               <DatePickerSegment key={i} segment={segment} {...state} />
             ))}
@@ -109,7 +108,7 @@ const DatePickerComp: React.FC<DatePickerInitialState> = props => {
           <DatePickerTrigger {...state}>open</DatePickerTrigger>
         </div>
       </DatePicker>
-      <DatePickerContent data-testid="datepicker-content" {...state}>
+      <DatePickerContent data-testid="testid-datepicker-content" {...state}>
         <CalendarComp {...state.calendar} />
       </DatePickerContent>
     </>

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import Select from "./SelectStyled.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import js from "./templates/SelectStyledJsx";
 import ts from "./templates/SelectStyledTsx";
-import { createPreviewTabs } from "../../../.storybook/utils";
+import Select from "./SelectStyled.component";
 
 export default {
   component: Select,

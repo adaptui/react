@@ -1,6 +1,6 @@
 import React from "react";
-import { DismissToast, UpdateToast } from "./CreateToastContext.types";
 
+import { DismissToast, UpdateToast } from "./CreateToastContext.types";
 import { getToast } from "./helpers";
 import { TimerToast } from "./ToastTypes";
 

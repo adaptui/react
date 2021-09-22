@@ -1,7 +1,7 @@
 import React from "react";
-import { cleanup } from "@testing-library/react";
-import { renderHook } from "reakit-test-utils/hooks";
 import { fireEvent, render } from "reakit-test-utils";
+import { renderHook } from "reakit-test-utils/hooks";
+import { cleanup } from "@testing-library/react";
 
 import { useSpinner } from "../helpers";
 
@@ -21,7 +21,7 @@ const Example = () => {
 
   return (
     <div>
-      <p data-testid="value">{value}</p>
+      <p data-testid="testid-value">{value}</p>
       <button onClick={() => up()}>+</button>
       <button onClick={() => down()}>-</button>
     </div>

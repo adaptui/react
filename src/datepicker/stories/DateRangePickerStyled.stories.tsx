@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./tailwind.css";
 import { DateRangePicker } from "./DateRangePickerStyled.component";
+
+import "./tailwind.css";
 
 export default {
   component: DateRangePicker,

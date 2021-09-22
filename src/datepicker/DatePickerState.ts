@@ -5,13 +5,13 @@
  */
 
 import * as React from "react";
-import { Validation, ValueBase, ValidationState } from "@react-types/shared";
+import { Validation, ValidationState, ValueBase } from "@react-types/shared";
 
 import { useCalendarState } from "../calendar";
-import { RangeValueBase } from "../utils/types";
-import { toUTCString, useControllableState } from "../utils";
-import { SegmentInitialState, useSegmentState } from "../segment";
 import { PickerBaseInitialState, usePickerBaseState } from "../picker-base";
+import { SegmentInitialState, useSegmentState } from "../segment";
+import { toUTCString, useControllableState } from "../utils";
+import { RangeValueBase } from "../utils/types";
 
 export type DatePickerInitialState = ValueBase<string> &
   RangeValueBase<string> &

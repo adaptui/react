@@ -1,15 +1,15 @@
-import {
-  useInput,
-  InputOptions,
-  InputHTMLProps,
-  unstable_useId,
-  unstable_IdOptions,
-  unstable_IdHTMLProps,
-} from "reakit";
 import * as React from "react";
-import { useWarning } from "reakit-warning";
-import { useForkRef, useLiveRef } from "reakit-utils";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
+import {
+  InputHTMLProps,
+  InputOptions,
+  unstable_IdHTMLProps,
+  unstable_IdOptions,
+  unstable_useId,
+  useInput,
+} from "reakit";
+import { useForkRef, useLiveRef } from "reakit-utils";
+import { useWarning } from "reakit-warning";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";

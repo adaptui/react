@@ -2,11 +2,11 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
-  SliderTrack,
-  SliderThumb,
-  SliderInput,
-  useSliderState,
   SliderInitialState,
+  SliderInput,
+  SliderThumb,
+  SliderTrack,
+  useSliderState,
 } from "../../index";
 
 interface SliderProps extends SliderInitialState {

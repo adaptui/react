@@ -1,14 +1,16 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 
-import "./ToastBasic.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import css from "./templates/ToastBasicCss";
 import js from "./templates/ToastCSSTransitionJsx";
 import ts from "./templates/ToastCSSTransitionTsx";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
 import { Toast } from "./ToastCSSTransition.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./ToastBasic.css";
 
 export default {
   component: Toast,

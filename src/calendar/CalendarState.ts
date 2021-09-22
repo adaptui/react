@@ -4,6 +4,12 @@
  * to work with Reakit System
  */
 
+import * as React from "react";
+import { unstable_useId as useId } from "reakit";
+import { useUpdateEffect } from "@chakra-ui/hooks";
+import { useDateFormatter } from "@react-aria/i18n";
+import { InputBase } from "@react-types/shared";
+
 import {
   addDays,
   addMonths,
@@ -18,17 +24,12 @@ import {
   subMonths,
   subWeeks,
   subYears,
-  useControllableState,
   toUTCString,
+  useControllableState,
 } from "../utils";
-import * as React from "react";
-import { unstable_useId as useId } from "reakit";
-import { useUpdateEffect } from "@chakra-ui/hooks";
-import { useDateFormatter } from "@react-aria/i18n";
-import { InputBase } from "@react-types/shared";
-
 import { announce } from "../utils/LiveAnnouncer";
-import { useWeekStart, useWeekDays, generateDaysInMonthArray } from "./helpers";
+
+import { generateDaysInMonthArray, useWeekDays, useWeekStart } from "./helpers";
 
 export function useCalendarState(
   props: CalendarInitialState = {},

@@ -1,12 +1,12 @@
-import { createHook } from "reakit-system/createHook";
 import { createComponent } from "reakit-system/createComponent";
+import { createHook } from "reakit-system/createHook";
 
-import {
-  useSelectItem,
-  SelectItemOptions,
-  SelectItemHTMLProps,
-} from "./SelectItem";
 import { SELECT_OPTION_KEYS } from "./__keys";
+import {
+  SelectItemHTMLProps,
+  SelectItemOptions,
+  useSelectItem,
+} from "./SelectItem";
 
 export const useSelectOption = createHook<
   SelectOptionOptions,

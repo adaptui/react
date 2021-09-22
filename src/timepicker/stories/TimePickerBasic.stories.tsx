@@ -1,14 +1,16 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./TimePickerBasic.css";
-import jsUtils from "./templates/UtilsJsx";
-import tsUtils from "./templates/UtilsTsx";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/TimePickerBasicCss";
 import js from "./templates/TimePickerBasicJsx";
 import ts from "./templates/TimePickerBasicTsx";
-import css from "./templates/TimePickerBasicCss";
+import jsUtils from "./templates/UtilsJsx";
+import tsUtils from "./templates/UtilsTsx";
 import { TimePicker } from "./TimePickerBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./TimePickerBasic.css";
 
 export default {
   component: TimePicker,

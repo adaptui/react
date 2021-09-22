@@ -3,9 +3,9 @@ import { css, keyframes } from "@emotion/css";
 
 import {
   Meter as RenderlesskitMeter,
-  useMeterState,
-  MeterStateReturn,
   MeterInitialState,
+  MeterStateReturn,
+  useMeterState,
 } from "../../index";
 
 export interface MeterProps extends MeterInitialState {

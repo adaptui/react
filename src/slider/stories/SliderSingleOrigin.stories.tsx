@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./SliderBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderSingleOriginJsx";
 import ts from "./templates/SliderSingleOriginTsx";
 import { Slider } from "./SliderSingleOrigin.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./SliderBasic.css";
 
 export default {
   component: Slider,

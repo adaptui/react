@@ -2,9 +2,9 @@ import * as React from "react";
 import { Dict, isFunction, objectKeys } from "@chakra-ui/utils";
 
 import {
-  TimerToast,
   createToastStore,
   DefaultToastOptions,
+  TimerToast,
   useToastTimer,
 } from "../../index";
 
@@ -49,7 +49,7 @@ const defaultOptions: DefaultToastOptions<Toast> = {
 const [ToastProvider, useToastStore, useCreateToast, useToastHandlers] =
   createToastStore<Toast, Content>(defaultOptions);
 
-export { ToastProvider, useToastStore, useCreateToast, useToastHandlers };
+export { ToastProvider, useCreateToast, useToastHandlers, useToastStore };
 
 /* =========================================================================
   ToastBarHelpers

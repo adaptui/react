@@ -36,19 +36,19 @@ Along the way i also stumbed upon this bug too: https://github.com/facebook/jest
 This possibly was because of wrong jest config.
 */
 
-import {
-  SliderTrack,
-  SliderThumb,
-  SliderInput,
-  useSliderState,
-} from "../index";
 import React from "react";
 import { VisuallyHidden } from "reakit";
-import { render, fireEvent } from "reakit-test-utils";
+import { fireEvent, render } from "reakit-test-utils";
 import { cleanup, screen } from "@testing-library/react";
 
-import { SliderInitialState } from "../SliderState";
 import { installMouseEvent } from "../../utils/test-utils";
+import {
+  SliderInput,
+  SliderThumb,
+  SliderTrack,
+  useSliderState,
+} from "../index";
+import { SliderInitialState } from "../SliderState";
 
 export const MultiSliderComponent = (
   props: SliderInitialState & {
@@ -92,7 +92,7 @@ export const MultiSliderComponent = (
         <label className="label" htmlFor="styled-slider">
           Multi slider
         </label>
-        <div className="value" data-testid="slider-value">
+        <div className="value" data-testid="testid-slider-value">
           {!isMulti ? labelValue : JSON.stringify(state.values)}
         </div>
       </div>

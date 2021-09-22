@@ -2,8 +2,8 @@ import * as React from "react";
 
 import {
   Meter as RenderlesskitMeter,
-  useMeterState,
   MeterInitialState,
+  useMeterState,
 } from "../../index";
 
 export const Meter: React.FC<MeterInitialState> = props => {

@@ -3,8 +3,8 @@ import { closest } from "reakit-utils";
 import { useShortcut } from "@chakra-ui/hooks";
 import { getNextItemFromSearch } from "@chakra-ui/utils";
 
-import { SelectStateReturn } from "../SelectState";
 import { getIdFromValue } from "../SelectBaseState";
+import { SelectStateReturn } from "../SelectState";
 
 type TypeAheadShortcutOption = Pick<
   SelectStateReturn,

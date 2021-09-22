@@ -4,15 +4,15 @@ import {
 } from "reakit-utils/useSealedState";
 
 import {
-  SelectListState,
   SelectListActions,
   SelectListInitialState,
+  SelectListState,
   useSelectListState,
 } from "./SelectListState";
 import {
-  SelectPopoverState,
   SelectPopoverActions,
   SelectPopoverInitialState,
+  SelectPopoverState,
   useSelectPopoverState,
 } from "./SelectPopoverState";
 

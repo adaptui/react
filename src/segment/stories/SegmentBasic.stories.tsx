@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import "./SegmentBasic.css";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import css from "./templates/SegmentBasicCss";
 import js from "./templates/SegmentBasicJsx";
 import ts from "./templates/SegmentBasicTsx";
-import css from "./templates/SegmentBasicCss";
 import { Segment } from "./SegmentBasic.component";
-import { createPreviewTabs } from "../../../.storybook/utils";
+
+import "./SegmentBasic.css";
 
 export default {
   component: Segment,

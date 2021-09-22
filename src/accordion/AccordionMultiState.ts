@@ -3,10 +3,10 @@ import { Dispatch, SetStateAction } from "react";
 import { useControllableState } from "@chakra-ui/hooks";
 
 import {
-  AccordionBaseState,
   AccordionBaseActions,
-  useAccordionBaseState,
   AccordionBaseInitialState,
+  AccordionBaseState,
+  useAccordionBaseState,
 } from "./AccordionBaseState";
 
 export function useAccordionMultiState(
