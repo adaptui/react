@@ -120,15 +120,15 @@ const openDatePicker = () => {
   expect(screen.getByLabelText("month", { selector: "div" })).toHaveFocus();
 
   press.ArrowDown(null, { altKey: true });
-  expect(screen.getByTestId("datepicker-content")).toBeVisible();
+  expect(screen.getByTestId("testid-datepicker-content")).toBeVisible();
 };
 
 describe("DatePicker", () => {
   it("should open/close the datepicker", () => {
     render(<DatePickerComp defaultValue={"2020-11-1"} />);
 
-    const datepickerContent = screen.getByTestId("datepicker-content");
-    const segment = screen.getByTestId("segment");
+    const datepickerContent = screen.getByTestId("testid-datepicker-content");
+    const segment = screen.getByTestId("testid-segment");
     const month = screen.getByRole("spinbutton", {
       name: /month/i,
     });
@@ -148,8 +148,8 @@ describe("DatePicker", () => {
   it("should be able to open and select date", () => {
     render(<DatePickerComp defaultValue={"2020-11-1"} />);
 
-    const segment = screen.getByTestId("segment");
-    const datepickerContent = screen.getByTestId("datepicker-content");
+    const segment = screen.getByTestId("testid-segment");
+    const datepickerContent = screen.getByTestId("testid-datepicker-content");
     const month = screen.getByRole("spinbutton", {
       name: /month/i,
     });
@@ -176,9 +176,9 @@ describe("DatePicker", () => {
 
   it("should be able to open and select date and jump to different dates", () => {
     render(<DatePickerComp defaultValue={"2020-11-1"} />);
-    const segment = screen.getByTestId("segment");
-    const calendarHeader = screen.getByTestId("calendar-header");
-    const datepickerContent = screen.getByTestId("datepicker-content");
+    const segment = screen.getByTestId("testid-segment");
+    const calendarHeader = screen.getByTestId("testid-calendar-header");
+    const datepickerContent = screen.getByTestId("testid-datepicker-content");
     const month = screen.getByRole("spinbutton", {
       name: /month/i,
     });
@@ -232,7 +232,7 @@ describe("DatePicker", () => {
       />,
     );
 
-    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+    expect(screen.getByTestId("testid-datepicker")).toHaveAttribute(
       "aria-invalid",
       "true",
     );
@@ -241,7 +241,7 @@ describe("DatePicker", () => {
   it("should be disabled", () => {
     render(<DatePickerComp isDisabled />);
 
-    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+    expect(screen.getByTestId("testid-datepicker")).toHaveAttribute(
       "aria-disabled",
       "true",
     );
@@ -250,7 +250,7 @@ describe("DatePicker", () => {
   it("should be readonly", () => {
     render(<DatePickerComp isReadOnly />);
 
-    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+    expect(screen.getByTestId("testid-datepicker")).toHaveAttribute(
       "aria-readonly",
       "true",
     );

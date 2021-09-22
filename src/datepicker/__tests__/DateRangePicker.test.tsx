@@ -131,7 +131,7 @@ const openDatePicker = () => {
 
   jest.advanceTimersByTime(1);
 
-  expect(screen.getByTestId("datepicker-content")).toBeVisible();
+  expect(screen.getByTestId("testid-datepicker-content")).toBeVisible();
 };
 
 describe("DateRangePicker", () => {
@@ -178,8 +178,8 @@ describe("DateRangePicker", () => {
 
     // Finish selection
     press.Enter();
-    expect(screen.getByTestId("datepicker-content")).not.toBeVisible();
-    expect(screen.getByTestId("segment")).toHaveTextContent(
+    expect(screen.getByTestId("testid-datepicker-content")).not.toBeVisible();
+    expect(screen.getByTestId("testid-segment")).toHaveTextContent(
       "11/15/2020 - 11/24/2020",
     );
 
@@ -196,7 +196,7 @@ describe("DateRangePicker", () => {
       />,
     );
 
-    const datepicker = screen.getByTestId("datepicker");
+    const datepicker = screen.getByTestId("testid-datepicker");
 
     expect(datepicker).not.toHaveAttribute("aria-invalid");
 
@@ -219,7 +219,7 @@ describe("DateRangePicker", () => {
         maxValue={"2020-11-15"}
       />,
     );
-    const datepicker = screen.getByTestId("datepicker");
+    const datepicker = screen.getByTestId("testid-datepicker");
 
     expect(datepicker).not.toHaveAttribute("aria-invalid");
 
@@ -233,7 +233,7 @@ describe("DateRangePicker", () => {
   it("should be disabled", () => {
     render(<DateRangePickerComp isDisabled />);
 
-    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+    expect(screen.getByTestId("testid-datepicker")).toHaveAttribute(
       "aria-disabled",
       "true",
     );
@@ -242,7 +242,7 @@ describe("DateRangePicker", () => {
   it("should be readonly", () => {
     render(<DateRangePickerComp isReadOnly />);
 
-    expect(screen.getByTestId("datepicker")).toHaveAttribute(
+    expect(screen.getByTestId("testid-datepicker")).toHaveAttribute(
       "aria-readonly",
       "true",
     );

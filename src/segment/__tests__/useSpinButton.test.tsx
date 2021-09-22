@@ -22,7 +22,7 @@ describe("useSpinButton", () => {
       />,
     );
 
-    const el = testId("test");
+    const el = testId("testid-test");
     expect(el).toHaveAttribute("role", "spinbutton");
     expect(el).toHaveAttribute("aria-valuenow", "2");
     expect(el).toHaveAttribute("aria-valuemin", "1");
@@ -43,7 +43,7 @@ describe("useSpinButton", () => {
       />,
     );
 
-    expect(testId("test")).toHaveAttribute("aria-disabled", "true");
+    expect(testId("testid-test")).toHaveAttribute("aria-disabled", "true");
   });
 
   it("should have aria-readonly if isReadOnly is set", () => {
@@ -57,7 +57,7 @@ describe("useSpinButton", () => {
       />,
     );
 
-    expect(testId("test")).toHaveAttribute("aria-readonly", "true");
+    expect(testId("testid-test")).toHaveAttribute("aria-readonly", "true");
   });
 
   it("should trigger onIncrement on arrow up", () => {
@@ -66,7 +66,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onIncrement={onIncrement} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "ArrowUp" });
+    fireEvent.keyDown(testId("testid-test"), { key: "ArrowUp" });
     expect(onIncrement).toHaveBeenCalledTimes(1);
   });
 
@@ -76,7 +76,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onDecrement={onDecrement} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "ArrowDown" });
+    fireEvent.keyDown(testId("testid-test"), { key: "ArrowDown" });
     expect(onDecrement).toHaveBeenCalledTimes(1);
   });
 
@@ -86,7 +86,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onIncrementPage={onIncrementPage} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "PageUp" });
+    fireEvent.keyDown(testId("testid-test"), { key: "PageUp" });
     expect(onIncrementPage).toHaveBeenCalledTimes(1);
   });
 
@@ -96,7 +96,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onIncrement={onIncrement} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "PageUp" });
+    fireEvent.keyDown(testId("testid-test"), { key: "PageUp" });
     expect(onIncrement).toHaveBeenCalledTimes(1);
   });
 
@@ -106,7 +106,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onDecrementPage={onDecrementPage} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "PageDown" });
+    fireEvent.keyDown(testId("testid-test"), { key: "PageDown" });
     expect(onDecrementPage).toHaveBeenCalledTimes(1);
   });
 
@@ -116,7 +116,7 @@ describe("useSpinButton", () => {
       <SpinButtonComp value={2} onDecrement={onDecrement} />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "PageDown" });
+    fireEvent.keyDown(testId("testid-test"), { key: "PageDown" });
     expect(onDecrement).toHaveBeenCalledTimes(1);
   });
 
@@ -130,7 +130,7 @@ describe("useSpinButton", () => {
       />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "Home" });
+    fireEvent.keyDown(testId("testid-test"), { key: "Home" });
     expect(onDecrementToMin).toHaveBeenCalledTimes(1);
   });
 
@@ -144,7 +144,7 @@ describe("useSpinButton", () => {
       />,
     );
 
-    fireEvent.keyDown(testId("test"), { key: "End" });
+    fireEvent.keyDown(testId("testid-test"), { key: "End" });
     expect(onIncrementToMax).toHaveBeenCalledTimes(1);
   });
 });

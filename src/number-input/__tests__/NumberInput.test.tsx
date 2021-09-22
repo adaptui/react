@@ -59,7 +59,7 @@ describe("NumberInput", () => {
   it("should start with empty string", () => {
     render(<NumberInputComp />);
 
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     expect(numberInput).toHaveValue("");
   });
@@ -67,7 +67,7 @@ describe("NumberInput", () => {
   it("should render correctly", () => {
     render(<NumberInputComp defaultValue={0} />);
 
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     expect(numberInput).not.toHaveFocus();
     press.Tab();
@@ -76,7 +76,7 @@ describe("NumberInput", () => {
 
   it("should increase/decrease with keyboard", () => {
     render(<NumberInputComp defaultValue={0} max={10} min={0} />);
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     expect(numberInput).not.toHaveFocus();
     press.Tab();
@@ -101,7 +101,7 @@ describe("NumberInput", () => {
 
   it("should increase/decrease by 0.1*step on ctrl+Arrow", () => {
     render(<NumberInputComp defaultValue={0} step={0.1} precision={2} />);
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.ArrowUp(numberInput);
     expect(numberInput).toHaveValue("0.10");
@@ -116,7 +116,7 @@ describe("NumberInput", () => {
 
   it("should increase/decrease by 10*step on shift+Arrow", () => {
     render(<NumberInputComp defaultValue={0} />);
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.ArrowUp(numberInput);
     expect(numberInput).toHaveValue("1");
@@ -132,9 +132,9 @@ describe("NumberInput", () => {
   it("should increase/decrease with buttons", () => {
     render(<NumberInputComp defaultValue={0} />);
 
-    const incBtn = screen.getByTestId("inc");
-    const decBtn = screen.getByTestId("dec");
-    const numberInput = screen.getByTestId("numberinput");
+    const incBtn = screen.getByTestId("testid-inc");
+    const decBtn = screen.getByTestId("testid-dec");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     expect(numberInput).not.toHaveFocus();
     expect(numberInput).toHaveValue("0");
@@ -150,7 +150,7 @@ describe("NumberInput", () => {
     jest.useFakeTimers();
 
     render(<NumberInputComp defaultValue={0} />);
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -176,9 +176,9 @@ describe("NumberInput", () => {
   it("should behave properly with min/max/step options", () => {
     render(<NumberInputComp defaultValue={0} min={10} max={50} step={10} />);
 
-    const incBtn = screen.getByTestId("inc");
-    const decBtn = screen.getByTestId("dec");
-    const numberInput = screen.getByTestId("numberinput");
+    const incBtn = screen.getByTestId("testid-inc");
+    const decBtn = screen.getByTestId("testid-dec");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -203,9 +203,9 @@ describe("NumberInput", () => {
   it("should behave properly precision value", () => {
     render(<NumberInputComp defaultValue={0} step={0.65} precision={2} />);
 
-    const incBtn = screen.getByTestId("inc");
-    const decBtn = screen.getByTestId("dec");
-    const numberInput = screen.getByTestId("numberinput");
+    const incBtn = screen.getByTestId("testid-inc");
+    const decBtn = screen.getByTestId("testid-dec");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();
@@ -231,7 +231,7 @@ describe("NumberInput", () => {
         max={50}
       />,
     );
-    const numberInput = screen.getByTestId("numberinput");
+    const numberInput = screen.getByTestId("testid-numberinput");
 
     press.Tab();
     expect(numberInput).toHaveFocus();

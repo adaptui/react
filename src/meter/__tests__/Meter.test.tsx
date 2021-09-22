@@ -113,7 +113,7 @@ describe("Meter", () => {
 
   it("supports custom DOM props", function () {
     const { getByTestId } = render(<MeterComp data-testid="testid-test" />);
-    const meter = getByTestId("test");
+    const meter = getByTestId("testid-test");
 
     expect(meter).toBeInTheDocument();
   });

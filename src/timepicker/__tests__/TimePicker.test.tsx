@@ -81,13 +81,15 @@ describe("TimePicker", () => {
   it("should render correctly", () => {
     render(<TimePickerComp defaultValue="12:45" />);
 
-    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 PM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "12:45 PM",
+    );
   });
 
   it("should open and change time value", () => {
     render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = screen.getByTestId("timepicker-content");
+    const timepickerContent = screen.getByTestId("testid-timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -102,13 +104,15 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("1:45 PM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "1:45 PM",
+    );
   });
 
   it("should be able to navigate with keyboard", () => {
     render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = screen.getByTestId("timepicker-content");
+    const timepickerContent = screen.getByTestId("testid-timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -135,13 +139,15 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "3:42 AM",
+    );
   });
 
   it("should cancel and restore the timer on pressing escape", () => {
     render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = screen.getByTestId("timepicker-content");
+    const timepickerContent = screen.getByTestId("testid-timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -168,13 +174,15 @@ describe("TimePicker", () => {
 
     press.Escape();
     expect(timepickerContent).toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("12:45 PM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "12:45 PM",
+    );
   });
 
   it("should cancel/restore/submit the time correctly", () => {
     render(<TimePickerComp defaultValue="12:45" />);
 
-    const timepickerContent = screen.getByTestId("timepicker-content");
+    const timepickerContent = screen.getByTestId("testid-timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -201,7 +209,9 @@ describe("TimePicker", () => {
 
     press.Enter();
     expect(timepickerContent).not.toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "3:42 AM",
+    );
 
     press.ArrowDown(null, { altKey: true });
 
@@ -219,13 +229,15 @@ describe("TimePicker", () => {
     // should restore the old value on pressing escape
     press.Escape();
     expect(timepickerContent).toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("3:42 AM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "3:42 AM",
+    );
   });
 
   test("timepicker old time should update when popover is closed", () => {
     render(<TimePickerComp defaultValue="01:00" />);
 
-    const timepickerContent = screen.getByTestId("timepicker-content");
+    const timepickerContent = screen.getByTestId("testid-timepicker-content");
 
     expect(timepickerContent).not.toBeVisible();
     press.Tab();
@@ -237,7 +249,9 @@ describe("TimePicker", () => {
     expect(document.activeElement).toHaveTextContent("4");
 
     expect(timepickerContent).not.toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("4:00 AM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "4:00 AM",
+    );
 
     press.ArrowDown(null, { altKey: true });
 
@@ -252,7 +266,9 @@ describe("TimePicker", () => {
     // focus and selection has been moved to the previous old time
     expect(document.activeElement).toHaveTextContent("4");
     expect(timepickerContent).toBeVisible();
-    expect(screen.getByTestId("current-time")).toHaveTextContent("4:00 AM");
+    expect(screen.getByTestId("testid-current-time")).toHaveTextContent(
+      "4:00 AM",
+    );
   });
 
   test("TimePicker renders with no a11y violations", async () => {

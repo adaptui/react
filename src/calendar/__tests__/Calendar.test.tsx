@@ -90,14 +90,14 @@ describe("Calendar", () => {
   it("should render correctly", () => {
     const { getByTestId: testId } = render(<CalendarComp />);
 
-    expect(testId("weekDays").children).toHaveLength(7);
-    expect(testId("current-year")).toHaveTextContent(/^october 2020$/i);
+    expect(testId("testid-weekDays").children).toHaveLength(7);
+    expect(testId("testid-current-year")).toHaveTextContent(/^october 2020$/i);
   });
 
   it("should have proper calendar header keyboard navigation", () => {
     render(<CalendarComp defaultValue={"2020-10-07"} />);
 
-    const currentYear = screen.getByTestId("current-year");
+    const currentYear = screen.getByTestId("testid-current-year");
     const { getByText: text } = screen;
 
     expect(currentYear).toHaveTextContent(/^october 2020$/i);
@@ -124,7 +124,7 @@ describe("Calendar", () => {
 
   it("should proper grid navigation", () => {
     render(<CalendarComp defaultValue={"2020-10-07"} />);
-    const currentYear = screen.getByTestId("current-year");
+    const currentYear = screen.getByTestId("testid-current-year");
 
     const { getByLabelText: label } = screen;
 

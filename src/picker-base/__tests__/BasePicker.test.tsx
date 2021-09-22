@@ -39,7 +39,7 @@ describe("PickerBase", () => {
   it("should open/close properly", () => {
     render(<PickerBaseComp />);
 
-    const pickerContent = screen.getByTestId("picker-content");
+    const pickerContent = screen.getByTestId("testid-picker-content");
 
     expect(pickerContent).not.toBeVisible();
     fireEvent.click(screen.getByText("open"));

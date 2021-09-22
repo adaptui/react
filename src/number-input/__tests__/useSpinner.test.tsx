@@ -47,14 +47,14 @@ describe("useSpinner", () => {
     const { getByTestId: testId, getByText: text } = render(<Example />);
 
     fireEvent.click(text("+"));
-    expect(testId("value")).toHaveTextContent("1");
+    expect(testId("testid-value")).toHaveTextContent("1");
   });
 
   it("press down", () => {
     const { getByTestId: testId, getByText: text } = render(<Example />);
 
     fireEvent.click(text("-"));
-    expect(testId("value")).toHaveTextContent("-1");
+    expect(testId("testid-value")).toHaveTextContent("-1");
   });
 
   // TODO: Simulate mouse hold to check for timeout and intervals of increments

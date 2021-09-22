@@ -96,8 +96,8 @@ describe("RangeCalendar", () => {
       />,
     );
 
-    expect(testId("week-days").children).toHaveLength(7);
-    expect(testId("current-year")).toHaveTextContent("October 2020");
+    expect(testId("testid-week-days").children).toHaveLength(7);
+    expect(testId("testid-current-year")).toHaveTextContent("October 2020");
   });
 
   it("should have proper initial start and end ranges", () => {
@@ -155,7 +155,7 @@ describe("RangeCalendar", () => {
       />,
     );
 
-    expect(screen.getByTestId("current-year")).toHaveTextContent(
+    expect(screen.getByTestId("testid-current-year")).toHaveTextContent(
       /October 2020/i,
     );
 
@@ -217,7 +217,7 @@ describe("RangeCalendar", () => {
       />,
     );
 
-    expect(screen.getByTestId("current-year")).toHaveTextContent(
+    expect(screen.getByTestId("testid-current-year")).toHaveTextContent(
       /October 2020/i,
     );
 

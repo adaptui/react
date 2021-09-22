@@ -33,7 +33,9 @@ describe("Segment", () => {
   it("should render correctly", () => {
     render(<SegmentSpinnerComp />);
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "1/1/2020",
+    );
   });
 
   it("should have proper keyboard navigation", () => {
@@ -49,7 +51,9 @@ describe("Segment", () => {
       name: /day/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "1/1/2020",
+    );
     press.Tab();
     expect(month).toHaveFocus();
     press.ArrowRight();
@@ -69,7 +73,9 @@ describe("Segment", () => {
       name: /month/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "1/1/2020",
+    );
 
     press.Tab();
     expect(month).toHaveFocus();
@@ -94,7 +100,9 @@ describe("Segment", () => {
       name: /day/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "1/1/2020",
+    );
 
     press.Tab();
     expect(month).toHaveFocus();
@@ -118,7 +126,9 @@ describe("Segment", () => {
       name: /year/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("1/1/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "1/1/2020",
+    );
 
     press.Tab();
     press.Enter();
@@ -141,7 +151,9 @@ describe("Segment", () => {
       name: /dayperiod/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("12:00 AM");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "12:00 AM",
+    );
 
     press.Tab();
     press.Enter();
@@ -170,7 +182,7 @@ describe("Segment", () => {
       name: /month/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent(
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
       "Wednesday, 01/01/2020",
     );
 
@@ -200,7 +212,9 @@ describe("Segment", () => {
       name: /dayperiod/i,
     });
 
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("12:00 AM");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "12:00 AM",
+    );
 
     press.Tab();
     expect(hour).toHaveFocus();
@@ -236,7 +250,9 @@ describe("Segment", () => {
     const month = screen.getByRole("spinbutton", {
       name: /month/i,
     });
-    expect(screen.getByTestId("segment-field")).toHaveTextContent("5/31/2020");
+    expect(screen.getByTestId("testid-segment-field")).toHaveTextContent(
+      "5/31/2020",
+    );
 
     press.Tab();
     expect(month).toHaveFocus();

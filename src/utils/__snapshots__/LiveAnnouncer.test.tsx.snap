@@ -7,14 +7,14 @@ exports[`LiveAnnouncer should render correctly 1`] = `
       aria-atomic="true"
       aria-live="assertive"
       aria-relevant="additions"
-      data-testid="testid-announcer-assertive"
+      data-testid="announcer-assertive"
       style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
     />
     <span
       aria-atomic="true"
       aria-live="assertive"
       aria-relevant="additions"
-      data-testid="testid-announcer-assertive"
+      data-testid="announcer-assertive"
       style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
     >
       Hello world
@@ -23,14 +23,14 @@ exports[`LiveAnnouncer should render correctly 1`] = `
       aria-atomic="true"
       aria-live="polite"
       aria-relevant="additions"
-      data-testid="testid-announcer-polite"
+      data-testid="announcer-polite"
       style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
     />
     <span
       aria-atomic="true"
       aria-live="polite"
       aria-relevant="additions"
-      data-testid="testid-announcer-polite"
+      data-testid="announcer-polite"
       style="border: 0px; height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;"
     />
   </div>

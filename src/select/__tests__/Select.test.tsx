@@ -44,7 +44,7 @@ describe("Select", () => {
   it("should be able to open popover and select an element", () => {
     render(<SelectComponent />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
@@ -68,7 +68,7 @@ describe("Select", () => {
   it("should be able to open popover and select an element with keyboard", () => {
     render(<SelectComponent />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
@@ -105,7 +105,7 @@ describe("Select", () => {
   it("should behave properly with default selected", () => {
     render(<SelectComponent selectedValue="Orange" />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
@@ -126,7 +126,7 @@ describe("Select", () => {
   test("typeahead should work properly when popover is not open", () => {
     render(<SelectComponent />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
@@ -155,7 +155,7 @@ describe("Select", () => {
   test("typeahead should work properly when popover is open", () => {
     render(<SelectComponent />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });
@@ -196,7 +196,7 @@ describe("Select", () => {
   test("open popover with arrowdown & select orange with typeahead", () => {
     render(<SelectComponent />);
 
-    const popover = screen.getByTestId("popover");
+    const popover = screen.getByTestId("testid-popover");
     const popoverButton = screen.getByRole("button", {
       name: /fruit/i,
     });

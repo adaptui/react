@@ -160,8 +160,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderThumb = screen.getByTestId("slider-thumb");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderThumb = screen.getByTestId("testid-slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50");
 
@@ -198,8 +198,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderThumb = screen.getByTestId("slider-thumb");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderThumb = screen.getByTestId("testid-slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50");
 
@@ -235,8 +235,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderThumb = screen.getByTestId("slider-thumb");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderThumb = screen.getByTestId("testid-slider-thumb");
 
     expect(sliderValue).toHaveTextContent("65");
 
@@ -278,8 +278,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderThumb = screen.getByTestId("slider-thumb");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderThumb = screen.getByTestId("testid-slider-thumb");
 
     expect(sliderValue).toHaveTextContent("0");
 
@@ -324,8 +324,8 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderThumb = screen.getByTestId("slider-thumb");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderThumb = screen.getByTestId("testid-slider-thumb");
 
     expect(sliderValue).toHaveTextContent("50°C");
 
@@ -345,7 +345,7 @@ describe("Slider", () => {
   it("supports disabled slider", () => {
     render(<SliderComponent isDisabled={true} />);
 
-    expect(screen.getByTestId("slider-input")).toBeDisabled();
+    expect(screen.getByTestId("testid-slider-input")).toBeDisabled();
   });
 
   test("Slider renders with no a11y violations", async () => {

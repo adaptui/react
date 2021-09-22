@@ -137,13 +137,13 @@ export const MultiSliderComponent = (
                 {...state}
                 index={index}
                 className="slider-thumb-handle"
-                data-testid={`slider-thumb-${index}`}
+                data-testid={`testid-slider-thumb-${index}`}
               >
                 <VisuallyHidden>
                   <SliderInput
                     index={index}
                     aria-label={`Thumb-${index}`}
-                    data-testid={`slider-input-${index}`}
+                    data-testid={`testid-slider-input-${index}`}
                     {...state}
                   />
                 </VisuallyHidden>
@@ -195,9 +195,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const thumb0 = screen.getByTestId("slider-thumb-0");
-    const thumb1 = screen.getByTestId("slider-thumb-1");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const thumb0 = screen.getByTestId("testid-slider-thumb-0");
+    const thumb1 = screen.getByTestId("testid-slider-thumb-1");
 
     expect(sliderValue).toHaveTextContent("[25,50,75]");
 
@@ -258,9 +258,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const thumb0 = screen.getByTestId("slider-thumb-0");
-    const thumb1 = screen.getByTestId("slider-thumb-1");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const thumb0 = screen.getByTestId("testid-slider-thumb-0");
+    const thumb1 = screen.getByTestId("testid-slider-thumb-1");
 
     expect(sliderValue).toHaveTextContent("25 to 50");
 
@@ -302,7 +302,7 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
+    const sliderValue = screen.getByTestId("testid-slider-value");
 
     expect(sliderValue).toHaveTextContent([...new Array(50).keys()].toString());
   });
@@ -318,9 +318,9 @@ describe("Slider", () => {
       />,
     );
 
-    const sliderValue = screen.getByTestId("slider-value");
-    const sliderInput0 = screen.getByTestId("slider-input-0");
-    const sliderInput1 = screen.getByTestId("slider-input-1");
+    const sliderValue = screen.getByTestId("testid-slider-value");
+    const sliderInput0 = screen.getByTestId("testid-slider-input-0");
+    const sliderInput1 = screen.getByTestId("testid-slider-input-1");
 
     expect(sliderValue).toHaveTextContent("10 to 50");
     expect(sliderInput0).toBeDisabled();

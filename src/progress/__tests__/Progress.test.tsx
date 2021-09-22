@@ -41,7 +41,7 @@ describe("Progress", () => {
   it("should render isIndeterminate", () => {
     render(<ProgressComp value={null} />);
 
-    expect(screen.getByTestId("progress")).toHaveAttribute(
+    expect(screen.getByTestId("testid-progress")).toHaveAttribute(
       "data-indeterminate",
       "",
     );
