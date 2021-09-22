@@ -4,12 +4,7 @@ module.exports = {
   addons: [
     "storybook-addon-preview",
     "storybook-addon-react-docgen",
-    {
-      name: "@storybook/addon-essentials",
-      options: {
-        measure: false,
-      },
-    },
+    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     {
       name: "@storybook/addon-postcss",

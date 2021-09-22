@@ -4,7 +4,7 @@ const parserBabel = require("prettier/parser-babel");
 
 const { joinCwd, extractCode } = require("./common-utils");
 const injectMdContent = require("./inject-md-content");
-const prettierConfig = require("../../.prettierrc.json");
+const prettierConfig = require("../../.prettierrc.js");
 
 // eslint-disable-next-line no-useless-escape
 const CODE_EXAMPLE_FLAG = /\<\!\-\- IMPORT_EXAMPLE (.*) \-\-\>/m;

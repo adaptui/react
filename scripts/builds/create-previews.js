@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
-const globFs = require("glob-fs")();
+const globFs = require("glob-fs")({ gitignore: false });
 const outdent = require("outdent");
 
 const {
@@ -11,23 +11,6 @@ const {
   joinCwd,
 } = require("../utils/common-utils");
 const transpileTs = require("../utils/transpile-ts");
-
-function globRecurse(file) {
-  // `file.pattern` is an object with a `glob` (string) property
-  file.recurse = file.pattern.glob.indexOf("**") !== -1;
-  return file;
-}
-
-const componentArg = process.argv[2];
-const folderToRead = componentArg
-  ? `src/${componentArg}/**/*.component.*`
-  : "src/**/*.component.*";
-//
-
-/**
- * Get all the files from the folder.
- */
-const files = globFs.use(globRecurse).readdirSync(folderToRead, {});
 
 const addPackageName = string =>
   string
@@ -80,6 +63,23 @@ const generatePreviewTemplateFiles = filePath => {
     console.error(err);
   }
 };
+
+function globRecurse(file) {
+  // `file.pattern` is an object with a `glob` (string) property
+  file.recurse = file.pattern.glob.indexOf("**") !== -1;
+  return file;
+}
+
+const componentArg = process.argv[2];
+const folderToRead = componentArg
+  ? `src/${componentArg}/**/*.component.*`
+  : "src/**/*.component.*";
+//
+
+/**
+ * Get all the files from the folder.
+ */
+const files = globFs.use(globRecurse).readdirSync(folderToRead, {});
 
 files.forEach(filePath => generatePreviewTemplateFiles(filePath));
 

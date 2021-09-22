@@ -1,43 +1,12 @@
-__js
-templates.ts
-
-# Dependency directories
-node_modules/
-jspm_packages/
-/node_modules
-/.pnp
-.pnp.js
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# dotenv environment variable files
+.env*
 
 # testing
 /coverage
 
-# dotenv environment variable files
-.env*
-
-# Mac files
-.DS_Store
-
-# Optional npm cache directory
-.npm
-
-# Yarn
-yarn-error.log
-.pnp/
-.pnp.js
-
-# Yarn Integrity file
-.yarn-integrity
-
-# gatsby files
-.cache/
-public
+# next.js
+/.next/
+/out/
 
 # Storybook build
 storybook-static
@@ -50,33 +19,40 @@ storybook-static
 # Vercel folder
 .vercel
 
-# library folder
-.lib
-dist
-
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
-
-# Typescript v1 declaration files
-typings/
-
 # Optional eslint cache
 .eslintcache
 
 # Logs
-logs
-*.log
-lerna-debug.log
+*.log*
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Dependency directories
+node_modules
+jspm_packages
 
-#buildsize
-size-plugin.json
-stats-react.json
-stats.html
+# Mac files
+.DS_Store
 
-#Project
+# Optional npm cache directory
+.npm
+
+# Yarn 2
+.pnp/
+.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn-integrity # Yarn Integrity file
+
+# Lock files
+package-lock.json
+yarn.lock
+
+## library folder
+dist
+__js
 templates
+templates.ts
