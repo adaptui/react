@@ -2,6 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { CheckboxState } from "../CheckboxState";
 
 import js from "./templates/CheckboxBasicJsx";
 import ts from "./templates/CheckboxBasicTsx";
@@ -32,3 +33,10 @@ export default {
 } as Meta;
 
 export const Default: Story<CheckboxProps> = args => <Checkbox {...args} />;
+
+export const Controlled = () => {
+  const [value, setValue] = React.useState<CheckboxState["state"]>(true);
+  console.log("%cvalue", "color: #997326", value);
+
+  return <Checkbox state={value} onStateChange={setValue} />;
+};

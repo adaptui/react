@@ -3,14 +3,14 @@ import * as React from "react";
 import {
   Radio as RenderlesskitRadio,
   RadioGroup,
+  RadioGroupHTMLProps,
   RadioInitialState,
-  RadioProps as RenderlesskitRadioProps,
   splitStateProps,
   USE_RADIO_STATE_KEYS,
   useRadioState,
 } from "../../index";
 
-export type RadioProps = RenderlesskitRadioProps & RadioInitialState & {};
+export type RadioProps = RadioInitialState & RadioGroupHTMLProps & {};
 
 export const Radio: React.FC<RadioProps> = props => {
   const [stateProps, radioProps] = splitStateProps<

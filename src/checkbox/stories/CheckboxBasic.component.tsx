@@ -2,15 +2,14 @@ import * as React from "react";
 
 import {
   Checkbox as RenderlesskitCheckbox,
+  CheckboxHTMLProps,
   CheckboxInitialState,
-  CheckboxProps as RenderlesskitCheckboxProps,
   splitStateProps,
   USE_CHECKBOX_STATE_KEYS,
   useCheckboxState,
 } from "../../index";
 
-export type CheckboxProps = RenderlesskitCheckboxProps &
-  CheckboxInitialState & {};
+export type CheckboxProps = CheckboxHTMLProps & CheckboxInitialState & {};
 
 export const Checkbox: React.FC<CheckboxProps> = props => {
   const [stateProps, checkboxProps] = splitStateProps<

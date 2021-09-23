@@ -26,9 +26,9 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
-  SliderTrack,
-  SliderThumb,
   SliderInput,
+  SliderThumb,
+  SliderTrack,
   useSliderState,
 } from "@renderlesskit/react";
 
@@ -86,17 +86,17 @@ export const Slider = args => {
 export default Slider;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/oii0e)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/wqe8x)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0i333)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Origin%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/myoqv)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rcn4d)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Reversed%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/jv5dw)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/wl1jp)
+[![Edit CodeSandbox](https://img.shields.io/badge/Single%20Vertical%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/gph2l)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bibgn)
+[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/d02dk)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Multi%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/tgseh)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multi%20Slider-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0rvot)
 
 ## Accessibility Requirement
 

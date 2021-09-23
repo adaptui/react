@@ -27,13 +27,14 @@ import * as React from "react";
 import {
   TimePicker as RenderlesskitTimePicker,
   TimePickerColumn,
-  TimePickerSegment,
-  TimePickerTrigger,
-  TimePickerContent,
-  useTimePickerState,
   TimePickerColumnValue,
+  TimePickerContent,
+  TimePickerSegment,
   TimePickerSegmentField,
+  TimePickerTrigger,
+  useTimePickerState,
 } from "@renderlesskit/react";
+
 import { CalendarIcon } from "./Utils.component";
 
 export const TimePicker = props => {
@@ -112,7 +113,7 @@ export const TimePicker = props => {
 export default TimePicker;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3d78z)
+[![Edit CodeSandbox](https://img.shields.io/badge/TimePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/70ft0)
 
 ## Composition
 
@@ -232,10 +233,10 @@ export default TimePicker;
 | **`columnType`**                                            | <code>&#34;hour&#34; \| &#34;minute&#34; \| &#34;meridian&#34;</code>                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                |
 | **`restoreOldTime`**                                        | <code>(() =&#62; Date) \| undefined</code>                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                |
 | **`updateOldTime`**                                         | <code>(() =&#62; void) \| undefined</code>                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                |
-| **`date`**                                                  | <code>Date</code>                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                |
 | **`move`**                                                  | <code>(id: string \| null) =&#62; void</code>                                                                                                                                                                                                                                                                                                                 | Moves focus to a given item ID.                                                                                                                                                                                                                                                                                                                                                                |
 | **`selected`**                                              | <code>number</code>                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                |
 | **`setSelected`**                                           | <code title="(value: number, close?: boolean \| undefined) =&#62; void">(value: number, close?: boolean \| undefined) =&#62;...</code>                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                |
+| **`date`**                                                  | <code>Date</code>                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                                                                |
 
 </details>
 

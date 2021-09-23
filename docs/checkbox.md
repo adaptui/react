@@ -22,10 +22,10 @@ By default, it renders the native `<input type="checkbox">`.
 import * as React from "react";
 
 import {
-  useCheckboxState,
   Checkbox as RenderlesskitCheckbox,
-  USE_CHECKBOX_STATE_KEYS,
   splitStateProps,
+  USE_CHECKBOX_STATE_KEYS,
+  useCheckboxState,
 } from "@renderlesskit/react";
 
 export const Checkbox = props => {
@@ -42,7 +42,7 @@ export const Checkbox = props => {
 export default Checkbox;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Checkbox%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/y9yts)
+[![Edit CodeSandbox](https://img.shields.io/badge/Checkbox%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vwt44)
 
 ## Accessibility Requirement
 

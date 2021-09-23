@@ -21,8 +21,8 @@ import * as React from "react";
 
 import {
   PickerBase as RenderlesskitPickerBase,
-  PickerBaseTrigger,
   PickerBaseContent,
+  PickerBaseTrigger,
   usePickerBaseState,
 } from "@renderlesskit/react";
 
@@ -42,7 +42,7 @@ export const PickerBase = props => {
 export default PickerBase;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Picker%20Base-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yighd)
+[![Edit CodeSandbox](https://img.shields.io/badge/Picker%20Base-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/m1o69)
 
 ## Composition
 

@@ -25,9 +25,9 @@ import * as React from "react";
 
 import {
   NumberInput as RenderlesskitNumberInput,
-  useNumberInputState,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
+  useNumberInputState,
 } from "@renderlesskit/react";
 
 export const NumberInput = props => {
@@ -53,7 +53,7 @@ export const NumberInput = props => {
 export default NumberInput;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/NumberInput-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yko82)
+[![Edit CodeSandbox](https://img.shields.io/badge/NumberInput-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/up5vw)
 
 ## Accessibility Requirement
 

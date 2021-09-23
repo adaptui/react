@@ -21,8 +21,8 @@ for its
 import * as React from "react";
 
 import {
-  Breadcrumbs as RenderlesskitBreadcrumbs,
   BreadcrumbLink,
+  Breadcrumbs as RenderlesskitBreadcrumbs,
 } from "@renderlesskit/react";
 
 export const Breadcrumbs = () => {
@@ -60,7 +60,7 @@ export const Breadcrumbs = () => {
 export default Breadcrumbs;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/40ezi)
+[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z16je)
 
 ## Accessibility Requirement
 

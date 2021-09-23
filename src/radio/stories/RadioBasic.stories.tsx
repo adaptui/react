@@ -2,6 +2,7 @@ import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
 import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { RadioState } from "../RadioState";
 
 import js from "./templates/RadioBasicJsx";
 import ts from "./templates/RadioBasicTsx";
@@ -32,3 +33,9 @@ export default {
 } as Meta;
 
 export const Default: Story<RadioProps> = args => <Radio {...args} />;
+
+export const Controlled = () => {
+  const [value, setValue] = React.useState<RadioState["state"]>("orange");
+
+  return <Radio state={value} onStateChange={setValue} />;
+};

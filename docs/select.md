@@ -56,19 +56,19 @@ export default Select;
 
 [![Edit CodeSandbox](https://img.shields.io/badge/Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/surso)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Dynamic%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/l50wh)
+[![Edit CodeSandbox](https://img.shields.io/badge/Dynamic%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7pd7i)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Multiple%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/quwfv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Multiple%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/kdlji)
 
 [![Edit CodeSandbox](https://img.shields.io/badge/Fetch%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8irr5)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Windows%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/osmtv)
+[![Edit CodeSandbox](https://img.shields.io/badge/Windows%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/yso1f)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Custom%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mbn6n)
+[![Edit CodeSandbox](https://img.shields.io/badge/Custom%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/243ku)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Controlled%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b4w5q)
+[![Edit CodeSandbox](https://img.shields.io/badge/Controlled%20Select-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/tnzwu)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Virtual%20Select%20Options-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/l9z28)
+[![Edit CodeSandbox](https://img.shields.io/badge/Virtual%20Select%20Options-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/qqrjd)
 
 ## Composition
 

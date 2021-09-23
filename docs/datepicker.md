@@ -28,12 +28,6 @@ for the keyboard navigation & accessibility features.
 import * as React from "react";
 
 import {
-  DatePicker,
-  DatePickerSegment,
-  DatePickerContent,
-  DatePickerTrigger,
-  useDatePickerState,
-  DatePickerSegmentField,
   Calendar as CalendarWrapper,
   CalendarButton,
   CalendarCell,
@@ -41,7 +35,14 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarWeekTitle,
+  DatePicker,
+  DatePickerContent,
+  DatePickerSegment,
+  DatePickerSegmentField,
+  DatePickerTrigger,
+  useDatePickerState,
 } from "@renderlesskit/react";
+
 import {
   CalendarIcon,
   ChevronLeft,
@@ -139,7 +140,7 @@ const Calendar = state => {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/DatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5hx47)
+[![Edit CodeSandbox](https://img.shields.io/badge/DatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/kzk3i)
 
 ### Range DatePicker
 
@@ -147,19 +148,19 @@ const Calendar = state => {
 import React from "react";
 
 import {
+  Calendar,
+  CalendarButton,
+  CalendarCell,
+  CalendarCellButton,
+  CalendarGrid,
+  CalendarHeader,
+  CalendarWeekTitle,
   DatePicker,
   DatePickerContent,
   DatePickerSegment,
-  DatePickerTrigger,
   DatePickerSegmentField,
+  DatePickerTrigger,
   useDateRangePickerState,
-  Calendar,
-  CalendarCell,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarButton,
-  CalendarWeekTitle,
-  CalendarCellButton,
 } from "@renderlesskit/react";
 
 import {
@@ -279,7 +280,7 @@ const RangeCalendar = state => {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/RangeDatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/prvgx)
+[![Edit CodeSandbox](https://img.shields.io/badge/RangeDatePicker-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/181vj)
 
 ## Composition
 
