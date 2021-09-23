@@ -55,6 +55,5 @@ yarn.lock
 dist
 __js
 templates
-templates.ts
 docs
 CHANGELOG.md

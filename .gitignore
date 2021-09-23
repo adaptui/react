@@ -55,4 +55,3 @@ yarn.lock
 dist
 __js
 templates
-templates.ts
