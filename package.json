@@ -163,7 +163,7 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-testing-library": "^4.12.3",
+    "eslint-plugin-testing-library": "^4.12.4",
     "gacp": "^2.10.2",
     "glob": "^7.2.0",
     "glob-fs": "^0.1.7",
