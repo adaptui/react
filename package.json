@@ -182,7 +182,7 @@
     "outdent": "^0.8.0",
     "patch-package": "^6.4.7",
     "pinst": "^2.1.6",
-    "postcss": "^8.3.7",
+    "postcss": "^8.3.8",
     "postcss-import": "^14.0.2",
     "postcss-scopify": "^0.1.9",
     "prettier": "^2.4.1",
