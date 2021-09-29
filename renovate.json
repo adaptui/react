@@ -1,6 +1,7 @@
 {
   "extends": ["config:base"],
   "commitMessageAction": "⬆️ update",
+  "ignoreDeps": ["node-fetch"],
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
