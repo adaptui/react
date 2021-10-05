@@ -1,3 +1,49 @@
+## [0.7.0](https://github.com/timelessco/renderlesskit-react/compare/v0.6.2...v0.7.0) (2021-10-05)
+
+
+### Test Updates
+
+* **dom:** ✅ fix long pending test fix for dom dep ([b1db4f7](https://github.com/timelessco/renderlesskit-react/commit/b1db4f79c8f6324f07982fa8585e47237c963494))
+* **testid:** ✅ fix test id eslint update ([5dfcbab](https://github.com/timelessco/renderlesskit-react/commit/5dfcbababdf450f153f0bee6e3f79493bbe121ee))
+
+
+### Documentation Changes
+
+* **all:** 📝 update radio checkbox ex with docs ([2186fb4](https://github.com/timelessco/renderlesskit-react/commit/2186fb43af43d95b6f8954939a97adb00e957e89))
+
+
+### Feature Updates
+
+* **disclosure:** ✨ add disclosure ([#244](https://github.com/timelessco/renderlesskit-react/issues/244)) ([0771c5a](https://github.com/timelessco/renderlesskit-react/commit/0771c5a7cffacc5a64057fa0bf3f0de431767821))
+
+
+### Maintanance Updates
+
+* **config:** 🔧 update & unify dev setups ([5e682c1](https://github.com/timelessco/renderlesskit-react/commit/5e682c1bcc03de2d922a594d47f3c1dcab72e3ab))
+* **deps:** ⬆️ update actions/setup-node action to v2 ([#237](https://github.com/timelessco/renderlesskit-react/issues/237)) ([30b68c6](https://github.com/timelessco/renderlesskit-react/commit/30b68c642723bb8e1cb976a5ac4c5c231b57d7b7))
+* **deps:** ⬆️ update dependency react-hook-form to v7.17.1 ([#243](https://github.com/timelessco/renderlesskit-react/issues/243)) ([3a6c97a](https://github.com/timelessco/renderlesskit-react/commit/3a6c97afb94beb463033f36dadf70e66ae05b18b))
+* **deps:** ⬆️ update dependency react-virtual to v2.8.2 ([#240](https://github.com/timelessco/renderlesskit-react/issues/240)) ([1445840](https://github.com/timelessco/renderlesskit-react/commit/14458402189dda31581051c93f061c3ee03e0d06))
+* **deps:** ⬆️ update dev dependencies (minor) ([#235](https://github.com/timelessco/renderlesskit-react/issues/235)) ([feeb434](https://github.com/timelessco/renderlesskit-react/commit/feeb434c8ac88577ec43b3b1352e5a7320324da5))
+* **deps:** ⬆️ update dev dependencies (minor) ([#238](https://github.com/timelessco/renderlesskit-react/issues/238)) ([f248873](https://github.com/timelessco/renderlesskit-react/commit/f24887350a719307009a1959a8f6810bb9f6a1b2))
+* **deps:** ⬆️ update dev dependencies (minor) ([#239](https://github.com/timelessco/renderlesskit-react/issues/239)) ([7ea34f8](https://github.com/timelessco/renderlesskit-react/commit/7ea34f87963023a292fb590062462e4ea1b5f86d))
+* **deps:** ⬆️ update dev dependencies (minor) ([#241](https://github.com/timelessco/renderlesskit-react/issues/241)) ([a64fcfd](https://github.com/timelessco/renderlesskit-react/commit/a64fcfdb6b4c0e93672e21aeb7ebbe1d725f4a64))
+* **deps:** ⬆️ update dev dependencies (minor) ([#242](https://github.com/timelessco/renderlesskit-react/issues/242)) ([78844d9](https://github.com/timelessco/renderlesskit-react/commit/78844d9d32f3af53da861caf4ba5b588171fcdea))
+* **deps:** pin dependencies ([#234](https://github.com/timelessco/renderlesskit-react/issues/234)) ([dfae4b2](https://github.com/timelessco/renderlesskit-react/commit/dfae4b2579dd6a46fa6847cec6635166ebc6170e))
+* **ingores:** 🔧 update ignore configs to latest ([2a05274](https://github.com/timelessco/renderlesskit-react/commit/2a052742d96c949eced27eef07bc5bc5662808ac))
+* **lint:** 🔧 update eslint import config ([6201e52](https://github.com/timelessco/renderlesskit-react/commit/6201e52b2c9bed1736a20e12f6ab7b92fff94496))
+* **package:** ⬆️ add renovate to manage deps ([#233](https://github.com/timelessco/renderlesskit-react/issues/233)) ([6d67979](https://github.com/timelessco/renderlesskit-react/commit/6d679793c9918439e873a41d9be681b85a726844))
+* **package:** ⬆️update @types/node to version 16.10.1 ([9752927](https://github.com/timelessco/renderlesskit-react/commit/975292728cf2863b3719d94ea8b638ac4170150d))
+* **package:** ⬆️update all of jest to version 27.2.2 ([6d9c60e](https://github.com/timelessco/renderlesskit-react/commit/6d9c60ea7438c86b960791c8953d8f3f0d69fe1d))
+* **package:** ⬆️update autoprefixer to version 10.3.6 ([ab79aee](https://github.com/timelessco/renderlesskit-react/commit/ab79aee1622b00162718b5b6e460fba6b415beca))
+* **package:** ⬆️update eslint-plugin-testing-library to version 4.12.4 ([b0b2357](https://github.com/timelessco/renderlesskit-react/commit/b0b235768303ad646267a4cf77f34c767f3a0739))
+* **package:** ⬆️update jest-matcher-utils to version 27.2.2 ([63a1e5a](https://github.com/timelessco/renderlesskit-react/commit/63a1e5a184c64d9f54ceb527946bc3dc094d34b7))
+* **package:** ⬆️update postcss to version 8.3.8 ([db8ea6d](https://github.com/timelessco/renderlesskit-react/commit/db8ea6d2ab079d009bf8c8bfabf4c839155e2ec0))
+* **package:** ⬆️update react-hook-form to version 7.16.0 ([c43ea6b](https://github.com/timelessco/renderlesskit-react/commit/c43ea6b6c6767131a836b7a40a8e899bca211551))
+* **package:** ⬆️update react-hook-form to version 7.16.1 ([a48f815](https://github.com/timelessco/renderlesskit-react/commit/a48f81534cbafbe7c49e17960c0ab516c26ef0ed))
+* **package:** ⬆️update sort-package-json to version 1.52.0 ([ba8c11a](https://github.com/timelessco/renderlesskit-react/commit/ba8c11acfba49cdd2dbc8ebe1bd999ea6e22f6b4))
+* **package:** ⬆️update tailwindcss to version 2.2.16 ([f0ede3e](https://github.com/timelessco/renderlesskit-react/commit/f0ede3e3246b1c5621f430b1087c0811cf765544))
+* **package:** ⬆️update webpack to version 5.54.0 ([8092dea](https://github.com/timelessco/renderlesskit-react/commit/8092dea1b672a2912fb41e895f202671ff64bb2a))
+
 ### [0.6.2](https://github.com/timelessco/renderlesskit-react/compare/v0.6.1...v0.6.2) (2021-09-20)
 
 

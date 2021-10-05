@@ -1,6 +1,6 @@
 {
   "name": "@renderlesskit/react",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by Reakit",
   "keywords": [
     "renderless",
