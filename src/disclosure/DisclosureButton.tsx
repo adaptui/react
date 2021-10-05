@@ -20,7 +20,7 @@ export type DisclosureButtonHTMLProps = ButtonHTMLProps;
 export type DisclosureButtonProps = DisclosureButtonOptions &
   DisclosureButtonHTMLProps;
 
-export const showMoreComposableButton = createComposableHook<
+export const disclosureComposableButton = createComposableHook<
   DisclosureButtonOptions,
   DisclosureButtonHTMLProps
 >({
@@ -60,7 +60,7 @@ export const showMoreComposableButton = createComposableHook<
   },
 });
 
-export const useDisclosureButton = showMoreComposableButton();
+export const useDisclosureButton = disclosureComposableButton();
 
 export const DisclosureButton = createComponent({
   as: "button",

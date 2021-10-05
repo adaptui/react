@@ -36,7 +36,7 @@ export type DisclosureContentHTMLProps = BoxHTMLProps;
 export type DisclosureContentProps = DisclosureContentOptions &
   DisclosureContentHTMLProps;
 
-export const showMoreComposableContent = createComposableHook<
+export const disclosureComposableContent = createComposableHook<
   DisclosureContentOptions,
   DisclosureContentHTMLProps
 >({
@@ -228,7 +228,7 @@ export const showMoreComposableContent = createComposableHook<
   },
 });
 
-export const useDisclosureContent = showMoreComposableContent();
+export const useDisclosureContent = disclosureComposableContent();
 
 export const DisclosureContent = createComponent({
   as: "div",
