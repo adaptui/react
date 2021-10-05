@@ -1,3 +1,20 @@
+### [0.7.1](https://github.com/timelessco/renderlesskit-react/compare/v0.7.0...v0.7.1) (2021-10-05)
+
+
+### Bug Fixes
+
+* **disclosure:** 🐛 fix composable export naming ([#246](https://github.com/timelessco/renderlesskit-react/issues/246)) ([d18373b](https://github.com/timelessco/renderlesskit-react/commit/d18373bb43870b83702503055b65d4eb87031ebe))
+
+
+### Maintanance Updates
+
+* **deps:** pin dependency @types/raf to 3.4.0 ([#245](https://github.com/timelessco/renderlesskit-react/issues/245)) ([0c67886](https://github.com/timelessco/renderlesskit-react/commit/0c67886f6d4d95d849c1a563b9d9aa00ff6fdf55))
+
+
+### Documentation Changes
+
+* **disclosure:** 📝 update disclosure in readme ([9ae2d73](https://github.com/timelessco/renderlesskit-react/commit/9ae2d73868a9e460167b15f864ed67591c7d5776))
+
 ## [0.7.0](https://github.com/timelessco/renderlesskit-react/compare/v0.6.2...v0.7.0) (2021-10-05)
 
 
