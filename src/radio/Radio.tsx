@@ -18,10 +18,12 @@ export type RadioOptions = CompositeItemOptions &
      * Same as the `value` attribute.
      */
     value: string | number;
+
     /**
      * Same as the `checked` attribute.
      */
     checked?: boolean;
+
     /**
      * @private
      */
@@ -85,7 +87,6 @@ export const useRadio = createHook<RadioOptions, RadioHTMLProps>({
         warning(
           true,
           "Can't determine whether the element is a native radio because `ref` wasn't passed to the component",
-          "See https://reakit.io/docs/radio",
         );
         return;
       }

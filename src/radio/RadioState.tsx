@@ -10,7 +10,7 @@ import { useControllableState } from "../utils";
 
 export type RadioState = CompositeState & {
   /**
-   * The `value` attribute of the current checked radio.
+   * The `value` attribute of the current active radio.
    */
   state: string | number | null;
 };
@@ -24,19 +24,19 @@ export type RadioActions = CompositeActions & {
 
 export type RadioInitialState = CompositeInitialState & {
   /**
-   * Default State of the Checkbox for uncontrolled Checkbox.
+   * Default State of the Radio for uncontrolled Radio.
    *
    * @default false
    */
   defaultState?: RadioState["state"];
 
   /**
-   * State of the Checkbox for controlled Checkbox..
+   * State of the Radio for controlled Radio..
    */
   state?: RadioState["state"];
 
   /**
-   * OnChange callback for controlled Checkbox.
+   * OnChange callback for controlled Radio.
    */
   onStateChange?: RadioActions["setState"];
 };

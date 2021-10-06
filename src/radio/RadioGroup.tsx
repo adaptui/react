@@ -31,7 +31,6 @@ export const RadioGroup = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://reakit.io/docs/radio",
     );
     return useCreateElement(type, props, children);
   },
