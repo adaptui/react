@@ -36,8 +36,6 @@ interface Props {
   tsUtils?: string;
   css?: string;
   deps?: string[];
-  jsSandbox?: CodeSandboxTemplate;
-  tsSandbox?: CodeSandboxTemplate;
 }
 
 export function createPreviewTabs(props: Props) {
