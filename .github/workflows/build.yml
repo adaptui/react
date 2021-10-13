@@ -1,4 +1,4 @@
-name: Test
+name: Build
 
 on:
   pull_request:
@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: "12.x"
 
@@ -29,12 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Setup timezone
-        uses: zcong1993/setup-timezone@master
-        with:
-          timezone: Asia/Kolkata
-
       - name: Install deps
         run: yarn
-      - name: Test
-        run: yarn test
+
+      - name: Build
+        run: yarn build
