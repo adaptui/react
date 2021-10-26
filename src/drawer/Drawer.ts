@@ -38,7 +38,7 @@ export type DrawerHTMLProps = DialogHTMLProps;
 
 export type DrawerProps = DrawerOptions & DrawerHTMLProps;
 
-const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
+export const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
   name: "Drawer",
   compose: useDialog,
   keys: DRAWER_KEYS,

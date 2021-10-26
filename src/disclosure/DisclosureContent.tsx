@@ -55,6 +55,7 @@ export const disclosureComposableContent = createComposableHook<
       onCollapseStart,
       onExpandEnd,
       onExpandStart,
+      baseId,
     } = options;
     const {
       ref: htmlRef,
@@ -219,7 +220,7 @@ export const disclosureComposableContent = createComposableHook<
 
     return {
       ref: useForkRef(ref, htmlRef),
-      id: options.baseId,
+      id: baseId,
       "aria-hidden": !expanded,
       style,
       onTransitionEnd,

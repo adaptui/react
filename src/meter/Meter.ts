@@ -12,7 +12,7 @@ export type MeterHTMLProps = RoleHTMLProps;
 
 export type MeterProps = MeterOptions & MeterHTMLProps;
 
-const useMeter = createHook<MeterOptions, MeterHTMLProps>({
+export const useMeter = createHook<MeterOptions, MeterHTMLProps>({
   name: "Meter",
   compose: useRole,
   keys: METER_KEYS,
