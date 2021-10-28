@@ -36,29 +36,29 @@
     "dist"
   ],
   "scripts": {
+    "postinstall": "concurrently \"husky install\" \"patch-package\"",
     "boot": "concurrently \"yarn keys\" \"yarn previews\"",
+    "keys": "node scripts/builds/keys",
+    "previews": "node scripts/builds/create-previews.js",
+    "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
+    "test": "jest --config ./jest.config.ts --no-cache",
+    "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
+    "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format:package": "sort-package-json package.json",
+    "docs": "node scripts/builds/docs.js",
     "prebuild": "rimraf dist",
     "build": "concurrently yarn:build:*",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.prod.json",
+    "storybook-build": "yarn previews && build-storybook",
     "commit": "gacp",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "docs": "node scripts/builds/docs.js",
-    "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
-    "format:package": "sort-package-json package.json",
-    "postinstall": "concurrently \"husky install\" \"patch-package\"",
-    "keys": "node scripts/builds/keys",
-    "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
     "prepublishOnly": "pinst --disable",
-    "previews": "node scripts/builds/create-previews.js",
-    "postpublish": "pinst --enable",
     "release": "release-it",
-    "storybook": "cross-env TAILWIND_MODE=watch start-storybook -p 6006",
-    "storybook-build": "yarn previews && build-storybook",
-    "test": "jest --config ./jest.config.ts --no-cache"
+    "postpublish": "pinst --enable"
   },
   "commitlint": {
     "extends": [
@@ -71,9 +71,6 @@
     ],
     "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
       "yarn format"
-    ],
-    "package.json": [
-      "yarn format:package"
     ]
   },
   "browserslist": {
@@ -89,15 +86,15 @@
     ]
   },
   "dependencies": {
-    "@chakra-ui/counter": "^1.1.9",
-    "@chakra-ui/hooks": "^1.6.0",
+    "@chakra-ui/counter": "^1.1.10",
+    "@chakra-ui/hooks": "^1.6.1",
     "@chakra-ui/react-utils": "^1.1.2",
-    "@chakra-ui/utils": "^1.8.2",
+    "@chakra-ui/utils": "^1.8.3",
     "@react-aria/i18n": "^3.3.2",
     "@react-aria/interactions": "^3.6.0",
     "@react-aria/spinbutton": "^3.0.1",
     "@react-aria/utils": "^3.9.0",
-    "date-fns": "^2.24.0",
+    "date-fns": "^2.25.0",
     "raf": "^3.4.1",
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",

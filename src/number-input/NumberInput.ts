@@ -1,7 +1,6 @@
 import * as React from "react";
-import { createComponent, createHook, useCreateElement } from "reakit-system";
+import { createComponent, createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
-import { useWarning } from "reakit-warning";
 import { EventKeyMap, mergeRefs } from "@chakra-ui/react-utils";
 import {
   callAllHandlers,
@@ -265,12 +264,4 @@ export const NumberInput = createComponent({
   as: "input",
   memo: true,
   useHook: useNumberInput,
-  useCreateElement: (type, props, children) => {
-    useWarning(
-      !props["aria-label"] && !props["aria-labelledby"],
-      "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://www.w3.org/TR/wai-aria-1.1/#spinbutton",
-    );
-    return useCreateElement(type, props, children);
-  },
 });
