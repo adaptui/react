@@ -1,3 +1,16 @@
+### [0.7.3](https://github.com/timelessco/renderlesskit-react/compare/v0.7.2...v0.7.3) (2021-10-28)
+
+
+### Bug Fixes
+
+* **numberinput:** 🐛 remove number input label warning ([9a1699f](https://github.com/timelessco/renderlesskit-react/commit/9a1699f8968e029c842519ee3f34986abf25ca56))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency lint-staged to v11.2.6 ([#260](https://github.com/timelessco/renderlesskit-react/issues/260)) ([69a3cdf](https://github.com/timelessco/renderlesskit-react/commit/69a3cdfaf32cc6d1b23150f2753d0e933b55156e))
+* **deps:** ⬆️ update dependency react-hook-form to v7.18.0 ([#261](https://github.com/timelessco/renderlesskit-react/issues/261)) ([51dbbd0](https://github.com/timelessco/renderlesskit-react/commit/51dbbd091bcf2181051df766801e61af7f6fb316))
+
 ### [0.7.2](https://github.com/timelessco/renderlesskit-react/compare/v0.7.1...v0.7.2) (2021-10-26)
 
 
