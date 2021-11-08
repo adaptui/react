@@ -18054,10 +18054,10 @@ storybook-addon-outline@^1.4.1:
     "@storybook/core-events" "^6.3.0"
     ts-dedent "^2.1.1"
 
-storybook-addon-preview@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/storybook-addon-preview/-/storybook-addon-preview-2.1.2.tgz#396cfbbbb14e9aee7ad4f1b127ce20509ff1d17c"
-  integrity sha512-PoQgTTVZlK/vzmcFGhBf5+R3tfcprU7HB+IzaBZ9AZ9i26YAK78Iqs/OP1vJxAgZuPOn4y4vxWhaytwW9VVkjw==
+storybook-addon-preview@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-preview/-/storybook-addon-preview-2.2.0.tgz#371f7fa948d8c143851ef6da7f97129953ad877b"
+  integrity sha512-37tuQZlhZOJCFPScRhaEyz7wE73suiiJeY79sA/9umpx+ti3ryfP0b07CawGBi317WHExb0T7Vl6YS9VC2sbnQ==
   dependencies:
     "@storybook/addon-knobs" "^6.0.0"
     "@types/prismjs" "^1.16.0"

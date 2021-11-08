@@ -197,7 +197,7 @@
     "release-it": "14.11.6",
     "rimraf": "3.0.2",
     "sort-package-json": "1.52.0",
-    "storybook-addon-preview": "2.1.2",
+    "storybook-addon-preview": "2.2.0",
     "storybook-addon-react-docgen": "1.2.42",
     "strip-comments": "2.0.1",
     "tailwindcss": "2.2.19",
