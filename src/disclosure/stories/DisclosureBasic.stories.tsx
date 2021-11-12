@@ -4,6 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import { createPreviewTabs } from "../../../.storybook/utils";
 import { DisclosureState } from "../index";
 
+import css from "./templates/DisclosureBasicCss";
 import js from "./templates/DisclosureBasicJsx";
 import ts from "./templates/DisclosureBasicTsx";
 import {
@@ -19,7 +20,7 @@ export default {
   parameters: {
     layout: "centered",
     options: { showPanel: true },
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 

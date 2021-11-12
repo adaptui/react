@@ -28,21 +28,3 @@
     height: 0;
   }
 }
-
-@keyframes slideRight {
-  from {
-    width: 0;
-  }
-  to {
-    width: var(--content-width);
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    width: var(--content-width);
-  }
-  to {
-    width: 0;
-  }
-}
