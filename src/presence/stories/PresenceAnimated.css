@@ -1,0 +1,25 @@
+.content[data-state="open"] {
+  animation: fadeIn 3s ease-out;
+}
+
+.content[data-state="closed"] {
+  animation: fadeOut 3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

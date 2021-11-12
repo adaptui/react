@@ -4,9 +4,12 @@ import { Meta, Story } from "@storybook/react";
 import { createPreviewTabs } from "../../../.storybook/utils";
 import { DisclosureState } from "../DisclosureState";
 
+import css from "./templates/DisclosureBasicCss";
 import js from "./templates/DisclosureBasicJsx";
 import ts from "./templates/DisclosureBasicTsx";
 import { Disclosure, DisclosureProps } from "./DisclosureHorizontal.component";
+
+import "./DisclosureHorizontal.css";
 
 export default {
   component: Disclosure,
@@ -14,27 +17,15 @@ export default {
   parameters: {
     layout: "centered",
     options: { showPanel: true },
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 
-export const Default: Story<DisclosureProps> = args => (
-  <Disclosure direction="horizontal" duration={1} {...args} />
-);
-
-export const WithTransition: Story<DisclosureProps> = args => (
-  <Disclosure direction="horizontal" {...args} />
-);
+export const Default: Story<DisclosureProps> = args => <Disclosure {...args} />;
 
 export const Controlled = () => {
   const [value, setValue] = React.useState<DisclosureState["expanded"]>(false);
   console.log("%cvalue", "color: #997326", value);
 
-  return (
-    <Disclosure
-      direction="horizontal"
-      expanded={value}
-      onExpandedChange={setValue}
-    />
-  );
+  return <Disclosure expanded={value} onExpandedChange={setValue} />;
 };

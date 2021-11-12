@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  width: 100%;
+}
+.content {
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.content[data-state="open"] {
+  animation: slideRight 300ms ease-out;
+}
+
+.item {
+  flex-shrink: 0;
+}
+
+.content[data-state="closed"] {
+  animation: slideLeft 300ms ease-in;
+}
+
+@keyframes slideRight {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--content-width);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    width: var(--content-width);
+  }
+  to {
+    width: 0;
+  }
+}

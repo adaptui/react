@@ -7,25 +7,20 @@ import {
   useDisclosureState,
 } from "../../index";
 
-export type DisclosureProps = DisclosureInitialState & {};
+export type DisclosureBasicProps = DisclosureInitialState & {};
 
-export const Disclosure: React.FC<DisclosureProps> = props => {
-  const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
-
-  const state = useDisclosureState({
-    ...props,
-    onExpandStart: () => setHasExpandStarted(true),
-    onCollapseEnd: () => setHasExpandStarted(false),
-  });
+export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
+  const state = useDisclosureState(props);
+  const isOpen = state.expanded || state.isPresent;
 
   return (
     <div>
       <DisclosureButton {...state}>Show More</DisclosureButton>
       <DisclosureContent
         style={{
-          display: hasExpandStarted ? "flex" : "none",
-          flexDirection: "column",
+          display: isOpen ? "flex" : "none",
         }}
+        className="content"
         {...state}
       >
         <span>Item 1</span>
@@ -38,4 +33,5 @@ export const Disclosure: React.FC<DisclosureProps> = props => {
     </div>
   );
 };
-export default Disclosure;
+
+export default DisclosureBasic;

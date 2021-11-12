@@ -1,0 +1,48 @@
+.content {
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content[data-state="open"] {
+  animation: slideDown 300ms ease-out;
+}
+
+.content[data-state="closed"] {
+  animation: slideUp 300ms ease-in;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--content-width);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    width: var(--content-width);
+  }
+  to {
+    width: 0;
+  }
+}

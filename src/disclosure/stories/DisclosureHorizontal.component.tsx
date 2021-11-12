@@ -10,30 +10,25 @@ import {
 export type DisclosureProps = DisclosureInitialState & {};
 
 export const Disclosure: React.FC<DisclosureProps> = props => {
-  const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
-
-  const state = useDisclosureState({
-    ...props,
-    onExpandStart: () => setHasExpandStarted(true),
-    onCollapseEnd: () => setHasExpandStarted(false),
-  });
+  const state = useDisclosureState(props);
+  const isOpen = state.expanded || state.isPresent;
 
   return (
-    <div style={{ display: "flex", height: "100%" }}>
+    <div className="root">
       <DisclosureButton {...state}>Show More</DisclosureButton>
       <DisclosureContent
         style={{
-          display: hasExpandStarted ? "flex" : "none",
-          flexDirection: "row",
+          display: isOpen ? "flex" : "none",
         }}
+        className="content"
         {...state}
       >
-        <div style={{ flexShrink: 0 }}>Item 1</div>
-        <div style={{ flexShrink: 0 }}>Item 2</div>
-        <div style={{ flexShrink: 0 }}>Item 3</div>
-        <div style={{ flexShrink: 0 }}>Item 4</div>
-        <div style={{ flexShrink: 0 }}>Item 5</div>
-        <div style={{ flexShrink: 0 }}>Item 6</div>
+        <div className="item">Item 1</div>
+        <div className="item">Item 2</div>
+        <div className="item">Item 3</div>
+        <div className="item">Item 4</div>
+        <div className="item">Item 5</div>
+        <div className="item">Item 6</div>
       </DisclosureContent>
     </div>
   );

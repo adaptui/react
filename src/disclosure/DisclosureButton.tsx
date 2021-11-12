@@ -11,6 +11,7 @@ import { createComposableHook } from "../system";
 
 import { DISCLOSURE_BUTTON_KEYS } from "./__keys";
 import { DisclosureStateReturn } from "./DisclosureState";
+import { getState } from "./helpers";
 
 export type DisclosureButtonOptions = ButtonOptions &
   Pick<DisclosureStateReturn, "baseId" | "toggle" | "expanded">;
@@ -29,15 +30,13 @@ export const disclosureComposableButton = createComposableHook<
   keys: DISCLOSURE_BUTTON_KEYS,
 
   useProps(options, htmlProps) {
-    const { toggle, expanded } = options;
+    const { toggle, expanded, baseId } = options;
     const {
       onClick: htmlOnClick,
       "aria-controls": ariaControls,
       ...restHtmlProps
     } = htmlProps;
-    const controls = ariaControls
-      ? `${ariaControls} ${options.baseId}`
-      : options.baseId;
+    const controls = ariaControls ? `${ariaControls} ${baseId}` : baseId;
 
     const onClickRef = useLiveRef(htmlOnClick);
 
@@ -54,6 +53,7 @@ export const disclosureComposableButton = createComposableHook<
     return {
       "aria-controls": controls,
       "aria-expanded": expanded,
+      "data-state": getState(expanded),
       onClick,
       ...restHtmlProps,
     };
