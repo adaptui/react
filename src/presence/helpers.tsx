@@ -1,5 +1,7 @@
 import * as React from "react";
 
+// Inspired from Radix UI Presence - https://github.com/radix-ui/primitives/tree/main/packages/react/presence
+
 type Machine<S> = { [k: string]: { [k: string]: S } };
 type MachineState<T> = keyof T;
 type MachineEvent<T> = keyof UnionToIntersection<T[keyof T]>;

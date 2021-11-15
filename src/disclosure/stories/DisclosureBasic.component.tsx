@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-  DisclosureButton,
+  Disclosure,
   DisclosureContent,
   DisclosureInitialState,
   useDisclosureState,
@@ -11,11 +11,11 @@ export type DisclosureBasicProps = DisclosureInitialState & {};
 
 export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
   const state = useDisclosureState(props);
-  const isOpen = state.expanded || state.isPresent;
+  const isOpen = state.visible || state.isPresent;
 
   return (
     <div>
-      <DisclosureButton {...state}>Show More</DisclosureButton>
+      <Disclosure {...state}>Show More</Disclosure>
       <DisclosureContent
         style={{
           display: isOpen ? "flex" : "none",

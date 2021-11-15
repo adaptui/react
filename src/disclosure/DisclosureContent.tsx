@@ -1,4 +1,4 @@
-// Core Logic for transition is based on https://github.com/roginfarrer/react-collapsed
+// Inspired from Radix UI https://github.com/radix-ui/primitives/tree/main/packages/react/collapsible
 import * as React from "react";
 import { createComponent } from "reakit-system";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
@@ -9,11 +9,10 @@ import { createComposableHook } from "../system";
 
 import { DISCLOSURE_CONTENT_KEYS } from "./__keys";
 import { DisclosureStateReturn } from "./DisclosureState";
-import { getState } from "./helpers";
 
 export type DisclosureContentOptions = BoxOptions &
   PresenceOptions &
-  Pick<DisclosureStateReturn, "baseId" | "expanded"> & {};
+  Pick<DisclosureStateReturn, "baseId" | "visible"> & {};
 
 export type DisclosureContentHTMLProps = BoxHTMLProps & PresenceHTMLProps;
 
@@ -29,7 +28,7 @@ export const disclosureComposableContent = createComposableHook<
   keys: DISCLOSURE_CONTENT_KEYS,
 
   useProps(options, htmlProps) {
-    const { expanded, baseId, present } = options;
+    const { visible, baseId, present } = options;
     const {
       ref: htmlRef,
       style: htmlStyle,
@@ -44,7 +43,7 @@ export const disclosureComposableContent = createComposableHook<
     const width = widthRef.current;
     // when opening we want it to immediately open to retrieve dimensions
     // when closing we delay `present` to retrieve dimensions before closing
-    const isExpanded = expanded || isPresent;
+    const isVisible = visible || isPresent;
 
     React.useLayoutEffect(() => {
       const node = ref.current;
@@ -72,7 +71,7 @@ export const disclosureComposableContent = createComposableHook<
        * animation end (so when close finishes). This allows us to
        * retrieve the dimensions *before* closing.
        */
-    }, [expanded, present]);
+    }, [visible, present]);
 
     const style = {
       "--content-height": height ? `${height}px` : undefined,
@@ -82,11 +81,12 @@ export const disclosureComposableContent = createComposableHook<
 
     return {
       ref: useForkRef(ref, htmlRef),
-      "data-state": getState(expanded),
+      "data-enter": visible ? "" : undefined,
+      "data-leave": !visible ? "" : undefined,
       id: baseId,
-      hidden: !isExpanded,
+      hidden: !isVisible,
       style,
-      children: isExpanded ? htmlChildren : null,
+      children: isVisible ? htmlChildren : null,
       ...restHtmlProps,
     };
   },

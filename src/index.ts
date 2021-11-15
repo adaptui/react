@@ -3,6 +3,7 @@ export * from "./breadcrumbs";
 export * from "./calendar";
 export * from "./checkbox";
 export * from "./datepicker";
+export * from "./dialog";
 export * from "./disclosure";
 export * from "./drawer";
 export * from "./link";

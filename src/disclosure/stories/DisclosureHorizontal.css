@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.content[data-state="open"] {
+.content[data-enter] {
   animation: slideRight 300ms ease-out;
 }
 
@@ -15,7 +15,7 @@
   flex-shrink: 0;
 }
 
-.content[data-state="closed"] {
+.content[data-leave] {
   animation: slideLeft 300ms ease-in;
 }
 

@@ -29,8 +29,8 @@ export const Default: Story<DisclosureBasicProps> = args => (
 );
 
 export const Controlled = () => {
-  const [value, setValue] = React.useState<DisclosureState["expanded"]>(false);
+  const [value, setValue] = React.useState<DisclosureState["visible"]>(false);
   console.log("%cvalue", "color: #997326", value);
 
-  return <DisclosureBasic expanded={value} onExpandedChange={setValue} />;
+  return <DisclosureBasic visible={value} onVisibleChange={setValue} />;
 };

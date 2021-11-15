@@ -3,11 +3,11 @@
   overflow: hidden;
 }
 
-.content[data-state="open"] {
+.content[data-enter] {
   animation: slideDown 300ms ease-out;
 }
 
-.content[data-state="closed"] {
+.content[data-leave] {
   animation: slideUp 300ms ease-in;
 }
 

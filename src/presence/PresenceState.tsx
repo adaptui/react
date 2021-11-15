@@ -1,3 +1,4 @@
+// Inspired from Radix UI Presence - https://github.com/radix-ui/primitives/tree/main/packages/react/presence
 import * as React from "react";
 import { useSafeLayoutEffect } from "@chakra-ui/hooks";
 
@@ -5,10 +6,13 @@ import { getAnimationName, useStateMachine } from "./helpers";
 
 export type PresenceState = {
   isPresent: boolean;
+};
+
+export type PresenceActions = {
   ref: (node: HTMLElement) => void;
 };
 
-export type PresenceStateReturn = PresenceState;
+export type PresenceStateReturn = PresenceState & PresenceActions;
 
 export type PresenceInitialState = {
   present?: boolean;
@@ -94,6 +98,7 @@ export const usePresenceState = (
         const isCurrentAnimation = currentAnimationName.includes(
           event.animationName,
         );
+
         if (event.target === node && isCurrentAnimation) {
           send("ANIMATION_END");
         }
@@ -104,9 +109,11 @@ export const usePresenceState = (
           prevAnimationNameRef.current = getAnimationName(stylesRef.current);
         }
       };
+
       node.addEventListener("animationstart", handleAnimationStart);
       node.addEventListener("animationcancel", handleAnimationEnd);
       node.addEventListener("animationend", handleAnimationEnd);
+
       return () => {
         node.removeEventListener("animationstart", handleAnimationStart);
         node.removeEventListener("animationcancel", handleAnimationEnd);

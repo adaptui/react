@@ -14,7 +14,7 @@ export type DisclosureState = unstable_IdState &
     /**
      * Whether it's expanded or not.
      */
-    expanded: boolean;
+    visible: boolean;
   };
 
 export type DisclosureActions = unstable_IdActions & {
@@ -36,56 +36,55 @@ export type DisclosureActions = unstable_IdActions & {
   /**
    * Sets `expanded`.
    */
-  setExpanded: React.Dispatch<
-    React.SetStateAction<DisclosureState["expanded"]>
-  >;
+  setVisible: React.Dispatch<React.SetStateAction<DisclosureState["visible"]>>;
 };
 
 export type DisclosureStateReturn = DisclosureState & DisclosureActions;
 
 export type DisclosureInitialState = unstable_IdInitialState &
   PresenceInitialState &
-  Partial<Pick<DisclosureState, "expanded">> & {
+  Partial<Pick<DisclosureState, "visible">> & {
     /**
      * Default uncontrolled state.
      */
-    defaultExpanded?: boolean;
+    defaultVisible?: boolean;
 
     /**
      * Controllabele state.
      */
-    expanded?: boolean;
+    visible?: boolean;
 
     /**
      * controllable state callback.
      */
-    onExpandedChange?: (expanded: boolean) => void;
+    onVisibleChange?: (expanded: boolean) => void;
   };
 
 export const useDisclosureState = (
   props: DisclosureInitialState = {},
 ): DisclosureStateReturn => {
   const {
-    defaultExpanded = false,
-    expanded: initialExpanded,
-    onExpandedChange,
+    defaultVisible = false,
+    visible: initialVisible,
+    onVisibleChange,
   } = props;
   const id = unstable_useIdState();
-  const [expanded, setExpanded] = useControllableState({
-    defaultValue: defaultExpanded,
-    value: initialExpanded,
-    onChange: onExpandedChange,
+  const [visible, setVisible] = useControllableState({
+    defaultValue: defaultVisible,
+    value: initialVisible,
+    onChange: onVisibleChange,
   });
-  const presence = usePresenceState({ present: expanded });
+  const presence = usePresenceState({ present: visible });
+  console.log("%cpresence", "color: #aa00ff", presence);
 
-  const show = React.useCallback(() => setExpanded(true), [setExpanded]);
-  const hide = React.useCallback(() => setExpanded(false), [setExpanded]);
-  const toggle = React.useCallback(() => setExpanded(e => !e), [setExpanded]);
+  const show = React.useCallback(() => setVisible(true), [setVisible]);
+  const hide = React.useCallback(() => setVisible(false), [setVisible]);
+  const toggle = React.useCallback(() => setVisible(e => !e), [setVisible]);
 
   return {
     ...id,
-    expanded,
-    setExpanded,
+    visible,
+    setVisible,
     show,
     hide,
     toggle,
