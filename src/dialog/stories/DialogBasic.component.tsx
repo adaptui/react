@@ -11,7 +11,7 @@ import {
 export type DialogBasicProps = DialogInitialState & {};
 
 export const DialogBasic: React.FC<DialogBasicProps> = props => {
-  const dialog = useDialogState(props);
+  const dialog = useDialogState({ modal: false });
   const searchFieldRef = React.useRef<HTMLInputElement>(null);
   const firstNameRef = React.useRef<HTMLInputElement>(null);
 

@@ -11,6 +11,7 @@ export * from "./meter";
 export * from "./number-input";
 export * from "./pagination";
 export * from "./picker-base";
+export * from "./popover";
 export * from "./presence";
 export * from "./progress";
 export * from "./radio";
