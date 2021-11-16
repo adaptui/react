@@ -1,6 +1,9 @@
 import * as React from "react";
-import { getDocument } from "reakit-utils/getDocument";
-import { getFirstTabbableIn, getLastTabbableIn } from "reakit-utils/tabbable";
+import {
+  getDocument,
+  getFirstTabbableIn,
+  getLastTabbableIn,
+} from "reakit-utils";
 import { warning } from "reakit-warning";
 
 import { DialogOptions } from "../Dialog";
@@ -38,7 +41,6 @@ export function useFocusTrap(
       warning(
         true,
         "Can't trap focus within modal dialog because either `ref` wasn't passed to component or the component wasn't rendered within a portal",
-        "See https://reakit.io/docs/dialog",
       );
       return undefined;
     }

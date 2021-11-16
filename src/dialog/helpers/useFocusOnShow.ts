@@ -24,12 +24,11 @@ export function useFocusOnShow(
       !!shouldFocus && !dialog,
       "[reakit/Dialog]",
       "Can't set initial focus on dialog because `ref` wasn't passed to the dialog element.",
-      "See https://reakit.io/docs/dialog",
     );
 
     if (!shouldFocus) return;
     if (!dialog) return;
-    if (!options.isPresent) return;
+    if (!options.present) return;
 
     // If there're nested open dialogs, let them handle focus
     if (nestedDialogs.some(child => child.current && !child.current.hidden)) {
@@ -49,16 +48,9 @@ export function useFocusOnShow(
           dialog.tabIndex === undefined || dialog.tabIndex < 0,
           "It's recommended to have at least one tabbable element inside dialog. The dialog element has been automatically focused.",
           "If this is the intended behavior, pass `tabIndex={0}` to the dialog element to disable this warning.",
-          "See https://reakit.io/docs/dialog/#initial-focus",
           dialog,
         );
       }
     }
-  }, [
-    dialogRef,
-    shouldFocus,
-    options.isPresent,
-    nestedDialogs,
-    initialFocusRef,
-  ]);
+  }, [dialogRef, shouldFocus, options.present, nestedDialogs, initialFocusRef]);
 }

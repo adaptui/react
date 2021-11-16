@@ -43,7 +43,6 @@ export function useIndeterminateState(
       warning(
         state === "indeterminate",
         "Can't set indeterminate state because `ref` wasn't passed to component.",
-        "See https://reakit.io/docs/checkbox/#indeterminate-state",
       );
       return;
     }

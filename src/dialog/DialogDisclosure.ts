@@ -14,8 +14,7 @@ import { DIALOG_DISCLOSURE_KEYS } from "./__keys";
 import { DialogStateReturn } from "./DialogState";
 
 export type DialogDisclosureOptions = DisclosureOptions &
-  Pick<Partial<DialogStateReturn>, "disclosureRef"> &
-  Pick<DialogStateReturn, "toggle">;
+  Pick<Partial<DialogStateReturn>, "disclosureRef">;
 
 export type DialogDisclosureHTMLProps = DisclosureHTMLProps;
 
@@ -30,11 +29,12 @@ export const useDialogDisclosure = createHook<
   compose: useDisclosure,
   keys: DIALOG_DISCLOSURE_KEYS,
 
-  useProps(options, { ref: htmlRef, onClick: htmlOnClick, ...htmlProps }) {
+  useProps(options, htmlProps) {
+    const { disclosureRef, visible } = options;
+    const { ref: htmlRef, onClick: htmlOnClick, ...restHtmlProps } = htmlProps;
     const ref = React.useRef<HTMLElement>(null);
     const onClickRef = useLiveRef(htmlOnClick);
     const [expanded, setExpanded] = React.useState(false);
-    const disclosureRef = options.disclosureRef;
 
     // aria-expanded may be used for styling purposes, so we useLayoutEffect
     useSafeLayoutEffect(() => {
@@ -43,7 +43,6 @@ export const useDialogDisclosure = createHook<
       warning(
         !element,
         "Can't determine whether the element is the current disclosure because `ref` wasn't passed to the component",
-        "See https://reakit.io/docs/dialog",
       );
 
       if (disclosureRef && !disclosureRef.current) {
@@ -53,8 +52,8 @@ export const useDialogDisclosure = createHook<
       const isCurrentDisclosure =
         !disclosureRef?.current || disclosureRef.current === element;
 
-      setExpanded(!!options.visible && isCurrentDisclosure);
-    }, [options.visible, disclosureRef]);
+      setExpanded(!!visible && isCurrentDisclosure);
+    }, [visible, disclosureRef]);
 
     const onClick = React.useCallback(
       (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -74,7 +73,7 @@ export const useDialogDisclosure = createHook<
       "aria-haspopup": "dialog",
       "aria-expanded": expanded,
       onClick,
-      ...htmlProps,
+      ...restHtmlProps,
     };
   },
 });

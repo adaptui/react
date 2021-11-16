@@ -1,4 +1,5 @@
 import * as React from "react";
+import { RemoveScroll } from "react-remove-scroll";
 import { createComponent, createHook, useCreateElement } from "reakit-system";
 import { Portal } from "reakit";
 import { useForkRef, useLiveRef } from "reakit-utils";
@@ -8,7 +9,7 @@ import {
   DisclosureContentHTMLProps,
   DisclosureContentOptions,
   useDisclosureContent,
-} from "../disclosure/DisclosureContent";
+} from "../disclosure";
 
 import { DIALOG_KEYS } from "./__keys";
 import { DialogStateReturn } from "./DialogState";
@@ -23,7 +24,6 @@ import {
   useFocusTrap,
   useHideOnClickOutside,
   useNestedDialogs,
-  usePreventBodyScroll,
 } from "./helpers";
 
 export type DialogOptions = DisclosureContentOptions &
@@ -87,16 +87,18 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
   compose: useDisclosureContent,
   keys: DIALOG_KEYS,
 
-  useOptions({
-    modal = true,
-    hideOnEsc = true,
-    hideOnClickOutside = true,
-    preventBodyScroll = modal,
-    unstable_autoFocusOnShow = true,
-    unstable_autoFocusOnHide = true,
-    unstable_orphan,
-    ...options
-  }) {
+  useOptions(options) {
+    const {
+      modal = true,
+      hideOnEsc = true,
+      hideOnClickOutside = true,
+      preventBodyScroll = modal,
+      unstable_autoFocusOnShow = true,
+      unstable_autoFocusOnHide = true,
+      unstable_orphan,
+      ...restOptions
+    } = options;
+
     return {
       modal,
       hideOnEsc,
@@ -105,24 +107,29 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
       unstable_autoFocusOnShow,
       unstable_autoFocusOnHide,
       unstable_orphan: modal && unstable_orphan,
-      ...options,
+      ...restOptions,
     };
   },
 
-  useProps(
-    options,
-    {
+  useProps(options, htmlProps) {
+    const {
+      preventBodyScroll,
+      baseId,
+      hideOnEsc,
+      hide,
+      modal: optionsModal,
+    } = options;
+    const {
       ref: htmlRef,
       onKeyDown: htmlOnKeyDown,
       onBlur: htmlOnBlur,
       wrapElement: htmlWrapElement,
       tabIndex,
-      ...htmlProps
-    },
-  ) {
+      ...restHtmlProps
+    } = htmlProps;
     const dialog = React.useRef<HTMLElement>(null);
     const backdrop = React.useContext(DialogBackdropContext);
-    const hasBackdrop = backdrop && backdrop === options.baseId;
+    const hasBackdrop = backdrop && backdrop === baseId;
     const disclosure = useDisclosureRef(dialog, options);
     const onKeyDownRef = useLiveRef(htmlOnKeyDown);
     const onBlurRef = useLiveRef(htmlOnBlur);
@@ -131,9 +138,8 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
     // VoiceOver/Safari accepts only one `aria-modal` container, so if there
     // are visible child modals, then we don't want to set aria-modal on the
     // parent modal (this component).
-    const modal = options.modal && !visibleModals.length ? true : undefined;
+    const modal = optionsModal && !visibleModals.length ? true : undefined;
 
-    usePreventBodyScroll(dialog, options);
     useFocusTrap(dialog, visibleModals, options);
     useFocusOnChildUnmount(dialog, options);
     useFocusOnShow(dialog, dialogs, options);
@@ -147,21 +153,20 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
 
         if (event.defaultPrevented) return;
         if (event.key !== "Escape") return;
-        if (!options.hideOnEsc) return;
-        if (!options.hide) {
+        if (!hideOnEsc) return;
+        if (!hide) {
           warning(
             true,
             "`hideOnEsc` prop is truthy, but `hide` prop wasn't provided.",
-            "See https://reakit.io/docs/dialog",
             dialog.current,
           );
           return;
         }
         event.stopPropagation();
 
-        options.hide();
+        hide();
       },
-      [options.hideOnEsc, options.hide],
+      [onKeyDownRef, hideOnEsc, hide],
     );
 
     const onBlur = React.useCallback(
@@ -177,8 +182,16 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
       (element: React.ReactNode) => {
         element = wrap(element);
 
-        if (options.modal && !hasBackdrop) {
-          element = <Portal>{element}</Portal>;
+        if (optionsModal && !hasBackdrop) {
+          if (preventBodyScroll) {
+            element = (
+              <Portal>
+                <RemoveScroll>{element}</RemoveScroll>
+              </Portal>
+            );
+          } else {
+            element = <Portal>{element}</Portal>;
+          }
         }
 
         if (htmlWrapElement) {
@@ -191,7 +204,7 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
         // );
         return element;
       },
-      [wrap, options.modal, hasBackdrop, htmlWrapElement],
+      [wrap, optionsModal, hasBackdrop, htmlWrapElement, preventBodyScroll],
     );
 
     return {
@@ -203,7 +216,7 @@ export const useDialog = createHook<DialogOptions, DialogHTMLProps>({
       onKeyDown,
       onBlur,
       wrapElement,
-      ...htmlProps,
+      ...restHtmlProps,
     };
   },
 });
@@ -215,7 +228,6 @@ export const Dialog = createComponent({
     useWarning(
       !props["aria-label"] && !props["aria-labelledby"],
       "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://reakit.io/docs/dialog",
     );
     return useCreateElement(type, props, children);
   },

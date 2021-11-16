@@ -31,7 +31,7 @@ export const DialogBasic: React.FC<DialogBasicProps> = props => {
               placeholder="Doe"
               ref={firstNameRef}
             />
-            <button type="submit">Send</button>
+            <button onClick={dialog.hide}>close</button>
           </div>
         </Dialog>
       </DialogBackdrop>

@@ -8,15 +8,16 @@ export function usePortalRef(
   dialogRef: React.RefObject<HTMLElement>,
   options: DialogOptions,
 ) {
+  const { visible } = options;
   const portalRef = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     const dialog = dialogRef.current;
 
-    if (!dialog || !options.visible) return;
+    if (!dialog || !visible) return;
 
     portalRef.current = closest(dialog, Portal.__selector) as HTMLElement;
-  }, [dialogRef, options.visible]);
+  }, [dialogRef, visible]);
 
   return portalRef;
 }

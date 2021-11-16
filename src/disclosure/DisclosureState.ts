@@ -7,15 +7,13 @@ import {
 } from "reakit";
 
 import { useControllableState } from "../utils";
-import { PresenceInitialState, PresenceState, usePresenceState } from "..";
 
-export type DisclosureState = unstable_IdState &
-  PresenceState & {
-    /**
-     * Whether it's expanded or not.
-     */
-    visible: boolean;
-  };
+export type DisclosureState = unstable_IdState & {
+  /**
+   * Whether it's expanded or not.
+   */
+  visible: boolean;
+};
 
 export type DisclosureActions = unstable_IdActions & {
   /**
@@ -42,7 +40,6 @@ export type DisclosureActions = unstable_IdActions & {
 export type DisclosureStateReturn = DisclosureState & DisclosureActions;
 
 export type DisclosureInitialState = unstable_IdInitialState &
-  PresenceInitialState &
   Partial<Pick<DisclosureState, "visible">> & {
     /**
      * Default uncontrolled state.
@@ -74,8 +71,6 @@ export const useDisclosureState = (
     value: initialVisible,
     onChange: onVisibleChange,
   });
-  const presence = usePresenceState({ present: visible });
-  console.log("%cpresence", "color: #aa00ff", presence);
 
   const show = React.useCallback(() => setVisible(true), [setVisible]);
   const hide = React.useCallback(() => setVisible(false), [setVisible]);
@@ -88,6 +83,5 @@ export const useDisclosureState = (
     show,
     hide,
     toggle,
-    ...presence,
   };
 };

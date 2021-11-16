@@ -1,7 +1,5 @@
 import * as React from "react";
-import { contains } from "reakit-utils/contains";
-import { getDocument } from "reakit-utils/getDocument";
-import { useLiveRef } from "reakit-utils/useLiveRef";
+import { contains, getDocument, useLiveRef } from "reakit-utils";
 import { warning } from "reakit-warning";
 
 import { isFocusTrap } from "./useFocusTrap";
@@ -55,7 +53,6 @@ export function useEventListenerOutside(
         warning(
           true,
           "Can't detect events outside dialog because `ref` wasn't passed to component.",
-          "See https://reakit.io/docs/dialog",
         );
         return;
       }

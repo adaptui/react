@@ -10,4 +10,3 @@ export * from "./useFocusTrap";
 export * from "./useHideOnClickOutside";
 export * from "./useNestedDialogs";
 export * from "./usePortalRef";
-export * from "./usePreventBodyScroll";

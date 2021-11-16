@@ -1,10 +1,12 @@
 import * as React from "react";
-import { contains } from "reakit-utils/contains";
-import { ensureFocus } from "reakit-utils/ensureFocus";
-import { getActiveElement } from "reakit-utils/getActiveElement";
-import { getDocument } from "reakit-utils/getDocument";
-import { isTabbable } from "reakit-utils/tabbable";
-import { useUpdateEffect } from "reakit-utils/useUpdateEffect";
+import {
+  contains,
+  ensureFocus,
+  getActiveElement,
+  getDocument,
+  isTabbable,
+  useUpdateEffect,
+} from "reakit-utils";
 import { warning } from "reakit-warning";
 
 import { DialogOptions } from "../Dialog";
@@ -32,7 +34,7 @@ export function useFocusOnHide(
 
   useUpdateEffect(() => {
     if (!shouldFocus) return;
-    if (!options.isPresent) return;
+    if (!options.present) return;
 
     // Hide was triggered by a click/focus on a tabbable element outside
     // the dialog or on another dialog. We won't change focus then.
@@ -65,8 +67,7 @@ export function useFocusOnHide(
     warning(
       true,
       "Can't return focus after closing dialog. Either render a disclosure component or provide a `unstable_finalFocusRef` prop.",
-      "See https://reakit.io/docs/dialog",
       dialogRef.current,
     );
-  }, [shouldFocus, options.isPresent, dialogRef, disclosureRef]);
+  }, [shouldFocus, options.present, dialogRef, disclosureRef]);
 }

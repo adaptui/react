@@ -4,17 +4,19 @@ import { createComponent } from "reakit-system";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
 import { useForkRef } from "reakit-utils";
 
-import { PresenceHTMLProps, PresenceOptions, usePresence } from "../presence";
+import { usePresenceState } from "../presence";
 import { createComposableHook } from "../system";
 
 import { DISCLOSURE_CONTENT_KEYS } from "./__keys";
 import { DisclosureStateReturn } from "./DisclosureState";
 
 export type DisclosureContentOptions = BoxOptions &
-  PresenceOptions &
-  Pick<DisclosureStateReturn, "baseId" | "visible"> & {};
+  Pick<DisclosureStateReturn, "baseId" | "visible"> & {
+    present: boolean;
+    presenceRef: ((value: any) => void) | null;
+  };
 
-export type DisclosureContentHTMLProps = BoxHTMLProps & PresenceHTMLProps;
+export type DisclosureContentHTMLProps = BoxHTMLProps;
 
 export type DisclosureContentProps = DisclosureContentOptions &
   DisclosureContentHTMLProps;
@@ -24,17 +26,22 @@ export const disclosureComposableContent = createComposableHook<
   DisclosureContentHTMLProps
 >({
   name: "DisclosureContent",
-  compose: [useBox, usePresence],
+  compose: useBox,
   keys: DISCLOSURE_CONTENT_KEYS,
 
+  useOptions(options, htmlProps) {
+    const { visible } = options;
+    const { ref } = htmlProps;
+    const { isPresent: present, ref: presenceRef } = usePresenceState({
+      present: visible,
+    });
+
+    return { ...options, present, presenceRef: useForkRef(ref, presenceRef) };
+  },
+
   useProps(options, htmlProps) {
-    const { visible, baseId, present } = options;
-    const {
-      ref: htmlRef,
-      style: htmlStyle,
-      children: htmlChildren,
-      ...restHtmlProps
-    } = htmlProps;
+    const { visible, baseId, presenceRef, present } = options;
+    const { ref: htmlRef, style: htmlStyle, ...restHtmlProps } = htmlProps;
     const ref = React.useRef<HTMLElement>(null);
     const [isPresent, setIsPresent] = React.useState(present);
     const heightRef = React.useRef<number | undefined>(0);
@@ -76,17 +83,17 @@ export const disclosureComposableContent = createComposableHook<
     const style = {
       "--content-height": height ? `${height}px` : undefined,
       "--content-width": width ? `${width}px` : undefined,
+      display: isVisible ? undefined : "none",
       ...htmlStyle,
     };
 
     return {
-      ref: useForkRef(ref, htmlRef),
+      ref: useForkRef(presenceRef, useForkRef(ref, htmlRef)),
       "data-enter": visible ? "" : undefined,
       "data-leave": !visible ? "" : undefined,
       id: baseId,
       hidden: !isVisible,
       style,
-      children: isVisible ? htmlChildren : null,
       ...restHtmlProps,
     };
   },

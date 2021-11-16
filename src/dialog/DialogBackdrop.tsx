@@ -1,6 +1,6 @@
 import * as React from "react";
-import { createComponent } from "reakit-system/createComponent";
-import { createHook } from "reakit-system/createHook";
+import { RemoveScroll } from "react-remove-scroll";
+import { createComponent, createHook } from "reakit-system";
 import { Portal } from "reakit";
 
 import {
@@ -14,7 +14,13 @@ import { DialogStateReturn } from "./DialogState";
 import { DialogBackdropContext } from "./helpers";
 
 export type DialogBackdropOptions = DisclosureContentOptions &
-  Pick<Partial<DialogStateReturn>, "modal">;
+  Pick<Partial<DialogStateReturn>, "modal"> & {
+    /**
+     * When enabled, user can't scroll on body when the dialog is visible.
+     * This option doesn't work if the dialog isn't modal.
+     */
+    preventBodyScroll?: boolean;
+  };
 
 export type DialogBackdropHTMLProps = DisclosureContentHTMLProps;
 
@@ -29,35 +35,49 @@ export const useDialogBackdrop = createHook<
   compose: useDisclosureContent,
   keys: DIALOG_BACKDROP_KEYS,
 
-  useOptions({ modal = true, ...options }) {
-    return { modal, ...options };
+  useOptions({ modal = true, preventBodyScroll = modal, ...options }) {
+    return { modal, preventBodyScroll: modal && preventBodyScroll, ...options };
   },
 
-  useProps(options, { wrapElement: htmlWrapElement, ...htmlProps }) {
+  useProps(options, htmlProps) {
+    const { modal, baseId, preventBodyScroll } = options;
+    const { wrapElement: htmlWrapElement, ...restHtmlProps } = htmlProps;
     const wrapElement = React.useCallback(
       (element: React.ReactNode) => {
-        if (options.modal) {
-          element = (
-            <Portal>
-              <DialogBackdropContext.Provider value={options.baseId}>
-                {element}
-              </DialogBackdropContext.Provider>
-            </Portal>
-          );
+        if (modal) {
+          if (preventBodyScroll) {
+            element = (
+              <Portal>
+                <DialogBackdropContext.Provider value={baseId}>
+                  <RemoveScroll>{element}</RemoveScroll>
+                </DialogBackdropContext.Provider>
+              </Portal>
+            );
+          } else {
+            element = (
+              <Portal>
+                <DialogBackdropContext.Provider value={baseId}>
+                  {element}
+                </DialogBackdropContext.Provider>
+              </Portal>
+            );
+          }
         }
+
         if (htmlWrapElement) {
           return htmlWrapElement(element);
         }
+
         return element;
       },
-      [options.modal, options.baseId, htmlWrapElement],
+      [modal, htmlWrapElement, preventBodyScroll, baseId],
     );
 
     return {
       id: undefined,
-      "data-dialog-ref": options.baseId,
+      "data-dialog-ref": baseId,
       wrapElement,
-      ...htmlProps,
+      ...restHtmlProps,
     };
   },
 });

@@ -1,9 +1,11 @@
 import * as React from "react";
-import { getActiveElement } from "reakit-utils/getActiveElement";
-import { getDocument } from "reakit-utils/getDocument";
-import { getNextActiveElementOnBlur } from "reakit-utils/getNextActiveElementOnBlur";
-import { useIsomorphicEffect } from "reakit-utils/useIsomorphicEffect";
+import {
+  getActiveElement,
+  getDocument,
+  getNextActiveElementOnBlur,
+} from "reakit-utils";
 import { warning } from "reakit-warning";
+import { useSafeLayoutEffect } from "@chakra-ui/hooks";
 
 import { DialogOptions } from "../Dialog";
 
@@ -22,7 +24,7 @@ export function useFocusOnBlur(
 ) {
   const [blurred, scheduleFocus] = React.useReducer((n: number) => n + 1, 0);
 
-  useIsomorphicEffect(() => {
+  useSafeLayoutEffect(() => {
     const dialog = dialogRef.current;
     if (!options.visible) return;
     if (!blurred) return;
@@ -34,7 +36,6 @@ export function useFocusOnBlur(
       warning(
         !dialog,
         "Can't focus dialog after a nested element got blurred because `ref` wasn't passed to the component",
-        "See https://reakit.io/docs/dialog",
       );
       dialog?.focus();
     }

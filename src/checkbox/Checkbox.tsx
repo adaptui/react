@@ -67,7 +67,6 @@ export const useCheckbox = createHook<CheckboxOptions, CheckboxHTMLProps>({
         warning(
           true,
           "Can't determine whether the element is a native checkbox because `ref` wasn't passed to the component",
-          "See https://reakit.io/docs/checkbox",
         );
         return;
       }
