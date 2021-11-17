@@ -9,8 +9,8 @@ export const POPOVER_STATE_KEYS = [
   "arrowStyles",
   "placedSide",
   "placedAlign",
-  "sideIndex",
-  "alignIndex",
+  "side",
+  "align",
   "sideOffset",
   "alignOffset",
   "arrowOffset",
@@ -24,8 +24,8 @@ export const POPOVER_STATE_KEYS = [
   "toggle",
   "setVisible",
   "setModal",
-  "setSideIndex",
-  "setAlignIndex",
+  "setSide",
+  "setAlign",
   "setSideOffset",
   "setAlignOffset",
   "setArrowOffset",
@@ -40,8 +40,8 @@ export const USE_POPOVER_STATE_KEYS = [
   "defaultVisible",
   "onVisibleChange",
   "modal",
-  "sideIndex",
-  "alignIndex",
+  "side",
+  "align",
   "sideOffset",
   "alignOffset",
   "arrowOffset",
@@ -51,23 +51,21 @@ export const USE_POPOVER_STATE_KEYS = [
 export const ARROW_KEYS = POPOVER_STATE_KEYS;
 export const ARROW_CONTENT_KEYS = ARROW_KEYS;
 export const POPOVER_KEYS = ARROW_CONTENT_KEYS;
-export const POPOVER_BACKDROP_KEYS = POPOVER_KEYS;
+export const POPOVER_ANCHOR_KEYS = POPOVER_KEYS;
+export const POPOVER_BACKDROP_KEYS = POPOVER_ANCHOR_KEYS;
 export const POPOVER_CONTENT_KEYS = POPOVER_BACKDROP_KEYS;
 export const POPOVER_DISCLOSURE_KEYS = POPOVER_CONTENT_KEYS;
+export const POPOVER_TRIGGER_KEYS = POPOVER_DISCLOSURE_KEYS;
 export const GET_PLACEMENT_DATA_KEYS = [
-  ...POPOVER_DISCLOSURE_KEYS,
+  ...POPOVER_TRIGGER_KEYS,
   "anchorRect",
   "popperSize",
   "arrowSize",
-  "side",
-  "align",
   "shouldAvoidCollisions",
   "collisionBoundariesRect",
 ] as const;
 export const GET_ARROW_STYLES_KEYS = [
-  ...POPOVER_DISCLOSURE_KEYS,
+  ...POPOVER_TRIGGER_KEYS,
   "popperSize",
   "arrowSize",
-  "side",
-  "align",
 ] as const;

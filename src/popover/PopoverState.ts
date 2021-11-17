@@ -5,21 +5,16 @@ import {
   DialogInitialState,
   DialogState,
   useDialogState,
-} from "..";
+} from "../dialog";
 
-import {
-  ALIGN_OPTIONS,
-  getPlacementData,
-  PlacementData,
-  SIDE_OPTIONS,
-} from "./popper-core";
+import { getPlacementData, PlacementData } from "./popper-core";
 import { useRect } from "./useRect";
 import { useSize } from "./useSize";
 
 export type PopoverState = DialogState &
   PlacementData & {
-    sideIndex: number;
-    alignIndex: number;
+    side: "top" | "bottom" | "left" | "right";
+    align: "start" | "center" | "end";
     sideOffset: number;
     alignOffset: number;
     arrowOffset: number;
@@ -30,8 +25,8 @@ export type PopoverState = DialogState &
   };
 
 export type PopoverActions = DialogActions & {
-  setSideIndex: React.Dispatch<React.SetStateAction<number>>;
-  setAlignIndex: React.Dispatch<React.SetStateAction<number>>;
+  setSide: React.Dispatch<React.SetStateAction<PopoverState["side"]>>;
+  setAlign: React.Dispatch<React.SetStateAction<PopoverState["align"]>>;
   setSideOffset: React.Dispatch<React.SetStateAction<number>>;
   setAlignOffset: React.Dispatch<React.SetStateAction<number>>;
   setArrowOffset: React.Dispatch<React.SetStateAction<number>>;
@@ -47,8 +42,8 @@ export type PopoverInitialState = DialogInitialState &
   Partial<
     Pick<
       PopoverState,
-      | "sideIndex"
-      | "alignIndex"
+      | "side"
+      | "align"
       | "sideOffset"
       | "alignOffset"
       | "arrowOffset"
@@ -63,8 +58,8 @@ export const usePopoverState = (
 ): PopoverStateReturn => {
   const {
     enableCollisionsDetection,
-    sideIndex: initialSideIndex = 1,
-    alignIndex: initialAlignIndex = 0,
+    side: initialSide = "bottom",
+    align: initialAlign = "center",
     sideOffset: initialSideOffset = 5,
     alignOffset: initialAlignOffset = 0,
     arrowOffset: initialArrowOffset = 20,
@@ -74,17 +69,14 @@ export const usePopoverState = (
   } = props;
   const dialog = useDialogState({ modal, ...restProps });
 
-  const [sideIndex, setSideIndex] = React.useState(initialSideIndex);
-  const [alignIndex, setAlignIndex] = React.useState(initialAlignIndex);
+  const [side, setSide] = React.useState(initialSide);
+  const [align, setAlign] = React.useState(initialAlign);
   const [sideOffset, setSideOffset] = React.useState(initialSideOffset);
   const [alignOffset, setAlignOffset] = React.useState(initialAlignOffset);
   const [arrowOffset, setArrowOffset] = React.useState(initialArrowOffset);
   const [collisionTolerance, setCollisionTolerance] = React.useState(
     initialCollisionTolerance,
   );
-
-  const side = SIDE_OPTIONS[sideIndex];
-  const align = ALIGN_OPTIONS[alignIndex];
 
   const [anchor, setAnchor] = React.useState<HTMLDivElement | null>(null);
   const anchorRect = useRect(anchor);
@@ -117,8 +109,8 @@ export const usePopoverState = (
   return {
     ...placementData,
     ...dialog,
-    sideIndex,
-    alignIndex,
+    side,
+    align,
     sideOffset,
     alignOffset,
     arrowOffset,
@@ -126,8 +118,8 @@ export const usePopoverState = (
     anchor,
     popper,
     arrow,
-    setSideIndex,
-    setAlignIndex,
+    setSide,
+    setAlign,
     setSideOffset,
     setAlignOffset,
     setArrowOffset,

@@ -3,18 +3,15 @@ import * as React from "react";
 import { Arrow } from "../Arrow";
 import { ArrowContent } from "../ArrowContent";
 import { Popover } from "../Popover";
+import { PopoverAnchor } from "../PopoverAnchor";
 import { PopoverContent } from "../PopoverContent";
-import { PopoverDisclosure } from "../PopoverDisclosure";
 import { PopoverInitialState, usePopoverState } from "../PopoverState";
+import { PopoverTrigger } from "../PopoverTrigger";
 
 export type PopoverBasicProps = PopoverInitialState & {};
 
 export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
-  const state = usePopoverState({
-    arrowOffset: 20,
-    sideIndex: 2,
-    alignIndex: 1,
-  });
+  const state = usePopoverState(props);
 
   return (
     <div
@@ -25,7 +22,21 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
         height: "200vh",
       }}
     >
-      <PopoverDisclosure {...state}>Open</PopoverDisclosure>
+      <PopoverTrigger
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: 250,
+          padding: 20,
+          margin: 100,
+          backgroundColor: "#eee",
+        }}
+        {...state}
+      >
+        Item
+        <PopoverAnchor {...state}>Open</PopoverAnchor>
+      </PopoverTrigger>
 
       <Popover className="popover" {...state}>
         <PopoverContent {...state} className="content">
