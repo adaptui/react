@@ -48,6 +48,7 @@ export const disclosureComposableContent = createComposableHook<
     const height = heightRef.current;
     const widthRef = React.useRef<number | undefined>(0);
     const width = widthRef.current;
+
     // when opening we want it to immediately open to retrieve dimensions
     // when closing we delay `present` to retrieve dimensions before closing
     const isVisible = visible || isPresent;

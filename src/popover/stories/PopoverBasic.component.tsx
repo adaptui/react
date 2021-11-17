@@ -29,23 +29,24 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
 
       <Popover className="popover" {...state}>
         <PopoverContent {...state} className="content">
-          <button onClick={state.hide}>close</button>
+          <div className="content-inside">
+            <button onClick={state.hide}>close</button>
+          </div>
+          <Arrow {...state}>
+            <ArrowContent className="arrow" {...state}>
+              <svg
+                width={20}
+                height={10}
+                viewBox="0 0 30 10"
+                preserveAspectRatio="none"
+                style={{ display: "block" }}
+                fill="gray"
+              >
+                <polygon points="0,0 30,0 15,10" />
+              </svg>
+            </ArrowContent>
+          </Arrow>
         </PopoverContent>
-
-        <Arrow {...state}>
-          <ArrowContent className="arrow" {...state}>
-            <svg
-              width={20}
-              height={10}
-              viewBox="0 0 30 10"
-              preserveAspectRatio="none"
-              style={{ display: "block" }}
-              fill="gray"
-            >
-              <polygon points="0,0 30,0 15,10" />
-            </svg>
-          </ArrowContent>
-        </Arrow>
       </Popover>
       <input />
     </div>

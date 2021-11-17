@@ -1,14 +1,15 @@
 import { createComponent, createHook } from "reakit-system";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useForkRef } from "reakit-utils";
+
+import { DialogHTMLProps, DialogOptions, useDialog } from "../dialog";
 
 import { POPOVER_DISCLOSURE_KEYS } from "./__keys";
 import { PopoverStateReturn } from "./PopoverState";
 
-export type PopoverContentOptions = RoleOptions &
+export type PopoverContentOptions = DialogOptions &
   Pick<PopoverStateReturn, "setPopper">;
 
-export type PopoverContentHTMLProps = RoleHTMLProps;
+export type PopoverContentHTMLProps = DialogHTMLProps;
 
 export type PopoverContentProps = PopoverContentOptions &
   PopoverContentHTMLProps;
@@ -18,11 +19,11 @@ export const usePopoverContent = createHook<
   PopoverContentHTMLProps
 >({
   name: "PopoverContent",
-  compose: useRole,
+  compose: useDialog,
   keys: POPOVER_DISCLOSURE_KEYS,
 
-  useOptions(options, htmlProps) {
-    return options;
+  useOptions({ modal = false, ...options }) {
+    return { modal, ...options };
   },
 
   useProps(options, htmlProps) {

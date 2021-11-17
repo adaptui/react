@@ -10,34 +10,38 @@
   pointer-events: auto;
 }
 
-.popover {
+.content {
   transform-origin: top center;
 }
 
-.popover[data-enter] {
-  animation: fadeIn 500ms ease-in-out;
+.content[data-enter] {
+  animation: fadesIn 500ms ease-in-out;
 }
 
-.popover[data-leave] {
-  animation: fadeOut 500ms ease-in-out;
+.content[data-leave] {
+  animation: fadesOut 500ms ease-in-out;
 }
 
-@keyframes fadeIn {
+@keyframes fadesIn {
   from {
     opacity: 0;
+    transform: translate(0, -10px);
   }
 
   to {
     opacity: 1;
+    transform: translate(0, 0px);
   }
 }
 
-@keyframes fadeOut {
+@keyframes fadesOut {
   from {
     opacity: 1;
+    transform: translate(0, 0px);
   }
 
   to {
     opacity: 0;
+    transform: translate(0, -10px);
   }
 }
