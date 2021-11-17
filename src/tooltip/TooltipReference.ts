@@ -34,6 +34,7 @@ export const useTooltipReference = createHook<
       ...htmlProps
     },
   ) {
+    const { show, hide, baseId, setAnchor } = options;
     const onFocusRef = useLiveRef(htmlOnFocus);
     const onBlurRef = useLiveRef(htmlOnBlur);
     const onMouseEnterRef = useLiveRef(htmlOnMouseEnter);
@@ -43,46 +44,46 @@ export const useTooltipReference = createHook<
       (event: React.FocusEvent) => {
         onFocusRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.show?.();
+        show?.();
       },
-      [options.show],
+      [onFocusRef, show],
     );
 
     const onBlur = React.useCallback(
       (event: React.FocusEvent) => {
         onBlurRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.hide?.();
+        hide?.();
       },
-      [options.hide],
+      [hide, onBlurRef],
     );
 
     const onMouseEnter = React.useCallback(
       (event: React.MouseEvent) => {
         onMouseEnterRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.show?.();
+        show?.();
       },
-      [options.show],
+      [onMouseEnterRef, show],
     );
 
     const onMouseLeave = React.useCallback(
       (event: React.MouseEvent) => {
         onMouseLeaveRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.hide?.();
+        hide?.();
       },
-      [options.hide],
+      [hide, onMouseLeaveRef],
     );
 
     return {
-      ref: useForkRef(options.setAnchor, htmlRef),
+      ref: useForkRef(setAnchor, htmlRef),
       tabIndex: 0,
       onFocus,
       onBlur,
       onMouseEnter,
       onMouseLeave,
-      "aria-describedby": options.baseId,
+      "aria-describedby": baseId,
       ...htmlProps,
     };
   },

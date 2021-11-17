@@ -65,6 +65,7 @@ export function useTooltipState(
     hideTimeout.current = window.setTimeout(() => {
       globalState.hide(popover.baseId);
     }, timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clearTimeouts, popover.hide, timeout, popover.baseId]);
 
   const show = React.useCallback(() => {
@@ -84,6 +85,7 @@ export function useTooltipState(
         popover.show();
       }, timeout);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clearTimeouts, timeout, popover.show, popover.baseId]);
 
   React.useEffect(() => {
@@ -96,6 +98,7 @@ export function useTooltipState(
         }
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [popover.baseId, clearTimeouts, popover.visible, popover.hide]);
 
   React.useEffect(

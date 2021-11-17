@@ -34,6 +34,7 @@ export const useTooltipTrigger = createHook<
       ...htmlProps
     },
   ) {
+    const { show, hide, baseId } = options;
     const onFocusRef = useLiveRef(htmlOnFocus);
     const onBlurRef = useLiveRef(htmlOnBlur);
     const onMouseEnterRef = useLiveRef(htmlOnMouseEnter);
@@ -45,34 +46,34 @@ export const useTooltipTrigger = createHook<
         if (event.defaultPrevented) return;
         options.show?.();
       },
-      [options.show],
+      [onFocusRef, options],
     );
 
     const onBlur = React.useCallback(
       (event: React.FocusEvent) => {
         onBlurRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.hide?.();
+        hide?.();
       },
-      [options.hide],
+      [hide, onBlurRef],
     );
 
     const onMouseEnter = React.useCallback(
       (event: React.MouseEvent) => {
         onMouseEnterRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.show?.();
+        show?.();
       },
-      [options.show],
+      [onMouseEnterRef, show],
     );
 
     const onMouseLeave = React.useCallback(
       (event: React.MouseEvent) => {
         onMouseLeaveRef.current?.(event);
         if (event.defaultPrevented) return;
-        options.hide?.();
+        hide?.();
       },
-      [options.hide],
+      [hide, onMouseLeaveRef],
     );
 
     return {
@@ -81,7 +82,7 @@ export const useTooltipTrigger = createHook<
       onBlur,
       onMouseEnter,
       onMouseLeave,
-      "aria-describedby": options.baseId,
+      "aria-describedby": baseId,
       ...htmlProps,
     };
   },
