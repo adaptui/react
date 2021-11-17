@@ -2,7 +2,7 @@ import { createComponent, createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useForkRef } from "reakit-utils";
 
-import { POPOVER_DISCLOSURE_KEYS } from "./__keys";
+import { POPOVER_ANCHOR_KEYS } from "./__keys";
 import { PopoverStateReturn } from "./PopoverState";
 
 export type PopoverAnchorOptions = RoleOptions &
@@ -18,7 +18,7 @@ export const usePopoverAnchor = createHook<
 >({
   name: "PopoverAnchor",
   compose: useRole,
-  keys: POPOVER_DISCLOSURE_KEYS,
+  keys: POPOVER_ANCHOR_KEYS,
 
   useOptions(options, htmlProps) {
     return options;

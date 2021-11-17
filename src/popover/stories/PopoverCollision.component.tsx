@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Arrow } from "../Arrow";
-import { ArrowContent } from "../ArrowContent";
 import { Popover } from "../Popover";
+import { PopoverArrow } from "../PopoverArrow";
+import { PopoverArrowContent } from "../PopoverArrowContent";
 import { PopoverContent } from "../PopoverContent";
 import { PopoverDisclosure } from "../PopoverDisclosure";
-import { usePopoverState } from "../PopoverState";
+import { PopoverState, usePopoverState } from "../PopoverState";
 import { ALIGN_OPTIONS, SIDE_OPTIONS } from "../popper-core";
 
 export const PopoverCollision = () => {
@@ -29,10 +29,10 @@ const Demo = ({ disableCollisions = false }) => {
     enableCollisionsDetection: !disableCollisions,
   });
   const {
-    sideIndex,
-    setSideIndex,
-    alignIndex,
-    setAlignIndex,
+    side,
+    setSide,
+    align,
+    setAlign,
     collisionTolerance,
     setCollisionTolerance,
     sideOffset,
@@ -82,12 +82,14 @@ const Demo = ({ disableCollisions = false }) => {
               side
               {/* eslint-disable-next-line jsx-a11y/no-onchange */}
               <select
-                value={sideIndex}
-                onChange={event => setSideIndex(Number(event.target.value))}
+                value={side}
+                onChange={event =>
+                  setSide(event.target.value as PopoverState["side"])
+                }
                 style={{ marginBottom: 10 }}
               >
-                {SIDE_OPTIONS.map((side, index) => (
-                  <option key={side} value={index}>
+                {SIDE_OPTIONS.map(side => (
+                  <option key={side} value={side}>
                     {side}
                   </option>
                 ))}
@@ -95,12 +97,14 @@ const Demo = ({ disableCollisions = false }) => {
               align
               {/* eslint-disable-next-line jsx-a11y/no-onchange */}
               <select
-                value={alignIndex}
-                onChange={event => setAlignIndex(Number(event.target.value))}
+                value={align}
+                onChange={event =>
+                  setAlign(event.target.value as PopoverState["align"])
+                }
                 style={{ marginBottom: 10 }}
               >
-                {ALIGN_OPTIONS.map((align, index) => (
-                  <option key={align} value={index}>
+                {ALIGN_OPTIONS.map(align => (
+                  <option key={align} value={align}>
                     {align}
                   </option>
                 ))}
@@ -151,8 +155,8 @@ const Demo = ({ disableCollisions = false }) => {
           </div>
         </PopoverContent>
 
-        <Arrow {...state}>
-          <ArrowContent
+        <PopoverArrow {...state}>
+          <PopoverArrowContent
             {...state}
             style={{
               width: 20,
@@ -162,7 +166,7 @@ const Demo = ({ disableCollisions = false }) => {
               backgroundColor: "hotpink",
             }}
           />
-        </Arrow>
+        </PopoverArrow>
       </Popover>
     </>
   );

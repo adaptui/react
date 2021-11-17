@@ -6,7 +6,7 @@ import {
   useDialogDisclosure,
 } from "../dialog";
 
-import { POPOVER_DISCLOSURE_KEYS } from "./__keys";
+import { POPOVER_TRIGGER_KEYS } from "./__keys";
 
 export type PopoverTriggerOptions = DialogDisclosureOptions & {};
 
@@ -21,7 +21,7 @@ export const usePopoverTrigger = createHook<
 >({
   name: "PopoverTrigger",
   compose: useDialogDisclosure,
-  keys: POPOVER_DISCLOSURE_KEYS,
+  keys: POPOVER_TRIGGER_KEYS,
 
   useOptions(options, htmlProps) {
     return options;

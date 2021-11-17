@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { Arrow } from "../Arrow";
-import { ArrowContent } from "../ArrowContent";
 import { Popover } from "../Popover";
 import { PopoverAnchor } from "../PopoverAnchor";
+import { PopoverArrow } from "../PopoverArrow";
+import { PopoverArrowContent } from "../PopoverArrowContent";
 import { PopoverContent } from "../PopoverContent";
 import { PopoverInitialState, usePopoverState } from "../PopoverState";
 import { PopoverTrigger } from "../PopoverTrigger";
@@ -43,8 +43,8 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
           <div className="content-inside">
             <button onClick={state.hide}>close</button>
           </div>
-          <Arrow {...state}>
-            <ArrowContent className="arrow" {...state}>
+          <PopoverArrow {...state}>
+            <PopoverArrowContent className="arrow" {...state}>
               <svg
                 width={20}
                 height={10}
@@ -55,8 +55,8 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
               >
                 <polygon points="0,0 30,0 15,10" />
               </svg>
-            </ArrowContent>
-          </Arrow>
+            </PopoverArrowContent>
+          </PopoverArrow>
         </PopoverContent>
       </Popover>
       <input />

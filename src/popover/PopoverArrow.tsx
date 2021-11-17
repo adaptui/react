@@ -1,20 +1,23 @@
 import { createComponent, createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
-import { ARROW_KEYS } from "./__keys";
+import { POPOVER_ARROW_KEYS } from "./__keys";
 import { PopoverStateReturn } from "./PopoverState";
 
-export type ArrowOptions = RoleOptions &
+export type PopoverArrowOptions = RoleOptions &
   Pick<PopoverStateReturn, "arrowStyles">;
 
-export type ArrowHTMLProps = RoleHTMLProps;
+export type PopoverArrowHTMLProps = RoleHTMLProps;
 
-export type ArrowProps = ArrowOptions & ArrowHTMLProps;
+export type PopoverArrowProps = PopoverArrowOptions & PopoverArrowHTMLProps;
 
-export const useArrow = createHook<ArrowOptions, ArrowHTMLProps>({
-  name: "Arrow",
+export const usePopoverArrow = createHook<
+  PopoverArrowOptions,
+  PopoverArrowHTMLProps
+>({
+  name: "PopoverArrow",
   compose: useRole,
-  keys: ARROW_KEYS,
+  keys: POPOVER_ARROW_KEYS,
 
   useOptions(options, htmlProps) {
     return options;
@@ -35,8 +38,8 @@ export const useArrow = createHook<ArrowOptions, ArrowHTMLProps>({
   },
 });
 
-export const Arrow = createComponent({
+export const PopoverArrow = createComponent({
   as: "span",
   memo: true,
-  useHook: useArrow,
+  useHook: usePopoverArrow,
 });
