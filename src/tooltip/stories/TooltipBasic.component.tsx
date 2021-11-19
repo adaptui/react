@@ -1,9 +1,12 @@
 import * as React from "react";
 
-import { Tooltip } from "../Tooltip";
-import { TooltipContent } from "../TooltipContent";
-import { TooltipReference } from "../TooltipReference";
-import { TooltipInitialState, useTooltipState } from "../TooltipState";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipInitialState,
+  TooltipReference,
+  useTooltipState,
+} from "../../index";
 
 export type TooltipBasicProps = TooltipInitialState & {};
 
@@ -24,7 +27,7 @@ export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
       </TooltipReference>
 
       <Tooltip className="popover" {...state}>
-        <TooltipContent {...state} className="content">
+        <TooltipContent {...state} className="content" animation={true}>
           <div>Tooltip</div>
         </TooltipContent>
       </Tooltip>

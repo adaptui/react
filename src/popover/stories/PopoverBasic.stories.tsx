@@ -3,6 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
+import css from "./templates/PopoverBasicCss";
 import js from "./templates/PopoverBasicJsx";
 import ts from "./templates/PopoverBasicTsx";
 import { PopoverBasic } from "./PopoverBasic.component";
@@ -14,7 +15,7 @@ export default {
   title: "Popover/Basic",
   parameters: {
     options: { showPanel: true },
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 

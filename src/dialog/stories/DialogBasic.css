@@ -64,20 +64,20 @@
 
 @keyframes slideIn {
   from {
-    opacity: 0;
+    transform: translate(0, -10px);
   }
 
   to {
-    opacity: 1;
+    transform: translate(0, 0px);
   }
 }
 
 @keyframes slideOut {
   from {
-    opacity: 1;
+    transform: translate(0, 0px);
   }
 
   to {
-    opacity: 0;
+    transform: translate(0, -10px);
   }
 }

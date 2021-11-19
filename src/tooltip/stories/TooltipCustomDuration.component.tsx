@@ -1,11 +1,14 @@
 import * as React from "react";
 
-import { Tooltip } from "../Tooltip";
-import { TooltipArrow } from "../TooltipArrow";
-import { TooltipArrowContent } from "../TooltipArrowContent";
-import { TooltipContent } from "../TooltipContent";
-import { TooltipReference } from "../TooltipReference";
-import { TooltipInitialState, useTooltipState } from "../TooltipState";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipArrowContent,
+  TooltipContent,
+  TooltipInitialState,
+  TooltipReference,
+  useTooltipState,
+} from "../../index";
 
 export type TooltipCustomDurationProps = {};
 
@@ -50,7 +53,7 @@ export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
       </TooltipReference>
 
       <Tooltip className="popover" {...state}>
-        <TooltipContent {...state} className="content">
+        <TooltipContent {...state} className="content" animation={true}>
           TooltipContent
           <TooltipArrow {...state}>
             <TooltipArrowContent className="arrow" {...state}>

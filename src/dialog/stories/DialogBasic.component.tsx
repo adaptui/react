@@ -18,8 +18,13 @@ export const DialogBasic: React.FC<DialogBasicProps> = props => {
   return (
     <>
       <DialogDisclosure {...dialog}>Open dialog</DialogDisclosure>
-      <DialogBackdrop {...dialog} className="backdrop">
-        <Dialog {...dialog} aria-label="Welcome" className="dialog">
+      <DialogBackdrop {...dialog} className="backdrop" animation={true}>
+        <Dialog
+          {...dialog}
+          aria-label="Welcome"
+          className="dialog"
+          animation={true}
+        >
           Welcome to Reakit!
           <div>
             <label htmlFor="firstName">First Name</label>

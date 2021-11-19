@@ -1,12 +1,15 @@
 import * as React from "react";
 
-import { Tooltip } from "../Tooltip";
-import { TooltipAnchor } from "../TooltipAnchor";
-import { TooltipArrow } from "../TooltipArrow";
-import { TooltipArrowContent } from "../TooltipArrowContent";
-import { TooltipContent } from "../TooltipContent";
-import { TooltipInitialState, useTooltipState } from "../TooltipState";
-import { TooltipTrigger } from "../TooltipTrigger";
+import {
+  Tooltip,
+  TooltipAnchor,
+  TooltipArrow,
+  TooltipArrowContent,
+  TooltipContent,
+  TooltipInitialState,
+  TooltipTrigger,
+  useTooltipState,
+} from "../../index";
 
 export type TooltipCustomAnchorProps = TooltipInitialState & {};
 
@@ -33,7 +36,7 @@ export const TooltipCustomAnchor: React.FC<TooltipCustomAnchorProps> =
         </TooltipTrigger>
 
         <Tooltip className="popover" {...state}>
-          <TooltipContent {...state} className="content">
+          <TooltipContent {...state} className="content" animation={true}>
             <div className="content-inside">Tooltip Content</div>
             <TooltipArrow {...state}>
               <TooltipArrowContent className="arrow" {...state}>

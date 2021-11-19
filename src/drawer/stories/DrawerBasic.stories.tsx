@@ -5,10 +5,10 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/DrawerBasicJsx";
 import ts from "./templates/DrawerBasicTsx";
-import { Drawer } from "./DrawerBasic.component";
+import { DrawerBasic } from "./DrawerBasic.component";
 
 export default {
-  component: Drawer,
+  component: DrawerBasic,
   title: "Drawer/Basic",
   parameters: {
     layout: "centered",
@@ -16,4 +16,4 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = args => <Drawer {...args} />;
+export const Default: Story = args => <DrawerBasic {...args} />;

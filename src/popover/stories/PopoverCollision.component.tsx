@@ -1,12 +1,15 @@
 import * as React from "react";
+import { ALIGN_OPTIONS, SIDE_OPTIONS } from "@radix-ui/popper";
 
-import { Popover } from "../Popover";
-import { PopoverArrow } from "../PopoverArrow";
-import { PopoverArrowContent } from "../PopoverArrowContent";
-import { PopoverContent } from "../PopoverContent";
-import { PopoverDisclosure } from "../PopoverDisclosure";
-import { PopoverState, usePopoverState } from "../PopoverState";
-import { ALIGN_OPTIONS, SIDE_OPTIONS } from "../popper-core";
+import {
+  Popover,
+  PopoverArrow,
+  PopoverArrowContent,
+  PopoverContent,
+  PopoverDisclosure,
+  PopoverState,
+  usePopoverState,
+} from "../../index";
 
 export const PopoverCollision = () => {
   return (

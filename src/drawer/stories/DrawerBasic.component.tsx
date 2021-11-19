@@ -2,23 +2,22 @@ import React from "react";
 import { css } from "@emotion/css";
 
 import {
-  Drawer as RenderlesskitDrawer,
+  Drawer,
   DrawerBackdrop,
-  DrawerCloseButton,
   DrawerDisclosure,
   DrawerInitialState,
   Placement,
   useDrawerState,
 } from "../../index";
 
-export const Drawer: React.FC<DrawerInitialState> = props => {
-  const dialog = useDrawerState({ animated: true, ...props });
+export const DrawerBasic: React.FC<DrawerInitialState> = props => {
+  const drawer = useDrawerState(props);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [placement, setPlacement] = React.useState<Placement>("left");
 
   return (
     <div>
-      <DrawerDisclosure {...dialog}>{`Open Drawer`}</DrawerDisclosure>
+      <DrawerDisclosure {...drawer}>{`Open Drawer`}</DrawerDisclosure>
       <select
         defaultValue={placement}
         onBlur={e => setPlacement(e.target.value as Placement)}
@@ -28,9 +27,9 @@ export const Drawer: React.FC<DrawerInitialState> = props => {
         <option value="right">Right</option>
         <option value="left">Left</option>
       </select>
-      <DrawerBackdrop className={backdropStyles} {...dialog}>
-        <RenderlesskitDrawer
-          {...dialog}
+      <DrawerBackdrop className={backdropStyles} transition={true} {...drawer}>
+        <Drawer
+          {...drawer}
           placement={placement}
           aria-label="Hello world"
           style={{ color: "red" }}
@@ -44,19 +43,24 @@ export const Drawer: React.FC<DrawerInitialState> = props => {
               opacity: 1;
               transform: translate(0, 0);
             }
+            &[data-leave] {
+              opacity: 0;
+              transform: ${cssTransforms[placement]};
+            }
           `}
+          transition={true}
           unstable_initialFocusRef={inputRef}
         >
-          <DrawerCloseButton {...dialog}>X</DrawerCloseButton>
+          <DrawerDisclosure {...drawer}>X</DrawerDisclosure>
           <p>Welcome to Reakit!</p>
           <input ref={inputRef} />
-        </RenderlesskitDrawer>
+        </Drawer>
       </DrawerBackdrop>
     </div>
   );
 };
 
-export default Drawer;
+export default DrawerBasic;
 
 const backdropStyles = css`
   opacity: 0;

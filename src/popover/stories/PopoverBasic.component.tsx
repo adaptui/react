@@ -1,12 +1,15 @@
 import * as React from "react";
 
-import { Popover } from "../Popover";
-import { PopoverAnchor } from "../PopoverAnchor";
-import { PopoverArrow } from "../PopoverArrow";
-import { PopoverArrowContent } from "../PopoverArrowContent";
-import { PopoverContent } from "../PopoverContent";
-import { PopoverInitialState, usePopoverState } from "../PopoverState";
-import { PopoverTrigger } from "../PopoverTrigger";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverArrow,
+  PopoverArrowContent,
+  PopoverContent,
+  PopoverInitialState,
+  PopoverTrigger,
+  usePopoverState,
+} from "../../index";
 
 export type PopoverBasicProps = PopoverInitialState & {};
 
@@ -39,7 +42,7 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
       </PopoverTrigger>
 
       <Popover className="popover" {...state}>
-        <PopoverContent {...state} className="content">
+        <PopoverContent {...state} className="content" animation={true}>
           <div className="content-inside">
             <button onClick={state.hide}>close</button>
           </div>

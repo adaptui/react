@@ -4,28 +4,17 @@
   overflow: hidden;
 }
 
+.content {
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+}
+
 .content[data-enter] {
-  animation: slideDown 300ms ease-out;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .content[data-leave] {
-  animation: slideUp 300ms ease-in;
-}
-
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--content-height);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: var(--content-height);
-  }
-  to {
-    height: 0;
-  }
+  transform: translate3d(0, 100%, 0);
 }

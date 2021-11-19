@@ -56,16 +56,3 @@ export const POPOVER_BACKDROP_KEYS = POPOVER_ARROW_CONTENT_KEYS;
 export const POPOVER_CONTENT_KEYS = POPOVER_BACKDROP_KEYS;
 export const POPOVER_DISCLOSURE_KEYS = POPOVER_CONTENT_KEYS;
 export const POPOVER_TRIGGER_KEYS = POPOVER_DISCLOSURE_KEYS;
-export const GET_PLACEMENT_DATA_KEYS = [
-  ...POPOVER_TRIGGER_KEYS,
-  "anchorRect",
-  "popperSize",
-  "arrowSize",
-  "shouldAvoidCollisions",
-  "collisionBoundariesRect",
-] as const;
-export const GET_ARROW_STYLES_KEYS = [
-  ...POPOVER_TRIGGER_KEYS,
-  "popperSize",
-  "arrowSize",
-] as const;

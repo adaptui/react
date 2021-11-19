@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { createComponent, createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
@@ -22,7 +23,7 @@ export const usePopover = createHook<PopoverOptions, PopoverHTMLProps>({
 
     return {
       style: {
-        ...popperStyles,
+        ...(popperStyles as CSSProperties),
         ...htmlStyle,
       },
       ...restHtmlProps,

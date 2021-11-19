@@ -1,4 +1,7 @@
 import * as React from "react";
+import { getPlacementData, PlacementData } from "@radix-ui/popper";
+import { useRect } from "@radix-ui/react-use-rect";
+import { useSize } from "@radix-ui/react-use-size";
 
 import {
   DialogActions,
@@ -6,10 +9,6 @@ import {
   DialogState,
   useDialogState,
 } from "../dialog";
-
-import { getPlacementData, PlacementData } from "./popper-core";
-import { useRect } from "./useRect";
-import { useSize } from "./useSize";
 
 export type PopoverState = DialogState &
   PlacementData & {

@@ -20,4 +20,6 @@ export const DISCLOSURE_CONTENT_KEYS = [
   ...DISCLOSURE_KEYS,
   "present",
   "presenceRef",
+  "animation",
+  "transition",
 ] as const;
