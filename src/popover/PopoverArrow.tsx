@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { createComponent, createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 
@@ -29,7 +30,7 @@ export const usePopoverArrow = createHook<
 
     return {
       style: {
-        ...arrowStyles,
+        ...(arrowStyles as CSSProperties),
         pointerEvents: "none",
         ...htmlStyle,
       },
