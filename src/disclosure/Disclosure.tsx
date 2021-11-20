@@ -9,35 +9,32 @@ import { useLiveRef } from "reakit-utils";
 
 import { createComposableHook } from "../system";
 
-import { DISCLOSURE_BUTTON_KEYS } from "./__keys";
+import { DISCLOSURE_KEYS } from "./__keys";
 import { DisclosureStateReturn } from "./DisclosureState";
 
-export type DisclosureButtonOptions = ButtonOptions &
-  Pick<DisclosureStateReturn, "baseId" | "toggle" | "expanded">;
+export type DisclosureOptions = ButtonOptions &
+  Pick<DisclosureStateReturn, "baseId" | "toggle" | "visible">;
 
-export type DisclosureButtonHTMLProps = ButtonHTMLProps;
+export type DisclosureHTMLProps = ButtonHTMLProps;
 
-export type DisclosureButtonProps = DisclosureButtonOptions &
-  DisclosureButtonHTMLProps;
+export type DisclosureProps = DisclosureOptions & DisclosureHTMLProps;
 
 export const disclosureComposableButton = createComposableHook<
-  DisclosureButtonOptions,
-  DisclosureButtonHTMLProps
+  DisclosureOptions,
+  DisclosureHTMLProps
 >({
-  name: "DisclosureButton",
+  name: "Disclosure",
   compose: useReakitButton,
-  keys: DISCLOSURE_BUTTON_KEYS,
+  keys: DISCLOSURE_KEYS,
 
   useProps(options, htmlProps) {
-    const { toggle, expanded } = options;
+    const { toggle, visible, baseId } = options;
     const {
       onClick: htmlOnClick,
       "aria-controls": ariaControls,
       ...restHtmlProps
     } = htmlProps;
-    const controls = ariaControls
-      ? `${ariaControls} ${options.baseId}`
-      : options.baseId;
+    const controls = ariaControls ? `${ariaControls} ${baseId}` : baseId;
 
     const onClickRef = useLiveRef(htmlOnClick);
 
@@ -53,17 +50,19 @@ export const disclosureComposableButton = createComposableHook<
 
     return {
       "aria-controls": controls,
-      "aria-expanded": expanded,
+      "aria-expanded": visible,
+      "data-enter": visible ? "" : undefined,
+      "data-leave": !visible ? "" : undefined,
       onClick,
       ...restHtmlProps,
     };
   },
 });
 
-export const useDisclosureButton = disclosureComposableButton();
+export const useDisclosure = disclosureComposableButton();
 
-export const DisclosureButton = createComponent({
+export const Disclosure = createComponent({
   as: "button",
   memo: true,
-  useHook: useDisclosureButton,
+  useHook: useDisclosure,
 });

@@ -1,35 +1,49 @@
-// Core Logic for transition is based on https://github.com/roginfarrer/react-collapsed
+// Inspired from Radix UI https://github.com/radix-ui/primitives/tree/main/packages/react/collapsible
 import * as React from "react";
-import { flushSync } from "react-dom";
 import { createComponent } from "reakit-system";
 import { BoxHTMLProps, BoxOptions, useBox } from "reakit";
-import { useForkRef, useLiveRef, useUpdateEffect } from "reakit-utils";
-import raf from "raf";
+import { useForkRef, useLiveRef } from "reakit-utils";
 
 import { createComposableHook } from "../system";
+import { useAnimationPresence } from "../utils";
 
 import { DISCLOSURE_CONTENT_KEYS } from "./__keys";
 import { DisclosureStateReturn } from "./DisclosureState";
 import {
-  getAutoSizeDuration,
-  getElementHeight,
-  getElementWidth,
+  TransitionState,
+  useAnimationPresenceSize,
+  UseAnimationPresenceSizeReturnType,
+  useTransitionPresence,
+  UseTransitionPresenceReturnType,
 } from "./helpers";
 
 export type DisclosureContentOptions = BoxOptions &
-  Pick<
-    DisclosureStateReturn,
-    | "baseId"
-    | "expanded"
-    | "contentSize"
-    | "duration"
-    | "direction"
-    | "easing"
-    | "onCollapseEnd"
-    | "onCollapseStart"
-    | "onExpandEnd"
-    | "onExpandStart"
-  > & {};
+  Pick<DisclosureStateReturn, "baseId" | "visible"> & {
+    /**
+     * Whether it uses animation or not.
+     */
+    animationPresent?: boolean;
+
+    /**
+     * Whether it uses animation or not.
+     */
+    transitionPresent?: boolean;
+
+    /**
+     * Whether the content is hidden or not.
+     */
+    isHidden?: boolean;
+
+    /**
+     * Ref for the animation/transition.
+     */
+    presenceRef?: ((value: any) => void) | null;
+    present?: UseAnimationPresenceSizeReturnType["isPresent"];
+    transitionState?: TransitionState;
+    onEnd?: UseTransitionPresenceReturnType["onEnd"];
+    contentWidth?: UseAnimationPresenceSizeReturnType["width"];
+    contentHeight?: UseAnimationPresenceSizeReturnType["height"];
+  };
 
 export type DisclosureContentHTMLProps = BoxHTMLProps;
 
@@ -44,18 +58,61 @@ export const disclosureComposableContent = createComposableHook<
   compose: useBox,
   keys: DISCLOSURE_CONTENT_KEYS,
 
+  useOptions(options, htmlProps) {
+    const {
+      visible,
+      animationPresent = false,
+      transitionPresent = false,
+    } = options;
+    const { isPresent: present, ref: animationRef } = useAnimationPresence({
+      present: visible,
+    });
+    const {
+      isPresent,
+      width: contentWidth,
+      height: contentHeight,
+      ref: transitionRef,
+    } = useAnimationPresenceSize({
+      present,
+      visible,
+    });
+    const { transitionState, transitioning, onEnd } = useTransitionPresence({
+      transition: transitionPresent,
+      visible,
+    });
+
+    // when opening we want it to immediately open to retrieve dimensions
+    // when closing we delay `present` to retrieve dimensions before closing
+    const isVisible = visible || isPresent;
+    const isHidden =
+      (animationPresent && !isVisible) ||
+      (transitionPresent && !visible && !transitioning) ||
+      (!animationPresent && !transitionPresent && !isVisible);
+
+    return {
+      ...options,
+      isHidden,
+      presenceRef: useForkRef(animationRef, transitionRef),
+      transitionState,
+      onEnd,
+      contentWidth,
+      contentHeight,
+      present,
+    };
+  },
+
   useProps(options, htmlProps) {
     const {
-      contentSize,
-      expanded,
-      direction,
-      duration,
-      easing,
-      onCollapseEnd,
-      onCollapseStart,
-      onExpandEnd,
-      onExpandStart,
+      visible,
       baseId,
+      presenceRef,
+      transitionPresent,
+      animationPresent,
+      onEnd,
+      contentWidth: width,
+      contentHeight: height,
+      isHidden,
+      transitionState,
     } = options;
     const {
       ref: htmlRef,
@@ -63,167 +120,40 @@ export const disclosureComposableContent = createComposableHook<
       onTransitionEnd: htmlOnTransitionEnd,
       ...restHtmlProps
     } = htmlProps;
-    const ref = React.useRef<HTMLElement>(null);
+
     const onTransitionEndRef = useLiveRef(htmlOnTransitionEnd);
-    const isVertical = direction === "vertical";
-    const currentSize = isVertical ? "height" : "width";
-    const getCurrentSizeStyle = React.useCallback(
-      (size: number) => ({
-        [currentSize]: `${size}px`,
-      }),
-      [currentSize],
-    );
-    const collapsedStyles = React.useMemo(() => {
-      return {
-        ...getCurrentSizeStyle(contentSize),
-        overflow: "hidden",
-      };
-    }, [contentSize, getCurrentSizeStyle]);
-
-    const [styles, setStylesRaw] = React.useState<React.CSSProperties>(
-      expanded ? {} : collapsedStyles,
-    );
-    const setStyles = (newStyles: {} | ((oldStyles: {}) => {})): void => {
-      // We rely on reading information from layout
-      // at arbitrary times, so ensure all style changes
-      // happen before we might attempt to read them.
-      flushSync(() => {
-        setStylesRaw(newStyles);
-      });
-    };
-    const mergeStyles = React.useCallback((newStyles: {}): void => {
-      setStyles(oldStyles => ({ ...oldStyles, ...newStyles }));
-    }, []);
-
-    function getTransitionStyles(size: number | string): {
-      transition?: string;
-    } {
-      const _duration = duration || getAutoSizeDuration(size);
-
-      return {
-        transition: `${currentSize} ${_duration}ms ${easing}`,
-      };
-    }
-
-    useUpdateEffect(() => {
-      if (expanded) {
-        raf(() => {
-          onExpandStart?.();
-
-          mergeStyles({
-            willChange: `${currentSize}`,
-            overflow: "hidden",
-          });
-
-          raf(() => {
-            const size = isVertical
-              ? getElementHeight(ref)
-              : getElementWidth(ref);
-
-            mergeStyles({
-              ...getTransitionStyles(size),
-              ...(isVertical ? { height: size } : { width: size }),
-            });
-          });
-        });
-      } else {
-        raf(() => {
-          onCollapseStart?.();
-
-          const size = isVertical
-            ? getElementHeight(ref)
-            : getElementWidth(ref);
-
-          mergeStyles({
-            willChange: `${currentSize}`,
-            ...(isVertical ? { height: size } : { width: size }),
-            ...getTransitionStyles(size),
-          });
-          raf(() => {
-            mergeStyles({
-              ...getCurrentSizeStyle(contentSize),
-              overflow: "hidden",
-            });
-          });
-        });
-      }
-    }, [expanded]);
-
     const onTransitionEnd = React.useCallback(
       (event: React.TransitionEvent) => {
         onTransitionEndRef.current?.(event);
 
-        if (event.defaultPrevented) return;
-
-        // Sometimes onTransitionEnd is triggered by another transition,
-        // such as a nested collapse panel transitioning. But we only
-        // want to handle this if this component's element is transitioning
-        if (
-          event.target !== ref.current ||
-          event.propertyName !== currentSize
-        ) {
-          return;
-        }
-
-        // The height comparisons below are a final check before
-        // completing the transition
-        // Sometimes this callback is run even though we've already begun
-        // transitioning the other direction
-        // The conditions give us the opportunity to bail out,
-        // which will prevent the collapsed content from flashing on the screen
-        const stylesSize = isVertical ? styles.height : styles.width;
-
-        if (expanded) {
-          const size = isVertical
-            ? getElementHeight(ref)
-            : getElementWidth(ref);
-
-          // If the height at the end of the transition
-          // matches the height we're animating to,
-          if (size === stylesSize) {
-            setStyles({});
-          } else {
-            // If the heights don't match, this could be due the height
-            // of the content changing mid-transition
-            mergeStyles({
-              ...getCurrentSizeStyle(contentSize),
-            });
-          }
-
-          onExpandEnd?.();
-
-          // If the height we should be animating to matches the collapsed height,
-          // it's safe to apply the collapsed overrides
-        } else if (stylesSize === `${contentSize}px`) {
-          setStyles(collapsedStyles);
-
-          onCollapseEnd?.();
-        }
+        onEnd?.(event);
       },
-      [
-        onTransitionEndRef,
-        currentSize,
-        isVertical,
-        styles.height,
-        styles.width,
-        expanded,
-        contentSize,
-        onExpandEnd,
-        mergeStyles,
-        getCurrentSizeStyle,
-        collapsedStyles,
-        onCollapseEnd,
-      ],
+      [onEnd, onTransitionEndRef],
     );
 
-    const style = { ...styles, ...htmlStyle };
+    const style = {
+      "--content-height": height ? `${height}px` : undefined,
+      "--content-width": width ? `${width}px` : undefined,
+      display: isHidden ? "none" : undefined,
+      ...htmlStyle,
+    };
 
     return {
-      ref: useForkRef(ref, htmlRef),
+      ref: useForkRef(presenceRef, htmlRef),
       id: baseId,
-      "aria-hidden": !expanded,
-      style,
+      hidden: isHidden,
+      "data-enter":
+        (transitionPresent && transitionState === "enter") ||
+        (animationPresent && visible)
+          ? ""
+          : undefined,
+      "data-leave":
+        (transitionPresent && transitionState === "leave") ||
+        (animationPresent && !visible)
+          ? ""
+          : undefined,
       onTransitionEnd,
+      style,
       ...restHtmlProps,
     };
   },

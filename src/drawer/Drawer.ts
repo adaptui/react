@@ -1,7 +1,57 @@
 import { createComponent, createHook } from "reakit-system";
-import { DialogHTMLProps, DialogOptions, useDialog } from "reakit";
+
+import { DialogHTMLProps, DialogOptions, useDialog } from "../dialog";
 
 import { DRAWER_KEYS } from "./__keys";
+
+export type DrawerOptions = DialogOptions & {
+  /**
+   * Direction to place the drawer.
+   *
+   * @default left
+   */
+  placement: Placement;
+};
+
+export type DrawerHTMLProps = DialogHTMLProps;
+
+export type DrawerProps = DrawerOptions & DrawerHTMLProps;
+
+export const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
+  name: "Drawer",
+  compose: useDialog,
+  keys: DRAWER_KEYS,
+
+  useOptions(options, htmlProps) {
+    const { placement = "left" } = options;
+
+    return {
+      ...options,
+      placement,
+    };
+  },
+
+  useProps(options, htmlProps) {
+    const { placement } = options;
+    const { style: htmlStyles, ...restHtmlProps } = htmlProps;
+
+    return {
+      style: {
+        ...PLACEMENTS[placement],
+        position: "fixed",
+        ...htmlStyles,
+      },
+      ...restHtmlProps,
+    };
+  },
+});
+
+export const Drawer = createComponent({
+  as: "div",
+  useHook: useDrawer,
+});
+
+export type Placement = keyof typeof PLACEMENTS;
 
 const PLACEMENTS = {
   left: {
@@ -29,33 +79,3 @@ const PLACEMENTS = {
     width: "100vw",
   },
 };
-
-export type Placement = keyof typeof PLACEMENTS;
-
-export type DrawerOptions = DialogOptions & { placement?: Placement };
-
-export type DrawerHTMLProps = DialogHTMLProps;
-
-export type DrawerProps = DrawerOptions & DrawerHTMLProps;
-
-export const useDrawer = createHook<DrawerOptions, DrawerHTMLProps>({
-  name: "Drawer",
-  compose: useDialog,
-  keys: DRAWER_KEYS,
-
-  useProps({ placement = "left" }, { style: htmlStyles, ...htmlProps }) {
-    return {
-      style: {
-        ...PLACEMENTS[placement],
-        position: "fixed",
-        ...htmlStyles,
-      },
-      ...htmlProps,
-    };
-  },
-});
-
-export const Drawer = createComponent({
-  as: "div",
-  useHook: useDrawer,
-});

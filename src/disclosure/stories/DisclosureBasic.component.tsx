@@ -1,31 +1,23 @@
 import * as React from "react";
 
 import {
-  DisclosureButton,
+  Disclosure,
   DisclosureContent,
   DisclosureInitialState,
   useDisclosureState,
 } from "../../index";
 
-export type DisclosureProps = DisclosureInitialState & {};
+export type DisclosureBasicProps = DisclosureInitialState & {};
 
-export const Disclosure: React.FC<DisclosureProps> = props => {
-  const [hasExpandStarted, setHasExpandStarted] = React.useState(false);
-
-  const state = useDisclosureState({
-    ...props,
-    onExpandStart: () => setHasExpandStarted(true),
-    onCollapseEnd: () => setHasExpandStarted(false),
-  });
+export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
+  const state = useDisclosureState(props);
 
   return (
     <div>
-      <DisclosureButton {...state}>Show More</DisclosureButton>
+      <Disclosure {...state}>Show More</Disclosure>
       <DisclosureContent
-        style={{
-          display: hasExpandStarted ? "flex" : "none",
-          flexDirection: "column",
-        }}
+        className="content"
+        transitionPresent={true}
         {...state}
       >
         <span>Item 1</span>
@@ -38,4 +30,5 @@ export const Disclosure: React.FC<DisclosureProps> = props => {
     </div>
   );
 };
-export default Disclosure;
+
+export default DisclosureBasic;

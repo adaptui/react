@@ -38,7 +38,6 @@ export const useLink = createHook<LinkOptions, LinkHTMLProps>({
         useWarning(
           true,
           "Can't determine whether the element is a native link because `ref` wasn't passed to the component",
-          "See https://reakit.io/docs/button",
         );
         return;
       }
