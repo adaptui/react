@@ -1,26 +1,14 @@
-// Inspired from Radix UI Presence - https://github.com/radix-ui/primitives/tree/main/packages/react/presence
+// Inspired from Radix UI AnimationPresence - https://github.com/radix-ui/primitives/tree/main/packages/react/presence
 import * as React from "react";
 import { useSafeLayoutEffect } from "@chakra-ui/hooks";
 
 import { getAnimationName, useStateMachine } from "./helpers";
 
-export type PresenceState = {
-  isPresent: boolean;
-};
-
-export type PresenceActions = {
-  ref: (node: HTMLElement) => void;
-};
-
-export type PresenceStateReturn = PresenceState & PresenceActions;
-
-export type PresenceInitialState = {
+export type UseAnimationPresenceProps = {
   present?: boolean;
 };
 
-export const usePresenceState = (
-  props: PresenceInitialState = {},
-): PresenceStateReturn => {
+export const useAnimationPresence = (props: UseAnimationPresenceProps = {}) => {
   const { present } = props;
 
   const [node, setNode] = React.useState<HTMLElement>();
@@ -130,3 +118,7 @@ export const usePresenceState = (
     }, []),
   };
 };
+
+export type useAnimationPresenceReturnType = ReturnType<
+  typeof useAnimationPresence
+>;

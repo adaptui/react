@@ -18,8 +18,12 @@ export const USE_DISCLOSURE_STATE_KEYS = [
 export const DISCLOSURE_KEYS = DISCLOSURE_STATE_KEYS;
 export const DISCLOSURE_CONTENT_KEYS = [
   ...DISCLOSURE_KEYS,
-  "present",
-  "presenceRef",
   "animation",
   "transition",
+  "isHidden",
+  "presenceRef",
+  "transitionState",
+  "onEnd",
+  "contentWidth",
+  "contentHeight",
 ] as const;

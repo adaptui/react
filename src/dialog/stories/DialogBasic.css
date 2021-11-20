@@ -54,30 +54,15 @@
   box-shadow: rgb(0 109 255 / 50%) 0px 0px 0px 0.2em;
 }
 
+.dialog {
+  transition: transform 250ms ease-in-out;
+  transform: translate(0, -10px);
+}
+
 .dialog[data-enter] {
-  animation: slideIn 250ms ease-in-out;
+  transform: translate(0, 0);
 }
 
 .dialog[data-leave] {
-  animation: slideOut 250ms ease-in-out;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translate(0, -10px);
-  }
-
-  to {
-    transform: translate(0, 0px);
-  }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translate(0, 0px);
-  }
-
-  to {
-    transform: translate(0, -10px);
-  }
+  transform: translate(0, -10px);
 }

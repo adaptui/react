@@ -11,7 +11,7 @@ import {
 export type DialogBasicProps = DialogInitialState & {};
 
 export const DialogBasic: React.FC<DialogBasicProps> = props => {
-  const dialog = useDialogState({ modal: false });
+  const dialog = useDialogState(props);
   const searchFieldRef = React.useRef<HTMLInputElement>(null);
   const firstNameRef = React.useRef<HTMLInputElement>(null);
 
@@ -23,7 +23,7 @@ export const DialogBasic: React.FC<DialogBasicProps> = props => {
           {...dialog}
           aria-label="Welcome"
           className="dialog"
-          animation={true}
+          transition={true}
         >
           Welcome to Reakit!
           <div>

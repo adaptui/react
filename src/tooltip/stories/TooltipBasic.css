@@ -1,38 +1,15 @@
 .content {
-  background-color: #222;
+  background-color: rgba(33, 33, 33, 0.9);
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.content {
+  padding: 8px;
+  border-radius: 4px;
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+  opacity: 0;
   transform-origin: top center;
+  transform: translate3d(0, -20px, 0);
 }
 
 .content[data-enter] {
-  animation: fadeIn 200ms ease-in-out;
-}
-
-.content[data-leave] {
-  animation: fadeOut 200ms ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
