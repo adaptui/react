@@ -136,7 +136,7 @@ export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
       </TooltipReference>
 
       <Tooltip className="popover" {...state}>
-        <TooltipContent {...state} className="content" animation={true}>
+        <TooltipContent {...state} className="content" animationPresent={true}>
           <div>Tooltip</div>
           <TooltipArrow {...state}>
             <TooltipArrowContent className="arrow" {...state}>

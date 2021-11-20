@@ -22,12 +22,12 @@ export type DisclosureContentOptions = BoxOptions &
     /**
      * Whether it uses animation or not.
      */
-    animation?: boolean;
+    animationPresent?: boolean;
 
     /**
      * Whether it uses animation or not.
      */
-    transition?: boolean;
+    transitionPresent?: boolean;
 
     /**
      * Whether the content is hidden or not.
@@ -59,7 +59,11 @@ export const disclosureComposableContent = createComposableHook<
   keys: DISCLOSURE_CONTENT_KEYS,
 
   useOptions(options, htmlProps) {
-    const { visible, animation = false, transition = false } = options;
+    const {
+      visible,
+      animationPresent = false,
+      transitionPresent = false,
+    } = options;
     const { isPresent: present, ref: animationRef } = useAnimationPresence({
       present: visible,
     });
@@ -73,7 +77,7 @@ export const disclosureComposableContent = createComposableHook<
       visible,
     });
     const { transitionState, transitioning, onEnd } = useTransitionPresence({
-      transition,
+      transition: transitionPresent,
       visible,
     });
 
@@ -81,9 +85,9 @@ export const disclosureComposableContent = createComposableHook<
     // when closing we delay `present` to retrieve dimensions before closing
     const isVisible = visible || isPresent;
     const isHidden =
-      (animation && !isVisible) ||
-      (transition && !visible && !transitioning) ||
-      (!animation && !transition && !isVisible);
+      (animationPresent && !isVisible) ||
+      (transitionPresent && !visible && !transitioning) ||
+      (!animationPresent && !transitionPresent && !isVisible);
 
     return {
       ...options,
@@ -102,8 +106,8 @@ export const disclosureComposableContent = createComposableHook<
       visible,
       baseId,
       presenceRef,
-      transition,
-      animation,
+      transitionPresent,
+      animationPresent,
       onEnd,
       contentWidth: width,
       contentHeight: height,
@@ -139,11 +143,13 @@ export const disclosureComposableContent = createComposableHook<
       id: baseId,
       hidden: isHidden,
       "data-enter":
-        (transition && transitionState === "enter") || (animation && visible)
+        (transitionPresent && transitionState === "enter") ||
+        (animationPresent && visible)
           ? ""
           : undefined,
       "data-leave":
-        (transition && transitionState === "leave") || (animation && !visible)
+        (transitionPresent && transitionState === "leave") ||
+        (animationPresent && !visible)
           ? ""
           : undefined,
       onTransitionEnd,

@@ -15,7 +15,11 @@ export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
   return (
     <div>
       <Disclosure {...state}>Show More</Disclosure>
-      <DisclosureContent className="content" transition={true} {...state}>
+      <DisclosureContent
+        className="content"
+        transitionPresent={true}
+        {...state}
+      >
         <span>Item 1</span>
         <span>Item 2</span>
         <span>Item 3</span>

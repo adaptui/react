@@ -27,7 +27,7 @@ export const TooltipBasic: React.FC<TooltipBasicProps> = props => {
       </TooltipReference>
 
       <Tooltip className="popover" {...state}>
-        <TooltipContent {...state} className="content" transition={true}>
+        <TooltipContent {...state} className="content" transitionPresent={true}>
           <div>Tooltip</div>
         </TooltipContent>
       </Tooltip>

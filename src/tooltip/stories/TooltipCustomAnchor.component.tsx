@@ -36,7 +36,11 @@ export const TooltipCustomAnchor: React.FC<TooltipCustomAnchorProps> =
         </TooltipTrigger>
 
         <Tooltip className="popover" {...state}>
-          <TooltipContent {...state} className="content" animation={true}>
+          <TooltipContent
+            {...state}
+            className="content"
+            animationPresent={true}
+          >
             <div className="content-inside">Tooltip Content</div>
             <TooltipArrow {...state}>
               <TooltipArrowContent className="arrow" {...state}>

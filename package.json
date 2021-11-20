@@ -91,7 +91,6 @@
     "@chakra-ui/react-utils": "^1.1.2",
     "@chakra-ui/utils": "^1.8.3",
     "@radix-ui/popper": "^0.1.0",
-    "@radix-ui/react-presence": "^0.1.1",
     "@radix-ui/react-use-rect": "^0.1.1",
     "@radix-ui/react-use-size": "^0.1.0",
     "@react-aria/i18n": "^3.3.2",
@@ -99,7 +98,9 @@
     "@react-aria/spinbutton": "^3.0.1",
     "@react-aria/utils": "^3.9.0",
     "date-fns": "^2.25.0",
+    "framer-motion": "^5.3.1",
     "react-remove-scroll": "^2.4.3",
+    "react-spring": "^9.3.1",
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
     "reakit-warning": "^0.6.2"

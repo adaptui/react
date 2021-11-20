@@ -42,7 +42,7 @@ export const PopoverBasic: React.FC<PopoverBasicProps> = props => {
       </PopoverTrigger>
 
       <Popover className="popover" {...state}>
-        <PopoverContent {...state} className="content" animation={true}>
+        <PopoverContent {...state} className="content" animationPresent={true}>
           <div className="content-inside">
             <button onClick={state.hide}>close</button>
           </div>
