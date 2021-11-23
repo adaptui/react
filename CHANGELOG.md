@@ -1,3 +1,10 @@
+### [0.8.2](https://github.com/timelessco/renderlesskit-react/compare/v0.8.1...v0.8.2) (2021-11-23)
+
+
+### Bug Fixes
+
+* **disclosure:** 🐛 add collapse for showmore & refactor presence ([e224e80](https://github.com/timelessco/renderlesskit-react/commit/e224e80ee1184081c739296c7afda9bb3c7c9977))
+
 ### [0.8.1](https://github.com/timelessco/renderlesskit-react/compare/v0.8.0...v0.8.1) (2021-11-23)
 
 
