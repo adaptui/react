@@ -16,11 +16,7 @@ export const DisclosureHorizontal: React.FC<DisclosureHorizontalProps> =
     return (
       <div className="root">
         <Disclosure {...state}>Show More</Disclosure>
-        <DisclosureContent
-          className="content"
-          animationPresent={true}
-          {...state}
-        >
+        <DisclosureContent className="content" animationPresent {...state}>
           <div className="item">Item 1</div>
           <div className="item">Item 2</div>
           <div className="item">Item 3</div>

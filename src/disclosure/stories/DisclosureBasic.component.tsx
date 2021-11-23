@@ -15,13 +15,7 @@ export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
   return (
     <div>
       <Disclosure {...state}>Show More</Disclosure>
-      <DisclosureContent
-        className="content"
-        transitionPresent={true}
-        onMountStart={start => console.log("onMountStart", start)}
-        onUnMountStart={start => console.log("onUnMountStart", start)}
-        {...state}
-      >
+      <DisclosureContent className="content" {...state}>
         <span>Item 1</span>
         <span>Item 2</span>
         <span>Item 3</span>

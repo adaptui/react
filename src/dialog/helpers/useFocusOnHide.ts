@@ -34,7 +34,8 @@ export function useFocusOnHide(
 
   useUpdateEffect(() => {
     if (!shouldFocus) return;
-    if (!options.present) return;
+    if (options.animating) return;
+    console.log("%canimating", "color: #ffa280", options.animating);
 
     // Hide was triggered by a click/focus on a tabbable element outside
     // the dialog or on another dialog. We won't change focus then.
@@ -69,5 +70,5 @@ export function useFocusOnHide(
       "Can't return focus after closing dialog. Either render a disclosure component or provide a `unstable_finalFocusRef` prop.",
       dialogRef.current,
     );
-  }, [shouldFocus, options.present, dialogRef, disclosureRef]);
+  }, [shouldFocus, options.animating, dialogRef, disclosureRef]);
 }

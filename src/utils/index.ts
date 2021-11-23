@@ -86,5 +86,4 @@ export function splitStateProps<T, P>(props: any, keys: readonly any[]) {
 }
 
 export * from "./date";
-export * from "./useAnimationPresence";
 export * from "./useControllableState";

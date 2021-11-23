@@ -12,84 +12,26 @@ function useLastValue<T>(value: T) {
   return lastValue;
 }
 
-export type useAnimationPresenceSizeProps = {
-  present: boolean;
+export type useAnimationProps = {
   visible: boolean;
 };
 
-export const useAnimationPresenceSize = (
-  props: useAnimationPresenceSizeProps,
-) => {
-  const { present, visible } = props;
-  const ref = React.useRef<HTMLElement>(null);
-  const [isPresent, setIsPresent] = React.useState(present);
-  const heightRef = React.useRef<number | undefined>(0);
-  const height = heightRef.current;
-  const widthRef = React.useRef<number | undefined>(0);
-  const width = widthRef.current;
+export const useAnimation = (props: useAnimationProps) => {
+  const { visible } = props;
 
-  React.useLayoutEffect(() => {
-    const node = ref.current;
-
-    if (node) {
-      const originalTransition = node.style.transition;
-      const originalAnimation = node.style.animation;
-      // block any animations/transitions so the element renders at its full dimensions
-      node.style.transition = "none";
-      node.style.animation = "none";
-
-      // get width and height from full dimensions
-      const rect = node.getBoundingClientRect();
-      heightRef.current = rect.height;
-      widthRef.current = rect.width;
-
-      // kick off any animations/transitions that were originally set up
-      node.style.transition = originalTransition;
-      node.style.animation = originalAnimation;
-      setIsPresent(present);
-    }
-    /**
-     * depends on `context.open` because it will change to `false`
-     * when a close is triggered but `present` will be `false` on
-     * animation end (so when close finishes). This allows us to
-     * retrieve the dimensions *before* closing.
-     */
-  }, [visible, present]);
-
-  return { isPresent, height, width, ref };
-};
-
-export type UseAnimationPresenceSizeReturnType = ReturnType<
-  typeof useAnimationPresenceSize
->;
-
-export type TransitionState = "enter" | "leave" | null;
-
-export type useTransitionPresenceProps = {
-  transition: boolean;
-  visible: boolean;
-};
-
-export const useTransitionPresence = (props: useTransitionPresenceProps) => {
-  const { transition, visible } = props;
-  const [transitionState, setTransitionState] =
-    React.useState<TransitionState>(null);
-  const [transitioning, setTransitioning] = React.useState(false);
+  const [animating, setAnimating] = React.useState(false);
   const lastVisible = useLastValue(visible);
-
   const visibleHasChanged =
     lastVisible.current != null && lastVisible.current !== visible;
-
-  if (transition && !transitioning && visibleHasChanged) {
-    // Sets transitioning to true when when visible is updated
-    setTransitioning(true);
-  }
-
+  const [state, setState] = React.useState<TransitionState>(null);
   const raf = React.useRef(0);
 
-  React.useEffect(() => {
-    if (!transition) return;
+  if (!animating && visibleHasChanged) {
+    // Sets animating to true when when visible is updated
+    setAnimating(true);
+  }
 
+  React.useEffect(() => {
     // Double RAF is needed so the browser has enough time to paint the
     // default styles before processing the `data-enter` attribute. Otherwise
     // it wouldn't be considered a transition.
@@ -97,35 +39,66 @@ export const useTransitionPresence = (props: useTransitionPresenceProps) => {
     raf.current = window.requestAnimationFrame(() => {
       raf.current = window.requestAnimationFrame(() => {
         if (visible) {
-          if (!transitioning) return;
-
-          setTransitionState("enter");
-        } else if (transitioning) {
-          setTransitionState("leave");
+          setState("enter");
+        } else if (animating) {
+          setState("leave");
         } else {
-          setTransitionState(null);
+          setState(null);
         }
       });
     });
 
     return () => window.cancelAnimationFrame(raf.current);
-  }, [visible, transitioning, transition]);
+  }, [visible, animating]);
+
+  const stopAnimation = React.useCallback(() => setAnimating(false), []);
 
   const onEnd = React.useCallback(
     (event: React.SyntheticEvent) => {
       if (!isSelfTarget(event)) return;
-      if (!transition) return;
-      if (!transitioning) return;
+      if (!animating) return;
 
       // Ignores number animated
-      setTransitioning(false);
+      stopAnimation();
     },
-    [transition, transitioning],
+    [animating, stopAnimation],
   );
 
-  return { transitionState, transitioning, onEnd };
+  return { state, animating, onEnd };
 };
 
-export type UseTransitionPresenceReturnType = ReturnType<
-  typeof useTransitionPresence
->;
+export type useAnimationReturnType = ReturnType<typeof useAnimation>;
+
+export type TransitionState = "enter" | "leave" | null;
+
+export function getElementHeight(
+  el: React.RefObject<HTMLElement> | { current?: { scrollHeight: number } },
+): string | number {
+  if (!el?.current) {
+    return "auto";
+  }
+
+  return el.current.scrollHeight;
+}
+
+export function getElementWidth(
+  el: React.RefObject<HTMLElement> | { current?: { scrollWidth: number } },
+): string | number {
+  if (!el?.current) {
+    return "auto";
+  }
+
+  return el.current.scrollWidth;
+}
+
+// https://github.com/mui-org/material-ui/blob/da362266f7c137bf671d7e8c44c84ad5cfc0e9e2/packages/material-ui/src/styles/transitions.js#L89-L98
+export function getAutoSizeDuration(size: number | string): number {
+  if (!size || typeof size === "string") {
+    return 0;
+  }
+
+  const constant = size / 36;
+
+  // https://www.wolframalpha.com/input/?i=(4+%2B+15+*+(x+%2F+36+)+**+0.25+%2B+(x+%2F+36)+%2F+5)+*+10
+  return Math.round((4 + 15 * constant ** 0.25 + constant / 5) * 10);
+}

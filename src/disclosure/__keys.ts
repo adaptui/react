@@ -16,17 +16,23 @@ export const USE_DISCLOSURE_STATE_KEYS = [
   "onVisibleChange",
 ] as const;
 export const DISCLOSURE_KEYS = DISCLOSURE_STATE_KEYS;
+export const DISCLOSURE_COLLAPSE_CONTENT_KEYS = [
+  ...DISCLOSURE_KEYS,
+  "direction",
+  "contentSize",
+  "duration",
+  "easing",
+  "onExpandStart",
+  "onExpandEnd",
+  "onCollapseStart",
+  "onCollapseEnd",
+] as const;
 export const DISCLOSURE_CONTENT_KEYS = [
   ...DISCLOSURE_KEYS,
   "animationPresent",
-  "transitionPresent",
-  "isHidden",
-  "presenceRef",
-  "present",
-  "transitionState",
+  "state",
+  "animating",
   "onEnd",
-  "contentWidth",
-  "contentHeight",
-  "onMountStart",
-  "onUnMountStart",
+  "isVisible",
+  "isHidden",
 ] as const;

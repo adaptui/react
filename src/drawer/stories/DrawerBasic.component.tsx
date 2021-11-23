@@ -27,11 +27,7 @@ export const DrawerBasic: React.FC<DrawerInitialState> = props => {
         <option value="right">Right</option>
         <option value="left">Left</option>
       </select>
-      <DrawerBackdrop
-        className={backdropStyles}
-        transitionPresent={true}
-        {...drawer}
-      >
+      <DrawerBackdrop className={backdropStyles} {...drawer}>
         <Drawer
           {...drawer}
           placement={placement}
@@ -52,7 +48,6 @@ export const DrawerBasic: React.FC<DrawerInitialState> = props => {
               transform: ${cssTransforms[placement]};
             }
           `}
-          transitionPresent={true}
           unstable_initialFocusRef={inputRef}
         >
           <DrawerDisclosure {...drawer}>X</DrawerDisclosure>

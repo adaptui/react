@@ -10,50 +10,50 @@ export function useDisclosureRef(
   const ref = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
-    if (options.visible && !options.present) {
-      // We get the last focused element before the dialog opens, so we can move
-      // focus back to it when the dialog closes.
-      const onFocus = (event: FocusEvent) => {
-        const target = event.target as HTMLElement;
+    if (options.visible || options.animating) return undefined;
 
-        if ("focus" in target) {
-          ref.current = target;
+    // We get the last focused element before the dialog opens, so we can move
+    // focus back to it when the dialog closes.
+    const onFocus = (event: FocusEvent) => {
+      const target = event.target as HTMLElement;
 
-          if (options.disclosureRef) {
-            options.disclosureRef.current = target;
-          }
+      if ("focus" in target) {
+        ref.current = target;
+
+        if (options.disclosureRef) {
+          options.disclosureRef.current = target;
         }
-      };
+      }
+    };
 
-      const document = getDocument(dialogRef.current);
-      document.addEventListener("focusin", onFocus);
+    const document = getDocument(dialogRef.current);
+    document.addEventListener("focusin", onFocus);
 
-      return () => document.removeEventListener("focusin", onFocus);
-    }
-  }, [options.visible, options.present, options.disclosureRef, dialogRef]);
+    return () => document.removeEventListener("focusin", onFocus);
+  }, [options.visible, options.animating, options.disclosureRef, dialogRef]);
 
   React.useEffect(() => {
-    if (!options.visible && options.present) {
-      // Safari and Firefox on MacOS don't focus on buttons on mouse down.
-      // Instead, they focus on the closest focusable parent (ultimately, the
-      // body element). This works around that by preventing that behavior and
-      // forcing focus on the disclosure button. Otherwise, we wouldn't be able
-      // to close the dialog by clicking again on the disclosure.
-      const onMouseDown = (event: MouseEvent) => {
-        const element = event.currentTarget as HTMLElement;
+    if (!options.visible || options.animating) return undefined;
 
-        if (!isButton(element)) return;
+    // Safari and Firefox on MacOS don't focus on buttons on mouse down.
+    // Instead, they focus on the closest focusable parent (ultimately, the
+    // body element). This works around that by preventing that behavior and
+    // forcing focus on the disclosure button. Otherwise, we wouldn't be able
+    // to close the dialog by clicking again on the disclosure.
+    const onMouseDown = (event: MouseEvent) => {
+      const element = event.currentTarget as HTMLElement;
 
-        event.preventDefault();
-        element.focus();
-      };
+      if (!isButton(element)) return;
 
-      const disclosure = options.disclosureRef?.current || ref.current;
-      disclosure?.addEventListener("mousedown", onMouseDown);
+      event.preventDefault();
+      element.focus();
+    };
 
-      return () => disclosure?.removeEventListener("mousedown", onMouseDown);
-    }
-  }, [options.visible, options.present, options.disclosureRef]);
+    const disclosure = options.disclosureRef?.current || ref.current;
+    disclosure?.addEventListener("mousedown", onMouseDown);
+
+    return () => disclosure?.removeEventListener("mousedown", onMouseDown);
+  }, [options.visible, options.animating, options.disclosureRef]);
 
   return options.disclosureRef || ref;
 }

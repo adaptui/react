@@ -5,35 +5,42 @@
 .content {
   display: flex;
   flex-direction: row;
-  overflow: hidden;
+  /* opacity: 0; */
+}
+
+.content {
+  transform-origin: top center;
 }
 
 .content[data-enter] {
-  animation: slideRight 300ms ease-out;
-}
-
-.item {
-  flex-shrink: 0;
+  /* opacity: 1; */
+  animation: fadedIn 500ms ease-in-out;
 }
 
 .content[data-leave] {
-  animation: slideLeft 300ms ease-in;
+  animation: fadedOut 500ms ease-in-out;
 }
 
-@keyframes slideRight {
+@keyframes fadedIn {
   from {
-    width: 0;
+    opacity: 0;
+    transform: translate(-10px, 0);
   }
+
   to {
-    width: var(--content-width);
+    opacity: 1;
+    transform: translate(0, 0px);
   }
 }
 
-@keyframes slideLeft {
+@keyframes fadedOut {
   from {
-    width: var(--content-width);
+    opacity: 1;
+    transform: translate(0, 0px);
   }
+
   to {
-    width: 0;
+    opacity: 0;
+    transform: translate(-10px, 0);
   }
 }
