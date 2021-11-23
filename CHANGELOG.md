@@ -1,3 +1,16 @@
+### [0.8.1](https://github.com/timelessco/renderlesskit-react/compare/v0.8.0...v0.8.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* **disclosure:** 🐛 add mount & unmount start callback ([678c084](https://github.com/timelessco/renderlesskit-react/commit/678c084d0b9a30110cad3646302075a6de4b8fd3))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency lint-staged to v12.1.2 ([#274](https://github.com/timelessco/renderlesskit-react/issues/274)) ([a13a95e](https://github.com/timelessco/renderlesskit-react/commit/a13a95eef5a06740465acea5b8f7ddf0444d1833))
+* **deps:** ⬆️ update dev dependencies (minor) ([#273](https://github.com/timelessco/renderlesskit-react/issues/273)) ([2b621ad](https://github.com/timelessco/renderlesskit-react/commit/2b621ad114750fb1f6c3eac03f4693995d175400))
+
 ## [0.8.0](https://github.com/timelessco/renderlesskit-react/compare/v0.7.3...v0.8.0) (2021-11-20)
 
 
