@@ -18,6 +18,8 @@ export const DisclosureBasic: React.FC<DisclosureBasicProps> = props => {
       <DisclosureContent
         className="content"
         transitionPresent={true}
+        onMountStart={start => console.log("onMountStart", start)}
+        onUnMountStart={start => console.log("onUnMountStart", start)}
         {...state}
       >
         <span>Item 1</span>

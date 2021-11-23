@@ -43,6 +43,8 @@ export type DisclosureContentOptions = BoxOptions &
     onEnd?: UseTransitionPresenceReturnType["onEnd"];
     contentWidth?: UseAnimationPresenceSizeReturnType["width"];
     contentHeight?: UseAnimationPresenceSizeReturnType["height"];
+    onMountStart?: (value: boolean) => void;
+    onUnMountStart?: (value: boolean) => void;
   };
 
 export type DisclosureContentHTMLProps = BoxHTMLProps;
@@ -63,6 +65,8 @@ export const disclosureComposableContent = createComposableHook<
       visible,
       animationPresent = false,
       transitionPresent = false,
+      onMountStart,
+      onUnMountStart,
     } = options;
     const { isPresent: present, ref: animationRef } = useAnimationPresence({
       present: visible,
@@ -80,6 +84,20 @@ export const disclosureComposableContent = createComposableHook<
       transition: transitionPresent,
       visible,
     });
+
+    React.useEffect(() => {
+      if (visible && !present) {
+        onMountStart?.(true);
+      } else {
+        onMountStart?.(false);
+      }
+
+      if (!visible && present) {
+        onUnMountStart?.(true);
+      } else {
+        onUnMountStart?.(false);
+      }
+    }, [visible, present, onMountStart, onUnMountStart]);
 
     // when opening we want it to immediately open to retrieve dimensions
     // when closing we delay `present` to retrieve dimensions before closing

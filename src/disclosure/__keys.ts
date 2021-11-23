@@ -27,4 +27,6 @@ export const DISCLOSURE_CONTENT_KEYS = [
   "onEnd",
   "contentWidth",
   "contentHeight",
+  "onMountStart",
+  "onUnMountStart",
 ] as const;
