@@ -48,7 +48,7 @@ import {
   SliderTrack,
   useSliderState,
 } from "../index";
-import { SliderInitialState } from "../SliderState";
+import { SliderInitialState } from "../SliderBaseState";
 
 export const MultiSliderComponent = (
   props: SliderInitialState & {

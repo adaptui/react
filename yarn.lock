@@ -2802,7 +2802,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
 
-"@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.2", "@emotion/is-prop-valid@^0.8.6":
+"@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.6":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -3601,26 +3601,6 @@
     "@react-spring/shared" "~9.3.0"
     "@react-spring/types" "~9.3.0"
 
-"@react-spring/konva@~9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/konva/-/konva-9.3.0.tgz#97b23b2f235a9805d39279a0a1027c7d9646d6fb"
-  integrity sha512-lyUWxzEateE6Qxpc81oxJb5yiNDdj36Q9R9euJAgjl2dvUDaX85rVGqaB25+72yA1iQg5I4Kymj3UZVvPthRlA==
-  dependencies:
-    "@react-spring/animated" "~9.3.0"
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/shared" "~9.3.0"
-    "@react-spring/types" "~9.3.0"
-
-"@react-spring/native@~9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/native/-/native-9.3.0.tgz#6fee1ccaa8d70a19c239b27e95bcc050776f1725"
-  integrity sha512-lvKV5qxqnE5AMtTHv8xwAocGED4+VRxpljwBl1lbtileq3WnvOn7CpMLZNGc5TXjLWAE3zfoNJui69/jE/3uSw==
-  dependencies:
-    "@react-spring/animated" "~9.3.0"
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/shared" "~9.3.0"
-    "@react-spring/types" "~9.3.0"
-
 "@react-spring/rafz@~9.3.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.3.0.tgz#e791c0ae854f7c1a512ae87f34fff36934d82d29"
@@ -3634,16 +3614,6 @@
     "@react-spring/rafz" "~9.3.0"
     "@react-spring/types" "~9.3.0"
 
-"@react-spring/three@~9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/three/-/three-9.3.0.tgz#e3fc49de1411eb1a7aa937fec8db33252f11d294"
-  integrity sha512-RKMXXdcNK0nbwLbmle/0KT/idGGpOxvI5lT1KtN8R3cgJWQBKYWVtzg+B/RgmQVNxO/QNlsKGWTjURockTRSVQ==
-  dependencies:
-    "@react-spring/animated" "~9.3.0"
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/shared" "~9.3.0"
-    "@react-spring/types" "~9.3.0"
-
 "@react-spring/types@~9.3.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.3.0.tgz#54ec58ca40414984209c8baa75fddd394f9e2949"
@@ -3653,26 +3623,6 @@
   version "9.3.1"
   resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.3.1.tgz#5b377ba7ad52e746c2b59e2738c021de3f219d0b"
   integrity sha512-sisZIgFGva/Z+xKWPSfXpukF0AP3kR9ALTxlHL87fVotMUCJX5vtH/YlVcywToEFwTHKt3MpI5Wy2M+vgVEeaw==
-  dependencies:
-    "@react-spring/animated" "~9.3.0"
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/shared" "~9.3.0"
-    "@react-spring/types" "~9.3.0"
-
-"@react-spring/web@~9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.3.0.tgz#48d1ebdd1d484065e0a943dbbb343af259496427"
-  integrity sha512-OTAGKRdyz6fLRR1tABFyw9KMpytyATIndQrj0O6RG47GfjiInpf4+WZKxo763vpS7z1OlnkI81WLUm/sqOqAnA==
-  dependencies:
-    "@react-spring/animated" "~9.3.0"
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/shared" "~9.3.0"
-    "@react-spring/types" "~9.3.0"
-
-"@react-spring/zdog@~9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/zdog/-/zdog-9.3.0.tgz#d84b69375017d864514ebcf59511731c5cc0280f"
-  integrity sha512-JOQwtg/MQ6sWwmKNY4w/R1TVXohIUkrbSgDfgUEK45ERTDwZGZzIo9QbqHv4dwEBK4Wa2Hfrcdf8cnEaNNzdAQ==
   dependencies:
     "@react-spring/animated" "~9.3.0"
     "@react-spring/core" "~9.3.0"
@@ -10722,30 +10672,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framer-motion@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.3.1.tgz#5588f904f16b20a617f112ee2b10573e7392c488"
-  integrity sha512-wBqW2eAoIxGcp6zhIPlzHq9b6FqWG3Xir6ovgg/HZgbKajGLfcfYRsQU6qri0U53Qov5QZwb7CkfMjl0UIxL4A==
-  dependencies:
-    framesync "6.0.1"
-    hey-listen "^1.0.8"
-    popmotion "11.0.0"
-    style-value-types "5.0.0"
-    tslib "^2.1.0"
-  optionalDependencies:
-    "@emotion/is-prop-valid" "^0.8.2"
-
 framesync@5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/framesync/-/framesync-5.3.0.tgz#0ecfc955e8f5a6ddc8fdb0cc024070947e1a0d9b"
   integrity sha512-oc5m68HDO/tuK2blj7ZcdEBRx3p1PjrgHazL8GYEpvULhrtGIFbQArN6cQS2QhW8mitffaB+VYzMjDqBxxQeoA==
-  dependencies:
-    tslib "^2.1.0"
-
-framesync@6.0.1, framesync@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/framesync/-/framesync-6.0.1.tgz#5e32fc01f1c42b39c654c35b16440e07a25d6f20"
-  integrity sha512-fUY88kXvGiIItgNC7wcTOl0SNRCVXMKSWW2Yzfmn7EKNc+MpCzcz9DhdHcdjbrtN3c6R4H5dTY2jiCpPdysEjA==
   dependencies:
     tslib "^2.1.0"
 
@@ -11684,11 +11614,6 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
-
-hey-listen@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/hey-listen/-/hey-listen-1.0.8.tgz#8e59561ff724908de1aa924ed6ecc84a56a9aa68"
-  integrity sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==
 
 highlight.js@^10.1.1, highlight.js@~10.7.0:
   version "10.7.3"
@@ -16013,16 +15938,6 @@ polished@^4.0.5:
   dependencies:
     "@babel/runtime" "^7.14.0"
 
-popmotion@11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-11.0.0.tgz#910e2e7077d9aeba520db8744d40bb5354992212"
-  integrity sha512-kJDyaG00TtcANP5JZ51od+DCqopxBm2a/Txh3Usu23L9qntjY5wumvcVf578N8qXEHR1a+jx9XCv8zOntdYalQ==
-  dependencies:
-    framesync "^6.0.1"
-    hey-listen "^1.0.8"
-    style-value-types "5.0.0"
-    tslib "^2.1.0"
-
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -16879,18 +16794,6 @@ react-sizeme@^3.0.1:
     invariant "^2.2.4"
     shallowequal "^1.1.0"
     throttle-debounce "^3.0.1"
-
-react-spring@^9.3.1:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.3.1.tgz#5f9587d42a524c8bfeb870458d32755ceee9801a"
-  integrity sha512-YbWcG+LiiyMi4RnBrMudVj2Rqnt2yEozeISkW5Hm2SOss+uDS4CpVjLuwdFAwczw99FSPrRfyAlGjEx3HvOWiw==
-  dependencies:
-    "@react-spring/core" "~9.3.0"
-    "@react-spring/konva" "~9.3.0"
-    "@react-spring/native" "~9.3.0"
-    "@react-spring/three" "~9.3.0"
-    "@react-spring/web" "~9.3.0"
-    "@react-spring/zdog" "~9.3.0"
 
 react-style-singleton@^2.1.0:
   version "2.1.1"
@@ -18675,14 +18578,6 @@ style-to-object@0.3.0, style-to-object@^0.3.0:
   integrity sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==
   dependencies:
     inline-style-parser "0.1.1"
-
-style-value-types@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-5.0.0.tgz#76c35f0e579843d523187989da866729411fc8ad"
-  integrity sha512-08yq36Ikn4kx4YU6RD7jWEv27v4V+PUsOGa4n/as8Et3CuODMJQ00ENeAVXAeydX4Z2j1XHZF1K2sX4mGl18fA==
-  dependencies:
-    hey-listen "^1.0.8"
-    tslib "^2.1.0"
 
 stylis@^4.0.10, stylis@^4.0.3:
   version "4.0.10"

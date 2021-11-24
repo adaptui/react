@@ -98,10 +98,8 @@
     "@react-aria/spinbutton": "^3.0.1",
     "@react-aria/utils": "^3.9.0",
     "date-fns": "^2.26.0",
-    "framer-motion": "^5.3.1",
     "raf": "^3.4.1",
     "react-remove-scroll": "^2.4.3",
-    "react-spring": "^9.3.1",
     "reakit-system": "^0.15.2",
     "reakit-utils": "^0.15.2",
     "reakit-warning": "^0.6.2"

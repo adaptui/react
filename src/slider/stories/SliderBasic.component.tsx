@@ -1,13 +1,11 @@
 import * as React from "react";
-import { VisuallyHidden } from "reakit";
+import { values } from "lodash";
 
-import {
-  SliderInitialState,
-  SliderInput,
-  SliderThumb,
-  SliderTrack,
-  useSliderState,
-} from "../../index";
+import { SliderInitialState, SliderTrack, useSliderState } from "../../index";
+import state from "../../tooltip/__globalState";
+import { SliderGroup } from "../SliderGroup";
+import { SliderLabel } from "../SliderLabel";
+import { SliderOutput } from "../SliderOutput";
 
 interface SliderProps extends SliderInitialState {
   /**
@@ -16,10 +14,12 @@ interface SliderProps extends SliderInitialState {
    * @default Styled
    */
   label?: string;
+
   /**
    * True, if thumb needs a tip to show it's current percent
    */
   showTip?: boolean;
+
   /**
    * True, if the direction of the slider is reversed
    * @default false
@@ -30,32 +30,29 @@ interface SliderProps extends SliderInitialState {
 export const Slider: React.FC<SliderProps> = args => {
   const { label, ...rest } = args;
 
-  const state = useSliderState(rest);
-  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
-    state;
+  const slider = useSliderState(rest);
+  const { getThumbValueLabel, getValuePercent } = slider.baseState;
 
   return (
-    <div
-      className="chakra-slider-group"
-      role="group"
-      aria-labelledby="styled-slider"
-    >
+    <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
-        <label className="label" id="styled-slider">
+        <SliderLabel className="label" {...slider}>
           {`${args.label ? args.label : "Styled"} Slider`}
-        </label>
-        <div className="value">{getThumbValueLabel(0)}</div>
+        </SliderLabel>
+        <SliderOutput className="value" {...slider}>
+          {getThumbValueLabel(0)}
+        </SliderOutput>
       </div>
 
       <div className="slider">
-        <SliderTrack {...state} className="slider-track-container">
+        <SliderTrack {...slider} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
             style={{ width: `${getValuePercent(values[0]) * 100}%` }}
           />
         </SliderTrack>
-        <div
+        {/* <div
           className="slider-thumb"
           style={{ left: `calc(${getThumbPercent(0) * 100}% - 7px)` }}
         >
@@ -72,9 +69,9 @@ export const Slider: React.FC<SliderProps> = args => {
           {args.showTip && (
             <div className="slider-thumb-tip">{getThumbValueLabel(0)}</div>
           )}
-        </div>
+        </div> */}
       </div>
-    </div>
+    </SliderGroup>
   );
 };
 
