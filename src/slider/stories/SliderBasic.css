@@ -1,6 +1,6 @@
 .chakra-slider-group {
   position: relative;
-  width: 400px;
+  width: 320px;
   font-family: Inter;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .chakra-slider-group .slider.vertical {
-  height: 400px;
+  height: 320px;
 }
 
 .chakra-slider-group .slider-track-container {
@@ -89,6 +89,10 @@
   align-items: center;
   top: unset;
   left: 2px;
+}
+
+.chakra-slider-group .slider-thumb:focus-within {
+  z-index: 10;
 }
 
 .chakra-slider-group .slider-thumb .slider-thumb-handle {

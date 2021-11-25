@@ -6,12 +6,12 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderSingleOriginJsx";
 import ts from "./templates/SliderSingleOriginTsx";
-import { Slider } from "./SliderSingleOrigin.component";
+import { SliderSingleOrigin } from "./SliderSingleOrigin.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: Slider,
+  component: SliderSingleOrigin,
   title: "Slider/SingleOrigin",
   parameters: {
     layout: "centered",
@@ -26,53 +26,53 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <Slider {...args} />;
+export const Default: Story = args => <SliderSingleOrigin {...args} />;
 
 Default.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  minValue: -10,
+  maxValue: +10,
+  defaultValue: [0],
 };
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  minValue: -10,
+  maxValue: +10,
+  defaultValue: [0],
   label: "Thumb Tipped",
   showTip: true,
 };
 
 export const MinMax = Default.bind({});
 MinMax.args = {
-  defaultValues: [0],
+  defaultValue: [0],
   label: "Min Max",
-  min: -20,
-  max: +20,
+  minValue: -20,
+  maxValue: +20,
 };
 
 export const Step = Default.bind({});
 Step.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  minValue: -10,
+  maxValue: +10,
+  defaultValue: [0],
   label: "Stepped",
   step: 2,
 };
 
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
-  min: -10,
-  max: +10,
+  minValue: -10,
+  maxValue: +10,
   label: "Default Valued",
-  defaultValues: [-5],
+  defaultValue: [-5],
 };
 
 export const FormatOptions = Default.bind({});
 FormatOptions.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  minValue: -10,
+  maxValue: +10,
+  defaultValue: [0],
   label: "Temperature Formatted",
   formatOptions: {
     style: "unit",
@@ -83,9 +83,9 @@ FormatOptions.args = {
 
 export const Disabled = Default.bind({});
 Disabled.args = {
-  min: -10,
-  max: +10,
-  defaultValues: [0],
+  minValue: -10,
+  maxValue: +10,
+  defaultValue: [0],
   label: "Disabled",
   isDisabled: true,
 };

@@ -36,69 +36,83 @@ Along the way i also stumbed upon this bug too: https://github.com/facebook/jest
 This possibly was because of wrong jest config.
 */
 
-import React from "react";
+import * as React from "react";
 import { VisuallyHidden } from "reakit";
 import { fireEvent, render } from "reakit-test-utils";
 import { cleanup, screen } from "@testing-library/react";
 
-import { installMouseEvent } from "../../utils/test-utils";
 import {
+  SliderGroup,
+  SliderInitialState,
   SliderInput,
+  SliderLabel,
+  SliderOutput,
   SliderThumb,
+  SliderThumbInitialState,
   SliderTrack,
   useSliderState,
-} from "../index";
-import { SliderInitialState } from "../SliderBaseState";
+  useSliderThumbState,
+} from "../../index";
+import { installMouseEvent } from "../../utils/test-utils";
 
-export const MultiSliderComponent = (
-  props: SliderInitialState & {
-    origin?: number;
-    onChange?: (values: number[]) => void;
-  },
-) => {
-  const { reversed, origin: originProp, ...rest } = props;
+export type SliderAllInOneProps = SliderInitialState & {
+  /**
+   * Label for the slider
+   *
+   * @default Styled
+   */
+  label?: string;
 
-  const state = useSliderState({ reversed: reversed, ...rest });
-  const origin = originProp ?? state.min ?? 0;
-  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
-    state;
+  /**
+   * Origin on the slider, calculated based on min & max
+   */
+  origin?: number;
+};
 
-  const isVertical = false;
+export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
+  const { label, origin: originProp, ...rest } = args;
+  const origin = originProp ?? args.minValue ?? 0;
+
+  const slider = useSliderState(rest);
+  const { baseState, orientation } = slider;
+  const { getThumbValueLabel, getThumbPercent, getValuePercent, values } =
+    baseState;
+
+  const isVertical = orientation === "vertical";
   const isRange = values.length === 2;
   const isMulti = values.length > 2;
 
   const labelValue = !isRange
     ? getThumbValueLabel(0)
-    : `${state.getThumbValueLabel(0)} to ${state.getThumbValueLabel(1)}`;
+    : `${getThumbValueLabel(0)} to ${getThumbValueLabel(1)}`;
   const trackWidth = !isRange
     ? `${
         (getValuePercent(Math.max(values[0], origin)) -
           getValuePercent(Math.min(values[0], origin))) *
         100
       }%`
-    : `${(state.getThumbPercent(1) - state.getThumbPercent(0)) * 100}%`;
+    : `${(getThumbPercent(1) - getThumbPercent(0)) * 100}%`;
   const trackLeft = !isRange
     ? `${getValuePercent(Math.min(values[0], origin)) * 100}%`
     : `${getThumbPercent(0) * 100}%`;
-  const trackRight = !isRange ? "0px" : `${getThumbPercent(0) * 100}%`;
 
   return (
-    <div
-      className="chakra-slider-group"
-      role="group"
-      aria-label="styled-slider"
-    >
+    <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
-        <label className="label" htmlFor="styled-slider">
-          Multi slider
-        </label>
-        <div className="value" data-testid="testid-slider-value">
-          {!isMulti ? labelValue : JSON.stringify(state.values)}
-        </div>
+        <SliderLabel className="label" {...slider}>
+          {`${label ? label : "Styled"} Slider`}
+        </SliderLabel>
+        <SliderOutput
+          className="value"
+          data-testid="testid-slider-value"
+          {...slider}
+        >
+          {!isMulti ? labelValue : JSON.stringify(values)}
+        </SliderOutput>
       </div>
 
       <div className={`slider ${isVertical ? "vertical" : ""}`}>
-        <SliderTrack {...state} className="slider-track-container">
+        <SliderTrack {...slider} className="slider-track-container">
           <div className="slider-track" />
           {!isMulti ? (
             <div
@@ -106,8 +120,7 @@ export const MultiSliderComponent = (
               style={{
                 width: !isVertical ? trackWidth : "",
                 height: isVertical ? trackWidth : "",
-                left: !reversed && !isVertical && trackLeft ? trackLeft : "",
-                right: reversed ? trackRight : "",
+                left: !isVertical && trackLeft ? trackLeft : "",
                 bottom:
                   isVertical && isRange ? `${getThumbPercent(0) * 100}%` : "",
               }}
@@ -115,49 +128,59 @@ export const MultiSliderComponent = (
           ) : null}
         </SliderTrack>
 
-        {[...new Array(values.length).keys()].map(index => {
-          return (
-            <div
-              className="slider-thumb"
-              key={`thumb-${index}`}
-              style={{
-                right: reversed
-                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                  : "",
-                left:
-                  !reversed && !isVertical
-                    ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                    : "",
-                bottom: isVertical
-                  ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-                  : "",
-              }}
-            >
-              <SliderThumb
-                {...state}
-                index={index}
-                className="slider-thumb-handle"
-                data-testid={`testid-slider-thumb-${index}`}
-              >
-                <VisuallyHidden>
-                  <SliderInput
-                    index={index}
-                    aria-label={`Thumb-${index}`}
-                    data-testid={`testid-slider-input-${index}`}
-                    {...state}
-                  />
-                </VisuallyHidden>
-              </SliderThumb>
-            </div>
-          );
-        })}
+        {[...new Array(values.length).keys()].map(index => (
+          <Thumb
+            index={index}
+            key={`thumb-${index}`}
+            sliderState={slider}
+            aria-label={`Thumb-${index}`}
+          />
+        ))}
       </div>
+    </SliderGroup>
+  );
+};
+
+export default SliderAllInOne;
+
+export type SliderThumbProps = SliderThumbInitialState & {};
+export const Thumb: React.FC<SliderThumbProps> = props => {
+  const sliderThumb = useSliderThumbState(props);
+  const { index, sliderState } = props;
+  const { orientation, baseState } = sliderState;
+  const { getThumbPercent } = baseState;
+
+  const isVertical = orientation === "vertical";
+
+  return (
+    <div
+      className="slider-thumb"
+      style={{
+        left: !isVertical ? `calc(${getThumbPercent(index) * 100}% - 7px)` : "",
+        bottom: isVertical
+          ? `calc(${getThumbPercent(index) * 100}% - 7px)`
+          : "",
+      }}
+    >
+      <SliderThumb
+        {...sliderThumb}
+        className="slider-thumb-handle"
+        data-testid={`testid-slider-thumb-${index}`}
+      >
+        <VisuallyHidden>
+          <SliderInput
+            {...sliderThumb}
+            data-testid={`testid-slider-input-${index}`}
+          />
+        </VisuallyHidden>
+      </SliderThumb>
     </div>
   );
 };
+
 afterEach(cleanup);
 
-describe("Slider", () => {
+describe("SliderAllInOne", () => {
   // IMPORTANT!
   // We need to mock HTMLElement.offsetWidth & offsetHeight,
   // since without them we cannot click on a target with specific clientX/pageX
@@ -181,16 +204,14 @@ describe("Slider", () => {
 
   it("should drag and change multiple slider values", () => {
     const onChange = jest.fn();
-    const onChangeStart = jest.fn();
     const onChangeEnd = jest.fn();
     render(
-      <MultiSliderComponent
+      <SliderAllInOne
         onChange={onChange}
-        onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}
-        defaultValues={[25, 50, 75]}
-        min={0}
-        max={100}
+        defaultValue={[25, 50, 75]}
+        minValue={0}
+        maxValue={100}
         step={1}
       />,
     );
@@ -202,7 +223,6 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("[25,50,75]");
 
     fireEvent.mouseDown(thumb0, { clientX: 10, pageX: 10 });
-    expect(onChangeStart).toHaveBeenLastCalledWith([25, 50, 75]);
     expect(onChangeEnd).not.toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
 
@@ -244,16 +264,14 @@ describe("Slider", () => {
 
   test("Check limits: drag first thumb to 5 then drag the second thumb to opposite direction", () => {
     const onChange = jest.fn();
-    const onChangeStart = jest.fn();
     const onChangeEnd = jest.fn();
     render(
-      <MultiSliderComponent
+      <SliderAllInOne
         onChange={onChange}
-        onChangeStart={onChangeStart}
         onChangeEnd={onChangeEnd}
-        defaultValues={[25, 50]}
-        min={0}
-        max={100}
+        defaultValue={[25, 50]}
+        minValue={0}
+        maxValue={100}
         step={1}
       />,
     );
@@ -265,7 +283,6 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("25 to 50");
 
     fireEvent.mouseDown(thumb0, { clientX: 10, pageX: 10 });
-    expect(onChangeStart).toHaveBeenLastCalledWith([25, 50]);
     expect(onChangeEnd).not.toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
 
@@ -279,7 +296,6 @@ describe("Slider", () => {
 
     // Now drag the second thumb to 5 and try to check the limits
     fireEvent.mouseDown(thumb1, { clientX: 10, pageX: 10 });
-    expect(onChangeStart).toHaveBeenLastCalledWith([5, 50]);
 
     fireEvent.mouseMove(thumb1, { clientX: -15, pageX: -15 });
     expect(onChange).toHaveBeenLastCalledWith([5, 25]);
@@ -294,10 +310,10 @@ describe("Slider", () => {
 
   test("stress test with 50 thumbs", () => {
     render(
-      <MultiSliderComponent
-        defaultValues={[...new Array(50).keys()]}
-        min={0}
-        max={50}
+      <SliderAllInOne
+        defaultValue={[...new Array(50).keys()]}
+        minValue={0}
+        maxValue={50}
         step={1}
       />,
     );
@@ -309,11 +325,11 @@ describe("Slider", () => {
 
   it("supports isDisabled", () => {
     render(
-      <MultiSliderComponent
+      <SliderAllInOne
         isDisabled={true}
-        defaultValues={[10, 50]}
-        min={0}
-        max={50}
+        defaultValue={[10, 50]}
+        minValue={0}
+        maxValue={50}
         step={1}
       />,
     );

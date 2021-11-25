@@ -1,11 +1,12 @@
 import { createComponent, createHook } from "reakit-system";
 import { GroupHTMLProps, GroupOptions, useGroup } from "reakit";
+import { mergeProps } from "@react-aria/utils";
 
 import { SLIDER_GROUP_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
 
 export type SliderGroupOptions = GroupOptions &
-  Pick<SliderStateReturn, "fieldProps">;
+  Pick<SliderStateReturn, "groupProps">;
 
 export type SliderGroupHTMLProps = GroupHTMLProps;
 
@@ -24,9 +25,7 @@ export const useSliderGroup = createHook<
   },
 
   useProps(options, htmlProps) {
-    const { fieldProps } = options;
-
-    return { ...fieldProps, ...htmlProps };
+    return mergeProps(options.groupProps, htmlProps);
   },
 });
 

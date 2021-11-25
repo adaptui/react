@@ -6,12 +6,12 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderSingleVerticalJsx";
 import ts from "./templates/SliderSingleVerticalTsx";
-import { Slider } from "./SliderSingleVertical.component";
+import { SliderSingleVertical } from "./SliderSingleVertical.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: Slider,
+  component: SliderSingleVertical,
   title: "Slider/SingleVertical",
   parameters: {
     layout: "centered",
@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <Slider {...args} />;
+export const Default: Story = args => <SliderSingleVertical {...args} />;
 
 Default.args = {
   orientation: "vertical",
@@ -43,8 +43,8 @@ export const MinMax = Default.bind({});
 MinMax.args = {
   orientation: "vertical",
   label: "Min Max",
-  min: 20,
-  max: 80,
+  minValue: 20,
+  maxValue: 80,
 };
 
 export const Step = Default.bind({});
@@ -58,7 +58,7 @@ export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   orientation: "vertical",
   label: "Default Valued",
-  defaultValues: [80],
+  defaultValue: [80],
 };
 
 export const FormatOptions = Default.bind({});

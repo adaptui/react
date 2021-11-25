@@ -6,12 +6,12 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderBasicJsx";
 import ts from "./templates/SliderBasicTsx";
-import { Slider } from "./SliderBasic.component";
+import { SliderBasic, SliderBasicProps } from "./SliderBasic.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: Slider,
+  component: SliderBasic,
   title: "Slider/Basic",
   parameters: {
     layout: "centered",
@@ -20,7 +20,9 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = args => <Slider {...args} />;
+export const Default: Story<SliderBasicProps> = args => (
+  <SliderBasic {...args} />
+);
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
@@ -31,8 +33,8 @@ ThumbTip.args = {
 export const MinMax = Default.bind({});
 MinMax.args = {
   label: "Min Max",
-  min: 20,
-  max: 80,
+  minValue: 20,
+  maxValue: 80,
 };
 
 export const Step = Default.bind({});
@@ -44,7 +46,7 @@ Step.args = {
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  defaultValues: [80],
+  defaultValue: [80],
 };
 
 export const FormatOptions = Default.bind({});

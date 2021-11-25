@@ -6,12 +6,12 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 import js from "./templates/SliderAllInOneJsx";
 import ts from "./templates/SliderAllInOneTsx";
 import css from "./templates/SliderBasicCss";
-import { Slider } from "./SliderAllInOne.component";
+import { SliderAllInOne } from "./SliderAllInOne.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: Slider,
+  component: SliderAllInOne,
   title: "Slider/AllInOne",
   parameters: {
     layout: "centered",
@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <Slider {...args} />;
+export const Default: Story = args => <SliderAllInOne {...args} />;
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
@@ -38,10 +38,10 @@ export const Origin = Default.bind({});
 Origin.args = {
   label: "Origin Changed",
   showTip: true,
-  defaultValues: [0],
+  defaultValue: [0],
   origin: 0,
-  min: -50,
-  max: 50,
+  minValue: -50,
+  maxValue: 50,
 };
 
 export const Reversed = Default.bind({});
@@ -59,8 +59,8 @@ Vertical.args = {
 export const MinMax = Default.bind({});
 MinMax.args = {
   label: "Min Max",
-  min: 20,
-  max: 80,
+  minValue: 20,
+  maxValue: 80,
 };
 
 export const Step = Default.bind({});
@@ -72,7 +72,7 @@ Step.args = {
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  defaultValues: [80],
+  defaultValue: [80],
 };
 
 export const FormatOptions = Default.bind({});
@@ -94,17 +94,17 @@ Disabled.args = {
 export const Range = Default.bind({});
 Range.args = {
   label: "Range",
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
 };
 
 export const Multi = Default.bind({});
 Multi.args = {
   label: "Range",
-  defaultValues: [25, 50, 75],
+  defaultValue: [25, 50, 75],
 };
 
 export const Multis = Default.bind({});
 Multis.args = {
   label: "Range",
-  defaultValues: [20, 40, 60, 80],
+  defaultValue: [0, 20, 40, 60, 80, 100],
 };

@@ -1,12 +1,12 @@
 import { createComponent, createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { mergeProps } from "@react-aria/utils";
 
 import { SLIDER_LABEL_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";
-import { getSliderThumbId } from ".";
 
 export type SliderOutputOptions = RoleOptions &
-  Pick<SliderStateReturn, "baseState">;
+  Pick<SliderStateReturn, "outputProps">;
 
 export type SliderOutputHTMLProps = RoleHTMLProps;
 
@@ -25,12 +25,7 @@ export const useSliderOutput = createHook<
   },
 
   useProps(options, htmlProps) {
-    const { baseState } = options;
-    const htmlFor = baseState.values
-      .map((_, index) => getSliderThumbId(baseState, index))
-      .join(" ");
-
-    return { htmlFor, "aria-live": "off", ...htmlProps };
+    return mergeProps(options.outputProps, htmlProps);
   },
 });
 

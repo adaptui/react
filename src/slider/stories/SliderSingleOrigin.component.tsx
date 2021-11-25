@@ -2,14 +2,19 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
+  SliderGroup,
   SliderInitialState,
   SliderInput,
+  SliderLabel,
+  SliderOutput,
   SliderThumb,
+  SliderThumbInitialState,
   SliderTrack,
   useSliderState,
+  useSliderThumbState,
 } from "../../index";
 
-interface SliderProps extends SliderInitialState {
+interface SliderSingleOriginProps extends SliderInitialState {
   /**
    * Label for the slider
    *
@@ -22,29 +27,27 @@ interface SliderProps extends SliderInitialState {
   showTip?: boolean;
 }
 
-export const Slider: React.FC<SliderProps> = args => {
-  const { label, ...rest } = args;
+export const SliderSingleOrigin: React.FC<SliderSingleOriginProps> = args => {
+  const { label, showTip, ...rest } = args;
 
-  const state = useSliderState(rest);
-  const { values, getValuePercent, getThumbValueLabel, getThumbPercent } =
-    state;
+  const slider = useSliderState(rest);
+  const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
+
   const origin = 0;
 
   return (
-    <div
-      className="chakra-slider-group"
-      role="group"
-      aria-labelledby="styled-slider"
-    >
+    <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
-        <label className="label" id="styled-slider">
-          {`${args.label ? args.label : "Styled"} Slider`}
-        </label>
-        <div className="value">{getThumbValueLabel(0)}</div>
+        <SliderLabel className="label" {...slider}>
+          {`${label ? label : "Styled"} Slider`}
+        </SliderLabel>
+        <SliderOutput className="value" {...slider}>
+          {getThumbValueLabel(0)}
+        </SliderOutput>
       </div>
 
       <div className="slider">
-        <SliderTrack {...state} className="slider-track-container">
+        <SliderTrack {...slider} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
@@ -58,27 +61,41 @@ export const Slider: React.FC<SliderProps> = args => {
             }}
           />
         </SliderTrack>
-        <div
-          className="slider-thumb"
-          style={{ left: `calc(${getThumbPercent(0) * 100}% - 7px)` }}
-        >
-          <SliderThumb {...state} index={0} className="slider-thumb-handle">
-            <VisuallyHidden>
-              <SliderInput
-                index={0}
-                aria-label={`Thumb-${0}`}
-                aria-labelledby="styled-slider"
-                {...state}
-              />
-            </VisuallyHidden>
-          </SliderThumb>
-          {args.showTip && (
-            <div className="slider-thumb-tip">{getThumbValueLabel(0)}</div>
-          )}
-        </div>
+
+        <Thumb
+          index={0}
+          sliderState={slider}
+          showTip={showTip}
+          aria-label="Thumb"
+        />
       </div>
-    </div>
+    </SliderGroup>
   );
 };
 
-export default Slider;
+export default SliderSingleOrigin;
+
+export type SliderThumbProps = SliderThumbInitialState &
+  Pick<SliderSingleOriginProps, "showTip">;
+
+export const Thumb: React.FC<SliderThumbProps> = props => {
+  const sliderThumb = useSliderThumbState(props);
+  const { index, showTip, sliderState } = props;
+  const { getThumbValueLabel, getThumbPercent } = sliderState.baseState;
+
+  return (
+    <div
+      className="slider-thumb"
+      style={{ left: `calc(${getThumbPercent(index) * 100}% - 7px)` }}
+    >
+      <SliderThumb {...sliderThumb} className="slider-thumb-handle">
+        <VisuallyHidden>
+          <SliderInput {...sliderThumb} />
+        </VisuallyHidden>
+      </SliderThumb>
+      {showTip && (
+        <div className="slider-thumb-tip">{getThumbValueLabel(index)}</div>
+      )}
+    </div>
+  );
+};
