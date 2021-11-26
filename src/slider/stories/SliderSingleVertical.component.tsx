@@ -28,43 +28,44 @@ export type SliderSingleVerticalProps = SliderInitialState & {
   showTip?: boolean;
 };
 
-export const SliderSingleVertical: React.FC<SliderSingleVerticalProps> =
-  args => {
-    const { label, showTip, ...rest } = args;
-    const sliderLabel = `${label ? label : "Styled"} Slider`;
-    const slider = useSliderState({ ...rest, label: sliderLabel });
-    const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
+export const SliderSingleVertical: React.FC<
+  SliderSingleVerticalProps
+> = args => {
+  const { label, showTip, ...rest } = args;
+  const sliderLabel = `${label ? label : "Styled"} Slider`;
+  const slider = useSliderState({ ...rest, label: sliderLabel });
+  const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
 
-    return (
-      <SliderGroup className="chakra-slider-group" {...slider}>
-        <div className="slider-label">
-          <SliderLabel className="label" {...slider}>
-            {sliderLabel}
-          </SliderLabel>
-          <SliderOutput className="value" {...slider}>
-            {getThumbValueLabel(0)}
-          </SliderOutput>
-        </div>
+  return (
+    <SliderGroup className="chakra-slider-group" {...slider}>
+      <div className="slider-label">
+        <SliderLabel className="label" {...slider}>
+          {sliderLabel}
+        </SliderLabel>
+        <SliderOutput className="value" {...slider}>
+          {getThumbValueLabel(0)}
+        </SliderOutput>
+      </div>
 
-        <div className="slider vertical">
-          <SliderTrack {...slider} className="slider-track-container">
-            <div className="slider-track" />
-            <div
-              className="slider-filled-track"
-              style={{ height: `${getValuePercent(values[0]) * 100}%` }}
-            />
-          </SliderTrack>
-
-          <Thumb
-            index={0}
-            sliderState={slider}
-            aria-label="Thumb"
-            showTip={showTip}
+      <div className="slider vertical">
+        <SliderTrack {...slider} className="slider-track-container">
+          <div className="slider-track" />
+          <div
+            className="slider-filled-track"
+            style={{ height: `${getValuePercent(values[0]) * 100}%` }}
           />
-        </div>
-      </SliderGroup>
-    );
-  };
+        </SliderTrack>
+
+        <Thumb
+          index={0}
+          sliderState={slider}
+          aria-label="Thumb"
+          showTip={showTip}
+        />
+      </div>
+    </SliderGroup>
+  );
+};
 
 export default SliderSingleVertical;
 

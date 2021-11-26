@@ -12,27 +12,28 @@ import {
 
 export type TooltipCustomDurationProps = {};
 
-export const TooltipCustomDuration: React.FC<TooltipCustomDurationProps> =
-  props => {
-    return (
-      <>
-        <h1>Duration</h1>
-        <h2>Default (Instant)</h2>
-        <div style={{ display: "flex", gap: 50 }}>
-          <TooltipBasic />
-          <TooltipBasic />
-          <TooltipBasic />
-        </div>
+export const TooltipCustomDuration: React.FC<
+  TooltipCustomDurationProps
+> = props => {
+  return (
+    <>
+      <h1>Duration</h1>
+      <h2>Default (Instant)</h2>
+      <div style={{ display: "flex", gap: 50 }}>
+        <TooltipBasic />
+        <TooltipBasic />
+        <TooltipBasic />
+      </div>
 
-        <h2>Custom (750ms)</h2>
-        <div style={{ display: "flex", gap: 50 }}>
-          <TooltipBasic unstable_timeout={750} />
-          <TooltipBasic unstable_timeout={750} />
-          <TooltipBasic unstable_timeout={750} />
-        </div>
-      </>
-    );
-  };
+      <h2>Custom (750ms)</h2>
+      <div style={{ display: "flex", gap: 50 }}>
+        <TooltipBasic unstable_timeout={750} />
+        <TooltipBasic unstable_timeout={750} />
+        <TooltipBasic unstable_timeout={750} />
+      </div>
+    </>
+  );
+};
 
 export type TooltipBasicProps = TooltipInitialState & {
   label?: string;
