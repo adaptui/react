@@ -9,23 +9,24 @@ import {
 
 export type DisclosureHorizontalProps = DisclosureInitialState & {};
 
-export const DisclosureHorizontal: React.FC<DisclosureHorizontalProps> =
-  props => {
-    const state = useDisclosureState(props);
+export const DisclosureHorizontal: React.FC<
+  DisclosureHorizontalProps
+> = props => {
+  const state = useDisclosureState(props);
 
-    return (
-      <div className="root">
-        <Disclosure {...state}>Show More</Disclosure>
-        <DisclosureContent className="content" animationPresent {...state}>
-          <div className="item">Item 1</div>
-          <div className="item">Item 2</div>
-          <div className="item">Item 3</div>
-          <div className="item">Item 4</div>
-          <div className="item">Item 5</div>
-          <div className="item">Item 6</div>
-        </DisclosureContent>
-      </div>
-    );
-  };
+  return (
+    <div className="root">
+      <Disclosure {...state}>Show More</Disclosure>
+      <DisclosureContent className="content" animationPresent {...state}>
+        <div className="item">Item 1</div>
+        <div className="item">Item 2</div>
+        <div className="item">Item 3</div>
+        <div className="item">Item 4</div>
+        <div className="item">Item 5</div>
+        <div className="item">Item 6</div>
+      </DisclosureContent>
+    </div>
+  );
+};
 
 export default DisclosureHorizontal;

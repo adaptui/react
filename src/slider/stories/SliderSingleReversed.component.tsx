@@ -29,14 +29,15 @@ export type SliderSingleReversedProps = SliderInitialState & {
   showTip?: boolean;
 };
 
-export const SliderSingleReversed: React.FC<SliderSingleReversedProps> =
-  args => {
-    return (
-      <I18nProvider locale="ar-ae">
-        <Slider {...args} />
-      </I18nProvider>
-    );
-  };
+export const SliderSingleReversed: React.FC<
+  SliderSingleReversedProps
+> = args => {
+  return (
+    <I18nProvider locale="ar-ae">
+      <Slider {...args} />
+    </I18nProvider>
+  );
+};
 
 export default SliderSingleReversed;
 

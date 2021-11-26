@@ -74,44 +74,45 @@ export type useToastsReturnType = ReturnType<typeof useToasts>;
 /* =========================================================================
   Components - Trigger
   ========================================================================== */
-export const TriggerButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> =
-  props => {
-    const { style, ...rest } = props;
+export const TriggerButton: React.FC<
+  React.HTMLAttributes<HTMLButtonElement>
+> = props => {
+  const { style, ...rest } = props;
 
-    return (
-      <button
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "auto",
-          height: "1rem",
-          minWidth: "1rem",
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
-          paddingRight: "0.5rem",
-          paddingLeft: "0.5rem",
-          fontSize: "14px",
-          lineHeight: "20px",
-          fontWeight: 500,
-          boxShadow: "none",
-          border: "none",
-          color: "white",
-          verticalAlign: "middle",
-          transition: "all 0.3s ease",
-          background: "black",
-          borderRadius: "6px",
-          appearance: "none",
-          whiteSpace: "nowrap",
-          marginTop: "0.5rem",
-          marginBottom: "0.5rem",
-          cursor: "pointer",
-          ...style,
-        }}
-        {...rest}
-      />
-    );
-  };
+  return (
+    <button
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "auto",
+        height: "1rem",
+        minWidth: "1rem",
+        paddingTop: "1rem",
+        paddingBottom: "1rem",
+        paddingRight: "0.5rem",
+        paddingLeft: "0.5rem",
+        fontSize: "14px",
+        lineHeight: "20px",
+        fontWeight: 500,
+        boxShadow: "none",
+        border: "none",
+        color: "white",
+        verticalAlign: "middle",
+        transition: "all 0.3s ease",
+        background: "black",
+        borderRadius: "6px",
+        appearance: "none",
+        whiteSpace: "nowrap",
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
+        cursor: "pointer",
+        ...style,
+      }}
+      {...rest}
+    />
+  );
+};
 
 const contents = [
   "Amet soufflé carrot cake tootsie roll jelly-o chocolate cake.",
