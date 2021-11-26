@@ -6,7 +6,7 @@
 NOTES on Testing slider component.
 
 ### The Error:
-TypeError : Class constructor MouseEvent cannot be invoed with "new"
+TypeError : Class constructor MouseEvent cannot be involved with "new"
 https://github.com/kulshekhar/ts-jest/issues/571#issuecomment-719352005
 
 
@@ -43,20 +43,24 @@ import { cleanup, screen } from "@testing-library/react";
 
 import { installMouseEvent } from "../../utils/test-utils";
 import {
+  SliderGroup,
   SliderInput,
+  SliderLabel,
+  SliderOutput,
   SliderThumb,
+  SliderThumbInitialState,
   SliderTrack,
   useSliderState,
+  useSliderThumbState,
 } from "../index";
 import { SliderInitialState } from "../SliderState";
 
-export const SliderComponent = (
-  props: SliderInitialState & { origin?: number },
-) => {
+export type SliderComponentProps = SliderInitialState & { origin?: number };
+
+export const SliderComponent = (props: SliderComponentProps) => {
   const state = useSliderState(props);
-  const originProp = props.origin ?? state.min ?? 0;
-  const { values, getValuePercent, getThumbPercent, getThumbValueLabel } =
-    state;
+  const originProp = props.origin ?? props.minValue ?? 0;
+  const { values, getValuePercent, getThumbValueLabel } = state.baseState;
 
   const trackWidth = `${
     (getValuePercent(Math.max(values[0], originProp)) -
@@ -69,18 +73,18 @@ export const SliderComponent = (
   const labelValue = getThumbValueLabel(0);
 
   return (
-    <div
-      role="group"
-      className="chakra-slider-group"
-      aria-label="styled-slider"
-    >
+    <SliderGroup className="chakra-slider-group">
       <div className="slider-label">
-        <label className="label" htmlFor="styled-slider">
+        <SliderLabel className="label" {...state}>
           Minimal slider
-        </label>
-        <div data-testid="testid-slider-value" className="value">
+        </SliderLabel>
+        <SliderOutput
+          data-testid="testid-slider-value"
+          className="value"
+          {...state}
+        >
           {labelValue}
-        </div>
+        </SliderOutput>
       </div>
 
       <div className={`slider`}>
@@ -94,34 +98,41 @@ export const SliderComponent = (
             }}
           />
         </SliderTrack>
-        <div
-          className="slider-thumb"
-          style={{
-            top: "26px",
-            left: `calc(${getThumbPercent(0) * 100}% - 7px)`,
-          }}
-        >
-          <SliderThumb
-            className="slider-thumb-handle"
-            data-testid="testid-slider-thumb"
-            index={0}
-            {...state}
-          >
-            <VisuallyHidden>
-              <SliderInput
-                data-testid="testid-slider-input"
-                index={0}
-                id="styled-slider"
-                aria-label={`Thumb-${0}`}
-                {...state}
-              />
-            </VisuallyHidden>
-          </SliderThumb>
-        </div>
+
+        <Thumb index={0} sliderState={state} aria-label="Thumb" />
       </div>
+    </SliderGroup>
+  );
+};
+
+export type SliderThumbProps = SliderThumbInitialState & {};
+
+export const Thumb: React.FC<SliderThumbProps> = props => {
+  const sliderThumb = useSliderThumbState(props);
+  const { sliderState } = props;
+  const { getThumbPercent } = sliderState.baseState;
+
+  return (
+    <div
+      className="slider-thumb"
+      style={{
+        top: "26px",
+        left: `calc(${getThumbPercent(0) * 100}% - 7px)`,
+      }}
+    >
+      <SliderThumb
+        data-testid="testid-slider-thumb"
+        {...sliderThumb}
+        className="slider-thumb-handle"
+      >
+        <VisuallyHidden>
+          <SliderInput data-testid="testid-slider-input" {...sliderThumb} />
+        </VisuallyHidden>
+      </SliderThumb>
     </div>
   );
 };
+
 afterEach(cleanup);
 
 describe("Slider", () => {
@@ -148,15 +159,15 @@ describe("Slider", () => {
 
   // installPointerEvent();
   it("should drag and change slider value", () => {
-    const onStart = jest.fn();
     const onEnd = jest.fn();
+
     render(
       <SliderComponent
-        onChangeStart={onStart}
         onChangeEnd={onEnd}
-        min={0}
-        max={100}
+        minValue={0}
+        maxValue={100}
         step={1}
+        defaultValue={[50]}
       />,
     );
 
@@ -166,7 +177,6 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("50");
 
     fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
     expect(onEnd).not.toHaveBeenCalled();
 
     fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
@@ -179,58 +189,19 @@ describe("Slider", () => {
 
     fireEvent.mouseMove(sliderThumb, { clientX: 40, pageX: 40 });
     fireEvent.mouseUp(sliderThumb, { clientX: 40, pageX: 40 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
     expect(onEnd).toHaveBeenLastCalledWith([80]);
     expect(sliderValue).toHaveTextContent("80");
   });
 
-  it("should work with reversed input", () => {
-    const onStart = jest.fn();
-    const onEnd = jest.fn();
-    render(
-      <SliderComponent
-        reversed={true}
-        onChangeStart={onStart}
-        onChangeEnd={onEnd}
-        min={0}
-        max={100}
-        step={1}
-      />,
-    );
-
-    const sliderValue = screen.getByTestId("testid-slider-value");
-    const sliderThumb = screen.getByTestId("testid-slider-thumb");
-
-    expect(sliderValue).toHaveTextContent("50");
-
-    fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
-    expect(onEnd).not.toHaveBeenCalled();
-
-    fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
-    expect(onEnd).not.toHaveBeenCalled();
-    expect(sliderValue).toHaveTextContent("40");
-
-    fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
-    expect(onEnd).not.toHaveBeenCalled();
-    expect(sliderValue).toHaveTextContent("30");
-
-    fireEvent.mouseMove(sliderThumb, { clientX: 40, pageX: 40 });
-    fireEvent.mouseUp(sliderThumb, { clientX: 40, pageX: 40 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
-    expect(onEnd).toHaveBeenLastCalledWith([20]);
-    expect(sliderValue).toHaveTextContent("20");
-  });
-
   it("should have proper min/max values", () => {
-    const onStart = jest.fn();
     const onEnd = jest.fn();
+
     render(
       <SliderComponent
-        onChangeStart={onStart}
         onChangeEnd={onEnd}
-        min={50}
-        max={80}
+        minValue={50}
+        maxValue={80}
+        defaultValue={[65]}
         step={1}
       />,
     );
@@ -241,7 +212,6 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("65");
 
     fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
-    expect(onStart).toHaveBeenLastCalledWith([65]);
     expect(onEnd).not.toHaveBeenCalled();
 
     fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
@@ -258,22 +228,20 @@ describe("Slider", () => {
 
     fireEvent.mouseMove(sliderThumb, { clientX: 140, pageX: 140 });
     fireEvent.mouseUp(sliderThumb, { clientX: 140, pageX: 140 });
-    expect(onStart).toHaveBeenLastCalledWith([65]);
     expect(onEnd).toHaveBeenLastCalledWith([80]);
     expect(sliderValue).toHaveTextContent("80");
   });
 
   it("should have proper values when origin is set", () => {
-    const onStart = jest.fn();
     const onEnd = jest.fn();
+
     render(
       <SliderComponent
-        onChangeStart={onStart}
         onChangeEnd={onEnd}
-        defaultValues={[0]}
+        defaultValue={[0]}
         origin={0}
-        min={-50}
-        max={50}
+        minValue={-50}
+        maxValue={50}
         step={1}
       />,
     );
@@ -284,7 +252,6 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("0");
 
     fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
-    expect(onStart).toHaveBeenLastCalledWith([0]);
 
     fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
     expect(sliderValue).toHaveTextContent("10");
@@ -300,14 +267,13 @@ describe("Slider", () => {
 
     fireEvent.mouseMove(sliderThumb, { clientX: -50, pageX: -50 });
     fireEvent.mouseUp(sliderThumb, { clientX: -50, pageX: -50 });
-    expect(onStart).toHaveBeenLastCalledWith([0]);
     expect(onEnd).toHaveBeenLastCalledWith([-50]);
     expect(sliderValue).toHaveTextContent("-50");
   });
 
   it("supports formatOptions", () => {
-    const onStart = jest.fn();
     const onEnd = jest.fn();
+
     render(
       <SliderComponent
         formatOptions={{
@@ -316,11 +282,11 @@ describe("Slider", () => {
           unit: "celsius",
           unitDisplay: "narrow",
         }}
-        onChangeStart={onStart}
         onChangeEnd={onEnd}
-        min={0}
-        max={100}
+        minValue={0}
+        maxValue={100}
         step={1}
+        defaultValue={[50]}
       />,
     );
 
@@ -330,14 +296,12 @@ describe("Slider", () => {
     expect(sliderValue).toHaveTextContent("50°C");
 
     fireEvent.mouseDown(sliderThumb, { clientX: 10, pageX: 10 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
 
     fireEvent.mouseMove(sliderThumb, { clientX: 20, pageX: 20 });
     expect(sliderValue).toHaveTextContent("60°C");
 
     fireEvent.mouseMove(sliderThumb, { clientX: 30, pageX: 30 });
     fireEvent.mouseUp(sliderThumb, { clientX: 30, pageX: 30 });
-    expect(onStart).toHaveBeenLastCalledWith([50]);
     expect(onEnd).toHaveBeenLastCalledWith([70]);
     expect(sliderValue).toHaveTextContent("70°C");
   });

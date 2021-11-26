@@ -6,12 +6,12 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 import css from "./templates/SliderBasicCss";
 import js from "./templates/SliderRangeJsx";
 import ts from "./templates/SliderRangeTsx";
-import { Slider } from "./SliderRange.component";
+import { SliderRange } from "./SliderRange.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: Slider,
+  component: SliderRange,
   title: "Slider/Range",
   parameters: {
     layout: "centered",
@@ -26,44 +26,37 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <Slider {...args} />;
+export const Default: Story = args => <SliderRange {...args} />;
 
 Default.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
 };
 
 export const ThumbTip = Default.bind({});
 ThumbTip.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Thumb Tipped",
   showTip: true,
 };
 
-export const Reversed = Default.bind({});
-Reversed.args = {
-  defaultValues: [25, 75],
-  label: "Reversed",
-  isReversed: true,
-};
-
 export const Vertical = Default.bind({});
 Vertical.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Vertical",
   orientation: "vertical",
 };
 
 export const MinMax = Default.bind({});
 MinMax.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Min Max",
-  min: 20,
-  max: 80,
+  minValue: 20,
+  maxValue: 80,
 };
 
 export const Step = Default.bind({});
 Step.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Stepped",
   step: 10,
 };
@@ -71,12 +64,12 @@ Step.args = {
 export const DefaultValue = Default.bind({});
 DefaultValue.args = {
   label: "Default Valued",
-  defaultValues: [10, 80],
+  defaultValue: [10, 80],
 };
 
 export const FormatOptions = Default.bind({});
 FormatOptions.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Temperature Formatted",
   formatOptions: {
     style: "unit",
@@ -87,7 +80,7 @@ FormatOptions.args = {
 
 export const Disabled = Default.bind({});
 Disabled.args = {
-  defaultValues: [25, 75],
+  defaultValue: [25, 75],
   label: "Disabled",
   isDisabled: true,
 };

@@ -4,25 +4,37 @@ import { Meta, Story } from "@storybook/react";
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 import css from "./templates/SliderBasicCss";
-import js from "./templates/SliderBasicJsx";
-import ts from "./templates/SliderBasicTsx";
-import { SliderBasic, SliderBasicProps } from "./SliderBasic.component";
+import js from "./templates/SliderSingleJsx";
+import ts from "./templates/SliderSingleTsx";
+import { SliderSingle, SliderSingleProps } from "./SliderSingle.component";
 
 import "./SliderBasic.css";
 
 export default {
-  component: SliderBasic,
-  title: "Slider/Basic",
+  component: SliderSingle,
+  title: "Slider/Single",
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, css }),
     options: { showPanel: true },
   },
+  decorators: [
+    Story => {
+      document.body.id = "slider-basic";
+      return <Story />;
+    },
+  ],
 } as Meta;
 
-export const Default: Story<SliderBasicProps> = args => (
-  <SliderBasic {...args} />
+export const Default: Story<SliderSingleProps> = args => (
+  <SliderSingle {...args} />
 );
+
+export const ThumbTip = Default.bind({});
+ThumbTip.args = {
+  label: "Thumb Tipped",
+  showTip: true,
+};
 
 export const MinMax = Default.bind({});
 MinMax.args = {

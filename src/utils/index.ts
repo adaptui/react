@@ -87,3 +87,4 @@ export function splitStateProps<T, P>(props: any, keys: readonly any[]) {
 
 export * from "./date";
 export * from "./useControllableState";
+export * from "./useControlledState";

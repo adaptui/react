@@ -1,38 +1,15 @@
-import * as React from "react";
-import { createComponent, createHook, useCreateElement } from "reakit-system";
-import {
-  InputHTMLProps,
-  InputOptions,
-  unstable_IdHTMLProps,
-  unstable_IdOptions,
-  unstable_useId,
-  useInput,
-} from "reakit";
-import { useForkRef, useLiveRef } from "reakit-utils";
-import { useWarning } from "reakit-warning";
+import { createComponent, createHook } from "reakit-system";
+import { InputHTMLProps, InputOptions, unstable_useId, useInput } from "reakit";
+import { useForkRef } from "reakit-utils";
+import { mergeProps } from "@react-aria/utils";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
-import { SliderStateReturn } from "./SliderState";
+import { SliderThumbStateReturn } from "./SliderThumbState";
 
 export type SliderInputOptions = InputOptions &
-  unstable_IdOptions &
-  Pick<
-    SliderStateReturn,
-    | "isDisabled"
-    | "registerInput"
-    | "unregisterInput"
-    | "setFocusedThumb"
-    | "setThumbValue"
-    | "getThumbMaxValue"
-    | "getThumbMinValue"
-    | "getThumbValueLabel"
-    | "step"
-    | "orientation"
-  > & {
-    index: number;
-  };
+  Pick<SliderThumbStateReturn, "inputProps" | "inputRef"> & {};
 
-export type SliderInputHTMLProps = InputHTMLProps & unstable_IdHTMLProps;
+export type SliderInputHTMLProps = InputHTMLProps & {};
 
 export type SliderInputProps = SliderInputOptions & SliderInputHTMLProps;
 
@@ -44,94 +21,18 @@ export const useSliderInput = createHook<
   compose: [unstable_useId, useInput],
   keys: SLIDER_INPUT_KEYS,
 
-  useOptions(options, { disabled: htmlDisabled, ...htmlProps }) {
-    const disabled = options.isDisabled || htmlDisabled;
-    return { disabled, ...options };
+  useOptions(options, htmlProps) {
+    return options;
   },
 
-  useProps(
-    options,
-    {
-      ref: htmlRef,
-      onFocus: onHtmlFocus,
-      onBlur: onHtmlBlur,
-      onChange: onHtmlChange,
-      ...htmlProps
-    },
-  ) {
-    const ref = React.useRef<HTMLElement>(null);
-    const onFocusRef = useLiveRef(onHtmlFocus);
-    const onBlurRef = useLiveRef(onHtmlBlur);
-    const onChangeRef = useLiveRef(onHtmlChange);
+  useProps(options, htmlProps) {
+    const { inputRef, inputProps } = options;
+    const { ref: htmlRef, ...restHtmlProps } = htmlProps;
 
-    const {
-      index,
-      id,
-      registerInput,
-      unregisterInput,
-      disabled,
-      setFocusedThumb,
-      setThumbValue,
-    } = options;
-
-    React.useLayoutEffect(() => {
-      if (!id) return undefined;
-      registerInput?.({ id, ref });
-
-      return () => {
-        unregisterInput?.(id);
-      };
-    }, [id, registerInput, unregisterInput]);
-
-    const onFocus = React.useCallback(
-      (event: React.FocusEvent) => {
-        onFocusRef.current?.(event);
-        if (event.defaultPrevented) return;
-        if (disabled) return;
-
-        setFocusedThumb(index);
-      },
-      [disabled, index, onFocusRef, setFocusedThumb],
-    );
-
-    const onBlur = React.useCallback(
-      (event: React.FocusEvent) => {
-        onBlurRef.current?.(event);
-        if (event.defaultPrevented) return;
-        if (disabled) return;
-
-        setFocusedThumb(undefined);
-      },
-      [disabled, onBlurRef, setFocusedThumb],
-    );
-
-    const onChange = React.useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChangeRef.current?.(event);
-        if (event.defaultPrevented) return;
-        if (disabled) return;
-
-        setThumbValue(index, parseFloat(event.target.value));
-      },
-      [disabled, index, onChangeRef, setThumbValue],
-    );
-
-    return {
-      type: "range",
-      tabIndex: !disabled ? 0 : undefined,
-      min: options.getThumbMinValue(index),
-      max: options.getThumbMaxValue(index),
-      step: options.step,
-      value: options.getThumbValueLabel(index),
-      disabled: disabled,
-      "aria-orientation": options.orientation,
-      "aria-valuetext": options.getThumbValueLabel(index),
-      ref: useForkRef(ref, htmlRef),
-      onFocus,
-      onBlur,
-      onChange,
-      ...htmlProps,
-    };
+    return mergeProps(inputProps, {
+      ref: useForkRef(htmlRef, inputRef),
+      ...restHtmlProps,
+    });
   },
 });
 
@@ -139,12 +40,4 @@ export const SliderInput = createComponent({
   as: "input",
   memo: true,
   useHook: useSliderInput,
-  useCreateElement: (type, props, children) => {
-    useWarning(
-      !props["aria-label"] && !props["aria-labelledby"],
-      "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://www.w3.org/TR/wai-aria-practices-1.1/#slider_roles_states_props",
-    );
-    return useCreateElement(type, props, children);
-  },
 });

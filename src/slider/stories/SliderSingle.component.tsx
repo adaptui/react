@@ -14,7 +14,7 @@ import {
   useSliderThumbState,
 } from "../../index";
 
-export type SliderMultiProps = SliderInitialState & {
+export type SliderSingleProps = SliderInitialState & {
   /**
    * Label for the slider
    *
@@ -28,14 +28,11 @@ export type SliderMultiProps = SliderInitialState & {
   showTip?: boolean;
 };
 
-export const SliderMulti: React.FC<SliderMultiProps> = args => {
+export const SliderSingle: React.FC<SliderSingleProps> = args => {
   const { label, showTip, ...rest } = args;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
   const slider = useSliderState({ ...rest, label: sliderLabel });
-  const { baseState, orientation } = slider;
-  const { values } = baseState;
-
-  const isVertical = orientation === "vertical";
+  const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
 
   return (
     <SliderGroup className="chakra-slider-group" {...slider}>
@@ -44,51 +41,44 @@ export const SliderMulti: React.FC<SliderMultiProps> = args => {
           {sliderLabel}
         </SliderLabel>
         <SliderOutput className="value" {...slider}>
-          {JSON.stringify(values)}
+          {getThumbValueLabel(0)}
         </SliderOutput>
       </div>
 
-      <div className={`slider ${isVertical ? "vertical" : ""}`}>
+      <div className="slider">
         <SliderTrack {...slider} className="slider-track-container">
           <div className="slider-track" />
+          <div
+            className="slider-filled-track"
+            style={{ width: `${getValuePercent(values[0]) * 100}%` }}
+          />
         </SliderTrack>
 
-        {[...new Array(values.length).keys()].map(index => (
-          <Thumb
-            index={index}
-            key={`thumb-${index}`}
-            aria-label={`Thumb-${index}`}
-            sliderState={slider}
-            showTip={showTip}
-          />
-        ))}
+        <Thumb
+          index={0}
+          sliderState={slider}
+          showTip={showTip}
+          aria-label="Thumb"
+        />
       </div>
     </SliderGroup>
   );
 };
 
-export default SliderMulti;
+export default SliderSingle;
 
 export type SliderThumbProps = SliderThumbInitialState &
-  Pick<SliderMultiProps, "showTip">;
+  Pick<SliderSingleProps, "showTip">;
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
   const { index, showTip, sliderState } = props;
-  const { orientation, baseState } = sliderState;
-  const { getThumbValueLabel, getThumbPercent } = baseState;
-
-  const isVertical = orientation === "vertical";
+  const { getThumbValueLabel, getThumbPercent } = sliderState.baseState;
 
   return (
     <div
       className="slider-thumb"
-      style={{
-        left: !isVertical ? `calc(${getThumbPercent(index) * 100}% - 7px)` : "",
-        bottom: isVertical
-          ? `calc(${getThumbPercent(index) * 100}% - 7px)`
-          : "",
-      }}
+      style={{ left: `calc(${getThumbPercent(index) * 100}% - 7px)` }}
     >
       <SliderThumb {...sliderThumb} className="slider-thumb-handle">
         <VisuallyHidden>

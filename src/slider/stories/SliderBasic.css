@@ -1,6 +1,6 @@
 .chakra-slider-group {
   position: relative;
-  width: 400px;
+  width: 320px;
   font-family: Inter;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .chakra-slider-group .slider.vertical {
-  height: 400px;
+  height: 320px;
 }
 
 .chakra-slider-group .slider-track-container {
@@ -91,6 +91,10 @@
   left: 2px;
 }
 
+.chakra-slider-group .slider-thumb:focus-within {
+  z-index: 10;
+}
+
 .chakra-slider-group .slider-thumb .slider-thumb-handle {
   width: 14px;
   height: 14px;
@@ -99,8 +103,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   user-select: none;
   touch-action: none;
   cursor: pointer;
