@@ -44,12 +44,6 @@ Origin.args = {
   maxValue: 50,
 };
 
-export const Reversed = Default.bind({});
-Reversed.args = {
-  label: "Reversed",
-  isReversed: true,
-};
-
 export const Vertical = Default.bind({});
 Vertical.args = {
   label: "Vertical",

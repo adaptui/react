@@ -22,10 +22,11 @@ export const useSliderTrack = createHook<
   keys: SLIDER_TRACK_KEYS,
 
   useProps(options, htmlProps) {
+    const { trackProps, trackRef } = options;
     const { ref: htmlRef, ...restHtmlProps } = htmlProps;
 
-    return mergeProps(options.trackProps, {
-      ref: useForkRef(options.trackRef, htmlRef),
+    return mergeProps(trackProps, {
+      ref: useForkRef(trackRef, htmlRef),
       ...restHtmlProps,
     });
   },

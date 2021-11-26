@@ -35,9 +35,9 @@ export type SliderAllInOneProps = SliderInitialState & {
 
 export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
   const { label, origin: originProp, showTip, ...rest } = args;
+  const sliderLabel = `${label ? label : "Styled"} Slider`;
   const origin = originProp ?? args.minValue ?? 0;
-
-  const slider = useSliderState(rest);
+  const slider = useSliderState({ ...rest, label: sliderLabel });
   const { baseState, orientation } = slider;
   const { getThumbValueLabel, getThumbPercent, getValuePercent, values } =
     baseState;
@@ -64,7 +64,7 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
     <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
         <SliderLabel className="label" {...slider}>
-          {`${label ? label : "Styled"} Slider`}
+          {sliderLabel}
         </SliderLabel>
         <SliderOutput className="value" {...slider}>
           {!isMulti ? labelValue : JSON.stringify(values)}

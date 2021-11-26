@@ -42,15 +42,15 @@ export default SliderSingleReversed;
 
 export const Slider: React.FC<SliderSingleReversedProps> = args => {
   const { label, showTip, ...rest } = args;
-
-  const slider = useSliderState(rest);
+  const sliderLabel = `${label ? label : "Styled"} Slider`;
+  const slider = useSliderState({ ...rest, label: sliderLabel });
   const { getThumbValue, getValuePercent, values } = slider.baseState;
 
   return (
     <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
         <SliderLabel className="label" {...slider}>
-          {`${label ? label : "Styled"} Slider`}
+          {sliderLabel}
         </SliderLabel>
         <SliderOutput className="value" {...slider}>
           {getThumbValue(0)}

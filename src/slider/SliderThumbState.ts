@@ -35,10 +35,16 @@ export function useSliderThumbState(
   props: SliderThumbInitialState,
 ): SliderThumbStateReturn {
   const { sliderState, ...restProps } = props;
-  const { trackRef, baseState } = sliderState;
+  const { trackRef, baseState, orientation } = sliderState;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const sliderThumbProps = useSliderThumb(
-    { trackRef, inputRef, isDisabled: baseState.isDisabled, ...restProps },
+    {
+      trackRef,
+      inputRef,
+      isDisabled: baseState.isDisabled,
+      orientation,
+      ...restProps,
+    },
     baseState,
   );
 

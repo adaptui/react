@@ -31,15 +31,15 @@ export type SliderSingleVerticalProps = SliderInitialState & {
 export const SliderSingleVertical: React.FC<SliderSingleVerticalProps> =
   args => {
     const { label, showTip, ...rest } = args;
-
-    const slider = useSliderState(rest);
+    const sliderLabel = `${label ? label : "Styled"} Slider`;
+    const slider = useSliderState({ ...rest, label: sliderLabel });
     const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
 
     return (
       <SliderGroup className="chakra-slider-group" {...slider}>
         <div className="slider-label">
           <SliderLabel className="label" {...slider}>
-            {`${label ? label : "Styled"} Slider`}
+            {sliderLabel}
           </SliderLabel>
           <SliderOutput className="value" {...slider}>
             {getThumbValueLabel(0)}

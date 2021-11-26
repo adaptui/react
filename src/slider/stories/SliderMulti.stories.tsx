@@ -38,13 +38,6 @@ ThumbTip.args = {
   showTip: true,
 };
 
-export const Reversed = Default.bind({});
-Reversed.args = {
-  defaultValue: [25, 50, 75],
-  label: "Reversed",
-  isReversed: true,
-};
-
 export const Vertical = Default.bind({});
 Vertical.args = {
   defaultValue: [25, 50, 75],
