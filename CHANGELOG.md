@@ -1,3 +1,10 @@
+### [0.9.1](https://github.com/timelessco/renderlesskit-react/compare/v0.9.0...v0.9.1) (2021-11-26)
+
+
+### Maintanance Updates
+
+* **package:** 🏷️ remove unused deps ([85dc09f](https://github.com/timelessco/renderlesskit-react/commit/85dc09f464ea509b1ad1d511be46d0e53c0243e5))
+
 ## [0.9.0](https://github.com/timelessco/renderlesskit-react/compare/v0.8.2...v0.9.0) (2021-11-26)
 
 
