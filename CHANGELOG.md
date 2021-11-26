@@ -1,3 +1,17 @@
+## [0.9.0](https://github.com/timelessco/renderlesskit-react/compare/v0.8.2...v0.9.0) (2021-11-26)
+
+
+### Code Refactors
+
+* **slider:** ♻️ update slider state & track handlers ([#278](https://github.com/timelessco/renderlesskit-react/issues/278)) ([a12c676](https://github.com/timelessco/renderlesskit-react/commit/a12c676bd9349181fe7a124f48fa312380cc9ae5))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency webpack to v5.64.3 ([#276](https://github.com/timelessco/renderlesskit-react/issues/276)) ([b97630a](https://github.com/timelessco/renderlesskit-react/commit/b97630acb42059fb32d295a99a488a128e72d706))
+* **deps:** ⬆️ update dev dependencies (minor) ([#275](https://github.com/timelessco/renderlesskit-react/issues/275)) ([0b6e6e6](https://github.com/timelessco/renderlesskit-react/commit/0b6e6e6a5c73695ba256474351803546dda0b4c5))
+* **deps:** ⬆️ update dev dependencies (minor) ([#277](https://github.com/timelessco/renderlesskit-react/issues/277)) ([2526b72](https://github.com/timelessco/renderlesskit-react/commit/2526b721bb552cbcc9b1bad30e6fb8d824014790))
+
 ### [0.8.2](https://github.com/timelessco/renderlesskit-react/compare/v0.8.1...v0.8.2) (2021-11-23)
 
 
