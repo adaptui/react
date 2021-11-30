@@ -2,15 +2,9 @@ import * as React from "react";
 import { useSliderThumb } from "@react-aria/slider";
 import { AriaSliderThumbProps } from "@react-types/slider";
 
-import { SliderStateReturn } from "./SliderState";
-import {} from ".";
+import { SliderBaseStateReturn } from "./SliderBaseState";
 
 export type SliderThumbState = {
-  /**
-   * Slider state, created via `useSliderState`.
-   */
-  sliderState: SliderStateReturn;
-
   /** A ref to the thumb input element. */
   inputRef: React.RefObject<HTMLInputElement>;
 
@@ -26,31 +20,28 @@ export type SliderThumbState = {
 
 export type SliderThumbActions = {};
 
-export type SliderThumbInitialState = Pick<SliderThumbState, "sliderState"> &
-  AriaSliderThumbProps & {};
-
 export type SliderThumbStateReturn = SliderThumbState & SliderThumbActions;
+
+export type SliderThumbInitialState = AriaSliderThumbProps & {
+  /** A ref to the track element. */
+  trackRef: React.RefObject<HTMLElement>;
+
+  state: SliderBaseStateReturn;
+};
 
 export function useSliderThumbState(
   props: SliderThumbInitialState,
 ): SliderThumbStateReturn {
-  const { sliderState, ...restProps } = props;
-  const { trackRef, baseState, orientation } = sliderState;
+  const { state, trackRef, ...thumbProps } = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const sliderThumbProps = useSliderThumb(
     {
-      trackRef,
       inputRef,
-      isDisabled: baseState.isDisabled,
-      orientation,
-      ...restProps,
+      trackRef,
+      ...thumbProps,
     },
-    baseState,
+    state,
   );
 
-  return {
-    sliderState,
-    inputRef,
-    ...sliderThumbProps,
-  };
+  return { ...sliderThumbProps, inputRef };
 }

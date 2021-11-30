@@ -1,20 +1,21 @@
 // Automatically generated
 export const USE_SLIDER_BASE_STATE_KEYS = [
+  "orientation",
   "isDisabled",
-  "step",
-  "value",
+  "onChangeEnd",
   "minValue",
   "maxValue",
+  "step",
+  "value",
   "defaultValue",
   "onChange",
-  "onChangeEnd",
+  "label",
   "formatOptions",
 ] as const;
 export const SLIDER_BASE_STATE_KEYS = [
   "values",
   "focusedThumb",
   "step",
-  "isDisabled",
   "getThumbValue",
   "setThumbValue",
   "setThumbPercent",
@@ -31,27 +32,38 @@ export const SLIDER_BASE_STATE_KEYS = [
   "isThumbEditable",
   "setThumbEditable",
 ] as const;
+export const SLIDER_STATE_KEYS = [
+  "trackRef",
+  "labelProps",
+  "groupProps",
+  "trackProps",
+  "outputProps",
+] as const;
 export const USE_SLIDER_STATE_KEYS = [
-  ...USE_SLIDER_BASE_STATE_KEYS,
   "orientation",
+  "isDisabled",
+  "onChangeEnd",
+  "minValue",
+  "maxValue",
+  "step",
+  "value",
+  "defaultValue",
+  "onChange",
   "label",
   "id",
   "aria-label",
   "aria-labelledby",
   "aria-describedby",
   "aria-details",
+  "state",
 ] as const;
-export const SLIDER_STATE_KEYS = [
-  "trackRef",
-  "baseState",
-  "orientation",
+export const SLIDER_THUMB_STATE_KEYS = [
+  "inputRef",
+  "thumbProps",
+  "inputProps",
   "labelProps",
-  "groupProps",
-  "trackProps",
-  "outputProps",
 ] as const;
 export const USE_SLIDER_THUMB_STATE_KEYS = [
-  "sliderState",
   "orientation",
   "isDisabled",
   "index",
@@ -71,13 +83,8 @@ export const USE_SLIDER_THUMB_STATE_KEYS = [
   "aria-describedby",
   "aria-details",
   "aria-errormessage",
-] as const;
-export const SLIDER_THUMB_STATE_KEYS = [
-  "sliderState",
-  "inputRef",
-  "thumbProps",
-  "inputProps",
-  "labelProps",
+  "trackRef",
+  "state",
 ] as const;
 export const SLIDER_GROUP_KEYS = [
   ...SLIDER_BASE_STATE_KEYS,
