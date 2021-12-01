@@ -1,3 +1,17 @@
+### [0.9.2](https://github.com/timelessco/renderlesskit-react/compare/v0.9.1...v0.9.2) (2021-12-01)
+
+
+### Code Refactors
+
+* **slider:** ♻️ update slider state handling for UI ([#282](https://github.com/timelessco/renderlesskit-react/issues/282)) ([acd4c1b](https://github.com/timelessco/renderlesskit-react/commit/acd4c1b95db90288b05b66165cd7c37365ee076a))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([#279](https://github.com/timelessco/renderlesskit-react/issues/279)) ([2891e2e](https://github.com/timelessco/renderlesskit-react/commit/2891e2edf0794d4e05cd598245eee8b8b271032e))
+* **deps:** ⬆️ update dev dependencies (minor) ([#280](https://github.com/timelessco/renderlesskit-react/issues/280)) ([6670d08](https://github.com/timelessco/renderlesskit-react/commit/6670d08ee9ad7080d5dcf0906d7d042e732094a2))
+* **deps:** ⬆️ update dev dependencies (minor) ([#281](https://github.com/timelessco/renderlesskit-react/issues/281)) ([25f23c6](https://github.com/timelessco/renderlesskit-react/commit/25f23c6abeba4dfbc94bb6d8d280247944b88f1d))
+
 ### [0.9.1](https://github.com/timelessco/renderlesskit-react/compare/v0.9.0...v0.9.1) (2021-11-26)
 
 
