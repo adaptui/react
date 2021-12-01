@@ -43,6 +43,7 @@ import { cleanup, screen } from "@testing-library/react";
 
 import { installMouseEvent } from "../../utils/test-utils";
 import {
+  SliderBaseInitialState,
   SliderGroup,
   SliderInput,
   SliderLabel,
@@ -50,17 +51,19 @@ import {
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../index";
-import { SliderInitialState } from "../SliderState";
 
-export type SliderComponentProps = SliderInitialState & { origin?: number };
+export type SliderComponentProps = SliderBaseInitialState & { origin?: number };
 
 export const SliderComponent = (props: SliderComponentProps) => {
-  const state = useSliderState(props);
+  const label = "Minimal slider";
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...props, label: "Minimal slider", state });
   const originProp = props.origin ?? props.minValue ?? 0;
-  const { values, getValuePercent, getThumbValueLabel } = state.baseState;
+  const { values, getValuePercent, getThumbValueLabel } = state;
 
   const trackWidth = `${
     (getValuePercent(Math.max(values[0], originProp)) -
@@ -73,22 +76,22 @@ export const SliderComponent = (props: SliderComponentProps) => {
   const labelValue = getThumbValueLabel(0);
 
   return (
-    <SliderGroup className="chakra-slider-group">
+    <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
-        <SliderLabel className="label" {...state}>
-          Minimal slider
+        <SliderLabel className="label" {...slider}>
+          {label}
         </SliderLabel>
         <SliderOutput
           data-testid="testid-slider-value"
           className="value"
-          {...state}
+          {...slider}
         >
           {labelValue}
         </SliderOutput>
       </div>
 
       <div className={`slider`}>
-        <SliderTrack {...state} className="slider-track-container">
+        <SliderTrack {...slider} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
@@ -99,7 +102,14 @@ export const SliderComponent = (props: SliderComponentProps) => {
           />
         </SliderTrack>
 
-        <Thumb index={0} sliderState={state} aria-label="Thumb" />
+        <Thumb
+          index={0}
+          orientation={props.orientation}
+          isDisabled={props.isDisabled}
+          trackRef={slider.trackRef}
+          state={state}
+          aria-label="Thumb"
+        />
       </div>
     </SliderGroup>
   );
@@ -109,8 +119,7 @@ export type SliderThumbProps = SliderThumbInitialState & {};
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { sliderState } = props;
-  const { getThumbPercent } = sliderState.baseState;
+  const { getThumbPercent } = props.state;
 
   return (
     <div
