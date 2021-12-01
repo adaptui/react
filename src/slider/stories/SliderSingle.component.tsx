@@ -2,37 +2,32 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
+  SliderBaseInitialState,
   SliderGroup,
-  SliderInitialState,
   SliderInput,
   SliderLabel,
   SliderOutput,
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderSingleProps = SliderInitialState & {
-  /**
-   * Label for the slider
-   *
-   * @default Styled
-   */
-  label?: string;
-
+export type SliderSingleProps = SliderBaseInitialState & {
   /**
    * True, if thumb needs a tip to show it's current percent
    */
   showTip?: boolean;
 };
 
-export const SliderSingle: React.FC<SliderSingleProps> = args => {
-  const { label, showTip, ...rest } = args;
+export const SliderSingle: React.FC<SliderSingleProps> = props => {
+  const { label, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
-  const slider = useSliderState({ ...rest, label: sliderLabel });
-  const { getThumbValueLabel, getValuePercent, values } = slider.baseState;
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...rest, label: sliderLabel, state });
+  const { getThumbValueLabel, getValuePercent, values } = state;
 
   return (
     <SliderGroup className="chakra-slider-group" {...slider}>
@@ -56,7 +51,10 @@ export const SliderSingle: React.FC<SliderSingleProps> = args => {
 
         <Thumb
           index={0}
-          sliderState={slider}
+          state={state}
+          orientation={props.orientation}
+          isDisabled={props.isDisabled}
+          trackRef={slider.trackRef}
           showTip={showTip}
           aria-label="Thumb"
         />
@@ -72,8 +70,8 @@ export type SliderThumbProps = SliderThumbInitialState &
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { index, showTip, sliderState } = props;
-  const { getThumbValueLabel, getThumbPercent } = sliderState.baseState;
+  const { index, showTip, state } = props;
+  const { getThumbValueLabel, getThumbPercent } = state;
 
   return (
     <div

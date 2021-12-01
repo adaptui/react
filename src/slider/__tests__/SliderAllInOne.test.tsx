@@ -42,43 +42,37 @@ import { fireEvent, render } from "reakit-test-utils";
 import { cleanup, screen } from "@testing-library/react";
 
 import {
+  SliderBaseInitialState,
   SliderGroup,
-  SliderInitialState,
   SliderInput,
   SliderLabel,
   SliderOutput,
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 import { installMouseEvent } from "../../utils/test-utils";
 
-export type SliderAllInOneProps = SliderInitialState & {
-  /**
-   * Label for the slider
-   *
-   * @default Styled
-   */
-  label?: string;
-
+export type SliderAllInOneProps = SliderBaseInitialState & {
   /**
    * Origin on the slider, calculated based on min & max
    */
   origin?: number;
 };
 
-export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
-  const { label, origin: originProp, ...rest } = args;
-  const origin = originProp ?? args.minValue ?? 0;
-
-  const slider = useSliderState(rest);
-  const { baseState, orientation } = slider;
+export const SliderAllInOne: React.FC<SliderAllInOneProps> = props => {
+  const { label, origin: originProp, ...rest } = props;
+  const origin = originProp ?? props.minValue ?? 0;
+  const sliderLabel = `${label ? label : "Styled"} Slider`;
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...rest, label: sliderLabel, state });
   const { getThumbValueLabel, getThumbPercent, getValuePercent, values } =
-    baseState;
+    state;
 
-  const isVertical = orientation === "vertical";
+  const isVertical = props.orientation === "vertical";
   const isRange = values.length === 2;
   const isMulti = values.length > 2;
 
@@ -100,7 +94,7 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
     <SliderGroup className="chakra-slider-group" {...slider}>
       <div className="slider-label">
         <SliderLabel className="label" {...slider}>
-          {`${label ? label : "Styled"} Slider`}
+          {sliderLabel}
         </SliderLabel>
         <SliderOutput
           className="value"
@@ -132,7 +126,10 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
           <Thumb
             index={index}
             key={`thumb-${index}`}
-            sliderState={slider}
+            state={state}
+            orientation={props.orientation}
+            isDisabled={props.isDisabled}
+            trackRef={slider.trackRef}
             aria-label={`Thumb-${index}`}
           />
         ))}
@@ -146,9 +143,8 @@ export default SliderAllInOne;
 export type SliderThumbProps = SliderThumbInitialState & {};
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { index, sliderState } = props;
-  const { orientation, baseState } = sliderState;
-  const { getThumbPercent } = baseState;
+  const { index, orientation } = props;
+  const { getThumbPercent } = props.state;
 
   const isVertical = orientation === "vertical";
 

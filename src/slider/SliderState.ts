@@ -2,11 +2,7 @@ import * as React from "react";
 import { useSlider } from "@react-aria/slider";
 import { AriaSliderProps } from "@react-types/slider";
 
-import {
-  SliderBaseInitialState,
-  SliderBaseStateReturn,
-  useSliderBaseState,
-} from "./index";
+import { SliderBaseStateReturn } from "./index";
 
 export type SliderState = {
   /**
@@ -16,17 +12,6 @@ export type SliderState = {
    * the track..
    */
   trackRef: React.RefObject<HTMLElement>;
-
-  /**
-   * Sliders BaseState.
-   */
-  baseState: SliderBaseStateReturn;
-
-  /**
-   * The orientation of the Slider.
-   * @default 'horizontal'
-   */
-  orientation: "horizontal" | "vertical";
 
   /** Props for the label element. */
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
@@ -41,24 +26,18 @@ export type SliderState = {
   outputProps: React.OutputHTMLAttributes<HTMLOutputElement>;
 };
 
-export type SliderAction = {};
+export type SliderActions = {};
 
-export type SliderInitialState = AriaSliderProps & SliderBaseInitialState & {};
+export type SliderStateReturn = SliderState & SliderActions & {};
 
-export type SliderStateReturn = SliderState & SliderAction & {};
+export type SliderInitialState = AriaSliderProps & {
+  state: SliderBaseStateReturn;
+};
 
-export function useSliderState(
-  props: SliderInitialState = {},
-): SliderStateReturn {
-  const { orientation = "horizontal" } = props;
-  const baseState = useSliderBaseState(props);
+export function useSliderState(props: SliderInitialState): SliderStateReturn {
+  const { state, ...rest } = props;
   const trackRef = React.useRef<HTMLElement>(null);
-  const sliderProps = useSlider({ ...props, orientation }, baseState, trackRef);
+  const sliderProps = useSlider(rest, state, trackRef);
 
-  return {
-    baseState,
-    orientation,
-    trackRef,
-    ...sliderProps,
-  };
+  return { ...sliderProps, trackRef };
 }

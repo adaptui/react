@@ -2,26 +2,20 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
+  SliderBaseInitialState,
   SliderGroup,
-  SliderInitialState,
   SliderInput,
   SliderLabel,
   SliderOutput,
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderAllInOneProps = SliderInitialState & {
-  /**
-   * Label for the slider
-   *
-   * @default Styled
-   */
-  label?: string;
-
+export type SliderAllInOneProps = SliderBaseInitialState & {
   /**
    * Origin on the slider, calculated based on min & max
    */
@@ -33,16 +27,16 @@ export type SliderAllInOneProps = SliderInitialState & {
   showTip?: boolean;
 };
 
-export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
-  const { label, origin: originProp, showTip, ...rest } = args;
+export const SliderAllInOne: React.FC<SliderAllInOneProps> = props => {
+  const { label, origin: originProp, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
-  const origin = originProp ?? args.minValue ?? 0;
-  const slider = useSliderState({ ...rest, label: sliderLabel });
-  const { baseState, orientation } = slider;
+  const origin = originProp ?? props.minValue ?? 0;
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...rest, label: sliderLabel, state });
   const { getThumbValueLabel, getThumbPercent, getValuePercent, values } =
-    baseState;
+    state;
 
-  const isVertical = orientation === "vertical";
+  const isVertical = props.orientation === "vertical";
   const isRange = values.length === 2;
   const isMulti = values.length > 2;
 
@@ -93,7 +87,10 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = args => {
             index={index}
             key={`thumb-${index}`}
             aria-label={`Thumb-${index}`}
-            sliderState={slider}
+            state={state}
+            orientation={props.orientation}
+            isDisabled={props.isDisabled}
+            trackRef={slider.trackRef}
             showTip={showTip}
           />
         ))}
@@ -109,9 +106,8 @@ export type SliderThumbProps = SliderThumbInitialState &
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { index, showTip, sliderState } = props;
-  const { orientation, baseState } = sliderState;
-  const { getThumbValueLabel, getThumbPercent } = baseState;
+  const { index, orientation, showTip } = props;
+  const { getThumbPercent, getThumbValueLabel } = props.state;
 
   const isVertical = orientation === "vertical";
 

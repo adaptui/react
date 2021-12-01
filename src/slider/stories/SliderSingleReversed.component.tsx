@@ -3,26 +3,20 @@ import { VisuallyHidden } from "reakit";
 import { I18nProvider } from "@react-aria/i18n";
 
 import {
+  SliderBaseInitialState,
   SliderGroup,
-  SliderInitialState,
   SliderInput,
   SliderLabel,
   SliderOutput,
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderSingleReversedProps = SliderInitialState & {
-  /**
-   * Label for the slider
-   *
-   * @default Styled
-   */
-  label?: string;
-
+export type SliderSingleReversedProps = SliderBaseInitialState & {
   /**
    * True, if thumb needs a tip to show it's current percent
    */
@@ -41,11 +35,12 @@ export const SliderSingleReversed: React.FC<
 
 export default SliderSingleReversed;
 
-export const Slider: React.FC<SliderSingleReversedProps> = args => {
-  const { label, showTip, ...rest } = args;
+export const Slider: React.FC<SliderSingleReversedProps> = props => {
+  const { label, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
-  const slider = useSliderState({ ...rest, label: sliderLabel });
-  const { getThumbValue, getValuePercent, values } = slider.baseState;
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...rest, label: sliderLabel, state });
+  const { getThumbValue, getValuePercent, values } = state;
 
   return (
     <SliderGroup className="chakra-slider-group" {...slider}>
@@ -72,7 +67,10 @@ export const Slider: React.FC<SliderSingleReversedProps> = args => {
 
         <Thumb
           index={0}
-          sliderState={slider}
+          state={state}
+          orientation={props.orientation}
+          isDisabled={props.isDisabled}
+          trackRef={slider.trackRef}
           aria-label="Thumb"
           showTip={showTip}
         />
@@ -86,8 +84,8 @@ export type SliderThumbProps = SliderThumbInitialState &
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { index, showTip, sliderState } = props;
-  const { getThumbValueLabel, getThumbPercent } = sliderState.baseState;
+  const { index, showTip, state } = props;
+  const { getThumbValueLabel, getThumbPercent } = state;
 
   return (
     <div

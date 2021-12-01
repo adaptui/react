@@ -2,40 +2,34 @@ import * as React from "react";
 import { VisuallyHidden } from "reakit";
 
 import {
+  SliderBaseInitialState,
   SliderGroup,
-  SliderInitialState,
   SliderInput,
   SliderLabel,
   SliderOutput,
   SliderThumb,
   SliderThumbInitialState,
   SliderTrack,
+  useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderRangeProps = SliderInitialState & {
-  /**
-   * Label for the slider
-   *
-   * @default Styled
-   */
-  label?: string;
-
+export type SliderRangeProps = SliderBaseInitialState & {
   /**
    * True, if thumb needs a tip to show it's current percent
    */
   showTip?: boolean;
 };
 
-export const SliderRange: React.FC<SliderRangeProps> = args => {
-  const { label, showTip, ...rest } = args;
+export const SliderRange: React.FC<SliderRangeProps> = props => {
+  const { label, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
-  const slider = useSliderState({ ...rest, label: sliderLabel });
-  const { baseState, orientation } = slider;
-  const { getThumbValueLabel, getThumbPercent, values } = baseState;
+  const state = useSliderBaseState(props);
+  const slider = useSliderState({ ...rest, label: sliderLabel, state });
+  const { getThumbValueLabel, getThumbPercent, values } = state;
 
-  const isVertical = orientation === "vertical";
+  const isVertical = props.orientation === "vertical";
   const isRange = values.length === 2;
 
   const labelValue = `${getThumbValueLabel(0)} to ${getThumbValueLabel(1)}`;
@@ -73,7 +67,10 @@ export const SliderRange: React.FC<SliderRangeProps> = args => {
             index={index}
             key={`thumb-${index}`}
             aria-label={`Thumb-${index}`}
-            sliderState={slider}
+            state={state}
+            orientation={props.orientation}
+            isDisabled={props.isDisabled}
+            trackRef={slider.trackRef}
             showTip={showTip}
           />
         ))}
@@ -89,9 +86,8 @@ export type SliderThumbProps = SliderThumbInitialState &
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
-  const { index, showTip, sliderState } = props;
-  const { orientation, baseState } = sliderState;
-  const { getThumbValueLabel, getThumbPercent } = baseState;
+  const { index, showTip, state, orientation } = props;
+  const { getThumbValueLabel, getThumbPercent } = state;
 
   const isVertical = orientation === "vertical";
 

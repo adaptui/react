@@ -1,5 +1,6 @@
 import { useNumberFormatter } from "@react-aria/i18n";
 import { useSliderState } from "@react-stately/slider";
+import { SliderProps } from "@react-types/slider";
 
 export interface SliderBaseState {
   /**
@@ -17,9 +18,6 @@ export interface SliderBaseState {
    * @default 1
    */
   step: number;
-
-  /** Whether the whole Slider is disabled. */
-  isDisabled: boolean;
 }
 
 export interface SliderBaseAction {
@@ -120,35 +118,7 @@ export interface SliderBaseAction {
   setThumbEditable(index: number, editable: boolean): void;
 }
 
-export type SliderBaseInitialState = Partial<
-  Pick<SliderBaseState, "step" | "isDisabled">
-> & {
-  /** The current value (controlled). */
-  value?: number[];
-
-  /**
-   * The slider's minimum value.
-   * @default 0
-   */
-  minValue?: number;
-
-  /**
-   * The slider's maximum value.
-   * @default 100
-   */
-  maxValue?: number;
-
-  /** The default value (uncontrolled). */
-  defaultValue?: number[];
-
-  /** Handler that is called when the value changes. */
-  onChange?: (value: number[]) => void;
-
-  /**
-   * Get the value when dragging has ended.
-   */
-  onChangeEnd?: (value: number[]) => void;
-
+export type SliderBaseInitialState = SliderProps & {
   /**
    * The display format of the value label.
    */
@@ -160,13 +130,8 @@ export type SliderBaseStateReturn = SliderBaseState & SliderBaseAction;
 export function useSliderBaseState(
   props: SliderBaseInitialState = {},
 ): SliderBaseStateReturn {
-  const { isDisabled = false } = props;
-
   const numberFormatter = useNumberFormatter(props.formatOptions);
-  const state = useSliderState({ ...props, isDisabled, numberFormatter });
+  const state = useSliderState({ ...props, numberFormatter });
 
-  return {
-    ...state,
-    isDisabled,
-  };
+  return state;
 }
