@@ -156,17 +156,21 @@ describe("NumberInput", () => {
     expect(numberInput).toHaveFocus();
     expect(numberInput).toHaveValue("0");
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       fireEvent.wheel(numberInput, { deltaY: -100 });
     });
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       fireEvent.wheel(numberInput, { deltaY: -100 });
     });
     expect(numberInput).toHaveValue("2");
 
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       fireEvent.wheel(numberInput, { deltaY: 100 });
     });
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       fireEvent.wheel(numberInput, { deltaY: 100 });
     });

@@ -29,6 +29,7 @@
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
     "testing-library/prefer-explicit-assert": ["error"],
+    "testing-library/no-node-access": "off",
     "testing-library/consistent-data-testid": [
       2,
       {

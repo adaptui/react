@@ -16,8 +16,8 @@ function render({
 
 describe("useAccordionState", () => {
   test("initial state", () => {
-    const result = render();
+    const { current } = render();
 
-    expect(result.current).toMatchSnapshot();
+    expect(current).toMatchSnapshot();
   });
 });
