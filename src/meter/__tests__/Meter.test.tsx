@@ -2,6 +2,7 @@ import * as React from "react";
 import { render } from "reakit-test-utils";
 import { renderHook } from "reakit-test-utils/hooks";
 import { jestSerializerStripFunctions } from "reakit-test-utils/jestSerializerStripFunctions";
+import { screen } from "@testing-library/react";
 import cases from "jest-in-case";
 
 import { MeterInitialState, useMeterState } from "../../index";
@@ -48,15 +49,17 @@ describe("Meter", () => {
   });
 
   it("checks role", function () {
-    const { getByRole } = render(<MeterComp />);
-    const meter = getByRole("meter");
-    const alsoProgressBar = getByRole("progressbar", { queryFallbacks: true });
+    render(<MeterComp />);
+    const meter = screen.getByRole("meter");
+    const alsoProgressBar = screen.getByRole("progressbar", {
+      queryFallbacks: true,
+    });
     expect(meter).toBe(alsoProgressBar);
   });
 
   it("no value", function () {
-    const { getByRole } = render(<MeterComp />);
-    const meter = getByRole("meter");
+    render(<MeterComp />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
@@ -65,8 +68,8 @@ describe("Meter", () => {
   });
 
   it("value between min and max", function () {
-    const { getByRole } = render(<MeterComp value={0.5} />);
-    const meter = getByRole("meter");
+    render(<MeterComp value={0.5} />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
@@ -75,8 +78,8 @@ describe("Meter", () => {
   });
 
   it("value below min", function () {
-    const { getByRole } = render(<MeterComp value={-0.5} />);
-    const meter = getByRole("meter");
+    render(<MeterComp value={-0.5} />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
@@ -85,8 +88,8 @@ describe("Meter", () => {
   });
 
   it("value above max", function () {
-    const { getByRole } = render(<MeterComp value={1.5} />);
-    const meter = getByRole("meter");
+    render(<MeterComp value={1.5} />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "1");
@@ -95,8 +98,8 @@ describe("Meter", () => {
   });
 
   it("custom min and max", function () {
-    const { getByRole } = render(<MeterComp min={0} value={5} max={10} />);
-    const meter = getByRole("meter");
+    render(<MeterComp min={0} value={5} max={10} />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-valuemin", "0");
     expect(meter).toHaveAttribute("aria-valuemax", "10");
@@ -105,15 +108,15 @@ describe("Meter", () => {
   });
 
   it("supports aria-label", function () {
-    const { getByRole } = render(<MeterComp aria-label="Meter" />);
-    const meter = getByRole("meter");
+    render(<MeterComp aria-label="Meter" />);
+    const meter = screen.getByRole("meter");
 
     expect(meter).toHaveAttribute("aria-label", "Meter");
   });
 
   it("supports custom DOM props", function () {
-    const { getByTestId } = render(<MeterComp data-testid="testid-test" />);
-    const meter = getByTestId("testid-test");
+    render(<MeterComp data-testid="testid-test" />);
+    const meter = screen.getByTestId("testid-test");
 
     expect(meter).toBeInTheDocument();
   });
@@ -121,8 +124,8 @@ describe("Meter", () => {
   cases(
     "meter state hook tests",
     (opts: any) => {
-      const result = renderMeterStateHook(opts.in);
-      expect(result.current).toMatchObject(opts.out);
+      const { current } = renderMeterStateHook(opts.in);
+      expect(current).toMatchObject(opts.out);
     },
     data,
   );

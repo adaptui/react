@@ -8,6 +8,7 @@ function render({ ...initialState }: SegmentInitialState = {}) {
 
 describe("SegmentState", () => {
   it("should have proper segments", () => {
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const result = render({
       defaultValue: new Date(2050, 0, 0),
     });
@@ -18,6 +19,7 @@ describe("SegmentState", () => {
   it.each(["increment", "decrement"])(
     "should be able to %s a segment",
     type => {
+      // eslint-disable-next-line testing-library/render-result-naming-convention
       const result = render();
 
       expect(result.current.segments[0].value).toBe(1);
@@ -43,6 +45,7 @@ describe("SegmentState", () => {
     // eslint-disable-next-line jest/no-identical-title
     "should be able to %s a segment",
     type => {
+      // eslint-disable-next-line testing-library/render-result-naming-convention
       const result = render();
 
       expect(result.current.segments[0].value).toBe(1);
@@ -64,6 +67,7 @@ describe("SegmentState", () => {
   );
 
   it("should be able to setSegment", () => {
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const result = render();
 
     expect(result.current.segments[0].value).toBe(1);
@@ -85,6 +89,7 @@ describe("SegmentState", () => {
   });
 
   it("should be able to setFieldValue", () => {
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const result = render({ defaultValue: new Date(2050, 0, 0) });
 
     expect(result.current.fieldValue).toStrictEqual(new Date(2050, 0, 0));
@@ -96,6 +101,7 @@ describe("SegmentState", () => {
   });
 
   it("should support different formatOptions", () => {
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const result = render({
       defaultValue: new Date(2050, 0, 0),
       formatOptions: {

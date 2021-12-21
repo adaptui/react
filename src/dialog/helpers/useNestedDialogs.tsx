@@ -24,6 +24,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
       context.addDialog?.(ref);
       setDialogs(prevDialogs => [...prevDialogs, ref]);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [context.addDialog],
   );
 
@@ -32,6 +33,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
       context.removeDialog?.(ref);
       setDialogs(prevDialogs => removeItemFromArray(prevDialogs, ref));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [context.removeDialog],
   );
 
@@ -40,6 +42,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
       context.showDialog?.(ref);
       setVisibleModals(prevDialogs => [...prevDialogs, ref]);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [context.showDialog],
   );
 
@@ -48,6 +51,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
       context.hideDialog?.(ref);
       setVisibleModals(prevDialogs => removeItemFromArray(prevDialogs, ref));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [context.hideDialog],
   );
 
@@ -58,6 +62,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
     return () => {
       context.removeDialog?.(dialogRef);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     options.unstable_orphan,
     context.addDialog,
@@ -73,6 +78,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
     return () => {
       context.hideDialog?.(dialogRef);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     options.unstable_orphan,
     options.modal,
@@ -91,6 +97,7 @@ export function useNestedDialogs(dialogRef: DialogRef, options: DialogOptions) {
     ) {
       options.hide?.();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context.visible, options.visible, options.hide, options.unstable_orphan]);
 
   // Provider
