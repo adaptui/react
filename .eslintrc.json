@@ -1,11 +1,11 @@
 {
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "env": { "es6": true },
-  "parser": "@typescript-eslint/parser",
-  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"],
-  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": ["simple-import-sort"],
   "rules": {
     "no-console": "off",
     "simple-import-sort/imports": [
