@@ -151,7 +151,7 @@
     "babel-plugin-jsx-remove-data-test-id": "3.0.0",
     "chalk": "4.1.0",
     "codesandbox": "2.2.3",
-    "concurrently": "6.5.1",
+    "concurrently": "7.0.0",
     "cross-env": "7.0.3",
     "eslint": "8.6.0",
     "eslint-config-prettier": "8.3.0",
