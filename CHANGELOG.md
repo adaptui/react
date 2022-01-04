@@ -1,3 +1,10 @@
+### [0.10.1](https://github.com/timelessco/renderlesskit-react/compare/v0.10.0...v0.10.1) (2022-01-04)
+
+
+### Feature Updates
+
+* **createComposableHook:** ✨ add support for all composable options ([8ff0fc1](https://github.com/timelessco/renderlesskit-react/commit/8ff0fc12a33f1cb1f1be929b74a069d05aa54430))
+
 ## [0.10.0](https://github.com/timelessco/renderlesskit-react/compare/v0.9.2...v0.10.0) (2022-01-04)
 
 
@@ -948,7 +955,7 @@
   ([dbf7fc5](https://github.com/timelessco/renderlesskit-react/commit/dbf7fc5ce17ad9df91dcea1e3f77104788778383))
 - **aria:** ♻️ remove aria dependencies with button & interactions
   ([f32199c](https://github.com/timelessco/renderlesskit-react/commit/f32199cbabf5ac529786896aec26e6f305480dfb))
-- **pickers:** ♻️ improve state from dateValue to string
+- **pickers:** ♻��� improve state from dateValue to string
   ([ade0a4e](https://github.com/timelessco/renderlesskit-react/commit/ade0a4ef3621828d6dfb66b57ed4ca3a391279e5))
 - **pickers:** ♻️ update utils & add date utils
   ([12ee6da](https://github.com/timelessco/renderlesskit-react/commit/12ee6da780ae2a79d7d3e3878321945f0a1a1995))
