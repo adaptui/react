@@ -1,9 +1,10 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { createOnKeyDown } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 
+import { createComponent } from "../system";
 import { ariaAttr, isTouch } from "../utils";
 
 import { PICKER_BASE_KEYS } from "./__keys";

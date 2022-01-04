@@ -1,5 +1,7 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
+
+import { createComponent } from "../system";
 
 import { ACCORDION_KEYS } from "./__keys";
 

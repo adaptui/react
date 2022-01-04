@@ -1,5 +1,7 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+
+import { createComponent } from "../system";
 
 import { CALENDAR_WEEK_TITLE_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";

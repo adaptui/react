@@ -1,5 +1,7 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
+
+import { createComponent } from "../system";
 
 import { PICKER_BASE_CONTENT_KEYS } from "./__keys";
 import { PickerBaseStateReturn } from "./PickerBaseState";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import {
   DisclosureContentHTMLProps,
   DisclosureContentOptions,
@@ -9,6 +9,8 @@ import {
   useDisclosureContent,
 } from "reakit";
 import { useForkRef } from "reakit-utils";
+
+import { createComponent } from "../system";
 
 import { ACCORDION_PANEL_KEYS } from "./__keys";
 import { AccordionMultiStateReturn } from "./AccordionMultiState";

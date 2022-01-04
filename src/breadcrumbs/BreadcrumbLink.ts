@@ -1,6 +1,7 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 
 import { LinkHTMLProps, LinkOptions, useLink } from "../link";
+import { createComponent } from "../system";
 
 import { BREADCRUMB_LINK_KEYS } from "./__keys";
 

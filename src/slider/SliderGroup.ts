@@ -1,6 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { GroupHTMLProps, GroupOptions, useGroup } from "reakit";
 import { mergeProps } from "@react-aria/utils";
+
+import { createComponent } from "../system";
 
 import { SLIDER_GROUP_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";

@@ -1,10 +1,11 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 
 import {
   SegmentFieldHTMLProps,
   SegmentFieldOptions,
   useSegmentField,
 } from "../segment";
+import { createComponent } from "../system";
 
 import { DATE_PICKER_SEGMENT_FIELD_KEYS } from "./__keys";
 import { DatePickerStateReturn } from "./DatePickerState";

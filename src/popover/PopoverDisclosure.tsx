@@ -1,4 +1,4 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { useForkRef } from "reakit-utils";
 
 import {
@@ -6,6 +6,7 @@ import {
   DialogDisclosureOptions,
   useDialogDisclosure,
 } from "../dialog";
+import { createComponent } from "../system";
 
 import { POPOVER_DISCLOSURE_KEYS } from "./__keys";
 import { PopoverStateReturn } from "./PopoverState";

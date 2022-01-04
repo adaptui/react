@@ -1,10 +1,11 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 
 import {
   DialogDisclosureHTMLProps,
   DialogDisclosureOptions,
   useDialogDisclosure,
 } from "../dialog";
+import { createComponent } from "../system";
 
 import { POPOVER_TRIGGER_KEYS } from "./__keys";
 

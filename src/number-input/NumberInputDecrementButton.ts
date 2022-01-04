@@ -1,7 +1,9 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
+
+import { createComponent } from "../system";
 
 import { NUMBER_INPUT_DECREMENT_BUTTON_KEYS } from "./__keys";
 import { NumberInputStateReturn } from "./index";

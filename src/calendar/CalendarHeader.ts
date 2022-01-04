@@ -1,6 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useDateFormatter } from "@react-aria/i18n";
+
+import { createComponent } from "../system";
 
 import { CALENDAR_HEADER_KEYS } from "./__keys";
 import { CalendarStateReturn } from "./CalendarState";

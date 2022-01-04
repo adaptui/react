@@ -1,6 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useForkRef } from "reakit-utils";
+
+import { createComponent } from "../system";
 
 import { POPOVER_ARROW_CONTENT_KEYS } from "./__keys";
 import { PopoverStateReturn } from "./PopoverState";

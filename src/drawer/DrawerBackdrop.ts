@@ -1,10 +1,11 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 
 import {
   DialogBackdropHTMLProps,
   DialogBackdropOptions,
   useDialogBackdrop,
 } from "../dialog";
+import { createComponent } from "../system";
 
 import { DRAWER_BACKDROP_KEYS } from "./__keys";
 

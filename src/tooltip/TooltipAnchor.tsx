@@ -1,10 +1,11 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 
 import {
   PopoverAnchorHTMLProps,
   PopoverAnchorOptions,
   usePopoverAnchor,
 } from "../popover";
+import { createComponent } from "../system";
 
 import { TOOLTIP_ANCHOR_KEYS } from "./__keys";
 import { TooltipStateReturn } from "./TooltipState";

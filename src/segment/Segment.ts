@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import {
   CompositeItemHTMLProps,
   CompositeItemOptions,
@@ -10,6 +10,7 @@ import { useDateFormatter } from "@react-aria/i18n";
 import { useSpinButton } from "@react-aria/spinbutton";
 import { mergeProps } from "@react-aria/utils";
 
+import { createComponent } from "../system";
 import { dataAttr } from "../utils";
 
 import { SEGMENT_KEYS } from "./__keys";

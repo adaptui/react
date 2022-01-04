@@ -4,12 +4,13 @@
  * to work with Reakit System
  */
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { ButtonHTMLProps, ButtonOptions, useButton } from "reakit";
 import { ensureFocus, useForkRef } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 import { useDateFormatter } from "@react-aria/i18n";
 
+import { createComponent } from "../system";
 import { isSameDay } from "../utils";
 
 import { CALENDAR_CELL_BUTTON_KEYS } from "./__keys";

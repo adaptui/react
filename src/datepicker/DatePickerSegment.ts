@@ -1,7 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { unstable_useId as useId } from "reakit";
 
 import { SegmentHTMLProps, SegmentOptions, useSegment } from "../segment";
+import { createComponent } from "../system";
 
 import { DATE_PICKER_SEGMENT_KEYS } from "./__keys";
 import { DatePickerStateReturn } from ".";

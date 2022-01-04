@@ -1,6 +1,8 @@
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { mergeProps } from "@react-aria/utils";
+
+import { createComponent } from "../system";
 
 import { SLIDER_THUMB_KEYS } from "./__keys";
 import { SliderThumbStateReturn } from "./SliderThumbState";

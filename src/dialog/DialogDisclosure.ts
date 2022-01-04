@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { useForkRef, useLiveRef } from "reakit-utils";
 import { warning } from "reakit-warning";
 import { useSafeLayoutEffect } from "@chakra-ui/hooks";
@@ -9,6 +9,7 @@ import {
   DisclosureOptions,
   useDisclosure,
 } from "../disclosure";
+import { createComponent } from "../system";
 
 import { DIALOG_DISCLOSURE_KEYS } from "./__keys";
 import { DialogStateReturn } from "./DialogState";

@@ -1,5 +1,5 @@
 import React from "react";
-import { createComponent, createHook } from "reakit-system";
+import { createHook } from "reakit-system";
 import { Portal } from "reakit";
 
 import {
@@ -7,6 +7,7 @@ import {
   PopoverOptions,
   usePopover,
 } from "../popover/Popover";
+import { createComponent } from "../system";
 
 import { TOOLTIP_KEYS } from "./__keys";
 
