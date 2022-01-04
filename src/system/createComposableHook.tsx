@@ -20,11 +20,9 @@ export type CreateHook<O, P> = {
 };
 
 export function createComposableHook<O, P>(options: CreateHook<O, P>) {
-  const composableHook = (newCompose = options.compose) =>
-    createHook({
-      ...options,
-      compose: newCompose,
-    });
+  const composableHook = (newOptions?: CreateHook<O, P>) => {
+    return createHook({ ...options, ...newOptions });
+  };
 
   return composableHook;
 }
