@@ -167,7 +167,7 @@
     "jest-axe": "5.0.1",
     "jest-in-case": "1.0.2",
     "jest-matcher-utils": "27.4.6",
-    "lint-staged": "12.1.7",
+    "lint-staged": "12.2.0",
     "lodash": "4.17.21",
     "markdown-to-ast": "6.0.3",
     "markdown-toc": "1.2.0",
