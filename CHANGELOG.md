@@ -1,3 +1,40 @@
+## [0.11.0](https://github.com/timelessco/renderlesskit-react/compare/v0.10.1...v0.11.0) (2022-02-16)
+
+
+### Bug Fixes
+
+* **i18n:** 🐛 numbers format for celsius patch ([3ea8753](https://github.com/timelessco/renderlesskit-react/commit/3ea8753760990a7764c996b18e6c319af372672f))
+
+
+### Feature Updates
+
+* **system:** ✨ add createHook function ([2c7304e](https://github.com/timelessco/renderlesskit-react/commit/2c7304ec381e2adf47876898bc571363c014fefd))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency @react-spring/web to v9.4.2 ([#305](https://github.com/timelessco/renderlesskit-react/issues/305)) ([3703bec](https://github.com/timelessco/renderlesskit-react/commit/3703bec5f42dd01cda2dfea456fa9fced6db1467))
+* **deps:** ⬆️ update dependency @release-it/conventional-changelog to v4 ([#304](https://github.com/timelessco/renderlesskit-react/issues/304)) ([c5d4ebb](https://github.com/timelessco/renderlesskit-react/commit/c5d4ebb4747fa822749f27af478d29daa9be5bfb))
+* **deps:** ⬆️ update dependency @types/node to v16.11.21 ([#309](https://github.com/timelessco/renderlesskit-react/issues/309)) ([07d4ab5](https://github.com/timelessco/renderlesskit-react/commit/07d4ab5a23f3bc9b75a9f66076be3c40d7b84c3f))
+* **deps:** ⬆️ update dependency lint-staged to v12.2.0 ([#308](https://github.com/timelessco/renderlesskit-react/issues/308)) ([61aa731](https://github.com/timelessco/renderlesskit-react/commit/61aa73191ec527ddf8e76791d89f3544ee8e7699))
+* **deps:** ⬆️ update dependency react-hook-form to v7.24.1 ([#307](https://github.com/timelessco/renderlesskit-react/issues/307)) ([19d2468](https://github.com/timelessco/renderlesskit-react/commit/19d2468e0e40a1d2e3b9c489aaa618b0f1af6fbf))
+* **deps:** ⬆️ update dependency tailwindcss to v3.0.16 ([#311](https://github.com/timelessco/renderlesskit-react/issues/311)) ([231d192](https://github.com/timelessco/renderlesskit-react/commit/231d1926dd01e000b4f6b0880f5659bca57628ac))
+* **deps:** ⬆️ update dev dependencies (minor) ([#302](https://github.com/timelessco/renderlesskit-react/issues/302)) ([5b7bab3](https://github.com/timelessco/renderlesskit-react/commit/5b7bab3f81e00eefda333cb5c184140e0dd115a9))
+* **deps:** ⬆️ update dev dependencies (minor) ([#303](https://github.com/timelessco/renderlesskit-react/issues/303)) ([bf7a2d3](https://github.com/timelessco/renderlesskit-react/commit/bf7a2d3d1aba2ab0e0c1dedc799d68db65707685))
+* **deps:** ⬆️ update dev dependencies (minor) ([#306](https://github.com/timelessco/renderlesskit-react/issues/306)) ([73eb686](https://github.com/timelessco/renderlesskit-react/commit/73eb686fd98860dd847179011ebf7fff62c11f07))
+* **deps:** ⬆️ update dev dependencies (minor) ([#310](https://github.com/timelessco/renderlesskit-react/issues/310)) ([b6756cd](https://github.com/timelessco/renderlesskit-react/commit/b6756cdf45cbd264e5db30634822435d96cca836))
+* **deps:** ⬆️ update dev dependencies (minor) ([#312](https://github.com/timelessco/renderlesskit-react/issues/312)) ([0db8eed](https://github.com/timelessco/renderlesskit-react/commit/0db8eed5c91452118b475ab24598dd74614b02c8))
+* **deps:** ⬆️ update dev dependencies (minor) ([#313](https://github.com/timelessco/renderlesskit-react/issues/313)) ([9810107](https://github.com/timelessco/renderlesskit-react/commit/9810107a3c23565711550cadb91183e8892e4cb5))
+* **deps:** ⬆️ update dev dependencies (minor) ([#314](https://github.com/timelessco/renderlesskit-react/issues/314)) ([798ebce](https://github.com/timelessco/renderlesskit-react/commit/798ebcec99be176e231455e329be333a6de563aa))
+* **deps:** ⬆️ update dev dependencies (minor) ([#316](https://github.com/timelessco/renderlesskit-react/issues/316)) ([702aeba](https://github.com/timelessco/renderlesskit-react/commit/702aeba5ae1aa7191593df52121f9e6bebe1c7c6))
+* **deps:** ⬆️ update dev dependencies (minor) ([#317](https://github.com/timelessco/renderlesskit-react/issues/317)) ([fd299b3](https://github.com/timelessco/renderlesskit-react/commit/fd299b32920ebd91004edce1f7f7dee7d1c99d20))
+* **deps:** ⬆️ update dev dependencies (minor) ([#318](https://github.com/timelessco/renderlesskit-react/issues/318)) ([b763f79](https://github.com/timelessco/renderlesskit-react/commit/b763f79b20d0610e432bd49c620279cb3207b17d))
+* **deps:** ⬆️ update dev dependencies (minor) ([#319](https://github.com/timelessco/renderlesskit-react/issues/319)) ([73de512](https://github.com/timelessco/renderlesskit-react/commit/73de5123a572d41f03e8979d32b6b30dc20f250e))
+* **deps:** ⬆️ update dev dependencies (minor) ([#320](https://github.com/timelessco/renderlesskit-react/issues/320)) ([e3e32f0](https://github.com/timelessco/renderlesskit-react/commit/e3e32f01855d83ffb93e3b3e9c32a9131bd03a50))
+* **deps:** ⬆️ update dev dependencies (minor) ([#321](https://github.com/timelessco/renderlesskit-react/issues/321)) ([4de0ab0](https://github.com/timelessco/renderlesskit-react/commit/4de0ab0323cacdc8dc8b2c6a9cc6cbbf24539a3b))
+* **deps:** ⬆️ update dev dependencies (minor) to v6.4.18 ([#315](https://github.com/timelessco/renderlesskit-react/issues/315)) ([3734d8c](https://github.com/timelessco/renderlesskit-react/commit/3734d8cabd492e328fcb0e59470632306a63185c))
+* **deps:** ⬆️ update dev deps ([5697351](https://github.com/timelessco/renderlesskit-react/commit/5697351a605f298ff031e1472c66ca1783aee508))
+
 ### [0.10.1](https://github.com/timelessco/renderlesskit-react/compare/v0.10.0...v0.10.1) (2022-01-04)
 
 
