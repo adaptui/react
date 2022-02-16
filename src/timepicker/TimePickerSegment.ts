@@ -1,7 +1,5 @@
-import { createHook } from "reakit-system";
-
 import { SegmentHTMLProps, SegmentOptions, useSegment } from "../segment";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { TIME_PICKER_SEGMENT_KEYS } from "./__keys";
 import { TimePickerStateReturn } from "./TimePickerState";

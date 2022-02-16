@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import {
   ButtonHTMLProps,
   ButtonOptions,
@@ -11,7 +10,7 @@ import {
 import { useForkRef } from "reakit-utils";
 import { callAllHandlers } from "@chakra-ui/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { TIME_PICKER_COLUMN_VALUE_KEYS } from "./__keys";
 import { getSelectedValueFromDate } from "./helpers";

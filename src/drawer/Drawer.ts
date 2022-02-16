@@ -1,7 +1,5 @@
-import { createHook } from "reakit-system";
-
 import { DialogHTMLProps, DialogOptions, useDialog } from "../dialog";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { DRAWER_KEYS } from "./__keys";
 

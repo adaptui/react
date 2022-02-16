@@ -1,11 +1,9 @@
-import { createHook } from "reakit-system";
-
 import {
   PickerBaseHTMLProps,
   PickerBaseOptions,
   usePickerBaseTrigger,
 } from "../picker-base";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { TIME_PICKER_TRIGGER_KEYS } from "./__keys";
 import { TimePickerStateReturn } from "./TimePickerState";

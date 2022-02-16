@@ -1,4 +1,4 @@
-import { createHook } from "reakit-system";
+import { createHook } from "../system";
 
 export type Hook<O = any, P = any> = {
   (options?: O, htmlProps?: P, unstable_ignoreUseOptions?: boolean): P;
@@ -19,6 +19,7 @@ export type CreateHook<O, P> = {
   keys?: ReadonlyArray<string>;
 };
 
+// TODO: Merge keys & compose incase of an array
 export function createComposableHook<O, P>(options: CreateHook<O, P>) {
   const composableHook = (newOptions?: CreateHook<O, P>) => {
     return createHook({ ...options, ...newOptions });

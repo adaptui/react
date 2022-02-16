@@ -4,11 +4,10 @@
  * to work with Reakit System
  */
 import { useCallback } from "react";
-import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 import {
   ariaAttr,
   dataAttr,

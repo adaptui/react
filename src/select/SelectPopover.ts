@@ -1,10 +1,10 @@
 import * as React from "react";
-import { createComponent } from "reakit-system/createComponent";
-import { createHook } from "reakit-system/createHook";
-import { useCreateElement } from "reakit-system/useCreateElement";
+import { useCreateElement } from "reakit-system";
 import { PopoverHTMLProps, PopoverOptions, usePopover } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
+
+import { createComponent, createHook } from "../system";
 
 import { SELECT_POPOVER_KEYS } from "./__keys";
 import { useTypeaheadShortcut } from "./helpers";

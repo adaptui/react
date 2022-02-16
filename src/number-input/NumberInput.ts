@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, useInput } from "reakit";
 import { EventKeyMap, mergeRefs } from "@chakra-ui/react-utils";
 import {
@@ -8,7 +7,7 @@ import {
   StringOrNumber,
 } from "@chakra-ui/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 import { ariaAttr } from "../utils";
 
 import { NUMBER_INPUT_KEYS } from "./__keys";

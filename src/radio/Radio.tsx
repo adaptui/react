@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import {
   CompositeItemHTMLProps,
   CompositeItemOptions,
@@ -8,7 +7,7 @@ import {
 import { useForkRef, useLiveRef } from "reakit-utils";
 import { warning } from "reakit-warning/warning";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { RADIO_KEYS } from "./__keys";
 import { fireChange, getChecked, useInitialChecked } from "./helpers";

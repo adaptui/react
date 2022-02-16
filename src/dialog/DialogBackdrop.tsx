@@ -1,6 +1,5 @@
 import * as React from "react";
 import { RemoveScroll } from "react-remove-scroll";
-import { createHook } from "reakit-system";
 import { Portal } from "reakit";
 
 import {
@@ -8,7 +7,7 @@ import {
   DisclosureContentOptions,
   useDisclosureContent,
 } from "../disclosure/DisclosureContent";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { DIALOG_BACKDROP_KEYS } from "./__keys";
 import { DialogStateReturn } from "./DialogState";

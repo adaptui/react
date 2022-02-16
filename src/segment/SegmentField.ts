@@ -1,7 +1,6 @@
-import { createHook } from "reakit-system";
 import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { SEGMENT_FIELD_KEYS } from "./__keys";
 

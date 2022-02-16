@@ -1,9 +1,8 @@
-import { createHook } from "reakit-system";
 import { InputHTMLProps, InputOptions, unstable_useId, useInput } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { mergeProps } from "@react-aria/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { SLIDER_INPUT_KEYS } from "./__keys";
 import { SliderThumbStateReturn } from "./SliderThumbState";

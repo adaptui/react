@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import {
   ButtonHTMLProps,
   ButtonOptions,
@@ -10,7 +9,7 @@ import {
 } from "reakit";
 import { callAllHandlers } from "@chakra-ui/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 import { ariaAttr } from "../utils";
 
 import { ACCORDION_TRIGGER_KEYS } from "./__keys";

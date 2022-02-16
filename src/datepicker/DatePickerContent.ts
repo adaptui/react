@@ -1,11 +1,9 @@
-import { createHook } from "reakit-system";
-
 import {
   PickerBaseHTMLProps,
   PickerBaseOptions,
   usePickerBaseContent,
 } from "../picker-base";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { DATE_PICKER_CONTENT_KEYS } from "./__keys";
 

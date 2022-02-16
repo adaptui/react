@@ -1,9 +1,8 @@
-import { createHook } from "reakit-system";
 import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { mergeProps } from "@react-aria/utils";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { SLIDER_TRACK_KEYS } from "./__keys";
 import { SliderStateReturn } from "./SliderState";

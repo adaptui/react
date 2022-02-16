@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import { createComponent } from "reakit-system/createComponent";
-import { createHook } from "reakit-system/createHook";
 import {
   CompositeItemHTMLProps,
   CompositeItemOptions,
   useCompositeItem,
 } from "reakit";
 import { useLiveRef } from "reakit-utils/useLiveRef";
+
+import { createComponent, createHook } from "../system";
 
 import { Item } from "./helpers/types";
 import { SELECT_ITEM_KEYS } from "./__keys";

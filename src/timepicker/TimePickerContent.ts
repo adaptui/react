@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import { createOnKeyDown, useForkRef } from "reakit-utils";
 import { focus, getNextTabbable, getPreviousTabbable } from "@chakra-ui/utils";
 
@@ -8,7 +7,7 @@ import {
   PickerBaseContentOptions,
   usePickerBaseContent,
 } from "../picker-base";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { TIME_PICKER_CONTENT_KEYS } from "./__keys";
 

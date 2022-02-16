@@ -1,10 +1,9 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
 import { useForkRef } from "reakit-utils";
 import { useWarning } from "reakit-warning";
 
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { LINK_KEYS } from "./__keys";
 

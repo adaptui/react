@@ -1,11 +1,9 @@
-import { createHook } from "reakit-system";
-
 import {
   DialogDisclosureHTMLProps,
   DialogDisclosureOptions,
   useDialogDisclosure,
 } from "../dialog";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import { DRAWER_DISCLOSURE_KEYS } from "./__keys";
 

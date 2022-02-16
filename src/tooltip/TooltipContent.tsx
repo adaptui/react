@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createHook } from "reakit-system";
 import { getDocument, useForkRef } from "reakit-utils";
 
 import {
@@ -7,7 +6,7 @@ import {
   DisclosureContentOptions,
   useDisclosureContent,
 } from "../disclosure/DisclosureContent";
-import { createComponent } from "../system";
+import { createComponent, createHook } from "../system";
 
 import globalState from "./__globalState";
 import { TOOLTIP_KEYS } from "./__keys";
