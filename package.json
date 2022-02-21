@@ -176,7 +176,7 @@
     "node-fetch": "2.6.1",
     "outdent": "0.8.0",
     "patch-package": "6.4.7",
-    "pinst": "2.1.6",
+    "pinst": "3.0.0",
     "postcss": "8.4.6",
     "postcss-import": "14.0.2",
     "postcss-scopify": "0.1.9",
