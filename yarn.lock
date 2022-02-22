@@ -9,10 +9,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@babel/cli@7.17.3":
-  version "7.17.3"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.17.3.tgz#0ccb93a348d0e3a4ff8776a63dbeefd329f7b3cc"
-  integrity sha512-1+WRlh1IqLocOp122CLx4if345RSHMspwIZNJTlqG/GA46HVZC6p49N1kolfdd2/GOdr+tu4nScbAR3ACJ2ZiA==
+"@babel/cli@7.17.6":
+  version "7.17.6"
+  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.17.6.tgz#169e5935f1795f0b62ded5a2accafeedfe5c5363"
+  integrity sha512-l4w608nsDNlxZhiJ5tE3DbNmr61fIKMZ6fTBo171VEFuFMIYuJ3mHRhTLEkKKyvx2Mizkkv/0a8OJOnZqkKYNA==
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.4"
     commander "^4.0.1"
@@ -10326,10 +10326,10 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-prettier@8.3.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
-  integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
+eslint-config-prettier@8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.4.0.tgz#8e6d17c7436649e98c4c2189868562921ef563de"
+  integrity sha512-CFotdUcMY18nGRo5KGsnNxpznzhkopOcOo0InID+sgQssPrzjvsyKZPvOgymTFeHrFuC3Tzdf2YndhXtULK9Iw==
 
 eslint-config-react-app@7.0.0:
   version "7.0.0"
@@ -17179,10 +17179,10 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-hook-form@7.27.0:
-  version "7.27.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.27.0.tgz#2c05e54ca557f71c55f645311ff612ec936c6c7c"
-  integrity sha512-NEh3Qbz1Rg3w95SRZv0kHorHN3frtMKasplznMBr8RkFrE4pVxjd/zo3clnFXpD0FppUVHBMfsTMtTsa6wyQrA==
+react-hook-form@7.27.1:
+  version "7.27.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.27.1.tgz#fe5fbcb6bf58751f66d9569e998d671480cc57f6"
+  integrity sha512-N3a7A6zIQ8DJeThisVZGtOUabTbJw+7DHJidmB9w8m3chckv2ZWKb5MHps9d2pPJqmCDoWe53Bos56bYmJms5w==
 
 react-input-autosize@^3.0.0:
   version "3.0.0"
