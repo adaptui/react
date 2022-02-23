@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/disclosure/disclosure-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/disclosure/disclosure-state",
+  "module": "../../esm/disclosure/disclosure-state",
+  "types": "../../ts/disclosure/disclosure-state.d.ts"
+}

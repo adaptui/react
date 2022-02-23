@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/radio",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/radio",
+  "module": "../esm/radio",
+  "types": "../ts/radio/index.d.ts"
+}

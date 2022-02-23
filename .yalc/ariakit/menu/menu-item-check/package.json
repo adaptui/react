@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-item-check",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-item-check",
+  "module": "../../esm/menu/menu-item-check",
+  "types": "../../ts/menu/menu-item-check.d.ts"
+}

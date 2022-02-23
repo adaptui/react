@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover/popover-disclosure",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/popover/popover-disclosure",
+  "module": "../../esm/popover/popover-disclosure",
+  "types": "../../ts/popover/popover-disclosure.d.ts"
+}

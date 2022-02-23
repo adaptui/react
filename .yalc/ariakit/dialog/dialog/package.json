@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/dialog/dialog",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/dialog/dialog",
+  "module": "../../esm/dialog/dialog",
+  "types": "../../ts/dialog/dialog.d.ts"
+}

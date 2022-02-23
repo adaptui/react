@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/dialog/dialog-dismiss",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/dialog/dialog-dismiss",
+  "module": "../../esm/dialog/dialog-dismiss",
+  "types": "../../ts/dialog/dialog-dismiss.d.ts"
+}

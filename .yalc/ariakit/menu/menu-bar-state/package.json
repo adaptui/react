@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-bar-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-bar-state",
+  "module": "../../esm/menu/menu-bar-state",
+  "types": "../../ts/menu/menu-bar-state.d.ts"
+}

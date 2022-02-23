@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-input",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-input",
+  "module": "../../esm/form/form-input",
+  "types": "../../ts/form/form-input.d.ts"
+}

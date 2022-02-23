@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/dialog/dialog-heading",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/dialog/dialog-heading",
+  "module": "../../esm/dialog/dialog-heading",
+  "types": "../../ts/dialog/dialog-heading.d.ts"
+}

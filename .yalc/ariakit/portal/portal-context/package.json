@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/portal/portal-context",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/portal/portal-context",
+  "module": "../../esm/portal/portal-context",
+  "types": "../../ts/portal/portal-context.d.ts"
+}

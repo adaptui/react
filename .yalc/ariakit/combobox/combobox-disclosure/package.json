@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/combobox/combobox-disclosure",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/combobox/combobox-disclosure",
+  "module": "../../esm/combobox/combobox-disclosure",
+  "types": "../../ts/combobox/combobox-disclosure.d.ts"
+}

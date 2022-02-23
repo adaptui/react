@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/combobox/combobox-popover",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/combobox/combobox-popover",
+  "module": "../../esm/combobox/combobox-popover",
+  "types": "../../ts/combobox/combobox-popover.d.ts"
+}

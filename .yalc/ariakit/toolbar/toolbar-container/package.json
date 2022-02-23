@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/toolbar/toolbar-container",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/toolbar/toolbar-container",
+  "module": "../../esm/toolbar/toolbar-container",
+  "types": "../../ts/toolbar/toolbar-container.d.ts"
+}

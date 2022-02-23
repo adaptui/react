@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/command",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/command",
+  "module": "../esm/command",
+  "types": "../ts/command/index.d.ts"
+}

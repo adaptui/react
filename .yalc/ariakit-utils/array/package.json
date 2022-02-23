@@ -1,0 +1,8 @@
+{
+  "name": "ariakit-utils/array",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/array",
+  "module": "../esm/array",
+  "types": "../ts/array.d.ts"
+}

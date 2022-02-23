@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/group/group",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/group/group",
+  "module": "../../esm/group/group",
+  "types": "../../ts/group/group.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover/popover-arrow",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/popover/popover-arrow",
+  "module": "../../esm/popover/popover-arrow",
+  "types": "../../ts/popover/popover-arrow.d.ts"
+}

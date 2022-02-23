@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-hover",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-hover",
+  "module": "../../esm/composite/composite-hover",
+  "types": "../../ts/composite/composite-hover.d.ts"
+}

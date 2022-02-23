@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-field",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-field",
+  "module": "../../esm/form/form-field",
+  "types": "../../ts/form/form-field.d.ts"
+}

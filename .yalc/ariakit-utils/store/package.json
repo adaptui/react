@@ -1,0 +1,8 @@
+{
+  "name": "ariakit-utils/store",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/store",
+  "module": "../esm/store",
+  "types": "../ts/store.d.ts"
+}

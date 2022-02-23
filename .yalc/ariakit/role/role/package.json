@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/role/role",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/role/role",
+  "module": "../../esm/role/role",
+  "types": "../../ts/role/role.d.ts"
+}

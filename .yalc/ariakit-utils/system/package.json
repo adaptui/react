@@ -1,0 +1,8 @@
+{
+  "name": "ariakit-utils/system",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/system",
+  "module": "../esm/system",
+  "types": "../ts/system.d.ts"
+}

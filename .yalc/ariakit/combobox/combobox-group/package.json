@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/combobox/combobox-group",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/combobox/combobox-group",
+  "module": "../../esm/combobox/combobox-group",
+  "types": "../../ts/combobox/combobox-group.d.ts"
+}

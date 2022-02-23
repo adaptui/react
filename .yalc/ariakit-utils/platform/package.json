@@ -1,0 +1,8 @@
+{
+  "name": "ariakit-utils/platform",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/platform",
+  "module": "../esm/platform",
+  "types": "../ts/platform.d.ts"
+}

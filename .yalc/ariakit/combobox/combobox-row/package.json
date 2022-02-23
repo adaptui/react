@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/combobox/combobox-row",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/combobox/combobox-row",
+  "module": "../../esm/combobox/combobox-row",
+  "types": "../../ts/combobox/combobox-row.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-push",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-push",
+  "module": "../../esm/form/form-push",
+  "types": "../../ts/form/form-push.d.ts"
+}

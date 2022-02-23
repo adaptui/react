@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/tab/tab-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/tab/tab-state",
+  "module": "../../esm/tab/tab-state",
+  "types": "../../ts/tab/tab-state.d.ts"
+}

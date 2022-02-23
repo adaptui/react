@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/radio/radio-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/radio/radio-state",
+  "module": "../../esm/radio/radio-state",
+  "types": "../../ts/radio/radio-state.d.ts"
+}

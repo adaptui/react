@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/toolbar/toolbar-input",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/toolbar/toolbar-input",
+  "module": "../../esm/toolbar/toolbar-input",
+  "types": "../../ts/toolbar/toolbar-input.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/toolbar/toolbar-separator",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/toolbar/toolbar-separator",
+  "module": "../../esm/toolbar/toolbar-separator",
+  "types": "../../ts/toolbar/toolbar-separator.d.ts"
+}

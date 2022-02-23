@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-overflow-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-overflow-state",
+  "module": "../../esm/composite/composite-overflow-state",
+  "types": "../../ts/composite/composite-overflow-state.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite",
+  "module": "../../esm/composite/composite",
+  "types": "../../ts/composite/composite.d.ts"
+}

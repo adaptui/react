@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/group/group-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/group/group-label",
+  "module": "../../esm/group/group-label",
+  "types": "../../ts/group/group-label.d.ts"
+}

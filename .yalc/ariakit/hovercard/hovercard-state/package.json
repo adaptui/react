@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/hovercard/hovercard-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/hovercard/hovercard-state",
+  "module": "../../esm/hovercard/hovercard-state",
+  "types": "../../ts/hovercard/hovercard-state.d.ts"
+}

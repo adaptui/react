@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/collection/collection-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/collection/collection-state",
+  "module": "../../esm/collection/collection-state",
+  "types": "../../ts/collection/collection-state.d.ts"
+}

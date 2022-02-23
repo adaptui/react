@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-group-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-group-label",
+  "module": "../../esm/form/form-group-label",
+  "types": "../../ts/form/form-group-label.d.ts"
+}

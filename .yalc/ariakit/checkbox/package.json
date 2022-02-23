@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/checkbox",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/checkbox",
+  "module": "../esm/checkbox",
+  "types": "../ts/checkbox/index.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-overflow",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-overflow",
+  "module": "../../esm/composite/composite-overflow",
+  "types": "../../ts/composite/composite-overflow.d.ts"
+}

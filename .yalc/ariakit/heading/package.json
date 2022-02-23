@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/heading",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/heading",
+  "module": "../esm/heading",
+  "types": "../ts/heading/index.d.ts"
+}

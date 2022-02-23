@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-typeahead",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-typeahead",
+  "module": "../../esm/composite/composite-typeahead",
+  "types": "../../ts/composite/composite-typeahead.d.ts"
+}

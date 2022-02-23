@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-separator",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-separator",
+  "module": "../../esm/menu/menu-separator",
+  "types": "../../ts/menu/menu-separator.d.ts"
+}

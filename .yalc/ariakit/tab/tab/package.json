@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/tab/tab",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/tab/tab",
+  "module": "../../esm/tab/tab",
+  "types": "../../ts/tab/tab.d.ts"
+}

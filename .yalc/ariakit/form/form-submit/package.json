@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-submit",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-submit",
+  "module": "../../esm/form/form-submit",
+  "types": "../../ts/form/form-submit.d.ts"
+}

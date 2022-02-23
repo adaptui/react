@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-remove",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-remove",
+  "module": "../../esm/form/form-remove",
+  "types": "../../ts/form/form-remove.d.ts"
+}

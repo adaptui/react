@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "packages": {
+    "ariakit": {
+      "signature": "5abc1518758844ad714ca277ba0190bd",
+      "link": true
+    },
+    "ariakit-utils": {
+      "signature": "bfc9f5112d1f23aede3904f7fcc97f60",
+      "link": true,
+      "replaced": "file:.yalc/ariakit-utils"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/focusable/focusable",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/focusable/focusable",
+  "module": "../../esm/focusable/focusable",
+  "types": "../../ts/focusable/focusable.d.ts"
+}

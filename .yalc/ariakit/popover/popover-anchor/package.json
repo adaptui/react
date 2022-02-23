@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover/popover-anchor",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/popover/popover-anchor",
+  "module": "../../esm/popover/popover-anchor",
+  "types": "../../ts/popover/popover-anchor.d.ts"
+}

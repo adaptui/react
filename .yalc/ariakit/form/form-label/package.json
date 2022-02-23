@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-label",
+  "module": "../../esm/form/form-label",
+  "types": "../../ts/form/form-label.d.ts"
+}

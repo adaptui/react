@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-row",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-row",
+  "module": "../../esm/composite/composite-row",
+  "types": "../../ts/composite/composite-row.d.ts"
+}

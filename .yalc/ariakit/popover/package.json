@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/popover",
+  "module": "../esm/popover",
+  "types": "../ts/popover/index.d.ts"
+}

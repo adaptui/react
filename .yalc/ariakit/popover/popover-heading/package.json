@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover/popover-heading",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/popover/popover-heading",
+  "module": "../../esm/popover/popover-heading",
+  "types": "../../ts/popover/popover-heading.d.ts"
+}

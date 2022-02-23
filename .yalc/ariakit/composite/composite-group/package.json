@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-group",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-group",
+  "module": "../../esm/composite/composite-group",
+  "types": "../../ts/composite/composite-group.d.ts"
+}

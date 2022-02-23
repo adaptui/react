@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/portal",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/portal",
+  "module": "../esm/portal",
+  "types": "../ts/portal/index.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-group-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-group-label",
+  "module": "../../esm/composite/composite-group-label",
+  "types": "../../ts/composite/composite-group-label.d.ts"
+}

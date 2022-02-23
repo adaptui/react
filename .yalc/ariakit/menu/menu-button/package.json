@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-button",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-button",
+  "module": "../../esm/menu/menu-button",
+  "types": "../../ts/menu/menu-button.d.ts"
+}

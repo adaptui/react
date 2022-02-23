@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/separator/separator",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/separator/separator",
+  "module": "../../esm/separator/separator",
+  "types": "../../ts/separator/separator.d.ts"
+}

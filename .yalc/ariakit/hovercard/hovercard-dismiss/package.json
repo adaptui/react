@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/hovercard/hovercard-dismiss",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/hovercard/hovercard-dismiss",
+  "module": "../../esm/hovercard/hovercard-dismiss",
+  "types": "../../ts/hovercard/hovercard-dismiss.d.ts"
+}

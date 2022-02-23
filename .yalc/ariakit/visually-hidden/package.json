@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/visually-hidden",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/visually-hidden",
+  "module": "../esm/visually-hidden",
+  "types": "../ts/visually-hidden/index.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-error",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-error",
+  "module": "../../esm/form/form-error",
+  "types": "../../ts/form/form-error.d.ts"
+}

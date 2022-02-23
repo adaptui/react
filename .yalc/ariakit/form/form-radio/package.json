@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-radio",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-radio",
+  "module": "../../esm/form/form-radio",
+  "types": "../../ts/form/form-radio.d.ts"
+}

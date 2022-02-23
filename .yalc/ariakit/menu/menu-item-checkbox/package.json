@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-item-checkbox",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-item-checkbox",
+  "module": "../../esm/menu/menu-item-checkbox",
+  "types": "../../ts/menu/menu-item-checkbox.d.ts"
+}

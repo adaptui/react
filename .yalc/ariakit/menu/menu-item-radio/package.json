@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-item-radio",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-item-radio",
+  "module": "../../esm/menu/menu-item-radio",
+  "types": "../../ts/menu/menu-item-radio.d.ts"
+}

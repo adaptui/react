@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/button",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/button",
+  "module": "../esm/button",
+  "types": "../ts/button/index.d.ts"
+}

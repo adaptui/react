@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-description",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-description",
+  "module": "../../esm/form/form-description",
+  "types": "../../ts/form/form-description.d.ts"
+}

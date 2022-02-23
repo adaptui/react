@@ -1,0 +1,8 @@
+{
+  "name": "ariakit-utils/hooks",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/hooks",
+  "module": "../esm/hooks",
+  "types": "../ts/hooks.d.ts"
+}

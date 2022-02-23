@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/combobox/combobox-separator",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/combobox/combobox-separator",
+  "module": "../../esm/combobox/combobox-separator",
+  "types": "../../ts/combobox/combobox-separator.d.ts"
+}

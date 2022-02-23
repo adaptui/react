@@ -1,0 +1,10 @@
+.button {
+  @apply
+    cursor-pointer
+    text-base
+    text-primary-1
+    underline
+    hover:no-underline
+    focus-visible:ariakit-outline
+    dark:text-primary-1-dark;
+}

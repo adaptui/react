@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/hovercard/hovercard-anchor",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/hovercard/hovercard-anchor",
+  "module": "../../esm/hovercard/hovercard-anchor",
+  "types": "../../ts/hovercard/hovercard-anchor.d.ts"
+}

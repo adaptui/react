@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/popover/popover-dismiss",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/popover/popover-dismiss",
+  "module": "../../esm/popover/popover-dismiss",
+  "types": "../../ts/popover/popover-dismiss.d.ts"
+}

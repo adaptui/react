@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/hovercard/hovercard",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/hovercard/hovercard",
+  "module": "../../esm/hovercard/hovercard",
+  "types": "../../ts/hovercard/hovercard.d.ts"
+}

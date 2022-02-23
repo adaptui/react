@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-overflow-disclosure",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-overflow-disclosure",
+  "module": "../../esm/composite/composite-overflow-disclosure",
+  "types": "../../ts/composite/composite-overflow-disclosure.d.ts"
+}

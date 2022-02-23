@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-arrow",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-arrow",
+  "module": "../../esm/menu/menu-arrow",
+  "types": "../../ts/menu/menu-arrow.d.ts"
+}

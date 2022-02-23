@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-checkbox",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-checkbox",
+  "module": "../../esm/form/form-checkbox",
+  "types": "../../ts/form/form-checkbox.d.ts"
+}

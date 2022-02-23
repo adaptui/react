@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/composite/composite-input",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/composite/composite-input",
+  "module": "../../esm/composite/composite-input",
+  "types": "../../ts/composite/composite-input.d.ts"
+}

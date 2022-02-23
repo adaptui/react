@@ -1,0 +1,38 @@
+.button {
+  @apply
+    flex
+    h-10
+    cursor-pointer
+    items-center
+    justify-center
+    gap-2
+    rounded-lg
+    border-none
+    bg-alpha-2
+    px-4
+    text-base
+    text-alpha-2
+    hover:bg-alpha-2-hover
+    focus-visible:ariakit-outline
+    aria-disabled:opacity-50
+    dark:bg-alpha-2-dark
+    dark:text-alpha-2-dark
+    dark:hover:bg-alpha-2-dark-hover;
+}
+
+.tooltip {
+  @apply
+    rounded-md
+    border
+    border-canvas-1
+    bg-canvas-1
+    py-1
+    px-2
+    text-sm
+    text-canvas-1
+    drop-shadow-sm
+    dark:border-canvas-4-dark
+    dark:bg-canvas-4-dark
+    dark:text-canvas-4-dark
+    dark:drop-shadow-sm-dark;
+}

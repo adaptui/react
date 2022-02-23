@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/menu/menu-heading",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/menu/menu-heading",
+  "module": "../../esm/menu/menu-heading",
+  "types": "../../ts/menu/menu-heading.d.ts"
+}
