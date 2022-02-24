@@ -19,7 +19,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: { href: "#", children: "View Story" },
+  args: { href: "https://timeless.co/", children: "Timeless" },
 };
 
 export const ExternlaLink: Story = {
@@ -38,23 +38,3 @@ export const DisabledExternalLink: Story = {
     disabled: true,
   },
 };
-
-// export const DisabledExternalLink = Default.bind({});
-// DisabledExternalLink.args = {
-//   href: "https://reakit.io/",
-//   isExternal: true,
-//   disabled: true,
-// };
-
-// export const SpanLink = Default.bind({});
-// SpanLink.args = {
-//   as: "span",
-//   onClick: () => alert("Custom Link"),
-// };
-
-// export const DisabledSpanLink = Default.bind({});
-// DisabledSpanLink.args = {
-//   as: "span",
-//   onClick: () => alert("Custom Link"),
-//   disabled: true,
-// };

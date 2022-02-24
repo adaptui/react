@@ -20,35 +20,29 @@ export default {
 
 export const Default: Story = {
   args: {
-    children: "View Link as Span",
-    onClick: () => alert("Custom View Story"),
+    children: "Timeless",
+    onClick: event => goToLink(event, "https://timeless.co/"),
+    onKeyDown: event => goToLink(event, "https://timeless.co/"),
   },
 };
 
 export const DisabledLink: Story = {
   args: {
-    children: "View Link as Span",
-    onClick: () => alert("Custom View Story"),
+    children: "Timeless",
+    onClick: event => goToLink(event, "https://timeless.co/"),
+    onKeyDown: event => goToLink(event, "https://timeless.co/"),
     disabled: true,
   },
 };
 
-// export const DisabledExternalLink = Default.bind({});
-// DisabledExternalLink.args = {
-//   href: "https://reakit.io/",
-//   isExternal: true,
-//   disabled: true,
-// };
+function goToLink(event: React.MouseEvent | React.KeyboardEvent, url: string) {
+  var type = event.type;
 
-// export const SpanLink = Default.bind({});
-// SpanLink.args = {
-//   as: "span",
-//   onClick: () => alert("Custom Link"),
-// };
+  // @ts-ignore
+  if (type === "click" || (type === "keydown" && event.key === "Enter")) {
+    window.location.href = url;
 
-// export const DisabledSpanLink = Default.bind({});
-// DisabledSpanLink.args = {
-//   as: "span",
-//   onClick: () => alert("Custom Link"),
-//   disabled: true,
-// };
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { CommandOptions, useCommand } from "ariakit";
-import { isButton, useForkRef, useTagName } from "ariakit-utils";
+import { CommandOptions, useCommand, useFocusable } from "ariakit";
+import { useForkRef, useTagName } from "ariakit-utils";
 import {
   createComponent,
   createElement,
