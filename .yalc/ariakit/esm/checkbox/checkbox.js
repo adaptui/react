@@ -121,7 +121,7 @@ const useCheckbox = createHook(_ref => {
     onClick
   };
   props = useCommand({
-    clickOnEnter: false,
+    clickOnEnter: !nativeCheckbox,
     ...props
   });
   return {

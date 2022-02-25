@@ -254,7 +254,7 @@ const useCombobox = createHook(_ref => {
         state.show();
       }
     }
-  }, [onKeyDownProp, state.move, state.activeId, state.visible, showOnKeyDownProp, state.show]);
+  }, [onKeyDownProp, state.visible, state.activeId, showOnKeyDownProp, state.show]);
   props = {
     role: "combobox",
     "aria-autocomplete": autoComplete,

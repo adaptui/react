@@ -1,4 +1,5 @@
 import { useContext, useRef, useCallback } from 'react';
+import { isTextField } from 'ariakit-utils/dom';
 import { isSelfTarget } from 'ariakit-utils/events';
 import { useEventCallback } from 'ariakit-utils/hooks';
 import { normalizeString } from 'ariakit-utils/misc';
@@ -8,8 +9,10 @@ import { C as CompositeContext, e as flipItems } from '../__utils-7da92179.js';
 let chars = "";
 
 function isValidTypeaheadEvent(event) {
-  // If the spacebar is pressed, we'll only consider it a valid typeahead event
+  const target = event.target;
+  if (target && isTextField(target)) return false; // If the spacebar is pressed, we'll only consider it a valid typeahead event
   // if there were already other characters typed.
+
   if (event.key === " " && chars.length) return true;
   return event.key.length === 1 && !event.ctrlKey && !event.altKey && !event.metaKey && // Matches any letter or number of any language.
   /^[\p{Letter}\p{Number}]$/u.test(event.key);

@@ -48,7 +48,6 @@ const useMenuItemCheckbox = createHook(_ref => {
   props = useCheckbox({
     state: checkboxState,
     checked,
-    clickOnEnter: true,
     ...props
   });
   props = useMenuItem({

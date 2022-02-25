@@ -304,6 +304,7 @@ function ensureFocus(element, _temp) {
   });
   if (isActive(element)) return -1;
   return requestAnimationFrame(() => {
+    if (isActive(element)) return;
     element.focus({
       preventScroll
     });

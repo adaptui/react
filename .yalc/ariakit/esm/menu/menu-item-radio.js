@@ -57,7 +57,6 @@ const useMenuItemRadio = createHook(_ref => {
     value,
     checked,
     onChange,
-    clickOnEnter: true,
     ...props
   });
   props = useMenuItem({

@@ -113,7 +113,7 @@ const useRadio = system.createHook(_ref => {
   };
   props = composite_compositeItem.useCompositeItem({
     state,
-    clickOnEnter: false,
+    clickOnEnter: !nativeRadio,
     ...props
   });
   return {

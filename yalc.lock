@@ -2,11 +2,11 @@
   "version": "v1",
   "packages": {
     "ariakit": {
-      "signature": "5abc1518758844ad714ca277ba0190bd",
+      "signature": "13e1ce405583f0a9983687f7b65a5f38",
       "link": true
     },
     "ariakit-utils": {
-      "signature": "bfc9f5112d1f23aede3904f7fcc97f60",
+      "signature": "5dbd28627a5a8ad88375554d5ea1892c",
       "link": true,
       "replaced": "file:.yalc/ariakit-utils"
     }

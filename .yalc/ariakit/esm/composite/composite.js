@@ -89,7 +89,7 @@ const useComposite = createHook(_ref => {
   let {
     state,
     composite = true,
-    focusOnMove = true,
+    focusOnMove = composite,
     ...props
   } = _ref;
   const ref = useRef(null);

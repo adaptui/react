@@ -3,6 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var react = require('react');
+var dom = require('ariakit-utils/dom');
 var events = require('ariakit-utils/events');
 var hooks = require('ariakit-utils/hooks');
 var misc = require('ariakit-utils/misc');
@@ -12,8 +13,10 @@ var __utils = require('../__utils-57ccda4f.js');
 let chars = "";
 
 function isValidTypeaheadEvent(event) {
-  // If the spacebar is pressed, we'll only consider it a valid typeahead event
+  const target = event.target;
+  if (target && dom.isTextField(target)) return false; // If the spacebar is pressed, we'll only consider it a valid typeahead event
   // if there were already other characters typed.
+
   if (event.key === " " && chars.length) return true;
   return event.key.length === 1 && !event.ctrlKey && !event.altKey && !event.metaKey && // Matches any letter or number of any language.
   /^[\p{Letter}\p{Number}]$/u.test(event.key);
