@@ -1,5 +1,5 @@
 import { CompositeOptions, useComposite } from "ariakit";
-import { useStoreProvider } from "ariakit-utils";
+import { useStoreProvider } from "ariakit-utils/store";
 import {
   createComponent,
   createElement,
@@ -20,7 +20,9 @@ export const useAccordion = createHook<AccordionOptions>(
 );
 
 export const Accordion = createComponent<AccordionOptions>(props => {
-  return createElement("div", props);
+  const htmlProps = useAccordion(props);
+
+  return createElement("div", htmlProps);
 });
 
 export type AccordionOptions<T extends As = "div"> = Omit<

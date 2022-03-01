@@ -2,8 +2,8 @@ import * as React from "react";
 
 import {
   Accordion,
-  AccordionContent,
   AccordionDisclosure,
+  AccordionPanel,
   AccordionStateProps,
   useAccordionState,
 } from "../../index";
@@ -14,29 +14,31 @@ export const AccordionBasic: React.FC<AccordionStateProps> = props => {
   return (
     <Accordion state={state}>
       <h2>
-        <AccordionDisclosure>Trigger 1</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 1">Trigger 1</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 1</AccordionContent>
+      <AccordionPanel id="Panel 1">
+        <button>ta</button>
+      </AccordionPanel>
       <h2>
-        <AccordionDisclosure>Trigger 2</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 2">Trigger 2</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 2</AccordionContent>
+      <AccordionPanel id="Panel 2">Panel 2</AccordionPanel>
       <h2>
-        <AccordionDisclosure id="accordion3">Trigger 3</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 3">Trigger 3</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 3</AccordionContent>
+      <AccordionPanel id="Panel 3">Panel 3</AccordionPanel>
       <h2>
-        <AccordionDisclosure>Trigger 4</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 4">Trigger 4</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 4</AccordionContent>
+      <AccordionPanel id="Panel 4">Panel 4</AccordionPanel>
       <h2>
-        <AccordionDisclosure>Trigger 5</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 5">Trigger 5</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 5</AccordionContent>
+      <AccordionPanel id="Panel 5">Panel 5</AccordionPanel>
       <h2>
-        <AccordionDisclosure>Trigger 6</AccordionDisclosure>
+        <AccordionDisclosure id="Trigger 6">Trigger 6</AccordionDisclosure>
       </h2>
-      <AccordionContent>Panel 6</AccordionContent>
+      <AccordionPanel id="Panel 6">Panel 6</AccordionPanel>
     </Accordion>
   );
 };
