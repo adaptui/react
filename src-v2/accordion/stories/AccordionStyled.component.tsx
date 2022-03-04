@@ -13,7 +13,7 @@ export const AccordionStyled: React.FC<AccordionStateProps> = props => {
   const state = useAccordionState(props);
 
   return (
-    <Accordion state={state} id="accordionGroup" className="accordion">
+    <Accordion state={state} className="accordion">
       <h2>
         <AccordionDisclosure className="accordion-trigger">
           <span className="accordion-title">

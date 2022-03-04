@@ -16,9 +16,7 @@ export const AccordionBasic: React.FC<AccordionStateProps> = props => {
       <h2>
         <AccordionDisclosure id="Trigger 1">Trigger 1</AccordionDisclosure>
       </h2>
-      <AccordionPanel id="Panel 1">
-        <button>ta</button>
-      </AccordionPanel>
+      <AccordionPanel id="Panel 1">Panel 1</AccordionPanel>
       <h2>
         <AccordionDisclosure id="Trigger 2">Trigger 2</AccordionDisclosure>
       </h2>
