@@ -18,9 +18,8 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
-import { id } from "date-fns/locale";
 
-import { AccordionContext } from "./__utils";
+import { AccordionContext, getSelectedId } from "./__utils";
 import { AccordionState } from "./accordion-state";
 
 function getAccordionId(panels?: AccordionState["panels"], id?: string) {
@@ -74,7 +73,7 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
     );
 
     const accordionId = accordionIdProp || getAccordionId(state?.panels, id);
-    const visible = !!accordionId && state?.selectedId === accordionId;
+    const visible = !!accordionId && getSelectedId(state, accordionId);
 
     props = {
       id,
@@ -95,7 +94,7 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
       shouldRegisterItem: !!id ? props.shouldRegisterItem : false,
     });
 
-    return { ...props, children: id };
+    return props;
   },
 );
 

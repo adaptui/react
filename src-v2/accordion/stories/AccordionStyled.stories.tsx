@@ -2,19 +2,22 @@ import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/AccordionBasicJsx";
-import ts from "./templates/AccordionBasicTsx";
-import { AccordionBasic } from "./AccordionBasic.component";
+import css from "./templates/AccordionStyledCss";
+import js from "./templates/AccordionStyledJsx";
+import ts from "./templates/AccordionStyledTsx";
+import { AccordionStyled } from "./AccordionStyled.component";
 
-type Meta = ComponentMeta<typeof AccordionBasic>;
-type Story = ComponentStoryObj<typeof AccordionBasic>;
+import "./AccordionStyled.css";
+
+type Meta = ComponentMeta<typeof AccordionStyled>;
+type Story = ComponentStoryObj<typeof AccordionStyled>;
 
 export default {
-  title: "Accordion/Basic",
-  component: AccordionBasic,
+  component: AccordionStyled,
+  title: "Accordion/Styled",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 
@@ -25,7 +28,7 @@ export const DefaultFirstIdSelected: Story = {
 };
 
 export const DefaultSelected: Story = {
-  args: { defaultSelectedId: "Trigger 3" },
+  args: { defaultSelectedId: "accordion2" },
 };
 
 export const SelectOnMove: Story = {

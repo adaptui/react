@@ -8,7 +8,7 @@ import { createMemoComponent, useStore } from "ariakit-utils/store";
 import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { AccordionContext } from "./__utils";
+import { AccordionContext, getSelectedId } from "./__utils";
 import { AccordionState } from "./accordion-state";
 
 function getPanelId(panels?: AccordionState["panels"], id?: string) {
@@ -42,7 +42,18 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
     const id = useId(props.id);
 
     state = useStore(state || AccordionContext, [
-      useCallback((s: AccordionState) => id && s.selectedId === id, [id]),
+      useCallback(
+        (s: AccordionState) => {
+          if (!id) return;
+
+          if (s.allowMultiple) {
+            return s.selectedId?.includes(id);
+          }
+
+          return s.selectedId === id;
+        },
+        [id],
+      ),
       "panels",
       "toggle",
       "selectOnMove",
@@ -70,6 +81,7 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
 
         state?.toggle(id);
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [onClickProp, state?.toggle, id],
     );
 
@@ -83,6 +95,7 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
 
         state?.toggle(id);
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [onFocusProp, state?.toggle, id, state?.selectOnMove],
     );
 
@@ -90,7 +103,7 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
 
     props = {
       id,
-      "aria-expanded": state?.selectedId === id,
+      "aria-expanded": getSelectedId(state, id),
       "aria-controls": panelId || undefined,
       ...props,
       onClick,
@@ -104,7 +117,7 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
       getItem,
     });
 
-    return { ...props, tabIndex: 0, children: id };
+    return { ...props, tabIndex: 0 };
   },
 );
 
