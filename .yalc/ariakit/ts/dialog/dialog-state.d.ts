@@ -4,7 +4,7 @@ import { DisclosureState, DisclosureStateProps } from "../disclosure/disclosure-
  * @example
  * ```jsx
  * const dialog = useDialogState();
- * <DialogDisclosure state={dialog}>Disclosure</DialogDisclosure>
+ * <button onClick={dialog.toggle}>Open dialog</button>
  * <Dialog state={dialog}>Content</Dialog>
  * ```
  */

@@ -37,10 +37,5 @@ export declare type MenuListOptions<T extends As = "div"> = Omit<CompositeOption
      * Object returned by the `useMenuListState` hook.
      */
     state: MenuState;
-    /**
-     * Determines whether a menu item inside the menu will receive focus when
-     * the menu is shown.
-     */
-    autoFocusOnShow?: boolean;
 };
 export declare type MenuListProps<T extends As = "div"> = Props<MenuListOptions<T>>;

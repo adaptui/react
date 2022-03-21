@@ -1,19 +1,21 @@
-import { useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { getPopupRole } from 'ariakit-utils/dom';
-import { useId, useEventCallback } from 'ariakit-utils/hooks';
+import { useEventCallback, useId, useForkRef } from 'ariakit-utils/hooks';
 import { useStore } from 'ariakit-utils/store';
 import { createHook, createComponent, createElement } from 'ariakit-utils/system';
 import { useCompositeTypeahead } from '../composite/composite-typeahead.js';
 import { useHovercardAnchor } from '../hovercard/hovercard-anchor.js';
 import { usePopoverDisclosure } from '../popover/popover-disclosure.js';
-import { u as useParentMenu, M as MenuBarContext } from '../__utils-aac2c931.js';
+import { M as MenuContext, a as MenuBarContext, h as hasExpandedMenuButton } from '../__utils-07f4a93f.js';
 
-function hasExpandedMenuButton(items, currentElement) {
-  return items.filter(item => item.ref.current !== currentElement).some(item => {
-    var _item$ref$current;
-
-    return ((_item$ref$current = item.ref.current) == null ? void 0 : _item$ref$current.getAttribute("aria-expanded")) === "true";
-  });
+function getInitialFocus(event, dir) {
+  const keyMap = {
+    ArrowDown: dir === "bottom" || dir === "top" ? "first" : false,
+    ArrowUp: dir === "bottom" || dir === "top" ? "last" : false,
+    ArrowRight: dir === "right" ? "first" : false,
+    ArrowLeft: dir === "left" ? "first" : false
+  };
+  return keyMap[event.key];
 }
 /**
  * A component hook that returns props that can be passed to `Role` or any other
@@ -37,32 +39,33 @@ const useMenuButton = createHook(_ref => {
     state,
     focusable,
     accessibleWhenDisabled,
+    showOnHover,
     ...props
   } = _ref;
-  const parentMenu = useParentMenu(["items"]);
+  const ref = useRef(null);
+  const parentMenu = useStore(MenuContext, ["items", "move"]);
   const parentMenuBar = useStore(MenuBarContext, ["items", "move"]);
   const hasParentMenu = !!parentMenu;
   const parentIsMenuBar = !!parentMenuBar && !hasParentMenu;
-  const disabled = props.disabled || props["aria-disabled"];
-  const id = useId(props.id);
-  const onMouseMoveProp = useEventCallback(props.onMouseMove);
-  const onMouseMove = useCallback(event => {
-    onMouseMoveProp(event);
-    if (event.defaultPrevented) return;
-    if (disabled) return; // We only want to focus on the menu button if it's in a menu bar
-
-    if (!parentMenuBar) return;
-    if (!parentIsMenuBar) return; // and there's already another expanded menu button.
-
-    if (hasExpandedMenuButton(parentMenuBar.items)) {
-      parentMenuBar.move(id);
-    }
-  }, [onMouseMoveProp, disabled, parentMenuBar, parentIsMenuBar, id]);
+  const disabled = props.disabled || props["aria-disabled"] === true || props["aria-disabled"] === "true";
+  useEffect(() => {
+    // Makes sure that the menu button is assigned as the menu disclosure
+    // element. This is needed to support screen reader focusing on sibling
+    // menu items.
+    state.disclosureRef.current = ref.current;
+  });
   const onFocusProp = useEventCallback(props.onFocus);
   const onFocus = useCallback(event => {
     onFocusProp(event);
-    if (event.defaultPrevented) return;
-    if (disabled) return; // When the menu button is focused, we'll only show its menu if it's in
+    if (disabled) return;
+    if (event.defaultPrevented) return; // Reset the autoFocusOnShow state so we can focus the menu button while
+    // the menu is open and press arrow keys to move focus to the menu
+    // items.
+
+    state.setAutoFocusOnShow(false); // We need to unset the active menu item so no menu item appears active
+    // while the menu button is focused.
+
+    state.setActiveId(null); // When the menu button is focused, we'll only show its menu if it's in
     // a menu bar
 
     if (!parentMenuBar) return;
@@ -71,19 +74,14 @@ const useMenuButton = createHook(_ref => {
     if (hasExpandedMenuButton(parentMenuBar.items, event.currentTarget)) {
       state.show();
     }
-  }, [onFocusProp, disabled, parentMenuBar, parentIsMenuBar, state.show]);
-  const onKeyDownProp = useEventCallback(props.onKeyDown);
+  }, [onFocusProp, disabled, state.setAutoFocusOnShow, state.setActiveId, parentMenuBar, parentIsMenuBar, state.show]);
   const dir = state.placement.split("-")[0];
+  const onKeyDownProp = useEventCallback(props.onKeyDown);
   const onKeyDown = useCallback(event => {
     onKeyDownProp(event);
+    if (disabled) return;
     if (event.defaultPrevented) return;
-    const keyMap = {
-      ArrowDown: dir === "bottom" || dir === "top" ? "first" : false,
-      ArrowUp: dir === "bottom" || dir === "top" ? "last" : false,
-      ArrowRight: dir === "right" ? "first" : false,
-      ArrowLeft: dir === "left" ? "first" : false
-    };
-    const initialFocus = keyMap[event.key];
+    const initialFocus = getInitialFocus(event, dir);
 
     if (initialFocus) {
       event.preventDefault();
@@ -91,22 +89,30 @@ const useMenuButton = createHook(_ref => {
       state.setAutoFocusOnShow(true);
       state.setInitialFocus(initialFocus);
     }
-  }, [onKeyDownProp, state.mounted, dir, state.show, state.setAutoFocusOnShow, state.setInitialFocus]);
+  }, [onKeyDownProp, disabled, dir, state.show, state.setAutoFocusOnShow, state.setInitialFocus]);
   const onClickProp = useEventCallback(props.onClick);
   const onClick = useCallback(event => {
     onClickProp(event);
     if (event.defaultPrevented) return;
-    if (state.mounted) return;
+    const isKeyboardClick = !event.detail; // When the menu button is clicked, if the menu is hidden or if it's
+    // a keyboard click (enter or space),
 
-    if (!parentIsMenuBar) {
-      state.setAutoFocusOnShow(true);
-      state.setInitialFocus(event.detail ? "container" : "first");
-    }
+    if (!state.mounted || isKeyboardClick) {
+      // we'll only automatically focus on the menu if it's not a submenu
+      // button, or if it's a keyboard click.
+      if (!hasParentMenu || isKeyboardClick) {
+        state.setAutoFocusOnShow(true);
+      }
 
-    if (hasParentMenu && !parentIsMenuBar) {
+      state.setInitialFocus(isKeyboardClick ? "first" : "container");
+    } // On submenu buttons, we can't hide the submenu by clicking on the menu
+    // button again.
+
+
+    if (hasParentMenu) {
       state.show();
     }
-  }, [onClickProp, state.mounted, parentIsMenuBar, state.setAutoFocusOnShow, state.setInitialFocus, hasParentMenu, state.show]);
+  }, [onClickProp, state.mounted, state.setAutoFocusOnShow, state.setInitialFocus, hasParentMenu, state.show]);
 
   if (hasParentMenu) {
     // On Safari, VO+Space triggers a click twice on native button elements
@@ -117,23 +123,31 @@ const useMenuButton = createHook(_ref => {
       as: "div",
       ...props
     };
-  }
+  } // We'll use this id to render the aria-labelledby attribute on the menu.
 
+
+  const id = useId(props.id);
   props = {
     id,
+    role: hasParentMenu || parentIsMenuBar ? "menuitem" : undefined,
     "aria-haspopup": getPopupRole(state.contentElement, "menu"),
     ...props,
-    onMouseMove,
+    ref: useForkRef(ref, props.ref),
     onFocus,
     onKeyDown,
     onClick
   };
   props = useHovercardAnchor({
     state,
-    showOnHover: hasParentMenu,
     focusable,
     accessibleWhenDisabled,
-    ...props
+    ...props,
+    showOnHover: event => {
+      if (typeof showOnHover === "function") return showOnHover(event);
+      if (showOnHover != null) return showOnHover;
+      if (hasParentMenu) return true;
+      return parentIsMenuBar && hasExpandedMenuButton(parentMenuBar.items);
+    }
   });
   props = usePopoverDisclosure({
     state,

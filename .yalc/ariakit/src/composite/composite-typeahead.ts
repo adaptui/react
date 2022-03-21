@@ -14,6 +14,10 @@ import { CompositeState } from "./composite-state";
 
 let chars = "";
 
+function clearChars() {
+  chars = "";
+}
+
 function isValidTypeaheadEvent(event: KeyboardEvent) {
   const target = event.target as HTMLElement | null;
   if (target && isTextField(target)) return false;
@@ -101,9 +105,9 @@ export const useCompositeTypeahead = createHook<CompositeTypeaheadOptions>(
         if (event.defaultPrevented) return;
         if (!typeahead) return;
         if (!state?.items) return;
-        if (!isValidTypeaheadEvent(event)) return;
+        if (!isValidTypeaheadEvent(event)) return clearChars();
         let items = getEnabledItems(state.items);
-        if (!isSelfTargetOrItem(event, items)) return;
+        if (!isSelfTargetOrItem(event, items)) return clearChars();
         event.preventDefault();
         // We need to clear the previous cleanup timeout so we can append the
         // pressed char to the existing one.
@@ -123,7 +127,7 @@ export const useCompositeTypeahead = createHook<CompositeTypeaheadOptions>(
         } else {
           // Immediately clear the characters so the next keypress starts a new
           // search.
-          chars = "";
+          clearChars();
         }
       },
       [

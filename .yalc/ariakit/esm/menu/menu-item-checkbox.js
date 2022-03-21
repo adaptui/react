@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useStore, createMemoComponent } from 'ariakit-utils/store';
 import { createHook, createElement } from 'ariakit-utils/system';
-import { a as MenuContext } from '../__utils-aac2c931.js';
+import { M as MenuContext } from '../__utils-07f4a93f.js';
 import { useMenuItem } from './menu-item.js';
 import { useCheckboxState } from '../checkbox/checkbox-state.js';
 import { useCheckbox } from '../checkbox/checkbox.js';

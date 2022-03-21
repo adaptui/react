@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-item-check",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-item-check",
+  "module": "../../esm/select/select-item-check",
+  "types": "../../ts/select/select-item-check.d.ts"
+}

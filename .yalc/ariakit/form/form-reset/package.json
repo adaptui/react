@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/form/form-reset",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/form/form-reset",
+  "module": "../../esm/form/form-reset",
+  "types": "../../ts/form/form-reset.d.ts"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-popover",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-popover",
+  "module": "../../esm/select/select-popover",
+  "types": "../../ts/select/select-popover.d.ts"
+}

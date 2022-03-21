@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-label",
+  "module": "../../esm/select/select-label",
+  "types": "../../ts/select/select-label.d.ts"
+}

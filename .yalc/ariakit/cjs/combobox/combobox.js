@@ -108,8 +108,7 @@ const useCombobox = system.createHook(_ref => {
     const element = ref.current;
     if (!element) return;
     element.setSelectionRange(state.value.length, state.activeValue.length);
-  }, [valueUpdated, inline, state.activeValue, state.items, autoSelect, state.value]); // Auto select the first item on type. Must be a layout effect, otherwise it
-  // doesn't work well with useDeferredValue.
+  }, [valueUpdated, inline, state.activeValue, state.items, autoSelect, state.value]); // Auto select the first item on type.
 
   hooks.useUpdateEffect(() => {
     if (!autoSelect) return;

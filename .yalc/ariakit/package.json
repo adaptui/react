@@ -1,6 +1,6 @@
 {
   "name": "ariakit",
-  "version": "2.0.0-alpha.18",
+  "version": "2.0.0-alpha.19",
   "description": "Toolkit for building accessible web apps with React",
   "sideEffects": false,
   "license": "MIT",
@@ -43,5 +43,5 @@
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^18.0.0-beta",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^18.0.0-beta"
   },
-  "yalcSig": "13e1ce405583f0a9983687f7b65a5f38"
+  "yalcSig": "1e4bdbe7d0997de20eb9c7d46408fbff"
 }

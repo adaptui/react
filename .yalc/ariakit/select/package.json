@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select",
+  "private": true,
+  "sideEffects": false,
+  "main": "../cjs/select",
+  "module": "../esm/select",
+  "types": "../ts/select/index.d.ts"
+}

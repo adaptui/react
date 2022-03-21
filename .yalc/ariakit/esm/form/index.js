@@ -10,6 +10,7 @@ export { FormPush, useFormPush } from './form-push.js';
 export { FormRadioGroup, useFormRadioGroup } from './form-radio-group.js';
 export { FormRadio, useFormRadio } from './form-radio.js';
 export { FormRemove, useFormRemove } from './form-remove.js';
+export { FormReset, useFormReset } from './form-reset.js';
 export { useFormState } from './form-state.js';
 export { FormSubmit, useFormSubmit } from './form-submit.js';
 export { Form, useForm } from './form.js';

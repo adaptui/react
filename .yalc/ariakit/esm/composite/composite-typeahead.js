@@ -8,6 +8,10 @@ import { C as CompositeContext, e as flipItems } from '../__utils-7da92179.js';
 
 let chars = "";
 
+function clearChars() {
+  chars = "";
+}
+
 function isValidTypeaheadEvent(event) {
   const target = event.target;
   if (target && isTextField(target)) return false; // If the spacebar is pressed, we'll only consider it a valid typeahead event
@@ -91,9 +95,9 @@ const useCompositeTypeahead = createHook(_ref => {
     if (event.defaultPrevented) return;
     if (!typeahead) return;
     if (!((_state = state) != null && _state.items)) return;
-    if (!isValidTypeaheadEvent(event)) return;
+    if (!isValidTypeaheadEvent(event)) return clearChars();
     let items = getEnabledItems(state.items);
-    if (!isSelfTargetOrItem(event, items)) return;
+    if (!isSelfTargetOrItem(event, items)) return clearChars();
     event.preventDefault(); // We need to clear the previous cleanup timeout so we can append the
     // pressed char to the existing one.
 
@@ -114,7 +118,7 @@ const useCompositeTypeahead = createHook(_ref => {
     } else {
       // Immediately clear the characters so the next keypress starts a new
       // search.
-      chars = "";
+      clearChars();
     }
   }, [onKeyDownCaptureProp, typeahead, (_state3 = state) == null ? void 0 : _state3.items, (_state4 = state) == null ? void 0 : _state4.activeId, (_state5 = state) == null ? void 0 : _state5.move]);
   props = { ...props,

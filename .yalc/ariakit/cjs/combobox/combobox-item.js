@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var react = require('react');
 var dom = require('ariakit-utils/dom');
+var focus = require('ariakit-utils/focus');
 var hooks = require('ariakit-utils/hooks');
 var misc = require('ariakit-utils/misc');
 var store = require('ariakit-utils/store');
@@ -38,7 +39,7 @@ function getItemRole(contentElement) {
 
 
 const useComboboxItem = system.createHook(_ref => {
-  var _state4, _state5, _state6, _state10, _state11, _state12, _state13, _state14;
+  var _state4, _state5, _state6, _state9, _state10, _state11, _state12;
 
   let {
     state,
@@ -50,7 +51,7 @@ const useComboboxItem = system.createHook(_ref => {
     getItem: getItemProp,
     ...props
   } = _ref;
-  state = store.useStore(state || __utils.ComboboxContext, ["setValue", "move", "hide", "virtualFocus", "baseRef", "contentElement", "mounted"]);
+  state = store.useStore(state || __utils.ComboboxContext, ["setValue", "move", "hide", "baseRef", "contentElement", "mounted"]);
   const getItem = react.useCallback(item => {
     const nextItem = { ...item,
       value
@@ -90,7 +91,9 @@ const useComboboxItem = system.createHook(_ref => {
 
     onKeyDownProp(event);
     if (event.defaultPrevented) return;
-    if ((_state7 = state) != null && _state7.virtualFocus) return; // When the combobox is not working with virtual focus, the items will
+    const baseElement = (_state7 = state) == null ? void 0 : _state7.baseRef.current;
+    if (!baseElement) return;
+    if (focus.hasFocus(baseElement)) return; // When the combobox is not working with virtual focus, the items will
     // receive DOM focus. Therefore, pressing printable keys will not fill
     // the text field. So we need to programmatically focus on the text
     // field when the user presses printable keys.
@@ -98,30 +101,26 @@ const useComboboxItem = system.createHook(_ref => {
     const printable = event.key.length === 1;
 
     if (printable || event.key === "Backspace" || event.key === "Delete") {
-      var _state8;
-
-      const baseElement = (_state8 = state) == null ? void 0 : _state8.baseRef.current;
-      if (!baseElement) return;
       misc.queueMicrotask(() => baseElement.focus());
 
       if (dom.isTextField(baseElement)) {
-        var _state9;
+        var _state8;
 
         // If the combobox element is a text field, we should update the
         // state value with the current's element value. This is necessary
         // because the value may temporarily change based on the currently
         // selected item, but it'll be reset to the original value when the
         // combobox input is focused.
-        (_state9 = state) == null ? void 0 : _state9.setValue(baseElement.value);
+        (_state8 = state) == null ? void 0 : _state8.setValue(baseElement.value);
       }
     }
-  }, [onKeyDownProp, (_state10 = state) == null ? void 0 : _state10.virtualFocus, (_state11 = state) == null ? void 0 : _state11.baseRef, (_state12 = state) == null ? void 0 : _state12.setValue]);
+  }, [onKeyDownProp, (_state9 = state) == null ? void 0 : _state9.baseRef, (_state10 = state) == null ? void 0 : _state10.setValue]);
   props = hooks.useWrapElement(props, element => /*#__PURE__*/jsxRuntime.jsx(__utils.ComboboxItemValueContext.Provider, {
     value: value,
     children: element
   }), [value]);
   props = {
-    role: getItemRole((_state13 = state) == null ? void 0 : _state13.contentElement),
+    role: getItemRole((_state11 = state) == null ? void 0 : _state11.contentElement),
     children: value,
     ...props,
     onClick,
@@ -133,7 +132,7 @@ const useComboboxItem = system.createHook(_ref => {
     getItem,
     // We only register the item on the state when the popover is visible so
     // we don't try to move focus to hidden items when pressing arrow keys.
-    shouldRegisterItem: ((_state14 = state) == null ? void 0 : _state14.mounted) && shouldRegisterItem
+    shouldRegisterItem: ((_state12 = state) == null ? void 0 : _state12.mounted) && shouldRegisterItem
   });
   props = composite_compositeHover.useCompositeHover({
     state,

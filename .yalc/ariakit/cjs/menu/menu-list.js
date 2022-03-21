@@ -9,7 +9,7 @@ var store = require('ariakit-utils/store');
 var system = require('ariakit-utils/system');
 var composite_composite = require('../composite/composite.js');
 var composite_compositeTypeahead = require('../composite/composite-typeahead.js');
-var __utils = require('../__utils-601a5088.js');
+var __utils = require('../__utils-6be0b335.js');
 
 const isSafariOnMac = platform.isMac() && platform.isSafari();
 
@@ -55,54 +55,13 @@ function useAriaLabelledBy(_ref) {
 const useMenuList = system.createHook(_ref2 => {
   let {
     state,
-    autoFocusOnShow = true,
     composite = true,
     ...props
   } = _ref2;
-  const parentMenu = __utils.useParentMenu();
+  const parentMenu = store.useStore(__utils.MenuContext, []);
   const parentMenuBar = store.useStore(__utils.MenuBarContext, ["items", "move", "next", "previous", "orientation"]);
   const hasParentMenu = !!parentMenu;
   const id = hooks.useId(props.id);
-  hooks.useSafeLayoutEffect(() => {
-    if (state.animating) return;
-    if (!state.visible) return;
-    if (!autoFocusOnShow) return;
-    if (!state.autoFocusOnShow) return;
-
-    switch (state.initialFocus) {
-      case "first":
-        {
-          const firstId = state.first();
-
-          if (firstId) {
-            // Resets autoFocusOnShow so that it can be set the next time the
-            // menu is opened.
-            state.setAutoFocusOnShow(false);
-            state.move(firstId);
-          }
-
-          break;
-        }
-
-      case "last":
-        {
-          const lastId = state.last();
-
-          if (lastId) {
-            state.setAutoFocusOnShow(false);
-            state.move(lastId);
-          }
-
-          break;
-        }
-
-      case "container":
-        {
-          state.setAutoFocusOnShow(false);
-          state.move(null);
-        }
-    }
-  }, [state.animating, state.visible, autoFocusOnShow, state.autoFocusOnShow, state.initialFocus, state.first, state.setAutoFocusOnShow, state.move, state.last]);
   const onKeyDownProp = hooks.useEventCallback(props.onKeyDown);
   const dir = state.placement.split("-")[0];
   const orientation = state.orientation === "both" ? undefined : state.orientation;
@@ -112,7 +71,7 @@ const useMenuList = system.createHook(_ref2 => {
     onKeyDownProp(event);
     if (event.defaultPrevented) return;
 
-    if (hasParentMenu) {
+    if (hasParentMenu || parentMenuBar && !isHorizontal) {
       const hideMap = {
         ArrowRight: () => dir === "left" && !isHorizontal,
         ArrowLeft: () => dir === "right" && !isHorizontal,
@@ -156,7 +115,7 @@ const useMenuList = system.createHook(_ref2 => {
         parentMenuBar.move(id);
       }
     }
-  }, [onKeyDownProp, hasParentMenu, state.hide, dir, orientation, parentMenuBar]);
+  }, [onKeyDownProp, hasParentMenu, parentMenuBar, isHorizontal, state.hide, dir]);
   props = store.useStoreProvider({
     state,
     ...props

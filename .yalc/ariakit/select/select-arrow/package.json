@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-arrow",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-arrow",
+  "module": "../../esm/select/select-arrow",
+  "types": "../../ts/select/select-arrow.d.ts"
+}

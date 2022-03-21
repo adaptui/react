@@ -1,6 +1,6 @@
 {
   "name": "ariakit-utils",
-  "version": "0.17.0-alpha.11",
+  "version": "0.17.0-alpha.12",
   "description": "Ariakit utils",
   "sideEffects": false,
   "license": "MIT",
@@ -31,5 +31,5 @@
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^18.0.0-beta"
   },
-  "yalcSig": "5dbd28627a5a8ad88375554d5ea1892c"
+  "yalcSig": "eca7c56d4b04b5277cd0ffe7711fbbb6"
 }

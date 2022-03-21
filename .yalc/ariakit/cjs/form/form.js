@@ -86,6 +86,13 @@ const useForm = system.createHook(_ref => {
     if (!isField(event.target, state.items)) return;
     state.validate();
   }, [onBlurProp, validateOnBlur, state.items, state.validate]);
+  const onResetProp = hooks.useEventCallback(props.onReset);
+  const onReset = react.useCallback(event => {
+    onResetProp(event);
+    if (event.defaultPrevented) return;
+    event.preventDefault();
+    state.reset();
+  }, [onResetProp, state.reset]);
   const tagName = hooks.useTagName(ref, props.as || "form");
   props = {
     role: tagName !== "form" ? "form" : undefined,
@@ -93,7 +100,8 @@ const useForm = system.createHook(_ref => {
     ...props,
     ref: hooks.useForkRef(ref, props.ref),
     onSubmit,
-    onBlur
+    onBlur,
+    onReset
   };
   props = store.useStoreProvider({
     state,

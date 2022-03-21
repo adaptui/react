@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-list",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-list",
+  "module": "../../esm/select/select-list",
+  "types": "../../ts/select/select-list.d.ts"
+}

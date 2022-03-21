@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-group",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-group",
+  "module": "../../esm/select/select-group",
+  "types": "../../ts/select/select-group.d.ts"
+}

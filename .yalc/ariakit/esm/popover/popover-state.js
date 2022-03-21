@@ -62,6 +62,8 @@ function usePopoverState(_temp) {
     const finalGutter = typeof gutter === "number" ? gutter + arrowOffset : gutter != null ? gutter : arrowOffset;
 
     const defaultRenderCallback = () => {
+      var _placement$startsWith;
+
       const popper = createPopper(anchor, popover, {
         // https://popper.js.org/docs/v2/constructors/#options
         placement,
@@ -90,7 +92,8 @@ function usePopoverState(_temp) {
         }, {
           // https://popper.js.org/docs/v2/modifiers/flip/
           name: "flip",
-          enabled: flip && dialog.mounted,
+          // See https://github.com/ariakit/ariakit/issues/1117
+          enabled: (_placement$startsWith = placement == null ? void 0 : placement.startsWith("auto")) != null ? _placement$startsWith : flip && dialog.mounted,
           options: {
             padding
           }

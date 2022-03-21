@@ -1,7 +1,7 @@
 import { useStoreProvider } from 'ariakit-utils/store';
 import { createHook, createComponent, createElement } from 'ariakit-utils/system';
 import { useComposite } from '../composite/composite.js';
-import { M as MenuBarContext } from '../__utils-aac2c931.js';
+import { a as MenuBarContext } from '../__utils-07f4a93f.js';
 
 /**
  * A component hook that returns props that can be passed to `Role` or any other

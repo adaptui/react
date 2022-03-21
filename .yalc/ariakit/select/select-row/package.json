@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-row",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-row",
+  "module": "../../esm/select/select-row",
+  "types": "../../ts/select/select-row.d.ts"
+}

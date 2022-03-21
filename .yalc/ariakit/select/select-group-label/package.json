@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-group-label",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-group-label",
+  "module": "../../esm/select/select-group-label",
+  "types": "../../ts/select/select-group-label.d.ts"
+}

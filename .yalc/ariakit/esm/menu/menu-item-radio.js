@@ -3,7 +3,7 @@ import { useEventCallback, useWrapElement } from 'ariakit-utils/hooks';
 import { useStore, createMemoComponent } from 'ariakit-utils/store';
 import { createHook, createElement } from 'ariakit-utils/system';
 import { useRadio } from '../radio/radio.js';
-import { a as MenuContext, b as MenuItemCheckedContext } from '../__utils-aac2c931.js';
+import { M as MenuContext, b as MenuItemCheckedContext } from '../__utils-07f4a93f.js';
 import { useMenuItem } from './menu-item.js';
 import { jsx } from 'react/jsx-runtime';
 

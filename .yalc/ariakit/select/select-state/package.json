@@ -1,0 +1,8 @@
+{
+  "name": "ariakit/select/select-state",
+  "private": true,
+  "sideEffects": false,
+  "main": "../../cjs/select/select-state",
+  "module": "../../esm/select/select-state",
+  "types": "../../ts/select/select-state.d.ts"
+}

@@ -8,17 +8,8 @@ var misc = require('ariakit-utils/misc');
 var store = require('ariakit-utils/store');
 var composite_compositeState = require('../composite/composite-state.js');
 var hovercard_hovercardState = require('../hovercard/hovercard-state.js');
-var __utils = require('../__utils-601a5088.js');
+var __utils = require('../__utils-6be0b335.js');
 
-function useParentOrientation(parentMenu) {
-  const parentMenuBar = store.useStore(__utils.MenuBarContext, ["orientation"]);
-
-  if (parentMenu) {
-    return parentMenu.orientation;
-  }
-
-  return parentMenuBar == null ? void 0 : parentMenuBar.orientation;
-}
 /**
  * Provides state for the `Menu` components.
  * @example
@@ -31,39 +22,34 @@ function useParentOrientation(parentMenu) {
  * </Menu>
  * ```
  */
-
-
 function useMenuState(_temp) {
+  var _timeout;
+
   let {
     orientation = "vertical",
-    timeout = 150,
+    timeout,
     hideTimeout = 0,
     ...props
   } = _temp === void 0 ? {} : _temp;
   const [initialFocus, setInitialFocus] = react.useState("container");
   const [values, setValues] = hooks.useControlledState(props.defaultValues || {}, props.values, props.setValues);
-  const parentMenu = __utils.useParentMenu(["orientation", "hideAll"]);
-  const contextOrientation = useParentOrientation(parentMenu); // Defines the placement of the menu popover based on the parent orientation.
+  const parentMenu = store.useStore(__utils.MenuContext, ["orientation", "hideAll"]);
+  const parentMenuBar = store.useStore(__utils.MenuBarContext, ["orientation"]);
+  const contextOrientation = (parentMenu == null ? void 0 : parentMenu.orientation) || (parentMenuBar == null ? void 0 : parentMenuBar.orientation);
+  const parentIsMenuBar = !!parentMenuBar && !parentMenu; // Defines the placement of the menu popover based on the parent orientation.
 
   const placement = props.placement || (contextOrientation === "vertical" ? "right-start" : "bottom-start");
+  timeout = ((_timeout = timeout) != null ? _timeout : parentIsMenuBar) ? 0 : 150;
   const composite = composite_compositeState.useCompositeState({
     orientation,
     ...props
   });
-  const hoverCard = hovercard_hovercardState.useHovercardState({
+  const hovercard = hovercard_hovercardState.useHovercardState({
     timeout,
     hideTimeout,
     ...props,
     placement
-  }); // TODO: Comment. Sometimes re-opening the menu in a menu bar will move focus.
-  // Maybe should reset activeId as well. Needs to be layout effect because of
-  // context menu subsequent clicks.
-
-  hooks.useSafeLayoutEffect(() => {
-    if (!hoverCard.visible) {
-      composite.setMoves(0);
-    }
-  }, [hoverCard.visible, composite.setMoves]);
+  });
   const setValue = react.useCallback((name, value) => {
     // Preventing prototype pollution.
     if (name === "__proto__" || name === "constructor") return;
@@ -81,18 +67,18 @@ function useMenuState(_temp) {
     });
   }, [setValues]);
   const hideAll = react.useCallback(() => {
-    hoverCard.hide();
+    hovercard.hide();
     parentMenu == null ? void 0 : parentMenu.hideAll();
-  }, [hoverCard.hide, parentMenu == null ? void 0 : parentMenu.hideAll]);
+  }, [hovercard.hide, parentMenu == null ? void 0 : parentMenu.hideAll]);
   const state = react.useMemo(() => ({ ...composite,
-    ...hoverCard,
+    ...hovercard,
     initialFocus,
     setInitialFocus,
     values,
     setValues,
     setValue,
     hideAll
-  }), [composite, hoverCard, initialFocus, setInitialFocus, values, setValues, setValue, hideAll]);
+  }), [composite, hovercard, initialFocus, setInitialFocus, values, setValues, setValue, hideAll]);
   return store.useStorePublisher(state);
 }
 

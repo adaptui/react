@@ -22,7 +22,7 @@ export declare const useDialog: import("ariakit-utils/types").Hook<DialogOptions
  * @example
  * ```jsx
  * const dialog = useDialogState();
- * <DialogDisclosure state={dialog}>Disclosure</DialogDisclosure>
+ * <button onClick={dialog.toggle}>Open dialog</button>
  * <Dialog state={dialog}>Dialog</Dialog>
  * ```
  */

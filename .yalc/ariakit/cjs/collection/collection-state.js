@@ -95,10 +95,23 @@ function getCommonParent(items) {
   return dom.getDocument(parentElement).body;
 }
 
+function useTimeoutObserver(items, setItems) {
+  react.useEffect(() => {
+    const callback = () => setItemsBasedOnDOMPosition(items, setItems);
+
+    const timeout = setTimeout(callback);
+    return () => clearTimeout(timeout);
+  });
+}
+
 function useSortBasedOnDOMPosition(items, setItems) {
   // istanbul ignore else: JSDOM doesn't support IntersectionObverser
   // See https://github.com/jsdom/jsdom/issues/2032
-  if (typeof IntersectionObserver !== "function") return;
+  if (typeof IntersectionObserver !== "function") {
+    useTimeoutObserver(items, setItems);
+    return;
+  }
+
   const previousItems = react.useRef([]);
   react.useEffect(() => {
     const callback = () => {

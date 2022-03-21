@@ -601,6 +601,7 @@ const useDialog = system.createHook(_ref => {
     visibleModals,
     wrapElement
   } = nested;
+  const nestedDialogsRef = hooks.useLiveRef(nestedDialogs);
   usePreventBodyScroll(preventBodyScroll && state.mounted); // When the dialog is unmounted, we make sure to update the state.
 
   useHideOnUnmount(ref, state); // When a focused child element is removed, focus will be placed on the
@@ -688,6 +689,8 @@ const useDialog = system.createHook(_ref => {
   }, [state.animating, state.visible, portal, portalNode, modal, backdrop, preserveTabOrder]); // Auto focus on show.
 
   react.useEffect(() => {
+    var _nestedDialogsRef$cur;
+
     if (state.animating) return;
     if (!state.visible) return;
     if (!autoFocusOnShow) return; // Makes sure to wait for the portalNode to be created before moving
@@ -696,7 +699,7 @@ const useDialog = system.createHook(_ref => {
 
     if (!domReady) return; // If there are open nested dialogs, let them handle the focus.
 
-    const isNestedDialogVisible = nestedDialogs.some(child => child.current && !child.current.hidden);
+    const isNestedDialogVisible = (_nestedDialogsRef$cur = nestedDialogsRef.current) == null ? void 0 : _nestedDialogsRef$cur.some(child => child.current && !child.current.hidden);
     if (isNestedDialogVisible) return;
     const dialog = ref.current;
     if (!dialog) return;
@@ -707,7 +710,7 @@ const useDialog = system.createHook(_ref => {
     // receives focus.
     focus.getFirstTabbableIn(dialog, true, portal && preserveTabOrder) || dialog;
     focus.ensureFocus(element);
-  }, [state.animating, state.visible, autoFocusOnShow, domReady, nestedDialogs, initialFocusRef, portal, preserveTabOrder]); // Auto focus on hide.
+  }, [state.animating, state.visible, autoFocusOnShow, domReady, initialFocusRef, portal, preserveTabOrder]); // Auto focus on hide.
 
   react.useEffect(() => {
     const dialog = ref.current;
@@ -895,7 +898,7 @@ const useDialog = system.createHook(_ref => {
  * @example
  * ```jsx
  * const dialog = useDialogState();
- * <DialogDisclosure state={dialog}>Disclosure</DialogDisclosure>
+ * <button onClick={dialog.toggle}>Open dialog</button>
  * <Dialog state={dialog}>Dialog</Dialog>
  * ```
  */
