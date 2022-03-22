@@ -28,7 +28,7 @@ function getPanelId(panels?: AccordionState["panels"], id?: string) {
  * const props = useAccordionDisclosure({ state });
  * <Accordion state={state}>
  *   <Role {...props}>Accordion 1</Role>
- *   <AccordionPanel state={state}>Panel 1</AccordionPanel>
+ *   <AccordionPanel>Panel 1</AccordionPanel>
  * </Accordion>
  * ```
  */
@@ -58,19 +58,6 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
       "toggle",
       "selectOnMove",
     ]);
-
-    const dimmed = props.disabled;
-
-    const getItem = useCallback(
-      item => {
-        const nextItem = { ...item, dimmed };
-        if (getItemProp) {
-          return getItemProp(nextItem);
-        }
-        return nextItem;
-      },
-      [dimmed, getItemProp],
-    );
 
     const onClickProp = useEventCallback(props.onClick);
 
@@ -110,6 +97,18 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
       onFocus,
     };
 
+    const dimmed = props.disabled;
+
+    const getItem = useCallback(
+      item => {
+        const nextItem = { ...item, dimmed };
+        if (getItemProp) return getItemProp(nextItem);
+
+        return nextItem;
+      },
+      [dimmed, getItemProp],
+    );
+
     props = useCompositeItem({
       state,
       ...props,
@@ -130,15 +129,16 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
  * const accordion = useAccordionState();
  * <Accordion state={accordion}>
  *   <AccordionDisclosure>Accordion 1</AccordionDisclosure>
- *   <AccordionPanel state={accordion}>Panel 1</AccordionPanel>
+ *   <AccordionPanel>Panel 1</AccordionPanel>
  *   <AccordionDisclosure>Accordion 2</AccordionDisclosure>
- *   <AccordionPanel state={accordion}>Panel 2</AccordionPanel>
+ *   <AccordionPanel>Panel 2</AccordionPanel>
  * </Accordion>
  * ```
  */
 export const AccordionDisclosure =
   createMemoComponent<AccordionDisclosureOptions>(props => {
     const htmlProps = useAccordionDisclosure(props);
+
     return createElement("button", htmlProps);
   });
 

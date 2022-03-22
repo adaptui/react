@@ -24,6 +24,7 @@ import { AccordionState } from "./accordion-state";
 
 function getAccordionId(panels?: AccordionState["panels"], id?: string) {
   if (!id) return;
+
   return panels?.items.find(panel => panel.id === id)?.accordionId;
 }
 
@@ -37,8 +38,8 @@ function getAccordionId(panels?: AccordionState["panels"], id?: string) {
  * const props = useAccordionPanel({ state });
  * <Accordion state={state}>
  *   <AccordionDisclosure>Accordion 1</AccordionDisclosure>
+ *   <Role {...props}>Panel 1</Role>
  * </Accordion>
- * <Role {...props}>Panel 1</Role>
  * ```
  */
 export const useAccordionPanel = createHook<AccordionPanelOptions>(
@@ -52,28 +53,7 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
       "setSelectedId",
     ]);
 
-    const [hasTabbableChildren, setHasTabbableChildren] = useState(false);
-
-    useEffect(() => {
-      const element = ref.current;
-      if (!element) return;
-      const tabbable = getAllTabbableIn(element);
-      setHasTabbableChildren(!!tabbable.length);
-    }, []);
-
-    const getItem = useCallback(
-      item => {
-        const nextItem = { ...item, id, accordionId: accordionIdProp };
-        if (getItemProp) {
-          return getItemProp(nextItem);
-        }
-        return nextItem;
-      },
-      [id, accordionIdProp, getItemProp],
-    );
-
     const accordionId = accordionIdProp || getAccordionId(state?.panels, id);
-    const visible = !!accordionId && getSelectedId(state, accordionId);
 
     props = {
       id,
@@ -83,10 +63,32 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
       ref: useForkRef(ref, props.ref),
     };
 
-    const disclosure = useDisclosureState({ visible });
+    const [hasTabbableChildren, setHasTabbableChildren] = useState(false);
+
+    useEffect(() => {
+      const element = ref.current;
+      if (!element) return;
+
+      const tabbable = getAllTabbableIn(element);
+      setHasTabbableChildren(!!tabbable.length);
+    }, []);
 
     props = useFocusable({ focusable: hasTabbableChildren, ...props });
+
+    const visible = !!accordionId && getSelectedId(state, accordionId);
+    const disclosure = useDisclosureState({ visible });
     props = useDisclosureContent({ state: disclosure, ...props });
+
+    const getItem = useCallback(
+      item => {
+        const nextItem = { ...item, id, accordionId: accordionIdProp };
+        if (getItemProp) return getItemProp(nextItem);
+
+        return nextItem;
+      },
+      [id, accordionIdProp, getItemProp],
+    );
+
     props = useCollectionItem({
       state: state?.panels,
       ...props,
@@ -106,14 +108,15 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
  * const accordion = useAccordionState();
  * <Accordion state={accordion}>
  *   <AccordionDisclosure>Accordion 1</AccordionDisclosure>
- *   <AccordionPanel state={accordion}>Panel 1</AccordionPanel>
+ *   <AccordionPanel>Panel 1</AccordionPanel>
  *   <AccordionDisclosure>Accordion 2</AccordionDisclosure>
- *   <AccordionPanel state={accordion}>Panel 2</AccordionPanel>
+ *   <AccordionPanel>Panel 2</AccordionPanel>
  * </Accordion>
  * ```
  */
 export const AccordionPanel = createComponent<AccordionPanelOptions>(props => {
   const htmlProps = useAccordionPanel(props);
+
   return createElement("div", htmlProps);
 });
 

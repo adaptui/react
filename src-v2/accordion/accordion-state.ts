@@ -35,10 +35,10 @@ function findFirstEnabledAccordion(items: Item[]) {
  * ```jsx
  * const accordion = useAccordionState();
  * <Accordion state={accordion}>
- *   <Accordion>Accordion 1</Accordion>
- *   <AccordionPanel state={accordion}>Panel 1</AccordionPanel>
- *   <AccordionPanel state={accordion}>Panel 2</AccordionPanel>
- *   <Accordion>Accordion 2</Accordion>
+ *   <AccordionDisclosure>Accordion 1</AccordionDisclosure>
+ *   <AccordionPanel>Panel 1</AccordionPanel>
+ *   <AccordionDisclosure>Accordion 2</AccordionDisclosure>
+ *   <AccordionPanel>Panel 2</AccordionPanel>
  * </Accordion>
  * ```
  */
@@ -48,7 +48,7 @@ export function useAccordionState({
   selectOnMove = false,
   shouldSelectFirstId = false,
   allowMultiple = false,
-  allowToggle = false,
+  allowToggle = allowMultiple || false,
   ...props
 }: AccordionStateProps = {}): AccordionState {
   const [selectedId, setSelectedId] = useControlledState(
@@ -56,36 +56,25 @@ export function useAccordionState({
     props.selectedId,
     props.setSelectedId,
   );
-  allowToggle = allowMultiple || allowToggle;
   const composite = useCompositeState({ orientation, focusLoop, ...props });
   const panels = useCollectionState<Panel>();
   const compositeRef = useLiveRef(composite);
   const firstEnabledAccordionSelected = useRef(false);
 
-  // Selects the active accordion when selectOnMove is true. Since we're listening to
-  // the moves state, but not the activeId state, this effect will run only when
-  // there's a move, which is usually triggered by moving through the accordions using
-  // the keyboard.
-  useEffect(() => {
-    if (!selectOnMove) return;
-    const { activeId, items } = compositeRef.current;
-    if (!activeId) return;
-    const accordion = findEnabledAccordionById(items, activeId);
-    if (!accordion) return;
+  const select: AccordionState["toggle"] = useCallback(
+    id => {
+      // Runs when the accordion has `allowMultiple` - `false`
+      if (!allowMultiple || id == null) {
+        setSelectedId(id);
 
-    if (allowMultiple) {
-      if (accordion.id == null) {
-        setSelectedId(accordion.id);
         return;
       }
 
-      setSelectedId([accordion.id]);
-      return;
-    }
-
-    setSelectedId(accordion.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [composite.moves, selectOnMove, setSelectedId, allowMultiple]);
+      // Runs when the accordion has `allowMultiple` - `true`
+      setSelectedId([id]);
+    },
+    [allowMultiple, setSelectedId],
+  );
 
   // Automatically set selectedId if it's undefined.
   useEffect(() => {
@@ -95,37 +84,22 @@ export function useAccordionState({
 
     // First, we try to set selectedId based on the current active accordion.
     const activeId = compositeRef.current.activeId;
+    if (!activeId) return;
 
     const accordion = findEnabledAccordionById(composite.items, activeId);
-    if (accordion) {
-      if (allowMultiple) {
-        if (activeId == null) {
-          setSelectedId(activeId);
-          return;
-        }
-
-        setSelectedId([activeId]);
-        return;
-      } else {
-        setSelectedId(activeId);
-      }
-    }
-    // If there's no active accordion or the active accordion is dimmed, we get the first
-    // enabled accordion instead.
-    else {
+    if (!accordion) {
+      // If there's no active accordion or the active accordion is dimmed, we get the first
+      // enabled accordion instead.
       const firstEnabledAccordion = findFirstEnabledAccordion(composite.items);
-      if (allowMultiple) {
-        if (firstEnabledAccordion?.id == null) {
-          setSelectedId(firstEnabledAccordion?.id);
-          return;
-        }
+      if (!firstEnabledAccordion) return;
 
-        setSelectedId([firstEnabledAccordion?.id]);
-        return;
-      } else {
-        setSelectedId(firstEnabledAccordion?.id);
-      }
+      select(firstEnabledAccordion?.id);
+
+      return;
     }
+
+    select(activeId);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     allowToggle,
@@ -143,37 +117,23 @@ export function useAccordionState({
 
     // First, we try to set selectedId based on the current active accordion.
     const activeId = compositeRef.current.activeId;
+    if (!activeId) return;
+
     const accordion = findEnabledAccordionById(composite.items, activeId);
-    if (accordion) {
-      firstEnabledAccordionSelected.current = true;
-      if (allowMultiple) {
-        if (activeId == null) {
-          setSelectedId(activeId);
-          return;
-        }
-
-        setSelectedId([activeId]);
-        return;
-      } else {
-        setSelectedId(activeId);
-      }
-    }
-    // If there's no active accordion or the active accordion is dimmed, we get the first
-    // enabled accordion instead.
-    else {
+    if (!accordion) {
+      // If there's no active accordion or the active accordion is dimmed, we get the first
+      // enabled accordion instead.
       const firstEnabledAccordion = findFirstEnabledAccordion(composite.items);
-      if (allowMultiple) {
-        if (firstEnabledAccordion?.id == null) {
-          setSelectedId(firstEnabledAccordion?.id);
-          return;
-        }
+      if (!firstEnabledAccordion) return;
 
-        setSelectedId([firstEnabledAccordion?.id]);
-        return;
-      } else {
-        setSelectedId(firstEnabledAccordion?.id);
-      }
+      select(firstEnabledAccordion?.id);
+
+      return;
     }
+
+    firstEnabledAccordionSelected.current = true;
+
+    select(activeId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     allowToggle,
@@ -182,72 +142,65 @@ export function useAccordionState({
     composite.items,
     setSelectedId,
     allowMultiple,
+    select,
   ]);
 
   // Keep panels accordionIds in sync with the current accordions.
   useEffect(() => {
     if (!composite.items.length) return;
+
     panels.setItems(prevPanels => {
       const hasOrphanPanels = prevPanels.some(panel => !panel.accordionId);
       if (!hasOrphanPanels) return prevPanels;
+
       return prevPanels.map((panel, i) => {
         if (panel.accordionId) return panel;
+
         const accordion = composite.items[i];
+
         return { ...panel, accordionId: accordion?.id };
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [composite.items, panels.setItems]);
 
-  const select: AccordionState["select"] = useCallback(
-    id => {
-      composite.move(id);
-      if (allowMultiple) {
-        if (id == null) {
-          setSelectedId(id);
-          return;
-        }
-
-        if (selectedId?.includes(id)) {
-          setSelectedId(prevId =>
-            (prevId as string[])?.filter(pId => pId !== id),
-          );
-
-          return;
-        }
-
-        setSelectedId((prevId: string[]) => {
-          if (prevId == null) {
-            return [id];
-          }
-
-          return [...prevId, id];
-        });
-
-        return;
-      } else {
-        setSelectedId(id);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [composite.move, setSelectedId, selectedId, allowMultiple],
-  );
-
   const toggle: AccordionState["toggle"] = useCallback(
     id => {
-      if (!allowToggle) {
-        select(id);
+      // If the accordion is already selected, we unselect it.
+      if (allowToggle && id === selectedId) {
+        setSelectedId(undefined);
 
         return;
       }
 
-      if (id === selectedId) {
-        setSelectedId(undefined);
-      } else {
-        select(id);
+      // If the accordion is toggled, we move the composite accordingly.
+      composite.move(id);
+
+      // Runs when the accordion has `allowMultiple` - `false`
+      // and the `id` is `null`.
+      if (!allowMultiple || id == null) {
+        setSelectedId(id);
+
+        return;
       }
+
+      // Runs when the accordion has `allowMultiple` - `true`
+      if (selectedId?.includes(id)) {
+        setSelectedId(prevId =>
+          (prevId as string[])?.filter(pId => pId !== id),
+        );
+
+        return;
+      }
+
+      setSelectedId((prevId: string[]) => {
+        if (prevId == null) return [id];
+
+        return [...prevId, id];
+      });
     },
-    [selectedId, setSelectedId, select, allowToggle],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allowToggle, selectedId, setSelectedId, composite.move, allowMultiple],
   );
 
   const state = useMemo(
@@ -257,7 +210,6 @@ export function useAccordionState({
       allowMultiple,
       selectedId,
       setSelectedId,
-      select,
       toggle,
       panels,
       selectOnMove,
@@ -268,7 +220,6 @@ export function useAccordionState({
       allowMultiple,
       selectedId,
       setSelectedId,
-      select,
       toggle,
       panels,
       selectOnMove,
@@ -279,7 +230,17 @@ export function useAccordionState({
 }
 
 export type AccordionState = CompositeState<Item> & {
+  /**
+   * Whether the accordion panels can be toggled on click. If it's set to
+   * `false`, the panels cannot be closed on the next click.
+   * @default false
+   */
   allowToggle: boolean;
+  /**
+   * Whether multiple accordion panels can be viewed at once. If it's set to
+   * `false`, the accordion will only allow one panel to be viewed at once.
+   * @default false
+   */
   allowMultiple: boolean;
   /**
    * The id of the accordion whose panel is currently visible.
@@ -289,10 +250,6 @@ export type AccordionState = CompositeState<Item> & {
    * Sets the `selectedId` state.
    */
   setSelectedId: SetState<AccordionState["selectedId"]>;
-  /**
-   * Selects the accordion panel for the accordion with the given id.
-   */
-  select: AccordionState["move"];
   /**
    * Selects the accordion panel for the accordion with the given id.
    */
