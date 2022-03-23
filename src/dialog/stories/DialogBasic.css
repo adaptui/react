@@ -55,8 +55,8 @@
 }
 
 .dialog {
-  transition: transform 250ms ease-in-out;
-  transform: translate(0, -10px);
+  transition: transform 500ms ease-in-out;
+  transform: translate(0, -100px);
 }
 
 .dialog[data-enter] {
@@ -64,5 +64,5 @@
 }
 
 .dialog[data-leave] {
-  transform: translate(0, -10px);
+  transform: translate(0, -100px);
 }

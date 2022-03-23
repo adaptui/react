@@ -2,10 +2,11 @@
   display: flex;
   width: 100%;
 }
+
 .content {
   display: flex;
   flex-direction: row;
-  /* opacity: 0; */
+  opacity: 0;
 }
 
 .content {
@@ -13,12 +14,12 @@
 }
 
 .content[data-enter] {
-  /* opacity: 1; */
-  animation: fadedIn 500ms ease-in-out;
+  opacity: 1;
+  animation: fadedIn 500ms ease-in-out forwards;
 }
 
 .content[data-leave] {
-  animation: fadedOut 500ms ease-in-out;
+  animation: fadedOut 500ms ease-in-out forwards;
 }
 
 @keyframes fadedIn {
