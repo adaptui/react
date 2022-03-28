@@ -1,0 +1,41 @@
+.dialog {
+  opacity: 0;
+  padding: 10px;
+  background-color: white;
+  transition: 250ms ease-in-out;
+  transform: translate(-200px, 0);
+}
+
+.dialog[data-enter] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.dialog[data-leave] {
+  opacity: 0;
+  transform: translate(-200px, 0);
+}
+
+.backdrop {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: opacity 250ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop[data-enter] {
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  margin: 0px;
+}
