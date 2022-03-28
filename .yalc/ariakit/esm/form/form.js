@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { isTextField } from 'ariakit-utils/dom';
-import { useUpdateEffect, useEventCallback, useTagName, useForkRef } from 'ariakit-utils/hooks';
+import { useInitialValue, useUpdateEffect, useEventCallback, useTagName, useForkRef } from 'ariakit-utils/hooks';
 import { useStoreProvider } from 'ariakit-utils/store';
 import { createHook, createComponent, createElement } from 'ariakit-utils/system';
 import { F as FormContext } from '../__utils-6eda8bb9.js';
@@ -40,12 +40,13 @@ const useForm = createHook(_ref => {
     ...props
   } = _ref;
   const ref = useRef(null);
+  const defaultValues = useInitialValue(state.values);
   useEffect(() => resetOnUnmount ? state.reset : undefined, [resetOnUnmount, state.reset]);
   useUpdateEffect(() => {
-    if (validateOnChange) {
-      state.validate();
-    }
-  }, [state.values, validateOnChange, state.validate]);
+    if (!validateOnChange) return;
+    if (state.values === defaultValues) return;
+    state.validate();
+  }, [validateOnChange, state.values, defaultValues, state.validate]);
   useEffect(() => {
     if (!resetOnSubmit) return;
     if (!state.submitSucceed) return;

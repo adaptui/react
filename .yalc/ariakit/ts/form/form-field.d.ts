@@ -1,4 +1,5 @@
-import { As, Props } from "ariakit-utils/types";
+import { FocusEvent } from "react";
+import { As, BooleanOrCallback, Props } from "ariakit-utils/types";
 import { CollectionItemOptions } from "../collection/collection-item";
 import { StringLike } from "./__utils";
 import { FormState } from "./form-state";
@@ -67,5 +68,10 @@ export declare type FormFieldOptions<T extends As = "input"> = Omit<CollectionIt
      * Name of the field.
      */
     name: StringLike;
+    /**
+     * Whether the field should be marked touched on blur.
+     * @default true
+     */
+    touchOnBlur?: BooleanOrCallback<FocusEvent>;
 };
 export declare type FormFieldProps<T extends As = "input"> = Props<FormFieldOptions<T>>;

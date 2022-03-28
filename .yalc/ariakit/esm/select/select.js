@@ -55,6 +55,8 @@ const useSelect = createHook(_ref => {
   let {
     state,
     name,
+    form,
+    required,
     showOnKeyDown = true,
     moveOnKeyDown = true,
     toggleOnClick = false,
@@ -145,7 +147,7 @@ const useSelect = createHook(_ref => {
   const label = props["aria-label"];
   const labelledBy = props["aria-labelledby"] || labelId;
   const values = useMemo( // Filter out items without value and duplicate values.
-  () => [...new Set(state.items.map(i => i.value).filter(Boolean))], [state.items]); // Renders a native select element with the same value as the select so we
+  () => [...new Set(state.items.map(i => i.value).filter(i => i != null))], [state.items]); // Renders a native select element with the same value as the select so we
   // support browser autofill. When the native select value changes, the
   // onChange event is triggered and we set the autofill state to true.
 
@@ -157,6 +159,8 @@ const useSelect = createHook(_ref => {
       "aria-label": label,
       "aria-labelledby": labelledBy,
       name: name,
+      form: form,
+      required: required,
       value: state.value,
       multiple: multiSelectable,
       onChange: event => {
@@ -169,7 +173,7 @@ const useSelect = createHook(_ref => {
         children: value
       }, value))
     }), element]
-  }), [label, labelledBy, name, state.value, multiSelectable, state.setValue, values]);
+  }), [label, labelledBy, name, form, required, state.value, multiSelectable, state.setValue, values]);
 
   const children = /*#__PURE__*/jsxs(Fragment, {
     children: [state.value, /*#__PURE__*/jsx(SelectArrow, {})]

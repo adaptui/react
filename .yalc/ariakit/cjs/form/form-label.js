@@ -89,6 +89,16 @@ const useFormLabel = system.createHook(_ref => {
     ref: hooks.useForkRef(ref, props.ref),
     onClick
   };
+
+  if (!isNativeLabel) {
+    props = { ...props,
+      style: {
+        cursor: "default",
+        ...props.style
+      }
+    };
+  }
+
   props = collection_collectionItem.useCollectionItem({
     state,
     ...props,

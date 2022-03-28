@@ -44,12 +44,13 @@ const useForm = system.createHook(_ref => {
     ...props
   } = _ref;
   const ref = react.useRef(null);
+  const defaultValues = hooks.useInitialValue(state.values);
   react.useEffect(() => resetOnUnmount ? state.reset : undefined, [resetOnUnmount, state.reset]);
   hooks.useUpdateEffect(() => {
-    if (validateOnChange) {
-      state.validate();
-    }
-  }, [state.values, validateOnChange, state.validate]);
+    if (!validateOnChange) return;
+    if (state.values === defaultValues) return;
+    state.validate();
+  }, [validateOnChange, state.values, defaultValues, state.validate]);
   react.useEffect(() => {
     if (!resetOnSubmit) return;
     if (!state.submitSucceed) return;

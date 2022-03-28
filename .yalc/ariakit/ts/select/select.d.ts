@@ -1,4 +1,4 @@
-import { KeyboardEvent, MouseEvent } from "react";
+import { KeyboardEvent, MouseEvent, SelectHTMLAttributes } from "react";
 import { As, BooleanOrCallback, Props } from "ariakit-utils/types";
 import { CompositeTypeaheadOptions } from "../composite/composite-typeahead";
 import { PopoverDisclosureOptions } from "../popover/popover-disclosure";
@@ -29,7 +29,7 @@ export declare const useSelect: import("ariakit-utils/types").Hook<SelectOptions
  * ```
  */
 export declare const Select: import("ariakit-utils/types").Component<SelectOptions<"button">>;
-export declare type SelectOptions<T extends As = "button"> = Omit<PopoverDisclosureOptions<T>, "state" | "toggleOnClick"> & Omit<CompositeTypeaheadOptions<T>, "state"> & {
+export declare type SelectOptions<T extends As = "button"> = Omit<PopoverDisclosureOptions<T>, "state" | "toggleOnClick"> & Pick<SelectHTMLAttributes<HTMLSelectElement>, "name" | "form" | "required"> & Omit<CompositeTypeaheadOptions<T>, "state"> & {
     /**
      * Object returned by the `useSelectState` hook.
      */

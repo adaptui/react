@@ -3,12 +3,29 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var react = require('react');
+var dom = require('ariakit-utils/dom');
 var hooks = require('ariakit-utils/hooks');
 var misc = require('ariakit-utils/misc');
 var store = require('ariakit-utils/store');
 var system = require('ariakit-utils/system');
 var collection_collectionItem = require('../collection/collection-item.js');
 var __utils = require('../__utils-02ec402c.js');
+
+function getNamedElement(ref, name) {
+  const element = ref.current;
+  if (!element) return null;
+
+  if (element.name !== name) {
+    if (element.form) {
+      return element.form.elements.namedItem(name);
+    } else {
+      const document = dom.getDocument(element);
+      return document.getElementsByName(name)[0];
+    }
+  }
+
+  return element;
+}
 
 function acceptsNameAttribute(tagName) {
   return tagName === "input" || tagName === "button" || tagName === "textarea" || tagName === "fieldset" || tagName === "select";
@@ -57,6 +74,7 @@ const useFormField = system.createHook(_ref => {
     state,
     name: nameProp,
     getItem: getItemProp,
+    touchOnBlur = true,
     ...props
   } = _ref;
   const name = "" + nameProp;
@@ -64,7 +82,7 @@ const useFormField = system.createHook(_ref => {
   const ref = react.useRef(null);
   const id = hooks.useId(props.id);
   (_state = state) == null ? void 0 : _state.useValidate(() => {
-    const element = ref.current;
+    const element = getNamedElement(ref, name);
     if (!element) return;
 
     if ("validity" in element && !element.validity.valid) {
@@ -87,13 +105,15 @@ const useFormField = system.createHook(_ref => {
     return nextItem;
   }, [id, name, getItemProp]);
   const onBlurProp = hooks.useEventCallback(props.onBlur);
+  const touchOnBlurProp = hooks.useBooleanEventCallback(touchOnBlur);
   const onBlur = react.useCallback(event => {
     var _state3;
 
     onBlurProp(event);
     if (event.defaultPrevented) return;
+    if (!touchOnBlurProp(event)) return;
     (_state3 = state) == null ? void 0 : _state3.setFieldTouched(name, true);
-  }, [onBlurProp, (_state4 = state) == null ? void 0 : _state4.setFieldTouched, name]);
+  }, [onBlurProp, touchOnBlurProp, (_state4 = state) == null ? void 0 : _state4.setFieldTouched, name]);
   const tagName = hooks.useTagName(ref, props.as || "input");
   const label = useItem(state, name, "label");
   const error = useItem(state, name, "error");
