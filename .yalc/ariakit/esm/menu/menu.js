@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useMemo } from 'react';
 import { hasFocusWithin } from 'ariakit-utils/focus';
 import { useEventCallback, useBooleanEventCallback } from 'ariakit-utils/hooks';
 import { useStore } from 'ariakit-utils/store';
@@ -7,11 +7,11 @@ import { useHovercard } from '../hovercard/hovercard.js';
 import { M as MenuContext, a as MenuBarContext } from '../__utils-07f4a93f.js';
 import { useMenuList } from './menu-list.js';
 
-function getItemElementById(items, id) {
+function getItemRefById(items, id) {
   var _items$find;
 
   if (!id) return;
-  return (_items$find = items.find(item => item.id === id)) == null ? void 0 : _items$find.ref.current;
+  return (_items$find = items.find(item => item.id === id)) == null ? void 0 : _items$find.ref;
 }
 /**
  * A component hook that returns props that can be passed to `Role` or any other
@@ -67,14 +67,7 @@ const useMenu = createHook(_ref => {
     state,
     ...props
   });
-  const initialFocusRef = useRef(null);
-  useEffect(() => {
-    const element = state.initialFocus === "first" ? getItemElementById(state.items, state.first()) : state.initialFocus === "last" ? getItemElementById(state.items, state.last()) : state.baseRef.current;
-
-    if (element) {
-      initialFocusRef.current = element;
-    }
-  }, [state.initialFocus, state.first, state.last, state.items, state.baseRef]);
+  const initialFocusRef = useMemo(() => state.initialFocus === "first" ? getItemRefById(state.items, state.first()) : state.initialFocus === "last" ? getItemRefById(state.items, state.last()) : state.baseRef, [state.initialFocus, state.items, state.first, state.last, state.baseRef]);
   props = useHovercard({
     state,
     autoFocusOnShow: state.autoFocusOnShow && autoFocusOnShow,

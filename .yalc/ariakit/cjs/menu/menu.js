@@ -11,11 +11,11 @@ var hovercard_hovercard = require('../hovercard/hovercard.js');
 var __utils = require('../__utils-6be0b335.js');
 var menu_menuList = require('./menu-list.js');
 
-function getItemElementById(items, id) {
+function getItemRefById(items, id) {
   var _items$find;
 
   if (!id) return;
-  return (_items$find = items.find(item => item.id === id)) == null ? void 0 : _items$find.ref.current;
+  return (_items$find = items.find(item => item.id === id)) == null ? void 0 : _items$find.ref;
 }
 /**
  * A component hook that returns props that can be passed to `Role` or any other
@@ -71,14 +71,7 @@ const useMenu = system.createHook(_ref => {
     state,
     ...props
   });
-  const initialFocusRef = react.useRef(null);
-  react.useEffect(() => {
-    const element = state.initialFocus === "first" ? getItemElementById(state.items, state.first()) : state.initialFocus === "last" ? getItemElementById(state.items, state.last()) : state.baseRef.current;
-
-    if (element) {
-      initialFocusRef.current = element;
-    }
-  }, [state.initialFocus, state.first, state.last, state.items, state.baseRef]);
+  const initialFocusRef = react.useMemo(() => state.initialFocus === "first" ? getItemRefById(state.items, state.first()) : state.initialFocus === "last" ? getItemRefById(state.items, state.last()) : state.baseRef, [state.initialFocus, state.items, state.first, state.last, state.baseRef]);
   props = hovercard_hovercard.useHovercard({
     state,
     autoFocusOnShow: state.autoFocusOnShow && autoFocusOnShow,

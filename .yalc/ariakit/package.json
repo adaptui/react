@@ -40,8 +40,8 @@
     "ariakit-utils": "file:../ariakit-utils"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^18.0.0-beta",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^18.0.0-beta"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
-  "yalcSig": "34f58752fa3e037a51b10cfb66375712"
+  "yalcSig": "d526de56aab17b3918ae77ec4896f278"
 }

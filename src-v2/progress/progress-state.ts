@@ -6,8 +6,8 @@ import { clamp, valueToPercent } from "./__utils";
  * Provides state for the `Progress` components.
  * @example
  * ```jsx
- * const meter = useProgressState();
- * <Progress state={meter} />
+ * const progress = useProgressState();
+ * <Progress state={progress} />
  * ```
  */
 export function useProgressState({

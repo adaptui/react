@@ -124,7 +124,7 @@ const useSelect = createHook(_ref => {
     if (!toggleOnPressProp(event)) return;
     const element = event.currentTarget;
     queueBeforeEvent(element, "focusin", () => {
-      state.disclosureRef.current = event.currentTarget;
+      state.disclosureRef.current = element;
       state.toggle();
     });
   }, [onMouseDownProp, toggleOnPressProp, state.toggle]);
