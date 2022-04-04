@@ -1,5 +1,6 @@
 export * from "./accordion";
 export * from "./breakcrumbs";
+export * from "./calendar";
 export * from "./dialog";
 export * from "./disclosure";
 export * from "./link";
