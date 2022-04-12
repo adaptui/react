@@ -7,6 +7,7 @@ import {
 import { As, Options, Props } from "ariakit-utils/types";
 
 import { DatePickerState } from "./datepicker-state";
+import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerLabel = createHook<DatePickerLabelOptions>(
   ({ state, ...props }) => {
@@ -28,7 +29,7 @@ export type DatePickerLabelOptions<T extends As = "span"> = Options<T> & {
   /**
    * Object returned by the `useDatePickerState` hook.
    */
-  state: DatePickerState;
+  state: DatePickerState | DateRangePickerState;
 };
 
 export type DatePickerLabelProps<T extends As = "span"> = Props<

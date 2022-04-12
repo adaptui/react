@@ -8,7 +8,6 @@ import {
 import { As, Options, Props } from "ariakit-utils/types";
 
 import { DateFieldState } from "./datefield-state";
-import { DatePickerState } from "./datepicker-state";
 
 export const useDateField = createHook<DateFieldOptions>(
   ({ state, ...props }) => {
@@ -29,7 +28,7 @@ export type DateFieldOptions<T extends As = "div"> = Options<T> & {
   /**
    * Object returned by the `useDateFieldBaseState` hook.
    */
-  state: DateFieldState | DatePickerState;
+  state: DateFieldState;
 };
 
 export type DateFieldProps<T extends As = "div"> = Props<DateFieldOptions<T>>;

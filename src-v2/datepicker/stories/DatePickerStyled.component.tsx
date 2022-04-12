@@ -2,8 +2,8 @@ import React from "react";
 import { createCalendar } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 
-import CalendarBasic from "../../calendar/stories/CalendarBasic.component";
-import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
+import CalendarStyled from "../../calendar/stories/CalendarStyled.component";
+import DateFieldStyled from "../../datefield/stories/DateFieldStyled.component";
 import {
   DatePickerBaseStateProps,
   useDatePickerBaseState,
@@ -13,36 +13,36 @@ import { DatePickerGroup } from "../datepicker-group";
 import { DatePickerPopover } from "../datepicker-popover";
 import { useDatePickerState } from "../datepicker-state";
 
-import { CalendarIcon } from "./Utils.component";
+import { CalendarStyledIcon } from "./Utils.component";
 
-export type DatePickerBasicProps = DatePickerBaseStateProps & {};
+export type DatePickerStyledProps = DatePickerBaseStateProps & {};
 
-export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
+export const DatePickerStyled: React.FC<DatePickerStyledProps> = props => {
   const { locale } = useLocale();
   const state = useDatePickerBaseState({ ...props, gutter: 10 });
   const datepicker = useDatePickerState({ ...props, state });
 
   return (
-    <div style={{ position: "relative" }} className="datepicker">
+    <div className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max">
       <DatePickerGroup
         state={datepicker}
-        className="datepicker__header"
+        className="flex justify-between items-center p-2 pl-4 pr-4 space-x-4 rounded-md"
         aria-label="DatePicker"
       >
-        <DateFieldBasic
+        <DateFieldStyled
           {...datepicker.fieldProps}
           createCalendar={createCalendar}
           locale={locale}
         />
         <DatePickerDisclosure
           state={datepicker}
-          className="datepicker__trigger"
+          className="px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
         >
-          <CalendarIcon />
+          <CalendarStyledIcon />
         </DatePickerDisclosure>
         {state.popover.visible && (
           <DatePickerPopover state={datepicker} className="popover">
-            <CalendarBasic
+            <CalendarStyled
               {...datepicker.calendarProps}
               locale={locale}
               createCalendar={createCalendar}
@@ -54,4 +54,4 @@ export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
   );
 };
 
-export default DatePickerBasic;
+export default DatePickerStyled;

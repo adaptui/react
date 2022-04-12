@@ -177,6 +177,7 @@ export const ToastBar = () => {
               const { content } = toast;
               return (
                 <React.Fragment key={toast.id}>
+                  {/* @ts-ignore */}
                   {isFunction(content) ? content({ toast, handlers }) : content}
                 </React.Fragment>
               );
@@ -197,7 +198,9 @@ const placememtStyles = {
   "bottom-right": { bottom: 10, right: 20 },
 };
 
-export const ToastContainer: React.FC<Pick<Toast, "placement">> = props => {
+export const ToastContainer: React.FC<
+  React.PropsWithChildren<Pick<Toast, "placement">>
+> = props => {
   const { placement, ...rest } = props;
 
   return (
@@ -228,7 +231,9 @@ function getTranslate(placement: ToastPlacement) {
   return translateMap[relevantPlacement];
 }
 
-export const ToastWrapper: React.FC<{ toast: Toast }> = props => {
+export const ToastWrapper: React.FC<
+  React.PropsWithChildren<{ toast: Toast }>
+> = props => {
   const { toast, children } = props;
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -356,7 +361,7 @@ export const AlertIndicator: React.FC<{
   );
 };
 
-export const AlertContent: React.FC<{}> = props => {
+export const AlertContent: React.FC<React.PropsWithChildren<{}>> = props => {
   return (
     <div style={{ flexGrow: 1, lineHeight: 1.5, padding: "8px" }} {...props} />
   );

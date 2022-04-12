@@ -47,7 +47,6 @@ export const useCalendarCell = createHook<CalendarCellOptions>(
             baseState.visibleRange.start,
           ));
 
-    console.log("%cstate", "color: #d90000", state);
     props = {
       "data-is-range-selection": ariaAttr(
         state.isSelected && "highlightedRange" in baseState,

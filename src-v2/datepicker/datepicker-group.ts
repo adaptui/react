@@ -8,6 +8,7 @@ import {
 import { As, Options, Props } from "ariakit-utils/types";
 
 import { DatePickerState } from "./datepicker-state";
+import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerGroup = createHook<DatePickerGroupOptions>(
   ({ state, ...props }) => {
@@ -30,7 +31,7 @@ export type DatePickerGroupOptions<T extends As = "div"> = Options<T> & {
   /**
    * Object returned by the `useDatePickerState` hook.
    */
-  state: DatePickerState;
+  state: DatePickerState | DateRangePickerState;
 };
 
 export type DatePickerGroupProps<T extends As = "div"> = Props<

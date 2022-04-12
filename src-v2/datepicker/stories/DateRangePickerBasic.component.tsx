@@ -2,48 +2,57 @@ import React from "react";
 import { createCalendar } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 
-import CalendarBasic from "../../calendar/stories/CalendarBasic.component";
+import CalendarRange from "../../calendar/stories/CalendarRange.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
-import {
-  DatePickerBaseStateProps,
-  useDatePickerBaseState,
-} from "../datepicker-base-state";
 import { DatePickerDisclosure } from "../datepicker-disclosure";
 import { DatePickerGroup } from "../datepicker-group";
 import { DatePickerPopover } from "../datepicker-popover";
-import { useDatePickerState } from "../datepicker-state";
+import {
+  DateRangePickerBaseStateProps,
+  useDateRangePickerBaseState,
+} from "../daterangepicker-base-state";
+import { useDateRangePickerState } from "../daterangepicker-state";
 
+import DatePickerBasic from "./DatePickerBasic.component";
 import { CalendarIcon } from "./Utils.component";
 
-export type DatePickerBasicProps = DatePickerBaseStateProps & {};
+export type DateRangePickerBasicProps = DateRangePickerBaseStateProps & {};
 
-export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
+export const DateRangePickerBasic: React.FC<
+  DateRangePickerBasicProps
+> = props => {
   const { locale } = useLocale();
-  const state = useDatePickerBaseState({ ...props, gutter: 10 });
-  const datepicker = useDatePickerState({ ...props, state });
+  const state = useDateRangePickerBaseState({ ...props, gutter: 10 });
+  const daterangepicker = useDateRangePickerState({ ...props, state });
 
   return (
     <div style={{ position: "relative" }} className="datepicker">
       <DatePickerGroup
-        state={datepicker}
+        state={daterangepicker}
         className="datepicker__header"
         aria-label="DatePicker"
       >
         <DateFieldBasic
-          {...datepicker.fieldProps}
+          {...daterangepicker.startFieldProps}
+          createCalendar={createCalendar}
+          locale={locale}
+        />
+        <div aria-hidden="true" className="datepicker__dash" />
+        <DateFieldBasic
+          {...daterangepicker.endFieldProps}
           createCalendar={createCalendar}
           locale={locale}
         />
         <DatePickerDisclosure
-          state={datepicker}
+          state={daterangepicker}
           className="datepicker__trigger"
         >
           <CalendarIcon />
         </DatePickerDisclosure>
         {state.popover.visible && (
-          <DatePickerPopover state={datepicker} className="popover">
-            <CalendarBasic
-              {...datepicker.calendarProps}
+          <DatePickerPopover state={daterangepicker} className="popover">
+            <CalendarRange
+              {...daterangepicker.calendarProps}
               locale={locale}
               createCalendar={createCalendar}
             />

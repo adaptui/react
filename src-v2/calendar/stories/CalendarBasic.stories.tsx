@@ -1,4 +1,7 @@
-import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
+import * as React from "react";
+import { createCalendar } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
+import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
@@ -12,7 +15,7 @@ import { CalendarBasic } from "./CalendarBasic.component";
 import "./CalendarBasic.css";
 
 type Meta = ComponentMeta<typeof CalendarBasic>;
-type Story = ComponentStoryObj<typeof CalendarBasic>;
+// type Story = ComponentStoryObj<typeof CalendarBasic>;
 
 export default {
   title: "Calendar/Basic",
@@ -23,6 +26,8 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
-  args: {},
+export const Default = () => {
+  let { locale } = useLocale();
+
+  return <CalendarBasic locale={locale} createCalendar={createCalendar} />;
 };

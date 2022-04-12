@@ -10,13 +10,17 @@
   border: none;
 }
 
+.datepicker__trigger svg {
+  fill: #43424d;
+  width: 20px;
+}
+
 .datepicker__trigger:focus-visible {
   outline: none;
 }
 
-.datepicker__trigger svg {
-  fill: #43424d;
-  width: 20px;
+.datepicker__dash:before {
+  content: "-";
 }
 
 .datepicker__header {
@@ -41,6 +45,8 @@
 .datepicker__field {
   font-family: monospace;
   display: flex;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .datepicker__field--item {
@@ -58,12 +64,13 @@
   opacity: 0.5;
 }
 
-.calendar {
+.calendar-range {
+  margin-top: 1em;
   max-width: 320px;
   position: relative;
 }
 
-.calendar .header {
+.calendar-range .header {
   cursor: default;
   background-color: #fbfbff;
   padding: 7px;
@@ -75,7 +82,7 @@
   align-items: center;
 }
 
-.calendar h2 {
+.calendar-range h2 {
   margin: 0;
   padding: 0;
   display: inline-block;
@@ -85,40 +92,46 @@
   font-weight: bold;
 }
 
-.calendar button {
+.calendar-range button {
   border-style: none;
   background: transparent;
 }
 
-.calendar button::-moz-focus-inner {
+.calendar-range button::-moz-focus-inner {
   border: 0;
 }
 
-.calendar .prev-month,
-.calendar .next-month {
+.calendar-range .prev-year,
+.calendar-range .prev-month,
+.calendar-range .next-month,
+.calendar-range .next-year {
   padding: 4px;
   width: 24px;
   height: 24px;
   color: #676d7e;
 }
 
-.calendar .prev-month:focus,
-.calendar .next-month:focus {
+.calendar-range .prev-year:focus,
+.calendar-range .prev-month:focus,
+.calendar-range .next-month:focus,
+.calendar-range .next-year:focus {
   padding: 2px;
   border: 2px solid #676d7e;
   border-radius: 4px;
   outline: 0;
 }
 
-.calendar .prev-month:hover,
-.calendar .next-month:hover {
+.calendar-range .prev-year:hover,
+.calendar-range .prev-month:hover,
+.calendar-range .next-month:hover,
+.calendar-range .next-year:hover {
   padding: 3px;
   border: 1px solid #676d7e;
   border-radius: 4px;
   outline: 0;
 }
 
-.calendar .month-year {
+.calendar-range .month-year {
   display: inline-block;
   width: 12em;
   text-align: center;
@@ -127,34 +140,36 @@
   justify-content: center;
 }
 
-.calendar .dates {
+.calendar-range .dates {
   width: 320px;
   padding-left: 1em;
   padding-right: 1em;
   background-color: #fbfbff;
+  border-spacing: 0;
 }
 
-.calendar .dates th,
-.calendar .dates td {
+.calendar-range .dates th,
+.calendar-range .dates td {
   text-align: center;
 }
 
-.calendar .dates th span {
+.calendar-range .dates th span {
   text-decoration: none;
 }
 
-.calendar .dates tr {
+.calendar-range .dates tr {
   border: 1px solid black;
 }
 
-.calendar .dates td {
+.calendar-range .dates td {
   height: 40px;
   width: 40px;
   border-radius: 5px;
   font-size: 15px;
+  padding: 1px 0;
 }
 
-.calendar .dates td span {
+.calendar-range .dates td span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,37 +178,35 @@
   user-select: none;
 }
 
-.calendar .dates td[aria-selected="true"] span {
-  border-radius: 50%;
-  border: 2px dotted black;
-  background-color: #fbfbff;
-}
-
-.calendar .dates td span:focus {
-  background-color: #5f91ff;
-  color: white;
-}
-
-.calendar .dates td span:hover {
-  background-color: #dae7fb;
-  color: black;
-}
-
-.calendar .dates td span:not(.disabled):hover {
-  border-radius: 50%;
-  border: 1px solid #4c4a69;
-}
-
-.calendar .dates td span:focus {
-  border-radius: 50%;
-  border: 2px solid #4c4a69;
-  outline: 0;
-}
-
-.calendar [aria-disabled="true"] {
+.calendar-range [aria-disabled="true"] {
   color: #959595;
 }
-
-.calendar [data-weekend] {
+.calendar-range [data-weekend] {
   color: #fa3131;
+}
+
+[data-is-range-start] > span,
+[data-is-range-end] > span,
+[data-is-range-selection] > span,
+[data-is-selection-start] > span,
+[data-is-selection-end] > span {
+  color: white !important;
+}
+
+[data-is-range-start] > span {
+  background-color: #1141aa;
+}
+[data-is-range-end] > span {
+  background-color: #1141aa;
+}
+[data-is-range-selection] > span {
+  background-color: #427af3;
+}
+[data-is-selection-start] > span {
+  background-color: #1141aa;
+  border-radius: 50% 0 0 50%;
+}
+[data-is-selection-end] > span {
+  background-color: #1141aa;
+  border-radius: 0% 50% 50% 0%;
 }

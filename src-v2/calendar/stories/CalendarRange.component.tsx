@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  createCalendar,
-  getWeeksInMonth,
-  startOfWeek,
-} from "@internationalized/date";
+import { getWeeksInMonth, startOfWeek } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 import { VisuallyHidden } from "ariakit";
 
@@ -29,10 +25,8 @@ import { ChevronLeft, ChevronRight } from "./Utils.component";
 export type CalendarRangeProps = RangeCalendarBaseStateProps & {};
 
 export const CalendarRange: React.FC<CalendarRangeProps> = props => {
-  let { locale } = useLocale();
-  const state = useRangeCalendarBaseState({ ...props, createCalendar, locale });
+  const state = useRangeCalendarBaseState(props);
   const calendar = useRangeCalendarState({ ...props, state });
-  console.log("%ccalendar", "color: #aa00ff", calendar);
 
   return (
     <RangeCalendar state={calendar} className="calendar-range">
@@ -56,7 +50,6 @@ export type CalendarGridProps = CalendarGridStateProps & {};
 
 const CalendarGridComp = (props: CalendarGridProps) => {
   const { state: baseState } = props;
-  console.log("%cbaseState", "color: #0088cc", baseState);
   let { locale } = useLocale();
   let gridState = useCalendarGridState(props);
 

@@ -22,5 +22,5 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {},
+  args: { label: "DatePicker" },
 };

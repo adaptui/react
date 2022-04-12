@@ -31,6 +31,7 @@ const alert =
     const { pauseTimer, resumeTimer, dismissToast } = handlers;
 
     return (
+      /* @ts-ignore */
       <CSSTransition
         in={toast.visible}
         classNames="alert"

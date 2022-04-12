@@ -24,21 +24,33 @@ import { useCalendarGridState } from "../calendar-grid-state";
 
 import { ChevronLeft, ChevronRight } from "./Utils.component";
 
-export type CalendarBasicProps = CalendarBaseStateProps & {};
+export type CalendarStyledProps = CalendarBaseStateProps & {};
 
-export const CalendarBasic: React.FC<CalendarBasicProps> = props => {
+export const CalendarStyled: React.FC<CalendarStyledProps> = props => {
   const state = useCalendarBaseState(props);
   const calendar = useCalendarState({ ...props, state });
 
   return (
-    <Calendar state={calendar} className="calendar">
-      <div className="header">
-        <CalendarPreviousButton state={calendar} className="prev-month">
-          <ChevronLeft />
+    <Calendar
+      state={calendar}
+      className="p-3 bg-white rounded-md shadow-lg styled-datepicker calendar w-max"
+    >
+      <div className="flex justify-between">
+        <CalendarPreviousButton
+          state={calendar}
+          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
+        >
+          <ChevronLeft className="flex-shrink-0 w-4" />
         </CalendarPreviousButton>
-        <CalendarTitle state={calendar} />
-        <CalendarNextButton state={calendar} className="next-month">
-          <ChevronRight />
+        <CalendarTitle
+          state={calendar}
+          className="text-sm font-bold text-gray-700 px-2 py-1"
+        />
+        <CalendarNextButton
+          state={calendar}
+          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
+        >
+          <ChevronRight className="flex-shrink-0 w-4" />
         </CalendarNextButton>
       </div>
       <CalendarGridComp state={state} />
@@ -46,7 +58,7 @@ export const CalendarBasic: React.FC<CalendarBasicProps> = props => {
   );
 };
 
-export default CalendarBasic;
+export default CalendarStyled;
 
 export type CalendarGridProps = CalendarGridStateProps & {};
 
@@ -62,12 +74,15 @@ const CalendarGridComp = (props: CalendarGridProps) => {
   let weeksInMonth = getWeeksInMonth(baseState.visibleRange.start, locale);
 
   return (
-    <CalendarGrid state={gridState} className="dates">
+    <CalendarGrid state={gridState} className="p-4 mt-2">
       <thead>
-        <tr>
+        <tr className="text-center">
           {gridState.weekDays.map((day, index) => {
             return (
-              <th key={index}>
+              <th
+                key={index}
+                className="font-light text-gray-500 calendar__cell"
+              >
                 {/* Make sure screen readers read the full day name,
                   but we show an abbreviation visually. */}
                 <VisuallyHidden>{day.long}</VisuallyHidden>
@@ -100,11 +115,11 @@ const CalendarCellComp = (props: CalendarCellProps) => {
   const state = useCalendarCellState(props);
 
   return (
-    <CalendarCell state={state}>
+    <CalendarCell state={state} className="calendar__cell">
       <CalendarCellButton
         state={state}
         hidden={state.isOutsideVisibleRange}
-        className={`cell ${state.isSelected ? "selected" : ""} ${
+        className={`p-2 cell ${state.isSelected ? "selected" : ""} ${
           state.isDisabled ? "disabled" : ""
         } ${state.isUnavailable ? "unavailable" : ""}`}
       >
