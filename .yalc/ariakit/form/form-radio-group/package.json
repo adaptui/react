@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/form/form-radio-group",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/form/form-radio-group",
-  "module": "../../esm/form/form-radio-group",
-  "types": "../../ts/form/form-radio-group.d.ts"
-}

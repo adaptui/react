@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/tooltip/tooltip-anchor",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/tooltip/tooltip-anchor",
-  "module": "../../esm/tooltip/tooltip-anchor",
-  "types": "../../ts/tooltip/tooltip-anchor.d.ts"
-}

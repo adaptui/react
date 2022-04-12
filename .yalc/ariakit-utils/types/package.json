@@ -1,8 +1,0 @@
-{
-  "name": "ariakit-utils/types",
-  "private": true,
-  "sideEffects": false,
-  "main": "../cjs/types",
-  "module": "../esm/types",
-  "types": "../ts/types.d.ts"
-}

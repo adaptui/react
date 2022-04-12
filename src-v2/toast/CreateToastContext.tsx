@@ -44,7 +44,9 @@ export function createToastStore<T extends DefaultToast, Content>(
     errorMessage: "useToastHandlers must be used within ToastProvider",
   });
 
-  const ToastProvider: React.FC<DefaultToastProviderOptions<T>> = props => {
+  const ToastProvider: React.FC<
+    React.PropsWithChildren<DefaultToastProviderOptions<T>>
+  > = props => {
     const { children, ...rest } = props;
     const { toasts, dispatch } = useToastState<T>();
     const context = React.useMemo(

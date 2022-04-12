@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/popover/popover-state",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/popover/popover-state",
-  "module": "../../esm/popover/popover-state",
-  "types": "../../ts/popover/popover-state.d.ts"
-}

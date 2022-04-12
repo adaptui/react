@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/form",
-  "private": true,
-  "sideEffects": false,
-  "main": "../cjs/form",
-  "module": "../esm/form",
-  "types": "../ts/form/index.d.ts"
-}

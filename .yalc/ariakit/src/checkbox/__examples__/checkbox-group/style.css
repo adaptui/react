@@ -1,5 +1,0 @@
-@import url("../checkbox/style.css");
-
-.wrapper {
-  @apply flex flex-col;
-}

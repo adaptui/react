@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/menu/menu-bar",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/menu/menu-bar",
-  "module": "../../esm/menu/menu-bar",
-  "types": "../../ts/menu/menu-bar.d.ts"
-}

@@ -9,6 +9,7 @@ import {
   useDisclosureState,
 } from "ariakit/disclosure";
 import { FocusableOptions, useFocusable } from "ariakit/focusable";
+import { Item } from "ariakit/ts/collection/__utils";
 import { getAllTabbableIn } from "ariakit-utils/focus";
 import { useForkRef, useId } from "ariakit-utils/hooks";
 import { useStore } from "ariakit-utils/store";
@@ -80,7 +81,7 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
     props = useDisclosureContent({ state: disclosure, ...props });
 
     const getItem = useCallback(
-      item => {
+      (item: Item) => {
         const nextItem = { ...item, id, accordionId: accordionIdProp };
         if (getItemProp) return getItemProp(nextItem);
 

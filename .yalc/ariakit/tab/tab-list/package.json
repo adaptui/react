@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/tab/tab-list",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/tab/tab-list",
-  "module": "../../esm/tab/tab-list",
-  "types": "../../ts/tab/tab-list.d.ts"
-}

@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/heading/heading-level",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/heading/heading-level",
-  "module": "../../esm/heading/heading-level",
-  "types": "../../ts/heading/heading-level.d.ts"
-}

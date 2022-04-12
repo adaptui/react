@@ -1,8 +1,0 @@
-{
-  "name": "ariakit-utils/dom",
-  "private": true,
-  "sideEffects": false,
-  "main": "../cjs/dom",
-  "module": "../esm/dom",
-  "types": "../ts/dom.d.ts"
-}

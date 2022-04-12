@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/dialog/dialog-disclosure",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/dialog/dialog-disclosure",
-  "module": "../../esm/dialog/dialog-disclosure",
-  "types": "../../ts/dialog/dialog-disclosure.d.ts"
-}

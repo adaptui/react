@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/dialog/dialog-state",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/dialog/dialog-state",
-  "module": "../../esm/dialog/dialog-state",
-  "types": "../../ts/dialog/dialog-state.d.ts"
-}

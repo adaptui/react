@@ -3,6 +3,7 @@ import {
   CompositeItemOptions,
   useCompositeItem,
 } from "ariakit/composite/composite-item";
+import { Item } from "ariakit/ts/collection/__utils";
 import { useEventCallback, useId } from "ariakit-utils/hooks";
 import { createMemoComponent, useStore } from "ariakit-utils/store";
 import { createElement, createHook } from "ariakit-utils/system";
@@ -100,7 +101,7 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
     const dimmed = props.disabled;
 
     const getItem = useCallback(
-      item => {
+      (item: Item) => {
         const nextItem = { ...item, dimmed };
         if (getItemProp) return getItemProp(nextItem);
 

@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/combobox/combobox-cancel",
-  "private": true,
-  "sideEffects": false,
-  "main": "../../cjs/combobox/combobox-cancel",
-  "module": "../../esm/combobox/combobox-cancel",
-  "types": "../../ts/combobox/combobox-cancel.d.ts"
-}

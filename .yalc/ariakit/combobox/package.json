@@ -1,8 +1,0 @@
-{
-  "name": "ariakit/combobox",
-  "private": true,
-  "sideEffects": false,
-  "main": "../cjs/combobox",
-  "module": "../esm/combobox",
-  "types": "../ts/combobox/index.d.ts"
-}
