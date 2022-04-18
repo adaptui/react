@@ -35,5 +35,8 @@ export type SliderState = {
 };
 
 export type SliderStateProps = AriaSliderProps & {
+  /**
+   * Object returned by the `useSliderBaseState` hook.
+   */
   state: SliderBaseState;
 };

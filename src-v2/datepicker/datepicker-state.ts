@@ -20,6 +20,9 @@ export type DatePickerState = DatePickerAria & {
    * Reference for the date picker's visible label element, if any.
    */
   ref: RefObject<HTMLElement>;
+  /**
+   * Object returned by the `useDatePickerBaseState` hook.
+   */
   baseState: DatePickerBaseState;
 };
 

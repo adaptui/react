@@ -29,7 +29,7 @@ export const SliderThumb = createComponent<SliderThumbOptions>(props => {
 
 export type SliderThumbOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useSliderState` hook.
+   * Object returned by the `useSliderThumbState` hook.
    */
   state: SliderThumbState;
 };
