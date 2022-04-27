@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocale } from "@react-aria/i18n";
 
 import {
   NumberFieldBaseStateProps,
@@ -14,7 +15,8 @@ import { useNumberFieldState } from "../numberfield-state";
 export type NumberFieldBasicProps = NumberFieldBaseStateProps & {};
 
 export const NumberFieldBasic: React.FC<NumberFieldBasicProps> = props => {
-  const baseState = useNumberFieldBaseState(props);
+  let { locale } = useLocale();
+  const baseState = useNumberFieldBaseState({ ...props, locale });
   const state = useNumberFieldState({ ...props, state: baseState });
 
   return (
