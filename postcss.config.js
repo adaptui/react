@@ -31,9 +31,22 @@ function addIdScope() {
 
 module.exports = {
   plugins: [
+    require("postcss-import"),
     require("tailwindcss"),
     require("postcss-flexbugs-fixes"),
     require("autoprefixer")({ flexbox: "no-2009" }),
+    require("postcss-merge-selectors")({
+      matchers: {
+        active: {
+          selectorFilter: /(:active|\[data-active\])/,
+          promote: true,
+        },
+        focusVisible: {
+          selectorFilter: /(:focus-visible|\[data-focus-visible\])/,
+          promote: true,
+        },
+      },
+    }),
     rewriteRootRule(),
     addIdScope(),
   ],

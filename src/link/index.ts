@@ -1,2 +1,1 @@
-export * from "./__keys";
-export * from "./Link";
+export * from "./link-base";

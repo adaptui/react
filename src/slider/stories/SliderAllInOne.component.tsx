@@ -1,21 +1,19 @@
 import * as React from "react";
-import { VisuallyHidden } from "reakit";
 
 import {
-  SliderBaseInitialState,
-  SliderGroup,
-  SliderInput,
+  Slider,
+  SliderBaseStateProps,
   SliderLabel,
   SliderOutput,
   SliderThumb,
-  SliderThumbInitialState,
+  SliderThumbStateProps,
   SliderTrack,
   useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderAllInOneProps = SliderBaseInitialState & {
+export type SliderAllInOneProps = SliderBaseStateProps & {
   /**
    * Origin on the slider, calculated based on min & max
    */
@@ -55,18 +53,18 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = props => {
     : `${getThumbPercent(0) * 100}%`;
 
   return (
-    <SliderGroup className="chakra-slider-group" {...slider}>
+    <Slider className="chakra-slider-group" state={slider}>
       <div className="slider-label">
-        <SliderLabel className="label" {...slider}>
+        <SliderLabel className="label" state={slider}>
           {sliderLabel}
         </SliderLabel>
-        <SliderOutput className="value" {...slider}>
+        <SliderOutput className="value" state={slider}>
           {!isMulti ? labelValue : JSON.stringify(values)}
         </SliderOutput>
       </div>
 
       <div className={`slider ${isVertical ? "vertical" : ""}`}>
-        <SliderTrack {...slider} className="slider-track-container">
+        <SliderTrack state={slider} className="slider-track-container">
           <div className="slider-track" />
           {!isMulti ? (
             <div
@@ -95,13 +93,13 @@ export const SliderAllInOne: React.FC<SliderAllInOneProps> = props => {
           />
         ))}
       </div>
-    </SliderGroup>
+    </Slider>
   );
 };
 
 export default SliderAllInOne;
 
-export type SliderThumbProps = SliderThumbInitialState &
+export type SliderThumbProps = SliderThumbStateProps &
   Pick<SliderAllInOneProps, "showTip">;
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
@@ -121,11 +119,7 @@ export const Thumb: React.FC<SliderThumbProps> = props => {
           : "",
       }}
     >
-      <SliderThumb {...sliderThumb} className="slider-thumb-handle">
-        <VisuallyHidden>
-          <SliderInput {...sliderThumb} />
-        </VisuallyHidden>
-      </SliderThumb>
+      <SliderThumb state={sliderThumb} className="slider-thumb-handle" />
       {showTip && (
         <div className="slider-thumb-tip">{getThumbValueLabel(index)}</div>
       )}

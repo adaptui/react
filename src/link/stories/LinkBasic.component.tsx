@@ -1,15 +1,11 @@
 import * as React from "react";
 
-import {
-  Link as RenderlesskitLink,
-  LinkProps as RenderlesskitLinkProps,
-} from "../../index";
+import { Link, LinkProps } from "../../index";
 
-export type LinkProps = RenderlesskitLinkProps &
-  React.AnchorHTMLAttributes<"a"> & {};
+export type LinkBasicProps = LinkProps & {};
 
-export const Link: React.FC<LinkProps> = props => {
-  return <RenderlesskitLink {...props}>Reakit</RenderlesskitLink>;
+export const LinkBasic: React.FC<LinkBasicProps> = props => {
+  return <Link {...props} />;
 };
 
-export default Link;
+export default LinkBasic;

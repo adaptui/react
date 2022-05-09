@@ -1,20 +1,23 @@
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { DateRangePicker } from "./DateRangePickerStyled.component";
+import { createPreviewTabs } from "../../../.storybook/utils";
+
+import js from "./templates/DateRangePickerStyledJsx";
+import ts from "./templates/DateRangePickerStyledTsx";
+import { DateRangePickerStyled } from "./DateRangePickerStyled.component";
 
 import "./tailwind.css";
 
+type Meta = ComponentMeta<typeof DateRangePickerStyled>;
+type Story = ComponentStoryObj<typeof DateRangePickerStyled>;
+
 export default {
-  component: DateRangePicker,
-  title: "DateRangePicker/Styled",
+  title: "DatePicker/RangeStyled",
+  component: DateRangePickerStyled,
   parameters: {
     layout: "centered",
-    options: { showPanel: false },
-  },
-  argTypes: {
-    minValue: { control: "date" },
-    maxValue: { control: "date" },
+    preview: createPreviewTabs({ js, ts }),
   },
   decorators: [
     Story => {
@@ -24,4 +27,6 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <DateRangePicker {...args} />;
+export const Default: Story = {
+  args: { label: "DateRangePicker" },
+};

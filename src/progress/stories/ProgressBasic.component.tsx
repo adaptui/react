@@ -1,20 +1,15 @@
 import * as React from "react";
 
-import {
-  Progress as RenderlesskitProgress,
-  ProgressInitialState,
-  useProgressState,
-} from "../../index";
+import { Progress, ProgressStateProps, useProgressState } from "../../index";
 
-export const Progress: React.FC<ProgressInitialState> = props => {
+export const ProgressBasic: React.FC<ProgressStateProps> = props => {
   const state = useProgressState(props);
-  const { value, percent, isIndeterminate } = state;
+  const { percent, isIndeterminate } = state;
 
   return (
     <div className="progress">
-      <RenderlesskitProgress
-        {...state}
-        value={value}
+      <Progress
+        state={state}
         aria-label="progress"
         style={{ width: `${percent}%` }}
         className={`progressbar ${isIndeterminate ? "indeterminate" : ""}`}
@@ -23,4 +18,4 @@ export const Progress: React.FC<ProgressInitialState> = props => {
   );
 };
 
-export default Progress;
+export default ProgressBasic;

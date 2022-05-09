@@ -1,28 +1,24 @@
 import * as React from "react";
 
 import {
-  Pagination as RenderlesskitPagination,
+  Goto,
+  Pagination,
   PaginationButton,
-  PaginationInitialState,
-  TGoto,
+  PaginationStateProps,
   usePaginationState,
 } from "../../index";
 
-export const Pagination: React.FC<PaginationInitialState> = props => {
+export const PaginationBasic: React.FC<PaginationStateProps> = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
-    <RenderlesskitPagination {...state} aria-label="Pagination">
+    <Pagination state={state} aria-label="Pagination">
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
-          <PaginationButton goto="firstPage" {...state}>
-            First
-          </PaginationButton>
+          <PaginationButton goto="firstPage">First</PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="prevPage" {...state}>
-            Previous
-          </PaginationButton>
+          <PaginationButton goto="prevPage">Previous</PaginationButton>
         </li>
         {state.pages.map(page => {
           if (page === "start-ellipsis" || page === "end-ellipsis") {
@@ -32,11 +28,10 @@ export const Pagination: React.FC<PaginationInitialState> = props => {
           return (
             <li key={page}>
               <PaginationButton
-                goto={page as TGoto}
+                goto={page as Goto}
                 style={{
                   fontWeight: state.currentPage === page ? "bold" : undefined,
                 }}
-                {...state}
               >
                 {page}
               </PaginationButton>
@@ -44,18 +39,14 @@ export const Pagination: React.FC<PaginationInitialState> = props => {
           );
         })}
         <li>
-          <PaginationButton goto="nextPage" {...state}>
-            Next
-          </PaginationButton>
+          <PaginationButton goto="nextPage">Next</PaginationButton>
         </li>
         <li>
-          <PaginationButton goto="lastPage" {...state}>
-            Last
-          </PaginationButton>
+          <PaginationButton goto="lastPage">Last</PaginationButton>
         </li>
       </ul>
-    </RenderlesskitPagination>
+    </Pagination>
   );
 };
 
-export default Pagination;
+export default PaginationBasic;

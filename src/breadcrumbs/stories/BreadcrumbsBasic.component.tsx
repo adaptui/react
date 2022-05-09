@@ -1,13 +1,12 @@
 import * as React from "react";
 
-import {
-  BreadcrumbLink,
-  Breadcrumbs as RenderlesskitBreadcrumbs,
-} from "../../index";
+import { BreadcrumbLink, Breadcrumbs, BreadcrumbsProps } from "../../index";
 
-export const Breadcrumbs = () => {
+export type BreadcrumbsBasicProps = BreadcrumbsProps & {};
+
+export const BreadcrumbsBasic: React.FC<BreadcrumbsBasicProps> = props => {
   return (
-    <RenderlesskitBreadcrumbs aria-label="Breadcrumb" className="breadcrumb">
+    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -21,7 +20,7 @@ export const Breadcrumbs = () => {
         </li>
         <li>
           <BreadcrumbLink
-            isCurrent
+            isCurrentPage
             href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
           >
             Breadcrumb Pattern
@@ -33,8 +32,8 @@ export const Breadcrumbs = () => {
           </BreadcrumbLink>
         </li>
       </ol>
-    </RenderlesskitBreadcrumbs>
+    </Breadcrumbs>
   );
 };
 
-export default Breadcrumbs;
+export default BreadcrumbsBasic;

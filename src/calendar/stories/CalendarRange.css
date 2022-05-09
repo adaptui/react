@@ -90,7 +90,7 @@
   text-align: center;
 }
 
-.calendar-range .dates th abbr {
+.calendar-range .dates th span {
   text-decoration: none;
 }
 

@@ -1,23 +1,23 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
-import css from "./templates/BreadcrumbsBasicCss";
 import js from "./templates/BreadcrumbsBasicJsx";
 import ts from "./templates/BreadcrumbsBasicTsx";
-import Breadcrumbs from "./BreadcrumbsBasic.component";
+import { BreadcrumbsBasic } from "./BreadcrumbsBasic.component";
 
 import "./BreadcrumbsBasic.css";
 
+type Meta = ComponentMeta<typeof BreadcrumbsBasic>;
+type Story = ComponentStoryObj<typeof BreadcrumbsBasic>;
+
 export default {
-  component: Breadcrumbs,
   title: "Breadcrumbs/Basic",
+  component: BreadcrumbsBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, css }),
-    options: { showPanel: false },
+    preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
-export const Default: Story = args => <Breadcrumbs {...args} />;
+export const Default: Story = {};

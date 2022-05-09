@@ -32,6 +32,14 @@
   }
 
   .styled-datepicker.calendar [aria-selected="true"] {
+    @apply text-white bg-blue-500;
+  }
+
+  .styled-datepicker.calendar [aria-selected]:focus-within {
+    @apply bg-gray-100;
+  }
+
+  .styled-datepicker.calendar [aria-selected="true"]:focus-within {
     @apply text-white bg-blue-400;
   }
 
@@ -41,5 +49,9 @@
 
   .styled-datepicker.calendar span {
     outline: none;
+  }
+
+  .datepicker__dash:before {
+    content: "-";
   }
 }

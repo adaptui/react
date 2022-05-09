@@ -1,3 +1,2 @@
-export * from "./__keys";
-export * from "./BreadcrumbLink";
-export * from "./Breadcrumbs";
+export * from "./breadcrumb-link";
+export * from "./breadcrumbs-base";

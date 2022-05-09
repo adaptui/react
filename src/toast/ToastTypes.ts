@@ -3,6 +3,7 @@ export interface DefaultToast {
   visible: boolean;
   reverseOrder: boolean;
   animationDuration: number;
+  children?: React.ReactNode;
 }
 
 export type TimerToast = DefaultToast & {

@@ -1,32 +1,28 @@
 import * as React from "react";
 
 import {
-  Accordion as RenderlesskitAccordion,
-  AccordionInitialState,
+  Accordion,
+  AccordionDisclosure,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionStateProps,
   useAccordionState,
 } from "../../index";
 
 // Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const Accordion: React.FC<AccordionInitialState> = props => {
+export const AccordionStyled: React.FC<AccordionStateProps> = props => {
   const state = useAccordionState(props);
 
   return (
-    <RenderlesskitAccordion
-      {...state}
-      id="accordionGroup"
-      className="accordion"
-    >
+    <Accordion state={state} className="accordion">
       <h2>
-        <AccordionTrigger {...state} className="accordion-trigger">
+        <AccordionDisclosure className="accordion-trigger">
           <span className="accordion-title">
             Personal Information
             <span className="accordion-icon"></span>
           </span>
-        </AccordionTrigger>
+        </AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state} className="accordion-panel">
+      <AccordionPanel className="accordion-panel">
         <div>
           <fieldset>
             <p>
@@ -70,18 +66,14 @@ export const Accordion: React.FC<AccordionInitialState> = props => {
       </AccordionPanel>
 
       <h2>
-        <AccordionTrigger
-          {...state}
-          className="accordion-trigger"
-          id="accordion2"
-        >
+        <AccordionDisclosure className="accordion-trigger">
           <span className="accordion-title">
             Billing Address
             <span className="accordion-icon"></span>
           </span>
-        </AccordionTrigger>
+        </AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state} className="accordion-panel">
+      <AccordionPanel className="accordion-panel">
         <div>
           <fieldset>
             <p>
@@ -109,14 +101,14 @@ export const Accordion: React.FC<AccordionInitialState> = props => {
       </AccordionPanel>
 
       <h2>
-        <AccordionTrigger {...state} className="accordion-trigger">
+        <AccordionDisclosure className="accordion-trigger">
           <span className="accordion-title">
             Shipping Address
             <span className="accordion-icon"></span>
           </span>
-        </AccordionTrigger>
+        </AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state} className="accordion-panel">
+      <AccordionPanel className="accordion-panel">
         <div>
           <fieldset>
             <p>
@@ -142,7 +134,7 @@ export const Accordion: React.FC<AccordionInitialState> = props => {
           </fieldset>
         </div>
       </AccordionPanel>
-    </RenderlesskitAccordion>
+    </Accordion>
   );
 };
 

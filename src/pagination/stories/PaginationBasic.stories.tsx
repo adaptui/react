@@ -1,39 +1,46 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/PaginationBasicJsx";
 import ts from "./templates/PaginationBasicTsx";
-import { Pagination } from "./PaginationBasic.component";
+import { PaginationBasic } from "./PaginationBasic.component";
+
+type Meta = ComponentMeta<typeof PaginationBasic>;
+type Story = ComponentStoryObj<typeof PaginationBasic>;
 
 export default {
-  component: Pagination,
   title: "Pagination/Basic",
+  component: PaginationBasic,
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
-export const Default: Story = args => <Pagination {...args} />;
-
-export const DefaultPage = Default.bind({});
-DefaultPage.args = {
-  defaultPage: 5,
-  count: 10,
+export const Default: Story = {
+  args: {},
 };
 
-export const BoundaryCount = Default.bind({});
-BoundaryCount.args = {
-  defaultPage: 25,
-  count: 50,
-  boundaryCount: 5,
+export const DefaultPage = {
+  args: {
+    defaultPage: 5,
+    count: 10,
+  },
 };
 
-export const SibilingCount = Default.bind({});
-SibilingCount.args = {
-  defaultPage: 25,
-  count: 50,
-  sibilingCount: 5,
+export const BoundaryCount = {
+  args: {
+    defaultPage: 25,
+    count: 50,
+    boundaryCount: 5,
+  },
+};
+
+export const SibilingCount = {
+  args: {
+    defaultPage: 25,
+    count: 50,
+    sibilingCount: 5,
+  },
 };
