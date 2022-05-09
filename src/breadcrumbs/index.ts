@@ -1,2 +1,2 @@
 export * from "./breadcrumb-link";
-export * from "./breadcrumbs";
+export * from "./breadcrumbs-base";

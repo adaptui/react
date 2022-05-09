@@ -1,4 +1,4 @@
-export * from "./calendar";
+export * from "./calendar-base";
 export * from "./calendar-base-state";
 export * from "./calendar-cell";
 export * from "./calendar-cell-button";

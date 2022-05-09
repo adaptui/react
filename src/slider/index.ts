@@ -1,4 +1,4 @@
-export * from "./slider";
+export * from "./slider-base";
 export * from "./slider-base-state";
 export * from "./slider-input";
 export * from "./slider-label";
