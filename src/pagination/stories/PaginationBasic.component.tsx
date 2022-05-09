@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { TGoto } from "../../../src/pagination";
 import { Pagination } from "../pagination";
-import { PaginationButton } from "../pagination-button";
+import { Goto, PaginationButton } from "../pagination-button";
 import { PaginationStateProps, usePaginationState } from "../pagination-state";
 
 export const PaginationBasic: React.FC<PaginationStateProps> = props => {
@@ -25,7 +24,7 @@ export const PaginationBasic: React.FC<PaginationStateProps> = props => {
           return (
             <li key={page}>
               <PaginationButton
-                goto={page as TGoto}
+                goto={page as Goto}
                 style={{
                   fontWeight: state.currentPage === page ? "bold" : undefined,
                 }}
