@@ -4,14 +4,14 @@ import { useLocale } from "@react-aria/i18n";
 
 import CalendarRangeStyled from "../../calendar/stories/CalendarRangeStyled.component";
 import DateFieldStyled from "../../datefield/stories/DateFieldStyled.component";
-import { DatePickerDisclosure } from "../datepicker-disclosure";
-import { DatePickerGroup } from "../datepicker-group";
-import { DatePickerPopover } from "../datepicker-popover";
 import {
+  DatePickerDisclosure,
+  DatePickerGroup,
+  DatePickerPopover,
   DateRangePickerBaseStateProps,
   useDateRangePickerBaseState,
-} from "../daterangepicker-base-state";
-import { useDateRangePickerState } from "../daterangepicker-state";
+  useDateRangePickerState,
+} from "../../index";
 
 import DatePickerStyled from "./DatePickerStyled.component";
 import { CalendarStyledIcon } from "./Utils.component";

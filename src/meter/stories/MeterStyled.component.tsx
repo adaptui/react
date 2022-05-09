@@ -22,13 +22,7 @@ export interface MeterBasicProps extends MeterStateProps {
 }
 
 export const MeterBasic: React.FC<MeterBasicProps> = props => {
-  const {
-    children,
-    withLabel = false,
-    withStripe,
-    withStripeAnimation,
-    ...rest
-  } = props;
+  const { withLabel = false, withStripe, withStripeAnimation, ...rest } = props;
   const state = useMeterState(rest);
 
   return (
@@ -38,7 +32,7 @@ export const MeterBasic: React.FC<MeterBasicProps> = props => {
         aria-label="meter"
         state={state}
         {...rest}
-      ></Meter>
+      />
       {withLabel && <div className={labelStyles}>{`${state.percent}%`}</div>}
     </div>
   );

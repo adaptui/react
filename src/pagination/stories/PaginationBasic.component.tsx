@@ -1,8 +1,12 @@
 import * as React from "react";
 
-import { Pagination } from "../pagination";
-import { Goto, PaginationButton } from "../pagination-button";
-import { PaginationStateProps, usePaginationState } from "../pagination-state";
+import {
+  Goto,
+  Pagination,
+  PaginationButton,
+  PaginationStateProps,
+  usePaginationState,
+} from "../../index";
 
 export const PaginationBasic: React.FC<PaginationStateProps> = props => {
   const state = usePaginationState({ count: 10, ...props });

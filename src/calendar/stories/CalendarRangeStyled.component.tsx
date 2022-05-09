@@ -85,8 +85,8 @@ const CalendarGridComp = (props: CalendarGridProps) => {
               >
                 {/* Make sure screen readers read the full day name,
                   but we show an abbreviation visually. */}
-                <VisuallyHidden>{day.long}</VisuallyHidden>
-                <span aria-hidden="true">{day.narrow}</span>
+                <VisuallyHidden>{day}</VisuallyHidden>
+                <span aria-hidden="true">{day}</span>
               </th>
             );
           })}

@@ -8,19 +8,17 @@ import {
   CalendarBaseStateProps,
   CalendarCell,
   CalendarCellButton,
+  CalendarCellStateProps,
   CalendarGrid,
   CalendarGridStateProps,
   CalendarNextButton,
   CalendarPreviousButton,
   CalendarTitle,
   useCalendarBaseState,
+  useCalendarCellState,
+  useCalendarGridState,
   useCalendarState,
 } from "../../index";
-import {
-  CalendarCellStateProps,
-  useCalendarCellState,
-} from "../calendar-cell-state";
-import { useCalendarGridState } from "../calendar-grid-state";
 
 import { ChevronLeft, ChevronRight } from "./Utils.component";
 
@@ -85,8 +83,8 @@ const CalendarGridComp = (props: CalendarGridProps) => {
               >
                 {/* Make sure screen readers read the full day name,
                   but we show an abbreviation visually. */}
-                <VisuallyHidden>{day.long}</VisuallyHidden>
-                <span aria-hidden="true">{day.narrow}</span>
+                <VisuallyHidden>{day}</VisuallyHidden>
+                <span aria-hidden="true">{day}</span>
               </th>
             );
           })}

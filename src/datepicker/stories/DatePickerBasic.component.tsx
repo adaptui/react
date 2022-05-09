@@ -6,12 +6,12 @@ import CalendarBasic from "../../calendar/stories/CalendarBasic.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
 import {
   DatePickerBaseStateProps,
+  DatePickerDisclosure,
+  DatePickerGroup,
+  DatePickerPopover,
   useDatePickerBaseState,
-} from "../datepicker-base-state";
-import { DatePickerDisclosure } from "../datepicker-disclosure";
-import { DatePickerGroup } from "../datepicker-group";
-import { DatePickerPopover } from "../datepicker-popover";
-import { useDatePickerState } from "../datepicker-state";
+  useDatePickerState,
+} from "../../index";
 
 import { CalendarIcon } from "./Utils.component";
 

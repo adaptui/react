@@ -1,12 +1,12 @@
 import React from "react";
 
-import { DateSegment } from "../date-segment";
-import { DateField } from "../datefield";
 import {
+  DateField,
   DateFieldBaseStateProps,
+  DateSegment,
   useDateFieldBaseState,
-} from "../datefield-base-state";
-import { useDateFieldState } from "../datefield-state";
+  useDateFieldState,
+} from "../../index";
 
 export type DateFieldBasicProps = DateFieldBaseStateProps & {};
 

@@ -3,14 +3,14 @@ import { useLocale } from "@react-aria/i18n";
 
 import {
   NumberFieldBaseStateProps,
+  NumberFieldDecrementButton,
+  NumberFieldGroup,
+  NumberFieldIncrementButton,
+  NumberFieldInput,
+  NumberFieldLabel,
   useNumberFieldBaseState,
-} from "../numberfield-base-state";
-import { NumberFieldDecrementButton } from "../numberfield-decrement-button";
-import { NumberFieldGroup } from "../numberfield-group";
-import { NumberFieldIncrementButton } from "../numberfield-increment-button";
-import { NumberFieldInput } from "../numberfield-input";
-import { NumberFieldLabel } from "../numberfield-label";
-import { useNumberFieldState } from "../numberfield-state";
+  useNumberFieldState,
+} from "../../index";
 
 export type NumberFieldBasicProps = NumberFieldBaseStateProps & {};
 

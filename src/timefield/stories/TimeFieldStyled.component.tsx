@@ -1,14 +1,14 @@
 import React from "react";
 import { VisuallyHidden } from "ariakit";
 
-import { TimeSegment } from "../time-segment";
-import { TimeField } from "../timefield";
 import {
+  TimeField,
   TimeFieldBaseStateProps,
+  TimeFieldLabel,
+  TimeSegment,
   useTimeFieldBaseState,
-} from "../timefield-base-state";
-import { TimeFieldLabel } from "../timefield-label";
-import { useTimeFieldState } from "../timefield-state";
+  useTimeFieldState,
+} from "../../index";
 
 export type TimeFieldStyledProps = TimeFieldBaseStateProps & {};
 
