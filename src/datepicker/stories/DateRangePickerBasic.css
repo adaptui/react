@@ -15,6 +15,14 @@
   width: 20px;
 }
 
+.datepicker__trigger:focus-visible {
+  outline: none;
+}
+
+.datepicker__dash:before {
+  content: "-";
+}
+
 .datepicker__header {
   padding: 0;
   border-radius: 4px;
@@ -37,6 +45,8 @@
 .datepicker__field {
   font-family: monospace;
   display: flex;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .datepicker__field--item {
@@ -143,7 +153,7 @@
   text-align: center;
 }
 
-.calendar-range .dates th abbr {
+.calendar-range .dates th span {
   text-decoration: none;
 }
 

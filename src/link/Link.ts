@@ -1,64 +1,59 @@
 import * as React from "react";
-import { ClickableHTMLProps, ClickableOptions, useClickable } from "reakit";
-import { useForkRef } from "reakit-utils";
-import { useWarning } from "reakit-warning";
+import { CommandOptions, useCommand } from "ariakit";
+import { useForkRef, useTagName } from "ariakit-utils";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { createComponent, createHook } from "../system";
+export const useLink = createHook<LinkOptions>(
+  ({ isExternal = false, ...props }) => {
+    const ref = React.useRef<HTMLElement>(null);
+    const tagName = useTagName(ref, props.as || "a");
+    const [isNativeLink, setIsNativeLink] = React.useState(
+      () => !!tagName && isLink({ tagName }),
+    );
 
-import { LINK_KEYS } from "./__keys";
+    React.useEffect(() => {
+      if (!ref.current) return;
 
-export type LinkOptions = ClickableOptions & {
+      setIsNativeLink(isLink(ref.current));
+    }, []);
+
+    props = {
+      role: !isNativeLink && tagName !== "a" ? "link" : undefined,
+      ...(isExternal && { target: "_blank", rel: "noopener noreferrer" }),
+      ...props,
+      ref: useForkRef(ref, props.ref),
+    };
+
+    props = useCommand({ clickOnSpace: false, ...props });
+
+    return props;
+  },
+);
+
+export const Link = createComponent<LinkOptions>(props => {
+  const htmlProps = useLink(props);
+
+  return createElement("a", htmlProps);
+});
+
+export type LinkOptions<T extends As = "a"> = CommandOptions<T> & {
   /**
    * Opens the link in a new tab
+   * @default false
    */
   isExternal?: boolean;
 };
 
-export type LinkHTMLProps = ClickableHTMLProps;
+export type LinkProps<T extends As = "a"> = Props<LinkOptions<T>>;
 
-export type LinkProps = LinkOptions & LinkHTMLProps;
+export function isLink(element: { tagName: string }) {
+  const tagName = element.tagName.toLowerCase();
+  if (tagName === "a") return true;
 
-export const useLink = createHook<LinkOptions, LinkHTMLProps>({
-  name: "Link",
-  compose: useClickable,
-  keys: LINK_KEYS,
-
-  useOptions(options) {
-    return { unstable_clickOnSpace: false, ...options };
-  },
-
-  useProps({ isExternal }, { ref: htmlRef, ...htmlProps }) {
-    const ref = React.useRef<HTMLElement>(null);
-    const [role, setRole] = React.useState<"link" | undefined>(undefined);
-
-    React.useEffect(() => {
-      const element = ref.current;
-
-      if (!element) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useWarning(
-          true,
-          "Can't determine whether the element is a native link because `ref` wasn't passed to the component",
-        );
-        return;
-      }
-
-      if (element.tagName !== "A") {
-        setRole("link");
-      }
-    }, []);
-
-    return {
-      ref: useForkRef(ref, htmlRef),
-      role,
-      ...(isExternal && { target: "_blank", rel: "noopener noreferrer" }),
-      ...htmlProps,
-    };
-  },
-});
-
-export const Link = createComponent({
-  as: "a",
-  memo: true,
-  useHook: useLink,
-});
+  return false;
+}

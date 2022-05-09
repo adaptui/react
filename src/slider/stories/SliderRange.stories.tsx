@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
@@ -9,6 +9,9 @@ import ts from "./templates/SliderRangeTsx";
 import { SliderRange } from "./SliderRange.component";
 
 import "./SliderBasic.css";
+
+type Meta = ComponentMeta<typeof SliderRange>;
+type Story = ComponentStoryObj<typeof SliderRange>;
 
 export default {
   component: SliderRange,
@@ -26,61 +29,68 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <SliderRange {...args} />;
-
-Default.args = {
-  defaultValue: [25, 75],
-};
-
-export const ThumbTip = Default.bind({});
-ThumbTip.args = {
-  defaultValue: [25, 75],
-  label: "Thumb Tipped",
-  showTip: true,
-};
-
-export const Vertical = Default.bind({});
-Vertical.args = {
-  defaultValue: [25, 75],
-  label: "Vertical",
-  orientation: "vertical",
-};
-
-export const MinMax = Default.bind({});
-MinMax.args = {
-  defaultValue: [25, 75],
-  label: "Min Max",
-  minValue: 20,
-  maxValue: 80,
-};
-
-export const Step = Default.bind({});
-Step.args = {
-  defaultValue: [25, 75],
-  label: "Stepped",
-  step: 10,
-};
-
-export const DefaultValue = Default.bind({});
-DefaultValue.args = {
-  label: "Default Valued",
-  defaultValue: [10, 80],
-};
-
-export const FormatOptions = Default.bind({});
-FormatOptions.args = {
-  defaultValue: [25, 75],
-  label: "Temperature Formatted",
-  formatOptions: {
-    style: "unit",
-    unit: "celsius",
-    unitDisplay: "narrow",
+export const Default: Story = {
+  args: {
+    defaultValue: [25, 75],
   },
 };
 
-export const Disabled = Default.bind({});
-Disabled.args = {
-  defaultValue: [25, 75],
-  label: "Disabled",
-  isDisabled: true,
+export const ThumbTip: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Thumb Tipped",
+    showTip: true,
+  },
+};
+
+export const Vertical: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Vertical",
+    orientation: "vertical",
+  },
+};
+
+export const MinMax: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Min Max",
+    minValue: 20,
+    maxValue: 80,
+  },
+};
+
+export const Step: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Stepped",
+    step: 10,
+  },
+};
+
+export const DefaultValue: Story = {
+  args: {
+    label: "Default Valued",
+    defaultValue: [10, 80],
+  },
+};
+
+export const FormatOptions: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Temperature Formatted",
+    formatOptions: {
+      style: "unit",
+      unit: "celsius",
+      unitDisplay: "narrow",
+    },
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    defaultValue: [25, 75],
+    label: "Disabled",
+    isDisabled: true,
+  },
 };

@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
+import { cx } from "ariakit-utils";
 
 import {
-  Progress as RenderlesskitProgress,
-  ProgressInitialState,
+  Progress,
   ProgressState,
+  ProgressStateProps,
   useProgressState,
 } from "../../index";
-import { cx, isNull } from "../../utils/index";
 
-export interface ProgressProps extends ProgressInitialState {
+export interface LinearProgressProps extends ProgressStateProps {
   withLabel?: boolean;
   /**
    * Adds a stripe style to meter bar.
@@ -24,7 +24,7 @@ export interface ProgressProps extends ProgressInitialState {
   withStripeAnimation?: boolean;
 }
 
-export const Progress: React.FC<ProgressProps> = props => {
+export const LinearProgress: React.FC<LinearProgressProps> = props => {
   const {
     children,
     withLabel = false,
@@ -43,7 +43,7 @@ export const Progress: React.FC<ProgressProps> = props => {
     const clearId = setInterval(() => {
       !isIndeterminate &&
         setValue(prevValue => {
-          if (isNull(prevValue)) return prevValue;
+          if (prevValue == null) return prevValue;
           return prevValue + 5;
         });
     }, 500);
@@ -61,9 +61,8 @@ export const Progress: React.FC<ProgressProps> = props => {
     <div>
       <div className={progressStyle}>
         {withLabel ? <div className={labelStyles}>{`${percent}%`}</div> : null}
-        <RenderlesskitProgress
-          {...state}
-          value={value}
+        <Progress
+          state={state}
           aria-label="progress"
           className={cx(
             progressBarStyle(percent),
@@ -81,7 +80,7 @@ export const Progress: React.FC<ProgressProps> = props => {
   );
 };
 
-export default Progress;
+export default LinearProgress;
 
 const progressStyle = css({
   background: "rgb(237, 242, 247)",

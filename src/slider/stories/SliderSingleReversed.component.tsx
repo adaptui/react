@@ -1,22 +1,20 @@
 import * as React from "react";
-import { VisuallyHidden } from "reakit";
 import { I18nProvider } from "@react-aria/i18n";
 
 import {
-  SliderBaseInitialState,
-  SliderGroup,
-  SliderInput,
+  Slider,
+  SliderBaseStateProps,
   SliderLabel,
   SliderOutput,
   SliderThumb,
-  SliderThumbInitialState,
+  SliderThumbStateProps,
   SliderTrack,
   useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderSingleReversedProps = SliderBaseInitialState & {
+export type SliderSingleReversedProps = SliderBaseStateProps & {
   /**
    * True, if thumb needs a tip to show it's current percent
    */
@@ -28,14 +26,16 @@ export const SliderSingleReversed: React.FC<
 > = args => {
   return (
     <I18nProvider locale="ar-ae">
-      <Slider {...args} />
+      <SliderSingleReversedComp {...args} />
     </I18nProvider>
   );
 };
 
 export default SliderSingleReversed;
 
-export const Slider: React.FC<SliderSingleReversedProps> = props => {
+export const SliderSingleReversedComp: React.FC<
+  SliderSingleReversedProps
+> = props => {
   const { label, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
   const state = useSliderBaseState(props);
@@ -43,18 +43,18 @@ export const Slider: React.FC<SliderSingleReversedProps> = props => {
   const { getThumbValue, getValuePercent, values } = state;
 
   return (
-    <SliderGroup className="chakra-slider-group" {...slider}>
+    <Slider className="chakra-slider-group" state={slider}>
       <div className="slider-label">
-        <SliderLabel className="label" {...slider}>
+        <SliderLabel className="label" state={slider}>
           {sliderLabel}
         </SliderLabel>
-        <SliderOutput className="value" {...slider}>
+        <SliderOutput className="value" state={slider}>
           {getThumbValue(0)}
         </SliderOutput>
       </div>
 
       <div className="slider">
-        <SliderTrack {...slider} className="slider-track-container">
+        <SliderTrack state={slider} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
@@ -75,11 +75,11 @@ export const Slider: React.FC<SliderSingleReversedProps> = props => {
           showTip={showTip}
         />
       </div>
-    </SliderGroup>
+    </Slider>
   );
 };
 
-export type SliderThumbProps = SliderThumbInitialState &
+export type SliderThumbProps = SliderThumbStateProps &
   Pick<SliderSingleReversedProps, "showTip">;
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
@@ -92,11 +92,7 @@ export const Thumb: React.FC<SliderThumbProps> = props => {
       className="slider-thumb"
       style={{ right: `calc(${getThumbPercent(index) * 100}% - 7px)` }}
     >
-      <SliderThumb {...sliderThumb} className="slider-thumb-handle">
-        <VisuallyHidden>
-          <SliderInput {...sliderThumb} />
-        </VisuallyHidden>
-      </SliderThumb>
+      <SliderThumb state={sliderThumb} className="slider-thumb-handle" />
       {showTip && (
         <div className="slider-thumb-tip">{getThumbValueLabel(index)}</div>
       )}

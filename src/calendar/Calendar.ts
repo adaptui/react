@@ -1,38 +1,32 @@
-/**
- * All credit goes to [React Spectrum](https://github.com/adobe/react-spectrum)
- * We improved the Calendar from Aria [useCalendarBase](https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/calendar/src/useCalendarBase.ts)
- * to work with Reakit System
- */
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
+import { mergeProps } from "@react-aria/utils";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Options, Props } from "ariakit-utils/types";
 
-import { createComponent, createHook } from "../system";
+import { CalendarState } from "./calendar-state";
 
-import { CALENDAR_KEYS } from "./__keys";
-import { CalendarStateReturn } from "./CalendarState";
+export const useCalendar = createHook<CalendarOptions>(
+  ({ state, ...props }) => {
+    props = mergeProps(state.calendarProps, props);
 
-export const useCalendar = createHook<CalendarOptions, CalendarHTMLProps>({
-  name: "Calendar",
-  compose: useRole,
-  keys: CALENDAR_KEYS,
-
-  useProps({ calendarId }, htmlProps) {
-    return {
-      role: "group",
-      "aria-labelledby": calendarId,
-      ...htmlProps,
-    };
+    return props;
   },
+);
+
+export const Calendar = createComponent<CalendarOptions>(props => {
+  const htmlProps = useCalendar(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const Calendar = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useCalendar,
-});
+export type CalendarOptions<T extends As = "div"> = Options<T> & {
+  /**
+   * Object returned by the `useCalendarState` hook.
+   */
+  state: CalendarState;
+};
 
-export type CalendarOptions = RoleOptions &
-  Pick<CalendarStateReturn, "calendarId">;
-
-export type CalendarHTMLProps = RoleHTMLProps;
-
-export type CalendarProps = CalendarOptions & CalendarHTMLProps;
+export type CalendarProps<T extends As = "div"> = Props<CalendarOptions<T>>;

@@ -1,36 +1,38 @@
-import { CompositeHTMLProps, CompositeOptions, useComposite } from "reakit";
+import { CompositeOptions, useComposite } from "ariakit";
+import { useStoreProvider } from "ariakit-utils/store";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Props } from "ariakit-utils/types";
 
-import { createComponent, createHook } from "../system";
+import { AccordionContext } from "./__utils";
+import { AccordionState } from "./accordion-state";
 
-import { ACCORDION_KEYS } from "./__keys";
+export const useAccordion = createHook<AccordionOptions>(
+  ({ state, ...props }) => {
+    props = useStoreProvider({ state, ...props }, AccordionContext);
+    props = useComposite({ state, ...props });
 
-export const useAccordion = createHook<AccordionOptions, AccordionHTMLProps>({
-  name: "Accordion",
-  compose: useComposite,
-  keys: ACCORDION_KEYS,
-
-  useComposeProps(options, htmlProps) {
-    const compositeHtmlProp = useComposite(options, htmlProps);
-
-    return {
-      ...compositeHtmlProp,
-
-      // When none selected i.e, selectedId={null}
-      // as per composite https://github.com/reakit/reakit/blob/master/packages/reakit/src/Composite/Composite.ts#L372
-      // it applies tabindex={0} which we need to remove it.
-      tabIndex: undefined,
-    };
+    return props;
   },
+);
+
+export const Accordion = createComponent<AccordionOptions>(props => {
+  const htmlProps = useAccordion(props);
+
+  return createElement("div", htmlProps);
 });
 
-export const Accordion = createComponent({
-  as: "div",
-  memo: true,
-  useHook: useAccordion,
-});
+export type AccordionOptions<T extends As = "div"> = Omit<
+  CompositeOptions<T>,
+  "state"
+> & {
+  /**
+   * Object returned by the `useAccordionState` hook.
+   */
+  state: AccordionState;
+};
 
-export type AccordionOptions = CompositeOptions;
-
-export type AccordionHTMLProps = CompositeHTMLProps;
-
-export type AccordionProps = AccordionOptions & AccordionHTMLProps;
+export type AccordionProps<T extends As = "div"> = Props<AccordionOptions<T>>;

@@ -1,48 +1,44 @@
 import * as React from "react";
 
 import {
-  Accordion as RenderlesskitAccordion,
-  AccordionInitialState,
+  Accordion,
+  AccordionDisclosure,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionStateProps,
   useAccordionState,
 } from "../../index";
 
-export const Accordion: React.FC<AccordionInitialState> = props => {
+export const AccordionBasic: React.FC<AccordionStateProps> = props => {
   const state = useAccordionState(props);
 
   return (
-    <RenderlesskitAccordion {...state}>
+    <Accordion state={state}>
       <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 1">Trigger 1</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 1</AccordionPanel>
+      <AccordionPanel id="Panel 1">Panel 1</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 2">Trigger 2</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 2</AccordionPanel>
+      <AccordionPanel id="Panel 2">Panel 2</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state} id="accordion3">
-          Trigger 3
-        </AccordionTrigger>
+        <AccordionDisclosure id="Trigger 3">Trigger 3</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 3</AccordionPanel>
+      <AccordionPanel id="Panel 3">Panel 3</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state}>Trigger 4</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 4">Trigger 4</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 4</AccordionPanel>
+      <AccordionPanel id="Panel 4">Panel 4</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state} disabled>
-          Trigger 5
-        </AccordionTrigger>
+        <AccordionDisclosure id="Trigger 5">Trigger 5</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 5</AccordionPanel>
+      <AccordionPanel id="Panel 5">Panel 5</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state}>Trigger 6</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 6">Trigger 6</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>Panel 6</AccordionPanel>
-    </RenderlesskitAccordion>
+      <AccordionPanel id="Panel 6">Panel 6</AccordionPanel>
+    </Accordion>
   );
 };
 
-export default Accordion;
+export default AccordionBasic;

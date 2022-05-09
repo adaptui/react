@@ -1,26 +1,26 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 import css from "./templates/ProgressBasicCss";
 import js from "./templates/ProgressBasicJsx";
 import ts from "./templates/ProgressBasicTsx";
-import { Progress } from "./ProgressBasic.component";
+import { ProgressBasic } from "./ProgressBasic.component";
 
 import "./ProgressBasic.css";
 
+type Meta = ComponentMeta<typeof ProgressBasic>;
+type Story = ComponentStoryObj<typeof ProgressBasic>;
+
 export default {
-  component: Progress,
   title: "Progress/Basic",
+  component: ProgressBasic,
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, css }),
   },
 } as Meta;
 
-export const Default: Story = args => <Progress {...args} />;
-Default.args = { value: 50 };
+export const Default: Story = { args: { value: 50 } };
 
-export const IsIndeterminate = Default.bind({});
-IsIndeterminate.args = { value: null };
+export const IsIndeterminate = { args: { value: null } };

@@ -115,9 +115,11 @@ export function ToastTriggers() {
   );
 }
 
-const SpringAnimationWrapper: React.FC<{
-  toast: RenderlesskitToast;
-}> = props => {
+const SpringAnimationWrapper: React.FC<
+  React.PropsWithChildren<{
+    toast: RenderlesskitToast;
+  }>
+> = props => {
   const {
     toast: { placement = "bottom-right", visible },
     children,

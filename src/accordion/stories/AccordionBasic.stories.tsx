@@ -1,46 +1,49 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createControls, createPreviewTabs } from "../../../.storybook/utils";
+import { createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/AccordionBasicJsx";
 import ts from "./templates/AccordionBasicTsx";
-import Accordion from "./AccordionBasic.component";
+import { AccordionBasic } from "./AccordionBasic.component";
+
+type Meta = ComponentMeta<typeof AccordionBasic>;
+type Story = ComponentStoryObj<typeof AccordionBasic>;
 
 export default {
-  component: Accordion,
   title: "Accordion/Basic",
+  component: AccordionBasic,
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts }),
   },
-  argTypes: createControls({
-    ignore: [
-      "selectedId",
-      "wrap",
-      "baseId",
-      "unstable_virtual",
-      "rtl",
-      "orientation",
-      "currentId",
-      "shift",
-      "unstable_includesBaseElement",
-      "onSelectedIdChange",
-      "shouldUpdate",
-    ],
-  }),
 } as Meta;
 
-export const Default: Story = args => <Accordion {...args} />;
+export const Default: Story = {};
 
-export const DefaultSelected = Default.bind({});
-DefaultSelected.args = { defaultSelectedId: "accordion3" };
+export const DefaultFirstIdSelected: Story = {
+  args: { shouldSelectFirstId: true },
+};
 
-export const AutoSelect = Default.bind({});
-AutoSelect.args = { manual: false };
+export const DefaultSelected: Story = {
+  args: { defaultSelectedId: "Trigger 3" },
+};
 
-export const Loop = Default.bind({});
-Loop.args = { loop: true };
+export const SelectOnMove: Story = {
+  args: { selectOnMove: true },
+};
 
-export const AllowToggle = Default.bind({});
-AllowToggle.args = { allowToggle: true };
+export const NoLoop: Story = {
+  args: { focusLoop: false },
+};
+
+export const AllowToggle: Story = {
+  args: { allowToggle: true },
+};
+
+export const DefaultFirstIdToggle: Story = {
+  args: { shouldSelectFirstId: true, allowToggle: true },
+};
+
+export const SelectOnMoveToggle: Story = {
+  args: { selectOnMove: true, allowToggle: true },
+};

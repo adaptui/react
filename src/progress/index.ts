@@ -1,3 +1,2 @@
-export * from "./__keys";
-export * from "./Progress";
-export * from "./ProgressState";
+export * from "./progress";
+export * from "./progress-state";

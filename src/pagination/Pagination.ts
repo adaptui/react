@@ -1,34 +1,34 @@
-import { createComponent, createHook, useCreateElement } from "reakit-system";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { useWarning } from "reakit-warning";
+import { useStoreProvider } from "ariakit-utils";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Options, Props } from "ariakit-utils/types";
 
-import { PAGINATION_KEYS } from "./__keys";
-import { PaginationStateReturn } from "./PaginationState";
+import { PaginationContextState } from "./__utils";
+import { PaginationState } from "./pagination-state";
 
-export type PaginationOptions = RoleOptions & PaginationStateReturn;
+export const usePagination = createHook<PaginationOptions>(
+  ({ state, ...props }) => {
+    props = useStoreProvider({ state, ...props }, PaginationContextState);
+    props = { "aria-label": "pagination", ...props };
 
-export type PaginationHTMLProps = RoleHTMLProps;
-
-export type PaginationProps = PaginationOptions & PaginationHTMLProps;
-
-export const usePagination = createHook<PaginationOptions, PaginationHTMLProps>(
-  {
-    name: "Pagination",
-    compose: useRole,
-    keys: PAGINATION_KEYS,
+    return props;
   },
 );
 
-export const Pagination = createComponent({
-  as: "nav",
-  memo: true,
-  useHook: usePagination,
-  useCreateElement: (type, props, children) => {
-    useWarning(
-      !props["aria-label"] && !props["aria-labelledby"],
-      "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://mzl.la/2VCL8ys",
-    );
-    return useCreateElement(type, props, children);
-  },
+export const Pagination = createComponent<PaginationOptions>(props => {
+  const htmlProps = usePagination(props);
+
+  return createElement("div", htmlProps);
 });
+
+export type PaginationOptions<T extends As = "div"> = Options<T> & {
+  /**
+   * Object returned by the `usePaginationState` hook.
+   */
+  state: PaginationState;
+};
+
+export type PaginationProps<T extends As = "div"> = Props<PaginationOptions<T>>;

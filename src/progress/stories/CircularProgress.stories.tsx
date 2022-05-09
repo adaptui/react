@@ -1,14 +1,16 @@
-import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/CircularProgressJsx";
 import ts from "./templates/CircularProgressTsx";
-import { Progress } from "./CircularProgress.component";
+import { CircularProgress } from "./CircularProgress.component";
+
+type Meta = ComponentMeta<typeof CircularProgress>;
+type Story = ComponentStoryObj<typeof CircularProgress>;
 
 export default {
-  component: Progress,
+  component: CircularProgress,
   title: "Progress/Circular",
   parameters: {
     layout: "centered",
@@ -20,10 +22,8 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = args => <Progress {...args} />;
+export const Default: Story = { args: {} };
 
-export const WithLabel = Default.bind({});
-WithLabel.args = { withLabel: true };
+export const IsIndeterminate: Story = { args: { value: null } };
 
-export const IsIndeterminate = Default.bind({});
-IsIndeterminate.args = { value: null };
+export const WithLabel: Story = { args: { ...Default.args, withLabel: true } };

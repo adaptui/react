@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
@@ -9,6 +9,9 @@ import ts from "./templates/SliderSingleReversedTsx";
 import { SliderSingleReversed } from "./SliderSingleReversed.component";
 
 import "./SliderBasic.css";
+
+type Meta = ComponentMeta<typeof SliderSingleReversed>;
+type Story = ComponentStoryObj<typeof SliderSingleReversed>;
 
 export default {
   component: SliderSingleReversed,
@@ -26,46 +29,51 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = args => <SliderSingleReversed {...args} />;
-Default.args = {};
+export const Default: Story = { args: {} };
 
-export const ThumbTip = Default.bind({});
-ThumbTip.args = {
-  label: "Thumb Tipped",
-  showTip: true,
-};
-
-export const MinMax = Default.bind({});
-MinMax.args = {
-  label: "Min Max",
-  minValue: 20,
-  maxValue: 80,
-};
-
-export const Step = Default.bind({});
-Step.args = {
-  label: "Stepped",
-  step: 10,
-};
-
-export const DefaultValue = Default.bind({});
-DefaultValue.args = {
-  label: "Default Valued",
-  defaultValue: [80],
-};
-
-export const FormatOptions = Default.bind({});
-FormatOptions.args = {
-  label: "Temperature Formatted",
-  formatOptions: {
-    style: "unit",
-    unit: "celsius",
-    unitDisplay: "narrow",
+export const ThumbTip: Story = {
+  args: {
+    label: "Thumb Tipped",
+    showTip: true,
   },
 };
 
-export const Disabled = Default.bind({});
-Disabled.args = {
-  label: "Disabled",
-  isDisabled: true,
+export const MinMax: Story = {
+  args: {
+    label: "Min Max",
+    minValue: 20,
+    maxValue: 80,
+  },
+};
+
+export const Step: Story = {
+  args: {
+    label: "Stepped",
+    step: 10,
+  },
+};
+
+export const DefaultValue: Story = {
+  args: {
+    label: "Default Valued",
+    defaultValue: [80],
+  },
+};
+
+export const FormatOptions: Story = {
+  args: {
+    label: "Temperature Formatted",
+    formatOptions: {
+      style: "unit",
+      unit: "celsius",
+      unitDisplay: "narrow",
+    },
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: "Disabled",
+    isDisabled: true,
+  },
 };

@@ -1,155 +1,57 @@
-import * as React from "react";
+import React from "react";
+import { createCalendar } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
 
+import CalendarStyled from "../../calendar/stories/CalendarStyled.component";
+import DateFieldStyled from "../../datefield/stories/DateFieldStyled.component";
 import {
-  Calendar as CalendarWrapper,
-  CalendarButton,
-  CalendarCell,
-  CalendarCellButton,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarStateReturn,
-  CalendarWeekTitle,
-  DatePicker as DatePickerWrapper,
-  DatePickerContent,
-  DatePickerInitialState,
-  DatePickerSegment,
-  DatePickerSegmentField,
-  DatePickerTrigger,
-  useDatePickerState,
-} from "../../index";
+  DatePickerBaseStateProps,
+  useDatePickerBaseState,
+} from "../datepicker-base-state";
+import { DatePickerDisclosure } from "../datepicker-disclosure";
+import { DatePickerGroup } from "../datepicker-group";
+import { DatePickerPopover } from "../datepicker-popover";
+import { useDatePickerState } from "../datepicker-state";
 
-import {
-  CalendarStyledIcon,
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "./Utils.component";
+import { CalendarStyledIcon } from "./Utils.component";
 
-export const DatePicker: React.FC<DatePickerInitialState> = props => {
-  const state = useDatePickerState({
-    gutter: 0,
-    unstable_offset: [-19, 10],
-    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
-    ...props,
-  });
+export type DatePickerStyledProps = DatePickerBaseStateProps & {};
+
+export const DatePickerStyled: React.FC<DatePickerStyledProps> = props => {
+  const { locale } = useLocale();
+  const state = useDatePickerBaseState({ ...props, gutter: 10 });
+  const datepicker = useDatePickerState({ ...props, state });
 
   return (
-    <>
-      <DatePickerWrapper
-        className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max"
-        {...state}
+    <div className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max">
+      <DatePickerGroup
+        state={datepicker}
+        className="flex justify-between items-center p-2 pl-4 pr-4 space-x-4 rounded-md"
+        aria-label="DatePicker"
       >
-        <div className="flex justify-between p-2 pl-4 pr-4 space-x-4 rounded-md">
-          <DatePickerSegmentField
-            {...state}
-            className="flex justify-between space-x-1"
-          >
-            {state.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                {...state}
-                className="font-mono focus:text-blue-500 focus:outline-none"
-              />
-            ))}
-          </DatePickerSegmentField>
-
-          <DatePickerTrigger
-            className="relative inline-block text-gray-700 focus:outline-none focus:text-blue-500"
-            {...state}
-          >
-            <CalendarStyledIcon />
-          </DatePickerTrigger>
-        </div>
-      </DatePickerWrapper>
-      <DatePickerContent {...state}>
-        <Calendar {...state.calendar} />
-      </DatePickerContent>
-    </>
-  );
-};
-
-export default DatePicker;
-
-export const Calendar: React.FC<CalendarStateReturn> = state => {
-  return (
-    <CalendarWrapper
-      {...state}
-      className="p-3 bg-white rounded-md shadow-lg styled-datepicker calendar w-max"
-    >
-      <div className="flex justify-between">
-        <CalendarButton
-          {...state}
-          goto="previousYear"
-          className="text-gray-700 w-16px"
-        >
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton
-          {...state}
-          goto="previousMonth"
-          className="text-gray-700 w-16px"
-        >
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader
-          className="text-sm font-bold text-gray-700"
-          {...state}
+        <DateFieldStyled
+          {...datepicker.fieldProps}
+          createCalendar={createCalendar}
+          locale={locale}
         />
-        <CalendarButton
-          {...state}
-          goto="nextMonth"
-          className="text-gray-700 w-16px"
+        <DatePickerDisclosure
+          state={datepicker}
+          className="px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
         >
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton
-          {...state}
-          goto="nextYear"
-          className="text-gray-700 w-16px"
-        >
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
-
-      <CalendarGrid {...state} as="table" className="p-4 mt-2">
-        <thead>
-          <tr className="text-center">
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  className="font-light text-gray-500 calendar__cell"
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr.slice(0, 2)}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell
-                  {...state}
-                  className="calendar__cell"
-                  as="td"
-                  key={dayIndex}
-                  date={day}
-                >
-                  <CalendarCellButton className="p-2" {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </CalendarWrapper>
+          <CalendarStyledIcon />
+        </DatePickerDisclosure>
+        {state.popover.visible && (
+          <DatePickerPopover state={datepicker} className="popover">
+            <CalendarStyled
+              {...datepicker.calendarProps}
+              locale={locale}
+              createCalendar={createCalendar}
+            />
+          </DatePickerPopover>
+        )}
+      </DatePickerGroup>
+    </div>
   );
 };
+
+export default DatePickerStyled;

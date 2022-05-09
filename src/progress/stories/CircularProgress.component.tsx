@@ -3,14 +3,13 @@ import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
 
 import {
-  Progress as RenderlesskitProgress,
-  ProgressInitialState,
+  Progress,
   ProgressState,
+  ProgressStateProps,
   useProgressState,
 } from "../../index";
-import { isNull } from "../../utils/index";
 
-export interface ProgressProps extends ProgressInitialState {
+export interface CircularProgressProps extends ProgressStateProps {
   /**
    * Adds a label to meter.
    * @default false
@@ -18,7 +17,7 @@ export interface ProgressProps extends ProgressInitialState {
   withLabel?: boolean;
 }
 
-export const Progress: React.FC<ProgressProps> = props => {
+export const CircularProgress: React.FC<CircularProgressProps> = props => {
   const { withLabel = false, children, ...rest } = props;
   const [value, setValue] = React.useState<number | null>(0);
   const state = useProgressState({
@@ -31,7 +30,7 @@ export const Progress: React.FC<ProgressProps> = props => {
     const clearId = setInterval(() => {
       !isIndeterminate &&
         setValue(prevValue => {
-          if (isNull(prevValue)) return prevValue;
+          if (prevValue == null) return prevValue;
           return prevValue + 5;
         });
     }, 500);
@@ -48,11 +47,7 @@ export const Progress: React.FC<ProgressProps> = props => {
   return (
     <div>
       <div>
-        <RenderlesskitProgress
-          {...state}
-          className={rootStyles}
-          aria-label="progress"
-        >
+        <Progress state={state} className={rootStyles} aria-label="progress">
           <svg viewBox="0 0 100 100" className={svgStyles(isIndeterminate)}>
             <circle
               cx={50}
@@ -75,7 +70,7 @@ export const Progress: React.FC<ProgressProps> = props => {
           {withLabel ? (
             <div className={labelStyles}>{`${percent}%`}</div>
           ) : null}
-        </RenderlesskitProgress>
+        </Progress>
       </div>
       <br />
       <Button type="reset" onClick={() => setValue(0)}>
@@ -85,7 +80,7 @@ export const Progress: React.FC<ProgressProps> = props => {
   );
 };
 
-export default Progress;
+export default CircularProgress;
 
 const rootStyles = css({
   display: "inline-block",

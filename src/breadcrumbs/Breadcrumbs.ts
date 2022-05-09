@@ -1,31 +1,27 @@
-import { createComponent, createHook, useCreateElement } from "reakit-system";
-import { RoleHTMLProps, RoleOptions, useRole } from "reakit";
-import { useWarning } from "reakit-warning";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import { As, Options, Props } from "ariakit-utils/types";
 
-export const useBreadcrumbs = createHook<
-  BreadcrumbsOptions,
-  BreadcrumbsHTMLProps
->({
-  name: "Breadcrumb",
-  compose: useRole,
+export const useBreadcrumbs = createHook<BreadcrumbsOptions>(({ ...props }) => {
+  props = {
+    "aria-label": "breadcrumbs",
+    ...props,
+  };
+
+  return props;
 });
 
-export const Breadcrumbs = createComponent({
-  as: "nav",
-  memo: true,
-  useHook: useBreadcrumbs,
-  useCreateElement: (type, props, children) => {
-    useWarning(
-      !props["aria-label"] && !props["aria-labelledby"],
-      "You should provide either `aria-label` or `aria-labelledby` props.",
-      "See https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-2",
-    );
-    return useCreateElement(type, props, children);
-  },
+export const Breadcrumbs = createComponent<BreadcrumbsOptions>(props => {
+  const htmlProps = useBreadcrumbs(props);
+
+  return createElement("nav", htmlProps);
 });
 
-export type BreadcrumbsOptions = RoleOptions;
+export type BreadcrumbsOptions<T extends As = "nav"> = Options<T> & {};
 
-export type BreadcrumbsHTMLProps = RoleHTMLProps;
-
-export type BreadcrumbProps = BreadcrumbsOptions & BreadcrumbsHTMLProps;
+export type BreadcrumbsProps<T extends As = "nav"> = Props<
+  BreadcrumbsOptions<T>
+>;

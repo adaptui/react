@@ -1,135 +1,66 @@
 import React from "react";
+import { createCalendar } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
 
+import CalendarRange from "../../calendar/stories/CalendarRange.component";
+import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
+import { DatePickerDisclosure } from "../datepicker-disclosure";
+import { DatePickerGroup } from "../datepicker-group";
+import { DatePickerPopover } from "../datepicker-popover";
 import {
-  Calendar,
-  CalendarButton,
-  CalendarCell,
-  CalendarCellButton,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarWeekTitle,
-  DatePicker,
-  DatePickerContent,
-  DatePickerSegment,
-  DatePickerSegmentField,
-  DatePickerTrigger,
-  DateRangePickerInitialState,
-  RangeCalendarStateReturn,
-  useDateRangePickerState,
-} from "../../index";
+  DateRangePickerBaseStateProps,
+  useDateRangePickerBaseState,
+} from "../daterangepicker-base-state";
+import { useDateRangePickerState } from "../daterangepicker-state";
 
-import {
-  CalendarIcon,
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "./Utils.component";
+import DatePickerBasic from "./DatePickerBasic.component";
+import { CalendarIcon } from "./Utils.component";
 
-export const DateRangePicker: React.FC<DateRangePickerInitialState> = props => {
-  const state = useDateRangePickerState({
-    formatOptions: { month: "2-digit", day: "2-digit", year: "numeric" },
-    ...props,
-  });
+export type DateRangePickerBasicProps = DateRangePickerBaseStateProps & {};
+
+export const DateRangePickerBasic: React.FC<
+  DateRangePickerBasicProps
+> = props => {
+  const { locale } = useLocale();
+  const state = useDateRangePickerBaseState({ ...props, gutter: 10 });
+  const daterangepicker = useDateRangePickerState({ ...props, state });
 
   return (
-    <>
-      <DatePicker aria-label="Date Range" className="datepicker" {...state}>
-        <div className="datepicker__header">
-          <DatePickerSegmentField
-            {...state.startSegmentState}
-            className="datepicker__field"
-            aria-label="start date"
-          >
-            {state.startSegmentState.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                className="datepicker__field--item"
-                {...state}
-                {...state.startSegmentState}
-              />
-            ))}
-          </DatePickerSegmentField>
-          &nbsp;-&nbsp;
-          <DatePickerSegmentField
-            {...state.endSegmentState}
-            className="datepicker__field"
-            aria-label="end date"
-          >
-            {state.endSegmentState.segments.map((segment, i) => (
-              <DatePickerSegment
-                key={i}
-                segment={segment}
-                className="datepicker__field--item"
-                {...state}
-                {...state.endSegmentState}
-              />
-            ))}
-          </DatePickerSegmentField>
-          <DatePickerTrigger className="datepicker__trigger" {...state}>
-            <CalendarIcon />
-          </DatePickerTrigger>
-        </div>
-      </DatePicker>
-      <DatePickerContent {...state}>
-        <RangeCalendar {...state.calendar} />
-      </DatePickerContent>
-    </>
+    <div style={{ position: "relative" }} className="datepicker">
+      <DatePickerGroup
+        state={daterangepicker}
+        className="datepicker__header"
+        aria-label="DatePicker"
+      >
+        <DateFieldBasic
+          {...daterangepicker.startFieldProps}
+          createCalendar={createCalendar}
+          locale={locale}
+        />
+        <div aria-hidden="true" className="datepicker__dash" />
+        <DateFieldBasic
+          {...daterangepicker.endFieldProps}
+          createCalendar={createCalendar}
+          locale={locale}
+        />
+        <DatePickerDisclosure
+          state={daterangepicker}
+          className="datepicker__trigger"
+        >
+          <CalendarIcon />
+        </DatePickerDisclosure>
+        {state.popover.visible && (
+          <DatePickerPopover state={daterangepicker} className="popover">
+            <CalendarRange
+              {...daterangepicker.calendarProps}
+              locale={locale}
+              createCalendar={createCalendar}
+            />
+          </DatePickerPopover>
+        )}
+      </DatePickerGroup>
+    </div>
   );
 };
 
-export default DatePicker;
-
-const RangeCalendar: React.FC<RangeCalendarStateReturn> = state => {
-  return (
-    <Calendar {...state} className="calendar-range">
-      <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
-          <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
-          <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
-      </div>
-
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </Calendar>
-  );
-};
+export default DatePickerBasic;

@@ -1,19 +1,17 @@
 import * as React from "react";
-import { VisuallyHidden } from "reakit";
 
 import {
-  SliderBaseInitialState,
-  SliderGroup,
-  SliderInput,
+  Slider,
+  SliderBaseStateProps,
   SliderThumb,
-  SliderThumbInitialState,
+  SliderThumbStateProps,
   SliderTrack,
   useSliderBaseState,
   useSliderState,
   useSliderThumbState,
 } from "../../index";
 
-export type SliderBasicProps = SliderBaseInitialState & {};
+export type SliderBasicProps = SliderBaseStateProps & {};
 
 export const SliderBasic: React.FC<SliderBasicProps> = props => {
   const { label } = props;
@@ -23,9 +21,9 @@ export const SliderBasic: React.FC<SliderBasicProps> = props => {
   const { getValuePercent, values } = state;
 
   return (
-    <SliderGroup className="chakra-slider-group" {...slider}>
+    <Slider className="chakra-slider-group" state={slider}>
       <div className="slider">
-        <SliderTrack {...slider} className="slider-track-container">
+        <SliderTrack state={slider} className="slider-track-container">
           <div className="slider-track" />
           <div
             className="slider-filled-track"
@@ -42,13 +40,13 @@ export const SliderBasic: React.FC<SliderBasicProps> = props => {
           aria-label="Thumb"
         />
       </div>
-    </SliderGroup>
+    </Slider>
   );
 };
 
 export default SliderBasic;
 
-export type SliderThumbProps = SliderThumbInitialState & {};
+export type SliderThumbProps = SliderThumbStateProps & {};
 
 export const Thumb: React.FC<SliderThumbProps> = props => {
   const sliderThumb = useSliderThumbState(props);
@@ -60,11 +58,7 @@ export const Thumb: React.FC<SliderThumbProps> = props => {
       className="slider-thumb"
       style={{ left: `calc(${getThumbPercent(index) * 100}% - 7px)` }}
     >
-      <SliderThumb {...sliderThumb} className="slider-thumb-handle">
-        <VisuallyHidden>
-          <SliderInput {...sliderThumb} />
-        </VisuallyHidden>
-      </SliderThumb>
+      <SliderThumb state={sliderThumb} className="slider-thumb-handle" />
       <div className="slider-thumb-tip">{getThumbValueLabel(index)}</div>
     </div>
   );

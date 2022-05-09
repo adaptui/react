@@ -72,8 +72,8 @@ function globRecurse(file) {
 
 const componentArg = process.argv[2];
 const folderToRead = componentArg
-  ? `src-v2/${componentArg}/**/*.component.*`
-  : "src-v2/**/*.component.*";
+  ? `src/${componentArg}/**/*.component.*`
+  : "src/**/*.component.*";
 //
 
 /**

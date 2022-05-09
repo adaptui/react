@@ -1,31 +1,27 @@
 import * as React from "react";
 
-import {
-  Meter as RenderlesskitMeter,
-  MeterInitialState,
-  useMeterState,
-} from "../../index";
+import { Meter, MeterStateProps, useMeterState } from "../../index";
 
-export const Meter: React.FC<MeterInitialState> = props => {
+export const MeterBasic: React.FC<MeterStateProps> = props => {
   const state = useMeterState(props);
   const { percent, status } = state;
 
   return (
     <div className="meter">
-      <RenderlesskitMeter
+      <Meter
         aria-label="meter"
         className="meterbar"
         style={{
           width: `${percent}%`,
           backgroundColor: status == null ? undefined : background[status],
         }}
-        {...state}
-      ></RenderlesskitMeter>
+        state={state}
+      ></Meter>
     </div>
   );
 };
 
-export default Meter;
+export default MeterBasic;
 
 const background = {
   safe: "#8bcf69",

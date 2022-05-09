@@ -1,14 +1,9 @@
 import * as React from "react";
 import { css, keyframes } from "@emotion/css";
 
-import {
-  Meter as RenderlesskitMeter,
-  MeterInitialState,
-  MeterStateReturn,
-  useMeterState,
-} from "../../index";
+import { Meter, MeterState, MeterStateProps, useMeterState } from "../../index";
 
-export interface MeterProps extends MeterInitialState {
+export interface MeterBasicProps extends MeterStateProps {
   /**
    * Adds a label to meter.
    * @default false
@@ -26,7 +21,7 @@ export interface MeterProps extends MeterInitialState {
   withStripeAnimation?: boolean;
 }
 
-export const Meter: React.FC<MeterProps> = props => {
+export const MeterBasic: React.FC<MeterBasicProps> = props => {
   const {
     children,
     withLabel = false,
@@ -34,17 +29,17 @@ export const Meter: React.FC<MeterProps> = props => {
     withStripeAnimation,
     ...rest
   } = props;
-  const meter = useMeterState(rest);
+  const state = useMeterState(rest);
 
   return (
     <div className={meterStyle}>
-      <RenderlesskitMeter
-        className={meterBarStyle(meter, props)}
+      <Meter
+        className={meterBarStyle(state, props)}
         aria-label="meter"
-        {...meter}
+        state={state}
         {...rest}
-      ></RenderlesskitMeter>
-      {withLabel && <div className={labelStyles}>{`${meter.percent}%`}</div>}
+      ></Meter>
+      {withLabel && <div className={labelStyles}>{`${state.percent}%`}</div>}
     </div>
   );
 };
@@ -100,7 +95,7 @@ const generateStripe = {
   backgroundSize: "1rem 1rem",
 };
 
-function meterBarStyle(meter: MeterStateReturn, props: MeterProps) {
+function meterBarStyle(meter: MeterState, props: MeterBasicProps) {
   const { percent, status } = meter;
   const { withStripe, withStripeAnimation } = props;
 

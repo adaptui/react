@@ -10,6 +10,10 @@
   border: none;
 }
 
+.datepicker__trigger:focus-visible {
+  outline: none;
+}
+
 .datepicker__trigger svg {
   fill: #43424d;
   width: 20px;
@@ -90,30 +94,24 @@
   border: 0;
 }
 
-.calendar .prev-year,
 .calendar .prev-month,
-.calendar .next-month,
-.calendar .next-year {
+.calendar .next-month {
   padding: 4px;
   width: 24px;
   height: 24px;
   color: #676d7e;
 }
 
-.calendar .prev-year:focus,
 .calendar .prev-month:focus,
-.calendar .next-month:focus,
-.calendar .next-year:focus {
+.calendar .next-month:focus {
   padding: 2px;
   border: 2px solid #676d7e;
   border-radius: 4px;
   outline: 0;
 }
 
-.calendar .prev-year:hover,
 .calendar .prev-month:hover,
-.calendar .next-month:hover,
-.calendar .next-year:hover {
+.calendar .next-month:hover {
   padding: 3px;
   border: 1px solid #676d7e;
   border-radius: 4px;
@@ -141,7 +139,7 @@
   text-align: center;
 }
 
-.calendar .dates th abbr {
+.calendar .dates th span {
   text-decoration: none;
 }
 
@@ -165,7 +163,7 @@
   user-select: none;
 }
 
-.calendar .dates td[aria-selected] span {
+.calendar .dates td[aria-selected="true"] span {
   border-radius: 50%;
   border: 2px dotted black;
   background-color: #fbfbff;
@@ -195,6 +193,7 @@
 .calendar [aria-disabled="true"] {
   color: #959595;
 }
+
 .calendar [data-weekend] {
   color: #fa3131;
 }
