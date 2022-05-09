@@ -4,7 +4,7 @@ import {
   useCompositeItem,
 } from "ariakit/composite/composite-item";
 import { Item } from "ariakit/ts/collection/__utils";
-import { useEventCallback, useId } from "ariakit-utils/hooks";
+import { useEvent, useId } from "ariakit-utils/hooks";
 import { createMemoComponent, useStore } from "ariakit-utils/store";
 import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
@@ -60,32 +60,24 @@ export const useAccordionDisclosure = createHook<AccordionDisclosureOptions>(
       "selectOnMove",
     ]);
 
-    const onClickProp = useEventCallback(props.onClick);
+    const onClickProp = props.onClick;
 
-    const onClick = useCallback(
-      (event: MouseEvent<HTMLButtonElement>) => {
-        onClickProp(event);
-        if (event.defaultPrevented) return;
+    const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
+      onClickProp?.(event);
+      if (event.defaultPrevented) return;
 
-        state?.toggle(id);
-      },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [onClickProp, state?.toggle, id],
-    );
+      state?.toggle(id);
+    });
 
-    const onFocusProp = useEventCallback(props.onFocus);
+    const onFocusProp = props.onFocus;
 
-    const onFocus = useCallback(
-      (event: FocusEvent<HTMLButtonElement>) => {
-        onFocusProp(event);
-        if (event.defaultPrevented) return;
-        if (!state?.selectOnMove) return;
+    const onFocus = useEvent((event: FocusEvent<HTMLButtonElement>) => {
+      onFocusProp?.(event);
+      if (event.defaultPrevented) return;
+      if (!state?.selectOnMove) return;
 
-        state?.toggle(id);
-      },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [onFocusProp, state?.toggle, id, state?.selectOnMove],
-    );
+      state?.toggle(id);
+    });
 
     const panelId = getPanelId(state?.panels, id);
 

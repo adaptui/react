@@ -1,7 +1,6 @@
-import { useCallback } from "react";
 import { mergeProps } from "@react-aria/utils";
 import { usePopover } from "ariakit";
-import { useEventCallback } from "ariakit-utils";
+import { useEvent } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -14,19 +13,16 @@ import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerPopover = createHook<DatePickerPopoverOptions>(
   ({ state, ...props }) => {
-    const onKeyDownProp = useEventCallback(props.onKeyDown);
+    const onKeyDownProp = props.onKeyDown;
 
-    const onKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        onKeyDownProp(event);
+    const onKeyDown = useEvent((event: React.KeyboardEvent<HTMLDivElement>) => {
+      onKeyDownProp?.(event);
 
-        if (event.key !== "Escape") return;
-        state.baseState.popover.hide();
+      if (event.key !== "Escape") return;
+      state.baseState.popover.hide();
 
-        if (event.defaultPrevented) return;
-      },
-      [onKeyDownProp, state.baseState.popover],
-    );
+      if (event.defaultPrevented) return;
+    });
 
     props = usePopover({
       ...props,

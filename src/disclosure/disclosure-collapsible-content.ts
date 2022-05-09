@@ -2,7 +2,7 @@ import * as React from "react";
 import { flushSync } from "react-dom";
 import { DisclosureState } from "ariakit/disclosure";
 import {
-  useEventCallback,
+  useEvent,
   useForkRef,
   useId,
   useUpdateEffect,
@@ -129,10 +129,10 @@ export const useDisclosureCollapsibleContent =
         }
       }, [state.visible]);
 
-      const onTransitionEndProp = useEventCallback(props.onTransitionEnd);
-      const onTransitionEnd = React.useCallback(
+      const onTransitionEndProp = props.onTransitionEnd;
+      const onTransitionEnd = useEvent(
         (event: React.TransitionEvent<HTMLDivElement>) => {
-          onTransitionEndProp(event);
+          onTransitionEndProp?.(event);
 
           if (event.defaultPrevented) return;
 
@@ -181,19 +181,6 @@ export const useDisclosureCollapsibleContent =
             props.onCollapseEnd?.();
           }
         },
-        [
-          onTransitionEndProp,
-          currentSize,
-          isVertical,
-          styles.height,
-          styles.width,
-          state.visible,
-          contentSize,
-          props,
-          mergeStyles,
-          getCurrentSizeStyle,
-          collapsedStyles,
-        ],
       );
 
       const style = { ...styles, ...props.style };

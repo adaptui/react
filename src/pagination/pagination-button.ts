@@ -1,6 +1,6 @@
-import { MouseEvent, useCallback } from "react";
+import { MouseEvent } from "react";
 import { isNumber } from "@chakra-ui/utils";
-import { useEventCallback, useStore } from "ariakit-utils";
+import { useEvent, useStore } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -39,26 +39,23 @@ export const usePaginationButton = createHook<PaginationButtonOptions>(
       ? `Page ${goto}`
       : `Go to ${goto === "prevPage" ? "previous" : goto} Page`;
 
-    const onClickProp = useEventCallback(props.onClick);
+    const onClickProp = props.onClick;
 
-    const onClick = useCallback(
-      (event: MouseEvent<HTMLButtonElement>) => {
-        onClickProp(event);
-        if (event.defaultPrevented) return;
-        if (disabled) return;
+    const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
+      onClickProp?.(event);
+      if (event.defaultPrevented) return;
+      if (disabled) return;
 
-        if (isNumber(goto)) {
-          state?.movePage?.(goto);
-          return;
-        }
+      if (isNumber(goto)) {
+        state?.movePage?.(goto);
+        return;
+      }
 
-        if (["nextPage", "prevPage", "lastPage", "firstPage"].includes(goto)) {
-          state?.[goto]?.();
-          return;
-        }
-      },
-      [disabled, goto, onClickProp, state],
-    );
+      if (["nextPage", "prevPage", "lastPage", "firstPage"].includes(goto)) {
+        state?.[goto]?.();
+        return;
+      }
+    });
 
     props = {
       "aria-label": ariaLabel,
