@@ -171,7 +171,7 @@
     "gacp": "3.0.1",
     "glob": "8.0.1",
     "glob-fs": "0.1.7",
-    "husky": "8.0.0",
+    "husky": "8.0.1",
     "jest": "28.1.0",
     "jest-axe": "6.0.0",
     "jest-environment-jsdom": "^28.1.0",
@@ -195,7 +195,7 @@
     "raw-loader": "4.0.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-hook-form": "7.30.0",
+    "react-hook-form": "7.31.1",
     "react-test-renderer": "18.1.0",
     "react-transition-group": "4.4.2",
     "react-virtual": "2.10.4",
@@ -212,7 +212,7 @@
     "ts-morph": "14.0.0",
     "ts-node": "10.7.0",
     "typescript": "4.6.4",
-    "webpack": "5.72.0",
+    "webpack": "5.72.1",
     "yaml": "2.0.1"
   },
   "peerDependencies": {
