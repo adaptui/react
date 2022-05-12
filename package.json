@@ -142,7 +142,7 @@
     "@testing-library/react": "13.2.0",
     "@testing-library/react-hooks": "8.0.0",
     "@testing-library/user-event": "14.1.1",
-    "@types/jest": "27.5.0",
+    "@types/jest": "27.5.1",
     "@types/jest-axe": "3.5.3",
     "@types/jest-in-case": "1.0.5",
     "@types/mockdate": "3.0.0",
