@@ -7408,10 +7408,10 @@ ariakit-utils@0.17.0-next.18:
   resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.18.tgz#5bf9a3be399b30c1f9b8573dbd24b06f552cc5fd"
   integrity sha512-uDPWUW850ootTSIeYWkDU83bjJeM+QB3WAurw0RUoqOsUbJOFqxG5opVikDhvelRMR8+gV52MC2v2iy10wxb7Q==
 
-ariakit@2.0.0-next.26:
-  version "2.0.0-next.26"
-  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.26.tgz#55d58da24866df23eafe70563abc07771e658f90"
-  integrity sha512-XilUfLkKqA6RZhoklY+ZtmpHApISARlnKuqhxoyUceWUV/XxuAe1b/ZaUDn4uZLlnppbTlzgexIVrg0MOpveJg==
+ariakit@2.0.0-next.27:
+  version "2.0.0-next.27"
+  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.27.tgz#a04a68ce31398a190c6d91a5275c35d2a747d862"
+  integrity sha512-PvZxNDARg6N/fKG1WW7L3UoOoXTBIeKYYTn6fUoBANbRS+K4u73wwkCVme8oWUzniUbNdx+w/pfvqZ8/cQyaUA==
   dependencies:
     "@floating-ui/dom" "0.5.0"
     ariakit-utils "0.17.0-next.18"
