@@ -167,7 +167,7 @@
     "eslint-config-react-app": "7.0.1",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "eslint-plugin-storybook": "0.5.11",
+    "eslint-plugin-storybook": "0.5.12",
     "gacp": "3.0.1",
     "glob": "8.0.3",
     "glob-fs": "0.1.7",
