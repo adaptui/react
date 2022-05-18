@@ -1,5 +1,33 @@
 
 
+## [1.0.0-1](https://github.com/timelessco/renderlesskit-react/compare/v1.0.0-0...v1.0.0-1) (2022-05-18)
+
+
+### Bug Fixes
+
+* **deps:** ⬆️ update chakra-ui monorepo to v2 (major) ([#342](https://github.com/timelessco/renderlesskit-react/issues/342)) ([1e943a4](https://github.com/timelessco/renderlesskit-react/commit/1e943a4d88dccbcaed0dee930863218e208fd023))
+* **deps:** ⬆️ update dependency ariakit to v2.0.0-next.27 ([#343](https://github.com/timelessco/renderlesskit-react/issues/343)) ([d4f96f9](https://github.com/timelessco/renderlesskit-react/commit/d4f96f9d42bc412dfeefeb6583ed850f4a0fb31f))
+
+
+### CI Changes
+
+* **pr:** 💚 add automerge pr ([f095063](https://github.com/timelessco/renderlesskit-react/commit/f095063c1ca965d7026875cd200f931fc532749d))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency @types/jest to v27.5.1 ([#340](https://github.com/timelessco/renderlesskit-react/issues/340)) ([5bf1212](https://github.com/timelessco/renderlesskit-react/commit/5bf1212a7b17f5f6622bbdcf713c5b66d0caacc9))
+* **deps:** ⬆️ update dependency eslint-plugin-storybook to v0.5.12 ([#346](https://github.com/timelessco/renderlesskit-react/issues/346)) ([6ff7899](https://github.com/timelessco/renderlesskit-react/commit/6ff78991b7c74c9a01352d974554bb8f506f0d60))
+* **deps:** ⬆️ update dev dependencies (major) to v17 (major) ([#344](https://github.com/timelessco/renderlesskit-react/issues/344)) ([0cb2496](https://github.com/timelessco/renderlesskit-react/commit/0cb2496d0c5a052e7e949f29fa0d549e8dc12190))
+* **deps:** ⬆️ update dev dependencies (minor) ([#338](https://github.com/timelessco/renderlesskit-react/issues/338)) ([ea5d259](https://github.com/timelessco/renderlesskit-react/commit/ea5d25952e6c508fe908620632b27c7529521da6))
+* **deps:** ⬆️ update dev dependencies (minor) ([#341](https://github.com/timelessco/renderlesskit-react/issues/341)) ([7e3702b](https://github.com/timelessco/renderlesskit-react/commit/7e3702bf0fce06c6c2e08d21b22f813767e76163))
+* **deps:** ⬆️ update dev dependencies (minor) ([#345](https://github.com/timelessco/renderlesskit-react/issues/345)) ([561735c](https://github.com/timelessco/renderlesskit-react/commit/561735ceba6715e8d84efd2c9ed9cec2de68abe0))
+
+
+### Code Refactors
+
+* **show-more:** ♻️ add role to collapsibel content ([3e1386a](https://github.com/timelessco/renderlesskit-react/commit/3e1386aa123903865cacd2974c357376c2e9702a))
+
 ## [1.0.0-0](https://github.com/timelessco/renderlesskit-react/compare/v0.11.0...v1.0.0-0) (2022-05-09)
 
 
