@@ -1,5 +1,6 @@
 import * as React from "react";
 import { flushSync } from "react-dom";
+import { RoleOptions, useRole } from "ariakit";
 import { DisclosureState } from "ariakit/disclosure";
 import {
   useEvent,
@@ -12,7 +13,7 @@ import {
   createElement,
   createHook,
 } from "ariakit-utils/system";
-import { As, Options, Props } from "ariakit-utils/types";
+import { As, Props } from "ariakit-utils/types";
 import raf from "raf";
 
 import {
@@ -198,6 +199,8 @@ export const useDisclosureCollapsibleContent =
         style,
       };
 
+      props = useRole(props);
+
       return props;
     },
   );
@@ -210,7 +213,7 @@ export const DisclosureCollapsibleContent =
   });
 
 export type DisclosureCollapsibleContentOptions<T extends As = "div"> =
-  Options<T> & {
+  RoleOptions<T> & {
     /**
      * Object returned by the `useDisclosureState` hook.
      */
