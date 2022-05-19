@@ -5930,7 +5930,7 @@
     core-js "^3.8.2"
     regenerator-runtime "^0.13.7"
 
-"@storybook/ui@6.5.0":
+"@storybook/ui@6.5.0", "@storybook/ui@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-6.5.0.tgz#50775066134de6b7a27f9f947921c0411fe8a27b"
   integrity sha512-4SeY2AjVZXqw0XS30iWWKnBfYvy/x0UVJ3FavN8G+j3HhXw+8Q3R+yL7SuXDPg1JsO2OuWL5NJroPw4z7y78/Q==
