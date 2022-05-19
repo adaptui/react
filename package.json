@@ -196,6 +196,7 @@
     "raw-loader": "4.0.2",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-helmet-async": "^1.3.0",
     "react-hook-form": "7.31.1",
     "react-test-renderer": "18.1.0",
     "react-transition-group": "4.4.2",
