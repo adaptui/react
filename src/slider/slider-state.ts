@@ -9,7 +9,7 @@ export function useSliderState(props: SliderStateProps): SliderState {
   const trackRef = React.useRef<HTMLElement>(null);
   const sliderProps = useSlider(rest, state, trackRef);
 
-  return { ...sliderProps, trackRef };
+  return { ...sliderProps, trackRef, baseState: state };
 }
 
 export type SliderState = {
@@ -32,6 +32,11 @@ export type SliderState = {
 
   /** Props for the output element, displaying the value of the slider thumbs. */
   outputProps: React.OutputHTMLAttributes<HTMLOutputElement>;
+
+  /**
+   * Object returned by the `useSliderBaseState` hook.
+   */
+  baseState: SliderBaseState;
 };
 
 export type SliderStateProps = AriaSliderProps & {

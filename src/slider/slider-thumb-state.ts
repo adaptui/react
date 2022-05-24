@@ -18,12 +18,17 @@ export function useSliderThumbState(
     state,
   );
 
-  return { ...sliderThumbProps, inputRef };
+  return { ...sliderThumbProps, inputRef, baseState: state };
 }
 
 export type SliderThumbState = SliderThumbAria & {
   /** A ref to the thumb input element. */
   inputRef: React.RefObject<HTMLInputElement>;
+
+  /**
+   * Object returned by the `useSliderBaseState` hook.
+   */
+  baseState: SliderBaseState;
 };
 
 export type SliderThumbStateProps = AriaSliderThumbProps & {
