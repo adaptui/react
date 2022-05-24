@@ -1,5 +1,18 @@
 
 
+## [1.0.0-2](https://github.com/timelessco/renderlesskit-react/compare/v1.0.0-1...v1.0.0-2) (2022-05-24)
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency ariakit to v2.0.0-next.28 ([#349](https://github.com/timelessco/renderlesskit-react/issues/349)) ([6022e8f](https://github.com/timelessco/renderlesskit-react/commit/6022e8f38be746aa3b7d5b78d4d9044a3eb5aec6))
+* **deps:** ⬆️ update dev dependencies (minor) ([#347](https://github.com/timelessco/renderlesskit-react/issues/347)) ([ebed501](https://github.com/timelessco/renderlesskit-react/commit/ebed50157c19eec9729b3b44c8aa8ffe03aed7a4))
+
+
+### Code Refactors
+
+* **slider:** ♻️ add base states to props states ([fe38843](https://github.com/timelessco/renderlesskit-react/commit/fe388431584ca53a7fead7dd06fcc0535ece03af))
+
 ## [1.0.0-1](https://github.com/timelessco/renderlesskit-react/compare/v1.0.0-0...v1.0.0-1) (2022-05-18)
 
 
