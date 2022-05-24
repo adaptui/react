@@ -216,7 +216,7 @@
     "yaml": "2.1.0"
   },
   "peerDependencies": {
-    "ariakit": "2.0.0-next.27",
+    "ariakit": "2.0.0-next.28",
     "react": "16.x || 17.x || 18.x",
     "react-dom": "16.x || 17.x || 18.x"
   },
