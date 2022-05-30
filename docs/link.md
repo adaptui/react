@@ -19,10 +19,10 @@ and
 ```js
 import * as React from "react";
 
-import { Link as RenderlesskitLink } from "@renderlesskit/react";
+import { Link as AdaptUILink } from "@adaptui/react";
 
 export const Link = props => {
-  return <RenderlesskitLink {...props}>Reakit</RenderlesskitLink>;
+  return <AdaptUILink {...props}>Reakit</AdaptUILink>;
 };
 
 export default Link;

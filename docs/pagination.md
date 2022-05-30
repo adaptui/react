@@ -19,16 +19,16 @@ navigation.
 import * as React from "react";
 
 import {
-  Pagination as RenderlesskitPagination,
+  Pagination as AdaptUIPagination,
   PaginationButton,
   usePaginationState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Pagination = props => {
   const state = usePaginationState({ count: 10, ...props });
 
   return (
-    <RenderlesskitPagination {...state} aria-label="Pagination">
+    <AdaptUIPagination {...state} aria-label="Pagination">
       <ul style={{ display: "flex", listStyle: "none" }}>
         <li>
           <PaginationButton goto="firstPage" {...state}>
@@ -70,7 +70,7 @@ export const Pagination = props => {
           </PaginationButton>
         </li>
       </ul>
-    </RenderlesskitPagination>
+    </AdaptUIPagination>
   );
 };
 

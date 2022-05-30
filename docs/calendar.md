@@ -39,7 +39,7 @@ import {
   CalendarHeader,
   CalendarWeekTitle,
   useCalendarState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import {
   ChevronLeft,
@@ -112,7 +112,7 @@ Converting a normal calendar to a range calendar is as easy as just swaping out
 the hook to range calendar hook.
 
 You'll need to import the `useRangeCalendarState` hook from the
-`@renderlesskit/react` first
+`@adaptui/react` first
 
 ```diff
 - const state = useCalendarState(props);

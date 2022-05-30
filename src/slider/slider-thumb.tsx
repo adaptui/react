@@ -1,11 +1,11 @@
 import * as React from "react";
-import { mergeProps } from "@react-aria/utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { mergeProps } from "@react-aria/utils";
 
 import { SliderInput } from "./slider-input";
 import { SliderThumbState } from "./slider-thumb-state";

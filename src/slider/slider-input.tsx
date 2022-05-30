@@ -1,5 +1,4 @@
 import * as React from "react";
-import { mergeProps } from "@react-aria/utils";
 import { VisuallyHidden } from "ariakit";
 import { useForkRef, useWrapElement } from "ariakit-utils";
 import {
@@ -8,6 +7,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { mergeProps } from "@react-aria/utils";
 
 import { SliderThumbState } from "./slider-thumb-state";
 

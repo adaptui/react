@@ -25,7 +25,7 @@ import {
   DisclosureButton,
   DisclosureContent,
   useDisclosureState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Disclosure = props => {
   const [hasExpandStarted, setHasExpandStarted] = React.useState(false);

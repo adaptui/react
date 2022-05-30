@@ -20,9 +20,9 @@ that varies within a defined range. It follows the
 import * as React from "react";
 
 import {
-  Meter as RenderlesskitMeter,
+  Meter as AdaptUIMeter,
   useMeterState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Meter = props => {
   const state = useMeterState(props);
@@ -30,7 +30,7 @@ export const Meter = props => {
 
   return (
     <div className="meter">
-      <RenderlesskitMeter
+      <AdaptUIMeter
         aria-label="meter"
         className="meterbar"
         style={{
@@ -38,7 +38,7 @@ export const Meter = props => {
           backgroundColor: status == null ? undefined : background[status],
         }}
         {...state}
-      ></RenderlesskitMeter>
+      ></AdaptUIMeter>
     </div>
   );
 };

@@ -20,10 +20,10 @@ accessibility properties necessary for the [DatePicker](./datepicker.md) &
 import React from "react";
 
 import {
-  Segment as RenderlesskitSegment,
+  Segment as AdaptUISegment,
   SegmentField,
   useSegmentState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Segment = props => {
   const state = useSegmentState(props);
@@ -32,7 +32,7 @@ export const Segment = props => {
     <div>
       <SegmentField {...state} className="segment__field">
         {state.segments.map((segment, i) => (
-          <RenderlesskitSegment
+          <AdaptUISegment
             key={i}
             segment={segment}
             className="segment__field--item"

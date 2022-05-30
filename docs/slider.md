@@ -30,7 +30,7 @@ import {
   SliderThumb,
   SliderTrack,
   useSliderState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Slider = args => {
   const { label, ...rest } = args;

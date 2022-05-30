@@ -19,12 +19,12 @@ import React from "react";
 import { css } from "@emotion/css";
 
 import {
-  Drawer as RenderlesskitDrawer,
+  Drawer as AdaptUIDrawer,
   DrawerBackdrop,
   DrawerCloseButton,
   DrawerDisclosure,
   useDrawerState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Drawer = props => {
   const dialog = useDrawerState({ animated: true, ...props });
@@ -44,7 +44,7 @@ export const Drawer = props => {
         <option value="left">Left</option>
       </select>
       <DrawerBackdrop className={backdropStyles} {...dialog}>
-        <RenderlesskitDrawer
+        <AdaptUIDrawer
           {...dialog}
           placement={placement}
           aria-label="Hello world"
@@ -65,7 +65,7 @@ export const Drawer = props => {
           <DrawerCloseButton {...dialog}>X</DrawerCloseButton>
           <p>Welcome to Reakit!</p>
           <input ref={inputRef} />
-        </RenderlesskitDrawer>
+        </AdaptUIDrawer>
       </DrawerBackdrop>
     </div>
   );

@@ -22,12 +22,12 @@ import * as React from "react";
 
 import {
   BreadcrumbLink,
-  Breadcrumbs as RenderlesskitBreadcrumbs,
-} from "@renderlesskit/react";
+  Breadcrumbs as AdaptUIBreadcrumbs,
+} from "@adaptui/react";
 
 export const Breadcrumbs = () => {
   return (
-    <RenderlesskitBreadcrumbs aria-label="Breadcrumb" className="breadcrumb">
+    <AdaptUIBreadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -53,7 +53,7 @@ export const Breadcrumbs = () => {
           </BreadcrumbLink>
         </li>
       </ol>
-    </RenderlesskitBreadcrumbs>
+    </AdaptUIBreadcrumbs>
   );
 };
 

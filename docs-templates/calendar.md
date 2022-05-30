@@ -19,8 +19,8 @@ keyboard navigaiton & focus management.
 Converting a normal calendar to a range calendar is as easy as just swaping out
 the hook to range calendar hook.
 
-You'll need to import the `useRangeCalendarState` hook from the
-`@renderlesskit/react` first
+You'll need to import the `useRangeCalendarState` hook from the `@adaptui/react`
+first
 
 ```diff
 - const state = useCalendarState(props);

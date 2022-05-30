@@ -1,18 +1,18 @@
-<h1 align="center">Renderlesskit React</h1>
+<h1 align="center">AdaptUI React</h1>
 
 <p align="center">
-  Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://reakit.io/">Reakit</a>
+  Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://ariakit.org/">Reakit</a>
 System.
-<a href="https://renderlesskit-react.vercel.app/"><strong>Explore all components »</strong></a>
+<a href="https://adaptui-react.vercel.app/"><strong>Explore all components »</strong></a>
 </p>
 
 <p align="center">
-  <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM version" src="https://img.shields.io/npm/v/@renderlesskit/react.svg" /></a>
-  <a href="https://npmjs.org/package/@renderlesskit/react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/@renderlesskit/react.svg"></a>
-  <a href="https://github.com/timelessco/renderlesskit-react/actions"><img alt="Build Status" src="https://github.com/timelessco/renderlesskit-react/workflows/Test/badge.svg?event=push&branch=master" /></a><br/>
-  <a href="https://github.com/timelessco/renderlesskit-react/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <a href="https://npmjs.org/package/@adaptui/react"><img alt="NPM version" src="https://img.shields.io/npm/v/@adaptui/react.svg" /></a>
+  <a href="https://npmjs.org/package/@adaptui/react"><img alt="NPM downloads" src="https://img.shields.io/npm/dm/@adaptui/react.svg"></a>
+  <a href="https://github.com/adaptui/react/actions"><img alt="Build Status" src="https://github.com/adaptui/react/workflows/Test/badge.svg?event=push&branch=master" /></a><br/>
+  <a href="https://github.com/adaptui/react/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   </a>
-  <a target="_blank" href="https://octo-repo-visualization.vercel.app/?repo=timelessco%2Frenderlesskit-react"><img src="https://img.shields.io/badge/Repo-Visualization-orange" alt="Repo Visualization">
+  <a target="_blank" href="https://octo-repo-visualization.vercel.app/?repo=adaptui%2Freact"><img src="https://img.shields.io/badge/Repo-Visualization-orange" alt="Repo Visualization">
   </a>
 </p>
 
@@ -28,10 +28,10 @@ System.
 
 ```sh
 # npm
-npm install @renderlesskit/react reakit
+npm install @adaptui/react reakit
 
 # Yarn
-yarn add @renderlesskit/react reakit
+yarn add @adaptui/react reakit
 ```
 
 > Make sure `react react-dom` is installed.
@@ -76,8 +76,8 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars0.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/timelessco/renderlesskit-react/commits?author=navin-moorthy" title="Code">💻</a></td>
-    <td align="center"><a href="http://anuraghazra.github.io/"><img src="https://avatars3.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/timelessco/renderlesskit-react/commits?author=anuraghazra" title="Code">💻</a></td>
+    <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars0.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/adaptui/react/commits?author=navin-moorthy" title="Code">💻</a></td>
+    <td align="center"><a href="http://anuraghazra.github.io/"><img src="https://avatars3.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/adaptui/react/commits?author=anuraghazra" title="Code">💻</a></td>
     <td align="center"><a href="http://timeless.co/"><img src="https://avatars2.githubusercontent.com/u/6380293?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sandeep Prabhakaran</b></sub></a><br /><a href="#ideas-sandeepprabhakaran" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>

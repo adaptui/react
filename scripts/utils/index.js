@@ -1,19 +1,6 @@
 // Taken from: https://github.com/reakit/reakit/blob/6f6d1ad9177156cafa4adf9c987a43c79a1bbb90/scripts/build/utils.js
-const {
-  lstatSync,
-  existsSync,
-  readdirSync,
-  writeFileSync,
-} = require("fs-extra");
-const chalk = require("chalk");
-const prettier = require("prettier");
-const { join, dirname, basename } = require("path");
-const { toUpper, snakeCase, isEqual } = require("lodash");
-const { Project } = require("ts-morph");
-
-function log(...args) {
-  console.log(...args);
-}
+const { lstatSync, existsSync, readdirSync } = require("fs-extra");
+const { join } = require("path");
 
 /**
  * @param {string} rootPath
@@ -34,13 +21,6 @@ function removeExt(path) {
  */
 function isDirectory(path) {
   return lstatSync(path).isDirectory();
-}
-
-/**
- * @param {string} rootPath
- */
-function getSourcePath(rootPath) {
-  return join(rootPath, "src");
 }
 
 /**
@@ -92,20 +72,6 @@ function getPublicFiles(rootPath, prefix = "") {
 }
 
 /**
- * Returns the same as getPublicFiles, but grouped by modules.
- * Like { "path/to/moduleName": ["path/to/moduleName/file1", "path/to/moduleName/file2"] }
- * @param {string} rootPath
- */
-function getPublicFilesByModules(rootPath) {
-  const publicFiles = getPublicFiles(rootPath);
-  return Object.values(publicFiles).reduce((acc, path) => {
-    const moduleName = dirname(path);
-    acc[moduleName] = [...(acc[moduleName] || []), path];
-    return acc;
-  }, {});
-}
-
-/**
  * @param {string} rootPath
  */
 function hasTSConfig(rootPath) {
@@ -128,17 +94,6 @@ function isStateReturnDeclaration(node) {
   const escapedName = getEscapedName(node);
   return (
     kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName)
-  );
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
-function isInitialStateDeclaration(node) {
-  const kindName = node.getKindName();
-  const escapedName = getEscapedName(node);
-  return (
-    kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName)
   );
 }
 
@@ -203,14 +158,6 @@ function getProps(node, includePrivate) {
 }
 
 /**
- * @param {import("ts-morph").Node<Node>} node
- * @param {boolean} includePrivate
- */
-function getPropsNames(node, includePrivate) {
-  return getProps(node, includePrivate).map(prop => prop.getEscapedName());
-}
-
-/**
  * @param {import("ts-morph").SourceFile[]} sourceFiles
  */
 function sortSourceFiles(sourceFiles) {
@@ -222,91 +169,6 @@ function sortSourceFiles(sourceFiles) {
     if (aName < bName) return -1;
     return 0;
   });
-}
-/**
- * @param {import("ts-morph").Node<Node>} node
- * @return {import("ts-morph").Node<Node>|null}
- */
-function getLiteralNode(node) {
-  if (node.getKindName() === "TypeLiteral") {
-    return node;
-  }
-  const children = node.getChildren();
-  for (const child of children) {
-    const result = getLiteralNode(child);
-    if (result) {
-      return result;
-    }
-  }
-  return null;
-}
-
-/**
- * @param {string} moduleName
- */
-function getKeysName(moduleName) {
-  return `${toUpper(snakeCase(moduleName))}_KEYS`;
-}
-
-/**
- * @param {any[]} a
- * @param {any[]} b
- */
-function isSubsetOf(a, b) {
-  return a.length && b.length && a.every(item => b.includes(item));
-}
-
-/**
- * @param {Object} object
- */
-function sortStateSets(object) {
-  return Object.entries(object)
-    .sort(([aKey, aValue], [bKey, bValue]) => {
-      if (aKey.endsWith("State") && bKey.endsWith("State")) {
-        if (isSubsetOf(aValue, bValue)) return -1;
-        if (isSubsetOf(bValue, aValue)) return 1;
-      }
-      return 0;
-    })
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-}
-
-/**
- * @param {Object} object
- */
-function replaceSubsetInObject(object) {
-  const finalObj = {};
-  Object.entries(object).forEach(([key, array]) => {
-    const refs = Object.entries(finalObj)
-      .filter(([, items]) => isSubsetOf(items, array))
-      .map(([k]) => k);
-
-    finalObj[key] = [
-      ...refs.map(ref => `...${getKeysName(ref)}`),
-      ...array.filter(item => !refs.some(ref => object[ref].includes(item))),
-    ];
-  });
-  if (!isEqual(object, finalObj)) {
-    return replaceSubsetInObject(finalObj);
-  }
-  return finalObj;
-}
-
-/**
- * @param {string} acc
- * @param {[string, string[]]} entry
- */
-function reduceKeys(acc, [moduleName, array]) {
-  const declaration = `const ${getKeysName(moduleName)}`;
-  const value = `${JSON.stringify(array)} as const`
-    // "...FOO_KEYS" -> ...FOO_KEYS (without quotes)
-    .replace(/"([.A-Z_]+)"/g, "$1")
-    // [...FOO_KEYS] as const -> FOO_KEYS
-    .replace(/\[\.\.\.([A-Z_]+)\] as const/g, "$1");
-
-  const finalString = `${declaration} = ${value};\n`;
-
-  return `${acc}export ${finalString}`;
 }
 
 module.exports = {

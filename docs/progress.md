@@ -19,9 +19,9 @@ of time to load. It follows
 import * as React from "react";
 
 import {
-  Progress as RenderlesskitProgress,
+  Progress as AdaptUIProgress,
   useProgressState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Progress = props => {
   const state = useProgressState(props);
@@ -29,7 +29,7 @@ export const Progress = props => {
 
   return (
     <div className="progress">
-      <RenderlesskitProgress
+      <AdaptUIProgress
         {...state}
         value={value}
         aria-label="progress"

@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useButton } from "@react-aria/button";
 import { usePopoverDisclosure } from "ariakit";
 import { useForkRef } from "ariakit-utils";
 import {
@@ -8,6 +7,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { useButton } from "@react-aria/button";
 
 import { DatePickerState } from "./datepicker-state";
 import { DateRangePickerState } from "./daterangepicker-state";

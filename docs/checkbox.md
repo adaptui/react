@@ -22,11 +22,11 @@ By default, it renders the native `<input type="checkbox">`.
 import * as React from "react";
 
 import {
-  Checkbox as RenderlesskitCheckbox,
+  Checkbox as AdaptUICheckbox,
   splitStateProps,
   USE_CHECKBOX_STATE_KEYS,
   useCheckboxState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Checkbox = props => {
   const [stateProps, checkboxProps] = splitStateProps(
@@ -36,7 +36,7 @@ export const Checkbox = props => {
 
   const state = useCheckboxState(stateProps);
 
-  return <RenderlesskitCheckbox {...state} {...checkboxProps} />;
+  return <AdaptUICheckbox {...state} {...checkboxProps} />;
 };
 
 export default Checkbox;

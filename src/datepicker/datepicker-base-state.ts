@@ -1,6 +1,6 @@
+import { PopoverState, PopoverStateProps, usePopoverState } from "ariakit";
 import { DatePickerState, useDatePickerState } from "@react-stately/datepicker";
 import { DatePickerProps, DateValue } from "@react-types/datepicker";
-import { PopoverState, PopoverStateProps, usePopoverState } from "ariakit";
 
 export function useDatePickerBaseState(
   props: DatePickerBaseStateProps,

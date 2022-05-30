@@ -1,5 +1,4 @@
 import { MouseEvent } from "react";
-import { isNumber } from "@chakra-ui/utils";
 import { useEvent, useStore } from "ariakit-utils";
 import {
   createComponent,
@@ -7,6 +6,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { isNumber } from "@chakra-ui/utils";
 
 import { PaginationContextState } from "./__utils";
 import { PaginationState } from "./pagination-state";

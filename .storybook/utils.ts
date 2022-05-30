@@ -40,7 +40,7 @@ interface Props {
 
 export function createPreviewTabs(props: Props) {
   const { js, ts, jsUtils, tsUtils, css, deps: extraDeps = [] } = props;
-  const deps = ["@renderlesskit/react@latest", "reakit@latest", ...extraDeps];
+  const deps = ["@adaptui/react@latest", "reakit@latest", ...extraDeps];
   const tabs = [];
 
   if (js) {

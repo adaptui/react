@@ -72,7 +72,7 @@ const getSandboxShortURL = async parsed => {
 const getSandboxContents = (files, extraDeps) => {
   const deps = {
     reakit: "latest",
-    "@renderlesskit/react": "latest",
+    "@adaptui/react": "latest",
     react: "^16.8.0",
     "react-dom": "^16.8.0",
     "react-scripts": "^3.4.3",

@@ -24,11 +24,11 @@ for the accessibility features.
 import * as React from "react";
 
 import {
-  NumberInput as RenderlesskitNumberInput,
+  NumberInput as AdaptUINumberInput,
   NumberInputDecrementButton,
   NumberInputIncrementButton,
   useNumberInputState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const NumberInput = props => {
   const state = useNumberInputState(props);
@@ -37,7 +37,7 @@ export const NumberInput = props => {
   return (
     <label htmlFor="number-input" id="numberinput-label">
       <NumberInputDecrementButton {...state}>-</NumberInputDecrementButton>
-      <RenderlesskitNumberInput
+      <AdaptUINumberInput
         placeholder="Enter a number"
         id="number-input"
         aria-labelledby="numberinput-label"

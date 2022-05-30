@@ -20,20 +20,20 @@
 import * as React from "react";
 
 import {
-  PickerBase as RenderlesskitPickerBase,
+  PickerBase as AdaptUIPickerBase,
   PickerBaseContent,
   PickerBaseTrigger,
   usePickerBaseState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const PickerBase = props => {
   const state = usePickerBaseState(props);
 
   return (
     <>
-      <RenderlesskitPickerBase {...state}>
+      <AdaptUIPickerBase {...state}>
         <PickerBaseTrigger {...state}>open</PickerBaseTrigger>
-      </RenderlesskitPickerBase>
+      </AdaptUIPickerBase>
       <PickerBaseContent {...state}>Content</PickerBaseContent>
     </>
   );

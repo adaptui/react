@@ -1,4 +1,3 @@
-import { mergeProps } from "@react-aria/utils";
 import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
@@ -6,6 +5,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { mergeProps } from "@react-aria/utils";
 
 import { SliderState } from "./slider-state";
 

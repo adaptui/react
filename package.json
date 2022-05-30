@@ -101,12 +101,8 @@
     "@react-stately/slider": "^3.0.8",
     "ariakit": "^2.0.0-next.27",
     "ariakit-utils": "^0.17.0-next.18",
-    "date-fns": "^2.28.0",
     "raf": "^3.4.1",
-    "react-remove-scroll": "^2.5.3",
-    "reakit-system": "^0.15.2",
-    "reakit-utils": "^0.15.2",
-    "reakit-warning": "^0.6.2"
+    "react-remove-scroll": "^2.5.3"
   },
   "devDependencies": {
     "@babel/cli": "7.17.10",

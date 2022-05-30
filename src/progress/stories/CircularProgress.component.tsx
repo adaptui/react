@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Button } from "reakit";
 import { css, keyframes } from "@emotion/css";
+import { Button } from "reakit";
 
 import {
   Progress,

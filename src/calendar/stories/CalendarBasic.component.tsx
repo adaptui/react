@@ -1,7 +1,7 @@
 import * as React from "react";
+import { VisuallyHidden } from "ariakit";
 import { getWeeksInMonth, startOfWeek } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
-import { VisuallyHidden } from "ariakit";
 
 import {
   Calendar,

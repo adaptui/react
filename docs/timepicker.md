@@ -25,7 +25,7 @@ for the keyboard navigation & accessibility features.
 import * as React from "react";
 
 import {
-  TimePicker as RenderlesskitTimePicker,
+  TimePicker as AdaptUITimePicker,
   TimePickerColumn,
   TimePickerColumnValue,
   TimePickerContent,
@@ -33,7 +33,7 @@ import {
   TimePickerSegmentField,
   TimePickerTrigger,
   useTimePickerState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import { CalendarIcon } from "./Utils.component";
 
@@ -42,7 +42,7 @@ export const TimePicker = props => {
 
   return (
     <>
-      <RenderlesskitTimePicker className="timepicker" {...state}>
+      <AdaptUITimePicker className="timepicker" {...state}>
         <div className="timepicker__header">
           <TimePickerSegmentField {...state} className="timepicker__field">
             {state.segments.map((segment, i) => (
@@ -58,7 +58,7 @@ export const TimePicker = props => {
             <CalendarIcon />
           </TimePickerTrigger>
         </div>
-      </RenderlesskitTimePicker>
+      </AdaptUITimePicker>
       <TimePickerContent className="timepicker__content" {...state}>
         <TimePickerColumn className="timepicker__column" {...state.hourState}>
           {state.hours.map(n => {

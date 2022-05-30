@@ -27,20 +27,20 @@ for the show/hide.
 import * as React from "react";
 
 import {
-  Select as RenderlesskitSelect,
+  Select as AdaptUISelect,
   SelectOption,
   SelectPopover,
   useSelectState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Select = props => {
   const select = useSelectState({ gutter: 8, ...props });
 
   return (
     <>
-      <RenderlesskitSelect className="select" {...select} aria-label="Fruit">
+      <AdaptUISelect className="select" {...select} aria-label="Fruit">
         {select.selectedValue || "Select a fruit"}
-      </RenderlesskitSelect>
+      </AdaptUISelect>
       <SelectPopover {...select} aria-label="Fruits">
         <SelectOption {...select} value="Apple" />
         <SelectOption {...select} value="AppleCusturd" />

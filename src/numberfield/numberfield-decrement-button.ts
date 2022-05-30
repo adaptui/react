@@ -1,6 +1,4 @@
 import { useRef } from "react";
-import { useButton } from "@react-aria/button";
-import { mergeProps } from "@react-aria/utils";
 import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
@@ -8,6 +6,8 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { useButton } from "@react-aria/button";
+import { mergeProps } from "@react-aria/utils";
 
 import { NumberFieldState } from "./numberfield-state";
 

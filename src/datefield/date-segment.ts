@@ -1,7 +1,4 @@
 import { useRef } from "react";
-import { useDateSegment as useAriaDateSegment } from "@react-aria/datepicker";
-import { mergeProps } from "@react-aria/utils";
-import { DateSegment as DateSegmentState } from "@react-stately/datepicker";
 import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
@@ -9,6 +6,9 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { useDateSegment as useAriaDateSegment } from "@react-aria/datepicker";
+import { mergeProps } from "@react-aria/utils";
+import { DateSegment as DateSegmentState } from "@react-stately/datepicker";
 
 import { DateFieldBaseState } from "./datefield-base-state";
 

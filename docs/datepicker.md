@@ -41,7 +41,7 @@ import {
   DatePickerSegmentField,
   DatePickerTrigger,
   useDatePickerState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import {
   CalendarIcon,
@@ -161,7 +161,7 @@ import {
   DatePickerSegmentField,
   DatePickerTrigger,
   useDateRangePickerState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 import {
   CalendarIcon,

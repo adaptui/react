@@ -22,12 +22,12 @@ By default, it renders the native `<input type="radio">`.
 import * as React from "react";
 
 import {
-  Radio as RenderlesskitRadio,
+  Radio as AdaptUIRadio,
   RadioGroup,
   splitStateProps,
   USE_RADIO_STATE_KEYS,
   useRadioState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Radio = props => {
   const [stateProps, radioProps] = splitStateProps(props, USE_RADIO_STATE_KEYS);
@@ -37,13 +37,13 @@ export const Radio = props => {
   return (
     <RadioGroup {...state} aria-label="fruits" {...radioProps}>
       <label>
-        <RenderlesskitRadio {...state} value="apple" /> apple
+        <AdaptUIRadio {...state} value="apple" /> apple
       </label>
       <label>
-        <RenderlesskitRadio {...state} value="orange" /> orange
+        <AdaptUIRadio {...state} value="orange" /> orange
       </label>
       <label>
-        <RenderlesskitRadio {...state} value="watermelon" /> watermelon
+        <AdaptUIRadio {...state} value="watermelon" /> watermelon
       </label>
     </RadioGroup>
   );

@@ -27,17 +27,17 @@ for
 import * as React from "react";
 
 import {
-  Accordion as RenderlesskitAccordion,
+  Accordion as AdaptUIAccordion,
   AccordionPanel,
   AccordionTrigger,
   useAccordionState,
-} from "@renderlesskit/react";
+} from "@adaptui/react";
 
 export const Accordion = props => {
   const state = useAccordionState(props);
 
   return (
-    <RenderlesskitAccordion {...state}>
+    <AdaptUIAccordion {...state}>
       <h2>
         <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
       </h2>
@@ -66,7 +66,7 @@ export const Accordion = props => {
         <AccordionTrigger {...state}>Trigger 6</AccordionTrigger>
       </h2>
       <AccordionPanel {...state}>Panel 6</AccordionPanel>
-    </RenderlesskitAccordion>
+    </AdaptUIAccordion>
   );
 };
 

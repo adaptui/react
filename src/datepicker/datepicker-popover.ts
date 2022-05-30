@@ -1,4 +1,3 @@
-import { mergeProps } from "@react-aria/utils";
 import { usePopover } from "ariakit";
 import { useEvent } from "ariakit-utils";
 import {
@@ -7,6 +6,7 @@ import {
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { mergeProps } from "@react-aria/utils";
 
 import { DatePickerState } from "./datepicker-state";
 import { DateRangePickerState } from "./daterangepicker-state";

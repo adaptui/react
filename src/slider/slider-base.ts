@@ -1,10 +1,10 @@
-import { mergeProps } from "@react-aria/utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
+import { mergeProps } from "@react-aria/utils";
 
 import { SliderState } from "./slider-state";
 
