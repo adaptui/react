@@ -8,7 +8,7 @@ import {
   ContentType,
   getRandomContent,
   getRandomType,
-  Toast as RenderlesskitToast,
+  Toast as AdaptUIToast,
   ToastBar,
   ToastProvider,
   TriggerButton,
@@ -117,7 +117,7 @@ export function ToastTriggers() {
 
 const SpringAnimationWrapper: React.FC<
   React.PropsWithChildren<{
-    toast: RenderlesskitToast;
+    toast: AdaptUIToast;
   }>
 > = props => {
   const {

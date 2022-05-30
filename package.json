@@ -1,6 +1,6 @@
 {
-  "name": "@renderlesskit/react",
-  "version": "1.0.0-2",
+  "name": "@adaptui/react",
+  "version": "1.0.0",
   "description": "Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by Reakit",
   "keywords": [
     "renderless",
@@ -14,13 +14,13 @@
     "nostyle",
     "composable"
   ],
-  "homepage": "https://github.com/timelessco/renderlesskit-react#readme",
+  "homepage": "https://github.com/adaptui/react#readme",
   "bugs": {
-    "url": "https://github.com/timelessco/renderlesskit-react/issues"
+    "url": "https://github.com/adaptui/react/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timelessco/renderlesskit-react.git"
+    "url": "git+https://github.com/adaptui/react.git"
   },
   "license": "MIT",
   "author": "Timeless <hello@timeless.co>",
