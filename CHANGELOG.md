@@ -1,5 +1,19 @@
 
 
+## [v1.0.0-3](https://github.com/adaptui/react/compare/v1.0.0-2...vv1.0.0-3) (2022-05-30)
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency ariakit to v2.0.0-next.29 ([#352](https://github.com/adaptui/react/issues/352)) ([f2dd5fa](https://github.com/adaptui/react/commit/f2dd5fa6e9b4120269499b31466d6d214e9682fb))
+* **deps:** ⬆️ update dependency lint-staged to v12.4.3 ([#353](https://github.com/adaptui/react/issues/353)) ([e50d304](https://github.com/adaptui/react/commit/e50d304b4991b281ebefc76b653ae3106c43cec7))
+* **deps:** ⬆️ update dependency ts-morph to v15 ([#350](https://github.com/adaptui/react/issues/350)) ([59c1fc0](https://github.com/adaptui/react/commit/59c1fc0c59f09771e5f0a60c83a7507013a95d3a))
+* **deps:** ⬆️ update dev dependencies (minor) ([#348](https://github.com/adaptui/react/issues/348)) ([4f6ccaf](https://github.com/adaptui/react/commit/4f6ccaf4ed6c0cb611f87fd1f7fae51c14b91b31))
+* **deps:** ⬆️ update dev dependencies (minor) ([#351](https://github.com/adaptui/react/issues/351)) ([95e1d60](https://github.com/adaptui/react/commit/95e1d605bcb85bcd53f4c49ec19b607adba95a11))
+* **deps:** ⬆️ update storybook to 6.5.5 ([5fd8d15](https://github.com/adaptui/react/commit/5fd8d15054a3b8410feb825eaeca4371b2fdb71a))
+* **renaming:** 🚚 rename to adaptui ([ad95b04](https://github.com/adaptui/react/commit/ad95b04196ec2953beff2cc46ac73ed55d058111))
+* **version:** 🔖 update version tag ([a249c58](https://github.com/adaptui/react/commit/a249c583f2be0b2b545ff403d221875807bfa8a6))
+
 ## [1.0.0-2](https://github.com/timelessco/renderlesskit-react/compare/v1.0.0-1...v1.0.0-2) (2022-05-24)
 
 
