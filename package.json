@@ -177,7 +177,7 @@
     "jest-environment-jsdom": "28.1.0",
     "jest-in-case": "1.0.2",
     "jest-matcher-utils": "28.1.0",
-    "lint-staged": "12.4.2",
+    "lint-staged": "12.4.3",
     "lodash": "4.17.21",
     "markdown-to-ast": "6.0.3",
     "markdown-toc": "1.2.0",
