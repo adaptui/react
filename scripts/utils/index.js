@@ -309,82 +309,9 @@ function reduceKeys(acc, [moduleName, array]) {
   return `${acc}export ${finalString}`;
 }
 
-/**
- * Create __keys.json files
- * @param {string} rootPath
- */
-function makeKeys(rootPath) {
-  const pkg = getPackage(rootPath);
-
-  const filesByModules = getPublicFilesByModules(getSourcePath(rootPath));
-  const project = new Project({
-    tsConfigFilePath: join(rootPath, "tsconfig.json"),
-    addFilesFromTsConfig: false,
-  });
-  const created = [];
-
-  Object.entries(filesByModules).forEach(([modulePath, paths]) => {
-    const sourceFiles = project.addSourceFilesAtPaths(paths);
-    const keys = {};
-    const stateKeys = [];
-
-    sortSourceFiles(sourceFiles).forEach(sourceFile => {
-      sourceFile.forEachChild(node => {
-        if (isStateReturnDeclaration(node) || isOptionsDeclaration(node)) {
-          const literalNode = isOptionsDeclaration(node)
-            ? getLiteralNode(node)
-            : node;
-          const props = literalNode ? getPropsNames(literalNode, true) : [];
-          if (isStateReturnDeclaration(node)) {
-            for (const prop of props) {
-              if (!stateKeys.includes(prop)) {
-                stateKeys.push(prop);
-              }
-            }
-            keys[getModuleName(node)] = props;
-          } else {
-            keys[getModuleName(node)] = [...stateKeys, ...props];
-          }
-        }
-        if (isInitialStateDeclaration(node)) {
-          const literalNode = isOptionsDeclaration(node)
-            ? getLiteralNode(node)
-            : node;
-          const props = literalNode ? getPropsNames(literalNode, true) : [];
-          keys[getModuleName(node)] = props;
-        }
-      });
-    });
-
-    if (!Object.keys(keys).length) return;
-
-    const normalizedKeys = replaceSubsetInObject(sortStateSets(keys));
-    const contents = Object.entries(normalizedKeys).reduce(reduceKeys, "");
-    created.push(chalk.bold(chalk.green(basename(modulePath))));
-
-    writeFileSync(
-      join(modulePath, "__keys.ts"),
-      prettier.format(`// Automatically generated\n${contents}`, {
-        parser: "babel-ts",
-      }),
-    );
-  });
-
-  if (created.length) {
-    log(
-      [
-        "",
-        `Generated keys in ${chalk.bold(pkg.name)}:`,
-        `${created.join(", ")}`,
-      ].join("\n"),
-    );
-  }
-}
-
 module.exports = {
   getPackage,
   hasTSConfig,
-  makeKeys,
   getProps,
   getEscapedName,
   getModuleName,
