@@ -1,5 +1,12 @@
 
 
+## [1.0.0-4](https://github.com/adaptui/react/compare/vv1.0.0-3...v1.0.0-4) (2022-05-30)
+
+
+### Maintanance Updates
+
+* **rename:** 🚚 move to adaptui ([a41dd2a](https://github.com/adaptui/react/commit/a41dd2a055feeb901f5ebf84a969ff82edb3377b))
+
 ## [v1.0.0-3](https://github.com/adaptui/react/compare/v1.0.0-2...vv1.0.0-3) (2022-05-30)
 
 
