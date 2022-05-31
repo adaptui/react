@@ -17,7 +17,7 @@ export default {
     preview: createPreviewTabs({
       js,
       ts,
-      deps: ["reakit@latest", "@emotion/css@latest"],
+      deps: ["@emotion/css@latest"],
     }),
   },
 } as Meta;

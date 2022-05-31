@@ -1,6 +1,6 @@
 import * as React from "react";
+import { Button } from "ariakit";
 import { css, keyframes } from "@emotion/css";
-import { Button } from "reakit";
 
 import {
   Progress,
@@ -17,7 +17,9 @@ export interface CircularProgressProps extends ProgressStateProps {
   withLabel?: boolean;
 }
 
-export const CircularProgress: React.FC<CircularProgressProps> = props => {
+export const CircularProgress: React.FC<
+  React.PropsWithChildren<CircularProgressProps>
+> = props => {
   const { withLabel = false, children, ...rest } = props;
   const [value, setValue] = React.useState<number | null>(0);
   const state = useProgressState({

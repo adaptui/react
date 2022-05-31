@@ -1,7 +1,7 @@
 <h1 align="center">AdaptUI React</h1>
 
 <p align="center">
-  Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://ariakit.org/">Reakit</a>
+  Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by <a href="https://ariakit.org/">Ariakit</a>
 System.
 <a href="https://adaptui-react.vercel.app/"><strong>Explore all components »</strong></a>
 </p>
@@ -28,10 +28,10 @@ System.
 
 ```sh
 # npm
-npm install @adaptui/react reakit
+npm install @adaptui/react
 
 # Yarn
-yarn add @adaptui/react reakit
+yarn add @adaptui/react
 ```
 
 > Make sure `react react-dom` is installed.

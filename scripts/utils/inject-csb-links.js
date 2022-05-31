@@ -71,7 +71,6 @@ const getSandboxShortURL = async parsed => {
 
 const getSandboxContents = (files, extraDeps) => {
   const deps = {
-    reakit: "latest",
     "@adaptui/react": "latest",
     react: "^16.8.0",
     "react-dom": "^16.8.0",

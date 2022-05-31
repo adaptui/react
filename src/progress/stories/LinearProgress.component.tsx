@@ -1,7 +1,7 @@
 import * as React from "react";
+import { Button } from "ariakit";
 import { cx } from "ariakit-utils";
 import { css, keyframes } from "@emotion/css";
-import { Button } from "reakit";
 
 import {
   Progress,
@@ -24,7 +24,9 @@ export interface LinearProgressProps extends ProgressStateProps {
   withStripeAnimation?: boolean;
 }
 
-export const LinearProgress: React.FC<LinearProgressProps> = props => {
+export const LinearProgress: React.FC<
+  React.PropsWithChildren<LinearProgressProps>
+> = props => {
   const {
     children,
     withLabel = false,
