@@ -17,7 +17,11 @@ export default {
   title: "Accordion/Styled",
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, css }),
+    preview: createPreviewTabs({
+      js: { template: js },
+      ts: { template: ts },
+      css,
+    }),
   },
 } as Meta;
 

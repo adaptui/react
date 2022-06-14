@@ -1,6 +1,10 @@
 import * as React from "react";
 import { VisuallyHidden } from "ariakit";
-import { getWeeksInMonth, startOfWeek } from "@internationalized/date";
+import {
+  createCalendar,
+  getWeeksInMonth,
+  startOfWeek,
+} from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 
 import {
@@ -22,12 +26,16 @@ import {
 
 import { ChevronLeft, ChevronRight } from "./Utils.component";
 
-export type CalendarRangeStyledProps = RangeCalendarBaseStateProps & {};
+export type CalendarRangeStyledProps = Omit<
+  RangeCalendarBaseStateProps,
+  "locale" | "createCalendar"
+> & {};
 
 export const CalendarRangeStyled: React.FC<
   CalendarRangeStyledProps
 > = props => {
-  const state = useRangeCalendarBaseState(props);
+  const { locale } = useLocale();
+  const state = useRangeCalendarBaseState({ ...props, locale, createCalendar });
   const calendar = useRangeCalendarState({ ...props, state });
 
   return (

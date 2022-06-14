@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -10,8 +8,6 @@ import js from "./templates/DateFieldBasicJsx";
 import ts from "./templates/DateFieldBasicTsx";
 import { DateFieldBasic } from "./DateFieldBasic.component";
 
-import "./DateFieldBasic.css";
-
 type Meta = ComponentMeta<typeof DateFieldBasic>;
 // type Story = ComponentStoryObj<typeof DateFieldBasic>;
 
@@ -20,18 +16,24 @@ export default {
   component: DateFieldBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, css }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/components/DateFieldBasic.css": css,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/DateFieldBasic.css": css,
+        },
+      },
+      css,
+    }),
   },
 } as Meta;
 
 export const Default = () => {
-  let { locale } = useLocale();
-
-  return (
-    <DateFieldBasic
-      locale={locale}
-      createCalendar={createCalendar}
-      label="DateField"
-    />
-  );
+  return <DateFieldBasic label="DateField" />;
 };

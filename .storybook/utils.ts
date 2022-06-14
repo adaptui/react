@@ -1,5 +1,9 @@
 /* eslint-disable no-new-func */
-import { CodeSandboxTemplate } from "storybook-addon-preview";
+import {
+  CodeSandboxTemplate,
+  CodeSandboxValue,
+  FilesParam,
+} from "storybook-addon-preview";
 
 type CreateControlsOptions = {
   unions?: string[];
@@ -29,9 +33,12 @@ export const createControls = (options?: CreateControlsOptions) => {
   }
 };
 
+interface FilesProp {
+  [index: string]: string;
+}
 interface Props {
-  js?: string;
-  ts?: string;
+  js?: { template: string; files?: FilesProp };
+  ts?: { template: string; files?: FilesProp };
   jsUtils?: string;
   tsUtils?: string;
   css?: string;
@@ -40,16 +47,18 @@ interface Props {
 
 export function createPreviewTabs(props: Props) {
   const { js, ts, jsUtils, tsUtils, css, deps: extraDeps = [] } = props;
-  const deps = ["@adaptui/react@latest", "reakit@latest", ...extraDeps];
   const tabs = [];
 
   if (js) {
     tabs.push({
       tab: "JSX",
-      template: js,
+      template: js.template,
       language: "jsx",
       copy: true,
-      codesandbox: REACTJS_CUSTOM_CODESANDBOX(deps),
+      codesandbox: REACTJS_CUSTOM_CODESANDBOX([...extraDeps], {
+        "src/components/index.js": js.template,
+        ...(js.files && js.files),
+      }),
     });
   }
 
@@ -59,17 +68,19 @@ export function createPreviewTabs(props: Props) {
       template: jsUtils,
       language: "jsx",
       copy: true,
-      codesandbox: REACTJS_CUSTOM_CODESANDBOX(deps),
     });
   }
 
   if (ts) {
     tabs.push({
       tab: "TSX",
-      template: ts,
+      template: ts.template,
       language: "tsx",
       copy: true,
-      codesandbox: REACT_CUSTOM_CODESANDBOX(deps),
+      codesandbox: REACT_CUSTOM_CODESANDBOX([...extraDeps], {
+        "src/components/index.tsx": ts.template,
+        ...(ts.files && ts.files),
+      }),
     });
   }
 
@@ -79,7 +90,6 @@ export function createPreviewTabs(props: Props) {
       template: tsUtils,
       language: "tsx",
       copy: true,
-      codesandbox: REACT_CUSTOM_CODESANDBOX(deps),
     });
   }
 
@@ -94,33 +104,124 @@ export function createPreviewTabs(props: Props) {
 
   return tabs;
 }
-
-const joinStrs = (strs: string[]) => {
-  return `[${strs.map(str => `"${str}"`).join(", ")}]`;
+export const REACTJS_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
+  userDependencies = [],
+  files = {},
+) => {
+  return {
+    template: "create-react-app-typescript",
+    files: {
+      "public/index.html": `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <meta name="theme-color" content="#000000">
+          <!--
+              manifest.json provides metadata used when your web app is added to the
+              homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+          -->
+          <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+          <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+          <title>React App</title>
+      </head>
+      <body>
+          <noscript>
+              You need to enable JavaScript to run this app.
+          </noscript>
+          <div id="root"></div>
+      </body>
+      </html>
+      `,
+      "src/index.js": `
+        import * as ReactDOM from "react-dom";
+        import * as React from "react";
+        import App from "./App";
+        const rootElement = document.getElementById("root");
+        ReactDOM.render(<App />, rootElement);
+        `,
+      "src/App.js": `import React from \"react\";\nimport Component from \"./components\";\n\nexport default function App() {\n  return (\n    <div>\n  <main >\n <Component ${JSON.stringify(
+        { test: "test" },
+      )} />\n </main>\n    </div>\n  );\n}\n`,
+      ...files,
+    },
+    dependencies: {
+      "@adaptui/react": "latest",
+      react: "18.0.0",
+      "react-dom": "18.0.0",
+      "react-scripts": "latest",
+      "@internationalized/date": "^3.0.0-rc.0",
+    },
+    scripts: {
+      start: "react-scripts start",
+      build: "react-scripts build",
+      test: "react-scripts test --env=jsdom",
+      eject: "react-scripts eject",
+    },
+    main: "src/index.js",
+    userDependencies,
+  };
 };
-
-const REACTJS_CUSTOM_CODESANDBOX = (dependencies: string[]) =>
-  new Function(`
-var previews = arguments[0];
-return {
-    framework: "reactjs",
+export const REACT_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
+  userDependencies = [],
+  files = {},
+) => {
+  return {
+    template: "create-react-app-typescript",
     files: {
-        "src/App.js": previews["JSX"][0],
-        "src/styles.css": previews["CSS"] ? previews["CSS"][0] : "",
-        ...(previews["UtilsJSX"] ? {"src/Utils.component.js": previews["UtilsJSX"][0]} : {}),
+      "public/index.html": `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <meta name="theme-color" content="#000000">
+          <!--
+              manifest.json provides metadata used when your web app is added to the
+              homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+          -->
+          <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+          <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+          <title>React App</title>
+      </head>
+      <body>
+          <noscript>
+              You need to enable JavaScript to run this app.
+          </noscript>
+          <div id="root"></div>
+      </body>
+      </html>
+      `,
+      "src/index.tsx": `
+        import * as ReactDOM from "react-dom";
+        import * as React from "react";
+        import App from "./App";
+        const rootElement = document.getElementById("root");
+        ReactDOM.render(<App />, rootElement);
+        `,
+      "src/App.tsx": `import React from \"react\";\n import Component from \"./components\";\n\nexport default function App() {\n  return (\n    <div>\n  <main >\n        <Component />\n      </main>\n    </div>\n  );\n}\n`,
+      ...files,
     },
-    userDependencies: ${joinStrs(dependencies)},
-};`) as CodeSandboxTemplate;
-
-const REACT_CUSTOM_CODESANDBOX = (dependencies: string[]) =>
-  new Function(`
-var previews = arguments[0];
-return {
-    framework: "react",
-    files: {
-        "src/App.tsx": previews["TSX"][0],
-        "src/styles.css": previews["CSS"] ? previews["CSS"][0] : "",
-        ...(previews["UtilsTSX"] ? {"src/Utils.component.tsx": previews["UtilsTSX"][0]} : {}),
+    dependencies: {
+      "@adaptui/react": "latest",
+      react: "17.0.2",
+      "react-dom": "17.0.2",
+      next: "12.0.7",
     },
-    userDependencies: ${joinStrs(dependencies)},
-};`) as CodeSandboxTemplate;
+    devDependencies: {
+      "@types/node": "17.0.5",
+      "@types/react": "17.0.38",
+      "@types/react-dom": "17.0.11",
+      typescript: "4.5.4",
+    },
+    scripts: {
+      dev: "next dev",
+      build: "next build",
+      start: "next start",
+      lint: "next lint",
+    },
+    main: "src/index.ts",
+    userDependencies,
+  };
+};

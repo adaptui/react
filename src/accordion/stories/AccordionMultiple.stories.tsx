@@ -14,7 +14,7 @@ export default {
   component: AccordionMultiple,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js: { template: js }, ts: { template: ts } }),
   },
 } as Meta;
 

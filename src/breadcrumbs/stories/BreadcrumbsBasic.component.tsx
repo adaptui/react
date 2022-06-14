@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { BreadcrumbLink, Breadcrumbs, BreadcrumbsProps } from "../../index";
 
+import "./BreadcrumbsBasic.css";
+
 export type BreadcrumbsBasicProps = BreadcrumbsProps & {};
 
 export const BreadcrumbsBasic: React.FC<BreadcrumbsBasicProps> = props => {

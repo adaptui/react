@@ -1,17 +1,14 @@
 import * as React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
+import css from "./templates/CalendarStyledCss";
 import js from "./templates/CalendarStyledJsx";
 import ts from "./templates/CalendarStyledTsx";
 import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
 import { CalendarStyled } from "./CalendarStyled.component";
-
-import "./tailwind.css";
 
 type Meta = ComponentMeta<typeof CalendarStyled>;
 // type Story = ComponentStoryObj<typeof CalendarStyled>;
@@ -21,7 +18,24 @@ export default {
   component: CalendarStyled,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, jsUtils, tsUtils }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/components/CalendarStyled.css": css,
+          "src/components/Utils.component.js": jsUtils,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/CalendarStyled.css": css,
+          "src/components/Utils.component.js": tsUtils,
+        },
+      },
+      jsUtils,
+      tsUtils,
+    }),
   },
   decorators: [
     Story => {
@@ -31,8 +45,4 @@ export default {
   ],
 } as Meta;
 
-export const Default = () => {
-  let { locale } = useLocale();
-
-  return <CalendarStyled locale={locale} createCalendar={createCalendar} />;
-};
+export const Default = () => <CalendarStyled />;

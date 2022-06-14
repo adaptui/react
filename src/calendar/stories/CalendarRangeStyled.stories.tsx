@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -21,7 +19,12 @@ export default {
   component: CalendarRangeStyled,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, jsUtils, tsUtils }),
+    preview: createPreviewTabs({
+      js: { template: js },
+      ts: { template: ts },
+      jsUtils,
+      tsUtils,
+    }),
   },
   decorators: [
     Story => {
@@ -31,10 +34,4 @@ export default {
   ],
 } as Meta;
 
-export const Default = () => {
-  let { locale } = useLocale();
-
-  return (
-    <CalendarRangeStyled locale={locale} createCalendar={createCalendar} />
-  );
-};
+export const Default = () => <CalendarRangeStyled />;

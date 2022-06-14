@@ -1,6 +1,4 @@
 import * as React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -12,8 +10,6 @@ import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
 import { CalendarBasic } from "./CalendarBasic.component";
 
-import "./CalendarBasic.css";
-
 type Meta = ComponentMeta<typeof CalendarBasic>;
 // type Story = ComponentStoryObj<typeof CalendarBasic>;
 
@@ -22,12 +18,26 @@ export default {
   component: CalendarBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts, css, jsUtils, tsUtils }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/components/CalendarBasic.css": css,
+          "src/components/Utils.component.js": jsUtils,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/CalendarBasic.css": css,
+          "src/components/Utils.component.tsx": tsUtils,
+        },
+      },
+      css,
+      jsUtils,
+      tsUtils,
+    }),
   },
 } as Meta;
 
-export const Default = () => {
-  let { locale } = useLocale();
-
-  return <CalendarBasic locale={locale} createCalendar={createCalendar} />;
-};
+export const Default = () => <CalendarBasic />;

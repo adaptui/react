@@ -9,6 +9,8 @@ import {
 
 import { Drawer } from "../../index";
 
+import "./DrawerBasic.css";
+
 export type DrawerBasicProps = DisclosureStateProps & {};
 
 export const DrawerBasic: React.FC<DrawerBasicProps> = props => {

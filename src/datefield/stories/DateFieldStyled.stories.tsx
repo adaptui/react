@@ -1,15 +1,12 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
+import css from "./templates/DateFieldStyledCss";
 import js from "./templates/DateFieldStyledJsx";
 import ts from "./templates/DateFieldStyledTsx";
 import { DateFieldStyled } from "./DateFieldStyled.component";
-
-import "./tailwind.css";
 
 type Meta = ComponentMeta<typeof DateFieldStyled>;
 // type Story = ComponentStoryObj<typeof DateFieldStyled>;
@@ -19,7 +16,20 @@ export default {
   component: DateFieldStyled,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/components/DateFieldStyled.css": css,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/DateFieldStyled.css": css,
+        },
+      },
+    }),
   },
   decorators: [
     Story => {
@@ -30,13 +40,5 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  let { locale } = useLocale();
-
-  return (
-    <DateFieldStyled
-      locale={locale}
-      createCalendar={createCalendar}
-      label="DateField"
-    />
-  );
+  return <DateFieldStyled label="DateField" />;
 };

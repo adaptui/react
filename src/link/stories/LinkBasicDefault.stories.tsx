@@ -14,12 +14,15 @@ export default {
   component: LinkBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({ js: { template: js }, ts: { template: ts } }),
   },
 } as Meta;
 
 export const Default: Story = {
-  args: { href: "https://timeless.co/", children: "Timeless" },
+  args: {
+    href: "https://timeless.co/",
+    children: "Timeless",
+  },
 };
 
 export const ExternlaLink: Story = {

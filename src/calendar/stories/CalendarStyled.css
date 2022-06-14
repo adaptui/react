@@ -1,0 +1,61 @@
+.styled-datepicker .calendar__cell {
+  height: 32px;
+  width: 32px;
+  max-height: 32px;
+  max-width: 32px;
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+  text-align: center;
+  border-radius: 0.5rem /* 8px */;
+}
+.styled-datepicker .calendar__cell[data-is-range-selection] {
+  background-color: rgb(219 234 254);
+  border-radius: 0px;
+  color: rgb(31 41 55);
+}
+.styled-datepicker .calendar__cell[data-is-selection-start] {
+  background-color: rgb(59 130 246);
+  border-top-left-radius: 0.5rem /* 8px */;
+  border-bottom-left-radius: 0.5rem /* 8px */;
+  color: rgb(255 255 255);
+}
+.styled-datepicker .calendar__cell[data-is-selection-end] {
+  background-color: rgb(59 130 246);
+  border-top-right-radius: 0.5rem /* 8px */;
+  border-bottom-right-radius: 0.5rem /* 8px */;
+  color: rgb(255 255 255);
+}
+
+.styled-datepicker .calendar__cell[data-is-range-selection]:focus-within {
+  background-color: rgb(96 165 250);
+  color: rgb(255 255 255);
+}
+.styled-datepicker .calendar__cell:focus-within {
+  background-color: rgb(243 244 246);
+}
+
+.styled-datepicker.calendar [data-weekend] {
+  color: rgb(220 38 38);
+}
+
+.styled-datepicker.calendar [aria-selected="true"] {
+  color: rgb(255 255 255);
+  background-color: rgb(59 130 246);
+}
+
+.styled-datepicker.calendar [aria-selected]:focus-within {
+  background-color: rgb(243 244 246);
+}
+
+.styled-datepicker.calendar [aria-selected="true"]:focus-within {
+  color: rgb(255 255 255);
+  background-color: rgb(96 165 250);
+}
+
+.styled-datepicker.calendar [aria-disabled="true"] {
+  color: rgb(107 114 128);
+}
+
+.styled-datepicker.calendar span {
+  outline: none;
+}
