@@ -3839,17 +3839,17 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@floating-ui/core@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-0.7.2.tgz#f7af9613d080dc29360e77c970965b79b524d45a"
-  integrity sha512-FRVAkSNU/vGXLIsgbggcs70GkXKEOXgBBbNpYPNHSaKsCAMMd00NrjbtKTesxkdv9xm9N3+XiDlcFGY6WnatBg==
+"@floating-ui/core@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-0.7.3.tgz#d274116678ffae87f6b60e90f88cc4083eefab86"
+  integrity sha512-buc8BXHmG9l82+OQXOFU3Kr2XQx9ys01U/Q9HMIrZ300iLc8HLMgh7dcCqgYzAzf4BkoQvDcXf5Y+CuEZ5JBYg==
 
-"@floating-ui/dom@0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-0.5.2.tgz#908f3febbfc0d6696d70921616ec194fe07af183"
-  integrity sha512-z1DnEa7F3d8Fm/eXSbii8UEGpcjZGkQaYYUI0WpEVgD3vBfebDW8j/3ysusxonuMexoigA+A3b/fYH7sEqiwyg==
+"@floating-ui/dom@0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-0.5.3.tgz#ade192cf9a911fc3e95fb614fe281658b654043c"
+  integrity sha512-vpjWB1uC7rajvgA58uzlJZgtWqrdDQLw+XVA3w63ZTmsWwRmVd0Gl5Dy9VMAViI9cP7hBWaJt23Jy3AVgVYnoQ==
   dependencies:
-    "@floating-ui/core" "^0.7.2"
+    "@floating-ui/core" "^0.7.3"
 
 "@formatjs/ecma402-abstract@1.11.4":
   version "1.11.4"
@@ -7571,18 +7571,18 @@ aria-query@^5.0.0:
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-5.0.0.tgz#210c21aaf469613ee8c9a62c7f86525e058db52c"
   integrity sha512-V+SM7AbUwJ+EBnB8+DXs0hPZHO0W6pqBcc0dW90OwtVG02PswOu/teuARoLQjdDOH+t9pJgGnW5/Qmouf3gPJg==
 
-ariakit-utils@0.17.0-next.20:
-  version "0.17.0-next.20"
-  resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.20.tgz#eb07a1cbbb185e4716394499af5fc919eff66165"
-  integrity sha512-OWUaYtOCoYLbB2kAOT0SsActG/wFdDtASDui71zIIDEaRpcnebKhp0+57a+SFDPoKOuNs0D87Rh6N0/2uF3jYg==
+ariakit-utils@0.17.0-next.21:
+  version "0.17.0-next.21"
+  resolved "https://registry.yarnpkg.com/ariakit-utils/-/ariakit-utils-0.17.0-next.21.tgz#bff902e8bca565c8f0a9946a63d5e24676370025"
+  integrity sha512-2zVBplN6O92WKDRy3RKafdl+BK0V7HtRpRX179YiWVG4ZTeeTNfj/m23d91SImue514U7PmxEp/DQb+LucQu+g==
 
-ariakit@2.0.0-next.29:
-  version "2.0.0-next.29"
-  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.29.tgz#5ea9d8e92e530d309548741f748ec3e87317cdf2"
-  integrity sha512-Lky9TU3qciTQjmt2m8IDK1RkGLubN8iK9e9boBrEQsme2sAyWbk9W3i7AxBfyz4szR7R2+bvzedAxwkG3PSe3A==
+ariakit@2.0.0-next.30:
+  version "2.0.0-next.30"
+  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.30.tgz#436eb631f82d04313d8b7b77f106de48b40cf64e"
+  integrity sha512-12CW6eY6i+3FPjB5ItIxRtet5pfLBML7bbCrrrDKEj1hIrUELvJu7HqFCvhNFTzODgVU8s1xr4rEUigaz/58rA==
   dependencies:
-    "@floating-ui/dom" "0.5.2"
-    ariakit-utils "0.17.0-next.20"
+    "@floating-ui/dom" "0.5.3"
+    ariakit-utils "0.17.0-next.21"
 
 arr-diff@^1.0.1:
   version "1.1.0"
