@@ -1,5 +1,26 @@
 
 
+## [1.0.0-alpha.5](https://github.com/adaptui/react/compare/v1.0.0-4...v1.0.0-alpha.5) (2022-06-16)
+
+
+### Bug Fixes
+
+* **deps:** ⬆️ update prod dependencies (minor) ([#359](https://github.com/adaptui/react/issues/359)) ([4c8af95](https://github.com/adaptui/react/commit/4c8af95cebe143743f7c1b9155c397889febd00f))
+* **deps:** ⬆️ update prod dependencies (minor) to v3.0.0 ([#364](https://github.com/adaptui/react/issues/364)) ([44ef03a](https://github.com/adaptui/react/commit/44ef03a2a1d75cfa11389e71381da000979658ab))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency tailwindcss to v3.1.1 ([#356](https://github.com/adaptui/react/issues/356)) ([de1586e](https://github.com/adaptui/react/commit/de1586e0f13fa7c7a4299f9c03bdc0021239d9bf))
+* **deps:** ⬆️ update deps & fix ([25c59a9](https://github.com/adaptui/react/commit/25c59a985f39cb2afdb3fcf124e57ebe6d848ab1))
+* **deps:** ⬆️ update dev dependencies (minor) ([#355](https://github.com/adaptui/react/issues/355)) ([810bc10](https://github.com/adaptui/react/commit/810bc10e85faa2cf5ba16675c8707230fe584216))
+* **deps:** ⬆️ update dev dependencies (minor) ([#357](https://github.com/adaptui/react/issues/357)) ([f7d8f3a](https://github.com/adaptui/react/commit/f7d8f3abcaf9323c79ee4fa55eca90f2a56a6775))
+* **deps:** ⬆️ update dev dependencies (minor) ([#358](https://github.com/adaptui/react/issues/358)) ([ea49eb2](https://github.com/adaptui/react/commit/ea49eb2aa1379e2e8269206807a2b824a7fc6750))
+* **deps:** ⬆️ update dev dependencies (minor) ([#361](https://github.com/adaptui/react/issues/361)) ([bfbc76f](https://github.com/adaptui/react/commit/bfbc76ff50a9d33a3ac6a34b7a6dcfc734503ade))
+* **deps:** ⬆️ update dev dependencies (minor) ([#362](https://github.com/adaptui/react/issues/362)) ([3249cdf](https://github.com/adaptui/react/commit/3249cdf9eaf9ac974dd2d0f861c88706b5170fdd))
+* **deps:** ⬆️ update dev dependencies (minor) to v28.1.1 ([#354](https://github.com/adaptui/react/issues/354)) ([4d087eb](https://github.com/adaptui/react/commit/4d087eba804ae3bba3af4dd7c998f2f5109870ac))
+* **rename:** 🚚 remove the reakit usage ([ca30a5e](https://github.com/adaptui/react/commit/ca30a5e2e41265453e3efaaa1d25129fa94376cd))
+
 ## [1.0.0-4](https://github.com/adaptui/react/compare/vv1.0.0-3...v1.0.0-4) (2022-05-30)
 
 
