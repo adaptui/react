@@ -1,5 +1,12 @@
 
 
+## [1.0.0-alpha.6](https://github.com/adaptui/react/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-06-16)
+
+
+### Bug Fixes
+
+* **disclosure:** 🐛 remove callbacks being passed to the dom ([75dfd28](https://github.com/adaptui/react/commit/75dfd28eec430cde4156ebf8b25574e9bdb48257))
+
 ## [1.0.0-alpha.5](https://github.com/adaptui/react/compare/v1.0.0-4...v1.0.0-alpha.5) (2022-06-16)
 
 
