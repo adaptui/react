@@ -27,8 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install deps
+      - name: Install Dependencies
         run: yarn
 
-      - name: Build
+      - name: Lint
         run: yarn lint

@@ -1,0 +1,7 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "git.branchProtection": ["main"],
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/navin/Documents/github/react-tailwind/.github/workflows/build.yml"
+  }
+}

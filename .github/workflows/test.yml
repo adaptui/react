@@ -34,7 +34,8 @@ jobs:
         with:
           timezone: Asia/Kolkata
 
-      - name: Install deps
+      - name: Install Dependencies
         run: yarn
+
       - name: Test
         run: yarn test
