@@ -2,6 +2,9 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    "vivaxy.vscode-conventional-commits",
+    "christian-kohler.path-intellisense",
+    "bradlc.vscode-tailwindcss",
     "orta.vscode-jest",
     "tlent.jest-snapshot-language-support",
     "vespa-dev-works.jestrunit"
