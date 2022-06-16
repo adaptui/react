@@ -36,10 +36,15 @@ import {
 export const useDisclosureCollapsibleContent =
   createHook<DisclosureCollapsibleContentOptions>(
     ({
+      state,
       direction = "vertical",
       contentSize = 0,
       easing = "cubic-bezier(0.4, 0, 0.2, 1)",
-      state,
+      duration,
+      onExpandStart,
+      onExpandEnd,
+      onCollapseStart,
+      onCollapseEnd,
       ...props
     }) => {
       const id = useId(props.id);
@@ -78,7 +83,7 @@ export const useDisclosureCollapsibleContent =
       function getTransitionStyles(size: number | string): {
         transition?: string;
       } {
-        const _duration = props.duration || getAutoSizeDuration(size);
+        const _duration = duration || getAutoSizeDuration(size);
 
         return {
           transition: `${currentSize} ${_duration}ms ${easing}`,
@@ -88,7 +93,7 @@ export const useDisclosureCollapsibleContent =
       useUpdateEffect(() => {
         if (state.visible) {
           raf(() => {
-            props.onExpandStart?.();
+            onExpandStart?.();
 
             mergeStyles({
               willChange: `${currentSize}`,
@@ -108,7 +113,7 @@ export const useDisclosureCollapsibleContent =
           });
         } else {
           raf(() => {
-            props.onCollapseStart?.();
+            onCollapseStart?.();
 
             const size = isVertical
               ? getElementHeight(contentRef)
@@ -171,14 +176,14 @@ export const useDisclosureCollapsibleContent =
               });
             }
 
-            props.onExpandEnd?.();
+            onExpandEnd?.();
 
             // If the height we should be animating to matches the collapsed height,
             // it's safe to apply the collapsed overrides
           } else if (stylesSize === `${contentSize}px`) {
             setStyles(collapsedStyles);
 
-            props.onCollapseEnd?.();
+            onCollapseEnd?.();
           }
         },
       );
