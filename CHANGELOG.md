@@ -1,5 +1,17 @@
 
 
+## [1.0.0-alpha.7](https://github.com/adaptui/react/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-06-17)
+
+
+### Bug Fixes
+
+* **slider:** 🩹 remove visually hidden in input ([ae6bcc4](https://github.com/adaptui/react/commit/ae6bcc41a741489c3a8d66c75e86b90d50516b3a))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dev dependencies (minor) ([6cb5fdc](https://github.com/adaptui/react/commit/6cb5fdcba1e9e03f3396eca048c83de5b3856b9b))
+
 ## [1.0.0-alpha.6](https://github.com/adaptui/react/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-06-16)
 
 
