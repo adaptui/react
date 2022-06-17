@@ -1,6 +1,4 @@
-import * as React from "react";
-import { VisuallyHidden } from "ariakit";
-import { useForkRef, useWrapElement } from "ariakit-utils";
+import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
   createElement,
@@ -15,10 +13,6 @@ export const useSliderInput = createHook<SliderInputOptions>(
   ({ state, ...props }) => {
     props = { ...props, ref: useForkRef(state.inputRef, props.ref) };
     props = mergeProps(state.inputProps, props);
-
-    props = useWrapElement(props, element => (
-      <VisuallyHidden>{element}</VisuallyHidden>
-    ));
 
     return props;
   },

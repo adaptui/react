@@ -1,4 +1,5 @@
 import * as React from "react";
+import { VisuallyHidden } from "ariakit";
 import {
   createComponent,
   createElement,
@@ -12,7 +13,11 @@ import { SliderThumbState } from "./slider-thumb-state";
 
 export const useSliderThumb = createHook<SliderThumbOptions>(
   ({ state, ...props }) => {
-    const children = <SliderInput state={state} />;
+    const children = (
+      <VisuallyHidden>
+        <SliderInput state={state} />
+      </VisuallyHidden>
+    );
 
     props = { children, ...props };
     props = mergeProps(state.thumbProps, props);
