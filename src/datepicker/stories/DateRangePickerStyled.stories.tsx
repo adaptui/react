@@ -1,13 +1,11 @@
-import * as React from "react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
+import css from "./templates/DatePickerStyledCss";
 import js from "./templates/DateRangePickerStyledJsx";
 import ts from "./templates/DateRangePickerStyledTsx";
 import { DateRangePickerStyled } from "./DateRangePickerStyled.component";
-
-import "./tailwind.css";
 
 type Meta = ComponentMeta<typeof DateRangePickerStyled>;
 type Story = ComponentStoryObj<typeof DateRangePickerStyled>;
@@ -17,14 +15,22 @@ export default {
   component: DateRangePickerStyled,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/components/DatePickerStyled.css": css,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/DatePickerStyled.css": css,
+        },
+      },
+      css,
+    }),
   },
-  decorators: [
-    Story => {
-      document.body.id = "tailwind";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 export const Default: Story = {

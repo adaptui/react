@@ -31,12 +31,6 @@ export default {
       },
     }),
   },
-  decorators: [
-    Story => {
-      document.body.id = "tailwind";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 export const Default = () => {

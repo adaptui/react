@@ -16,6 +16,8 @@ import {
 import DatePickerStyled from "./DatePickerStyled.component";
 import { CalendarStyledIcon } from "./Utils.component";
 
+import "./DateRangePickerStyled.css";
+
 export type DateRangePickerStyledProps = DateRangePickerBaseStateProps & {};
 
 export const DateRangePickerStyled: React.FC<
@@ -34,14 +36,14 @@ export const DateRangePickerStyled: React.FC<
       >
         <DateFieldStyled
           {...daterangepicker.startFieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
+          // createCalendar={createCalendar}
+          // locale={locale}
         />
         <div aria-hidden="true" className="datepicker__dash" />
         <DateFieldStyled
           {...daterangepicker.endFieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
+          // createCalendar={createCalendar}
+          // locale={locale}
         />
         <DatePickerDisclosure
           state={daterangepicker}
@@ -53,8 +55,8 @@ export const DateRangePickerStyled: React.FC<
           <DatePickerPopover state={daterangepicker} className="popover">
             <CalendarRangeStyled
               {...daterangepicker.calendarProps}
-              locale={locale}
-              createCalendar={createCalendar}
+              // locale={locale}
+              // createCalendar={createCalendar}
             />
           </DatePickerPopover>
         )}
