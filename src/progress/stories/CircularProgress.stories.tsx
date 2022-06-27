@@ -15,8 +15,12 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js,
-      ts,
+      js: {
+        template: js,
+      },
+      ts: {
+        template: ts,
+      },
       deps: ["reakit@latest", "@emotion/css@latest"],
     }),
   },

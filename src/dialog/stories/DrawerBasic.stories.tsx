@@ -22,7 +22,12 @@ export default {
           "src/components/DrawerBasic.css": css,
         },
       },
-      ts: { template: ts },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/DrawerBasic.css": css,
+        },
+      },
     }),
   },
 } as Meta;

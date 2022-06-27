@@ -19,8 +19,20 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js: { template: js, files: { "src/components/CalendarRange.css": css } },
-      ts: { template: ts, files: { "src/components/CalendarRange.css": css } },
+      js: {
+        template: js,
+        files: {
+          "src/components/CalendarRange.css": css,
+          "src/components/Utils.component.jsx": jsUtils,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/CalendarRange.css": css,
+          "src/components/Utils.component.tsx": tsUtils,
+        },
+      },
       css,
       jsUtils,
       tsUtils,

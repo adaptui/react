@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import js from "./templates/NumberFieldBasicJsx";
 import ts from "./templates/NumberFieldBasicTsx";
@@ -14,7 +17,20 @@ export default {
   component: NumberFieldBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({ label: "NumberField" }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({ label: "NumberField" }),
+        },
+      },
+    }),
   },
 } as Meta;
 

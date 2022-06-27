@@ -15,6 +15,8 @@ import {
   useToastHandlers,
 } from "./Utils.component";
 
+import "./ToastBasic.css";
+
 export const Toast = () => {
   return (
     <ToastProvider animationDuration={500}>

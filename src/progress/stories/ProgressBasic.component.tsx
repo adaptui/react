@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { Progress, ProgressStateProps, useProgressState } from "../../index";
 
+import "./ProgressBasic.css";
+
 export const ProgressBasic: React.FC<ProgressStateProps> = props => {
   const state = useProgressState(props);
   const { percent, isIndeterminate } = state;

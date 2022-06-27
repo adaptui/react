@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import js from "./templates/LinkBasicJsx";
 import ts from "./templates/LinkBasicTsx";
@@ -12,16 +15,35 @@ type Story = ComponentStoryObj<typeof LinkBasic>;
 export default {
   title: "Link/Basic",
   component: LinkBasic,
-  parameters: {
-    layout: "centered",
-    preview: createPreviewTabs({ js: { template: js }, ts: { template: ts } }),
-  },
 } as Meta;
 
 export const Default: Story = {
   args: {
     href: "https://timeless.co/",
     children: "Timeless",
+  },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+          }),
+        },
+      },
+    }),
   },
 };
 
@@ -31,6 +53,31 @@ export const ExternlaLink: Story = {
     href: "https://timeless.co/",
     isExternal: true,
   },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+            isExternal: true,
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+            isExternal: true,
+          }),
+        },
+      },
+    }),
+  },
 };
 
 export const DisabledExternalLink: Story = {
@@ -39,5 +86,32 @@ export const DisabledExternalLink: Story = {
     href: "https://timeless.co/",
     isExternal: true,
     disabled: true,
+  },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+            isExternal: true,
+            disabled: true,
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({
+            href: "https://timeless.co/",
+            children: "Timeless",
+            isExternal: true,
+            disabled: true,
+          }),
+        },
+      },
+    }),
   },
 };

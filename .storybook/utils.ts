@@ -1,9 +1,6 @@
 /* eslint-disable no-new-func */
-import {
-  CodeSandboxTemplate,
-  CodeSandboxValue,
-  FilesParam,
-} from "storybook-addon-preview";
+import { CodeSandboxTemplate } from "storybook-addon-preview";
+import outdent from "outdent";
 
 type CreateControlsOptions = {
   unions?: string[];
@@ -109,7 +106,7 @@ export const REACTJS_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
   files = {},
 ) => {
   return {
-    template: "create-react-app-typescript",
+    template: "create-react-app",
     files: {
       "public/index.html": `
       <!DOCTYPE html>
@@ -135,15 +132,20 @@ export const REACTJS_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
       </html>
       `,
       "src/index.js": `
-        import * as ReactDOM from "react-dom";
-        import * as React from "react";
         import App from "./App";
-        const rootElement = document.getElementById("root");
-        ReactDOM.render(<App />, rootElement);
+        import { createRoot } from 'react-dom/client';
+        const rootElement = document.getElementById('root');
+        const root = createRoot(rootElement);
+        root.render(<App />);
         `,
-      "src/App.js": `import React from \"react\";\nimport Component from \"./components\";\n\nexport default function App() {\n  return (\n    <div>\n  <main >\n <Component ${JSON.stringify(
-        { test: "test" },
-      )} />\n </main>\n    </div>\n  );\n}\n`,
+      "src/App.js": outdent`
+        import React from "react";
+        import Component from "./components";
+    
+        export default function App() {
+          return <Component />
+        }
+      `,
       ...files,
     },
     dependencies: {
@@ -171,27 +173,27 @@ export const REACT_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
     template: "create-react-app-typescript",
     files: {
       "public/index.html": `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-          <meta name="theme-color" content="#000000">
-          <!--
-              manifest.json provides metadata used when your web app is added to the
-              homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-          -->
-          <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-          <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-          <title>React App</title>
-      </head>
-      <body>
-          <noscript>
-              You need to enable JavaScript to run this app.
-          </noscript>
-          <div id="root"></div>
-      </body>
-      </html>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="theme-color" content="#000000">
+            <!--
+                manifest.json provides metadata used when your web app is added to the
+                homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+            -->
+            <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+            <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+            <title>React App</title>
+        </head>
+        <body>
+            <noscript>
+                You need to enable JavaScript to run this app.
+            </noscript>
+            <div id="root"></div>
+        </body>
+        </html>
       `,
       "src/index.tsx": `
         import * as ReactDOM from "react-dom";
@@ -199,7 +201,7 @@ export const REACT_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
         import App from "./App";
         const rootElement = document.getElementById("root");
         ReactDOM.render(<App />, rootElement);
-        `,
+      `,
       "src/App.tsx": `import React from \"react\";\n import Component from \"./components\";\n\nexport default function App() {\n  return (\n    <div>\n  <main >\n        <Component />\n      </main>\n    </div>\n  );\n}\n`,
       ...files,
     },
@@ -224,4 +226,15 @@ export const REACT_CUSTOM_CODESANDBOX: CodeSandboxTemplate = (
     main: "src/index.ts",
     userDependencies,
   };
+};
+
+export const CreateAppTemplate = (props: object | undefined) => {
+  return outdent`
+    import React from "react";
+    import Component from "./components";
+
+    export default function App() {
+      return <Component ${props && `{...${JSON.stringify(props)}}`} />
+    }
+`;
 };

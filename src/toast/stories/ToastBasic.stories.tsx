@@ -18,14 +18,26 @@ export default {
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js,
-      ts,
+      js: {
+        template: js,
+        files: {
+          "src/components/Utils.component.js": jsUtils,
+          "src/components/ToastBasic.css": css,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/Utils.component.ts": tsUtils,
+          "src/components/ToastBasic.css": css,
+        },
+      },
       css,
       jsUtils,
       tsUtils,
       deps: ["@chakra-ui/utils"],
     }),
-    options: { showPanel: false },
+    options: { showPanel: true },
   },
 } as Meta;
 

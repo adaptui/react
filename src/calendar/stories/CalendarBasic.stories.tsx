@@ -1,7 +1,10 @@
 import * as React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import css from "./templates/CalendarBasicCss";
 import js from "./templates/CalendarBasicJsx";
@@ -29,6 +32,7 @@ export default {
       ts: {
         template: ts,
         files: {
+          "src/App.tsx": CreateAppTemplate({}),
           "src/components/CalendarBasic.css": css,
           "src/components/Utils.component.tsx": tsUtils,
         },

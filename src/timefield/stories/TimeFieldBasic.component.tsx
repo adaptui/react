@@ -10,6 +10,8 @@ import {
   useTimeFieldState,
 } from "../../index";
 
+import "./TimeFieldBasic.css";
+
 export type TimeFieldBasicProps = TimeFieldBaseStateProps & {};
 
 export const TimeFieldBasic: React.FC<TimeFieldBasicProps> = props => {

@@ -23,14 +23,14 @@ export default {
         template: js,
         files: {
           "src/components/CalendarStyled.css": css,
-          "src/components/Utils.component.js": jsUtils,
+          "src/components/Utils.component.jsx": jsUtils,
         },
       },
       ts: {
         template: ts,
         files: {
           "src/components/CalendarStyled.css": css,
-          "src/components/Utils.component.js": tsUtils,
+          "src/components/Utils.component.tsx": tsUtils,
         },
       },
       jsUtils,

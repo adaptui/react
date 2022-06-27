@@ -1,14 +1,15 @@
 import * as React from "react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import css from "./templates/MeterBasicCss";
 import js from "./templates/MeterBasicJsx";
 import ts from "./templates/MeterBasicTsx";
 import MeterBasic from "./MeterBasic.component";
-
-import "./MeterBasic.css";
 
 type Meta = ComponentMeta<typeof MeterBasic>;
 type Story = ComponentStoryObj<typeof MeterBasic>;
@@ -16,10 +17,6 @@ type Story = ComponentStoryObj<typeof MeterBasic>;
 export default {
   title: "Meter/Basic",
   component: MeterBasic,
-  parameters: {
-    layout: "centered",
-    preview: createPreviewTabs({ js, ts, css }),
-  },
 } as Meta;
 
 export const Default: Story = {
@@ -30,6 +27,26 @@ export const Default: Story = {
     low: 0,
     high: 10,
     optimum: 5,
+  },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({ value: 0.5, high: 0.8 }),
+          "src/components/MeterBasic.css": css,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({ value: 0.5, high: 0.8 }),
+          "src/components/MeterBasic.css": css,
+        },
+      },
+      css,
+    }),
   },
 };
 

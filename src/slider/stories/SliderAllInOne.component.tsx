@@ -13,6 +13,8 @@ import {
   useSliderThumbState,
 } from "../../index";
 
+import "./SliderBasic.css";
+
 export type SliderAllInOneProps = SliderBaseStateProps & {
   /**
    * Origin on the slider, calculated based on min & max

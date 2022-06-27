@@ -14,6 +14,8 @@ import {
   useSliderThumbState,
 } from "../../index";
 
+import "./SliderBasic.css";
+
 export type SliderSingleReversedProps = SliderBaseStateProps & {
   /**
    * True, if thumb needs a tip to show it's current percent

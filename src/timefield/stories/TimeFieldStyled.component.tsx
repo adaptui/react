@@ -10,6 +10,8 @@ import {
   useTimeFieldState,
 } from "../../index";
 
+import "./TimeFieldStyled.css";
+
 export type TimeFieldStyledProps = TimeFieldBaseStateProps & {};
 
 export const TimeFieldStyled: React.FC<TimeFieldStyledProps> = props => {

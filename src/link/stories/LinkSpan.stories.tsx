@@ -1,6 +1,10 @@
+import React from "react";
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import js from "./templates/LinkSpanJsx";
 import ts from "./templates/LinkSpanTsx";
@@ -12,10 +16,6 @@ type Story = ComponentStoryObj<typeof LinkSpan>;
 export default {
   title: "Link/Span",
   component: LinkSpan,
-  parameters: {
-    layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
-  },
 } as Meta;
 
 export const Default: Story = {
@@ -23,6 +23,35 @@ export const Default: Story = {
     children: "Timeless",
     onClick: event => goToLink(event, "https://timeless.co/"),
     onKeyDown: event => goToLink(event, "https://timeless.co/"),
+  },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            children: "Timeless",
+            onClick: (event: React.MouseEvent<HTMLButtonElement>) =>
+              goToLink(event, "https://timeless.co/"),
+            onKeyDown: (event: React.MouseEvent<HTMLButtonElement>) =>
+              goToLink(event, "https://timeless.co/"),
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({
+            children: "Timeless",
+            onClick: (event: React.MouseEvent<HTMLButtonElement>) =>
+              goToLink(event, "https://timeless.co/"),
+            onKeyDown: (event: React.MouseEvent<HTMLButtonElement>) =>
+              goToLink(event, "https://timeless.co/"),
+          }),
+        },
+      },
+    }),
   },
 };
 
@@ -32,6 +61,37 @@ export const DisabledLink: Story = {
     onClick: event => goToLink(event, "https://timeless.co/"),
     onKeyDown: event => goToLink(event, "https://timeless.co/"),
     disabled: true,
+  },
+  parameters: {
+    layout: "centered",
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            children: "Timeless",
+            onClick: (event: React.MouseEvent | React.KeyboardEvent) =>
+              goToLink(event, "https://timeless.co/"),
+            onKeyDown: (event: React.MouseEvent | React.KeyboardEvent) =>
+              goToLink(event, "https://timeless.co/"),
+            disabled: true,
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.tsx": CreateAppTemplate({
+            children: "Timeless",
+            onClick: (event: React.MouseEvent<HTMLElement>) =>
+              goToLink(event, "https://timeless.co/"),
+            onKeyDown: (event: React.MouseEvent<HTMLElement>) =>
+              goToLink(event, "https://timeless.co/"),
+            disabled: true,
+          }),
+        },
+      },
+    }),
   },
 };
 

@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import js from "./templates/PaginationBasicJsx";
 import ts from "./templates/PaginationBasicTsx";
@@ -14,18 +17,43 @@ export default {
   component: PaginationBasic,
   parameters: {
     layout: "centered",
-    preview: createPreviewTabs({ js, ts }),
   },
 } as Meta;
 
 export const Default: Story = {
   args: {},
+  parameters: {
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+      },
+      ts: {
+        template: ts,
+      },
+    }),
+  },
 };
 
 export const DefaultPage = {
   args: {
     defaultPage: 5,
     count: 10,
+  },
+  parameters: {
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({ defaultPage: 5, count: 10 }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.ts": CreateAppTemplate({ defaultPage: 5, count: 10 }),
+        },
+      },
+    }),
   },
 };
 
@@ -35,6 +63,30 @@ export const BoundaryCount = {
     count: 50,
     boundaryCount: 5,
   },
+  parameters: {
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            defaultPage: 25,
+            count: 50,
+            boundaryCount: 5,
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.ts": CreateAppTemplate({
+            defaultPage: 25,
+            count: 50,
+            boundaryCount: 5,
+          }),
+        },
+      },
+    }),
+  },
 };
 
 export const SibilingCount = {
@@ -42,5 +94,29 @@ export const SibilingCount = {
     defaultPage: 25,
     count: 50,
     sibilingCount: 5,
+  },
+  parameters: {
+    preview: createPreviewTabs({
+      js: {
+        template: js,
+        files: {
+          "src/App.js": CreateAppTemplate({
+            defaultPage: 25,
+            count: 50,
+            sibilingCount: 5,
+          }),
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/App.ts": CreateAppTemplate({
+            defaultPage: 25,
+            count: 50,
+            sibilingCount: 5,
+          }),
+        },
+      },
+    }),
   },
 };

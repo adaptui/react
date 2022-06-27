@@ -11,6 +11,8 @@ import {
   useSliderThumbState,
 } from "../../index";
 
+import "./SliderBasic.css";
+
 export type SliderBasicProps = SliderBaseStateProps & {};
 
 export const SliderBasic: React.FC<SliderBasicProps> = props => {

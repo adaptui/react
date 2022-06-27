@@ -13,6 +13,8 @@ import {
   useSliderThumbState,
 } from "../../index";
 
+import "./SliderBasic.css";
+
 export type SliderSingleVerticalProps = SliderBaseStateProps & {
   /**
    * True, if thumb needs a tip to show it's current percent

@@ -10,22 +10,32 @@ import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
 import { Toast } from "./ToastReactSpring.component";
 
-import "./ToastBasic.css";
-
 export default {
   component: Toast,
   title: "Toast/ReactSpring",
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({
-      js,
-      ts,
+      js: {
+        template: js,
+        files: {
+          "src/components/ToastBasic.css": css,
+          "src/components/Utils.component.js": jsUtils,
+        },
+      },
+      ts: {
+        template: ts,
+        files: {
+          "src/components/ToastBasic.css": css,
+          "src/components/Utils.component.ts": tsUtils,
+        },
+      },
       css,
       jsUtils,
       tsUtils,
       deps: ["@react-spring/web", "@chakra-ui/utils"],
     }),
-    options: { showPanel: false },
+    options: { showPanel: true },
   },
   decorators: [
     Story => {

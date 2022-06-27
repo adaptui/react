@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { Meter, MeterStateProps, useMeterState } from "../../index";
 
+import "./MeterBasic.css";
+
 export const MeterBasic: React.FC<MeterStateProps> = props => {
   const state = useMeterState(props);
   const { percent, status } = state;
