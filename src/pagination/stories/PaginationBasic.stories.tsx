@@ -22,14 +22,14 @@ export const Default: Story = {
   args: {},
 };
 
-export const DefaultPage = {
+export const DefaultPage: Story = {
   args: {
     defaultPage: 5,
     count: 10,
   },
 };
 
-export const BoundaryCount = {
+export const BoundaryCount: Story = {
   args: {
     defaultPage: 25,
     count: 50,
@@ -37,10 +37,10 @@ export const BoundaryCount = {
   },
 };
 
-export const SibilingCount = {
+export const SiblingCount: Story = {
   args: {
     defaultPage: 25,
     count: 50,
-    sibilingCount: 5,
+    siblingCount: 5,
   },
 };
