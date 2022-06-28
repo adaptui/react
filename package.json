@@ -195,7 +195,7 @@
     "react-test-renderer": "18.2.0",
     "react-transition-group": "4.4.2",
     "react-virtual": "2.10.4",
-    "release-it": "15.1.0",
+    "release-it": "15.1.1",
     "rimraf": "3.0.2",
     "sort-package-json": "1.57.0",
     "storybook-addon-preview": "2.2.0",
