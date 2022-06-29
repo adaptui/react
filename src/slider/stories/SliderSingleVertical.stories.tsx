@@ -30,14 +30,11 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  args: {
-    orientation: "vertical",
-  },
+  args: {},
 };
 
 export const ThumbTip: Story = {
   args: {
-    orientation: "vertical",
     label: "Thumb Tipped",
     showTip: true,
   },
@@ -45,7 +42,6 @@ export const ThumbTip: Story = {
 
 export const MinMax: Story = {
   args: {
-    orientation: "vertical",
     label: "Min Max",
     minValue: 20,
     maxValue: 80,
@@ -54,7 +50,6 @@ export const MinMax: Story = {
 
 export const Step: Story = {
   args: {
-    orientation: "vertical",
     label: "Stepped",
     step: 10,
   },
@@ -62,7 +57,6 @@ export const Step: Story = {
 
 export const DefaultValue: Story = {
   args: {
-    orientation: "vertical",
     label: "Default Valued",
     defaultValue: [80],
   },
@@ -70,7 +64,6 @@ export const DefaultValue: Story = {
 
 export const FormatOptions: Story = {
   args: {
-    orientation: "vertical",
     label: "Temperature Formatted",
     formatOptions: {
       style: "unit",
@@ -82,7 +75,6 @@ export const FormatOptions: Story = {
 
 export const Disabled: Story = {
   args: {
-    orientation: "vertical",
     label: "Disabled",
     isDisabled: true,
   },
