@@ -20,12 +20,13 @@ export type SliderSingleVerticalProps = SliderBaseStateProps & {
   showTip?: boolean;
 };
 
-export const SliderSingleVertical: React.FC<
-  SliderSingleVerticalProps
-> = props => {
+export const SliderSingleVertical: React.FC<SliderSingleVerticalProps> = ({
+  orientation = "vertical",
+  ...props
+}) => {
   const { label, showTip, ...rest } = props;
   const sliderLabel = `${label ? label : "Styled"} Slider`;
-  const state = useSliderBaseState(props);
+  const state = useSliderBaseState({ ...props, orientation });
   const slider = useSliderState({ ...rest, label: sliderLabel, state });
   const { getThumbValueLabel, getValuePercent, values } = state;
 
@@ -52,7 +53,7 @@ export const SliderSingleVertical: React.FC<
         <Thumb
           index={0}
           state={state}
-          orientation={props.orientation}
+          orientation={orientation}
           isDisabled={props.isDisabled}
           trackRef={slider.trackRef}
           aria-label="Thumb"
