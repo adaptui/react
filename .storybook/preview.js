@@ -1,7 +1,5 @@
 import React from "react";
 import { kebabCase } from "lodash";
-import { addDecorator } from "@storybook/react";
-import { withPropsTable } from "storybook-addon-react-docgen";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -21,5 +19,3 @@ export const decorators = [
     return <Story />;
   },
 ];
-
-addDecorator(withPropsTable);
