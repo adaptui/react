@@ -1,11 +1,12 @@
 module.exports = {
   framework: "@storybook/react",
   core: { builder: "webpack5" },
-  features: { babelModeV7: true },
+  // storyStoreV7 removes the circular dependency issue with Webpack 5
+  // So, we added ThemeProvider in preview.jsx and so src/theme should work for HMR
+  features: { storyStoreV7: true, babelModeV7: true },
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "storybook-addon-preview",
-    "storybook-addon-react-docgen",
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     {
