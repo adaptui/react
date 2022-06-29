@@ -26,6 +26,8 @@ import {
 
 import { ChevronLeft, ChevronRight } from "./Utils.component";
 
+import "./CalendarRangeStyled.css";
+
 export type CalendarRangeStyledProps = Omit<
   RangeCalendarBaseStateProps,
   "locale" | "createCalendar"

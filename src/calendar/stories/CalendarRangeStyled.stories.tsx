@@ -9,8 +9,6 @@ import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
 import { CalendarRangeStyled } from "./CalendarRangeStyled.component";
 
-import "./tailwind.css";
-
 type Meta = ComponentMeta<typeof CalendarRangeStyled>;
 // type Story = ComponentStoryObj<typeof CalendarRangeStyled>;
 
@@ -26,12 +24,6 @@ export default {
       tsUtils,
     }),
   },
-  decorators: [
-    Story => {
-      document.body.id = "tailwind";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 export const Default = () => <CalendarRangeStyled />;

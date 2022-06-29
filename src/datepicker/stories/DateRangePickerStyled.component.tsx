@@ -13,10 +13,9 @@ import {
   useDateRangePickerState,
 } from "../../index";
 
-import DatePickerStyled from "./DatePickerStyled.component";
-import { CalendarStyledIcon } from "./Utils.component";
+import { CalendarIcon, CalendarStyledIcon } from "./Utils.component";
 
-import "./DateRangePickerStyled.css";
+// import "./DateRangePickerStyled.css";
 
 export type DateRangePickerStyledProps = DateRangePickerBaseStateProps & {};
 
@@ -49,7 +48,7 @@ export const DateRangePickerStyled: React.FC<
           state={daterangepicker}
           className="px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
         >
-          <CalendarStyledIcon />
+          <CalendarIcon />
         </DatePickerDisclosure>
         {state.popover.visible && (
           <DatePickerPopover state={daterangepicker} className="popover">
@@ -65,4 +64,4 @@ export const DateRangePickerStyled: React.FC<
   );
 };
 
-export default DatePickerStyled;
+export default DateRangePickerStyled;

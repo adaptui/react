@@ -1,7 +1,10 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import {
+  CreateAppTemplate,
+  createPreviewTabs,
+} from "../../../.storybook/utils";
 
 import css from "./templates/DateFieldStyledCss";
 import js from "./templates/DateFieldStyledJsx";
@@ -21,12 +24,18 @@ export default {
         template: js,
         files: {
           "src/components/DateFieldStyled.css": css,
+          "src/App.js": CreateAppTemplate({
+            label: "DateField",
+          }),
         },
       },
       ts: {
         template: ts,
         files: {
           "src/components/DateFieldStyled.css": css,
+          "src/App.tsx": CreateAppTemplate({
+            label: "DateField",
+          }),
         },
       },
     }),

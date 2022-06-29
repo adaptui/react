@@ -10,12 +10,12 @@ button {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 .px-2 {
-  padding-left: 0.5rem /* 8px */;
-  padding-right: 0.5rem /* 8px */;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .py-1 {
-  padding-top: 0.25rem /* 4px */;
-  padding-bottom: 0.25rem /* 4px */;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
@@ -33,7 +33,7 @@ button {
   flex-shrink: 0;
 }
 .w-4 {
-  width: 1rem /* 16px */;
+  width: 1rem;
 }
 .text-center {
   text-align: center;
@@ -46,11 +46,11 @@ button {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 .p-2 {
-  padding: 0.5rem /* 8px */;
+  padding: 0.5rem;
 }
 .text-sm {
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .font-bold {
   font-weight: 700;
@@ -60,12 +60,12 @@ button {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 .px-2 {
-  padding-left: 0.5rem /* 8px */;
-  padding-right: 0.5rem /* 8px */;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .py-1 {
-  padding-top: 0.25rem /* 4px */;
-  padding-bottom: 0.25rem /* 4px */;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
@@ -79,27 +79,46 @@ button {
   width: max-content;
 }
 .rounded-md {
-  border-radius: 0.375rem /* 6px */;
+  border-radius: 0.375rem;
 }
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .p-3 {
-  padding: 0.75rem /* 12px */;
+  padding: 0.75rem;
 }
 .flex {
   display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.datepicker__trigger {
+  display: flex;
+  padding: 5px;
+  margin-left: 10px;
+  background-color: #f8f8f8;
+  border: none;
+}
+
+.datepicker__trigger:focus-visible {
+  outline: none;
+}
+
+.datepicker__trigger svg {
+  fill: #43424d;
+  width: 20px;
 }
 .calendar__cell {
   height: 32px;
   width: 32px;
   max-height: 32px;
   max-width: 32px;
-  font-size: 0.875rem /* 14px */;
-  line-height: 1.25rem /* 20px */;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   text-align: center;
-  border-radius: 0.5rem /* 8px */;
+  border-radius: 0.5rem;
 }
 .calendar__cell[data-is-range-selection] {
   background-color: rgb(219 234 254);
@@ -108,14 +127,14 @@ button {
 }
 .calendar__cell[data-is-selection-start] {
   background-color: rgb(59 130 246);
-  border-top-left-radius: 0.5rem /* 8px */;
-  border-bottom-left-radius: 0.5rem /* 8px */;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   color: rgb(255 255 255);
 }
 .calendar__cell[data-is-selection-end] {
   background-color: rgb(59 130 246);
-  border-top-right-radius: 0.5rem /* 8px */;
-  border-bottom-right-radius: 0.5rem /* 8px */;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   color: rgb(255 255 255);
 }
 
