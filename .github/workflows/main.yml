@@ -92,17 +92,13 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Built
+      - name: Build
         run: yarn build
 
   test:
-    name: Test (${{ matrix.shard }})
+    name: Test
     needs: install
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: ["1/2", "2/2"]
 
     steps:
       - name: Checkout repository
@@ -127,4 +123,4 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Test
-        run: yarn test -- --maxWorkers 2 --shard ${{ matrix.shard }}
+        run: yarn test
