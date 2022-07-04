@@ -1,10 +1,10 @@
 import { CSSProperties } from "react";
-import { DialogOptions, useDialog } from "ariakit/dialog";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { DialogOptions, useDialog } from "ariakit/dialog";
 import { As, Props } from "ariakit-utils/types";
 
 export const useDrawer = createHook<DrawerOptions>(

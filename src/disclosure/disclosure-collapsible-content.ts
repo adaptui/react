@@ -1,5 +1,10 @@
 import * as React from "react";
 import { flushSync } from "react-dom";
+import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
 import { DisclosureState } from "ariakit/disclosure";
 import {
   useEvent,
@@ -7,11 +12,6 @@ import {
   useId,
   useUpdateEffect,
 } from "ariakit-utils/hooks";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
 import { As, Options, Props } from "ariakit-utils/types";
 import raf from "raf";
 

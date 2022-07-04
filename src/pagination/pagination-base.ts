@@ -1,9 +1,9 @@
-import { useStoreProvider } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useStoreProvider } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 
 import { PaginationContextState } from "./__utils";

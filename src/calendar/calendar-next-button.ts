@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useForkRef } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { useButton } from "@react-aria/button";
 import { mergeProps } from "@react-aria/utils";

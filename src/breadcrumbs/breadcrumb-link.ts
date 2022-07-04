@@ -1,9 +1,9 @@
-import { CommandOptions } from "ariakit";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { CommandOptions } from "ariakit";
 import { As, Props } from "ariakit-utils/types";
 
 import { useLink } from "../link";

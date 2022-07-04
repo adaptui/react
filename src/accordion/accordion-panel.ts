@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  createComponent,
+  createElement,
+  createHook,
+} from "ariakit-utils/system";
+import {
   CollectionItemOptions,
   useCollectionItem,
 } from "ariakit/collection/collection-item";
@@ -13,21 +18,10 @@ import { Item } from "ariakit/ts/collection/__utils";
 import { getAllTabbableIn } from "ariakit-utils/focus";
 import { useForkRef, useId } from "ariakit-utils/hooks";
 import { useStore } from "ariakit-utils/store";
-import {
-  createComponent,
-  createElement,
-  createHook,
-} from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { AccordionContext, getSelectedId } from "./__utils";
+import { AccordionContext, getAccordionId, getSelectedId } from "./__utils";
 import { AccordionState } from "./accordion-state";
-
-function getAccordionId(panels?: AccordionState["panels"], id?: string) {
-  if (!id) return;
-
-  return panels?.items.find(panel => panel.id === id)?.accordionId;
-}
 
 /**
  * A component hook that returns props that can be passed to `Role` or any other

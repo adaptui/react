@@ -1,10 +1,10 @@
-import { CompositeOptions, useComposite } from "ariakit";
-import { useStoreProvider } from "ariakit-utils/store";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { CompositeOptions, useComposite } from "ariakit";
+import { useStoreProvider } from "ariakit-utils/store";
 import { As, Props } from "ariakit-utils/types";
 
 import { AccordionContext } from "./__utils";

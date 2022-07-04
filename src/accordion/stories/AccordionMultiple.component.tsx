@@ -8,8 +8,10 @@ import {
   useAccordionState,
 } from "../../index";
 
-export const AccordionMultiple: React.FC<AccordionStateProps> = props => {
-  const state = useAccordionState({ allowMultiple: true, ...props });
+export type AccordionMultipleProps = AccordionStateProps;
+
+export const AccordionMultiple: React.FC<AccordionMultipleProps> = props => {
+  const state = useAccordionState(props);
 
   return (
     <Accordion state={state}>

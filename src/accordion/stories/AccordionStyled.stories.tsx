@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import css from "./templates/AccordionStyledCss";
 import js from "./templates/AccordionStyledJsx";
@@ -19,34 +19,61 @@ export default {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, css }),
   },
+  argTypes: createControls({
+    ignore: [
+      "items",
+      "setItems",
+      "orientation",
+      "virtualFocus",
+      "rtl",
+      "focusWrap",
+      "focusShift",
+      "moves",
+      "includesBaseElement",
+      "activeId",
+      "defaultActiveId",
+      "setMoves",
+      "setActiveId",
+      "selectedId",
+      "defaultSelectedId",
+      "setSelectedId",
+    ],
+  }),
 } as Meta;
 
 export const Default: Story = {};
 
 export const DefaultFirstIdSelected: Story = {
-  args: { shouldSelectFirstId: true },
+  ...Default,
+  args: { ...Default.args, shouldSelectFirstId: true },
 };
 
 export const DefaultSelected: Story = {
-  args: { defaultSelectedId: "accordion2" },
+  ...Default,
+  args: { ...Default.args, defaultSelectedId: "accordion2" },
 };
 
 export const SelectOnMove: Story = {
-  args: { selectOnMove: true },
+  ...Default,
+  args: { ...Default.args, selectOnMove: true },
 };
 
 export const NoLoop: Story = {
-  args: { focusLoop: false },
+  ...Default,
+  args: { ...Default.args, focusLoop: false },
 };
 
 export const AllowToggle: Story = {
-  args: { allowToggle: true },
+  ...Default,
+  args: { ...Default.args, allowToggle: true },
 };
 
 export const DefaultFirstIdToggle: Story = {
-  args: { shouldSelectFirstId: true, allowToggle: true },
+  ...Default,
+  args: { ...Default.args, shouldSelectFirstId: true, allowToggle: true },
 };
 
 export const SelectOnMoveToggle: Story = {
+  ...Default,
   args: { selectOnMove: true, allowToggle: true },
 };

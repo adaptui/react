@@ -1,4 +1,5 @@
 import { FocusEvent, MouseEvent, useCallback } from "react";
+import { createElement, createHook } from "ariakit-utils/system";
 import {
   CompositeItemOptions,
   useCompositeItem,
@@ -6,16 +7,10 @@ import {
 import { Item } from "ariakit/ts/collection/__utils";
 import { useEvent, useId } from "ariakit-utils/hooks";
 import { createMemoComponent, useStore } from "ariakit-utils/store";
-import { createElement, createHook } from "ariakit-utils/system";
 import { As, Props } from "ariakit-utils/types";
 
-import { AccordionContext, getSelectedId } from "./__utils";
+import { AccordionContext, getPanelId, getSelectedId } from "./__utils";
 import { AccordionState } from "./accordion-state";
-
-function getPanelId(panels?: AccordionState["panels"], id?: string) {
-  if (!id) return;
-  return panels?.items.find(panel => panel.accordionId === id)?.id;
-}
 
 /**
  * A component hook that returns props that can be passed to `Role` or any other

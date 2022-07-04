@@ -1,10 +1,10 @@
 import { MouseEvent } from "react";
-import { useEvent, useStore } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useEvent, useStore } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { isNumber } from "@chakra-ui/utils";
 
