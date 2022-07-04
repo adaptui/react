@@ -1,7 +1,33 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "git.branchProtection": ["main"],
-  "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow.json": "file:///Users/navin/Documents/github/react-tailwind/.github/workflows/build.yml"
-  }
+  "editor.tabSize": 2,
+  "editor.guides.bracketPairs": true,
+  "editor.rulers": [80, 100, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": true,
+    // "source.organizeImports": true,
+    // "source.sortImports": true,
+    // "source.fixAll": true
+    "source.fixAll.eslint": true
+    // "source.fixAll.stylelint": true
+  },
+  "eslint.enable": true,
+  "eslint.useESLintClass": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ]
 }
