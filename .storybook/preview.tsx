@@ -11,7 +11,7 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story, context) => {
+  (Story: any, context: any) => {
     document.body.id = kebabCase(context.kind);
     document.body.classList.add("font-sans");
     document.body.classList.add("antialiased");
