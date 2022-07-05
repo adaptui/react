@@ -93,7 +93,7 @@ function isStateReturnDeclaration(node) {
   const kindName = node.getKindName();
   const escapedName = getEscapedName(node);
   return (
-    kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName)
+    kindName === "TypeAliasDeclaration" && /.+StateProps$/.test(escapedName)
   );
 }
 
@@ -151,6 +151,7 @@ function getTagNames(prop) {
  */
 function getProps(node, includePrivate) {
   const props = node.getType().getProperties();
+
   if (includePrivate) {
     return props;
   }

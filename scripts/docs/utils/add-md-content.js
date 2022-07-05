@@ -1,4 +1,4 @@
-const injectMdContent = (md, regex, callback) => {
+const addMdContent = (md, regex, callback) => {
   return md
     .split("\n")
     .map(line => {
@@ -11,4 +11,4 @@ const injectMdContent = (md, regex, callback) => {
     .join("\n");
 };
 
-module.exports = injectMdContent;
+module.exports = { addMdContent };

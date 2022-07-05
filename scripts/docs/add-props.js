@@ -12,25 +12,23 @@ const {
   sortSourceFiles,
   isOptionsDeclaration,
   isStateReturnDeclaration,
-} = require("./index");
-const injectMdContent = require("./inject-md-content");
+} = require("../utils");
+const { addMdContent } = require("./utils");
+const { typeFootprint } = require("./typeFootPrint");
+const { createFile } = require("../utils/common-utils");
 
 // eslint-disable-next-line no-useless-escape
-const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
+const PROPS_ADD_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
-const injectProps = docsTemplate => {
-  return injectMdContent(
-    docsTemplate,
-    PROPS_INJECT_FLAG,
-    (line, regexMatched) => {
-      const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
+const addProps = docsTemplate => {
+  return addMdContent(docsTemplate, PROPS_ADD_FLAG, (line, regexMatched) => {
+    const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
 
-      return getPropTypesMarkdown(types);
-    },
-  );
+    return getPropTypesMarkdown(types);
+  });
 };
 
-module.exports = injectProps;
+module.exports = { addProps };
 
 /**
  * Inject prop types tables into README.md files
@@ -47,31 +45,49 @@ function getPropTypes(rootPath) {
   const publicPaths = Object.values(getPublicFiles(rootPath));
   const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
   project.resolveSourceFileDependencies();
+
   const types = {};
 
   sortSourceFiles(sourceFiles).forEach(sourceFile => {
     sourceFile.forEachChild(node => {
       if (isStateReturnDeclaration(node)) {
-        const propTypes = createPropTypeObjects(rootPath, node);
-        stateTypes.push(...propTypes.map(prop => prop.name));
-      }
-      if (isPropsDeclaration(node)) {
         const moduleName = getModuleName(node);
+        console.log("%cmoduleName", "color: #807160", moduleName);
+        const stateName = `use${getModuleName(node).replace("Props", "")}`;
+
+        const types = typeFootprint(sourceFile.getFilePath(), moduleName);
+
+        createFile("scripts/docs/types.txt", types);
+        // console.log("%cmoduleName", "color: #9c66cc", moduleName);
         const propTypes = createPropTypeObjects(rootPath, node);
 
-        if (isInitialStateDeclaration(node)) {
-          types[moduleName] = propTypes;
-        } else {
-          const propTypesWithoutState = propTypes.filter(
-            prop => !stateTypes.includes(prop.name),
-          );
-          const propTypesReturnedByState = propTypes.filter(prop =>
-            stateTypes.includes(prop.name),
-          );
-          types[moduleName] = propTypesWithoutState;
-          types[moduleName].stateProps = propTypesReturnedByState;
-        }
+        // console.log(
+        //   "%c",
+        //   "color: #00b300",
+        //   sourceFile.getTypeAliasOrThrow(getModuleName(node)).getType(),
+        // );
+
+        types[stateName] = propTypes;
+        // console.log("%cpropTypes", "color: #ace2e6", propTypes);
+        // stateTypes.push(...propTypes.map(prop => prop.name));
       }
+      // if (isPropsDeclaration(node)) {
+      //   const moduleName = getModuleName(node);
+      //   const propTypes = createPropTypeObjects(rootPath, node);
+
+      //   if (isInitialStateDeclaration(node)) {
+      //     types[moduleName] = propTypes;
+      //   } else {
+      //     const propTypesWithoutState = propTypes.filter(
+      //       prop => !stateTypes.includes(prop.name),
+      //     );
+      //     const propTypesReturnedByState = propTypes.filter(prop =>
+      //       stateTypes.includes(prop.name),
+      //     );
+      //     types[moduleName] = propTypesWithoutState;
+      //     types[moduleName].stateProps = propTypesReturnedByState;
+      //   }
+      // }
     });
   });
 
@@ -83,7 +99,8 @@ function getPropTypes(rootPath) {
  * @param {import("ts-morph").Node<Node>} node
  */
 function createPropTypeObjects(rootPath, node) {
-  return getProps(node).map(prop => createPropTypeObject(rootPath, prop));
+  const props = getProps(node);
+  return props.map(prop => createPropTypeObject(rootPath, prop));
 }
 
 /**
@@ -152,10 +169,7 @@ function isPropsDeclaration(node) {
  * @param {ReturnType<typeof createPropTypeObject>} prop
  */
 function getPropTypesRow(prop) {
-  const symbol = /unstable_/.test(prop.name)
-    ? ' <span title="Experimental">⚠️</span>'
-    : "";
-  const name = `**\`${prop.name}\`**${symbol} `;
+  const name = `**\`${prop.name}\`**`;
   const desc = prop.description.replace(/\r?\n|\r/g, "");
 
   return outdent`

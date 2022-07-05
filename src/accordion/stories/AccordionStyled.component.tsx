@@ -140,4 +140,4 @@ export const AccordionStyled: React.FC<AccordionStyledProps> = props => {
   );
 };
 
-export default Accordion;
+export default AccordionStyled;

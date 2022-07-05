@@ -4,7 +4,7 @@ const { outdent } = require("outdent");
 // eslint-disable-next-line no-useless-escape
 const TOC_REPLACE_FLAG = /\<\!\-\- INJECT_TOC \-\-\>/m;
 
-const injectToc = docsTemplate => {
+const addToc = docsTemplate => {
   const tocContents = outdent`
     ## Table of Contents
 
@@ -14,4 +14,4 @@ const injectToc = docsTemplate => {
   return docsTemplate.replace(TOC_REPLACE_FLAG, tocContents);
 };
 
-module.exports = injectToc;
+module.exports = { addToc };

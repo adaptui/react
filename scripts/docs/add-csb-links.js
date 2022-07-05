@@ -1,14 +1,15 @@
 const yaml = require("yaml");
 const fetch = require("node-fetch");
 const { outdent } = require("outdent");
-const { joinCwd, extractCode } = require("./common-utils");
+
+const { joinCwd, extractCode } = require("../utils/common-utils");
 
 // eslint-disable-next-line no-useless-escape
 const CODESANDBOX_REGEX = /\<\!\-\- CODESANDBOX[\s\S]*?.*\-\-\>/gm;
 const CODESANDBOX_GLOBAL_FLAG = new RegExp(CODESANDBOX_REGEX.source, "gm");
 const CODESANDBOX_REPLACE_FLAG = new RegExp(CODESANDBOX_REGEX.source, "m");
 
-const injectCsbLinks = async docsTemplate => {
+const addCsbLinks = async docsTemplate => {
   const regexMatched = docsTemplate.match(CODESANDBOX_GLOBAL_FLAG);
   if (!regexMatched) return docsTemplate;
 
@@ -19,8 +20,8 @@ const injectCsbLinks = async docsTemplate => {
         .replace("-->", "");
       const parsed = yaml.parse(ymlString);
       const linkTitle = parsed.link_title.split(" ").join("%20");
-
       const sandboxLink = await getSandboxShortURL(parsed);
+
       return { sandboxLink, linkTitle };
     } catch (error) {
       console.log(error);
@@ -39,9 +40,10 @@ const injectCsbLinks = async docsTemplate => {
   return docsTemplate;
 };
 
-module.exports = injectCsbLinks;
+module.exports = { addCsbLinks };
 
 const getSandboxShortURL = async parsed => {
+  const linkTitle = parsed.link_title;
   const body = getSandboxContents(
     {
       js: parsed.js ? extractCode(joinCwd(parsed.js)) : undefined,
@@ -49,6 +51,7 @@ const getSandboxShortURL = async parsed => {
       utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
     },
     parsed.deps && parsed.deps,
+    linkTitle,
   );
 
   // fetching the sandbox_id, otherwise the URL would be longer
@@ -69,40 +72,66 @@ const getSandboxShortURL = async parsed => {
   return sandboxLink;
 };
 
-const getSandboxContents = (files, extraDeps) => {
+const getSandboxContents = (files, extraDeps, linkTitle) => {
   const deps = {
-    "@adaptui/react": "latest",
-    react: "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "^3.4.3",
+    "@adaptui/react": "alpha",
+    react: "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
     ...(extraDeps &&
       extraDeps.reduce((curr, next) => {
         return { ...curr, ...resolveVersion(next) };
       }, {})),
   };
+  const description = `AdaptUI ${linkTitle} example`;
 
   return JSON.stringify({
     files: {
       "src/index.js": {
         content: outdent`
-          import * as ReactDOM from "react-dom";
-          import * as React from "react";
+          import { createRoot } from "react-dom/client";
+
           import App from "./App";
           import "./styles.css";
 
           const rootElement = document.getElementById("root");
-          ReactDOM.render(<App />, rootElement);
+          const root = createRoot(rootElement);
+
+          root.render(<App />);
         `,
       },
       "src/App.js": { content: files.js || "" },
       "src/styles.css": { content: files.css || "" },
-      "src/Utils.component.js": files.utils && {
-        content: files.utils,
-      },
+      ...(files.utils
+        ? { "src/Utils.component.js": { content: files.utils } }
+        : {}),
       "package.json": {
-        content: { dependencies: { ...deps } },
+        content: {
+          name: linkTitle,
+          version: "1.0.0",
+          description: description,
+          main: "src/index.js",
+          scripts: {
+            start: "react-scripts start",
+            build: "react-scripts build",
+            test: "react-scripts test --env=jsdom",
+            eject: "react-scripts eject",
+          },
+          browserslist: [
+            ">0.2%",
+            "not dead",
+            "not ie <= 11",
+            "not op_mini all",
+          ],
+          dependencies: { ...deps },
+          devDependencies: {
+            "@babel/runtime": "7.13.8",
+            typescript: "4.1.3",
+          },
+        },
       },
     },
+    template: "create-react-app",
   });
 };
 
