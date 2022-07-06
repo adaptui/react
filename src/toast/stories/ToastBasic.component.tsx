@@ -214,7 +214,7 @@ function ToastTriggers() {
             })
           }
         >
-          Add Manually Dismissable Toast
+          Add Manual Dismissable Toast
         </TriggerButton>
       </div>
     </div>

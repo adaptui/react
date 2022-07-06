@@ -114,7 +114,7 @@ export function ToastTriggers() {
           })
         }
       >
-        Add Manually Dismissable Bottom Right Toast
+        Add Manual Dismissable Bottom Right Toast
       </TriggerButton>
     </div>
   );
