@@ -93,7 +93,7 @@ export function ToastTriggers() {
           })
         }
       >
-        Add 4s duration Top Left Toast
+        Add 4s duration Bottom Left Toast
       </TriggerButton>
       <TriggerButton
         onClick={() =>
@@ -114,7 +114,7 @@ export function ToastTriggers() {
           })
         }
       >
-        Add Non Dismissable Bottom Right Toast
+        Add Manual Dismissable Bottom Right Toast
       </TriggerButton>
     </div>
   );
