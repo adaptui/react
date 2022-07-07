@@ -10,24 +10,17 @@ for its
 
 - [Usage](#usage)
 - [Accessibility Requirement](#accessibility-requirement)
-- [Composition](#composition)
-- [Props](#props)
-  - [`BreadcrumbLink`](#breadcrumblink)
-  - [`Breadcrumbs`](#breadcrumbs)
 
 ## Usage
 
 ```js
 import * as React from "react";
 
-import {
-  BreadcrumbLink,
-  Breadcrumbs as AdaptUIBreadcrumbs,
-} from "@adaptui/react";
+import { BreadcrumbLink, Breadcrumbs } from "@adaptui/react";
 
-export const Breadcrumbs = () => {
+export const BreadcrumbsBasic = props => {
   return (
-    <AdaptUIBreadcrumbs aria-label="Breadcrumb" className="breadcrumb">
+    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
       <ol>
         <li>
           <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
@@ -41,7 +34,7 @@ export const Breadcrumbs = () => {
         </li>
         <li>
           <BreadcrumbLink
-            isCurrent
+            isCurrentPage
             href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
           >
             Breadcrumb Pattern
@@ -53,14 +46,14 @@ export const Breadcrumbs = () => {
           </BreadcrumbLink>
         </li>
       </ol>
-    </AdaptUIBreadcrumbs>
+    </Breadcrumbs>
   );
 };
 
-export default Breadcrumbs;
+export default BreadcrumbsBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z16je)
+[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4ywvzv)
 
 ## Accessibility Requirement
 
@@ -70,20 +63,7 @@ export default Breadcrumbs;
 
 ## Composition
 
-- BreadcrumbLink uses [useLink](./link.md)
-- Breadcrumbs uses [useRole](https://reakit.io/docs/role)
+- BreadcrumbLink uses `useCommand`
+- Breadcrumbs uses
 
-## Props
-
-### `BreadcrumbLink`
-
-| Name             | Type                              | Description                                                                                                                                                  |
-| :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`isCurrent`**  | <code>boolean \| undefined</code> | If true, sets `aria-current: "page"`                                                                                                                         |
-| **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
-| **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
-| **`isExternal`** | <code>boolean \| undefined</code> | Opens the link in a new tab                                                                                                                                  |
-
-### `Breadcrumbs`
-
-No props to show
+<!-- INJECT_PROPS src/breadcrumbs -->

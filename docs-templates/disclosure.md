@@ -10,23 +10,24 @@ for it's
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureBasicJsx.ts -->
+### Horizontal Disclosure
+
+<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts -->
 
 <!-- CODESANDBOX
-link_title: Disclosure Basic
-js: src/disclosure/stories/templates/DisclosureBasicJsx.ts
+link_title: Disclosure Horizontal
+js: src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts
 -->
 
-## Accessibility Requirement
+### Vertical Disclosure
 
-- `DisclosureButton` extends the accessibility features of
-  [Button](https://www.w3.org/TR/wai-aria-practices/#button).
-- `DisclosureButton` has a value specified for `aria-controls `that refers to
-  `DisclosureContent`.
-- When `DisclosureContent` is visible, `DisclosureButton` is `aria-expanded` set
-  to `true`.
-- When `DisclosureContent` is hidden, `DisclosureButton` is set to `false`.
+<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts -->
 
-<!-- INJECT_COMPOSITION src/disclosure -->
+<!-- CODESANDBOX
+link_title: Disclosure Vertical
+js: src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts
+-->
 
-<!-- INJECT_PROPS src/disclosure -->
+<!-- INJECT_COMPOSITION src/datepicker -->
+
+<!-- INJECT_PROPS src/datepicker -->

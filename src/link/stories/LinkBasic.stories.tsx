@@ -22,7 +22,7 @@ export const Default: Story = {
   args: { href: "https://timeless.co/", children: "Timeless" },
 };
 
-export const ExternlaLink: Story = {
+export const ExternalLink: Story = {
   args: {
     children: "Timeless",
     href: "https://timeless.co/",
