@@ -10,36 +10,25 @@ and
 ## Table of Contents
 
 - [Usage](#usage)
-- [Composition](#composition)
-- [Props](#props)
-  - [`Link`](#link)
 
 ## Usage
 
 ```js
 import * as React from "react";
 
-import { Link as AdaptUILink } from "@adaptui/react";
+import { Link } from "@adaptui/react";
 
-export const Link = props => {
-  return <AdaptUILink {...props}>Reakit</AdaptUILink>;
+export const LinkBasic = props => {
+  return <Link {...props} />;
 };
 
-export default Link;
+export default LinkBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/c2yxn)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/k74wwe)
 
 ## Composition
 
-- Link uses [useClickable](https://reakit.io/docs/clickable)
+- Link uses `useCommand`
 
-## Props
-
-### `Link`
-
-| Name             | Type                              | Description                                                                                                                                                  |
-| :--------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`disabled`**   | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
-| **`focusable`**  | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
-| **`isExternal`** | <code>boolean \| undefined</code> | Opens the link in a new tab                                                                                                                                  |
+<!-- INJECT_PROPS src/link -->

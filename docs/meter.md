@@ -9,41 +9,34 @@ that varies within a defined range. It follows the
 
 - [Usage](#usage)
 - [Accessibility Requirement](#accessibility-requirement)
-- [Composition](#composition)
-- [Props](#props)
-  - [`useMeterState`](#usemeterstate)
-  - [`Meter`](#meter)
 
 ## Usage
 
 ```js
 import * as React from "react";
 
-import {
-  Meter as AdaptUIMeter,
-  useMeterState,
-} from "@adaptui/react";
+import { Meter, useMeterState } from "@adaptui/react";
 
-export const Meter = props => {
+export const MeterBasic = props => {
   const state = useMeterState(props);
   const { percent, status } = state;
 
   return (
     <div className="meter">
-      <AdaptUIMeter
+      <Meter
         aria-label="meter"
         className="meterbar"
         style={{
           width: `${percent}%`,
           backgroundColor: status == null ? undefined : background[status],
         }}
-        {...state}
-      ></AdaptUIMeter>
+        state={state}
+      ></Meter>
     </div>
   );
 };
 
-export default Meter;
+export default MeterBasic;
 
 const background = {
   safe: "#8bcf69",
@@ -52,9 +45,9 @@ const background = {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hvo2u)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/nyddy6)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/eet0g)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2yqk5o)
 
 ## Accessibility Requirement
 
@@ -67,31 +60,6 @@ const background = {
 
 ## Composition
 
-- Meter uses [useRole](https://reakit.io/docs/role)
+- Meter uses
 
-## Props
-
-### `useMeterState`
-
-| Name          | Type                | Description                                                                                        |
-| :------------ | :------------------ | :------------------------------------------------------------------------------------------------- |
-| **`value`**   | <code>number</code> | The `value` of the meter indicator.If `undefined`/`not valid` the meter bar will be equal to `min` |
-| **`min`**     | <code>number</code> | The minimum value of the meter                                                                     |
-| **`max`**     | <code>number</code> | The maximum value of the meter                                                                     |
-| **`low`**     | <code>number</code> | The higher limit of min range.Defaults to `min`.                                                   |
-| **`optimum`** | <code>number</code> | The lower limit of max range.Defaults to `median of low & high`.                                   |
-| **`high`**    | <code>number</code> | The lower limit of max range.Defaults to `max`.                                                    |
-
-### `Meter`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name          | Type                | Description                                                                                        |
-| :------------ | :------------------ | :------------------------------------------------------------------------------------------------- |
-| **`value`**   | <code>number</code> | The `value` of the meter indicator.If `undefined`/`not valid` the meter bar will be equal to `min` |
-| **`min`**     | <code>number</code> | The minimum value of the meter                                                                     |
-| **`max`**     | <code>number</code> | The maximum value of the meter                                                                     |
-| **`percent`** | <code>number</code> | Percentage of the value progressed with respect to min & max                                       |
-
-</details>
+<!-- INJECT_PROPS src/meter -->
