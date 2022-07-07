@@ -1,7 +1,7 @@
 # Disclosure
 
-Accessible Disclosure component that controls visibility of a section of
-content.. It follows the
+Disclosure component that controls visibility of a section of content.. It
+follows the
 [WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices/#disclosure)
 for it's
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices/#wai-aria-roles-states-and-properties-8).
@@ -28,6 +28,6 @@ link_title: Disclosure Vertical
 js: src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts
 -->
 
-<!-- INJECT_COMPOSITION src/datepicker -->
+<!-- INJECT_COMPOSITION src/disclosure -->
 
-<!-- INJECT_PROPS src/datepicker -->
+<!-- INJECT_PROPS src/disclosure -->

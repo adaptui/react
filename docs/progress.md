@@ -8,30 +8,22 @@ of time to load. It follows
 
 - [Usage](#usage)
 - [Accessibility Requirement](#accessibility-requirement)
-- [Composition](#composition)
-- [Props](#props)
-  - [`useProgressState`](#useprogressstate)
-  - [`Progress`](#progress)
 
 ## Usage
 
 ```js
 import * as React from "react";
 
-import {
-  Progress as AdaptUIProgress,
-  useProgressState,
-} from "@adaptui/react";
+import { Progress, useProgressState } from "@adaptui/react";
 
-export const Progress = props => {
+export const ProgressBasic = props => {
   const state = useProgressState(props);
-  const { value, percent, isIndeterminate } = state;
+  const { percent, isIndeterminate } = state;
 
   return (
     <div className="progress">
-      <AdaptUIProgress
-        {...state}
-        value={value}
+      <Progress
+        state={state}
         aria-label="progress"
         style={{ width: `${percent}%` }}
         className={`progressbar ${isIndeterminate ? "indeterminate" : ""}`}
@@ -40,14 +32,14 @@ export const Progress = props => {
   );
 };
 
-export default Progress;
+export default ProgressBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2bwye)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/87ch5d)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/htpvy)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4kirlc)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2z6dk)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/tmfq0l)
 
 ## Accessibility Requirement
 
@@ -57,28 +49,6 @@ export default Progress;
 
 ## Composition
 
-- Progress uses [useRole](https://reakit.io/docs/role)
+- Progress uses
 
-## Props
-
-### `useProgressState`
-
-| Name        | Type                        | Description                                                                                       |
-| :---------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
-| **`value`** | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
-| **`min`**   | <code>number</code>         | The minimum value of the progress                                                                 |
-| **`max`**   | <code>number</code>         | The maximum value of the                                                                          |
-
-### `Progress`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name                  | Type                        | Description                                                                                       |
-| :-------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
-| **`value`**           | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
-| **`min`**             | <code>number</code>         | The minimum value of the progress                                                                 |
-| **`max`**             | <code>number</code>         | The maximum value of the                                                                          |
-| **`isIndeterminate`** | <code>boolean</code>        | `true` if `value` is `null`                                                                       |
-
-</details>
+<!-- INJECT_PROPS src/progress -->

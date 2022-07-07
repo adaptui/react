@@ -231,40 +231,12 @@ function ToastTriggers() {
 }
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0zrue)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zluost)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ohi1e)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/r6kf9k)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/g6mc8)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/i7to1s)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z762p)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zz4p8p)
 
-## Props
-
-### `DefaultToast`
-
-| Name                    | Type                | Description |
-| :---------------------- | :------------------ | :---------- |
-| **`animationDuration`** | <code>number</code> |             |
-
-### `DefaultToastProvider`
-
-| Name                    | Type                | Description |
-| :---------------------- | :------------------ | :---------- |
-| **`animationDuration`** | <code>number</code> |             |
-
-### `ConfigurableToast`
-
-| Name                    | Type                 | Description |
-| :---------------------- | :------------------- | :---------- |
-| **`id`**                | <code>string</code>  |             |
-| **`reverseOrder`**      | <code>boolean</code> |             |
-| **`animationDuration`** | <code>number</code>  |             |
-
-### `Toast`
-
-| Name                    | Type                 | Description |
-| :---------------------- | :------------------- | :---------- |
-| **`id`**                | <code>string</code>  |             |
-| **`reverseOrder`**      | <code>boolean</code> |             |
-| **`animationDuration`** | <code>number</code>  |             |
+<!-- INJECT_PROPS src/toast -->

@@ -1,7 +1,7 @@
 # Disclosure
 
-Accessible Disclosure component that controls visibility of a section of
-content.. It follows the
+Disclosure component that controls visibility of a section of content.. It
+follows the
 [WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices/#disclosure)
 for it's
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices/#wai-aria-roles-states-and-properties-8).
@@ -92,9 +92,6 @@ export default DisclosureVerticalCollapseBasic;
 
 ## Composition
 
-- DatePickerDisclosure uses
-- DatePickerGroup uses
-- DatePickerLabel uses
-- DatePickerPopover uses
+- DisclosureCollapsibleContent uses
 
-<!-- INJECT_PROPS src/datepicker -->
+<!-- INJECT_PROPS src/disclosure -->
