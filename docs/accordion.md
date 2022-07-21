@@ -75,8 +75,8 @@ export default AccordionBasic;
 [![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5uvhf6)
 [![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bedlw0)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/57ynb0)
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/6f3zew)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/e0m91w)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/gt6ek1)
 
 ## Composition
 
