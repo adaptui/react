@@ -5,13 +5,13 @@
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features.
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
 ### DateField
 
-<!-- IMPORT_EXAMPLE src/datefield/stories/templates/DateFieldBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/datefield/stories/templates/DateFieldBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: DateField

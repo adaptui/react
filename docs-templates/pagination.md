@@ -3,11 +3,11 @@
 `Pagination` component provides all the accessibility features for the page
 navigation.
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/pagination/stories/templates/PaginationBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/pagination/stories/templates/PaginationBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Pagination
@@ -18,6 +18,6 @@ js: src/pagination/stories/templates/PaginationBasicJsx.ts
 
 - `Pagination` should have `aria-label` or `aria-labelledby` attribute.
 
-<!-- INJECT_COMPOSITION src/pagination -->
+<!-- ADD_COMPOSITION src/pagination -->
 
-<!-- INJECT_PROPS src/pagination -->
+<!-- ADD_PROPS src/pagination -->

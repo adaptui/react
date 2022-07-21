@@ -5,11 +5,11 @@ that varies within a defined range. It follows the
 [WAI-ARIA Meter Pattern](https://w3c.github.io/aria-practices/#meter) for it's
 [accessibility properties](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-15)
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/meter/stories/templates/MeterBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/meter/stories/templates/MeterBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Meter Basic
@@ -37,4 +37,4 @@ deps: ['@emotion/css']
 - MeterOptions uses `Role`
 - MeterState uses its own state
 
-<!-- INJECT_PROPS src/meter -->
+<!-- ADD_PROPS src/meter -->

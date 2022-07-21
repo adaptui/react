@@ -4,11 +4,11 @@
 of time to load. It follows
 [WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/progress/stories/templates/ProgressBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/progress/stories/templates/ProgressBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Progress Basic
@@ -34,7 +34,7 @@ deps: ['@emotion/css']
   a page, you should use `aria-describedby` to point to the status, and set the
   `aria-busy `attribute to `true` on the region until it is finished loading.
 
-<!-- INJECT_COMPOSITION src/progress -->
+<!-- ADD_COMPOSITION src/progress -->
 
 ## Props
 

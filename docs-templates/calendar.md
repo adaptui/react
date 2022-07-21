@@ -6,13 +6,13 @@ done internally to provide the ease of use. It follows the
 [Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
 navigaiton & focus management.
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
 ### Base Calendar
 
-<!-- IMPORT_EXAMPLE src/calendar/stories/templates/CalendarBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/calendar/stories/templates/CalendarBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Calendar
@@ -113,6 +113,6 @@ css: src/calendar/stories/templates/CalendarRangeCss.ts
 utils: src/calendar/stories/templates/UtilsTsx.ts
 -->
 
-<!-- INJECT_COMPOSITION src/calendar -->
+<!-- ADD_COMPOSITION src/calendar -->
 
-<!-- INJECT_PROPS src/calendar -->
+<!-- ADD_PROPS src/calendar -->

@@ -5,13 +5,13 @@ the help of [Calendar](./calendar.md) component. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features.
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
 ### DatePicker
 
-<!-- IMPORT_EXAMPLE src/datepicker/stories/templates/DatePickerBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/datepicker/stories/templates/DatePickerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: DatePicker
@@ -22,7 +22,7 @@ utils: src/datepicker/stories/templates/UtilsJsx.ts
 
 ### Range DatePicker
 
-<!-- IMPORT_EXAMPLE src/datepicker/stories/templates/DateRangePickerBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/datepicker/stories/templates/DateRangePickerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: RangeDatePicker
@@ -31,6 +31,6 @@ css: src/datepicker/stories/templates/DateRangePickerBasicCss.ts
 utils: src/datepicker/stories/templates/UtilsJsx.ts
 -->
 
-<!-- INJECT_COMPOSITION src/datepicker -->
+<!-- ADD_COMPOSITION src/datepicker -->
 
-<!-- INJECT_PROPS src/datepicker -->
+<!-- ADD_PROPS src/datepicker -->

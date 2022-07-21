@@ -12,7 +12,7 @@ const {
 } = require("../utils/index");
 
 // eslint-disable-next-line no-useless-escape
-const COMPOSITION_ADD_FLAG = /\<\!\-\- INJECT_COMPOSITION (.*) \-\-\>/m;
+const COMPOSITION_ADD_FLAG = /\<\!\-\- ADD_COMPOSITION (.*) \-\-\>/m;
 
 const addComposition = docsTemplate => {
   return addMdContent(

@@ -7,11 +7,11 @@ It follows
 [WAI-ARIA Spin Button Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#spinbutton)
 for the accessibility features.
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/numberfield/stories/templates/NumberFieldBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/numberfield/stories/templates/NumberFieldBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: NumberField
@@ -22,6 +22,6 @@ js: src/numberfield/stories/templates/NumberFieldBasicJsx.ts
 
 - `NumberField` should have `aria-label` or `aria-labelledby` attribute.
 
-<!-- INJECT_COMPOSITION src/numberfield -->
+<!-- ADD_COMPOSITION src/numberfield -->
 
-<!-- INJECT_PROPS src/numberfield -->
+<!-- ADD_PROPS src/numberfield -->

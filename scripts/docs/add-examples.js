@@ -7,7 +7,7 @@ const { joinCwd, extractCode } = require("../utils/common-utils");
 const { addMdContent } = require("./utils");
 
 // eslint-disable-next-line no-useless-escape
-const CODE_EXAMPLE_FLAG = /\<\!\-\- IMPORT_EXAMPLE (.*) \-\-\>/m;
+const CODE_EXAMPLE_FLAG = /\<\!\-\- ADD_EXAMPLE (.*) \-\-\>/m;
 
 const addExamples = docsTemplate => {
   return addMdContent(docsTemplate, CODE_EXAMPLE_FLAG, (line, regexMatched) => {

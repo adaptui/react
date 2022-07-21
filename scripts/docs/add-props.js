@@ -16,10 +16,10 @@ const { addMdContent } = require("./utils");
 const { typeFootprint } = require("./typeFootPrint");
 
 // eslint-disable-next-line no-useless-escape
-const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
+const PROPS_ADD_FLAG = /\<\!\-\- ADD_PROPS (.*) \-\-\>/m;
 
 const addProps = docsTemplate => {
-  return addMdContent(docsTemplate, PROPS_INJECT_FLAG, (line, regexMatched) => {
+  return addMdContent(docsTemplate, PROPS_ADD_FLAG, (line, regexMatched) => {
     const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
 
     return getPropTypesMarkdown(types);

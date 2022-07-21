@@ -62,4 +62,4 @@ export default NumberFieldBasic;
 - NumberFieldInput uses
 - NumberFieldLabel uses
 
-<!-- INJECT_PROPS src/numberfield -->
+<!-- ADD_PROPS src/numberfield -->

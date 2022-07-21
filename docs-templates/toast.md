@@ -8,7 +8,7 @@ the
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/toast/stories/templates/ToastBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/toast/stories/templates/ToastBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Toast Basic
@@ -40,4 +40,4 @@ css: src/toast/stories/templates/ToastBasicCss.ts
 deps: ["@react-spring/web", "@chakra-ui/utils"]
 -->
 
-<!-- INJECT_PROPS src/toast -->
+<!-- ADD_PROPS src/toast -->

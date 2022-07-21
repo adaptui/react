@@ -74,4 +74,4 @@ export default PaginationBasic;
 - Pagination uses
 - PaginationButton uses
 
-<!-- INJECT_PROPS src/pagination -->
+<!-- ADD_PROPS src/pagination -->

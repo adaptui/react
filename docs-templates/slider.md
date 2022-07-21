@@ -8,11 +8,11 @@ for the
 &
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#slider_roles_states_props)
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/slider/stories/templates/SliderBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/slider/stories/templates/SliderBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Single Slider
@@ -54,6 +54,6 @@ css: src/slider/stories/templates/SliderBasicCss.ts
 
 - `SliderInput` should have `aria-label` or `aria-labelledby` attribute.
 
-<!-- INJECT_COMPOSITION src/slider -->
+<!-- ADD_COMPOSITION src/slider -->
 
-<!-- INJECT_PROPS src/slider -->
+<!-- ADD_PROPS src/slider -->

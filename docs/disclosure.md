@@ -6,13 +6,13 @@ content.. It follows the
 for it's
 [accessibility properties](https://www.w3.org/TR/wai-aria-practices/#wai-aria-roles-states-and-properties-8).
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
 ### Horizontal Disclosure
 
-<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Disclosure Horizontal
@@ -21,14 +21,14 @@ js: src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts
 
 ### Vertical Disclosure
 
-<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Disclosure Vertical
 js: src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts
 -->
 
-<!-- INJECT_COMPOSITION src/datepicker -->
+<!-- ADD_COMPOSITION src/datepicker -->
 
 ## Props
 

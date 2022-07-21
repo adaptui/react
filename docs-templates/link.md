@@ -7,17 +7,17 @@ different compositions. It follows the
 and
 [accessibilty properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-11)
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/link/stories/templates/LinkBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/link/stories/templates/LinkBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Link
 js: src/link/stories/templates/LinkBasicJsx.ts
 -->
 
-<!-- INJECT_COMPOSITION src/link -->
+<!-- ADD_COMPOSITION src/link -->
 
-<!-- INJECT_PROPS src/link -->
+<!-- ADD_PROPS src/link -->

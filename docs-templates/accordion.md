@@ -8,11 +8,11 @@ for
 &
 [accessibiltiy properties](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/#:~:text=last%20accordion%20header.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties%3A,-The%20title%20of).
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Accordion
@@ -45,6 +45,6 @@ tsx: src/accordion/stories/templates/AccordionStyledTsx.ts
 css: src/accordion/stories/templates/AccordionStyledCss.ts
 -->
 
-<!-- INJECT_COMPOSITION src/accordion -->
+<!-- ADD_COMPOSITION src/accordion -->
 
-<!-- INJECT_PROPS src/accordion -->
+<!-- ADD_PROPS src/accordion -->

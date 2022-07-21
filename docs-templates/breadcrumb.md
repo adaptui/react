@@ -6,11 +6,11 @@ required aria attributes for it's links and the current link. It follows the
 for its
 [accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-Breadcrumb%20trail%20is).
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/breadcrumbs/stories/templates/BreadcrumbsBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/breadcrumbs/stories/templates/BreadcrumbsBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Breadcrumbs
@@ -23,6 +23,6 @@ tsx: src/breadcrumbs/stories/templates/BreadcrumbsBasicTsx.ts
 css: src/breadcrumbs/stories/templates/BreadcrumbsBasicCss.ts
 -->
 
-<!-- INJECT_COMPOSITION src/breadcrumbs -->
+<!-- ADD_COMPOSITION src/breadcrumbs -->
 
-<!-- INJECT_PROPS src/breadcrumbs -->
+<!-- ADD_PROPS src/breadcrumbs -->
