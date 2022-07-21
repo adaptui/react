@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -14,7 +12,6 @@ import { CalendarRangeStyled } from "./CalendarRangeStyled.component";
 import "./tailwind.css";
 
 type Meta = ComponentMeta<typeof CalendarRangeStyled>;
-// type Story = ComponentStoryObj<typeof CalendarRangeStyled>;
 
 export default {
   title: "Calendar/RangeStyled",
@@ -32,9 +29,5 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  let { locale } = useLocale();
-
-  return (
-    <CalendarRangeStyled locale={locale} createCalendar={createCalendar} />
-  );
+  return <CalendarRangeStyled />;
 };

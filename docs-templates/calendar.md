@@ -3,8 +3,8 @@
 `Calendar` component provides a way to select a date or a range of dates while
 allowing you to style them however. All the date, month & year calculations are
 done internally to provide the ease of use. It follows the
-[Grid Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#grid) for the
-keyboard navigaiton & focus management.
+[Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
+navigaiton & focus management.
 
 <!-- INJECT_TOC -->
 
@@ -13,6 +13,19 @@ keyboard navigaiton & focus management.
 ### Base Calendar
 
 <!-- IMPORT_EXAMPLE src/calendar/stories/templates/CalendarBasicJsx.ts -->
+
+<!-- CODESANDBOX
+link_title: Calendar
+js: src/calendar/stories/templates/CalendarBasicJsx.ts
+css: src/calendar/stories/templates/CalendarBasicCss.ts
+utils: src/calendar/stories/templates/UtilsJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Calendar TS
+tsx: src/calendar/stories/templates/CalendarBasicTsx.ts
+css: src/calendar/stories/templates/CalendarBasicCss.ts
+utils: src/calendar/stories/templates/UtilsTsx.ts
+-->
 
 ### Range Calendar
 
@@ -23,8 +36,18 @@ You'll need to import the `useRangeCalendarState` hook from the `@adaptui/react`
 first
 
 ```diff
-- const state = useCalendarState(props);
-+ const state = useRangeCalendarState(props);
+- const state = useCalendarBaseState(props);
++ const state = useRangeCalendarBaseState(props);
+- const calendar = useCalendarState({ ...props, state });
++ const calendar = useRangeCalendarState({ ...props, state });
+
+return (
+-   <Calendar state={calendar}>
++   <RangeCalendar state={calendar}>
+      ...
+-   </Calendar>
++   </RangeCalendar>
+  );
 ```
 
 Also we can customize and style the ranges with CSS attribute selectors
@@ -50,17 +73,44 @@ Also we can customize and style the ranges with CSS attribute selectors
 ```
 
 <!-- CODESANDBOX
-link_title: Calendar
-js: src/calendar/stories/templates/CalendarBasicJsx.ts
-css: src/calendar/stories/templates/CalendarBasicCss.ts
-utils: src/calendar/stories/templates/UtilsJsx.ts
--->
-
-<!-- CODESANDBOX
 link_title: Range Calendar
 js: src/calendar/stories/templates/CalendarRangeJsx.ts
 css: src/calendar/stories/templates/CalendarRangeCss.ts
 utils: src/calendar/stories/templates/UtilsJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Range Calendar TS
+tsx: src/calendar/stories/templates/CalendarRangeTsx.ts
+css: src/calendar/stories/templates/CalendarRangeCss.ts
+utils: src/calendar/stories/templates/UtilsTsx.ts
+-->
+
+## Other Examples
+
+<!-- CODESANDBOX
+link_title: Calendar Styled
+js: src/calendar/stories/templates/CalendarStyledJsx.ts
+css: src/calendar/stories/templates/CalendarBasicCss.ts
+utils: src/calendar/stories/templates/UtilsJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Calendar Styled TS
+tsx: src/calendar/stories/templates/CalendarStyledTsx.ts
+css: src/calendar/stories/templates/CalendarBasicCss.ts
+utils: src/calendar/stories/templates/UtilsTsx.ts
+-->
+
+<!-- CODESANDBOX
+link_title: Calendar Range Styled
+js: src/calendar/stories/templates/CalendarRangeStyledJsx.ts
+css: src/calendar/stories/templates/CalendarRangeCss.ts
+utils: src/calendar/stories/templates/UtilsJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Calendar Range Styled TS
+tsx: src/calendar/stories/templates/CalendarRangeStyledTsx.ts
+css: src/calendar/stories/templates/CalendarRangeCss.ts
+utils: src/calendar/stories/templates/UtilsTsx.ts
 -->
 
 <!-- INJECT_COMPOSITION src/calendar -->
