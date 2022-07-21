@@ -44,15 +44,30 @@ module.exports = { addCsbLinks };
 
 const getSandboxShortURL = async parsed => {
   const linkTitle = parsed.link_title;
-  const body = getSandboxContents(
-    {
-      js: parsed.js ? extractCode(joinCwd(parsed.js)) : undefined,
-      css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
-      utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
-    },
-    parsed.deps && parsed.deps,
-    linkTitle,
-  );
+
+  let body = "";
+
+  if (Object.keys(parsed).includes("js")) {
+    body = getJSSandboxContents(
+      {
+        js: parsed.js ? extractCode(joinCwd(parsed.js)) : undefined,
+        css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
+        utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
+      },
+      parsed.deps && parsed.deps,
+      linkTitle,
+    );
+  } else {
+    body = getTSSandboxContents(
+      {
+        tsx: parsed.tsx ? extractCode(joinCwd(parsed.tsx)) : undefined,
+        css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
+        utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
+      },
+      parsed.deps && parsed.deps,
+      linkTitle,
+    );
+  }
 
   // fetching the sandbox_id, otherwise the URL would be longer
   const response = await fetch(
@@ -72,18 +87,18 @@ const getSandboxShortURL = async parsed => {
   return sandboxLink;
 };
 
-const getSandboxContents = (files, extraDeps, linkTitle) => {
+const getJSSandboxContents = (files, extraDeps, linkTitle) => {
   const deps = {
-    "@adaptui/react": "alpha",
-    react: "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
+    "@adaptui/react": "1.0.0-alpha.7",
+    react: "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
     ...(extraDeps &&
       extraDeps.reduce((curr, next) => {
         return { ...curr, ...resolveVersion(next) };
       }, {})),
   };
-  const description = `AdaptUI ${linkTitle} example`;
+  const description = `AdaptUI ${linkTitle} React Typescript example`;
 
   return JSON.stringify({
     files: {
@@ -125,13 +140,78 @@ const getSandboxContents = (files, extraDeps, linkTitle) => {
           ],
           dependencies: { ...deps },
           devDependencies: {
-            "@babel/runtime": "7.13.8",
-            typescript: "4.1.3",
+            "@babel/runtime": "7.18.9",
+            typescript: "4.7.4",
           },
         },
       },
     },
     template: "create-react-app",
+  });
+};
+
+const getTSSandboxContents = (files, extraDeps, linkTitle) => {
+  const deps = {
+    "@adaptui/react": "1.0.0-alpha.7",
+    react: "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    ...(extraDeps &&
+      extraDeps.reduce((curr, next) => {
+        return { ...curr, ...resolveVersion(next) };
+      }, {})),
+  };
+  const description = `AdaptUI ${linkTitle} React Javascript example`;
+
+  return JSON.stringify({
+    files: {
+      "src/index.tsx": {
+        content: outdent`
+          import { createRoot } from "react-dom/client";
+
+          import App from "./App";
+          import "./styles.css";
+
+          const rootElement = document.getElementById("root");
+          const root = createRoot(rootElement);
+
+          root.render(<App />);
+        `,
+      },
+      "src/App.tsx": { content: files.tsx || "" },
+      "src/styles.css": { content: files.css || "" },
+      ...(files.utils
+        ? { "src/Utils.component.tsx": { content: files.utils } }
+        : {}),
+      "package.json": {
+        content: {
+          name: linkTitle,
+          version: "1.0.0",
+          description: description,
+          main: "src/index.tsx",
+          scripts: {
+            start: "react-scripts start",
+            build: "react-scripts build",
+            test: "react-scripts test --env=jsdom",
+            eject: "react-scripts eject",
+          },
+          browserslist: [
+            ">0.2%",
+            "not dead",
+            "not ie <= 11",
+            "not op_mini all",
+          ],
+          dependencies: { ...deps },
+          devDependencies: {
+            "@babel/runtime": "7.18.9",
+            typescript: "4.7.4",
+            "@types/react": "18.0.15",
+            "@types/react-dom": "18.0.6",
+          },
+        },
+      },
+    },
+    template: "create-react-app-typescript",
   });
 };
 

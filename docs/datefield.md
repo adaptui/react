@@ -5,46 +5,16 @@
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features.
 
-## Table of Contents
-
-- [Usage](#usage)
-  - [DateField](#datefield-1)
+<!-- INJECT_TOC -->
 
 ## Usage
 
 ### DateField
 
-```js
-import React from "react";
+<!-- IMPORT_EXAMPLE src/datefield/stories/templates/DateFieldBasicJsx.ts -->
 
-import {
-  DateField,
-  DateSegment,
-  useDateFieldBaseState,
-  useDateFieldState,
-} from "@adaptui/react";
-
-export const DateFieldBasic = props => {
-  const state = useDateFieldBaseState({ ...props });
-  const datefield = useDateFieldState({ ...props, state });
-
-  return (
-    <DateField state={datefield} className="datepicker__field">
-      {state.segments.map((segment, i) => (
-        <DateSegment
-          key={i}
-          segment={segment}
-          state={state}
-          className="datepicker__field--item"
-        >
-          {segment.text}
-        </DateSegment>
-      ))}
-    </DateField>
-  );
-};
-
-export default DateFieldBasic;
-```
-
-[![Edit CodeSandbox](https://img.shields.io/badge/DateField-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/mvnst9)
+<!-- CODESANDBOX
+link_title: DateField
+js: src/datefield/stories/templates/DateFieldBasicJsx.ts
+css: src/datefield/stories/templates/DateFieldBasicCss.ts
+-->

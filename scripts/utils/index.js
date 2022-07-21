@@ -89,7 +89,7 @@ function getEscapedName(node) {
 /**
  * @param {import("ts-morph").Node<Node>} node
  */
-function isStateReturnDeclaration(node) {
+function isStatePropsDeclaration(node) {
   const kindName = node.getKindName();
   const escapedName = getEscapedName(node);
   return (
@@ -146,6 +146,7 @@ function getTagNames(prop) {
 }
 
 /**
+ * Get all the props from the node.
  * @param {import("ts-morph").Node<Node>} node
  * @param {boolean} includePrivate
  */
@@ -180,7 +181,7 @@ module.exports = {
   getModuleName,
   getDeclaration,
   isOptionsDeclaration,
-  isStateReturnDeclaration,
+  isStatePropsDeclaration,
   sortSourceFiles,
   getPublicFiles,
   getJsDocs,

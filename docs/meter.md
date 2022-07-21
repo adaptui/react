@@ -5,49 +5,23 @@ that varies within a defined range. It follows the
 [WAI-ARIA Meter Pattern](https://w3c.github.io/aria-practices/#meter) for it's
 [accessibility properties](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-15)
 
-## Table of Contents
-
-- [Usage](#usage)
-- [Accessibility Requirement](#accessibility-requirement)
+<!-- INJECT_TOC -->
 
 ## Usage
 
-```js
-import * as React from "react";
+<!-- IMPORT_EXAMPLE src/meter/stories/templates/MeterBasicJsx.ts -->
 
-import { Meter, useMeterState } from "@adaptui/react";
+<!-- CODESANDBOX
+link_title: Meter Basic
+js: src/meter/stories/templates/MeterBasicJsx.ts
+css: src/meter/stories/templates/MeterBasicCss.ts
+-->
 
-export const MeterBasic = props => {
-  const state = useMeterState(props);
-  const { percent, status } = state;
-
-  return (
-    <div className="meter">
-      <Meter
-        aria-label="meter"
-        className="meterbar"
-        style={{
-          width: `${percent}%`,
-          backgroundColor: status == null ? undefined : background[status],
-        }}
-        state={state}
-      ></Meter>
-    </div>
-  );
-};
-
-export default MeterBasic;
-
-const background = {
-  safe: "#8bcf69",
-  caution: "#e6d450",
-  danger: "#f28f68",
-};
-```
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/nyddy6)
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2yqk5o)
+<!-- CODESANDBOX
+link_title: Meter Styled
+js: src/meter/stories/templates/MeterStyledJsx.ts
+deps: ['@emotion/css']
+-->
 
 ## Accessibility Requirement
 
@@ -60,6 +34,7 @@ const background = {
 
 ## Composition
 
-- Meter uses
+- MeterOptions uses `Role`
+- MeterState uses its own state
 
 <!-- INJECT_PROPS src/meter -->

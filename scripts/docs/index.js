@@ -25,25 +25,22 @@ const generateDocs = async templateFilePath => {
   const fileName = path.basename(templateFilePath);
   const template = readFile(templateFilePath, "utf-8");
 
-  const addedTocTemplate = addToc(template);
-  logProgress(`Added table of contents`, fileName);
-
-  const addedExamplesTemplate = addExamples(addedTocTemplate);
+  const addedExamples = addExamples(template);
   logProgress(`Added examples`, fileName);
 
-  const addedCsbLinks = await addCsbLinks(addedExamplesTemplate);
+  const addedCsbLinks = await addCsbLinks(addedExamples);
   logProgress(`Added csb links`, fileName);
 
-  const addedCompositionTemplate = addComposition(addedCsbLinks);
+  const addedComposition = addComposition(addedCsbLinks);
   logProgress(`Added composition`, fileName);
 
-  // const finalDocs = addProps(template);
-  // logProgress(`Added props`, fileName);
+  const addedProps = addProps(addedComposition);
+  logProgress(`Added props`, fileName);
 
-  createFile(
-    path.join(docsFolder, fileName),
-    mdPrettify(addedCompositionTemplate),
-  );
+  const addedToc = addToc(addedProps);
+  logProgress(`Added table of contents`, fileName);
+
+  createFile(path.join(docsFolder, fileName), mdPrettify(addedToc));
   logProgress(`Docs generated`, fileName);
 };
 

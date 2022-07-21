@@ -15,7 +15,6 @@ export type TimeFieldBasicProps = TimeFieldBaseStateProps & {};
 export const TimeFieldBasic: React.FC<TimeFieldBasicProps> = props => {
   const state = useTimeFieldBaseState({ ...props });
   const timefield = useTimeFieldState({ ...props, state });
-  console.log("%ctimefield", "color: #733d00", timefield);
 
   return (
     <>

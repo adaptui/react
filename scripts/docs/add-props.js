@@ -6,22 +6,20 @@ const {
   getProps,
   getJsDocs,
   getPublicFiles,
-  getModuleName,
   getEscapedName,
   getDeclaration,
   sortSourceFiles,
   isOptionsDeclaration,
-  isStateReturnDeclaration,
+  isStatePropsDeclaration,
 } = require("../utils");
 const { addMdContent } = require("./utils");
 const { typeFootprint } = require("./typeFootPrint");
-const { createFile } = require("../utils/common-utils");
 
 // eslint-disable-next-line no-useless-escape
-const PROPS_ADD_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
+const PROPS_INJECT_FLAG = /\<\!\-\- INJECT_PROPS (.*) \-\-\>/m;
 
 const addProps = docsTemplate => {
-  return addMdContent(docsTemplate, PROPS_ADD_FLAG, (line, regexMatched) => {
+  return addMdContent(docsTemplate, PROPS_INJECT_FLAG, (line, regexMatched) => {
     const types = getPropTypes(path.join(process.cwd(), regexMatched[1]));
 
     return getPropTypesMarkdown(types);
@@ -35,7 +33,7 @@ module.exports = { addProps };
  * @param {string} rootPath
  */
 function getPropTypes(rootPath) {
-  const stateTypes = [];
+  const otherTypes = [];
 
   const project = new Project({
     tsConfigFilePath: path.join(process.cwd(), "tsconfig.json"),
@@ -45,73 +43,105 @@ function getPropTypes(rootPath) {
   const publicPaths = Object.values(getPublicFiles(rootPath));
   const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
   project.resolveSourceFileDependencies();
-
   const types = {};
 
   sortSourceFiles(sourceFiles).forEach(sourceFile => {
     sourceFile.forEachChild(node => {
-      if (isStateReturnDeclaration(node)) {
-        const moduleName = getModuleName(node);
-        console.log("%cmoduleName", "color: #807160", moduleName);
-        const stateName = `use${getModuleName(node).replace("Props", "")}`;
+      if (isStatePropsDeclaration(node) || isOptionsDeclaration(node)) {
+        const otherMultipleTypes = [];
+        const moduleName = getEscapedName(node);
+        const childCount = node.getChildCount();
 
-        const types = typeFootprint(sourceFile.getFilePath(), moduleName);
+        if (node.getChildAtIndex(childCount - 2)) {
+          const n = node.getChildAtIndex(childCount - 2);
 
-        createFile("scripts/docs/types.txt", types);
-        // console.log("%cmoduleName", "color: #9c66cc", moduleName);
-        const propTypes = createPropTypeObjects(rootPath, node);
+          const children = getChildrenRecursive(n).flat();
 
-        // console.log(
-        //   "%c",
-        //   "color: #00b300",
-        //   sourceFile.getTypeAliasOrThrow(getModuleName(node)).getType(),
-        // );
+          children.forEach(child => {
+            if (child.getKindName() === "AmpersandToken") return;
 
-        types[stateName] = propTypes;
-        // console.log("%cpropTypes", "color: #ace2e6", propTypes);
-        // stateTypes.push(...propTypes.map(prop => prop.name));
+            const otherPropsName = getOtherPropsName(node, child.getText());
+
+            if (otherPropsName) {
+              const regex = /(\w+)\?:/gm;
+              const matches = typeFootprint(child).match(regex);
+              const _matches = matches.map(m => m.slice(0, -2));
+
+              otherMultipleTypes.push({ [otherPropsName]: _matches });
+              otherTypes.push(..._matches);
+            }
+          });
+        }
+
+        const propTypes = createPropTypeObjects(node);
+        const ownPropTypes = propTypes.filter(
+          prop => !otherTypes.includes(prop.name),
+        );
+        const otherPropTypes = propTypes.filter(prop =>
+          otherTypes.includes(prop.name),
+        );
+
+        types[moduleName] = ownPropTypes;
+
+        const otherMultiplePropTypes = otherMultipleTypes.reduce(
+          (acc, curr) => {
+            const [key, values] = Object.entries(curr)[0];
+            const propTypes = acc[key] || [];
+            const _propTypes = [...propTypes, ...values];
+            const _otherPropTypes = otherPropTypes.filter(prop =>
+              _propTypes.includes(prop.name),
+            );
+
+            return { ...acc, [key]: _otherPropTypes };
+          },
+          {},
+        );
+
+        types[moduleName].otherProps = otherMultiplePropTypes;
       }
-      // if (isPropsDeclaration(node)) {
-      //   const moduleName = getModuleName(node);
-      //   const propTypes = createPropTypeObjects(rootPath, node);
-
-      //   if (isInitialStateDeclaration(node)) {
-      //     types[moduleName] = propTypes;
-      //   } else {
-      //     const propTypesWithoutState = propTypes.filter(
-      //       prop => !stateTypes.includes(prop.name),
-      //     );
-      //     const propTypesReturnedByState = propTypes.filter(prop =>
-      //       stateTypes.includes(prop.name),
-      //     );
-      //     types[moduleName] = propTypesWithoutState;
-      //     types[moduleName].stateProps = propTypesReturnedByState;
-      //   }
-      // }
     });
   });
 
   return types;
 }
 
+const getChildrenRecursive = (node, callStackLevel = 0) => {
+  if (node.getKindName() !== "IntersectionType" && callStackLevel === 0) {
+    return [node];
+  }
+  const children = node.getChildren();
+
+  if (callStackLevel === 2) {
+    return node;
+  }
+
+  if (children.length > 0) {
+    return children.map(child =>
+      getChildrenRecursive(child, callStackLevel + 1),
+    );
+  }
+
+  return [node];
+};
+
 /**
- * @param {string} rootPath
  * @param {import("ts-morph").Node<Node>} node
  */
-function createPropTypeObjects(rootPath, node) {
+function createPropTypeObjects(node) {
   const props = getProps(node);
-  return props.map(prop => createPropTypeObject(rootPath, prop));
+  // Remove all "as" type as we don't want to appear in the table
+  const _props = props.filter(prop => prop.getEscapedName() !== "as");
+  return _props.map(prop => createPropTypeObject(prop));
 }
 
 /**
- * @param {string} rootPath
  * @param {import("ts-morph").Symbol} prop
  */
-function getPropType(rootPath, prop) {
+function getPropType(prop) {
   const declaration = getDeclaration(prop);
   const type = declaration
     .getType()
-    .getText(undefined, ts.TypeFormatFlags.InTypeAlias);
+    .getText(undefined, ts.TypeFormatFlags.None);
 
   const encode = text =>
     text.replace(/[\u00A0-\u9999<>&"]/gim, i => `&#${i.charCodeAt(0)};`);
@@ -125,26 +155,14 @@ function getPropType(rootPath, prop) {
 }
 
 /**
- * @param {string} rootPath
  * @param {import("ts-morph").Symbol} prop
  */
-function createPropTypeObject(rootPath, prop) {
+function createPropTypeObject(prop) {
   return {
     name: prop.getEscapedName(),
     description: getComment(prop),
-    type: getPropType(rootPath, prop),
+    type: getPropType(prop),
   };
-}
-
-/**
- * @param {import("ts-morph").Node<Node>} node
- */
-function isInitialStateDeclaration(node) {
-  const kindName = node.getKindName();
-  const escapedName = getEscapedName(node);
-  return (
-    kindName === "TypeAliasDeclaration" && /.+InitialState$/.test(escapedName)
-  );
 }
 
 /**
@@ -161,15 +179,27 @@ function getComment(symbol) {
 /**
  * @param {import("ts-morph").Node<Node>} node
  */
-function isPropsDeclaration(node) {
-  return isOptionsDeclaration(node) || isInitialStateDeclaration(node);
+function getOtherPropsName(node, str) {
+  const statePropsRegex = /\w+StateProps/gm;
+  const OptionsRegex = /\w+Options/gm;
+  const finalRegex = isStatePropsDeclaration(node)
+    ? statePropsRegex
+    : OptionsRegex;
+  const matches = str.match(finalRegex);
+
+  if (matches) return matches[0];
+
+  return null;
 }
 
 /**
  * @param {ReturnType<typeof createPropTypeObject>} prop
  */
 function getPropTypesRow(prop) {
-  const name = `**\`${prop.name}\`**`;
+  const symbol = /unstable_/.test(prop.name)
+    ? ' <span title="Experimental">⚠️</span>'
+    : "";
+  const name = `**\`${prop.name}\`**${symbol} `;
   const desc = prop.description.replace(/\r?\n|\r/g, "");
 
   return outdent`
@@ -182,28 +212,40 @@ const tableHeader = outdent`
 | :--- |:---|:---|
 `;
 
-function getSummaryDetails(stateProps) {
-  return outdent`
-    <details><summary>${stateProps.length} state props</summary>
-    > These props are returned by the state hook. You can spread them into this component (\`{...state}\`) or pass them separately. You can also provide these props from your own state logic.
+function getSummaryDetails(otherProps) {
+  const otherPropsObjectKeys = Object.keys(otherProps);
+  const content = otherPropsObjectKeys
+    .map(title => {
+      const props = otherProps[title];
+      const rows = props.map(getPropTypesRow).join("\n");
 
-    ${tableHeader}
-    ${stateProps.map(getPropTypesRow).join("\n")}
+      return outdent`
+        <details><summary>${title} props</summary>
+        > These props are returned by the other props You can also provide these props.
 
-    </details>
-  `;
+        ${tableHeader}
+        ${rows}
+
+        </details>
+      `;
+    })
+    .join("\n\n");
+
+  return content;
 }
 
 /**
  * @param {Record<string, ReturnType<typeof createPropTypeObject>>} types
  */
 function getPropTypesMarkdown(types) {
-  const content = Object.keys(types)
+  const typesObjectKeys = Object.keys(types);
+
+  const content = typesObjectKeys
     .map(title => {
       const props = types[title];
       const rows = props.map(getPropTypesRow).join("\n");
-      const stateProps = props.stateProps || [];
-      const hiddenRows = stateProps.length ? getSummaryDetails(stateProps) : "";
+      const otherProps = props.otherProps;
+      const hiddenRows = getSummaryDetails(otherProps);
 
       const table = outdent`
         ${tableHeader}

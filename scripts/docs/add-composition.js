@@ -1,9 +1,15 @@
 const path = require("path");
 const outdent = require("outdent");
-const { Project, ts } = require("ts-morph");
+const { Project } = require("ts-morph");
 
 const { addMdContent } = require("./utils");
-const { getPublicFiles, sortSourceFiles } = require("../utils/index");
+const {
+  getPublicFiles,
+  sortSourceFiles,
+  isStatePropsDeclaration,
+  isOptionsDeclaration,
+  getEscapedName,
+} = require("../utils/index");
 
 // eslint-disable-next-line no-useless-escape
 const COMPOSITION_ADD_FLAG = /\<\!\-\- INJECT_COMPOSITION (.*) \-\-\>/m;
@@ -33,52 +39,72 @@ function getComposition(rootPath) {
   const publicPaths = Object.values(getPublicFiles(rootPath));
   const sourceFiles = project.addSourceFilesAtPaths(publicPaths);
   project.resolveSourceFileDependencies();
-
-  let compose = {};
+  const compose = {};
 
   sortSourceFiles(sourceFiles).forEach(sourceFile => {
-    sourceFile.forEachDescendant(node => {
-      const kind = node.getKind();
+    sourceFile.forEachChild(node => {
+      if (isStatePropsDeclaration(node) || isOptionsDeclaration(node)) {
+        const otherMultipleTypes = [];
+        const moduleName = getEscapedName(node);
+        const childCount = node.getChildCount();
 
-      if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
-        const typeAliasDeclaration = node
-          .getChildrenOfKind(ts.SyntaxKind.Identifier)[0]
-          .getText();
+        if (node.getChildAtIndex(childCount - 2)) {
+          const n = node.getChildAtIndex(childCount - 2);
 
-        const isOptionsType = /.+Options$/.test(typeAliasDeclaration);
+          const children = getChildrenRecursive(n).flat();
 
-        if (isOptionsType) {
-          const identifiers = node.getDescendantsOfKind(
-            ts.SyntaxKind.Identifier,
-          );
+          children.forEach(child => {
+            if (child.getKindName() === "AmpersandToken") return;
 
-          const options = identifiers
-            .map(identifier => {
-              const identifierText = identifier.getText();
+            const otherPropsName = getOtherPropsName(node, child.getText());
 
-              if (
-                /.+Options$/.test(identifierText) &&
-                identifierText !== typeAliasDeclaration
-              ) {
-                return identifierText;
-              }
-              return null;
-            })
-            .filter(Boolean);
-
-          const module = typeAliasDeclaration.replace(/Options$/, "");
-
-          const composition = options.map(option => {
-            return `use${option.replace(/Options$/, "")}`;
+            if (otherPropsName) {
+              otherMultipleTypes.push(otherPropsName);
+            }
           });
-
-          compose[module] = composition;
         }
+
+        compose[moduleName] = otherMultipleTypes;
       }
     });
   });
 
   return compose;
+}
+
+const getChildrenRecursive = (node, callStackLevel = 0) => {
+  if (node.getKindName() !== "IntersectionType" && callStackLevel === 0) {
+    return [node];
+  }
+  const children = node.getChildren();
+
+  if (callStackLevel === 2) {
+    return node;
+  }
+
+  if (children.length > 0) {
+    return children.map(child =>
+      getChildrenRecursive(child, callStackLevel + 1),
+    );
+  }
+
+  return [node];
+};
+
+/**
+ * @param {import("ts-morph").Node<Node>} node
+ */
+function getOtherPropsName(node, str) {
+  const statePropsRegex = /\w+StateProps/gm;
+  const OptionsRegex = /\w+Options/gm;
+  const finalRegex = isStatePropsDeclaration(node)
+    ? statePropsRegex
+    : OptionsRegex;
+  const matches = str.match(finalRegex);
+
+  if (matches) return matches[0];
+
+  return null;
 }
 
 function getMarkdown(compose) {
@@ -88,20 +114,35 @@ function getMarkdown(compose) {
   });
   const content = Object.keys(compose).map(moduleName => {
     const module = compose[moduleName];
+    const RoleText = "`" + "Role" + "`";
+    let composition = [];
 
-    const composition = formatter.format(
-      module.map(item => {
-        return "`" + item + "`";
-      }),
-    );
+    if (module.length > 0) {
+      composition = module.map(item => "`" + item + "`");
+    } else {
+      composition = /.+StateProps$/.test(moduleName)
+        ? ["its own state"]
+        : ["`" + RoleText + "`"];
+    }
+
+    const formattedComposition = formatter.format(composition);
+    const finalModuleName = /.+StateProps$/.test(moduleName)
+      ? moduleName.replace(/Props$/, "")
+      : moduleName.replace(/Options$/, "");
 
     return outdent`
-      - ${moduleName} uses ${composition}
+      - ${finalModuleName} uses ${formattedComposition}
     `;
   });
+
+  const finalContent = content.filter(Boolean);
+
+  const isEmpty = finalContent.length === 0;
+
+  if (isEmpty) return "";
 
   return outdent`
   ## Composition
 
-  ${content.join("\n")}`;
+  ${finalContent.join("\n")}`;
 }

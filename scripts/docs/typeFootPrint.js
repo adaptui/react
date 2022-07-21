@@ -28,19 +28,16 @@ const project = tsConfigFilePath => {
  * into plain structure without all the complexities. That is - when type B changes
  * you would explicitly see all the types/interfaces it affected.
  */
-function typeFootprint(fileName, typeName, opts) {
-  const p = project(opts?.tsConfigFilePath ?? defaultTsConfigFilePath);
-  const s = p.addSourceFileAtPath(fileName);
-  const a = s.getTypeAliasOrThrow(typeName);
-  const t = a.getType();
+function typeFootprint(node, opts) {
+  const t = node.getType();
 
   const text = footprintOfType({
     type: t,
-    node: a,
+    node,
     overrides: opts?.overrides,
   });
 
-  return `type ${typeName} = ` + text;
+  return text;
 }
 
 module.exports = { typeFootprint };
@@ -226,13 +223,13 @@ function footprintOfType(params) {
   }
 
   if (type.isIntersection()) {
-    console.log(
-      "%cty",
-      "color: #e57373",
-      type.getIntersectionTypes().forEach(type => {
-        console.log(type.getText());
-      }),
-    );
+    // console.log(
+    //   "%cty",
+    //   "color: #e57373",
+    //   type.getIntersectionTypes().forEach(type => {
+    //     console.log(type.getText());
+    //   }),
+    // );
     return type
       .getIntersectionTypes()
       .map(type => next(type))

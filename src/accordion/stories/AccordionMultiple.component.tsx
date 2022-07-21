@@ -11,7 +11,7 @@ import {
 export type AccordionMultipleProps = AccordionStateProps;
 
 export const AccordionMultiple: React.FC<AccordionMultipleProps> = props => {
-  const state = useAccordionState(props);
+  const state = useAccordionState({ allowMultiple: true, ...props });
 
   return (
     <Accordion state={state}>

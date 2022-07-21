@@ -40,7 +40,7 @@ export default {
   }),
 } as Meta;
 
-export const Default: Story = { args: { allowMultiple: true } };
+export const Default: Story = { args: {} };
 
 export const DefaultFirstIdSelected: Story = {
   ...Default,

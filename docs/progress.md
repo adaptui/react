@@ -4,50 +4,29 @@
 of time to load. It follows
 [WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
 
-## Table of Contents
-
-- [Usage](#usage)
-- [Accessibility Requirement](#accessibility-requirement)
-- [Composition](#composition)
-- [Props](#props)
-  - [`useProgressState`](#useprogressstate)
-  - [`Progress`](#progress)
+<!-- INJECT_TOC -->
 
 ## Usage
 
-```js
-import * as React from "react";
+<!-- IMPORT_EXAMPLE src/progress/stories/templates/ProgressBasicJsx.ts -->
 
-import {
-  Progress as AdaptUIProgress,
-  useProgressState,
-} from "@adaptui/react";
+<!-- CODESANDBOX
+link_title: Progress Basic
+js: src/progress/stories/templates/ProgressBasicJsx.ts
+css: src/progress/stories/templates/ProgressBasicCss.ts
+-->
 
-export const Progress = props => {
-  const state = useProgressState(props);
-  const { value, percent, isIndeterminate } = state;
+<!-- CODESANDBOX
+link_title: Progress Linear
+js: src/progress/stories/templates/LinearProgressJsx.ts
+deps: ['@emotion/css']
+-->
 
-  return (
-    <div className="progress">
-      <AdaptUIProgress
-        {...state}
-        value={value}
-        aria-label="progress"
-        style={{ width: `${percent}%` }}
-        className={`progressbar ${isIndeterminate ? "indeterminate" : ""}`}
-      />
-    </div>
-  );
-};
-
-export default Progress;
-```
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2bwye)
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/htpvy)
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2z6dk)
+<!-- CODESANDBOX
+link_title: Progress Circular
+js: src/progress/stories/templates/CircularProgressJsx.ts
+deps: ['@emotion/css']
+-->
 
 ## Accessibility Requirement
 
@@ -55,30 +34,21 @@ export default Progress;
   a page, you should use `aria-describedby` to point to the status, and set the
   `aria-busy `attribute to `true` on the region until it is finished loading.
 
-## Composition
-
-- Progress uses [useRole](https://reakit.io/docs/role)
+<!-- INJECT_COMPOSITION src/progress -->
 
 ## Props
 
-### `useProgressState`
+### `ProgressOptions`
+
+| Name        | Type                                                                                                                                                                             | Description                                     |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| **`as`**    | <code>T \| undefined</code>                                                                                                                                                      |                                                 |
+| **`state`** | <code title="{ value: number \| null; min: number; max: number; isIndeterminate: boolean; percent: number \| null; }">{ value: number \| null; min: number; max: numbe...</code> | Object returned by the `useProgressState` hook. |
+
+### `ProgressStateProps`
 
 | Name        | Type                        | Description                                                                                       |
 | :---------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
 | **`value`** | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
 | **`min`**   | <code>number</code>         | The minimum value of the progress                                                                 |
 | **`max`**   | <code>number</code>         | The maximum value of the                                                                          |
-
-### `Progress`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name                  | Type                        | Description                                                                                       |
-| :-------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
-| **`value`**           | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
-| **`min`**             | <code>number</code>         | The minimum value of the progress                                                                 |
-| **`max`**             | <code>number</code>         | The maximum value of the                                                                          |
-| **`isIndeterminate`** | <code>boolean</code>        | `true` if `value` is `null`                                                                       |
-
-</details>

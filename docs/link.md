@@ -7,28 +7,17 @@ different compositions. It follows the
 and
 [accessibilty properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-11)
 
-## Table of Contents
-
-- [Usage](#usage)
+<!-- INJECT_TOC -->
 
 ## Usage
 
-```js
-import * as React from "react";
+<!-- IMPORT_EXAMPLE src/link/stories/templates/LinkBasicJsx.ts -->
 
-import { Link } from "@adaptui/react";
+<!-- CODESANDBOX
+link_title: Link
+js: src/link/stories/templates/LinkBasicJsx.ts
+-->
 
-export const LinkBasic = props => {
-  return <Link {...props} />;
-};
+<!-- INJECT_COMPOSITION src/link -->
 
-export default LinkBasic;
-```
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/k74wwe)
-
-## Composition
-
-- Link uses `useCommand`
-
-<!-- INJECT_PROPS src/link -->
+## Props
