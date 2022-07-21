@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 
 import CalendarBasic from "../../calendar/stories/CalendarBasic.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
@@ -18,7 +16,6 @@ import { CalendarIcon } from "./Utils.component";
 export type DatePickerBasicProps = DatePickerBaseStateProps & {};
 
 export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
-  const { locale } = useLocale();
   const state = useDatePickerBaseState({ ...props, gutter: 10 });
   const datepicker = useDatePickerState({ ...props, state });
 
@@ -29,11 +26,7 @@ export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
         className="datepicker__header"
         aria-label="DatePicker"
       >
-        <DateFieldBasic
-          {...datepicker.fieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
-        />
+        <DateFieldBasic {...datepicker.fieldProps} />
         <DatePickerDisclosure
           state={datepicker}
           className="datepicker__trigger"
@@ -42,11 +35,7 @@ export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
         </DatePickerDisclosure>
         {state.popover.visible && (
           <DatePickerPopover state={datepicker} className="popover">
-            <CalendarBasic
-              {...datepicker.calendarProps}
-              locale={locale}
-              createCalendar={createCalendar}
-            />
+            <CalendarBasic {...datepicker.calendarProps} />
           </DatePickerPopover>
         )}
       </DatePickerGroup>

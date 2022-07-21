@@ -15,15 +15,17 @@ const transpileTs = require("../utils/transpile-ts");
 const addPackageName = string =>
   string
     .replace("../../index", "@adaptui/react")
-    .replace("../../../index", "@adaptui/react");
+    .replace("../../../index", "@adaptui/react")
+    .replace(/\.\.\/\.\.\/.+stories(.+.component)/gm, ".$1");
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const createTemplateFile = (code, name, type, dir) => {
+const createTemplateFile = (code, name, type, dir, pathName) => {
   const componentName = `${name}${capitalizeFirstLetter(type)}`;
   const finalCode = addPackageName(code);
+
   const template = outdent`
   export const ${componentName} = ${JSON.stringify(finalCode)}
 
@@ -45,11 +47,41 @@ const generatePreviewTemplateFiles = filePath => {
   const templateDir = joinCwd(templatesFolderPath);
   createDirectory(templateDir);
 
-  let code = readFile(joinCwd(filePath));
+  const code = readFile(joinCwd(filePath));
   createTemplateFile(code, componentName, componentType, templateDir);
 
   const jsCode = transpileTs(code);
   createTemplateFile(jsCode, componentName, "jsx", templateDir);
+
+  try {
+    const otherStoryComponentRegex = /\.\.\/.+\/stories\/.+/gm;
+    const otherStoryComponentPaths = code.match(otherStoryComponentRegex);
+
+    if (otherStoryComponentPaths?.length > 0) {
+      otherStoryComponentPaths.forEach(path => {
+        const componentName = path
+          .replace(/\.\.\/.+\//gm, "")
+          .replace(/.component";/gm, "");
+        const componentFilePath = path.replace(
+          /\.\.\/\.\.\/(.+)";/gm,
+          "src/$1.tsx",
+        );
+
+        const otherStoryComponentCode = readFile(joinCwd(componentFilePath));
+        createTemplateFile(
+          otherStoryComponentCode,
+          componentName,
+          "tsx",
+          templateDir,
+        );
+
+        const jsCode = transpileTs(otherStoryComponentCode);
+        createTemplateFile(jsCode, componentName, "jsx", templateDir);
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
   try {
     const cssFilePath = joinCwd(
@@ -59,8 +91,8 @@ const generatePreviewTemplateFiles = filePath => {
       const cssCode = readFile(cssFilePath);
       createTemplateFile(cssCode, componentName, "css", templateDir);
     }
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 

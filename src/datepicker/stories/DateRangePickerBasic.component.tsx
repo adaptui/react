@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 
 import CalendarRange from "../../calendar/stories/CalendarRange.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
@@ -13,7 +11,6 @@ import {
   useDateRangePickerState,
 } from "../../index";
 
-import DatePickerBasic from "./DatePickerBasic.component";
 import { CalendarIcon } from "./Utils.component";
 
 export type DateRangePickerBasicProps = DateRangePickerBaseStateProps & {};
@@ -21,7 +18,6 @@ export type DateRangePickerBasicProps = DateRangePickerBaseStateProps & {};
 export const DateRangePickerBasic: React.FC<
   DateRangePickerBasicProps
 > = props => {
-  const { locale } = useLocale();
   const state = useDateRangePickerBaseState({ ...props, gutter: 10 });
   const daterangepicker = useDateRangePickerState({ ...props, state });
 
@@ -32,17 +28,9 @@ export const DateRangePickerBasic: React.FC<
         className="datepicker__header"
         aria-label="DatePicker"
       >
-        <DateFieldBasic
-          {...daterangepicker.startFieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
-        />
+        <DateFieldBasic {...daterangepicker.startFieldProps} />
         <div aria-hidden="true" className="datepicker__dash" />
-        <DateFieldBasic
-          {...daterangepicker.endFieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
-        />
+        <DateFieldBasic {...daterangepicker.endFieldProps} />
         <DatePickerDisclosure
           state={daterangepicker}
           className="datepicker__trigger"
@@ -51,11 +39,7 @@ export const DateRangePickerBasic: React.FC<
         </DatePickerDisclosure>
         {state.popover.visible && (
           <DatePickerPopover state={daterangepicker} className="popover">
-            <CalendarRange
-              {...daterangepicker.calendarProps}
-              locale={locale}
-              createCalendar={createCalendar}
-            />
+            <CalendarRange {...daterangepicker.calendarProps} />
           </DatePickerPopover>
         )}
       </DatePickerGroup>
@@ -63,4 +47,4 @@ export const DateRangePickerBasic: React.FC<
   );
 };
 
-export default DatePickerBasic;
+export default DateRangePickerBasic;

@@ -21,13 +21,13 @@ navigaiton & focus management. Support all the features as React Aria's
 link_title: Calendar
 js: src/calendar/stories/templates/CalendarBasicJsx.ts
 css: src/calendar/stories/templates/CalendarBasicCss.ts
-utils: src/calendar/stories/templates/UtilsJsx.ts
+files: [src/calendar/stories/templates/UtilsJsx.ts]
 -->
 <!-- CODESANDBOX
 link_title: Calendar TS
 tsx: src/calendar/stories/templates/CalendarBasicTsx.ts
 css: src/calendar/stories/templates/CalendarBasicCss.ts
-utils: src/calendar/stories/templates/UtilsTsx.ts
+files: [src/calendar/stories/templates/UtilsTsx.ts]
 -->
 
 ### Range Calendar
@@ -79,13 +79,13 @@ Also we can customize and style the ranges with CSS attribute selectors
 link_title: Range Calendar
 js: src/calendar/stories/templates/CalendarRangeJsx.ts
 css: src/calendar/stories/templates/CalendarRangeCss.ts
-utils: src/calendar/stories/templates/UtilsJsx.ts
+files: [src/calendar/stories/templates/UtilsJsx.ts]
 -->
 <!-- CODESANDBOX
 link_title: Range Calendar TS
 tsx: src/calendar/stories/templates/CalendarRangeTsx.ts
 css: src/calendar/stories/templates/CalendarRangeCss.ts
-utils: src/calendar/stories/templates/UtilsTsx.ts
+files: [src/calendar/stories/templates/UtilsTsx.ts]
 -->
 
 ## Other Examples
@@ -94,26 +94,26 @@ utils: src/calendar/stories/templates/UtilsTsx.ts
 link_title: Calendar Styled
 js: src/calendar/stories/templates/CalendarStyledJsx.ts
 css: src/calendar/stories/templates/CalendarBasicCss.ts
-utils: src/calendar/stories/templates/UtilsJsx.ts
+files: [src/calendar/stories/templates/UtilsJsx.ts]
 -->
 <!-- CODESANDBOX
 link_title: Calendar Styled TS
 tsx: src/calendar/stories/templates/CalendarStyledTsx.ts
 css: src/calendar/stories/templates/CalendarBasicCss.ts
-utils: src/calendar/stories/templates/UtilsTsx.ts
+files: [src/calendar/stories/templates/UtilsTsx.ts]
 -->
 
 <!-- CODESANDBOX
 link_title: Calendar Range Styled
 js: src/calendar/stories/templates/CalendarRangeStyledJsx.ts
 css: src/calendar/stories/templates/CalendarRangeCss.ts
-utils: src/calendar/stories/templates/UtilsJsx.ts
+files: [src/calendar/stories/templates/UtilsJsx.ts]
 -->
 <!-- CODESANDBOX
 link_title: Calendar Range Styled TS
 tsx: src/calendar/stories/templates/CalendarRangeStyledTsx.ts
 css: src/calendar/stories/templates/CalendarRangeCss.ts
-utils: src/calendar/stories/templates/UtilsTsx.ts
+files: [src/calendar/stories/templates/UtilsTsx.ts]
 -->
 
 <!-- ADD_COMPOSITION src/calendar -->

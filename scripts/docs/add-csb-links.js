@@ -43,30 +43,37 @@ const addCsbLinks = async docsTemplate => {
 module.exports = { addCsbLinks };
 
 const getSandboxShortURL = async parsed => {
+  const files = {};
+
+  if (parsed.js) {
+    files["src/App.js"] = extractCode(joinCwd(parsed.js));
+  }
+  if (parsed.tsx) {
+    files["src/App.tsx"] = extractCode(joinCwd(parsed.tsx));
+  }
+  if (parsed.css) {
+    files["src/styles.css"] = extractCode(joinCwd(parsed.css));
+  }
+
+  const replacer = (match, p1, p2) => {
+    return `src/${p1}.component.${p2.toLowerCase()}sx`;
+  };
+
+  if (parsed.files) {
+    parsed.files.forEach(file => {
+      const fileName = file.replace(/.+\/templates\/(.+)(J|T)sx\.ts/, replacer);
+      files[fileName] = extractCode(joinCwd(file));
+    });
+  }
+
   const linkTitle = parsed.link_title;
 
   let body = "";
 
   if (Object.keys(parsed).includes("js")) {
-    body = getJSSandboxContents(
-      {
-        js: parsed.js ? extractCode(joinCwd(parsed.js)) : undefined,
-        css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
-        utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
-      },
-      parsed.deps && parsed.deps,
-      linkTitle,
-    );
+    body = getJSSandboxContents(files, parsed.deps && parsed.deps, linkTitle);
   } else {
-    body = getTSSandboxContents(
-      {
-        tsx: parsed.tsx ? extractCode(joinCwd(parsed.tsx)) : undefined,
-        css: parsed.css ? extractCode(joinCwd(parsed.css)) : undefined,
-        utils: parsed.utils ? extractCode(joinCwd(parsed.utils)) : undefined,
-      },
-      parsed.deps && parsed.deps,
-      linkTitle,
-    );
+    body = getTSSandboxContents(files, parsed.deps && parsed.deps, linkTitle);
   }
 
   // fetching the sandbox_id, otherwise the URL would be longer
@@ -100,6 +107,10 @@ const getJSSandboxContents = (files, extraDeps, linkTitle) => {
   };
   const description = `AdaptUI ${linkTitle} React Typescript example`;
 
+  const finalFiles = Object.keys(files).reduce((acc, curr) => {
+    return { ...acc, [curr]: { content: files[curr] } };
+  }, {});
+
   return JSON.stringify({
     files: {
       "src/index.js": {
@@ -115,11 +126,7 @@ const getJSSandboxContents = (files, extraDeps, linkTitle) => {
           root.render(<App />);
         `,
       },
-      "src/App.js": { content: files.js || "" },
-      "src/styles.css": { content: files.css || "" },
-      ...(files.utils
-        ? { "src/Utils.component.js": { content: files.utils } }
-        : {}),
+      ...finalFiles,
       "package.json": {
         content: {
           name: linkTitle,
@@ -163,6 +170,10 @@ const getTSSandboxContents = (files, extraDeps, linkTitle) => {
   };
   const description = `AdaptUI ${linkTitle} React Javascript example`;
 
+  const finalFiles = Object.keys(files).reduce((acc, curr) => {
+    return { ...acc, [curr]: { content: files[curr] } };
+  }, {});
+
   return JSON.stringify({
     files: {
       "src/index.tsx": {
@@ -180,9 +191,7 @@ const getTSSandboxContents = (files, extraDeps, linkTitle) => {
       },
       "src/App.tsx": { content: files.tsx || "" },
       "src/styles.css": { content: files.css || "" },
-      ...(files.utils
-        ? { "src/Utils.component.tsx": { content: files.utils } }
-        : {}),
+      ...finalFiles,
       "package.json": {
         content: {
           name: linkTitle,
