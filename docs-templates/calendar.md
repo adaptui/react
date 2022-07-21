@@ -4,7 +4,10 @@
 allowing you to style them however. All the date, month & year calculations are
 done internally to provide the ease of use. It follows the
 [Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
-navigaiton & focus management.
+navigaiton & focus management. Support all the features as React Aria's
+[useCalendar](https://react-spectrum.adobe.com/react-aria/useCalendar.html#features)
+&
+[useRangeCalendar](https://react-spectrum.adobe.com/react-aria/useRangeCalendar.html#features)
 
 <!-- ADD_TOC -->
 

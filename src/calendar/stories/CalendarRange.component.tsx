@@ -34,11 +34,7 @@ export type CalendarRangeProps = Omit<
 export const CalendarRange: React.FC<CalendarRangeProps> = props => {
   let { locale } = useLocale();
 
-  const state = useRangeCalendarBaseState({
-    locale: locale,
-    createCalendar: createCalendar,
-    ...props,
-  });
+  const state = useRangeCalendarBaseState({ locale, createCalendar, ...props });
   const calendar = useRangeCalendarState({ ...props, state });
 
   return (

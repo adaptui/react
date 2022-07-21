@@ -1,4 +1,6 @@
 import React from "react";
+import { createCalendar } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
 
 import {
   DateField,
@@ -8,10 +10,15 @@ import {
   useDateFieldState,
 } from "../../index";
 
-export type DateFieldStyledProps = DateFieldBaseStateProps & {};
+export type DateFieldStyledProps = Omit<
+  DateFieldBaseStateProps,
+  "locale" | "createCalendar"
+> & {};
 
 export const DateFieldStyled: React.FC<DateFieldStyledProps> = props => {
-  const state = useDateFieldBaseState({ ...props });
+  let { locale } = useLocale();
+
+  const state = useDateFieldBaseState({ locale, createCalendar, ...props });
   const datefield = useDateFieldState({ ...props, state });
 
   return (

@@ -4,7 +4,10 @@
 allowing you to style them however. All the date, month & year calculations are
 done internally to provide the ease of use. It follows the
 [Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
-navigaiton & focus management.
+navigaiton & focus management. Support all the features as React Aria's
+[useCalendar](https://react-spectrum.adobe.com/react-aria/useCalendar.html#features)
+&
+[useRangeCalendar](https://react-spectrum.adobe.com/react-aria/useRangeCalendar.html#features)
 
 ## Table of Contents
 
@@ -62,11 +65,7 @@ import { ChevronLeft, ChevronRight } from "./Utils.component";
 export const CalendarBasic = props => {
   let { locale } = useLocale();
 
-  const state = useCalendarBaseState({
-    locale: locale,
-    createCalendar: createCalendar,
-    ...props,
-  });
+  const state = useCalendarBaseState({ locale, createCalendar, ...props });
   const calendar = useCalendarState({ ...props, state });
 
   return (
@@ -146,8 +145,8 @@ const CalendarCellComp = props => {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/jomxy9)
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/71qfrc)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8etxc0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5by8vl)
 
 ### Range Calendar
 
@@ -194,16 +193,16 @@ Also we can customize and style the ranges with CSS attribute selectors
 }
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/xheffs)
-[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/sjox17)
+[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/9mwysg)
+[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/uj6zx9)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ynlty4)
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/smok6q)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/xwt87e)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/5bivzk)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Range%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0mu0zd)
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Range%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bt8bhs)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Range%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/t8rnvf)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Range%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/pjwlqp)
 
 ## Composition
 

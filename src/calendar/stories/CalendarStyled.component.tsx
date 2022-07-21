@@ -34,11 +34,7 @@ export type CalendarStyledProps = Omit<
 export const CalendarStyled: React.FC<CalendarStyledProps> = props => {
   let { locale } = useLocale();
 
-  const state = useCalendarBaseState({
-    locale: locale,
-    createCalendar: createCalendar,
-    ...props,
-  });
+  const state = useCalendarBaseState({ locale, createCalendar, ...props });
   const calendar = useCalendarState({ ...props, state });
 
   return (
