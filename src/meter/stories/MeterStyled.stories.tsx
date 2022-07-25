@@ -4,13 +4,13 @@ import { createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/MeterStyledJsx";
 import ts from "./templates/MeterStyledTsx";
-import { MeterBasic } from "./MeterStyled.component";
+import { MeterStyled } from "./MeterStyled.component";
 
-type Meta = ComponentMeta<typeof MeterBasic>;
-type Story = ComponentStoryObj<typeof MeterBasic>;
+type Meta = ComponentMeta<typeof MeterStyled>;
+type Story = ComponentStoryObj<typeof MeterStyled>;
 
 export default {
-  component: MeterBasic,
+  component: MeterStyled,
   title: "Meter/Styled",
   parameters: {
     layout: "centered",

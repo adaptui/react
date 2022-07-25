@@ -1,15 +1,16 @@
-import { usePopover } from "ariakit";
-import { useEvent } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
-import { As, Options, Props } from "ariakit-utils/types";
+import { PopoverOptions, usePopover } from "ariakit";
+import { useEvent } from "ariakit-utils";
+import { As, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
+import { DateRangePickerState } from "../daterange-picker";
+
 import { DatePickerState } from "./datepicker-state";
-import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerPopover = createHook<DatePickerPopoverOptions>(
   ({ state, ...props }) => {
@@ -45,9 +46,12 @@ export const DatePickerPopover = createComponent<DatePickerPopoverOptions>(
   },
 );
 
-export type DatePickerPopoverOptions<T extends As = "span"> = Options<T> & {
+export type DatePickerPopoverOptions<T extends As = "span"> = Omit<
+  PopoverOptions<T>,
+  "state"
+> & {
   /**
-   * Object returned by the `useDatePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

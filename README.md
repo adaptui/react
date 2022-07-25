@@ -26,15 +26,19 @@ System.
 
 ## ⚓ Installation
 
-```sh
-# npm
-npm install @adaptui/react
+### npm
 
-# Yarn
+```sh
+npm install @adaptui/react
+```
+
+### Yarn
+
+```sh
 yarn add @adaptui/react
 ```
 
-> Make sure `react react-dom` is installed.
+> Make sure `react` and `react-dom` is installed.
 
 ## :beginner: Getting started
 
@@ -45,21 +49,19 @@ Check out our [getting started docs](/docs/getting-started.md)
 - [Accordion](docs/accordion.md)
 - [Breadcrumbs](docs/breadcrumb.md)
 - [Calendar](docs/calendar.md)
-- [Checkbox](docs/checkbox.md)
-- [Date Picker](docs/datepicker.md)
-- [Disclosure](docs/disclosure.md)
+- [RangeCalendar](docs/range-calendar.md)
+- [DateField](docs/datefield.md)
+- [DatePicker](docs/datepicker.md)
+- [DateRangePicker](docs/daterange-picker.md)
+- [TimeField](docs/timefield.md)
 - [Drawer](docs/drawer.md)
+- [Disclosure](docs/disclosure.md)
 - [Link](docs/link.md)
 - [Meter](docs/meter.md)
-- [Number Input](docs/number-input.md)
+- [Number field](docs/numberfield.md)
 - [Pagination](docs/pagination.md)
-- [Picker Base](docs/picker-base.md)
 - [Progress](docs/progress.md)
-- [Radio](docs/radio.md)
-- [Segment](docs/segment.md)
-- [Select](docs/select.md)
 - [Slider](docs/slider.md)
-- [Time Picker](docs/timepicker.md)
 - [Toast](docs/toast.md)
 
 > **Note:** As the 0.#.# version number suggests that we are still very much

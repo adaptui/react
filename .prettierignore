@@ -55,6 +55,6 @@ yarn.lock
 dist
 __js
 templates
-docs
+/docs
 CHANGELOG.md
 .yalc

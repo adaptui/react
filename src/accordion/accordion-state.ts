@@ -12,22 +12,7 @@ import { useControlledState, useLiveRef } from "ariakit-utils/hooks";
 import { useStorePublisher } from "ariakit-utils/store";
 import { SetState } from "ariakit-utils/types";
 
-type Item = CompositeState["items"][number] & {
-  dimmed?: boolean;
-};
-
-type Panel = CollectionState["items"][number] & {
-  id: string;
-  accordionId?: string | null;
-};
-
-function findEnabledAccordionById(items: Item[], id?: string | null) {
-  return items.find(item => item.id === id && !item.disabled && !item.dimmed);
-}
-
-function findFirstEnabledAccordion(items: Item[]) {
-  return items.find(item => !item.disabled && !item.dimmed);
-}
+import { findEnabledAccordionById, findFirstEnabledAccordion } from "./__utils";
 
 /**
  * Provides state for the `Accordion` components.
@@ -76,74 +61,54 @@ export function useAccordionState({
     [allowMultiple, setSelectedId],
   );
 
-  // Automatically set selectedId if it's undefined.
+  // First, we try to set selectedId based on the current active accordion.
+  const setActiveSelectedId = useCallback(
+    (isFirstEnabledAccordionSelected: boolean) => {
+      if (
+        isFirstEnabledAccordionSelected &&
+        firstEnabledAccordionSelected.current === true
+      )
+        return;
+
+      const activeId = compositeRef.current.activeId;
+      if (!activeId) return;
+
+      const accordion = findEnabledAccordionById(composite.items, activeId);
+      if (!accordion) {
+        // If there's no active accordion or the active accordion is dimmed, we get the first
+        // enabled accordion instead.
+        const firstEnabledAccordion = findFirstEnabledAccordion(
+          composite.items,
+        );
+        if (!firstEnabledAccordion) return;
+
+        select(firstEnabledAccordion?.id);
+
+        return;
+      }
+
+      if (isFirstEnabledAccordionSelected === true) {
+        firstEnabledAccordionSelected.current = true;
+      }
+
+      select(activeId);
+    },
+    [composite.items, compositeRef, select],
+  );
+
+  // Automatically set selectedId if it's undefined if !allowToggle
   useEffect(() => {
-    if (!shouldSelectFirstId) return;
-    if (allowToggle) return;
-    if (selectedId !== undefined) return;
+    if (!shouldSelectFirstId || allowToggle || selectedId !== undefined) return;
 
-    // First, we try to set selectedId based on the current active accordion.
-    const activeId = compositeRef.current.activeId;
-    if (!activeId) return;
+    setActiveSelectedId(false);
+  }, [allowToggle, selectedId, setActiveSelectedId, shouldSelectFirstId]);
 
-    const accordion = findEnabledAccordionById(composite.items, activeId);
-    if (!accordion) {
-      // If there's no active accordion or the active accordion is dimmed, we get the first
-      // enabled accordion instead.
-      const firstEnabledAccordion = findFirstEnabledAccordion(composite.items);
-      if (!firstEnabledAccordion) return;
-
-      select(firstEnabledAccordion?.id);
-
-      return;
-    }
-
-    select(activeId);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    allowToggle,
-    shouldSelectFirstId,
-    selectedId,
-    composite.items,
-    allowMultiple,
-    setSelectedId,
-  ]);
-
-  // Automatically set selectedId if it's undefined.
+  // Automatically set selectedId if it's undefined if allowToggle
   useEffect(() => {
     if (!shouldSelectFirstId || !allowToggle) return;
-    if (firstEnabledAccordionSelected.current === true) return;
 
-    // First, we try to set selectedId based on the current active accordion.
-    const activeId = compositeRef.current.activeId;
-    if (!activeId) return;
-
-    const accordion = findEnabledAccordionById(composite.items, activeId);
-    if (!accordion) {
-      // If there's no active accordion or the active accordion is dimmed, we get the first
-      // enabled accordion instead.
-      const firstEnabledAccordion = findFirstEnabledAccordion(composite.items);
-      if (!firstEnabledAccordion) return;
-
-      select(firstEnabledAccordion?.id);
-
-      return;
-    }
-
-    firstEnabledAccordionSelected.current = true;
-
-    select(activeId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    allowToggle,
-    shouldSelectFirstId,
-    selectedId,
-    composite.items,
-    setSelectedId,
-    allowMultiple,
-    select,
-  ]);
+    setActiveSelectedId(true);
+  }, [allowToggle, shouldSelectFirstId, setActiveSelectedId]);
 
   // Keep panels accordionIds in sync with the current accordions.
   useEffect(() => {
@@ -228,6 +193,15 @@ export function useAccordionState({
 
   return useStorePublisher(state);
 }
+
+export type Item = CompositeState["items"][number] & {
+  dimmed?: boolean;
+};
+
+export type Panel = CollectionState["items"][number] & {
+  id: string;
+  accordionId?: string | null;
+};
 
 export type AccordionState = CompositeState<Item> & {
   /**

@@ -1,32 +1,43 @@
 # Disclosure
 
-Accessible Disclosure component that controls visibility of a section of
-content.. It follows the
-[WAI-ARIA Disclosure Pattern](https://www.w3.org/TR/wai-aria-practices/#disclosure)
+`Disclosure` component that controls visibility of a section of content. It
+follows the
+[WAI-ARIA Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)
 for it's
-[accessibility properties](https://www.w3.org/TR/wai-aria-practices/#wai-aria-roles-states-and-properties-8).
+[keyboard interaction](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/#:~:text=Top%2DLevel%20Links-,Keyboard%20Interaction,-When%20the%20disclosure)
+&
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/#:~:text=the%20disclosure%20content.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20that).
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/disclosure/stories/templates/DisclosureBasicJsx.ts -->
+### Horizontal Disclosure
+
+<!-- ADD_EXAMPLE src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts -->
 
 <!-- CODESANDBOX
-link_title: Disclosure Basic
-js: src/disclosure/stories/templates/DisclosureBasicJsx.ts
+link_title: Disclosure Horizontal
+js: src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Disclosure Horizontal
+tsx: src/disclosure/stories/templates/DisclosureHorizontalCollapseBasicTsx.ts
 -->
 
-## Accessibility Requirement
+### Vertical Disclosure
 
-- `DisclosureButton` extends the accessibility features of
-  [Button](https://www.w3.org/TR/wai-aria-practices/#button).
-- `DisclosureButton` has a value specified for `aria-controls `that refers to
-  `DisclosureContent`.
-- When `DisclosureContent` is visible, `DisclosureButton` is `aria-expanded` set
-  to `true`.
-- When `DisclosureContent` is hidden, `DisclosureButton` is set to `false`.
+<!-- ADD_EXAMPLE src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts -->
 
-<!-- INJECT_COMPOSITION src/disclosure -->
+<!-- CODESANDBOX
+link_title: Disclosure Vertical
+js: src/disclosure/stories/templates/DisclosureVerticalCollapseBasicJsx.ts
+-->
+<!-- CODESANDBOX
+link_title: Disclosure Vertical
+tsx: src/disclosure/stories/templates/DisclosureVerticalCollapseBasicTsx.ts
+-->
 
-<!-- INJECT_PROPS src/disclosure -->
+<!-- ADD_COMPOSITION src/disclosure -->
+
+<!-- ADD_PROPS src/disclosure -->

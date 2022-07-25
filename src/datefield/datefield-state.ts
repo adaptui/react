@@ -1,14 +1,17 @@
 import { RefObject, useRef } from "react";
 import { DateValue } from "@internationalized/date";
-import { DateFieldAria, useDateField } from "@react-aria/datepicker";
-import { AriaDatePickerProps } from "@react-types/datepicker";
+import {
+  AriaDateFieldProps,
+  DateFieldAria,
+  useDateField,
+} from "@react-aria/datepicker";
 
 import { DateFieldBaseState } from "./datefield-base-state";
 
-export function useDateFieldState({
+export function useDateFieldState<T extends DateValue>({
   state,
   ...props
-}: DateFieldStateProps): DateFieldState {
+}: DateFieldStateProps<T>): DateFieldState {
   const ref = useRef<HTMLElement>(null);
   const datefield = useDateField(props, state, ref);
 
@@ -22,15 +25,7 @@ export type DateFieldState = DateFieldAria & {
   ref: RefObject<HTMLElement>;
 };
 
-export type DateFieldStateProps = Omit<
-  AriaDatePickerProps<DateValue>,
-  | "value"
-  | "defaultValue"
-  | "onChange"
-  | "minValue"
-  | "maxValue"
-  | "placeholderValue"
-> & {
+export type DateFieldStateProps<T extends DateValue> = AriaDateFieldProps<T> & {
   /**
    * Object returned by the `useDateFieldBaseState` hook.
    */

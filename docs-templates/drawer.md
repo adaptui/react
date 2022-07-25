@@ -1,21 +1,31 @@
 # Drawer
 
-`Drawer` component was built on top of [Dialog](https://reakit.io/docs/dialog/)
-component to provide the drawer ability from four ends. It follows the
-[Dialog Accessibility](https://reakit.io/docs/dialog/#accessibility) features.
+`Drawer` component that controls visibility of a section of content by following
+the
+[WAI-ARIA Dialog(Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/)
+for it's
+[keyboard interaction](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/#:~:text=choosing%20a%20date.-,Keyboard%20Interaction,-In%20the%20following)
+&
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/#:~:text=or%20cancel%20button.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20that).
 
-<!-- INJECT_TOC -->
+<!-- ADD_TOC -->
 
 ## Usage
 
-<!-- IMPORT_EXAMPLE src/drawer/stories/templates/DrawerBasicJsx.ts -->
+<!-- ADD_EXAMPLE src/drawer/stories/templates/DrawerBasicJsx.ts -->
 
 <!-- CODESANDBOX
 link_title: Drawer
 js: src/drawer/stories/templates/DrawerBasicJsx.ts
-deps: ["@emotion/css"]
+css: src/drawer/stories/templates/DrawerBasicCss.ts
 -->
 
-<!-- INJECT_COMPOSITION src/drawer -->
+<!-- CODESANDBOX
+link_title: Drawer TS
+tsx: src/drawer/stories/templates/DrawerBasicTsx.ts
+css: src/drawer/stories/templates/DrawerBasicCss.ts
+-->
 
-<!-- INJECT_PROPS src/drawer -->
+<!-- ADD_COMPOSITION src/drawer -->
+
+<!-- ADD_PROPS src/drawer -->

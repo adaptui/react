@@ -6,8 +6,9 @@ import {
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
+import { DateRangePickerState } from "../daterange-picker";
+
 import { DatePickerState } from "./datepicker-state";
-import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerLabel = createHook<DatePickerLabelOptions>(
   ({ state, ...props }) => {
@@ -27,7 +28,7 @@ export const DatePickerLabel = createComponent<DatePickerLabelOptions>(
 
 export type DatePickerLabelOptions<T extends As = "span"> = Options<T> & {
   /**
-   * Object returned by the `useDatePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

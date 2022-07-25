@@ -8,8 +8,10 @@ import {
   useAccordionState,
 } from "../../index";
 
-// Styled based on https://www.w3.org/TR/wai-aria-practices-1.2/examples/accordion/accordion.html
-export const AccordionStyled: React.FC<AccordionStateProps> = props => {
+export type AccordionStyledProps = AccordionStateProps;
+
+// Styled based on https://www.w3.org/WAI/ARIA/apg/example-index/accordion/accordion.html
+export const AccordionStyled: React.FC<AccordionStyledProps> = props => {
   const state = useAccordionState(props);
 
   return (
@@ -138,4 +140,4 @@ export const AccordionStyled: React.FC<AccordionStateProps> = props => {
   );
 };
 
-export default Accordion;
+export default AccordionStyled;

@@ -3,7 +3,7 @@ import { css, keyframes } from "@emotion/css";
 
 import { Meter, MeterState, MeterStateProps, useMeterState } from "../../index";
 
-export interface MeterBasicProps extends MeterStateProps {
+export interface MeterStyledProps extends MeterStateProps {
   /**
    * Adds a label to meter.
    * @default false
@@ -21,9 +21,17 @@ export interface MeterBasicProps extends MeterStateProps {
   withStripeAnimation?: boolean;
 }
 
-export const MeterBasic: React.FC<MeterBasicProps> = props => {
+export const MeterStyled: React.FC<MeterStyledProps> = props => {
   const { withLabel = false, withStripe, withStripeAnimation, ...rest } = props;
-  const state = useMeterState(rest);
+  const state = useMeterState({
+    value: 5,
+    min: 0,
+    max: 10,
+    low: 0,
+    high: 10,
+    optimum: 5,
+    ...rest,
+  });
 
   return (
     <div className={meterStyle}>
@@ -38,7 +46,7 @@ export const MeterBasic: React.FC<MeterBasicProps> = props => {
   );
 };
 
-export default Meter;
+export default MeterStyled;
 
 // CSS Styles from https://css-tricks.com/html5-meter-element/
 const meterStyle = css({
@@ -89,7 +97,7 @@ const generateStripe = {
   backgroundSize: "1rem 1rem",
 };
 
-function meterBarStyle(meter: MeterState, props: MeterBasicProps) {
+function meterBarStyle(meter: MeterState, props: MeterStyledProps) {
   const { percent, status } = meter;
   const { withStripe, withStripeAnimation } = props;
 

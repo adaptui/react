@@ -1,9 +1,9 @@
-import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useForkRef } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
@@ -28,7 +28,7 @@ export const CalendarCellButton = createComponent<CalendarCellButtonOptions>(
 
 export type CalendarCellButtonOptions<T extends As = "span"> = Options<T> & {
   /**
-   * Object returned by the `useCalendarCellButtonState` hook.
+   * Object returned by the `useCalendarCellState` hook.
    */
   state: CalendarCellState;
 };

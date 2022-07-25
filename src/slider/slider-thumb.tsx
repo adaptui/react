@@ -1,10 +1,10 @@
 import * as React from "react";
-import { VisuallyHidden } from "ariakit";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { VisuallyHidden } from "ariakit";
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 

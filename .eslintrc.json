@@ -14,7 +14,13 @@
         // https://github.com/lydell/eslint-plugin-simple-import-sort#custom-grouping
         "groups": [
           // Packages. `react` related packages come first.
-          ["^react", "^ariakit", "^ariakit-utils", "^@?\\w"],
+          [
+            "^react",
+            "^ariakit-utils/system",
+            "^ariakit",
+            "^ariakit-utils",
+            "^@?\\w"
+          ],
           // Parent imports. Put `..` last.
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
           // Other relative imports. Put same-folder imports and `.` last.

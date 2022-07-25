@@ -23,7 +23,7 @@ export const CalendarTitle = createComponent<CalendarTitleOptions>(props => {
 
 export type CalendarTitleOptions<T extends As = "h2"> = Options<T> & {
   /**
-   * Object returned by the `useCalendarTitleState` hook.
+   * Object returned by the `useCalendarState` hook.
    */
   state: CalendarState;
 };

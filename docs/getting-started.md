@@ -2,15 +2,17 @@
 
 Collection of headless components/hooks that are accessible, composable,
 customizable from low level to build your own UI & Design System powered by
-[Reakit](https://reakit.io)
+[Ariakit System](https://reakit.io)
 
 ## :rocket: Installation
 
+### npm
 ```sh
-# npm
 npm install @adaptui/react reakit
+```
 
-# Yarn
+### Yarn
+```sh
 yarn add @adaptui/react reakit
 ```
 
@@ -20,58 +22,59 @@ yarn add @adaptui/react reakit
 
 Code below will render an [Accordion](./Accordion.md)
 
-Play with this on
-[CodeSandbox](https://codesandbox.io/s/renderless-accordion-seywy)
-
 See [Accordion](./Accordion.md) docs for more info.
 
+
 ```jsx
-import React from "react";
+import * as React from "react";
+
 import {
   Accordion,
+  AccordionDisclosure,
   AccordionPanel,
-  AccordionTrigger,
   useAccordionState,
 } from "@adaptui/react";
 
-function App() {
-  const state = useAccordionState();
+export const AccordionBasic = props => {
+  const state = useAccordionState(props);
 
   return (
-    <Accordion {...state}>
+    <Accordion state={state}>
       <h2>
-        <AccordionTrigger {...state}>Trigger 1</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 1">Trigger 1</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>This is panel 1</AccordionPanel>
+      <AccordionPanel id="Panel 1">Panel 1</AccordionPanel>
       <h2>
-        <AccordionTrigger {...state}>Trigger 2</AccordionTrigger>
+        <AccordionDisclosure id="Trigger 2">Trigger 2</AccordionDisclosure>
       </h2>
-      <AccordionPanel {...state}>This is panel 2</AccordionPanel>
+      <AccordionPanel id="Panel 2">Panel 2</AccordionPanel>
     </Accordion>
   );
-}
+};
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default AccordionBasic;
 ```
 
 ## Component Docs
 
-- [Accordion](accordion.md)
-- [Breadcrumbs](breadcrumb.md)
-- [Calendar](calendar.md)
-- [Date Picker](datepicker.md)
-- [Drawer](drawer.md)
-- [Link](Link.md)
-- [Meter](meter.md)
-- [Number Input](number-input.md)
-- [Pagination](pagination.md)
-- [Picker Base](picker-base.md)
-- [Progress](progress.md)
-- [Segment](segment.md)
-- [Select](select.md)
-- [Slider](slider.md)
-- [Time Picker](timepicker.md)
-- [Toast](toast.md)
+- [Accordion](./accordion.md)
+- [Breadcrumbs](./breadcrumb.md)
+- [Calendar](./calendar.md)
+- [RangeCalendar](./range-calendar.md)
+- [DateField](./datefield.md)
+- [DatePicker](./datepicker.md)
+- [DateRangePicker](./daterange-picker.md)
+- [TimeField](./timefield.md)
+- [Drawer](./drawer.md)
+- [Disclosure](./disclosure.md)
+- [Link](./link.md)
+- [Meter](./meter.md)
+- [Number field](./numberfield.md)
+- [Pagination](./pagination.md)
+- [Progress](./progress.md)
+- [Slider](./slider.md)
+- [Toast](./toast.md)
+
 
 <p align="right">
 <a href="./core-principles.md">Next | Core Principles →</a>

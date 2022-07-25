@@ -2,36 +2,33 @@
 
 `Progress` component provides a graphical status for tasks that take some amount
 of time to load. It follows
-[WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
+[WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar).
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [Other Examples](#other-examples)
 - [Accessibility Requirement](#accessibility-requirement)
 - [Composition](#composition)
 - [Props](#props)
-  - [`useProgressState`](#useprogressstate)
-  - [`Progress`](#progress)
+  - [`ProgressOptions`](#progressoptions)
+  - [`ProgressStateProps`](#progressstateprops)
 
 ## Usage
 
 ```js
 import * as React from "react";
 
-import {
-  Progress as AdaptUIProgress,
-  useProgressState,
-} from "@adaptui/react";
+import { Progress, useProgressState } from "@adaptui/react";
 
-export const Progress = props => {
-  const state = useProgressState(props);
-  const { value, percent, isIndeterminate } = state;
+export const ProgressBasic = props => {
+  const state = useProgressState({ value: 50, ...props });
+  const { percent, isIndeterminate } = state;
 
   return (
     <div className="progress">
-      <AdaptUIProgress
-        {...state}
-        value={value}
+      <Progress
+        state={state}
         aria-label="progress"
         style={{ width: `${percent}%` }}
         className={`progressbar ${isIndeterminate ? "indeterminate" : ""}`}
@@ -40,14 +37,19 @@ export const Progress = props => {
   );
 };
 
-export default Progress;
+export default ProgressBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2bwye)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8gl7td)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7lf4is)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/htpvy)
+## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/2z6dk)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bf2db0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7bjws5)
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3i6nvw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/itn0j4)
 
 ## Accessibility Requirement
 
@@ -57,28 +59,21 @@ export default Progress;
 
 ## Composition
 
-- Progress uses [useRole](https://reakit.io/docs/role)
+- Progress uses `Role`
+- useProgressState uses its own state
 
 ## Props
 
-### `useProgressState`
+### `ProgressOptions`
+
+| Name        | Type                       | Description                                     |
+| :---------- | :------------------------- | :---------------------------------------------- |
+| **`state`** | <code>ProgressState</code> | Object returned by the `useProgressState` hook. |
+
+### `ProgressStateProps`
 
 | Name        | Type                        | Description                                                                                       |
 | :---------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
 | **`value`** | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
 | **`min`**   | <code>number</code>         | The minimum value of the progress                                                                 |
 | **`max`**   | <code>number</code>         | The maximum value of the                                                                          |
-
-### `Progress`
-
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name                  | Type                        | Description                                                                                       |
-| :-------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------ |
-| **`value`**           | <code>number \| null</code> | The `value` of the progress indicator.If `null` the progress bar will be in `indeterminate` state |
-| **`min`**             | <code>number</code>         | The minimum value of the progress                                                                 |
-| **`max`**             | <code>number</code>         | The maximum value of the                                                                          |
-| **`isIndeterminate`** | <code>boolean</code>        | `true` if `value` is `null`                                                                       |
-
-</details>

@@ -1,9 +1,9 @@
-import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useForkRef } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
@@ -26,7 +26,7 @@ export const DateField = createComponent<DateFieldOptions>(props => {
 
 export type DateFieldOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useDateFieldBaseState` hook.
+   * Object returned by the `useDateFieldState` hook.
    */
   state: DateFieldState;
 };

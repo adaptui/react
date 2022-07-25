@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStoryObj } from "@storybook/react";
 
-import { createPreviewTabs } from "../../../.storybook/utils";
+import { createControls, createPreviewTabs } from "../../../.storybook/utils";
 
 import js from "./templates/AccordionMultipleJsx";
 import ts from "./templates/AccordionMultipleTsx";
@@ -16,18 +16,43 @@ export default {
     layout: "centered",
     preview: createPreviewTabs({ js, ts }),
   },
+  argTypes: createControls({
+    ignore: [
+      "items",
+      "setItems",
+      "orientation",
+      "virtualFocus",
+      "rtl",
+      "focusLoop",
+      "focusWrap",
+      "focusShift",
+      "moves",
+      "includesBaseElement",
+      "activeId",
+      "defaultActiveId",
+      "setMoves",
+      "setActiveId",
+      "selectedId",
+      "defaultSelectedId",
+      "setSelectedId",
+      "allowToggle",
+    ],
+  }),
 } as Meta;
 
-export const Default: Story = {};
+export const Default: Story = { args: {} };
 
 export const DefaultFirstIdSelected: Story = {
-  args: { shouldSelectFirstId: true },
+  ...Default,
+  args: { ...Default.args, shouldSelectFirstId: true },
 };
 
 export const DefaultSelected: Story = {
-  args: { defaultSelectedId: ["Trigger 3", "Trigger 4"] },
+  ...Default,
+  args: { ...Default.args, defaultSelectedId: ["Trigger 3", "Trigger 4"] },
 };
 
 export const NoLoop: Story = {
-  args: { focusLoop: false },
+  ...Default,
+  args: { ...Default.args, focusLoop: false },
 };

@@ -1,6 +1,6 @@
 # Codebase Overview
 
-_Proceed if you are interested in contributing to renderless-component's
+_Proceed if you are interested in contributing to AdaptUI React component's
 codebase_
 
 Let's get a basic overview of our codebase and how our code is stuctured.
@@ -32,45 +32,40 @@ aware of for reducing any confusion.
 
 We generate:
 
-- keys for reakit components in [\_\_keys.ts](/src/accordion/__keys.ts) file for
-  each component.
-
-  Command: `yarn keys`
-
 - javascript examples from Typescript examples to provide both examples in
-  storybook.
+  storybook and docs
 
-  Command: `yarn generatejs`
+  Command: `yarn preview`
 
-- proptypes, composition, csb links and inject examples in the docs with special
+- proptypes, composition, csb links and addings examples in the docs using
   scripts.
 
-  Command: `yarn docsgen`
+  Command: `yarn docs`
 
 ## Docs generation guide
 
 For our component API documentation, we auto generate them by parsing the
 typescript code and extracting information from them.
 
-We have [docs-templates](/docs-templates) which holds the templates for the
+We have [docs-templates](./docs-templates) which holds the templates for the
 docs.
 
-See example for [accordion](/docs-templates/Accordion.md)
+See example for [accordion](./docs-templates/Accordion.md)
 
 ### Props
 
-- `INJECT_PROPS` syntax will inject the prop types in its place
-- Usage: `<!-- INJECT_PROPS src/accordion -->` as markdown comment.
+- `ADD_PROPS` syntax will inject the prop types in its place
+- Usage: `<!-- ADD_PROPS src/accordion -->` as markdown comment.
 
 ### Composition
 
-- `INJECT_COMPOSITION` will inject the composition in the specified component
-- Usage: `<!-- INJECT_COMPOSITION src/accordion -->` as markdown comment.
+- `ADD_COMPOSITION` will inject the composition in the specified component
+- Usage: `<!-- ADD_COMPOSITION src/accordion -->` as markdown comment.
 
 ### Examples
 
-- `IMPORT_EXAMPLE` will inject the examples from the components as code.
-- Usage: `<!-- IMPORT_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->` as markdown
+- `ADD_EXAMPLE` will inject the examples from the components as code.
+- Usage: `<!-- ADD_EXAMPLE src/accordion/stories/templates/AccordionBasicJsx.ts -->` as markdown
   comment.
 
 ### Sandbox links
@@ -83,9 +78,10 @@ link
 - Usage:
   ```md
   <!-- CODESANDBOX
-  link_title: Accordion Example
-  js: src/accordion/stories/templates/AccordionBasicJsx.ts
-  css: src/accordion/stories/AccordionStyled.css
+  link_title: Calendar
+  js: src/calendar/stories/templates/CalendarBasicJsx.ts
+  css: src/calendar/stories/templates/CalendarBasicCss.ts
+  files: [src/calendar/stories/templates/UtilsJsx.ts]
   -->
   ```
 
@@ -95,28 +91,28 @@ link
 - `storybook-build` - builds storybook
 - `build` - bundles the library
 - `test` - runs tests
-- `tsd` - runs tests for typescript type check
-- `keys` - generates keys for components
 - `docs` - generates docs for components
-- `generatejs` - transpiles ts examples to js
+- `preview` - transpiles ts examples to both js & ts string
 - `commit` - to commit with [gacp](https://github.com/vivaxy/gacp)
 - `lint` - to lint the `src` with [ESLint](https://eslint.org/)
+- `format` - to format the `src` with [Prettier](https://prettier.io/)
 
 ## Component Docs
 
-- [Accordion](accordion.md)
-- [Breadcrumbs](breadcrumb.md)
-- [Calendar](calendar.md)
-- [Date Picker](datepicker.md)
-- [Drawer](drawer.md)
-- [Link](Link.md)
-- [Meter](meter.md)
-- [Number Input](number-input.md)
-- [Pagination](pagination.md)
-- [Picker Base](picker-base.md)
-- [Progress](progress.md)
-- [Segment](segment.md)
-- [Select](select.md)
-- [Slider](slider.md)
-- [Time Picker](timepicker.md)
-- [Toast](toast.md)
+- [Accordion](./accordion.md)
+- [Breadcrumbs](./breadcrumb.md)
+- [Calendar](./calendar.md)
+- [RangeCalendar](./range-calendar.md)
+- [DateField](./datefield.md)
+- [DatePicker](./datepicker.md)
+- [DateRangePicker](./daterange-picker.md)
+- [TimeField](./timefield.md)
+- [Drawer](./drawer.md)
+- [Disclosure](./disclosure.md)
+- [Link](./link.md)
+- [Meter](./meter.md)
+- [Number field](./numberfield.md)
+- [Pagination](./pagination.md)
+- [Progress](./progress.md)
+- [Slider](./slider.md)
+- [Toast](./toast.md)

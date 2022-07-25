@@ -1,134 +1,113 @@
 # Drawer
 
-`Drawer` component was built on top of [Dialog](https://reakit.io/docs/dialog/)
-component to provide the drawer ability from four ends. It follows the
-[Dialog Accessibility](https://reakit.io/docs/dialog/#accessibility) features.
+`Drawer` component that controls visibility of a section of content by following
+the
+[WAI-ARIA Dialog(Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/)
+for it's
+[keyboard interaction](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/#:~:text=choosing%20a%20date.-,Keyboard%20Interaction,-In%20the%20following)
+&
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/#:~:text=or%20cancel%20button.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20that).
 
 ## Table of Contents
 
 - [Usage](#usage)
 - [Composition](#composition)
 - [Props](#props)
-  - [`Drawer`](#drawer)
-  - [`DrawerCloseButton`](#drawerclosebutton)
+  - [`DrawerOptions`](#draweroptions)
 
 ## Usage
 
 ```js
-import React from "react";
-import { css } from "@emotion/css";
+import * as React from "react";
+import { Button, DialogDismiss, DialogHeading, useDialogState } from "ariakit";
 
-import {
-  Drawer as AdaptUIDrawer,
-  DrawerBackdrop,
-  DrawerCloseButton,
-  DrawerDisclosure,
-  useDrawerState,
-} from "@adaptui/react";
+import { Drawer } from "@adaptui/react";
 
-export const Drawer = props => {
-  const dialog = useDrawerState({ animated: true, ...props });
-  const inputRef = React.useRef(null);
-  const [placement, setPlacement] = React.useState("left");
+export const DrawerBasic = props => {
+  const dialog = useDialogState({ animated: true, ...props });
 
   return (
-    <div>
-      <DrawerDisclosure {...dialog}>{`Open Drawer`}</DrawerDisclosure>
-      <select
-        defaultValue={placement}
-        onBlur={e => setPlacement(e.target.value)}
+    <>
+      <Button onClick={dialog.toggle} className="button">
+        View details
+      </Button>
+      <Drawer
+        state={dialog}
+        className="dialog"
+        backdropProps={{ className: "backdrop" }}
       >
-        <option value="top">Top</option>
-        <option value="bottom">Bottom</option>
-        <option value="right">Right</option>
-        <option value="left">Left</option>
-      </select>
-      <DrawerBackdrop className={backdropStyles} {...dialog}>
-        <AdaptUIDrawer
-          {...dialog}
-          placement={placement}
-          aria-label="Hello world"
-          style={{ color: "red" }}
-          className={css`
-            opacity: 0;
-            padding: 10px;
-            background-color: white;
-            transition: 250ms ease-in-out;
-            transform: ${cssTransforms[placement]};
-            &[data-enter] {
-              opacity: 1;
-              transform: translate(0, 0);
-            }
-          `}
-          unstable_initialFocusRef={inputRef}
-        >
-          <DrawerCloseButton {...dialog}>X</DrawerCloseButton>
-          <p>Welcome to Reakit!</p>
-          <input ref={inputRef} />
-        </AdaptUIDrawer>
-      </DrawerBackdrop>
-    </div>
+        <header className="header">
+          <DialogHeading className="heading">Apples</DialogHeading>
+          <DialogDismiss className="button dismiss" />
+        </header>
+        <ul>
+          <li>
+            <strong>Calories:</strong> 95
+          </li>
+          <li>
+            <strong>Carbs:</strong> 25 grams
+          </li>
+          <li>
+            <strong>Fibers:</strong> 4 grams
+          </li>
+          <li>
+            <strong>Vitamin C:</strong> 14% of the Reference Daily Intake (RDI)
+          </li>
+          <li>
+            <strong>Potassium:</strong> 6% of the RDI
+          </li>
+          <li>
+            <strong>Vitamin K:</strong> 5% of the RDI
+          </li>
+        </ul>
+      </Drawer>
+    </>
   );
 };
 
-export default Drawer;
-
-const backdropStyles = css`
-  opacity: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  transition: opacity 250ms ease-in-out;
-  background-color: rgba(0, 0, 0, 0.2);
-  &[data-enter] {
-    opacity: 1;
-  }
-`;
-
-const cssTransforms = {
-  top: "translate(0, -200px)",
-  bottom: "translate(0, 200px)",
-  left: "translate(-200px, 0)",
-  right: "translate(200px, 0)",
-};
+export default DrawerBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Drawer-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/o99mb)
+[![Edit CodeSandbox](https://img.shields.io/badge/Drawer-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/sk6om0)
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Drawer%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b65wzt)
 
 ## Composition
 
-- Drawer uses [useDialog](https://reakit.io/docs/dialog/)
-- DrawerCloseButton uses [useDialogDisclosure](https://reakit.io/docs/dialog/)
+- Drawer uses `useDialog`
 
 ## Props
 
-### `Drawer`
+### `DrawerOptions`
 
-| Name                                                                | Type                                                                                             | Description                                                                                                                                                                                                                                                           |
-| :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`baseId`**                                                        | <code>string</code>                                                                              | ID that will serve as a base for all the items IDs.                                                                                                                                                                                                                   |
-| **`visible`**                                                       | <code>boolean</code>                                                                             | Whether it's visible or not.                                                                                                                                                                                                                                          |
-| **`animating`**                                                     | <code>boolean</code>                                                                             | Whether it's animating or not.                                                                                                                                                                                                                                        |
-| **`animated`**                                                      | <code>number \| boolean</code>                                                                   | If `true`, `animating` will be set to `true` when `visible` is updated.It'll wait for `stopAnimation` to be called or a CSS transition ends.If `animated` is set to a `number`, `stopAnimation` will be called onlyafter the same number of milliseconds have passed. |
-| **`stopAnimation`**                                                 | <code>() =&#62; void</code>                                                                      | Stops animation. It's called automatically if there's a CSS transition.                                                                                                                                                                                               |
-| **`modal`**                                                         | <code>boolean</code>                                                                             | Toggles Dialog's `modal` state. - Non-modal: `preventBodyScroll` doesn't work and focus is free. - Modal: `preventBodyScroll` is automatically enabled, focus istrapped within the dialog and the dialog is rendered within a `Portal`by default.                     |
-| **`hide`**                                                          | <code>() =&#62; void</code>                                                                      | Changes the `visible` state to `false`                                                                                                                                                                                                                                |
-| **`hideOnEsc`**                                                     | <code>boolean \| undefined</code>                                                                | When enabled, user can hide the dialog by pressing `Escape`.                                                                                                                                                                                                          |
-| **`hideOnClickOutside`**                                            | <code>boolean \| undefined</code>                                                                | When enabled, user can hide the dialog by clicking outside it.                                                                                                                                                                                                        |
-| **`preventBodyScroll`**                                             | <code>boolean \| undefined</code>                                                                | When enabled, user can't scroll on body when the dialog is visible.This option doesn't work if the dialog isn't modal.                                                                                                                                                |
-| **`unstable_initialFocusRef`** <span title="Experimental">⚠️</span> | <code>RefObject&#60;HTMLElement&#62; \| undefined</code>                                         | The element that will be focused when the dialog shows.When not set, the first tabbable element within the dialog will be used.                                                                                                                                       |
-| **`unstable_finalFocusRef`** <span title="Experimental">⚠️</span>   | <code>RefObject&#60;HTMLElement&#62; \| undefined</code>                                         | The element that will be focused when the dialog hides.When not set, the disclosure component will be used.                                                                                                                                                           |
-| **`unstable_orphan`** <span title="Experimental">⚠️</span>          | <code>boolean \| undefined</code>                                                                | Whether or not the dialog should be a child of its parent.Opening a nested orphan dialog will close its parent dialog if`hideOnClickOutside` is set to `true` on the parent.It will be set to `false` if `modal` is `false`.                                          |
-| **`placement`**                                                     | <code>&#34;left&#34; \| &#34;right&#34; \| &#34;top&#34; \| &#34;bottom&#34; \| undefined</code> |                                                                                                                                                                                                                                                                       |
+| Name            | Type                                                                                             | Description                                   |
+| :-------------- | :----------------------------------------------------------------------------------------------- | :-------------------------------------------- |
+| **`state`**     | <code>DisclosureState</code>                                                                     | Object returned by the `useDialogState` hook. |
+| **`placement`** | <code>&#34;left&#34; \| &#34;right&#34; \| &#34;top&#34; \| &#34;bottom&#34; \| undefined</code> | Direction to place the drawer.                |
 
-### `DrawerCloseButton`
+<details><summary>DialogOptions props</summary>
+> These props are returned by the other props You can also provide these props.
 
-| Name            | Type                              | Description                                                                                                                                                  |
-| :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
-| **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
-| **`visible`**   | <code>boolean</code>              | Whether it's visible or not.                                                                                                                                 |
-| **`baseId`**    | <code>string</code>               | ID that will serve as a base for all the items IDs.                                                                                                          |
-| **`toggle`**    | <code>() =&#62; void</code>       | Toggles the `visible` state                                                                                                                                  |
+| Name                         | Type                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| :--------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`disabled`**               | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether the focusable element is disabled. If the focusableelement doesn't support the native `disabled` attribute, the`aria-disabled` attribute will be used instead.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **`autoFocus`**              | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Automatically focus the element when it is mounted. It works similarly tothe native `autoFocus` prop, but solves an issue where the element isgiven focus before React effects can run.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **`focusable`**              | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Whether the element should be focusable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **`accessibleWhenDisabled`** | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether the element should be focusable even when it isdisabled.This is important when discoverability is a concern. For example:> A toolbar in an editor contains a set of special smart paste functionsthat are disabled when the clipboard is empty or when the function is notapplicable to the current content of the clipboard. It could be helpful tokeep the disabled buttons focusable if the ability to discover theirfunctionality is primarily via their presence on the toolbar.Learn more on [Focusability of disabledcontrols](https://www.w3.org/TR/wai-aria-practices-1.2/#kbd_disabled_controls).                                                                             |
+| **`onFocusVisible`**         | <code title="((event: SyntheticEvent&#60;Element, Event&#62;) =&#62; void) \| undefined">((event: SyntheticEvent&#60;Element, Event&#62;) =&#62; voi...</code>                                                                                                                                       | Custom event handler that is called when the element is focused via thekeyboard or when a key is pressed while the element is focused.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **`preserveTabOrder`**       | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | When enabled, `preserveTabOrder` will keep the DOM element's tab order thesame as the order in which the `Portal` component was mounted in the Reacttree.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **`portalRef`**              | <code title="((instance: HTMLElement \| null) =&#62; void) \| MutableRefObject&#60;HTMLElement&#62; \| undefined">((instance: HTMLElement \| null) =&#62; void) \| Muta...</code>                                                                                                                    | `portalRef` is similar to `ref` but is scoped to the portal node. It'suseful when you need to be informed when the portal element is appended tothe DOM or removed from the DOM.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **`portal`**                 | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether the element should be rendered as a React Portal.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **`portalElement`**          | <code title="HTMLElement \| ((element: HTMLElement) =&#62; HTMLElement \| null) \| null \| undefined">HTMLElement \| ((element: HTMLElement) =&#62; HTMLEl...</code>                                                                                                                                 | An HTML element or a memoized callback function that returns an HTMLelement to be used as the portal element. By default, the portal elementwill be a `div` element appended to the `document.body`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **`modal`**                  | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether the dialog is modal. Modal dialogs have distinctstates and behaviors: - The `portal`, `backdrop` and `preventBodyScroll` props are set to `true`. They can still be manually set to `false`. - A visually hidden dismiss button will be rendered if the `DialogDismiss` component hasn't been used. This allows screen reader users to close the dialog. - The focus will be trapped within the dialog. - When the dialog is visible, the elements outside of the dialog will be hidden to assistive technology users using the `aria-hidden` attribute. - When using the `Heading` or `DialogHeading` components within the dialog, their level will be reset so they start with `h1`. |
+| **`backdrop`**               | <code title="boolean \| ElementType&#60;Pick&#60;DetailedHTMLProps&#60;HTMLAttributes&#60;HTMLDivElement&#62;, HTMLDivElement&#62;, &#34;key&#34; \| keyof HTMLAttributes&#60;...&#62;&#62; &#38; { ...; }&#62; \| undefined">boolean \| ElementType&#60;Pick&#60;DetailedHTMLProps&#60;HT...</code> | Determines whether there will be a backdrop behind the dialog. On modaldialogs, this is `true` by default. Besides a `boolean`, this prop canalso be a React component that will be rendered as the backdrop.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **`backdropProps`**          | <code title="Omit&#60;DisclosureContentProps&#60;&#34;div&#34;&#62;, &#34;state&#34;&#62; \| undefined">Omit&#60;DisclosureContentProps&#60;&#34;div&#34;&#62;, &#34;state&#34;&#62; \| ...</code>                                                                                                   | Props that will be passed to the backdrop element if `backdrop` is`true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **`hideOnEscape`**           | <code title="BooleanOrCallback&#60;KeyboardEvent \| React.KeyboardEvent&#60;Element&#62;&#62; \| undefined">BooleanOrCallback&#60;KeyboardEvent \| React.Keyboar...</code>                                                                                                                           | Determines whether the dialog will be hidden when the user presses theEscape key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **`hideOnInteractOutside`**  | <code title="BooleanOrCallback&#60;Event \| SyntheticEvent&#60;Element, Event&#62;&#62; \| undefined">BooleanOrCallback&#60;Event \| SyntheticEvent&#60;Elemen...</code>                                                                                                                             | Determines whether the dialog will be hidden when the user clicks orfocus on an element outside of the dialog.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **`preventBodyScroll`**      | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether the body scrolling will be prevented when the dialogis shown.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **`autoFocusOnShow`**        | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether an element inside the dialog will receive focus whenthe dialog is shown. By default, this is usually the first tabbableelement in the dialog or the dialog itself. The `initialFocusRef` propcan be used to set a different element to receive focus.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **`autoFocusOnHide`**        | <code>boolean \| undefined</code>                                                                                                                                                                                                                                                                    | Determines whether an element outside of the dialog will be focused whenthe dialog is hidden if another element hasn't been focused in the actionof hiding the dialog (for example, by clicking or tabbing into anothertabbable element outside of the dialog). By default, this is usually thedisclosure element. The `finalFocusRef` prop can be used to define adifferent element to be focused.                                                                                                                                                                                                                                                                                                        |
+| **`initialFocusRef`**        | <code>RefObject&#60;HTMLElement&#62; \| undefined</code>                                                                                                                                                                                                                                             | Determines which element will receive focus when the dialog is shown.This has no effect if `autoFocusOnShow` is `false`. If not set, the firsttabbable element inside the dialog or the dialog itself will receivefocus.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **`finalFocusRef`**          | <code>RefObject&#60;HTMLElement&#62; \| undefined</code>                                                                                                                                                                                                                                             | Determines which element will receive focus when the dialog is hidden ifanother element hasn't been focused in the action of hiding the dialog(for example, by clicking or tabbing into another tabbable elementoutside of the dialog). This has no effect if `autoFocusOnHide` is`false`. If not set, the disclosure element will be used.                                                                                                                                                                                                                                                                                                                                                                |
+
+</details>

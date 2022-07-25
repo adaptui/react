@@ -89,11 +89,11 @@ function getEscapedName(node) {
 /**
  * @param {import("ts-morph").Node<Node>} node
  */
-function isStateReturnDeclaration(node) {
+function isStatePropsDeclaration(node) {
   const kindName = node.getKindName();
   const escapedName = getEscapedName(node);
   return (
-    kindName === "TypeAliasDeclaration" && /.+StateReturn$/.test(escapedName)
+    kindName === "TypeAliasDeclaration" && /.+StateProps$/.test(escapedName)
   );
 }
 
@@ -146,11 +146,13 @@ function getTagNames(prop) {
 }
 
 /**
+ * Get all the props from the node.
  * @param {import("ts-morph").Node<Node>} node
  * @param {boolean} includePrivate
  */
 function getProps(node, includePrivate) {
   const props = node.getType().getProperties();
+
   if (includePrivate) {
     return props;
   }
@@ -179,7 +181,7 @@ module.exports = {
   getModuleName,
   getDeclaration,
   isOptionsDeclaration,
-  isStateReturnDeclaration,
+  isStatePropsDeclaration,
   sortSourceFiles,
   getPublicFiles,
   getJsDocs,

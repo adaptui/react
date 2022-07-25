@@ -1,9 +1,9 @@
-import { useForkRef } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useForkRef } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
@@ -26,7 +26,7 @@ export const TimeField = createComponent<TimeFieldOptions>(props => {
 
 export type TimeFieldOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useTimeFieldBaseState` hook.
+   * Object returned by the `useTimeFieldState` hook.
    */
   state: TimeFieldState;
 };

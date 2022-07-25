@@ -5,10 +5,10 @@ import { AriaDatePickerProps } from "@react-types/datepicker";
 
 import { DatePickerBaseState } from "./datepicker-base-state";
 
-export function useDatePickerState({
+export function useDatePickerState<T extends DateValue>({
   state,
   ...props
-}: DatePickerStateProps): DatePickerState {
+}: DatePickerStateProps<T>): DatePickerState {
   const ref = useRef<HTMLElement>(null);
   const datepicker = useDatePicker(props, state.datepicker, ref);
 
@@ -26,9 +26,10 @@ export type DatePickerState = DatePickerAria & {
   baseState: DatePickerBaseState;
 };
 
-export type DatePickerStateProps = AriaDatePickerProps<DateValue> & {
-  /**
-   * Object returned by the `useDatePickerBaseState` hook.
-   */
-  state: DatePickerBaseState;
-};
+export type DatePickerStateProps<T extends DateValue> =
+  AriaDatePickerProps<T> & {
+    /**
+     * Object returned by the `useDatePickerBaseState` hook.
+     */
+    state: DatePickerBaseState;
+  };

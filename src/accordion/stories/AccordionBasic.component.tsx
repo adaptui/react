@@ -8,7 +8,9 @@ import {
   useAccordionState,
 } from "../../index";
 
-export const AccordionBasic: React.FC<AccordionStateProps> = props => {
+export type AccordionBasicProps = AccordionStateProps;
+
+export const AccordionBasic: React.FC<AccordionBasicProps> = props => {
   const state = useAccordionState(props);
 
   return (

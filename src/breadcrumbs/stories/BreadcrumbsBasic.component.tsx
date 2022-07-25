@@ -6,28 +6,28 @@ export type BreadcrumbsBasicProps = BreadcrumbsProps & {};
 
 export const BreadcrumbsBasic: React.FC<BreadcrumbsBasicProps> = props => {
   return (
-    <Breadcrumbs aria-label="Breadcrumb" className="breadcrumb">
+    <Breadcrumbs className="breadcrumb">
       <ol>
         <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/">
-            WAI-ARIA Authoring Practices 1.1
+          <BreadcrumbLink href="https://www.w3.org/WAI/ARIA/apg/">
+            ARIA Authoring Practices Guide
           </BreadcrumbLink>
         </li>
         <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex">
-            Design Patterns
+          <BreadcrumbLink href="https://www.w3.org/WAI/ARIA/apg/patterns/">
+            APG Patterns
           </BreadcrumbLink>
         </li>
         <li>
           <BreadcrumbLink
             isCurrentPage
-            href="https://www.w3.org/TR/wai-aria-practices-1.1/#breadcrumb"
+            href="https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/"
           >
             Breadcrumb Pattern
           </BreadcrumbLink>
         </li>
         <li>
-          <BreadcrumbLink href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/breadcrumb/index.html">
+          <BreadcrumbLink href="https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/">
             Breadcrumb Example
           </BreadcrumbLink>
         </li>

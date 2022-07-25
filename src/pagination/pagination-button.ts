@@ -1,10 +1,10 @@
 import { MouseEvent } from "react";
-import { useEvent, useStore } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { useEvent, useStore } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { isNumber } from "@chakra-ui/utils";
 
@@ -81,9 +81,12 @@ export type Goto = "nextPage" | "prevPage" | "lastPage" | "firstPage" | number;
 
 export type PaginationButtonOptions<T extends As = "button"> = Options<T> & {
   /**
-   * Object returned by the `usePaginationButtonState` hook.
+   * Object returned by the `usePaginationState` hook.
    */
   state?: PaginationState;
+  /**
+   * Provide the page you want to go.
+   */
   goto: Goto;
 };
 

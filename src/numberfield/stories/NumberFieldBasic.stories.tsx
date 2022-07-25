@@ -18,6 +18,4 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
-  args: { label: "NumberField" },
-};
+export const Default: Story = { args: { label: "NumberField" } };

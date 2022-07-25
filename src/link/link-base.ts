@@ -1,11 +1,11 @@
 import * as React from "react";
-import { CommandOptions, useCommand } from "ariakit";
-import { useForkRef, useTagName } from "ariakit-utils";
 import {
   createComponent,
   createElement,
   createHook,
 } from "ariakit-utils/system";
+import { CommandOptions, useCommand } from "ariakit";
+import { useForkRef, useTagName } from "ariakit-utils";
 import { As, Props } from "ariakit-utils/types";
 
 export const useLink = createHook<LinkOptions>(

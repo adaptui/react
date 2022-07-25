@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 
 import CalendarBasic from "../../calendar/stories/CalendarBasic.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
@@ -8,6 +6,7 @@ import {
   DatePickerBaseStateProps,
   DatePickerDisclosure,
   DatePickerGroup,
+  DatePickerLabel,
   DatePickerPopover,
   useDatePickerBaseState,
   useDatePickerState,
@@ -18,38 +17,28 @@ import { CalendarIcon } from "./Utils.component";
 export type DatePickerBasicProps = DatePickerBaseStateProps & {};
 
 export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
-  const { locale } = useLocale();
   const state = useDatePickerBaseState({ ...props, gutter: 10 });
   const datepicker = useDatePickerState({ ...props, state });
 
   return (
-    <div style={{ position: "relative" }} className="datepicker">
-      <DatePickerGroup
-        state={datepicker}
-        className="datepicker__header"
-        aria-label="DatePicker"
-      >
-        <DateFieldBasic
-          {...datepicker.fieldProps}
-          createCalendar={createCalendar}
-          locale={locale}
-        />
+    <div className="datepicker">
+      <DatePickerLabel state={datepicker} className="datepicker__label">
+        {props.label}
+      </DatePickerLabel>
+      <DatePickerGroup state={datepicker} className="datepicker__group">
+        <DateFieldBasic {...datepicker.fieldProps} />
         <DatePickerDisclosure
           state={datepicker}
           className="datepicker__trigger"
         >
           <CalendarIcon />
         </DatePickerDisclosure>
-        {state.popover.visible && (
-          <DatePickerPopover state={datepicker} className="popover">
-            <CalendarBasic
-              {...datepicker.calendarProps}
-              locale={locale}
-              createCalendar={createCalendar}
-            />
-          </DatePickerPopover>
-        )}
       </DatePickerGroup>
+      {state.popover.visible && (
+        <DatePickerPopover state={datepicker} className="popover">
+          <CalendarBasic {...datepicker.calendarProps} />
+        </DatePickerPopover>
+      )}
     </div>
   );
 };

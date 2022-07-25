@@ -1,321 +1,260 @@
 # Calendar
 
-`Calendar` component provides a way to select a date or a range of dates while
-allowing you to style them however. All the date, month & year calculations are
-done internally to provide the ease of use. It follows the
-[Grid Pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#grid) for the
-keyboard navigaiton & focus management.
+`Calendar` component provides a way to select a date while allowing you to style
+them however. All the date, month & year calculations are done internally using
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html)
+to provide the ease of use. It follows the
+[Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
+navigaiton & focus management. Supports all the features as React Aria's
+[useCalendar](https://react-spectrum.adobe.com/react-aria/useCalendar.html#features).
 
 ## Table of Contents
 
 - [Usage](#usage)
-  - [Base Calendar](#base-calendar)
-  - [Range Calendar](#range-calendar)
+- [Other Examples](#other-examples)
 - [Composition](#composition)
 - [Props](#props)
-  - [`useCalendarState`](#usecalendarstate)
-  - [`useRangeCalendarState`](#userangecalendarstate)
-  - [`Calendar`](#calendar)
-  - [`CalendarButton`](#calendarbutton)
-  - [`CalendarCell`](#calendarcell)
-  - [`CalendarCellButton`](#calendarcellbutton)
-  - [`CalendarGrid`](#calendargrid)
-  - [`CalendarHeader`](#calendarheader)
-  - [`CalendarWeekTitle`](#calendarweektitle)
+  - [`CalendarOptions`](#calendaroptions)
+  - [`CalendarBaseStateProps`](#calendarbasestateprops)
+  - [`CalendarCellOptions`](#calendarcelloptions)
+  - [`CalendarCellButtonOptions`](#calendarcellbuttonoptions)
+  - [`CalendarCellStateProps`](#calendarcellstateprops)
+  - [`CalendarGridOptions`](#calendargridoptions)
+  - [`CalendarGridStateProps`](#calendargridstateprops)
+  - [`CalendarNextButtonOptions`](#calendarnextbuttonoptions)
+  - [`CalendarPreviousButtonOptions`](#calendarpreviousbuttonoptions)
+  - [`CalendarStateProps`](#calendarstateprops)
+  - [`CalendarTitleOptions`](#calendartitleoptions)
 
 ## Usage
 
-### Base Calendar
-
 ```js
 import * as React from "react";
+import { VisuallyHidden } from "ariakit";
+import { createCalendar, getWeeksInMonth } from "@internationalized/date";
+import { useLocale } from "@react-aria/i18n";
 
 import {
-  Calendar as CalendarWrapper,
-  CalendarButton,
+  Calendar,
   CalendarCell,
   CalendarCellButton,
   CalendarGrid,
-  CalendarHeader,
-  CalendarWeekTitle,
+  CalendarNextButton,
+  CalendarPreviousButton,
+  CalendarTitle,
+  useCalendarBaseState,
+  useCalendarCellState,
+  useCalendarGridState,
   useCalendarState,
 } from "@adaptui/react";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  DoubleChevronLeft,
-  DoubleChevronRight,
-} from "./Utils.component";
+import { ChevronLeft, ChevronRight } from "./Utils.component";
 
-export const Calendar = props => {
-  const state = useCalendarState(props);
+export const CalendarBasic = props => {
+  let { locale } = useLocale();
+
+  const state = useCalendarBaseState({ locale, createCalendar, ...props });
+  const calendar = useCalendarState({ ...props, state });
 
   return (
-    <CalendarWrapper {...state} className="calendar">
+    <Calendar state={calendar} className="calendar">
       <div className="header">
-        <CalendarButton {...state} goto="previousYear" className="prev-year">
-          <DoubleChevronLeft />
-        </CalendarButton>
-        <CalendarButton {...state} goto="previousMonth" className="prev-month">
+        <CalendarPreviousButton state={calendar} className="prev-month">
           <ChevronLeft />
-        </CalendarButton>
-        <CalendarHeader {...state} />
-        <CalendarButton {...state} goto="nextMonth" className="next-month">
+        </CalendarPreviousButton>
+        <CalendarTitle state={calendar} />
+        <CalendarNextButton state={calendar} className="next-month">
           <ChevronRight />
-        </CalendarButton>
-        <CalendarButton {...state} goto="nextYear" className="next-year">
-          <DoubleChevronRight />
-        </CalendarButton>
+        </CalendarNextButton>
       </div>
-
-      <CalendarGrid {...state} as="table" className="dates">
-        <thead>
-          <tr>
-            {state.weekDays.map((day, dayIndex) => {
-              return (
-                <CalendarWeekTitle
-                  {...state}
-                  as="th"
-                  scope="col"
-                  key={dayIndex}
-                  dayIndex={dayIndex}
-                >
-                  <abbr title={day.title}>{day.abbr}</abbr>
-                </CalendarWeekTitle>
-              );
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {state.daysInMonth.map((week, weekIndex) => (
-            <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
-                <CalendarCell {...state} as="td" key={dayIndex} date={day}>
-                  <CalendarCellButton {...state} date={day} />
-                </CalendarCell>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </CalendarGrid>
-    </CalendarWrapper>
+      <CalendarGridComp state={state} />
+    </Calendar>
   );
 };
 
-export default Calendar;
+export default CalendarBasic;
+
+const CalendarGridComp = props => {
+  const { state: baseState } = props;
+  let { locale } = useLocale();
+  let gridState = useCalendarGridState(props);
+
+  let weeksInMonth = getWeeksInMonth(baseState.visibleRange.start, locale);
+
+  return (
+    <CalendarGrid state={gridState} className="dates">
+      <thead>
+        <tr>
+          {gridState.weekDays.map((day, index) => {
+            return (
+              <th key={index}>
+                {}
+                <VisuallyHidden>{day}</VisuallyHidden>
+                <span aria-hidden="true">{day}</span>
+              </th>
+            );
+          })}
+        </tr>
+      </thead>
+      <tbody>
+        {[...new Array(weeksInMonth).keys()].map(weekIndex => (
+          <tr key={weekIndex}>
+            {baseState
+              .getDatesInWeek(weekIndex)
+              .map((date, i) =>
+                date ? (
+                  <CalendarCellComp key={i} state={baseState} date={date} />
+                ) : (
+                  <td key={i} />
+                ),
+              )}
+          </tr>
+        ))}
+      </tbody>
+    </CalendarGrid>
+  );
+};
+
+const CalendarCellComp = props => {
+  const cellState = useCalendarCellState(props);
+  const {
+    isOutsideVisibleRange,
+    isDisabled,
+    isSelected,
+    isUnavailable,
+    formattedDate,
+  } = cellState;
+
+  return (
+    <CalendarCell state={cellState}>
+      <CalendarCellButton
+        state={cellState}
+        hidden={isOutsideVisibleRange}
+        className={`cell ${isSelected ? "selected" : ""} ${
+          isDisabled ? "disabled" : ""
+        } ${isUnavailable ? "unavailable" : ""}`}
+      >
+        {formattedDate}
+      </CalendarCellButton>
+    </CalendarCell>
+  );
+};
 ```
 
-### Range Calendar
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zr2dki)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/9x3skk)
 
-Converting a normal calendar to a range calendar is as easy as just swaping out
-the hook to range calendar hook.
+## Other Examples
 
-You'll need to import the `useRangeCalendarState` hook from the
-`@adaptui/react` first
-
-```diff
-- const state = useCalendarState(props);
-+ const state = useRangeCalendarState(props);
-```
-
-Also we can customize and style the ranges with CSS attribute selectors
-
-```css
-[data-is-range-selection] > span {
-  /* styles for any cells between start-end (inclusive) */
-}
-[data-is-selection-start] > span {
-  /* styles for first selected range cell */
-}
-[data-is-selection-end] > span {
-  /* styles for end selected range cell */
-}
-
-/* only applied if cell date is first or last of the month*/
-[data-is-range-start] > span {
-  /**/
-}
-[data-is-range-end] > span {
-  /**/
-}
-```
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/qojzs)
-
-[![Edit CodeSandbox](https://img.shields.io/badge/Range%20Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rdtk7)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/le2yec)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zym3nq)
 
 ## Composition
 
-- Calendar uses [useRole](https://reakit.io/docs/role)
-- CalendarButton uses [useButton](https://reakit.io/docs/button)
-- CalendarCell uses [useRole](https://reakit.io/docs/role)
-- CalendarCellButton uses [useButton](https://reakit.io/docs/button)
-- CalendarGrid uses [useRole](https://reakit.io/docs/role)
-- CalendarHeader uses [useRole](https://reakit.io/docs/role)
-- CalendarWeekTitle uses [useRole](https://reakit.io/docs/role)
+- Calendar uses `Role`
+- useCalendarBaseState uses `useCalendarState`
+- CalendarCell uses `Role`
+- CalendarCellButton uses `Role`
+- useCalendarCellState uses its own state
+- CalendarGrid uses `Role`
+- useCalendarGridState uses its own state
+- CalendarNextButton uses `Role`
+- CalendarPreviousButton uses `Role`
+- useCalendarState uses its own state
+- CalendarTitle uses `Role`
 
 ## Props
 
-### `useCalendarState`
+### `CalendarOptions`
 
-| Name               | Type                                                    | Description                                                    |
-| :----------------- | :------------------------------------------------------ | :------------------------------------------------------------- |
-| **`value`**        | <code>string \| undefined</code>                        | The current date (controlled).                                 |
-| **`defaultValue`** | <code>string \| undefined</code>                        | The default date (uncontrolled).                               |
-| **`onChange`**     | <code>((value: string) =&#62; void) \| undefined</code> | Handler that is called when the date changes.                  |
-| **`minValue`**     | <code>string \| undefined</code>                        | The lowest date allowed.                                       |
-| **`maxValue`**     | <code>string \| undefined</code>                        | The highest date allowed.                                      |
-| **`isDisabled`**   | <code>boolean \| undefined</code>                       | Whether the input is disabled.                                 |
-| **`isReadOnly`**   | <code>boolean \| undefined</code>                       | Whether the input can be selected but not changed by the user. |
-| **`autoFocus`**    | <code>boolean \| undefined</code>                       | Whether the element should receive focus on render.            |
-| **`id`**           | <code>string \| undefined</code>                        | Id for the calendar grid                                       |
+| Name        | Type                      | Description                                     |
+| :---------- | :------------------------ | :---------------------------------------------- |
+| **`state`** | <code>CalendarAria</code> | Object returned by the `useCalendarState` hook. |
 
-### `useRangeCalendarState`
+### `CalendarBaseStateProps`
 
-| Name               | Type                                                   | Description                                                    |
-| :----------------- | :----------------------------------------------------- | :------------------------------------------------------------- |
-| **`value`**        | <code>Range \| undefined</code>                        | The current value (controlled).                                |
-| **`defaultValue`** | <code>Range \| undefined</code>                        | The default value (uncontrolled).                              |
-| **`onChange`**     | <code>((value: Range) =&#62; void) \| undefined</code> | Handler that is called when the value changes.                 |
-| **`minValue`**     | <code>string \| undefined</code>                       | The smallest value allowed.                                    |
-| **`maxValue`**     | <code>string \| undefined</code>                       | The largest value allowed.                                     |
-| **`isDisabled`**   | <code>boolean \| undefined</code>                      | Whether the input is disabled.                                 |
-| **`isReadOnly`**   | <code>boolean \| undefined</code>                      | Whether the input can be selected but not changed by the user. |
-| **`autoFocus`**    | <code>boolean \| undefined</code>                      | Whether the element should receive focus on render.            |
-| **`id`**           | <code>string \| undefined</code>                       | Id for the calendar grid                                       |
+| Name                 | Type                                        | Description                                                                                                                                                                                                                                                           |
+| :------------------- | :------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`locale`**         | <code>string</code>                         | The locale to display and edit the value according to.                                                                                                                                                                                                                |
+| **`createCalendar`** | <code>(name: string) =&#62; Calendar</code> | A function that creates a [Calendar](../internationalized/date/Calendar.html)object for a given calendar identifier. Such a function may be imported from the`@internationalized/date` package, or manually implemented to include support foronly certain calendars. |
 
-### `Calendar`
+<details><summary>CalendarStateProps props</summary>
+> These props are returned by the other props You can also provide these props.
 
-<details><summary>1 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name             | Type                             | Description                |
-| :--------------- | :------------------------------- | :------------------------- |
-| **`calendarId`** | <code>string \| undefined</code> | Id for the Calendar Header |
+| Name                      | Type                                                                           | Description                                                                                              |
+| :------------------------ | :----------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| **`visibleDuration`**     | <code>DateDuration \| undefined</code>                                         | The amount of days that will be displayed at once. This affects how pagination works.                    |
+| **`selectionAlignment`**  | <code>&#34;start&#34; \| &#34;center&#34; \| &#34;end&#34; \| undefined</code> | Determines how to align the initial selection relative to the visible date range.                        |
+| **`minValue`**            | <code>DateValue \| undefined</code>                                            | The minimum allowed date that a user may select.                                                         |
+| **`maxValue`**            | <code>DateValue \| undefined</code>                                            | The maximum allowed date that a user may select.                                                         |
+| **`isDateUnavailable`**   | <code>((date: DateValue) =&#62; boolean) \| undefined</code>                   | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. |
+| **`isDisabled`**          | <code>boolean \| undefined</code>                                              | Whether the calendar is disabled.                                                                        |
+| **`isReadOnly`**          | <code>boolean \| undefined</code>                                              | Whether the calendar value is immutable.                                                                 |
+| **`autoFocus`**           | <code>boolean \| undefined</code>                                              | Whether to automatically focus the calendar when it mounts.                                              |
+| **`focusedValue`**        | <code>DateValue \| undefined</code>                                            | Controls the currently focused date within the calendar.                                                 |
+| **`defaultFocusedValue`** | <code>DateValue \| undefined</code>                                            | The date that is focused when the calendar first mounts (uncountrolled).                                 |
+| **`onFocusChange`**       | <code>((date: CalendarDate) =&#62; void) \| undefined</code>                   | Handler that is called when the focused date changes.                                                    |
+| **`validationState`**     | <code>ValidationState \| undefined</code>                                      | Whether the current selection is valid or invalid according to application logic.                        |
+| **`errorMessage`**        | <code>ReactNode</code>                                                         | An error message to display when the selected value is invalid.                                          |
+| **`value`**               | <code>T \| undefined</code>                                                    | The current value (controlled).                                                                          |
+| **`defaultValue`**        | <code>T \| undefined</code>                                                    | The default value (uncontrolled).                                                                        |
+| **`onChange`**            | <code>((value: C) =&#62; void) \| undefined</code>                             | Handler that is called when the value changes.                                                           |
 
 </details>
 
-### `CalendarButton`
+### `CalendarCellOptions`
 
-| Name            | Type                                                                                                                                                                                                  | Description                                                                                                                                                  |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`disabled`**  | <code>boolean \| undefined</code>                                                                                                                                                                     | Same as the HTML attribute.                                                                                                                                  |
-| **`focusable`** | <code>boolean \| undefined</code>                                                                                                                                                                     | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
-| **`goto`**      | <code title="&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;previousYear&#34;">&#34;nextMonth&#34; \| &#34;previousMonth&#34; \| &#34;nextYear&#34; \| &#34;p...</code> |                                                                                                                                                              |
+| Name        | Type                           | Description                                         |
+| :---------- | :----------------------------- | :-------------------------------------------------- |
+| **`state`** | <code>CalendarCellState</code> | Object returned by the `useCalendarCellState` hook. |
 
-<details><summary>4 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+### `CalendarCellButtonOptions`
 
-| Name                     | Type                        | Description                                                 |
-| :----------------------- | :-------------------------- | :---------------------------------------------------------- |
-| **`focusNextMonth`**     | <code>() =&#62; void</code> | Focus the cell one month next to the current date           |
-| **`focusPreviousMonth`** | <code>() =&#62; void</code> | Focus the cell one month prev to the current date           |
-| **`focusPreviousYear`**  | <code>() =&#62; void</code> | Focus the cell of the date one year before the current date |
-| **`focusNextYear`**      | <code>() =&#62; void</code> | Focus the cell of the date one year from the current date   |
+| Name        | Type                           | Description                                         |
+| :---------- | :----------------------------- | :-------------------------------------------------- |
+| **`state`** | <code>CalendarCellState</code> | Object returned by the `useCalendarCellState` hook. |
 
-</details>
+### `CalendarCellStateProps`
 
-### `CalendarCell`
+| Name        | Type                                             | Description                                                                    |
+| :---------- | :----------------------------------------------- | :----------------------------------------------------------------------------- |
+| **`date`**  | <code>CalendarDate</code>                        | The date that this cell represents.                                            |
+| **`state`** | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook. |
 
-| Name       | Type              | Description |
-| :--------- | :---------------- | :---------- |
-| **`date`** | <code>Date</code> |             |
+### `CalendarGridOptions`
 
-<details><summary>6 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+| Name        | Type                          | Description                                         |
+| :---------- | :---------------------------- | :-------------------------------------------------- |
+| **`state`** | <code>CalendarGridAria</code> | Object returned by the `useCalendarGridState` hook. |
 
-| Name                   | Type                                          | Description                                     |
-| :--------------------- | :-------------------------------------------- | :---------------------------------------------- |
-| **`dateValue`**        | <code>Date</code>                             | Selected Date value                             |
-| **`isDisabled`**       | <code>boolean</code>                          | `true` if the calendar is disabled              |
-| **`currentMonth`**     | <code>Date</code>                             | Month of the current Date                       |
-| **`isRangeCalendar`**  | <code>boolean</code>                          | `true` if the calendar is used as RangeCalendar |
-| **`highlightDate`**    | <code>(date: Date) =&#62; void</code>         |                                                 |
-| **`highlightedRange`** | <code>RangeValue&#60;Date&#62; \| null</code> |                                                 |
+### `CalendarGridStateProps`
 
-</details>
+| Name            | Type                                             | Description                                                                                                                                                  |
+| :-------------- | :----------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`startDate`** | <code>CalendarDate \| undefined</code>           | The first date displayed in the calendar grid.Defaults to the first visible date in the calendar.Override this to display multiple date grids in a calendar. |
+| **`endDate`**   | <code>CalendarDate \| undefined</code>           | The last date displayed in the calendar grid.Defaults to the last visible date in the calendar.Override this to display multiple date grids in a calendar.   |
+| **`state`**     | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook.                                                                               |
 
-### `CalendarCellButton`
+### `CalendarNextButtonOptions`
 
-| Name            | Type                              | Description                                                                                                                                                  |
-| :-------------- | :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`disabled`**  | <code>boolean \| undefined</code> | Same as the HTML attribute.                                                                                                                                  |
-| **`focusable`** | <code>boolean \| undefined</code> | When an element is `disabled`, it may still be `focusable`. It workssimilarly to `readOnly` on form elements. In this case, only`aria-disabled` will be set. |
-| **`date`**      | <code>Date</code>                 |                                                                                                                                                              |
+| Name        | Type                                            | Description                                                            |
+| :---------- | :---------------------------------------------- | :--------------------------------------------------------------------- |
+| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` & `RangeCalendarState` hook. |
 
-<details><summary>10 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+### `CalendarPreviousButtonOptions`
 
-| Name                     | Type                                                           | Description                                             |
-| :----------------------- | :------------------------------------------------------------- | :------------------------------------------------------ |
-| **`anchorDate`**         | <code>Date \| null</code>                                      |                                                         |
-| **`dateValue`**          | <code>Date</code>                                              | Selected Date value                                     |
-| **`isDisabled`**         | <code>boolean</code>                                           | `true` if the calendar is disabled                      |
-| **`isRangeCalendar`**    | <code>boolean</code>                                           | `true` if the calendar is used as RangeCalendar         |
-| **`focusedDate`**        | <code>Date</code>                                              | Date value that is currently focused                    |
-| **`selectDate`**         | <code>(value: Date) =&#62; void</code>                         | sets `dateValue`                                        |
-| **`setFocusedDate`**     | <code>(value: SetStateAction&#60;Date&#62;) =&#62; void</code> | Sets `focusedDate`                                      |
-| **`month`**              | <code>number</code>                                            | Month of the current date value                         |
-| **`isFocused`**          | <code>boolean</code>                                           | `true` if the calendar is focused                       |
-| **`isInvalidDateRange`** | <code>(value: Date) =&#62; boolean</code>                      | Informs if the given date is within the min & max date. |
+| Name        | Type                                            | Description                                                            |
+| :---------- | :---------------------------------------------- | :--------------------------------------------------------------------- |
+| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` & `RangeCalendarState` hook. |
 
-</details>
+### `CalendarStateProps`
 
-### `CalendarGrid`
+| Name        | Type                       | Description                                         |
+| :---------- | :------------------------- | :-------------------------------------------------- |
+| **`state`** | <code>CalendarState</code> | Object returned by the `useCalendarBaseState` hook. |
 
-<details><summary>17 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
+### `CalendarTitleOptions`
 
-| Name                     | Type                                                                   | Description                                                 |
-| :----------------------- | :--------------------------------------------------------------------- | :---------------------------------------------------------- |
-| **`calendarId`**         | <code>string \| undefined</code>                                       | Id for the Calendar Header                                  |
-| **`focusNextMonth`**     | <code>() =&#62; void</code>                                            | Focus the cell one month next to the current date           |
-| **`focusPreviousMonth`** | <code>() =&#62; void</code>                                            | Focus the cell one month prev to the current date           |
-| **`focusPreviousYear`**  | <code>() =&#62; void</code>                                            | Focus the cell of the date one year before the current date |
-| **`focusNextYear`**      | <code>() =&#62; void</code>                                            | Focus the cell of the date one year from the current date   |
-| **`isDisabled`**         | <code>boolean</code>                                                   | `true` if the calendar is disabled                          |
-| **`isRangeCalendar`**    | <code>boolean</code>                                                   | `true` if the calendar is used as RangeCalendar             |
-| **`isReadOnly`**         | <code>boolean</code>                                                   | `true` if the calendar is only readonly                     |
-| **`setFocused`**         | <code>(value: SetStateAction&#60;boolean&#62;) =&#62; void</code>      | Sets `isFocused`                                            |
-| **`selectFocusedDate`**  | <code>() =&#62; void</code>                                            | Selects the `focusedDate`                                   |
-| **`focusEndOfMonth`**    | <code>() =&#62; void</code>                                            | Focus the cell of the last day of the month                 |
-| **`focusStartOfMonth`**  | <code>() =&#62; void</code>                                            | Focus the cell of the first day of the month                |
-| **`focusNextDay`**       | <code>() =&#62; void</code>                                            | Focus the cell next to the current date                     |
-| **`focusPreviousDay`**   | <code>() =&#62; void</code>                                            | Focus the cell prev to the current date                     |
-| **`focusNextWeek`**      | <code>() =&#62; void</code>                                            | Focus the cell one week next to the current date            |
-| **`focusPreviousWeek`**  | <code>() =&#62; void</code>                                            | Focus the cell one week prev to the current date            |
-| **`setAnchorDate`**      | <code>(value: SetStateAction&#60;Date \| null&#62;) =&#62; void</code> |                                                             |
-
-</details>
-
-### `CalendarHeader`
-
-| Name         | Type                                            | Description |
-| :----------- | :---------------------------------------------- | :---------- |
-| **`format`** | <code>DateTimeFormatOptions \| undefined</code> |             |
-
-<details><summary>2 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name               | Type                             | Description                |
-| :----------------- | :------------------------------- | :------------------------- |
-| **`calendarId`**   | <code>string \| undefined</code> | Id for the Calendar Header |
-| **`currentMonth`** | <code>Date</code>                | Month of the current Date  |
-
-</details>
-
-### `CalendarWeekTitle`
-
-| Name           | Type                | Description |
-| :------------- | :------------------ | :---------- |
-| **`dayIndex`** | <code>number</code> |             |
-
-<details><summary>1 state props</summary>
-> These props are returned by the state hook. You can spread them into this component (`{...state}`) or pass them separately. You can also provide these props from your own state logic.
-
-| Name           | Type                                            | Description                                                  |
-| :------------- | :---------------------------------------------- | :----------------------------------------------------------- |
-| **`weekDays`** | <code>{ title: string; abbr: string; }[]</code> | Generated week days for CalendarWeekTitle based on weekStart |
-
-</details>
+| Name        | Type                      | Description                                     |
+| :---------- | :------------------------ | :---------------------------------------------- |
+| **`state`** | <code>CalendarAria</code> | Object returned by the `useCalendarState` hook. |
