@@ -118,7 +118,7 @@ const getJSSandboxContents = (files, extraDeps, linkTitle) => {
           import { createRoot } from "react-dom/client";
 
           import App from "./App";
-          import "./styles.css";
+          ${files["src/styles.css"] ? 'import "./styles.css";' : ""}
 
           const rootElement = document.getElementById("root");
           const root = createRoot(rootElement);
