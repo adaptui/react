@@ -2,39 +2,90 @@
 
 `Meter` component can be used to provide a graphical display of a numeric value
 that varies within a defined range. It follows the
-[WAI-ARIA Meter Pattern](https://w3c.github.io/aria-practices/#meter) for it's
-[accessibility properties](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-15)
+[WAI-ARIA Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for
+it's
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving)
 
-<!-- ADD_TOC -->
+## Table of Contents
+
+- [Usage](#usage)
+- [Other Examples](#other-examples)
+- [Composition](#composition)
+- [Props](#props)
+  - [`MeterOptions`](#meteroptions)
+  - [`MeterStateProps`](#meterstateprops)
 
 ## Usage
 
-<!-- ADD_EXAMPLE src/meter/stories/templates/MeterBasicJsx.ts -->
+```js
+import * as React from "react";
 
-<!-- CODESANDBOX
-link_title: Meter Basic
-js: src/meter/stories/templates/MeterBasicJsx.ts
-css: src/meter/stories/templates/MeterBasicCss.ts
--->
+import { Meter, useMeterState } from "@adaptui/react";
 
-<!-- CODESANDBOX
-link_title: Meter Styled
-js: src/meter/stories/templates/MeterStyledJsx.ts
-deps: ['@emotion/css']
--->
+export const MeterBasic = props => {
+  const state = useMeterState({
+    value: 5,
+    min: 0,
+    max: 10,
+    low: 0,
+    high: 10,
+    optimum: 5,
+    ...props,
+  });
+  const { percent, status } = state;
 
-## Accessibility Requirement
+  return (
+    <div className="meter">
+      <Meter
+        aria-label="meter"
+        className="meterbar"
+        style={{
+          width: `${percent}%`,
+          backgroundColor: status == null ? undefined : background[status],
+        }}
+        state={state}
+      ></Meter>
+    </div>
+  );
+};
 
-- `Meter` should have `aria-label` or `aria-labelledby` attribute.
-- `Meter` should not be used to represent a value like the current world
-  population since it does not have a meaningful maximum limit.
-- `Meter` should not be used to indicate progress, such as loading or percent
-  completion of a task. To communicate progress, use the progressbar role
-  instead.
+export default MeterBasic;
+
+const background = {
+  safe: "#8bcf69",
+  caution: "#e6d450",
+  danger: "#f28f68",
+};
+```
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z9m7w0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hpfw3y)
+
+## Other Examples
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3hu02q)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/os30lu)
 
 ## Composition
 
-- MeterOptions uses `Role`
-- MeterState uses its own state
+- Meter uses `Role`
+- useMeterState uses its own state
 
-<!-- ADD_PROPS src/meter -->
+## Props
+
+### `MeterOptions`
+
+| Name        | Type                    | Description                                  |
+| :---------- | :---------------------- | :------------------------------------------- |
+| **`state`** | <code>MeterState</code> | Object returned by the `useMeterState` hook. |
+
+### `MeterStateProps`
+
+| Name          | Type                | Description                                                                                        |
+| :------------ | :------------------ | :------------------------------------------------------------------------------------------------- |
+| **`value`**   | <code>number</code> | The `value` of the meter indicator.If `undefined`/`not valid` the meter bar will be equal to `min` |
+| **`min`**     | <code>number</code> | The minimum value of the meter                                                                     |
+| **`max`**     | <code>number</code> | The maximum value of the meter                                                                     |
+| **`low`**     | <code>number</code> | The higher limit of min range.Defaults to `min`.                                                   |
+| **`optimum`** | <code>number</code> | The lower limit of max range.Defaults to `median of low & high`.                                   |
+| **`high`**    | <code>number</code> | The lower limit of max range.Defaults to `max`.                                                    |

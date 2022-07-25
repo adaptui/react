@@ -2,8 +2,9 @@
 
 `Meter` component can be used to provide a graphical display of a numeric value
 that varies within a defined range. It follows the
-[WAI-ARIA Meter Pattern](https://w3c.github.io/aria-practices/#meter) for it's
-[accessibility properties](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-15)
+[WAI-ARIA Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for
+it's
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving)
 
 <!-- ADD_TOC -->
 
@@ -16,21 +17,24 @@ link_title: Meter Basic
 js: src/meter/stories/templates/MeterBasicJsx.ts
 css: src/meter/stories/templates/MeterBasicCss.ts
 -->
+<!-- CODESANDBOX
+link_title: Meter Basic
+tsx: src/meter/stories/templates/MeterBasicTsx.ts
+css: src/meter/stories/templates/MeterBasicCss.ts
+-->
+
+## Other Examples
 
 <!-- CODESANDBOX
 link_title: Meter Styled
 js: src/meter/stories/templates/MeterStyledJsx.ts
 deps: ['@emotion/css']
 -->
-
-## Accessibility Requirement
-
-- `Meter` should have `aria-label` or `aria-labelledby` attribute.
-- `Meter` should not be used to represent a value like the current world
-  population since it does not have a meaningful maximum limit.
-- `Meter` should not be used to indicate progress, such as loading or percent
-  completion of a task. To communicate progress, use the progressbar role
-  instead.
+<!-- CODESANDBOX
+link_title: Meter Styled
+tsx: src/meter/stories/templates/MeterStyledTsx.ts
+deps: ['@emotion/css']
+-->
 
 <!-- ADD_COMPOSITION src/meter -->
 

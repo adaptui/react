@@ -3,7 +3,15 @@ import * as React from "react";
 import { Meter, MeterStateProps, useMeterState } from "../../index";
 
 export const MeterBasic: React.FC<MeterStateProps> = props => {
-  const state = useMeterState(props);
+  const state = useMeterState({
+    value: 5,
+    min: 0,
+    max: 10,
+    low: 0,
+    high: 10,
+    optimum: 5,
+    ...props,
+  });
   const { percent, status } = state;
 
   return (
