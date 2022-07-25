@@ -1,5 +1,74 @@
 
 
+## [1.0.0-alpha.8](https://github.com/adaptui/react/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-07-25)
+
+
+### Other Changes
+
+* **logo:** 🍱  show adaptui logo instead of storybook ([380afed](https://github.com/adaptui/react/commit/380afedbcea08c4d9512d64808fe08fc2de3e773))
+
+
+### Build Updates
+
+* **actions:** 👷 add .nvmrc file ([325859d](https://github.com/adaptui/react/commit/325859dcdf7ca0550be1ce55e91495dffd680caf))
+* **sb:** 👷 fix hmr in sb ([f397110](https://github.com/adaptui/react/commit/f397110afc44e27afc9eeaaf9b5ced3e3d5cc231))
+* **sb:** 👷 update actions, sb & vscode configs ([a6f0644](https://github.com/adaptui/react/commit/a6f0644eac85d08be49dee99ab63beb4a1313587))
+* **sb:** 👷 update sb storystore and remove react docgen plugin ([b0231dd](https://github.com/adaptui/react/commit/b0231dda7b879a769822fe534b4d93a61b1ea086))
+
+
+### CI Changes
+
+* **test:** 👷 update test action ([32d78b6](https://github.com/adaptui/react/commit/32d78b69575616d3c2adf6c5e69b48aa64a9ca89))
+
+
+### Code Refactors
+
+* **avatar:** ♻️ update avatar stories & imports ([09a710b](https://github.com/adaptui/react/commit/09a710b5cc6bff35cfa32a96241e809dd9e3a868))
+* **pagination:** ♻️  change pagination story type ([d65539f](https://github.com/adaptui/react/commit/d65539f2396bfcd57901a7b15d1769774d8c6311))
+* **slider:** ♻️  change default orientation to vertical ([151a076](https://github.com/adaptui/react/commit/151a07655991f3aeff23c1d4096d3eaa4753d71e))
+* **slider:** ♻️  remove orientation from verticalSlider ([2a8fcf2](https://github.com/adaptui/react/commit/2a8fcf252967ebb5d3ffa8fea77d2ee90b942626))
+* **toast:** ♻️  change manually to manual (grammar) ([6767b56](https://github.com/adaptui/react/commit/6767b56050a234deb4e6ee4389758b0bef41a3ba))
+* **toast:** ♻️  fix few typos and grammatical mistakes ([4594700](https://github.com/adaptui/react/commit/4594700126decb47789a332874fb6809923e8345))
+
+
+### Maintanance Updates
+
+* **deps:** ⬆️ update dependency @types/react-transition-group to v4.4.5 ([5169a95](https://github.com/adaptui/react/commit/5169a9533a1147d31d0caa89b51040eeb74ad10d))
+* **deps:** ⬆️ update dev dependencies (minor) ([6f93982](https://github.com/adaptui/react/commit/6f939822b2d669f446f90055a6ce784374cd1eaf))
+* **deps:** ⬆️ update dev dependencies (minor) ([c7e9a3f](https://github.com/adaptui/react/commit/c7e9a3f8f40d3c90cd1aeea2b44d15e836bf1b62))
+* **deps:** ⬆️ update dev dependencies (minor) ([98d00e6](https://github.com/adaptui/react/commit/98d00e67f4c0a06d0438c3ee394217e455346530))
+* **deps:** ⬆️ update dev dependencies (minor) ([c860b2a](https://github.com/adaptui/react/commit/c860b2a2ae3fa5bdbb50174701a297684e330b23))
+* **deps:** ⬆️ update prod dependencies (minor) ([70c8fce](https://github.com/adaptui/react/commit/70c8fceb8d675b87f5d1f1451d9a1018d9e87503))
+* **github:** 🍱  Add Pull Request Template for GitHub ([82d7753](https://github.com/adaptui/react/commit/82d775391518c7221dbd7d888240561e471f7fde))
+* **kodiak:** 🔧 update kodiak merge method ([a4c37df](https://github.com/adaptui/react/commit/a4c37df1721a1041f306b672baf3d564c730b4bc))
+
+
+### Documentation Changes
+
+* add [@mcnaveen](https://github.com/mcnaveen) as a contributor ([39442b5](https://github.com/adaptui/react/commit/39442b57bd332e2b8e48b4abb6f69a0356e734a9))
+* **accordion:** 📝 finish docs ([e99e583](https://github.com/adaptui/react/commit/e99e583a4609542c98f68a6384de5dc5f46c38df))
+* **all:** 📝 generate new docs ([0135c7d](https://github.com/adaptui/react/commit/0135c7dba2671db4e1317b9a17cef263c43f9587))
+* **breadcrumb:** 📝 finish docs ([0c4b76a](https://github.com/adaptui/react/commit/0c4b76aa508578739e7f294cad68b95de33aac51))
+* **calendar:** 📝 finish docs ([902b822](https://github.com/adaptui/react/commit/902b82238f441c03fecb825cdf0ef0049be4e4b6))
+* **code-base-overview:** 📝 finish docs ([cc6538c](https://github.com/adaptui/react/commit/cc6538cb30e92aca46a0153887e8e0750523bfae))
+* **csblink:** 📝 add support for multiple csb files ([2e62661](https://github.com/adaptui/react/commit/2e62661c9c602f1dab0fa3625e36ae108dfea6e1))
+* **date-time:** 📝 separate normal & range calendars & pickers ([42545fb](https://github.com/adaptui/react/commit/42545fb3c8dfab02d45101ca4ce4ec953bd81289))
+* **datefield:** 📝 finish docs ([9e38545](https://github.com/adaptui/react/commit/9e385454384cc47a8d303a78968bbcccea7a3d1c))
+* **disclosure:** 📝 finish docs ([5117025](https://github.com/adaptui/react/commit/5117025832fb3d7178b04363c23758678edbcb84))
+* **docs:** 📝  update documentation for multiple components ([#393](https://github.com/adaptui/react/issues/393)) ([df6e312](https://github.com/adaptui/react/commit/df6e3123ad323147bc1a7195e3abdbad3341e71a))
+* **drawer:** 📝 finish docs ([1dea3a1](https://github.com/adaptui/react/commit/1dea3a1486f0cf35098e418e9728ab537f518a16))
+* **getting-started:** 📝 update docs ([43d9797](https://github.com/adaptui/react/commit/43d97971e93b4c7a68de401a508f9cc8ead14a8d))
+* **meter:** 📝 finish docs ([0704c0f](https://github.com/adaptui/react/commit/0704c0f0a36cd2cf92f881b5414abfd3e02d5ffb))
+* **numberfield:** 📝 finish docs ([2e624be](https://github.com/adaptui/react/commit/2e624be12311ae94eb3887b5bd2c3267a848d770))
+* **pagination:** 📝 finish docs ([3912ea0](https://github.com/adaptui/react/commit/3912ea0a2dcf7e708962887b43cda741f3d7549e))
+* **progress:** 📝 finish docs ([a5134fb](https://github.com/adaptui/react/commit/a5134fbd6aec1248fe7f189e6a303d7b6aed1112))
+* **readme:** 📝 update docs ([0dcd38e](https://github.com/adaptui/react/commit/0dcd38e9ca55f59f5a40e195cd56eedb66c7d77e))
+* **scripts:** 📝 update docs script for v2 syntax ([caba05b](https://github.com/adaptui/react/commit/caba05b8cc58ee9f7987b7320f70d9ccc846734c))
+* **slider:** 📝 finish docs ([0a4d221](https://github.com/adaptui/react/commit/0a4d2212237f00c494f64cd878a558e155153c1a))
+* **toast:** 📝 finish docs ([70665a2](https://github.com/adaptui/react/commit/70665a2a3c7f032edbe0a3627e53dc29f3ac0ff1))
+* **typos:** 📝 update typos ([da76a50](https://github.com/adaptui/react/commit/da76a5094469bd6de67a0bead1ef990b518968c4))
+* 📝 finish docs ([0b4333e](https://github.com/adaptui/react/commit/0b4333ed12c5472b26fca7c738309b6a02b9e482))
+
 ## [1.0.0-alpha.7](https://github.com/adaptui/react/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-06-17)
 
 
