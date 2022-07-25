@@ -33,13 +33,13 @@ export const LinkBasic = props => {
 export default LinkBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1h12jn)
-[![Edit CodeSandbox](https://img.shields.io/badge/Link%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/jprz2b)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4t3mje)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zsq50u)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b3in0z)
-[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vpb6l5)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3x1exr)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ufcpss)
 
 ## Composition
 

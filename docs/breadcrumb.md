@@ -56,8 +56,8 @@ export const BreadcrumbsBasic = props => {
 export default BreadcrumbsBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/edse1g)
-[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0jfmlo)
+[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/inyj77)
+[![Edit CodeSandbox](https://img.shields.io/badge/Breadcrumbs%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/rs3pqg)
 
 ## Composition
 

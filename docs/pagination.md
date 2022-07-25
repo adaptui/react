@@ -68,8 +68,8 @@ export const PaginationBasic = props => {
 export default PaginationBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ygchkt)
-[![Edit CodeSandbox](https://img.shields.io/badge/Pagination%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/supn0d)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/lr1mlw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/msusvq)
 
 ## Accessibility Requirement
 

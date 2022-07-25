@@ -141,13 +141,13 @@ const CalendarCellComp = props => {
 };
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zr2dki)
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/9x3skk)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/69ocsh)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/nipvvz)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/le2yec)
-[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zym3nq)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7m6rq9)
+[![Edit CodeSandbox](https://img.shields.io/badge/Calendar%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/phumbf)
 
 ## Composition
 

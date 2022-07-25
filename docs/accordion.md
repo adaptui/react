@@ -67,16 +67,16 @@ export const AccordionBasic = props => {
 export default AccordionBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/6zc13n)
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3lx8e2)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/c3u01i)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/dq6vjy)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/fx62jw)
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bedlw0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/81fes1)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Multiple%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/culcz8)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/e0m91w)
-[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/gt6ek1)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0wgj26)
+[![Edit CodeSandbox](https://img.shields.io/badge/Accordion%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hih6h9)
 
 ## Composition
 
