@@ -23,7 +23,7 @@ link_title: NumberField
 js: src/numberfield/stories/templates/NumberFieldBasicJsx.ts
 -->
 <!-- CODESANDBOX
-link_title: NumberField
+link_title: NumberField TS
 tsx: src/numberfield/stories/templates/NumberFieldBasicTsx.ts
 -->
 

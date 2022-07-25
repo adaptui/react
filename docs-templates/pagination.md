@@ -13,6 +13,10 @@ navigation.
 link_title: Pagination
 js: src/pagination/stories/templates/PaginationBasicJsx.ts
 -->
+<!-- CODESANDBOX
+link_title: Pagination TS
+tsx: src/pagination/stories/templates/PaginationBasicTsx.ts
+-->
 
 ## Accessibility Requirement
 

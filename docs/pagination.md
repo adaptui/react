@@ -7,6 +7,11 @@ navigation.
 
 - [Usage](#usage)
 - [Accessibility Requirement](#accessibility-requirement)
+- [Composition](#composition)
+- [Props](#props)
+  - [`PaginationOptions`](#paginationoptions)
+  - [`PaginationButtonOptions`](#paginationbuttonoptions)
+  - [`PaginationStateProps`](#paginationstateprops)
 
 ## Usage
 
@@ -63,7 +68,8 @@ export const PaginationBasic = props => {
 export default PaginationBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/47y21q)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ygchkt)
+[![Edit CodeSandbox](https://img.shields.io/badge/Pagination%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/supn0d)
 
 ## Accessibility Requirement
 
@@ -71,7 +77,32 @@ export default PaginationBasic;
 
 ## Composition
 
-- Pagination uses
-- PaginationButton uses
+- Pagination uses `Role`
+- PaginationButton uses `Role`
+- usePaginationState uses its own state
 
-<!-- ADD_PROPS src/pagination -->
+## Props
+
+### `PaginationOptions`
+
+| Name        | Type                         | Description                                       |
+| :---------- | :--------------------------- | :------------------------------------------------ |
+| **`state`** | <code>PaginationState</code> | Object returned by the `usePaginationState` hook. |
+
+### `PaginationButtonOptions`
+
+| Name        | Type                                      | Description                                       |
+| :---------- | :---------------------------------------- | :------------------------------------------------ |
+| **`state`** | <code>PaginationState \| undefined</code> | Object returned by the `usePaginationState` hook. |
+| **`goto`**  | <code>Goto</code>                         | Provide the page you want to go.                  |
+
+### `PaginationStateProps`
+
+| Name                | Type                                                   | Description                                                 |
+| :------------------ | :----------------------------------------------------- | :---------------------------------------------------------- |
+| **`defaultPage`**   | <code>number \| undefined</code>                       | Set the default page(uncontrollable)                        |
+| **`page`**          | <code>number \| undefined</code>                       | Set the page(controllable)                                  |
+| **`onChange`**      | <code>((page: number) =&#62; void) \| undefined</code> |                                                             |
+| **`count`**         | <code>number \| undefined</code>                       | Total no. of pages                                          |
+| **`boundaryCount`** | <code>number \| undefined</code>                       | No. of boundary pages to be visible                         |
+| **`siblingCount`**  | <code>number \| undefined</code>                       | No. of sibiling pages allowed before/after the current page |

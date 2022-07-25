@@ -18,9 +18,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = { args: {} };
 
 export const DefaultPage: Story = {
   args: {

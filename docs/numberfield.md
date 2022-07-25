@@ -62,7 +62,7 @@ export default NumberFieldBasic;
 ```
 
 [![Edit CodeSandbox](https://img.shields.io/badge/NumberField-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/dwz8wi)
-[![Edit CodeSandbox](https://img.shields.io/badge/NumberField-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/h4pxl7)
+[![Edit CodeSandbox](https://img.shields.io/badge/NumberField%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/47800w)
 
 ## Composition
 
