@@ -55,7 +55,7 @@ export const DisclosureHorizontalCollapseBasic = props => {
 export default DisclosureHorizontalCollapseBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Horizontal-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0lgike)
+[![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Horizontal-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/kbjhn2)
 [![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Horizontal-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/nfnhi9)
 
 ### Vertical Disclosure
@@ -94,7 +94,7 @@ export const DisclosureVerticalCollapseBasic = props => {
 export default DisclosureVerticalCollapseBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Vertical-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ldlicp)
+[![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Vertical-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/66vcvy)
 [![Edit CodeSandbox](https://img.shields.io/badge/Disclosure%20Vertical-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/zz5rwq)
 
 ## Composition

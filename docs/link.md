@@ -33,12 +33,12 @@ export const LinkBasic = props => {
 export default LinkBasic;
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/qgsgpy)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1h12jn)
 [![Edit CodeSandbox](https://img.shields.io/badge/Link%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/jprz2b)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/gs4enr)
+[![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/b3in0z)
 [![Edit CodeSandbox](https://img.shields.io/badge/Link%20Span%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/vpb6l5)
 
 ## Composition

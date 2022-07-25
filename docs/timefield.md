@@ -5,7 +5,7 @@ to style. It follows the
 [Native Input Time](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
 for the keyboard navigation & accessibility features. Supports all the features
 of React Aria's
-[useTimeField](https://react-spectrum.adobe.com/react-aria/useTimeField.html#features)
+[useTimeField](https://react-spectrum.adobe.com/react-aria/useTimeField.html#features).
 
 ## Table of Contents
 

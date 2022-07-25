@@ -2,8 +2,9 @@
 
 `Toast` component provides a way to add notifications to the app with complete
 freedom of styling them. It follows
-[WAI-ARIA Alert Patter](https://www.w3.org/WAI/ARIA/apg/patterns/alert/) for the
-[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/alert/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20widget%20has)
+[WAI-ARIA Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/) for
+the
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/alert/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20widget%20has).
 
 ## Usage
 

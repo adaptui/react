@@ -4,7 +4,7 @@
 that varies within a defined range. It follows the
 [WAI-ARIA Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for
 it's
-[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving)
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving).
 
 ## Table of Contents
 
@@ -59,12 +59,12 @@ const background = {
 ```
 
 [![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z9m7w0)
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/hpfw3y)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Basic%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/sjd6go)
 
 ## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3hu02q)
-[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/os30lu)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1dpgzo)
+[![Edit CodeSandbox](https://img.shields.io/badge/Meter%20Styled%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/4v89rm)
 
 ## Composition
 
