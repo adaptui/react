@@ -1,5 +1,18 @@
 
 
+## [1.0.0-alpha.9](https://github.com/adaptui/react/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2022-07-25)
+
+
+### Documentation Changes
+
+* **release:** 📝 update core pkg to new alpha release ([439c3ae](https://github.com/adaptui/react/commit/439c3aee47d6fcf6304fcdb105cc08f2bf34bd62))
+* **segments:** 📝 add docs ([d70d2d0](https://github.com/adaptui/react/commit/d70d2d02e6b4f4357e6518e3fa975e903bcd90a8))
+
+
+### Code Refactors
+
+* **disclosure:** ♻️ migrate visible to open props ([fa1ab1f](https://github.com/adaptui/react/commit/fa1ab1f0e177128bf748cbf339b0f6a412f5549c))
+
 ## [1.0.0-alpha.8](https://github.com/adaptui/react/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2022-07-25)
 
 

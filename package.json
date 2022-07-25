@@ -1,6 +1,6 @@
 {
   "name": "@adaptui/react",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "description": "Collection of headless components/hooks that are accessible, composable, customizable from low level to build your own UI & Design System powered by Reakit",
   "keywords": [
     "renderless",
