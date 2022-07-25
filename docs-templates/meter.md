@@ -18,7 +18,7 @@ js: src/meter/stories/templates/MeterBasicJsx.ts
 css: src/meter/stories/templates/MeterBasicCss.ts
 -->
 <!-- CODESANDBOX
-link_title: Meter Basic
+link_title: Meter Basic TS
 tsx: src/meter/stories/templates/MeterBasicTsx.ts
 css: src/meter/stories/templates/MeterBasicCss.ts
 -->
@@ -31,7 +31,7 @@ js: src/meter/stories/templates/MeterStyledJsx.ts
 deps: ['@emotion/css']
 -->
 <!-- CODESANDBOX
-link_title: Meter Styled
+link_title: Meter Styled TS
 tsx: src/meter/stories/templates/MeterStyledTsx.ts
 deps: ['@emotion/css']
 -->

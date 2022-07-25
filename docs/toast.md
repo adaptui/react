@@ -2,9 +2,8 @@
 
 `Toast` component provides a way to add notifications to the app with complete
 freedom of styling them. It follows
-[WAI-ARIA Alert Patter](https://www.w3.org/TR/wai-aria-practices-1.2/#alert) for
-the
-[accessibility properties](https://www.w3.org/TR/wai-aria-practices-1.2/#wai-aria-roles-states-and-properties-0)
+[WAI-ARIA Alert Patter](https://www.w3.org/WAI/ARIA/apg/patterns/alert/) for the
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/alert/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20widget%20has)
 
 ## Usage
 
@@ -223,7 +222,7 @@ function ToastTriggers() {
             })
           }
         >
-          Add Non Dismissable Toast
+          Add Manual Dismissable Toast
         </TriggerButton>
       </div>
     </div>
@@ -231,40 +230,58 @@ function ToastTriggers() {
 }
 ```
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0zrue)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3h689y)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20Basic%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/0ypwe8)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ohi1e)
+## Other Examples
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/g6mc8)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/9kcrmd)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Animated%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/h0x68t)
 
-[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/z762p)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/1eg04q)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20CSS%20Transition%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/kcss9u)
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/ik3u1n)
+[![Edit CodeSandbox](https://img.shields.io/badge/Toast%20React%20Spring%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/38jcm5)
 
 ## Props
 
-### `DefaultToast`
+### `DefaultToastOptions`
 
-| Name                    | Type                | Description |
-| :---------------------- | :------------------ | :---------- |
-| **`animationDuration`** | <code>number</code> |             |
+| Name                    | Type                   | Description |
+| :---------------------- | :--------------------- | :---------- |
+| **`animationDuration`** | <code>number</code>    |             |
+| **`children`**          | <code>ReactNode</code> |             |
 
-### `DefaultToastProvider`
+### `DefaultToastProviderOptions`
 
-| Name                    | Type                | Description |
-| :---------------------- | :------------------ | :---------- |
-| **`animationDuration`** | <code>number</code> |             |
+<details><summary>DefaultToastOptions props</summary>
+> These props are returned by the other props You can also provide these props.
 
-### `ConfigurableToast`
+| Name                    | Type                   | Description |
+| :---------------------- | :--------------------- | :---------- |
+| **`animationDuration`** | <code>number</code>    |             |
+| **`children`**          | <code>ReactNode</code> |             |
 
-| Name                    | Type                 | Description |
-| :---------------------- | :------------------- | :---------- |
-| **`id`**                | <code>string</code>  |             |
-| **`reverseOrder`**      | <code>boolean</code> |             |
-| **`animationDuration`** | <code>number</code>  |             |
+</details>
 
-### `Toast`
+### `ConfigurableToastOptions`
 
-| Name                    | Type                 | Description |
-| :---------------------- | :------------------- | :---------- |
-| **`id`**                | <code>string</code>  |             |
-| **`reverseOrder`**      | <code>boolean</code> |             |
-| **`animationDuration`** | <code>number</code>  |             |
+| Name               | Type                 | Description |
+| :----------------- | :------------------- | :---------- |
+| **`id`**           | <code>string</code>  |             |
+| **`reverseOrder`** | <code>boolean</code> |             |
+
+### `ToastOptions`
+
+<details><summary>ConfigurableToastOptions props</summary>
+> These props are returned by the other props You can also provide these props.
+
+| Name                    | Type                   | Description |
+| :---------------------- | :--------------------- | :---------- |
+| **`id`**                | <code>string</code>    |             |
+| **`reverseOrder`**      | <code>boolean</code>   |             |
+| **`animationDuration`** | <code>number</code>    |             |
+| **`children`**          | <code>ReactNode</code> |             |
+
+</details>
