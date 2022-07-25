@@ -4,29 +4,52 @@
 of time to load. It follows
 [WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
 
-<!-- ADD_TOC -->
+## Table of Contents
+
+- [Usage](#usage)
+- [Other Examples](#other-examples)
+- [Accessibility Requirement](#accessibility-requirement)
+- [Composition](#composition)
+- [Props](#props)
+  - [`ProgressOptions`](#progressoptions)
+  - [`ProgressStateProps`](#progressstateprops)
 
 ## Usage
 
-<!-- ADD_EXAMPLE src/progress/stories/templates/ProgressBasicJsx.ts -->
+```js
+import * as React from "react";
 
-<!-- CODESANDBOX
-link_title: Progress Basic
-js: src/progress/stories/templates/ProgressBasicJsx.ts
-css: src/progress/stories/templates/ProgressBasicCss.ts
--->
+import { Progress, useProgressState } from "@adaptui/react";
 
-<!-- CODESANDBOX
-link_title: Progress Linear
-js: src/progress/stories/templates/LinearProgressJsx.ts
-deps: ['@emotion/css']
--->
+export const ProgressBasic = props => {
+  const state = useProgressState({ value: 50, ...props });
+  const { percent, isIndeterminate } = state;
 
-<!-- CODESANDBOX
-link_title: Progress Circular
-js: src/progress/stories/templates/CircularProgressJsx.ts
-deps: ['@emotion/css']
--->
+  return (
+    <div className="progress">
+      <Progress
+        state={state}
+        aria-label="progress"
+        style={{ width: `${percent}%` }}
+        className={`progressbar ${isIndeterminate ? "indeterminate" : ""}`}
+      />
+    </div>
+  );
+};
+
+export default ProgressBasic;
+```
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/8gl7td)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Basic%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7lf4is)
+
+## Other Examples
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/bf2db0)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Linear%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/7bjws5)
+
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/3i6nvw)
+[![Edit CodeSandbox](https://img.shields.io/badge/Progress%20Circular%20TS-Open%20On%20CodeSandbox-%230971f1?style=for-the-badge&logo=codesandbox&labelColor=151515)](https://codesandbox.io/s/itn0j4)
 
 ## Accessibility Requirement
 
@@ -34,16 +57,18 @@ deps: ['@emotion/css']
   a page, you should use `aria-describedby` to point to the status, and set the
   `aria-busy `attribute to `true` on the region until it is finished loading.
 
-<!-- ADD_COMPOSITION src/progress -->
+## Composition
+
+- Progress uses `Role`
+- useProgressState uses its own state
 
 ## Props
 
 ### `ProgressOptions`
 
-| Name        | Type                                                                                                                                                                             | Description                                     |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| **`as`**    | <code>T \| undefined</code>                                                                                                                                                      |                                                 |
-| **`state`** | <code title="{ value: number \| null; min: number; max: number; isIndeterminate: boolean; percent: number \| null; }">{ value: number \| null; min: number; max: numbe...</code> | Object returned by the `useProgressState` hook. |
+| Name        | Type                       | Description                                     |
+| :---------- | :------------------------- | :---------------------------------------------- |
+| **`state`** | <code>ProgressState</code> | Object returned by the `useProgressState` hook. |
 
 ### `ProgressStateProps`
 

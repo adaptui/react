@@ -21,6 +21,6 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = { args: { value: 50 } };
+export const Default: Story = { args: {} };
 
 export const IsIndeterminate = { args: { value: null } };

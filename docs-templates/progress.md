@@ -15,16 +15,33 @@ link_title: Progress Basic
 js: src/progress/stories/templates/ProgressBasicJsx.ts
 css: src/progress/stories/templates/ProgressBasicCss.ts
 -->
+<!-- CODESANDBOX
+link_title: Progress Basic TS
+tsx: src/progress/stories/templates/ProgressBasicTsx.ts
+css: src/progress/stories/templates/ProgressBasicCss.ts
+-->
+
+## Other Examples
 
 <!-- CODESANDBOX
 link_title: Progress Linear
 js: src/progress/stories/templates/LinearProgressJsx.ts
 deps: ['@emotion/css']
 -->
+<!-- CODESANDBOX
+link_title: Progress Linear TS
+tsx: src/progress/stories/templates/LinearProgressTsx.ts
+deps: ['@emotion/css']
+-->
 
 <!-- CODESANDBOX
 link_title: Progress Circular
 js: src/progress/stories/templates/CircularProgressJsx.ts
+deps: ['@emotion/css']
+-->
+<!-- CODESANDBOX
+link_title: Progress Circular TS
+tsx: src/progress/stories/templates/CircularProgressTsx.ts
 deps: ['@emotion/css']
 -->
 
