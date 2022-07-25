@@ -41,7 +41,7 @@ export const DateRangePickerStyled: React.FC<
         >
           <CalendarStyledIcon />
         </DatePickerDisclosure>
-        {state.popover.visible && (
+        {state.popover.open && (
           <DatePickerPopover state={daterangepicker} className="popover">
             <CalendarRangeStyled {...daterangepicker.calendarProps} />
           </DatePickerPopover>

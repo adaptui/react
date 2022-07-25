@@ -11,11 +11,7 @@ export function useDateRangePickerBaseState(
   const datepicker = useDateRangePickerState(props);
   const { isOpen, setOpen } = datepicker;
 
-  const popover = usePopoverState({
-    visible: isOpen,
-    setVisible: setOpen,
-    ...props,
-  });
+  const popover = usePopoverState({ open: isOpen, setOpen, ...props });
 
   return { datepicker, popover };
 }

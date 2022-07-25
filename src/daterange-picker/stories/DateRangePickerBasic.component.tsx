@@ -37,7 +37,7 @@ export const DateRangePickerBasic: React.FC<
           <CalendarIcon />
         </DatePickerDisclosure>
       </DatePickerGroup>
-      {state.popover.visible && (
+      {state.popover.open && (
         <DatePickerPopover state={daterangepicker} className="popover">
           <CalendarRange {...daterangepicker.calendarProps} />
         </DatePickerPopover>

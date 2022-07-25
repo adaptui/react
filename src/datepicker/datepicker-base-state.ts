@@ -10,10 +10,11 @@ export function useDatePickerBaseState(
 ): DatePickerBaseState {
   const datepicker = useDatePickerState(props);
   const { isOpen, setOpen } = datepicker;
+  console.log("%cisOpen", "color: #007300", isOpen);
 
   const popover = usePopoverState({
-    visible: isOpen,
-    setVisible: setOpen,
+    open: isOpen,
+    setOpen: setOpen,
     ...props,
   });
 

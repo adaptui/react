@@ -36,7 +36,7 @@ export const DatePickerStyled: React.FC<DatePickerStyledProps> = props => {
         >
           <CalendarStyledIcon />
         </DatePickerDisclosure>
-        {state.popover.visible && (
+        {state.popover.open && (
           <DatePickerPopover state={datepicker} className="popover">
             <CalendarStyled {...datepicker.calendarProps} />
           </DatePickerPopover>
