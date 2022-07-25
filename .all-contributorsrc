@@ -3,7 +3,8 @@
   "projectOwner": "adaptui",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [ "README.md"
+  "files": [
+    "README.md"
   ],
   "imageSize": 100,
   "commit": true,
@@ -34,6 +35,15 @@
       "profile": "http://timeless.co/",
       "contributions": [
         "ideas"
+      ]
+    },
+    {
+      "login": "mcnaveen",
+      "name": "MC Naveen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8493007?v=4",
+      "profile": "https://github.com/mcnaveen",
+      "contributions": [
+        "code"
       ]
     }
   ],

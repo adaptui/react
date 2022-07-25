@@ -81,6 +81,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://navinmoorthy.me/"><img src="https://avatars0.githubusercontent.com/u/39694575?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Navin Moorthy</b></sub></a><br /><a href="https://github.com/adaptui/react/commits?author=navin-moorthy" title="Code">💻</a></td>
     <td align="center"><a href="http://anuraghazra.github.io/"><img src="https://avatars3.githubusercontent.com/u/35374649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anurag Hazra</b></sub></a><br /><a href="https://github.com/adaptui/react/commits?author=anuraghazra" title="Code">💻</a></td>
     <td align="center"><a href="http://timeless.co/"><img src="https://avatars2.githubusercontent.com/u/6380293?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sandeep Prabhakaran</b></sub></a><br /><a href="#ideas-sandeepprabhakaran" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/mcnaveen"><img src="https://avatars.githubusercontent.com/u/8493007?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MC Naveen</b></sub></a><br /><a href="https://github.com/adaptui/react/commits?author=mcnaveen" title="Code">💻</a></td>
   </tr>
 </table>
 
