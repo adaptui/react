@@ -41,7 +41,7 @@ export type DrawerProps<T extends As = "div"> = Props<DrawerOptions<T>>;
 
 export type Placement = keyof typeof PLACEMENTS;
 
-const PLACEMENTS = {
+export const PLACEMENTS = {
   left: {
     left: 0,
     top: 0,

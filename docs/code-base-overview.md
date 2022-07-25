@@ -107,7 +107,7 @@ link
 - [DatePicker](./datepicker.md)
 - [DateRangePicker](./daterange-picker.md)
 - [TimeField](./timefield.md)
-- [Dialog](./dialog.md)
+- [Drawer](./drawer.md)
 - [Disclosure](./disclosure.md)
 - [Link](./Link.md)
 - [Meter](./meter.md)
