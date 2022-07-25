@@ -47,10 +47,10 @@ We generate:
 For our component API documentation, we auto generate them by parsing the
 typescript code and extracting information from them.
 
-We have [docs-templates](/docs-templates) which holds the templates for the
+We have [docs-templates](./docs-templates) which holds the templates for the
 docs.
 
-See example for [accordion](/docs-templates/Accordion.md)
+See example for [accordion](./docs-templates/Accordion.md)
 
 ### Props
 
@@ -78,9 +78,10 @@ link
 - Usage:
   ```md
   <!-- CODESANDBOX
-  link_title: Accordion Example
-  js: src/accordion/stories/templates/AccordionBasicJsx.ts
-  css: src/accordion/stories/AccordionStyled.css
+  link_title: Calendar
+  js: src/calendar/stories/templates/CalendarBasicJsx.ts
+  css: src/calendar/stories/templates/CalendarBasicCss.ts
+  files: [src/calendar/stories/templates/UtilsJsx.ts]
   -->
   ```
 
@@ -98,18 +99,20 @@ link
 
 ## Component Docs
 
-- [Accordion](accordion.md)
-- [Breadcrumbs](breadcrumb.md)
-- [Calendar](calendar.md)
-- [Date Field](datefield.md)
-- [Date Picker](datepicker.md)
-- [Dialog](dialog.md)
-- [Disclosure](disclosure.md)
-- [Link](Link.md)
-- [Meter](meter.md)
-- [Number field](numberfield.md)
-- [Pagination](pagination.md)
-- [Progress](progress.md)
-- [Slider](slider.md)
-- [Time Field](timefield.md)
-- [Toast](toast.md)
+- [Accordion](./accordion.md)
+- [Breadcrumbs](./breadcrumb.md)
+- [Calendar](./calendar.md)
+- [RangeCalendar](./range-calendar.md)
+- [DateField](./datefield.md)
+- [DatePicker](./datepicker.md)
+- [DateRangePicker](./daterange-picker.md)
+- [TimeField](./timefield.md)
+- [Dialog](./dialog.md)
+- [Disclosure](./disclosure.md)
+- [Link](./Link.md)
+- [Meter](./meter.md)
+- [Number field](./numberfield.md)
+- [Pagination](./pagination.md)
+- [Progress](./progress.md)
+- [Slider](./slider.md)
+- [Toast](./toast.md)

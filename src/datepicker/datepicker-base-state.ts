@@ -1,6 +1,9 @@
 import { PopoverState, PopoverStateProps, usePopoverState } from "ariakit";
-import { DatePickerState, useDatePickerState } from "@react-stately/datepicker";
-import { DatePickerProps, DateValue } from "@react-types/datepicker";
+import {
+  DatePickerState,
+  DatePickerStateOptions as DatePickerStateProps,
+  useDatePickerState,
+} from "@react-stately/datepicker";
 
 export function useDatePickerBaseState(
   props: DatePickerBaseStateProps,
@@ -18,15 +21,15 @@ export function useDatePickerBaseState(
 }
 
 export type DatePickerBaseState = {
+  /**
+   * Object returned by the `useDatePickerState` hook.
+   */
   datepicker: DatePickerState;
+  /**
+   * Object returned by the `usePopoverState` hook.
+   */
   popover: PopoverState;
 };
 
-export type DatePickerBaseStateProps = DatePickerProps<DateValue> &
-  PopoverStateProps & {
-    /**
-     * Determines whether the date picker popover should close automatically when a date is selected.
-     * @default true
-     */
-    shouldCloseOnSelect?: boolean | (() => boolean);
-  };
+export type DatePickerBaseStateProps = DatePickerStateProps &
+  PopoverStateProps & {};

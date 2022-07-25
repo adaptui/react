@@ -9,8 +9,9 @@ import { As, Options, Props } from "ariakit-utils/types";
 import { useButton } from "@react-aria/button";
 import { mergeProps } from "@react-aria/utils";
 
+import { RangeCalendarState } from "../range-calendar";
+
 import { CalendarState } from "./calendar-state";
-import { RangeCalendarState } from "./range-calendar-state";
 
 export const useCalendarPreviousButton =
   createHook<CalendarPreviousButtonOptions>(({ state, ...props }) => {
@@ -32,7 +33,7 @@ export const CalendarPreviousButton =
 export type CalendarPreviousButtonOptions<T extends As = "button"> =
   Options<T> & {
     /**
-     * Object returned by the `useCalendarPreviousButtonState` hook.
+     * Object returned by the `useCalendarState` | `RangeCalendarState` hook.
      */
     state: CalendarState | RangeCalendarState;
   };

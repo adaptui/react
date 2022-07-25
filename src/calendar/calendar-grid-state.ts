@@ -1,8 +1,12 @@
-import { CalendarDate } from "@internationalized/date";
-import { CalendarGridAria, useCalendarGrid } from "@react-aria/calendar";
+import {
+  AriaCalendarGridProps,
+  CalendarGridAria,
+  useCalendarGrid,
+} from "@react-aria/calendar";
+
+import { RangeCalendarBaseState } from "../range-calendar";
 
 import { CalendarBaseState } from "./calendar-base-state";
-import { RangeCalendarBaseState } from "./range-calendar-base-state";
 
 export function useCalendarGridState({
   state,
@@ -15,21 +19,9 @@ export function useCalendarGridState({
 
 export type CalendarGridState = CalendarGridAria;
 
-export type CalendarGridStateProps = {
+export type CalendarGridStateProps = AriaCalendarGridProps & {
   /**
-   * The first date displayed in the calendar grid.
-   * Defaults to the first visible date in the calendar.
-   * Override this to display multiple date grids in a calendar.
-   */
-  startDate?: CalendarDate;
-  /**
-   * The last date displayed in the calendar grid.
-   * Defaults to the last visible date in the calendar.
-   * Override this to display multiple date grids in a calendar.
-   */
-  endDate?: CalendarDate;
-  /**
-   * Object returned by the `useSliderState` hook.
+   * Object returned by the `useCalendarBaseState` | `RangeCalendarBaseState` hook.
    */
   state: CalendarBaseState | RangeCalendarBaseState;
 };

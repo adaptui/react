@@ -1,15 +1,16 @@
 import React from "react";
 
-import CalendarRange from "../../calendar/stories/CalendarRange.component";
 import DateFieldBasic from "../../datefield/stories/DateFieldBasic.component";
 import {
   DatePickerDisclosure,
   DatePickerGroup,
+  DatePickerLabel,
   DatePickerPopover,
   DateRangePickerBaseStateProps,
   useDateRangePickerBaseState,
   useDateRangePickerState,
 } from "../../index";
+import CalendarRange from "../../range-calendar/stories/RangeCalendarBasic.component";
 
 import { CalendarIcon } from "./Utils.component";
 
@@ -22,14 +23,12 @@ export const DateRangePickerBasic: React.FC<
   const daterangepicker = useDateRangePickerState({ ...props, state });
 
   return (
-    <div style={{ position: "relative" }} className="datepicker">
-      <DatePickerGroup
-        state={daterangepicker}
-        className="datepicker__header"
-        aria-label="DatePicker"
-      >
+    <div className="datepicker">
+      <DatePickerLabel state={daterangepicker} className="datepicker__label">
+        {props.label}
+      </DatePickerLabel>
+      <DatePickerGroup state={daterangepicker} className="datepicker__group">
         <DateFieldBasic {...daterangepicker.startFieldProps} />
-        <div aria-hidden="true" className="datepicker__dash" />
         <DateFieldBasic {...daterangepicker.endFieldProps} />
         <DatePickerDisclosure
           state={daterangepicker}
@@ -37,12 +36,12 @@ export const DateRangePickerBasic: React.FC<
         >
           <CalendarIcon />
         </DatePickerDisclosure>
-        {state.popover.visible && (
-          <DatePickerPopover state={daterangepicker} className="popover">
-            <CalendarRange {...daterangepicker.calendarProps} />
-          </DatePickerPopover>
-        )}
       </DatePickerGroup>
+      {state.popover.visible && (
+        <DatePickerPopover state={daterangepicker} className="popover">
+          <CalendarRange {...daterangepicker.calendarProps} />
+        </DatePickerPopover>
+      )}
     </div>
   );
 };

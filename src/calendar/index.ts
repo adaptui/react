@@ -9,6 +9,3 @@ export * from "./calendar-next-button";
 export * from "./calendar-prev-button";
 export * from "./calendar-state";
 export * from "./calendar-title";
-export * from "./range-calendar";
-export * from "./range-calendar-base-state";
-export * from "./range-calendar-state";

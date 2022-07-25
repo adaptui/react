@@ -6,6 +6,7 @@ import {
   DatePickerBaseStateProps,
   DatePickerDisclosure,
   DatePickerGroup,
+  DatePickerLabel,
   DatePickerPopover,
   useDatePickerBaseState,
   useDatePickerState,
@@ -20,12 +21,11 @@ export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
   const datepicker = useDatePickerState({ ...props, state });
 
   return (
-    <div style={{ position: "relative" }} className="datepicker">
-      <DatePickerGroup
-        state={datepicker}
-        className="datepicker__header"
-        aria-label="DatePicker"
-      >
+    <div className="datepicker">
+      <DatePickerLabel state={datepicker} className="datepicker__label">
+        {props.label}
+      </DatePickerLabel>
+      <DatePickerGroup state={datepicker} className="datepicker__group">
         <DateFieldBasic {...datepicker.fieldProps} />
         <DatePickerDisclosure
           state={datepicker}
@@ -33,12 +33,12 @@ export const DatePickerBasic: React.FC<DatePickerBasicProps> = props => {
         >
           <CalendarIcon />
         </DatePickerDisclosure>
-        {state.popover.visible && (
-          <DatePickerPopover state={datepicker} className="popover">
-            <CalendarBasic {...datepicker.calendarProps} />
-          </DatePickerPopover>
-        )}
       </DatePickerGroup>
+      {state.popover.visible && (
+        <DatePickerPopover state={datepicker} className="popover">
+          <CalendarBasic {...datepicker.calendarProps} />
+        </DatePickerPopover>
+      )}
     </div>
   );
 };

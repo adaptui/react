@@ -13,7 +13,7 @@ type Meta = ComponentMeta<typeof DateRangePickerStyled>;
 type Story = ComponentStoryObj<typeof DateRangePickerStyled>;
 
 export default {
-  title: "DatePicker/RangeStyled",
+  title: "DateRangePicker/Styled",
   component: DateRangePickerStyled,
   parameters: {
     layout: "centered",

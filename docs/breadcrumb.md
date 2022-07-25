@@ -61,7 +61,7 @@ export default BreadcrumbsBasic;
 
 ## Composition
 
-- BreadcrumbLink uses `CommandOptions`
+- BreadcrumbLink uses `useCommand`
 - Breadcrumbs uses `Role`
 
 ## Props

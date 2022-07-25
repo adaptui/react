@@ -1,12 +1,12 @@
 import * as React from "react";
 import { VisuallyHidden } from "ariakit";
-import {
-  createCalendar,
-  getWeeksInMonth,
-  startOfWeek,
-} from "@internationalized/date";
+import { createCalendar, getWeeksInMonth } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 
+import {
+  ChevronLeft,
+  ChevronRight,
+} from "../../calendar/stories/Utils.component";
 import {
   CalendarCell,
   CalendarCellButton,
@@ -24,15 +24,14 @@ import {
   useRangeCalendarState,
 } from "../../index";
 
-import { ChevronLeft, ChevronRight } from "./Utils.component";
-
-export type CalendarRangeProps = Omit<
+export type RangeCalendarBasicProps = Omit<
   RangeCalendarBaseStateProps,
   "locale" | "createCalendar"
 > & {};
 
-export const CalendarRange: React.FC<CalendarRangeProps> = props => {
-  let { locale } = useLocale();
+// Example from https://react-spectrum.adobe.com/react-aria/useRangeCalendar.html
+export const RangeCalendarBasic: React.FC<RangeCalendarBasicProps> = props => {
+  const { locale } = useLocale();
 
   const state = useRangeCalendarBaseState({ locale, createCalendar, ...props });
   const calendar = useRangeCalendarState({ ...props, state });
@@ -53,7 +52,7 @@ export const CalendarRange: React.FC<CalendarRangeProps> = props => {
   );
 };
 
-export default CalendarRange;
+export default RangeCalendarBasic;
 
 export type CalendarGridProps = CalendarGridStateProps & {};
 
@@ -62,10 +61,7 @@ const CalendarGridComp = (props: CalendarGridProps) => {
   let { locale } = useLocale();
   let gridState = useCalendarGridState(props);
 
-  // Find the start date of the grid, which is the beginning
-  // of the week the month starts in. Also get the number of
-  // weeks in the month so we can render the proper number of rows.
-  let monthStart = startOfWeek(baseState.visibleRange.start, locale);
+  // Get the number of weeks in the month so we can render the proper number of rows.
   let weeksInMonth = getWeeksInMonth(baseState.visibleRange.start, locale);
 
   return (
@@ -87,13 +83,15 @@ const CalendarGridComp = (props: CalendarGridProps) => {
       <tbody>
         {[...new Array(weeksInMonth).keys()].map(weekIndex => (
           <tr key={weekIndex}>
-            {[...new Array(7).keys()].map(dayIndex => (
-              <CalendarCellComp
-                key={dayIndex}
-                state={baseState}
-                date={monthStart.add({ weeks: weekIndex, days: dayIndex })}
-              />
-            ))}
+            {baseState
+              .getDatesInWeek(weekIndex)
+              .map((date, i) =>
+                date ? (
+                  <CalendarCellComp key={i} state={baseState} date={date} />
+                ) : (
+                  <td key={i} />
+                ),
+              )}
           </tr>
         ))}
       </tbody>
@@ -104,18 +102,25 @@ const CalendarGridComp = (props: CalendarGridProps) => {
 export type CalendarCellProps = CalendarCellStateProps & {};
 
 const CalendarCellComp = (props: CalendarCellProps) => {
-  const state = useCalendarCellState(props);
+  const cellState = useCalendarCellState(props);
+  const {
+    isOutsideVisibleRange,
+    isDisabled,
+    isSelected,
+    isUnavailable,
+    formattedDate,
+  } = cellState;
 
   return (
-    <CalendarCell state={state}>
+    <CalendarCell state={cellState}>
       <CalendarCellButton
-        state={state}
-        hidden={state.isOutsideVisibleRange}
-        className={`cell ${state.isSelected ? "selected" : ""} ${
-          state.isDisabled ? "disabled" : ""
-        } ${state.isUnavailable ? "unavailable" : ""}`}
+        state={cellState}
+        hidden={isOutsideVisibleRange}
+        className={`cell ${isSelected ? "selected" : ""} ${
+          isDisabled ? "disabled" : ""
+        } ${isUnavailable ? "unavailable" : ""}`}
       >
-        {state.formattedDate}
+        {formattedDate}
       </CalendarCellButton>
     </CalendarCell>
   );

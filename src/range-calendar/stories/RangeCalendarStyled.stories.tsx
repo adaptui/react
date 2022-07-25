@@ -3,19 +3,19 @@ import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
 
-import js from "./templates/CalendarRangeStyledJsx";
-import ts from "./templates/CalendarRangeStyledTsx";
+import js from "./templates/RangeCalendarStyledJsx";
+import ts from "./templates/RangeCalendarStyledTsx";
 import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
-import { CalendarRangeStyled } from "./CalendarRangeStyled.component";
+import { RangeCalendarStyled } from "./RangeCalendarStyled.component";
 
 import "./tailwind.css";
 
-type Meta = ComponentMeta<typeof CalendarRangeStyled>;
+type Meta = ComponentMeta<typeof RangeCalendarStyled>;
 
 export default {
-  title: "Calendar/RangeStyled",
-  component: CalendarRangeStyled,
+  title: "RangeCalendar/Styled",
+  component: RangeCalendarStyled,
   parameters: {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, jsUtils, tsUtils }),
@@ -29,5 +29,5 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  return <CalendarRangeStyled />;
+  return <RangeCalendarStyled />;
 };

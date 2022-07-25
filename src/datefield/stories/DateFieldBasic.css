@@ -2,18 +2,38 @@
   box-sizing: border-box;
 }
 
-.datepicker__field {
-  font-family: monospace;
+.datefield {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.datepicker__field--item {
-  padding: 2px;
+.datefield__label {
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+}
+
+.datefield__field {
+  display: inline-flex;
+  padding: 2px 4px;
+  border-radius: 2px;
+  border: 1px solid #6f6f6f;
+  background: #fff;
+}
+
+.datefield__field--item {
+  padding: 0 2px;
   border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
 }
 
-.datepicker__field--item:focus {
+.datefield__field--item.placeholder {
+  color: #767676;
+}
+
+.datefield__field--item:focus {
   background-color: #1e65fd;
-  color: white;
   outline: none;
+  color: white;
 }

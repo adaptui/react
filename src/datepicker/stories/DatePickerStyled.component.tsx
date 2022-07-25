@@ -6,6 +6,7 @@ import {
   DatePickerBaseStateProps,
   DatePickerDisclosure,
   DatePickerGroup,
+  DatePickerLabel,
   DatePickerPopover,
   useDatePickerBaseState,
   useDatePickerState,
@@ -21,10 +22,12 @@ export const DatePickerStyled: React.FC<DatePickerStyledProps> = props => {
 
   return (
     <div className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max">
+      <DatePickerLabel state={datepicker} className="datepicker__label">
+        {props.label}
+      </DatePickerLabel>
       <DatePickerGroup
         state={datepicker}
         className="flex justify-between items-center p-2 pl-4 pr-4 space-x-4 rounded-md"
-        aria-label="DatePicker"
       >
         <DateFieldStyled {...datepicker.fieldProps} />
         <DatePickerDisclosure

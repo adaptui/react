@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -29,7 +28,5 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  let { locale } = useLocale();
-
-  return <TimeFieldStyled locale={locale} label="TimeField" />;
+  return <TimeFieldStyled label="TimeField" />;
 };

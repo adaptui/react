@@ -1,5 +1,8 @@
-import { DateFieldState, useTimeFieldState } from "@react-stately/datepicker";
-import { TimePickerProps, TimeValue } from "@react-types/datepicker";
+import {
+  DateFieldState,
+  TimeFieldStateOptions,
+  useTimeFieldState,
+} from "@react-stately/datepicker";
 
 export function useTimeFieldBaseState(
   props: TimeFieldBaseStateProps,
@@ -11,7 +14,4 @@ export function useTimeFieldBaseState(
 
 export type TimeFieldBaseState = DateFieldState & {};
 
-export type TimeFieldBaseStateProps = TimePickerProps<TimeValue> & {
-  /** The locale to display and edit the value according to. */
-  locale: string;
-};
+export type TimeFieldBaseStateProps = TimeFieldStateOptions & {};

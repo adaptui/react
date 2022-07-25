@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .styled-datepicker .calendar__cell {
+    height: 32px;
+    width: 32px;
+    max-height: 32px;
+    max-width: 32px;
+    @apply text-sm text-center rounded-lg;
+  }
+  .styled-datepicker .calendar__cell[data-is-range-selection] {
+    @apply bg-blue-100 rounded-none text-gray-800 !important;
+  }
+  .styled-datepicker .calendar__cell[data-is-selection-start] {
+    @apply bg-blue-500 rounded-l-lg text-white !important;
+  }
+  .styled-datepicker .calendar__cell[data-is-selection-end] {
+    @apply bg-blue-500 rounded-r-lg text-white !important;
+  }
+
+  .styled-datepicker .calendar__cell[data-is-range-selection]:focus-within {
+    @apply bg-blue-400 text-white !important;
+  }
+  .styled-datepicker .calendar__cell:focus-within {
+    @apply bg-gray-100;
+  }
+
+  .styled-datepicker.calendar [data-weekend] {
+    @apply text-red-600;
+  }
+
+  .styled-datepicker.calendar [aria-selected="true"] {
+    @apply text-white bg-blue-500;
+  }
+
+  .styled-datepicker.calendar [aria-selected]:focus-within {
+    @apply bg-gray-100;
+  }
+
+  .styled-datepicker.calendar [aria-selected="true"]:focus-within {
+    @apply text-white bg-blue-400;
+  }
+
+  .styled-datepicker.calendar [aria-disabled="true"] {
+    @apply text-gray-500;
+  }
+
+  .styled-datepicker.calendar span {
+    outline: none;
+  }
+
+  .datepicker__dash:before {
+    content: "-";
+  }
+}

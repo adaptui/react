@@ -117,17 +117,26 @@ function getMarkdown(compose) {
     const RoleText = "`" + "Role" + "`";
     let composition = [];
 
+    const isStateProps = name => /.+StateProps$/.test(name);
+    const useStateReplacer = name => name.replace(/(.+)Props$/, "use$1");
+    const moduleItemReplacer = item =>
+      isStateProps(item)
+        ? useStateReplacer(item)
+        : item.replace(/(.+)Options$/, "use$1");
+
     if (module.length > 0) {
-      composition = module.map(item => "`" + item + "`");
+      composition = module.map(item => {
+        return "`" + moduleItemReplacer(item) + "`";
+      });
     } else {
-      composition = /.+StateProps$/.test(moduleName)
+      composition = isStateProps(moduleName)
         ? ["its own state"]
         : ["`" + RoleText + "`"];
     }
 
     const formattedComposition = formatter.format(composition);
-    const finalModuleName = /.+StateProps$/.test(moduleName)
-      ? moduleName.replace(/Props$/, "")
+    const finalModuleName = isStateProps(moduleName)
+      ? useStateReplacer(moduleName)
       : moduleName.replace(/Options$/, "");
 
     return outdent`

@@ -1,15 +1,16 @@
 import React from "react";
 
-import CalendarRangeStyled from "../../calendar/stories/CalendarRangeStyled.component";
 import DateFieldStyled from "../../datefield/stories/DateFieldStyled.component";
 import {
   DatePickerDisclosure,
   DatePickerGroup,
+  DatePickerLabel,
   DatePickerPopover,
   DateRangePickerBaseStateProps,
   useDateRangePickerBaseState,
   useDateRangePickerState,
 } from "../../index";
+import CalendarRangeStyled from "../../range-calendar/stories/RangeCalendarStyled.component";
 
 import { CalendarStyledIcon } from "./Utils.component";
 
@@ -23,6 +24,9 @@ export const DateRangePickerStyled: React.FC<
 
   return (
     <div className="relative inline-block bg-white border border-gray-300 rounded-md shadow-sm styled-datepicker w-max">
+      <DatePickerLabel state={daterangepicker} className="datepicker__label">
+        {props.label}
+      </DatePickerLabel>
       <DatePickerGroup
         state={daterangepicker}
         className="flex justify-between items-center p-2 pl-4 pr-4 space-x-4 rounded-md"

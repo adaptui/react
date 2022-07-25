@@ -1,6 +1,4 @@
 import React from "react";
-import { createCalendar } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
 import { ComponentMeta } from "@storybook/react";
 
 import { createPreviewTabs } from "../../../.storybook/utils";
@@ -25,13 +23,5 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  let { locale } = useLocale();
-
-  return (
-    <DateFieldBasic
-      locale={locale}
-      createCalendar={createCalendar}
-      label="DateField"
-    />
-  );
+  return <DateFieldBasic label="DateField" />;
 };

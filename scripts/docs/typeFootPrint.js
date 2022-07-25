@@ -114,7 +114,7 @@ function intrinsicNameOf(type) {
 function footprintOfType(params) {
   const { type, node, overrides, flags = [], callStackLevel = 0 } = params;
 
-  if (callStackLevel > 2) {
+  if (callStackLevel > 1) {
     // too deep?
     return "'...'";
   }

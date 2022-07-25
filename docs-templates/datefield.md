@@ -1,7 +1,7 @@
 # DateField
 
-`DateField` component provides a way to select a date with the help of
-[Calendar](./calendar.md) component. It follows the
+`DateField` component is an input that provides a way to select a date and time
+using keyboard. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features. Supports all the features
 of React Aria's
@@ -10,8 +10,6 @@ of React Aria's
 <!-- ADD_TOC -->
 
 ## Usage
-
-### DateField
 
 <!-- ADD_EXAMPLE src/datefield/stories/templates/DateFieldBasicJsx.ts -->
 

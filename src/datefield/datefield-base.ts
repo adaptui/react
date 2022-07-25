@@ -26,7 +26,7 @@ export const DateField = createComponent<DateFieldOptions>(props => {
 
 export type DateFieldOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useDateFieldBaseState` hook.
+   * Object returned by the `useDateFieldState` hook.
    */
   state: DateFieldState;
 };

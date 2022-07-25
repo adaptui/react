@@ -4,13 +4,14 @@ import {
   createElement,
   createHook,
 } from "ariakit-utils/system";
-import { usePopoverDisclosure } from "ariakit";
+import { PopoverDisclosureOptions, usePopoverDisclosure } from "ariakit";
 import { useForkRef } from "ariakit-utils";
-import { As, Options, Props } from "ariakit-utils/types";
+import { As, Props } from "ariakit-utils/types";
 import { useButton } from "@react-aria/button";
 
+import { DateRangePickerState } from "../daterange-picker";
+
 import { DatePickerState } from "./datepicker-state";
-import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerDisclosure = createHook<DatePickerDisclosureOptions>(
   ({ state, ...props }) => {
@@ -33,13 +34,15 @@ export const DatePickerDisclosure =
     return createElement("button", htmlProps);
   });
 
-export type DatePickerDisclosureOptions<T extends As = "button"> =
-  Options<T> & {
-    /**
-     * Object returned by the `useDatePickerDisclosureState` hook.
-     */
-    state: DatePickerState | DateRangePickerState;
-  };
+export type DatePickerDisclosureOptions<T extends As = "button"> = Omit<
+  PopoverDisclosureOptions<T>,
+  "state"
+> & {
+  /**
+   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
+   */
+  state: DatePickerState | DateRangePickerState;
+};
 
 export type DatePickerDisclosureProps<T extends As = "button"> = Props<
   DatePickerDisclosureOptions<T>

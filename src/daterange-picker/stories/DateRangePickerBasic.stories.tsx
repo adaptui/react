@@ -14,7 +14,7 @@ type Meta = ComponentMeta<typeof DateRangePickerBasic>;
 type Story = ComponentStoryObj<typeof DateRangePickerBasic>;
 
 export default {
-  title: "DatePicker/Range",
+  title: "DateRangePicker/Basic",
   component: DateRangePickerBasic,
   parameters: {
     layout: "centered",

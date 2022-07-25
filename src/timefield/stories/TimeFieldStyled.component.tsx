@@ -1,5 +1,5 @@
 import React from "react";
-import { VisuallyHidden } from "ariakit";
+import { useLocale } from "@react-aria/i18n";
 
 import {
   TimeField,
@@ -10,30 +10,37 @@ import {
   useTimeFieldState,
 } from "../../index";
 
-export type TimeFieldStyledProps = TimeFieldBaseStateProps & {};
+export type TimeFieldStyledProps = Omit<TimeFieldBaseStateProps, "locale"> & {};
 
 export const TimeFieldStyled: React.FC<TimeFieldStyledProps> = props => {
-  const state = useTimeFieldBaseState({ ...props });
-  const timefield = useTimeFieldState({ ...props, state });
+  let { locale } = useLocale();
+
+  const state = useTimeFieldBaseState({ locale, ...props });
+  const datefield = useTimeFieldState({ ...props, state });
 
   return (
-    <>
-      <VisuallyHidden as={TimeFieldLabel} state={timefield}>
+    <div className="flex flex-col items-start">
+      <TimeFieldLabel state={datefield} className="mb-2">
         {props.label}
-      </VisuallyHidden>
-      <TimeField state={timefield} className="flex justify-between space-x-1">
+      </TimeFieldLabel>
+      <TimeField
+        state={datefield}
+        className="rounded-sm border-solid border inline-flex px-1 py-px border-[#6f6f6f]"
+      >
         {state.segments.map((segment, i) => (
           <TimeSegment
             key={i}
             segment={segment}
             state={state}
-            className="font-mono focus:text-blue-500 focus:outline-none"
+            className={`rounded py-0 px-px font-mono focus:text-blue-500 focus:outline-none ${
+              segment.isPlaceholder ? "text-[#767676]" : ""
+            }`}
           >
             {segment.text}
           </TimeSegment>
         ))}
       </TimeField>
-    </>
+    </div>
   );
 };
 

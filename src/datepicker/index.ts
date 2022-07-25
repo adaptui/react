@@ -4,5 +4,3 @@ export * from "./datepicker-group";
 export * from "./datepicker-label";
 export * from "./datepicker-popover";
 export * from "./datepicker-state";
-export * from "./daterangepicker-base-state";
-export * from "./daterangepicker-state";

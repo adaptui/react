@@ -7,8 +7,9 @@ import { useForkRef } from "ariakit-utils";
 import { As, Options, Props } from "ariakit-utils/types";
 import { mergeProps } from "@react-aria/utils";
 
+import { DateRangePickerState } from "../daterange-picker";
+
 import { DatePickerState } from "./datepicker-state";
-import { DateRangePickerState } from "./daterangepicker-state";
 
 export const useDatePickerGroup = createHook<DatePickerGroupOptions>(
   ({ state, ...props }) => {
@@ -29,7 +30,7 @@ export const DatePickerGroup = createComponent<DatePickerGroupOptions>(
 
 export type DatePickerGroupOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useDatePickerState` hook.
+   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

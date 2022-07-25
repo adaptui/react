@@ -9,8 +9,9 @@ import { getDayOfWeek, isSameDay } from "@internationalized/date";
 import { useLocale } from "@react-aria/i18n";
 import { mergeProps } from "@react-aria/utils";
 
+import { RangeCalendarBaseState } from "../range-calendar";
+
 import { CalendarCellState } from "./calendar-cell-state";
-import { RangeCalendarBaseState } from "./range-calendar-base-state";
 
 export const useCalendarCell = createHook<CalendarCellOptions>(
   ({ state, ...props }) => {

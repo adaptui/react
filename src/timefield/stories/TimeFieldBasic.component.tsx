@@ -1,5 +1,5 @@
 import React from "react";
-import { VisuallyHidden } from "ariakit";
+import { useLocale } from "@react-aria/i18n";
 
 import {
   TimeField,
@@ -10,30 +10,38 @@ import {
   useTimeFieldState,
 } from "../../index";
 
-export type TimeFieldBasicProps = TimeFieldBaseStateProps & {};
+export type TimeFieldBasicProps = Omit<TimeFieldBaseStateProps, "locale"> & {};
 
+// Example from https://react-spectrum.adobe.com/react-aria/useTimeField.html
 export const TimeFieldBasic: React.FC<TimeFieldBasicProps> = props => {
-  const state = useTimeFieldBaseState({ ...props });
-  const timefield = useTimeFieldState({ ...props, state });
+  let { locale } = useLocale();
+
+  const state = useTimeFieldBaseState({ locale, ...props });
+  const datefield = useTimeFieldState({ ...props, state });
 
   return (
-    <>
-      <VisuallyHidden as={TimeFieldLabel} state={timefield}>
+    <div className="timefield">
+      <TimeFieldLabel state={datefield} className="timefield__label">
         {props.label}
-      </VisuallyHidden>
-      <TimeField state={timefield} className="datepicker__field">
+      </TimeFieldLabel>
+      <TimeField state={datefield} className="timefield__field">
         {state.segments.map((segment, i) => (
           <TimeSegment
             key={i}
             segment={segment}
             state={state}
-            className="datepicker__field--item"
+            className={`timefield__field--item ${
+              segment.isPlaceholder ? "placeholder" : ""
+            }`}
           >
             {segment.text}
           </TimeSegment>
         ))}
+        {state.validationState === "invalid" && (
+          <span aria-hidden="true">🚫</span>
+        )}
       </TimeField>
-    </>
+    </div>
   );
 };
 

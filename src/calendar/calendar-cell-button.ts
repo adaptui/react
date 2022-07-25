@@ -28,7 +28,7 @@ export const CalendarCellButton = createComponent<CalendarCellButtonOptions>(
 
 export type CalendarCellButtonOptions<T extends As = "span"> = Options<T> & {
   /**
-   * Object returned by the `useCalendarCellButtonState` hook.
+   * Object returned by the `useCalendarCellState` hook.
    */
   state: CalendarCellState;
 };

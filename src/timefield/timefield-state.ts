@@ -4,10 +4,10 @@ import { AriaTimeFieldProps, TimeValue } from "@react-types/datepicker";
 
 import { TimeFieldBaseState } from "./timefield-base-state";
 
-export function useTimeFieldState({
+export function useTimeFieldState<T extends TimeValue>({
   state,
   ...props
-}: TimeFieldStateProps): TimeFieldState {
+}: TimeFieldStateProps<T>): TimeFieldState {
   const ref = useRef<HTMLElement>(null);
   const timefield = useTimeField(props, state, ref);
 
@@ -21,7 +21,7 @@ export type TimeFieldState = DateFieldAria & {
   ref: RefObject<HTMLElement>;
 };
 
-export type TimeFieldStateProps = AriaTimeFieldProps<TimeValue> & {
+export type TimeFieldStateProps<T extends TimeValue> = AriaTimeFieldProps<T> & {
   /**
    * Object returned by the `useTimeFieldBaseState` hook.
    */
