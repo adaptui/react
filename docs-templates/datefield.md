@@ -5,7 +5,7 @@ using keyboard. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
 for the keyboard navigation & accessibility features. Supports all the features
 of React Aria's
-[useDateField](https://react-spectrum.adobe.com/react-aria/useDateField.html#features)
+[useDateField](https://react-spectrum.adobe.com/react-aria/useDateField.html#features).
 
 <!-- ADD_TOC -->
 

@@ -3,7 +3,7 @@
 `DatePicker` component provides a way to select a date using
 [DateField](./datefield) & [Calendar](./calendar.md) component. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
-for the keyboard navigation & accessibility features. Support all the features
+for the keyboard navigation & accessibility features. Supports all the features
 as React Aria's
 [useDatePicker](https://react-spectrum.adobe.com/react-aria/useDatePicker.html#features).
 

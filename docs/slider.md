@@ -7,7 +7,7 @@ for the
 [keyboard navigation](https://www.w3.org/WAI/ARIA/apg/patterns/slidertwothumb/#:~:text=a%20hotel%20reservation.-,Keyboard%20Interaction,-Each%20thumb%20is)
 &
 [accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/slidertwothumb/#:~:text=does%20not%20change.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-Each%20element%20serving).
-Support all the features as React Aria's
+Supports all the features as React Aria's
 [useSlider](https://react-spectrum.adobe.com/react-aria/useSlider.html#features).
 
 ## Table of Contents

@@ -6,7 +6,7 @@ internally using
 [@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html)
 to provide the ease of use. It follows the
 [Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) for the keyboard
-navigaiton & focus management. Support all the features as React Aria's
+navigaiton & focus management. Supports all the features as React Aria's
 [useRangeCalendar](https://react-spectrum.adobe.com/react-aria/useRangeCalendar.html#features).
 
 <!-- ADD_TOC -->

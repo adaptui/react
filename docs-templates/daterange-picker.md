@@ -3,7 +3,7 @@
 `DateRangePicker` component provides a way to select a a range of dates using
 [DateField](./datefield) & [Calendar](./calendar.md) component. It follows the
 [Native Input Date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)
-for the keyboard navigation & accessibility features. Support all the features
+for the keyboard navigation & accessibility features. Supports all the features
 as React Aria's
 [useDateRangePicker](https://react-spectrum.adobe.com/react-aria/useDateRangePicker.html#features).
 

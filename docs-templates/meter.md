@@ -4,7 +4,7 @@
 that varies within a defined range. It follows the
 [WAI-ARIA Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for
 it's
-[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving)
+[accessibility properties](https://www.w3.org/WAI/ARIA/apg/patterns/meter/#:~:text=Not%20applicable.-,WAI%2DARIA%20Roles%2C%20States%2C%20and%20Properties,-The%20element%20serving).
 
 <!-- ADD_TOC -->
 

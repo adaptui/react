@@ -2,7 +2,7 @@
 
 `Progress` component provides a graphical status for tasks that take some amount
 of time to load. It follows
-[WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar)
+[WAI-ARIA Progressbar Pattern](https://www.w3.org/TR/wai-aria-1.2/#progressbar).
 
 <!-- ADD_TOC -->
 
