@@ -66,7 +66,7 @@ export const useDisclosureCollapsibleContent =
       }, [contentSize, getCurrentSizeStyle]);
 
       const [styles, setStylesRaw] = React.useState<React.CSSProperties>(
-        state.visible ? {} : collapsedStyles,
+        state.open ? {} : collapsedStyles,
       );
       const setStyles = (newStyles: {} | ((oldStyles: {}) => {})): void => {
         // We rely on reading information from layout
@@ -91,7 +91,7 @@ export const useDisclosureCollapsibleContent =
       }
 
       useUpdateEffect(() => {
-        if (state.visible) {
+        if (state.open) {
           raf(() => {
             onExpandStart?.();
 
@@ -132,7 +132,7 @@ export const useDisclosureCollapsibleContent =
             });
           });
         }
-      }, [state.visible]);
+      }, [state.open]);
 
       const onTransitionEndProp = props.onTransitionEnd;
       const onTransitionEnd = useEvent(
@@ -159,7 +159,7 @@ export const useDisclosureCollapsibleContent =
           // which will prevent the collapsed content from flashing on the screen
           const stylesSize = isVertical ? styles.height : styles.width;
 
-          if (state.visible) {
+          if (state.open) {
             const size = isVertical
               ? getElementHeight(contentRef)
               : getElementWidth(contentRef);

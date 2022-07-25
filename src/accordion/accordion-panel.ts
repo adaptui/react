@@ -70,8 +70,8 @@ export const useAccordionPanel = createHook<AccordionPanelOptions>(
 
     props = useFocusable({ focusable: hasTabbableChildren, ...props });
 
-    const visible = !!accordionId && getSelectedId(state, accordionId);
-    const disclosure = useDisclosureState({ visible });
+    const open = !!accordionId && getSelectedId(state, accordionId);
+    const disclosure = useDisclosureState({ open });
     props = useDisclosureContent({ state: disclosure, ...props });
 
     const getItem = useCallback(
