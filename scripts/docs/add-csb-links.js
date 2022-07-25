@@ -96,7 +96,7 @@ const getSandboxShortURL = async parsed => {
 
 const getJSSandboxContents = (files, extraDeps, linkTitle) => {
   const deps = {
-    "@adaptui/react": "1.0.0-alpha.8",
+    "@adaptui/react": "1.0.0-alpha.9",
     react: "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
@@ -159,7 +159,7 @@ const getJSSandboxContents = (files, extraDeps, linkTitle) => {
 
 const getTSSandboxContents = (files, extraDeps, linkTitle) => {
   const deps = {
-    "@adaptui/react": "1.0.0-alpha.8",
+    "@adaptui/react": "1.0.0-alpha.9",
     react: "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
