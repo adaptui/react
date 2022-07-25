@@ -31,6 +31,9 @@ export const TimeSegment = createComponent<TimeSegmentOptions>(props => {
 });
 
 export type TimeSegmentOptions<T extends As = "div"> = Options<T> & {
+  /**
+   * Current segment state return from `state.segments`.
+   */
   segment: DateSegmentState;
   /**
    * Object returned by the `useTimeFieldBaseState` hook.

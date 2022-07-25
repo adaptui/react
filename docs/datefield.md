@@ -95,7 +95,7 @@ export default DateFieldBasic;
 
 | Name          | Type                        | Description                                          |
 | :------------ | :-------------------------- | :--------------------------------------------------- |
-| **`segment`** | <code>DateSegment</code>    |                                                      |
+| **`segment`** | <code>DateSegment</code>    | Current segment state return from `state.segments`.  |
 | **`state`**   | <code>DateFieldState</code> | Object returned by the `useDateFieldBaseState` hook. |
 
 ### `DateFieldOptions`

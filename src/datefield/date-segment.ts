@@ -31,6 +31,9 @@ export const DateSegment = createComponent<DateSegmentOptions>(props => {
 });
 
 export type DateSegmentOptions<T extends As = "div"> = Options<T> & {
+  /**
+   * Current segment state return from `state.segments`.
+   */
   segment: DateSegmentState;
   /**
    * Object returned by the `useDateFieldBaseState` hook.
