@@ -28,7 +28,7 @@ export const DatePickerLabel = createComponent<DatePickerLabelOptions>(
 
 export type DatePickerLabelOptions<T extends As = "span"> = Options<T> & {
   /**
-   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

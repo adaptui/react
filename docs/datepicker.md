@@ -151,9 +151,9 @@ export default DatePickerBasic;
 
 ### `DatePickerDisclosureOptions`
 
-| Name        | Type                                                 | Description                                 |
-| :---------- | :--------------------------------------------------- | :------------------------------------------ | ------------------------------- |
-| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` | `useDateRangePickerState` hook. |
+| Name        | Type                                                 | Description                                                                   |
+| :---------- | :--------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` & `useDateRangePickerState` hook. |
 
 <details><summary>PopoverDisclosureOptions props</summary>
 > These props are returned by the other props You can also provide these props.
@@ -173,21 +173,21 @@ export default DatePickerBasic;
 
 ### `DatePickerGroupOptions`
 
-| Name        | Type                                                 | Description                                 |
-| :---------- | :--------------------------------------------------- | :------------------------------------------ | ------------------------------- |
-| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` | `useDateRangePickerState` hook. |
+| Name        | Type                                                 | Description                                                                   |
+| :---------- | :--------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` & `useDateRangePickerState` hook. |
 
 ### `DatePickerLabelOptions`
 
-| Name        | Type                                                 | Description                                 |
-| :---------- | :--------------------------------------------------- | :------------------------------------------ | ------------------------------- |
-| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` | `useDateRangePickerState` hook. |
+| Name        | Type                                                 | Description                                                                   |
+| :---------- | :--------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` & `useDateRangePickerState` hook. |
 
 ### `DatePickerPopoverOptions`
 
-| Name        | Type                                                 | Description                                 |
-| :---------- | :--------------------------------------------------- | :------------------------------------------ | ------------------------------- |
-| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` | `useDateRangePickerState` hook. |
+| Name        | Type                                                 | Description                                                                   |
+| :---------- | :--------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **`state`** | <code>DatePickerState \| DateRangePickerState</code> | Object returned by the `useDatePickerState` & `useDateRangePickerState` hook. |
 
 <details><summary>PopoverOptions props</summary>
 > These props are returned by the other props You can also provide these props.

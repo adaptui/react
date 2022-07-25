@@ -216,10 +216,10 @@ const CalendarCellComp = props => {
 
 ### `CalendarCellStateProps`
 
-| Name        | Type                                             | Description                                   |
-| :---------- | :----------------------------------------------- | :-------------------------------------------- | ------------------------------ |
-| **`date`**  | <code>CalendarDate</code>                        | The date that this cell represents.           |
-| **`state`** | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState` | `RangeCalendarBaseState` hook. |
+| Name        | Type                                             | Description                                                                    |
+| :---------- | :----------------------------------------------- | :----------------------------------------------------------------------------- |
+| **`date`**  | <code>CalendarDate</code>                        | The date that this cell represents.                                            |
+| **`state`** | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook. |
 
 ### `CalendarGridOptions`
 
@@ -230,22 +230,22 @@ const CalendarCellComp = props => {
 ### `CalendarGridStateProps`
 
 | Name            | Type                                             | Description                                                                                                                                                  |
-| :-------------- | :----------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| :-------------- | :----------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`startDate`** | <code>CalendarDate \| undefined</code>           | The first date displayed in the calendar grid.Defaults to the first visible date in the calendar.Override this to display multiple date grids in a calendar. |
 | **`endDate`**   | <code>CalendarDate \| undefined</code>           | The last date displayed in the calendar grid.Defaults to the last visible date in the calendar.Override this to display multiple date grids in a calendar.   |
-| **`state`**     | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState`                                                                                                                | `RangeCalendarBaseState` hook. |
+| **`state`**     | <code>CalendarState \| RangeCalendarState</code> | Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook.                                                                               |
 
 ### `CalendarNextButtonOptions`
 
-| Name        | Type                                            | Description                               |
-| :---------- | :---------------------------------------------- | :---------------------------------------- | -------------------------- |
-| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` | `RangeCalendarState` hook. |
+| Name        | Type                                            | Description                                                            |
+| :---------- | :---------------------------------------------- | :--------------------------------------------------------------------- |
+| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` & `RangeCalendarState` hook. |
 
 ### `CalendarPreviousButtonOptions`
 
-| Name        | Type                                            | Description                               |
-| :---------- | :---------------------------------------------- | :---------------------------------------- | -------------------------- |
-| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` | `RangeCalendarState` hook. |
+| Name        | Type                                            | Description                                                            |
+| :---------- | :---------------------------------------------- | :--------------------------------------------------------------------- |
+| **`state`** | <code>CalendarAria \| RangeCalendarState</code> | Object returned by the `useCalendarState` & `RangeCalendarState` hook. |
 
 ### `CalendarStateProps`
 

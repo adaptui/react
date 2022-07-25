@@ -39,7 +39,7 @@ export type DatePickerDisclosureOptions<T extends As = "button"> = Omit<
   "state"
 > & {
   /**
-   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

@@ -35,7 +35,7 @@ export type CalendarCellState = CalendarCellAria & {
 
 export type CalendarCellStateProps = AriaCalendarCellProps & {
   /**
-   * Object returned by the `useCalendarBaseState` | `RangeCalendarBaseState` hook.
+   * Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook.
    */
   state: CalendarBaseState | RangeCalendarBaseState;
 };

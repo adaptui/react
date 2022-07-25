@@ -21,7 +21,7 @@ export type CalendarGridState = CalendarGridAria;
 
 export type CalendarGridStateProps = AriaCalendarGridProps & {
   /**
-   * Object returned by the `useCalendarBaseState` | `RangeCalendarBaseState` hook.
+   * Object returned by the `useCalendarBaseState` & `RangeCalendarBaseState` hook.
    */
   state: CalendarBaseState | RangeCalendarBaseState;
 };

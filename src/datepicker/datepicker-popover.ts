@@ -51,7 +51,7 @@ export type DatePickerPopoverOptions<T extends As = "span"> = Omit<
   "state"
 > & {
   /**
-   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

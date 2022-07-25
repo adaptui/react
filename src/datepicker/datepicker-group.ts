@@ -30,7 +30,7 @@ export const DatePickerGroup = createComponent<DatePickerGroupOptions>(
 
 export type DatePickerGroupOptions<T extends As = "div"> = Options<T> & {
   /**
-   * Object returned by the `useDatePickerState` | `useDateRangePickerState` hook.
+   * Object returned by the `useDatePickerState` & `useDateRangePickerState` hook.
    */
   state: DatePickerState | DateRangePickerState;
 };

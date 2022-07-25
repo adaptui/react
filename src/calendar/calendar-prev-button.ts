@@ -33,7 +33,7 @@ export const CalendarPreviousButton =
 export type CalendarPreviousButtonOptions<T extends As = "button"> =
   Options<T> & {
     /**
-     * Object returned by the `useCalendarState` | `RangeCalendarState` hook.
+     * Object returned by the `useCalendarState` & `RangeCalendarState` hook.
      */
     state: CalendarState | RangeCalendarState;
   };
