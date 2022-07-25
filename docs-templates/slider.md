@@ -34,10 +34,20 @@ link_title: Single Origin Slider
 js: src/slider/stories/templates/SliderSingleOriginJsx.ts
 css: src/slider/stories/templates/SliderBasicCss.ts
 -->
+<!-- CODESANDBOX
+link_title: Single Origin Slider TS
+tsx: src/slider/stories/templates/SliderSingleOriginTsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
 
 <!-- CODESANDBOX
 link_title: Single Reversed Slider
 js: src/slider/stories/templates/SliderSingleReversedJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
+<!-- CODESANDBOX
+link_title: Single Reversed Slider TS
+tsx: src/slider/stories/templates/SliderSingleReversedTsx.ts
 css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
@@ -46,16 +56,42 @@ link_title: Single Vertical Slider
 js: src/slider/stories/templates/SliderSingleVerticalJsx.ts
 css: src/slider/stories/templates/SliderBasicCss.ts
 -->
+<!-- CODESANDBOX
+link_title: Single Vertical Slider TS
+tsx: src/slider/stories/templates/SliderSingleVerticalTsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
 
 <!-- CODESANDBOX
 link_title: Range Slider
 js: src/slider/stories/templates/SliderRangeJsx.ts
 css: src/slider/stories/templates/SliderBasicCss.ts
 -->
+<!-- CODESANDBOX
+link_title: Range Slider TS
+tsx: src/slider/stories/templates/SliderRangeTsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
 
 <!-- CODESANDBOX
 link_title: Multi Slider
 js: src/slider/stories/templates/SliderMultiJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
+<!-- CODESANDBOX
+link_title: Multi Slider TS
+tsx: src/slider/stories/templates/SliderMultiTsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
+
+<!-- CODESANDBOX
+link_title: AllInOne Slider
+js: src/slider/stories/templates/SliderAllInOneJsx.ts
+css: src/slider/stories/templates/SliderBasicCss.ts
+-->
+<!-- CODESANDBOX
+link_title: AllInOne Slider TS
+tsx: src/slider/stories/templates/SliderAllInOneTsx.ts
 css: src/slider/stories/templates/SliderBasicCss.ts
 -->
 
