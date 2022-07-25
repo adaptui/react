@@ -18,31 +18,6 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
-  args: {
-    children: "Timeless",
-    onClick: event => goToLink(event, "https://timeless.co/"),
-    onKeyDown: event => goToLink(event, "https://timeless.co/"),
-  },
-};
+export const Default: Story = { args: {} };
 
-export const DisabledLink: Story = {
-  args: {
-    children: "Timeless",
-    onClick: event => goToLink(event, "https://timeless.co/"),
-    onKeyDown: event => goToLink(event, "https://timeless.co/"),
-    disabled: true,
-  },
-};
-
-function goToLink(event: React.MouseEvent | React.KeyboardEvent, url: string) {
-  var type = event.type;
-
-  // @ts-ignore
-  if (type === "click" || (type === "keydown" && event.key === "Enter")) {
-    window.location.href = url;
-
-    event.preventDefault();
-    event.stopPropagation();
-  }
-}
+export const DisabledLink: Story = { args: { disabled: true } };

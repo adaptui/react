@@ -18,23 +18,8 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
-  args: { href: "https://timeless.co/", children: "Timeless" },
-};
+export const Default: Story = { args: {} };
 
-export const ExternalLink: Story = {
-  args: {
-    children: "Timeless",
-    href: "https://timeless.co/",
-    isExternal: true,
-  },
-};
-
-export const DisabledExternalLink: Story = {
-  args: {
-    children: "Timeless",
-    href: "https://timeless.co/",
-    isExternal: true,
-    disabled: true,
-  },
+export const DisabledLink: Story = {
+  args: { disabled: true },
 };
