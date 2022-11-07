@@ -30,6 +30,7 @@
 .calendar__button_chevron {
   flex-shrink: 0;
   width: 1rem;
+  cursor: pointer;
 }
 
 .calendar__title {
@@ -45,4 +46,9 @@
 
 .dates {
   padding: 0.75rem;
+}
+
+.dates__date:hover {
+  background-color: #f7fafc;
+  border-radius: 0.375rem;
 }
