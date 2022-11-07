@@ -9,8 +9,6 @@ import jsUtils from "./templates/UtilsJsx";
 import tsUtils from "./templates/UtilsTsx";
 import { CalendarStyled } from "./CalendarStyled.component";
 
-import "./tailwind.css";
-
 type Meta = ComponentMeta<typeof CalendarStyled>;
 // type Story = ComponentStoryObj<typeof CalendarStyled>;
 
@@ -21,12 +19,6 @@ export default {
     layout: "centered",
     preview: createPreviewTabs({ js, ts, jsUtils, tsUtils }),
   },
-  decorators: [
-    Story => {
-      document.body.id = "tailwind";
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 export const Default = () => {
