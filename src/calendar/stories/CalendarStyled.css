@@ -47,8 +47,3 @@
 .dates {
   padding: 0.75rem;
 }
-
-.dates__date:hover {
-  background-color: #f7fafc;
-  border-radius: 0.375rem;
-}
