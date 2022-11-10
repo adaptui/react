@@ -47,3 +47,34 @@
 .dates {
   padding: 0.75rem;
 }
+
+.calendar [data-weekend] {
+  color: #dc2626;
+}
+
+.calendar [aria-selected="true"] {
+  color: #ffffff;
+  background-color: #3b82f6;
+}
+
+.calendar [aria-selected="true"] {
+  color: #ffffff;
+  background-color: #3b82f6;
+}
+
+.calendar [aria-selected]:focus-within {
+  background-color: #f3f4f6;
+}
+
+.calendar [aria-selected="true"]:focus-within {
+  color: #ffffff;
+  background-color: #3b82f6;
+}
+
+.calendar [aria-disabled="true"] {
+  color: #6b7280;
+}
+
+.calendar span {
+  outline: none;
+}
