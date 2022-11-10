@@ -24,6 +24,7 @@
 }
 
 .calendar__button:focus {
+  cursor: pointer;
   outline: none;
 }
 
@@ -77,4 +78,5 @@
 
 .calendar span {
   outline: none;
+  cursor: pointer;
 }
