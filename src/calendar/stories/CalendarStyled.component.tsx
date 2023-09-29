@@ -22,6 +22,8 @@ import {
 
 import { ChevronLeft, ChevronRight } from "./Utils.component";
 
+import "./CalendarStyled.css";
+
 export type CalendarStyledProps = Omit<
   CalendarBaseStateProps,
   "locale" | "createCalendar"
@@ -34,26 +36,14 @@ export const CalendarStyled: React.FC<CalendarStyledProps> = props => {
   const calendar = useCalendarState({ ...props, state });
 
   return (
-    <Calendar
-      state={calendar}
-      className="p-3 bg-white rounded-md shadow-lg styled-datepicker calendar w-max"
-    >
-      <div className="flex justify-between">
-        <CalendarPreviousButton
-          state={calendar}
-          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
-        >
-          <ChevronLeft className="flex-shrink-0 w-4" />
+    <Calendar state={calendar} className="calendar">
+      <div className="calendar--wrapper">
+        <CalendarPreviousButton state={calendar} className="calendar__button">
+          <ChevronLeft className="calendar__button_chevron" />
         </CalendarPreviousButton>
-        <CalendarTitle
-          state={calendar}
-          className="text-sm font-bold text-gray-700 px-2 py-1"
-        />
-        <CalendarNextButton
-          state={calendar}
-          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
-        >
-          <ChevronRight className="flex-shrink-0 w-4" />
+        <CalendarTitle state={calendar} className="calendar__title" />
+        <CalendarNextButton state={calendar} className="calendar__button">
+          <ChevronRight className="calendar__button_chevron" />
         </CalendarNextButton>
       </div>
       <CalendarGridComp state={state} />
