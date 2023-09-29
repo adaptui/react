@@ -24,6 +24,8 @@ import {
   useRangeCalendarState,
 } from "../../index";
 
+import "./RangeCalendarStyled.css";
+
 export type RangeCalendarStyledProps = Omit<
   RangeCalendarBaseStateProps,
   "locale" | "createCalendar"
@@ -38,26 +40,17 @@ export const RangeCalendarStyled: React.FC<
   const calendar = useRangeCalendarState({ ...props, state });
 
   return (
-    <RangeCalendar
-      state={calendar}
-      className="p-3 bg-white rounded-md shadow-lg styled-datepicker calendar w-max"
-    >
-      <div className="flex justify-between">
+    <RangeCalendar state={calendar} className="rangecalendar">
+      <div className="rangecalendar--wrapper">
         <CalendarPreviousButton
           state={calendar}
-          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
+          className="rangecalendar__button"
         >
-          <ChevronLeft className="flex-shrink-0 w-4" />
+          <ChevronLeft className="rangecalendar__button_chevron" />
         </CalendarPreviousButton>
-        <CalendarTitle
-          state={calendar}
-          className="text-sm font-bold text-gray-700 px-2 py-1"
-        />
-        <CalendarNextButton
-          state={calendar}
-          className="text-gray-700 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-border-400"
-        >
-          <ChevronRight className="flex-shrink-0 w-4" />
+        <CalendarTitle state={calendar} className="rangecalendar__title" />
+        <CalendarNextButton state={calendar} className="rangecalendar__button">
+          <ChevronRight className="rangecalendar__button_chevron" />
         </CalendarNextButton>
       </div>
       <CalendarGridComp state={state} />
